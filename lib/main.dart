@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,9 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider<ThemeProvider>(
+      create: (BuildContext context) => ThemeProvider(),
+    ),
     ChangeNotifierProvider<LoginRegisterPageProvider>(
       create: (BuildContext context) => LoginRegisterPageProvider(),
     )
@@ -25,7 +29,6 @@ class MyApp extends StatelessWidget {
       fallbackLocale: const Locale('en', 'US'),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-
       home: SplashPage(),
       // home: LoginPage(),
     );
