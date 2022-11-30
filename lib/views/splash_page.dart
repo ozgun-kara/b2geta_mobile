@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:b2geta_mobile/app_constants.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/language_selection_page.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,7 +29,8 @@ class _SplashPageState extends State<SplashPage> {
         const Duration(milliseconds: 2000),
         () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (BuildContext context) {
-              return LoginPage();
+              // return LoginPage();
+              return LanguageSelectionPage();
             })));
   }
 
@@ -46,7 +48,7 @@ class _SplashPageState extends State<SplashPage> {
     }
 
     return Scaffold(
-      backgroundColor: Provider.of<ThemeProvider>(context).pageBackgroundColor,
+      backgroundColor: Color(0xFF21233A),
       body: SizedBox(
         width: deviceWidth,
         height: deviceHeight,
@@ -54,9 +56,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              Provider.of<ThemeProvider>(context).themeSwitch == false
-                  ? 'assets/images/b2geta_logo_light.png'
-                  : 'assets/images/b2geta_logo_dark.png',
+              'assets/images/b2geta_logo_dark.png',
               width: 202.69,
               height: 27.35,
             ),

@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 class ThemeProvider with ChangeNotifier {
   bool themeSwitch = false;
 
-  Color? pageBackgroundColor;
+  Color? pageBackgroundColor1;
+  Color? pageBackgroundColor2;
 
   void updateThemeSwitch(bool value) {
     themeSwitch = value;
 
     if (value == false) {
-      pageBackgroundColor = const Color(0xFFFFFFFF);
+      pageBackgroundColor1 = const Color(0xFFFFFFFF);
+      pageBackgroundColor2 = const Color(0xFFFBFCFF);
+
     } else {
-      pageBackgroundColor = const Color(0xFF21233A);
+      pageBackgroundColor1 = const Color(0xFF21233A);
+      pageBackgroundColor2 = const Color(0xFF21233A);
     }
 
     notifyListeners();
