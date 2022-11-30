@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
+import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
 
-      home: LoginPage(),
+      home: SplashPage(),
+      // home: LoginPage(),
     );
   }
 }
