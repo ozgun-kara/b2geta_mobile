@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/app_constants.dart';
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,7 +49,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                       child: Text(
                         'Dil Seçimi',
                         style: TextStyle(
-                            fontFamily: AppConstants().appFontFamily,
+                            fontFamily: AppTheme().appFontFamily,
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.white),
@@ -98,7 +98,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                           "Kaydet",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppConstants().appFontFamily,
+                              fontFamily: AppTheme().appFontFamily,
                               fontWeight: FontWeight.w700,
                               color: Colors.white),
                         ),

@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:b2geta_mobile/app_constants.dart';
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/language_selection_page.dart';

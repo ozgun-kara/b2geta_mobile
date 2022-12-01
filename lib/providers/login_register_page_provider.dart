@@ -4,8 +4,7 @@ class LoginRegisterPageProvider with ChangeNotifier {
   bool loginPasswordVisible = false;
   bool loginCheckBox = false;
 
-  bool registerPasswordVisible = false;
-  bool registerCheckBox = false;
+  bool registerSwitch = false;
 
   bool resetPasswordVisible1 = false;
   bool resetPasswordVisible2 = false;
@@ -20,13 +19,8 @@ class LoginRegisterPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateRegisterPasswordVisible() {
-    registerPasswordVisible = !registerPasswordVisible;
-    notifyListeners();
-  }
-
-  void updateRegisterCheckBox(bool value) {
-    registerCheckBox = value;
+  void updateregisterSwitch(bool value) {
+    registerSwitch = value;
     notifyListeners();
   }
 

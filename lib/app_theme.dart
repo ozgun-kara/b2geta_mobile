@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppConstants {
+class AppTheme {
   String appFontFamily = "Axiforma";
 
   Color white1 = const Color(0xFFFFFFFF);
@@ -18,7 +18,6 @@ class AppConstants {
   Color white13 = const Color(0xFF9FA7BE);
   Color white14 = const Color(0xFF9B9CB0);
   Color white15 = const Color(0xFF8695AC);
-  Color white16 = const Color(0xFF636484);
 
   Color green1 = const Color(0xFF4CBD17);
 
@@ -35,4 +34,6 @@ class AppConstants {
   Color black7 = const Color(0xFF383A56);
   Color black8 = const Color(0xFF404365);
   Color black9 = const Color(0xFF2B2D38);
+  Color black10 = const Color(0xFF4F547A);
+  Color black11 = const Color(0xFF636484);
 }
