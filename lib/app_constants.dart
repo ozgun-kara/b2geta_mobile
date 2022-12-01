@@ -5,20 +5,20 @@ class AppConstants {
 
   Color white1 = const Color(0xFFFFFFFF);
   Color white2 = const Color(0xFFFBFCFF);
-  Color white3 = const Color(0xFFEBEDF6);
-  Color white4 = const Color(0xFF9B9CB0);
-  Color white5 = const Color(0xFF8695AC);
-  Color white6 = const Color(0xFFC6C9CE);
-  Color white7 = const Color(0xFF9FA7BE);
-  Color white8 = const Color(0xFFD8DAE4);
-  Color white9 = const Color(0xFFAEB1D0);
-  Color white10 = const Color(0xFFADBCD2);
-  Color white11 = const Color(0xFF636484);
-  Color white12 = const Color(0xFFF4F6FC);
-  Color white13 = const Color(0xFFC4CEF1);
-  Color white14 = const Color(0xFFFAFBFD);
-  Color white15 = const Color(0xFFF3F5FB);
-  Color white16 = const Color(0xFFF1F3FF);
+  Color white3 = const Color(0xFFFAFBFD);
+  Color white4 = const Color(0xFFF3F5FB);
+  Color white5 = const Color(0xFFF4F6FC);
+  Color white6 = const Color(0xFFF1F3FF);
+  Color white7 = const Color(0xFFEBEDF6);
+  Color white8 = const Color(0xFFC6C9CE);
+  Color white9 = const Color(0xFFD8DAE4);
+  Color white10 = const Color(0xFFC4CEF1);
+  Color white11 = const Color(0xFFADBCD2);
+  Color white12 = const Color(0xFFAEB1D0);
+  Color white13 = const Color(0xFF9FA7BE);
+  Color white14 = const Color(0xFF9B9CB0);
+  Color white15 = const Color(0xFF8695AC);
+  Color white16 = const Color(0xFF636484);
 
   Color green1 = const Color(0xFF4CBD17);
 
