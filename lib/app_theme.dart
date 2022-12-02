@@ -36,4 +36,5 @@ class AppTheme {
   Color black9 = const Color(0xFF2B2D38);
   Color black10 = const Color(0xFF4F547A);
   Color black11 = const Color(0xFF636484);
+  Color black12 = const Color(0xFF21233A);
 }
