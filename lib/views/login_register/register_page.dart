@@ -1,9 +1,9 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -18,6 +18,20 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController1 = TextEditingController();
   final passwordController2 = TextEditingController();
   final companyNameController = TextEditingController();
+  final authorizedNameController = TextEditingController();
+  final authorizedPhoneController = TextEditingController();
+
+  final List<String> dropdownItems = [
+    'Item1',
+    'Item2',
+    'Item3',
+    'Item4',
+    'Item5',
+    'Item6',
+    'Item7',
+    'Item8',
+  ];
+  String? dropdownSelectedValue;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -172,7 +186,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
                   fillColor: AppTheme().black7,
-                  hintText: "E-mail",
+                  hintText: "E-mail (tekrar)",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme().appFontFamily,
@@ -213,7 +227,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Return null if the entered email is valid
                   return null;
                 },
-                controller: emailController2,
+                controller: passwordController1,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme().appFontFamily,
@@ -221,11 +235,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: AppTheme().white2,
                 ), // WHILE WRITING
                 maxLines: 1,
+                obscureText: true,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
                   fillColor: AppTheme().black7,
-                  hintText: "E-mail",
+                  hintText: "Şifre",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme().appFontFamily,
@@ -266,7 +281,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Return null if the entered email is valid
                   return null;
                 },
-                controller: emailController2,
+                controller: passwordController2,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme().appFontFamily,
@@ -274,11 +289,12 @@ class _RegisterPageState extends State<RegisterPage> {
                   color: AppTheme().white2,
                 ), // WHILE WRITING
                 maxLines: 1,
+                obscureText: true,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
                   fillColor: AppTheme().black7,
-                  hintText: "E-mail",
+                  hintText: "Şifre Tekrar",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme().appFontFamily,
@@ -307,7 +323,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(height: 13),
-              SizedBox(height: 200),
               TextFormField(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -320,7 +335,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   // Return null if the entered email is valid
                   return null;
                 },
-                controller: emailController2,
+                controller: companyNameController,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme().appFontFamily,
@@ -332,7 +347,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
                   fillColor: AppTheme().black7,
-                  hintText: "E-mail",
+                  hintText: "Firma Adı",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme().appFontFamily,
@@ -358,6 +373,189 @@ class _RegisterPageState extends State<RegisterPage> {
                       width: 1,
                     ),
                   ),
+                ),
+              ),
+              SizedBox(height: 13),
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your email address';
+                  }
+                  // Check if the entered email has the right format
+                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  // Return null if the entered email is valid
+                  return null;
+                },
+                controller: authorizedNameController,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: AppTheme().appFontFamily,
+                  fontWeight: FontWeight.w500,
+                  color: AppTheme().white2,
+                ), // WHILE WRITING
+                maxLines: 1,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                  filled: true,
+                  fillColor: AppTheme().black7,
+                  hintText: "Yetkili Kişi",
+                  hintStyle: TextStyle(
+                    fontSize: 14,
+                    fontFamily: AppTheme().appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: AppTheme().white14,
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      )),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: AppTheme().white1,
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 13),
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Please enter your email address';
+                  }
+                  // Check if the entered email has the right format
+                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                    return 'Please enter a valid email address';
+                  }
+                  // Return null if the entered email is valid
+                  return null;
+                },
+                controller: authorizedPhoneController,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: AppTheme().appFontFamily,
+                  fontWeight: FontWeight.w500,
+                  color: AppTheme().white2,
+                ), // WHILE WRITING
+                maxLines: 1,
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                  filled: true,
+                  fillColor: AppTheme().black7,
+                  hintText: "Yetkili Telefon",
+                  hintStyle: TextStyle(
+                    fontSize: 14,
+                    fontFamily: AppTheme().appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: AppTheme().white14,
+                  ),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      )),
+                  enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      )),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(
+                      color: AppTheme().white1,
+                      width: 1,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 13),
+              DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  // alignment: AlignmentDirectional.center,
+                  // isExpanded: true,
+                  hint: Text(
+                    "Ülke",
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: AppTheme().appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: AppTheme().white14,
+                    ),
+                    overflow: TextOverflow.visible,
+                  ),
+                  items: dropdownItems
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Center(
+                              child: Text(
+                                item,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme().appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme().white14,
+                                ),
+                                overflow: TextOverflow.visible,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  value: dropdownSelectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      dropdownSelectedValue = value as String;
+                    });
+                  },
+                  icon: Center(
+                    child: Image.asset(
+                      'assets/icons/dropdown.png',
+                      width: 10,
+                      height: 6,
+                    ),
+                  ),
+                  iconSize: 24,
+                  // iconEnabledColor: Colors.yellow,
+                  // iconDisabledColor: Colors.grey,
+                  // icon: Container(),
+                  buttonHeight: 57,
+                  buttonWidth: deviceWidth,
+                  buttonPadding: EdgeInsets.only(left: 25, right: 17),
+                  buttonDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    // border:
+                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                    // color: Colors.transparent,
+                    color: AppTheme().black7,
+                  ),
+                  // buttonElevation: 2,
+                  itemHeight: 40,
+                  itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                  dropdownMaxHeight: 200,
+                  // dropdownWidth: deviceWidth,
+                  dropdownPadding: null,
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    // color: Color(0xFFEFF0F7),
+                    color: AppTheme().black7,
+                  ),
+                  // dropdownElevation: 8,
+                  scrollbarRadius: const Radius.circular(40),
+                  scrollbarThickness: 4,
+                  scrollbarAlwaysShow: true,
+                  offset: const Offset(0, 0),
                 ),
               ),
 
