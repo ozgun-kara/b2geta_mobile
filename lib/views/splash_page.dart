@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
     Timer(
-        const Duration(milliseconds: 2000),
+        const Duration(milliseconds: 200000000),
         () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (BuildContext context) {
               // return LoginPage();
@@ -48,19 +48,37 @@ class _SplashPageState extends State<SplashPage> {
     }
 
     return Scaffold(
-      backgroundColor: Color(0xFF21233A),
+      backgroundColor: AppTheme.black12,
       body: SizedBox(
         width: deviceWidth,
         height: deviceHeight,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/b2geta_logo_dark.png',
-              width: 202.69,
-              height: 27.35,
+            Container(
+              child: Provider.of<ThemeProvider>(context).themeSwitch
+                  ? Image.asset(
+                      'assets/images/b2geta_logo_light.png',
+                      width: 202.69,
+                      height: 27.35,
+                    )
+                  : Image.asset(
+                      'assets/images/b2geta_logo_dark.png',
+                      width: 202.69,
+                      height: 27.35,
+                    ),
             ),
-            // SizedBox(height: 30),
+
+            SizedBox(height: 30),
+
+            // IconButton(
+            //   icon: Icon(Icons.brightness_6),
+            //   color: Colors.white,
+            //   onPressed: () {
+            //     debugPrint("Swap it");
+            //     Provider.of<ThemeProvider>(context, listen: false).swapTheme();
+            //   },
+            // ),
             // FlutterSwitch(
             //   width: 41,
             //   height: 24,

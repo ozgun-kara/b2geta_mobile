@@ -49,7 +49,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                       child: Text(
                         'Dil Seçimi',
                         style: TextStyle(
-                            fontFamily: AppTheme().appFontFamily,
+                            fontFamily: AppTheme.appFontFamily,
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Colors.white),
@@ -98,7 +98,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                           "Kaydet",
                           style: TextStyle(
                               fontSize: 16,
-                              fontFamily: AppTheme().appFontFamily,
+                              fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w700,
                               color: Colors.white),
                         ),

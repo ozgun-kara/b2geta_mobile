@@ -1,40 +1,40 @@
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  String appFontFamily = "Axiforma";
+  static String appFontFamily = "Axiforma";
 
-  Color white1 = const Color(0xFFFFFFFF);
-  Color white2 = const Color(0xFFFBFCFF);
-  Color white3 = const Color(0xFFFAFBFD);
-  Color white4 = const Color(0xFFF3F5FB);
-  Color white5 = const Color(0xFFF4F6FC);
-  Color white6 = const Color(0xFFF1F3FF);
-  Color white7 = const Color(0xFFEBEDF6);
-  Color white8 = const Color(0xFFC6C9CE);
-  Color white9 = const Color(0xFFD8DAE4);
-  Color white10 = const Color(0xFFC4CEF1);
-  Color white11 = const Color(0xFFADBCD2);
-  Color white12 = const Color(0xFFAEB1D0);
-  Color white13 = const Color(0xFF9FA7BE);
-  Color white14 = const Color(0xFF9B9CB0);
-  Color white15 = const Color(0xFF8695AC);
+  static Color white1 = const Color(0xFFFFFFFF);
+  static Color white2 = const Color(0xFFFBFCFF);
+  static Color white3 = const Color(0xFFFAFBFD);
+  static Color white4 = const Color(0xFFF3F5FB);
+  static Color white5 = const Color(0xFFF4F6FC);
+  static Color white6 = const Color(0xFFF1F3FF);
+  static Color white7 = const Color(0xFFEBEDF6);
+  static Color white8 = const Color(0xFFC6C9CE);
+  static Color white9 = const Color(0xFFD8DAE4);
+  static Color white10 = const Color(0xFFC4CEF1);
+  static Color white11 = const Color(0xFFADBCD2);
+  static Color white12 = const Color(0xFFAEB1D0);
+  static Color white13 = const Color(0xFF9FA7BE);
+  static Color white14 = const Color(0xFF9B9CB0);
+  static Color white15 = const Color(0xFF8695AC);
 
-  Color green1 = const Color(0xFF4CBD17);
+  static Color green1 = const Color(0xFF4CBD17);
 
-  Color blue1 = const Color(0xFF5F77FF);
-  Color blue2 = const Color(0xFF2943D6);
-  Color blue3 = const Color(0xFF022255);
+  static Color blue1 = const Color(0xFF5F77FF);
+  static Color blue2 = const Color(0xFF2943D6);
+  static Color blue3 = const Color(0xFF022255);
 
-  Color black1 = const Color(0xFF000000);
-  Color black2 = const Color(0xFF022255);
-  Color black3 = const Color(0xFF2D304B);
-  Color black4 = const Color(0xFF22243B);
-  Color black5 = const Color(0xFF141526);
-  Color black6 = const Color(0xFF303745);
-  Color black7 = const Color(0xFF383A56);
-  Color black8 = const Color(0xFF404365);
-  Color black9 = const Color(0xFF2B2D38);
-  Color black10 = const Color(0xFF4F547A);
-  Color black11 = const Color(0xFF636484);
-  Color black12 = const Color(0xFF21233A);
+  static Color black1 = const Color(0xFF000000);
+  static Color black2 = const Color(0xFF022255);
+  static Color black3 = const Color(0xFF2D304B);
+  static Color black4 = const Color(0xFF22243B);
+  static Color black5 = const Color(0xFF141526);
+  static Color black6 = const Color(0xFF303745);
+  static Color black7 = const Color(0xFF383A56);
+  static Color black8 = const Color(0xFF404365);
+  static Color black9 = const Color(0xFF2B2D38);
+  static Color black10 = const Color(0xFF4F547A);
+  static Color black11 = const Color(0xFF636484);
+  static Color black12 = const Color(0xFF21233A);
 }

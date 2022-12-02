@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeProvider>(
-      create: (BuildContext context) => ThemeProvider(),
+      create: (BuildContext context) => ThemeProvider(isDarkMode: true),
     ),
     ChangeNotifierProvider<LoginRegisterPageProvider>(
       create: (BuildContext context) => LoginRegisterPageProvider(),
@@ -25,16 +25,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      // translations: AppLanguages(),
-      locale: Get.deviceLocale,
-      fallbackLocale: const Locale('en', 'US'),
-      debugShowCheckedModeBanner: false,
-      title: 'B2GETA',
-      // home: SplashPage(),
-      // home: LoginPage(),
-      home: RegisterPage(),
-      // home: LanguageSelectionPage(),
-    );
+    return Consumer<ThemeProvider>(builder: (context, themeProvider, child) {
+      return GetMaterialApp(
+        // translations: AppLanguages(),
+        theme: themeProvider.getTheme,
+        locale: Get.deviceLocale,
+        fallbackLocale: const Locale('en', 'US'),
+        debugShowCheckedModeBanner: false,
+        title: 'B2GETA',
+        // home: SplashPage(),
+        // home: LoginPage(),
+        home: RegisterPage(),
+        // home: LanguageSelectionPage(),
+      );
+    });
   }
 }
