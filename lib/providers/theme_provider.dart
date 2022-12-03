@@ -1,35 +1,60 @@
+import 'package:b2geta_mobile/services/storage_manager.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
-  bool themeSwitch = false;
+  final darkTheme = ThemeData(
+    // primarySwatch: Colors.grey,
+    // primaryColor: Colors.black,
+    // brightness: Brightness.dark,
+    // backgroundColor: const Color(0xFF212121),
+    // dividerColor: Colors.black12,
+  );
 
-  late ThemeData _selectedTheme;
+  final lightTheme = ThemeData(
+    // primarySwatch: Colors.grey,
+    // primaryColor: Colors.white,
+    // brightness: Brightness.light,
+    // backgroundColor: const Color(0xFFE5E5E5),
+    // dividerColor: Colors.white54,
+  );
 
-  ThemeData light = ThemeData.light().copyWith(primaryColor: Colors.green);
+  var themeMode;
 
-  ThemeData dark = ThemeData.dark().copyWith(primaryColor: Colors.black);
+  ThemeData? _themeData;
+  ThemeData? getTheme() => _themeData;
 
-  ThemeProvider({required bool isDarkMode}) {
-    if (isDarkMode) {
-      _selectedTheme = dark;
-    } else {
-      _selectedTheme = light;
-    }
+  ThemeProvider() {
+    StorageManager.readData('themeMode').then((value) {
+      print('value read from storage: ' + value.toString());
+      // var themeMode = value ?? 'light';
+
+      themeMode = value ?? 'light';
+      if (themeMode == 'light') {
+        print('setting light theme');
+        themeMode = 'light';
+        _themeData = lightTheme;
+      } else {
+        print('setting dark theme');
+
+        themeMode = 'dark';
+        _themeData = darkTheme;
+      }
+      notifyListeners();
+    });
   }
 
-  ThemeData get getTheme => _selectedTheme;
-
-  void swapTheme() {
-    _selectedTheme = _selectedTheme == dark ? light : dark;
-
-    themeSwitch = !themeSwitch;
+  void setDarkMode() async {
+    _themeData = darkTheme;
+    themeMode = 'dark';
+    StorageManager.saveData('themeMode', 'dark');
 
     notifyListeners();
   }
 
-  void updateThemeSwitch(bool value) {
-    themeSwitch = value;
-
+  void setLightMode() async {
+    _themeData = lightTheme;
+    themeMode = 'light';
+    StorageManager.saveData('themeMode', 'light');
     notifyListeners();
   }
 }

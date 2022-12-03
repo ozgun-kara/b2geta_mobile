@@ -47,9 +47,9 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       // backgroundColor: Color(0xFF21233A),
 
-      backgroundColor: Provider.of<ThemeProvider>(context).themeSwitch
-          ? AppTheme.white1
-          : AppTheme.black12,
+      // backgroundColor: Provider.of<ThemeProvider>(context).themeSwitch
+      //     ? AppTheme.white1
+      //     : AppTheme.black12,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(116),
           child: Padding(
@@ -61,12 +61,14 @@ class _RegisterPageState extends State<RegisterPage> {
               centerTitle: true,
               leading: IconButton(
                 splashRadius: 24,
-                icon: Image.asset('assets/icons/back.png',
-                    width: 27,
-                    height: 13,
-                    color: Provider.of<ThemeProvider>(context).themeSwitch
-                        ? AppTheme.blue3
-                        : AppTheme.white14),
+                icon: Image.asset(
+                  'assets/icons/back.png',
+                  width: 27,
+                  height: 13,
+                  // color: Provider.of<ThemeProvider>(context).themeSwitch
+                  //     ? AppTheme.blue3
+                  //     : AppTheme.white14
+                ),
                 onPressed: () {
                   // Navigator.pop(context);
                 },
@@ -80,12 +82,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   'Üyelik Formu',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontFamily: AppTheme.appFontFamily,
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      color: Provider.of<ThemeProvider>(context).themeSwitch
-                          ? AppTheme.blue1
-                          : AppTheme.white1),
+                    fontFamily: AppTheme.appFontFamily,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w600,
+                    // color: Provider.of<ThemeProvider>(context).themeSwitch
+                    //     ? AppTheme.blue1
+                    //     : AppTheme.white1
+                  ),
                 ),
               ),
             ),

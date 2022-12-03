@@ -48,7 +48,9 @@ class _SplashPageState extends State<SplashPage> {
     }
 
     return Scaffold(
-      backgroundColor: AppTheme.black12,
+      backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
+          ? AppTheme.white1
+          : AppTheme.black12,
       body: SizedBox(
         width: deviceWidth,
         height: deviceHeight,
@@ -56,7 +58,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              child: Provider.of<ThemeProvider>(context).themeSwitch
+              child: Provider.of<ThemeProvider>(context).themeMode == "light"
                   ? Image.asset(
                       'assets/images/b2geta_logo_light.png',
                       width: 202.69,
@@ -70,6 +72,33 @@ class _SplashPageState extends State<SplashPage> {
             ),
 
             SizedBox(height: 30),
+
+            Text(
+              Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? "LIGHT TEMA AKTIF"
+                  : "DARK TEMA AKTIF",
+              style: TextStyle(
+                  fontFamily: AppTheme.appFontFamily,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.lightBlue),
+            ),
+            SizedBox(height: 30),
+            MaterialButton(
+              onPressed: () => {
+                debugPrint('Set Light Theme'),
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setLightMode()
+              },
+              child: Text('Set Light Theme'),
+            ),
+            MaterialButton(
+              onPressed: () => {
+                debugPrint('Set Dark theme'),
+                Provider.of<ThemeProvider>(context, listen: false).setDarkMode()
+              },
+              child: Text('Set Dark theme'),
+            ),
 
             // IconButton(
             //   icon: Icon(Icons.brightness_6),
