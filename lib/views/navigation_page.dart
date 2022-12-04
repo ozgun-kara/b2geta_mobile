@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,11 +13,13 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
+  late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
   @override
   Widget build(BuildContext context) {
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
@@ -62,26 +65,24 @@ class _NavigationPageState extends State<NavigationPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/icons/homepage.png',
-                              width: 20,
-                              height: 20,
+                              width: 23,
+                              height: 22,
                               color:
                                   Provider.of<NavigationPageProvider>(context)
                                               .currentTabIndex ==
                                           0
-                                      ? AppTheme.green1
-                                      : AppTheme.white9),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15),
                           SizedBox(height: 4),
                           Text('Anasayfa',
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
-                                  fontWeight:
-                                      Provider.of<NavigationPageProvider>(
-                                                      context)
-                                                  .currentTabIndex ==
-                                              0
-                                          ? FontWeight.w600
-                                          : FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: Provider.of<NavigationPageProvider>(
                                                   context)
                                               .currentTabIndex ==
@@ -116,14 +117,18 @@ class _NavigationPageState extends State<NavigationPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/icons/market.png',
-                              width: 20,
-                              height: 20,
+                              width: 22,
+                              height: 21,
                               color:
                                   Provider.of<NavigationPageProvider>(context)
                                               .currentTabIndex ==
                                           1
-                                      ? AppTheme.green1
-                                      : AppTheme.white9),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15),
                           SizedBox(height: 4),
                           Text('Arama Yap',
                               style: TextStyle(
@@ -170,14 +175,18 @@ class _NavigationPageState extends State<NavigationPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/icons/people.png',
-                              width: 20,
-                              height: 20,
+                              width: 21,
+                              height: 21,
                               color:
                                   Provider.of<NavigationPageProvider>(context)
                                               .currentTabIndex ==
                                           2
-                                      ? AppTheme.green1
-                                      : AppTheme.white9),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15),
                           SizedBox(height: 4),
                           Text('Kütüphane',
                               style: TextStyle(
@@ -224,14 +233,18 @@ class _NavigationPageState extends State<NavigationPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Image.asset('assets/icons/panel.png',
-                              width: 20,
-                              height: 20,
+                              width: 19,
+                              height: 19,
                               color:
                                   Provider.of<NavigationPageProvider>(context)
                                               .currentTabIndex ==
                                           3
-                                      ? AppTheme.green1
-                                      : AppTheme.white9),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15),
                           SizedBox(height: 4),
                           Text('Profil',
                               style: TextStyle(

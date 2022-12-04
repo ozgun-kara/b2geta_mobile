@@ -16,9 +16,6 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  double? deviceWidth;
-  double? deviceHeight;
-
   @override
   void initState() {
     super.initState();
@@ -35,13 +32,18 @@ class _SplashPageState extends State<SplashPage> {
             })));
   }
 
+  late double deviceTopPadding;
+  late double deviceWidth;
+  late double deviceHeight;
+
   @override
   Widget build(BuildContext context) {
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
     // CONTROL OF APP ORIENTATION
-    if (deviceHeight! < 450 || deviceWidth! < 450) {
+    if (deviceHeight < 450 || deviceWidth < 450) {
       SystemChrome.setPreferredOrientations([
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,

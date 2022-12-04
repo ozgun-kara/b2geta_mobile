@@ -15,12 +15,12 @@ void main() {
     ChangeNotifierProvider<ThemeProvider>(
       create: (BuildContext context) => ThemeProvider(),
     ),
+    ChangeNotifierProvider<LoginRegisterPageProvider>(
+      create: (BuildContext context) => LoginRegisterPageProvider(),
+    ),
     ChangeNotifierProvider<NavigationPageProvider>(
       create: (BuildContext context) => NavigationPageProvider(),
     ),
-    ChangeNotifierProvider<LoginRegisterPageProvider>(
-      create: (BuildContext context) => LoginRegisterPageProvider(),
-    )
   ], child: MyApp()));
 }
 
