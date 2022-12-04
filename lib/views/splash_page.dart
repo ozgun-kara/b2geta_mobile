@@ -24,7 +24,7 @@ class _SplashPageState extends State<SplashPage> {
 
     // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
     Timer(
-        const Duration(milliseconds: 8000),
+        const Duration(milliseconds: 2000),
         () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (BuildContext context) {
               // return LoginPage();
@@ -69,38 +69,38 @@ class _SplashPageState extends State<SplashPage> {
                       height: 27.35,
                     ),
             ),
-            Column(
-              children: [
-                SizedBox(height: 30),
-                Text(
-                  Provider.of<ThemeProvider>(context).themeMode == "light"
-                      ? "LIGHT TEMA AKTIF"
-                      : "DARK TEMA AKTIF",
-                  style: TextStyle(
-                      fontFamily: AppTheme.appFontFamily,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.lightBlue),
-                ),
-                SizedBox(height: 30),
-                MaterialButton(
-                  onPressed: () => {
-                    debugPrint('Set Light Theme'),
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setLightMode()
-                  },
-                  child: Text('Set Light Theme'),
-                ),
-                MaterialButton(
-                  onPressed: () => {
-                    debugPrint('Set Dark theme'),
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setDarkMode()
-                  },
-                  child: Text('Set Dark theme'),
-                ),
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     SizedBox(height: 30),
+            //     Text(
+            //       Provider.of<ThemeProvider>(context).themeMode == "light"
+            //           ? "LIGHT TEMA AKTIF"
+            //           : "DARK TEMA AKTIF",
+            //       style: TextStyle(
+            //           fontFamily: AppTheme.appFontFamily,
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.w600,
+            //           color: Colors.lightBlue),
+            //     ),
+            //     SizedBox(height: 30),
+            //     MaterialButton(
+            //       onPressed: () => {
+            //         debugPrint('Set Light Theme'),
+            //         Provider.of<ThemeProvider>(context, listen: false)
+            //             .setLightMode()
+            //       },
+            //       child: Text('Set Light Theme'),
+            //     ),
+            //     MaterialButton(
+            //       onPressed: () => {
+            //         debugPrint('Set Dark theme'),
+            //         Provider.of<ThemeProvider>(context, listen: false)
+            //             .setDarkMode()
+            //       },
+            //       child: Text('Set Dark theme'),
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ),

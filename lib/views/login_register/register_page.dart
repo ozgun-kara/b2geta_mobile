@@ -82,9 +82,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     fontFamily: AppTheme.appFontFamily,
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
-                    // color: Provider.of<ThemeProvider>(context).themeSwitch
-                    //     ? AppTheme.blue1
-                    //     : AppTheme.white1
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
                   ),
                 ),
               ),
@@ -118,13 +119,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "E-mail",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -171,13 +178,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "E-mail (tekrar)",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -225,13 +238,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "Şifre",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -279,13 +298,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "Şifre Tekrar",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -332,13 +357,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "Firma Adı",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -385,13 +416,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "Yetkili Kişi",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -439,13 +476,19 @@ class _RegisterPageState extends State<RegisterPage> {
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                   filled: true,
-                  fillColor: AppTheme.black7,
+                  fillColor:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white5
+                          : AppTheme.black7,
                   hintText: "Yetkili Telefon",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w400,
-                    color: AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
                   ),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
@@ -479,7 +522,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       fontSize: 14,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: AppTheme.white14,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black11
+                          : AppTheme.white14,
                     ),
                     overflow: TextOverflow.visible,
                   ),
@@ -493,7 +539,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w400,
-                                  color: AppTheme.white14,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.black11
+                                      : AppTheme.white14,
                                 ),
                                 overflow: TextOverflow.visible,
                               ),
@@ -525,7 +575,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     // border:
                     //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
                     // color: Colors.transparent,
-                    color: AppTheme.black7,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
                   ),
                   // buttonElevation: 2,
                   itemHeight: 40,
@@ -536,7 +589,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   dropdownDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
                     // color: Color(0xFFEFF0F7),
-                    color: AppTheme.black7,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
                   ),
                   // dropdownElevation: 8,
                   scrollbarRadius: const Radius.circular(40),
@@ -556,9 +612,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         toggleSize: 17,
                         padding: 2,
                         borderRadius: 100,
+                        inactiveColor:
+                            Provider.of<ThemeProvider>(context).themeMode ==
+                                    "light"
+                                ? AppTheme.white7
+                                : AppTheme.black10,
                         activeColor: AppTheme.green1,
-                        inactiveColor: AppTheme.black10,
-                        toggleColor: AppTheme.black4,
+                        toggleColor:
+                            Provider.of<ThemeProvider>(context).themeMode ==
+                                    "light"
+                                ? AppTheme.white1
+                                : AppTheme.black4,
 
                         // value: Provider.of<LoginRegisterPageProvider>(context)
                         //     .registerSwitch,
@@ -646,88 +710,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
-
-              // Row(
-              //   children: [
-              //     FlutterSwitch(
-              //       width: 42,
-              //       height: 21,
-              //       toggleSize: 17,
-              //       padding: 2,
-              //       borderRadius: 100,
-              //       activeColor: AppTheme().green1,
-              //       inactiveColor: AppTheme().black10,
-              //       toggleColor: AppTheme().black4,
-              //       value: Provider.of<LoginRegisterPageProvider>(context)
-              //           .registerSwitch,
-              //       onToggle: (value) {
-              //         Provider.of<LoginRegisterPageProvider>(context,
-              //                 listen: false)
-              //             .updateregisterSwitch(value);
-              //       },
-              //     ),
-              //     SizedBox(width: 13),
-              //     Expanded(
-              //       child: Text(
-              //         "Kullanıcı sözleşmesişni okudum onaylıyorum",
-              //         style: TextStyle(
-              //             fontSize: 12,
-              //             fontFamily: AppTheme().appFontFamily,
-              //             fontWeight: FontWeight.w400,
-              //             color: AppTheme().white14),
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // SizedBox(height: 30),
-              // ButtonTheme(
-              //   minWidth: deviceWidth,
-              //   height: 52,
-              //   child: Container(
-              //     height: 52,
-              //     decoration: BoxDecoration(
-              //         color: AppTheme().green1,
-              //         // boxShadow: [
-              //         //   BoxShadow(
-              //         //     blurStyle: BlurStyle.outer,
-              //         //     offset: Offset(0, -4),
-              //         //     blurRadius: 16,
-              //         //     spreadRadius: 0,
-              //         //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-              //         //   ),
-              //         //   BoxShadow(
-              //         //     blurStyle: BlurStyle.normal,
-              //         //     offset: Offset(0, -2),
-              //         //     blurRadius: 2,
-              //         //     spreadRadius: 0,
-              //         //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-              //         //   ),
-              //         //   BoxShadow(
-              //         //     blurStyle: BlurStyle.normal,
-              //         //     offset: Offset(0, 1),
-              //         //     blurRadius: 2,
-              //         //     spreadRadius: 0,
-              //         //     color: Color(0xFF000000).withOpacity(0.18),
-              //         //   ),
-              //         // ],
-              //
-              //         borderRadius: BorderRadius.all(Radius.circular(16))),
-              //     child: MaterialButton(
-              //         elevation: 0,
-              //         shape: const RoundedRectangleBorder(
-              //           borderRadius: BorderRadius.all(Radius.circular(16)),
-              //         ),
-              //         child: Text(
-              //           "Üye Ol",
-              //           style: TextStyle(
-              //               fontSize: 16,
-              //               fontFamily: AppTheme().appFontFamily,
-              //               fontWeight: FontWeight.w700,
-              //               color: AppTheme().white1),
-              //         ),
-              //         onPressed: () async {}),
-              //   ),
-              // ),
             ],
           ),
         ),
