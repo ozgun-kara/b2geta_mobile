@@ -1,4 +1,3 @@
-import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -6,14 +5,14 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _HomePageState extends State<HomePage> {
   final emailController1 = TextEditingController();
   final emailController2 = TextEditingController();
   final passwordController1 = TextEditingController();
@@ -46,56 +45,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
-          ? AppTheme.white1
+          ? AppTheme.white2
           : AppTheme.black12,
-      appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(116),
-          child: Padding(
-            padding: EdgeInsets.only(top: deviceTopPadding),
-            child: AppBar(
-              toolbarHeight: 30,
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              centerTitle: true,
-              leading: IconButton(
-                splashRadius: 24,
-                icon: Image.asset(
-                  'assets/icons/back.png',
-                  width: 27,
-                  height: 13,
-                  color:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white14,
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              flexibleSpace: Padding(
-                padding: EdgeInsets.only(top: 65),
-                // padding: EdgeInsets.only(top: 49),
-                child: Text(
-                  'Üyelik Formu',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: AppTheme.appFontFamily,
-                    fontSize: 22,
-                    fontWeight: FontWeight.w600,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.blue2
-                            : AppTheme.white1,
-                  ),
-                ),
-              ),
-            ),
-          )),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 120),
               TextFormField(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -249,190 +207,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? AppTheme.white5
                           : AppTheme.black7,
                   hintText: "Şifre",
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w400,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white14,
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: AppTheme.white1,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 13),
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your email address';
-                  }
-                  // Check if the entered email has the right format
-                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  // Return null if the entered email is valid
-                  return null;
-                },
-                controller: passwordController2,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white1), // WHILE WRITING
-                maxLines: 1,
-                obscureText: true,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
-                  filled: true,
-                  fillColor:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white5
-                          : AppTheme.black7,
-                  hintText: "Şifre Tekrar",
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w400,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white14,
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: AppTheme.white1,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 13),
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your email address';
-                  }
-                  // Check if the entered email has the right format
-                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  // Return null if the entered email is valid
-                  return null;
-                },
-                controller: companyNameController,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white1), // WHILE WRITING
-                maxLines: 1,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
-                  filled: true,
-                  fillColor:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white5
-                          : AppTheme.black7,
-                  hintText: "Firma Adı",
-                  hintStyle: TextStyle(
-                    fontSize: 14,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w400,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white14,
-                  ),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      )),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      color: AppTheme.white1,
-                      width: 1,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 13),
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your email address';
-                  }
-                  // Check if the entered email has the right format
-                  if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                    return 'Please enter a valid email address';
-                  }
-                  // Return null if the entered email is valid
-                  return null;
-                },
-                controller: authorizedNameController,
-                style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black11
-                            : AppTheme.white1), // WHILE WRITING
-                maxLines: 1,
-                decoration: InputDecoration(
-                  contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
-                  filled: true,
-                  fillColor:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white5
-                          : AppTheme.black7,
-                  hintText: "Yetkili Kişi",
                   hintStyle: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
@@ -717,13 +491,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             fontWeight: FontWeight.w700,
                             color: AppTheme.white1),
                       ),
-                      onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NavigationPage(),
-                            ));
-                      }),
+                      onPressed: () async {}),
                 ),
               ),
             ],

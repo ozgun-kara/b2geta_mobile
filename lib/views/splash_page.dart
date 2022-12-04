@@ -27,8 +27,8 @@ class _SplashPageState extends State<SplashPage> {
                 MaterialPageRoute(builder: (BuildContext context) {
               // return LoginPage();
               // return LanguageSelectionPage();
-              // return RegisterPage();
-              return NavigationPage();
+              return RegisterPage();
+              // return NavigationPage();
             })));
   }
 

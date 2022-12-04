@@ -26,6 +26,81 @@ class _NavigationPageState extends State<NavigationPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
+
+      appBar: AppBar(
+          toolbarHeight: 68,
+          backgroundColor:
+              Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.white1
+                  : AppTheme.black5,
+          elevation: 0,
+          // centerTitle: true,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/menu.png',
+                width: 27,
+                height: 19,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/message.png',
+                  width: 17.17,
+                  height: 14.05,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              ),
+              SizedBox(width: 4),
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/shopping_car.png',
+                  width: 17.95,
+                  height: 16.39,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              ),
+              SizedBox(width: 4),
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/bell.png',
+                  width: 14.05,
+                  height: 15.61,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              )
+            ],
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/search.png',
+                  width: 19,
+                  height: 19,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ]),
+
       body: Provider.of<NavigationPageProvider>(context)
           .pages[Provider.of<NavigationPageProvider>(context).currentTabIndex],
 
