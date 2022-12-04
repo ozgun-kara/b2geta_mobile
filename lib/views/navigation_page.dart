@@ -31,25 +31,27 @@ class _NavigationPageState extends State<NavigationPage> {
 
       bottomNavigationBar: Container(
         width: deviceWidth,
-        height: 56,
+        height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black54.withOpacity(0.35),
-              offset: Offset(0, 10),
-              blurRadius: 48,
-            ),
-          ],
-          color: Colors.white,
+          // boxShadow: [
+          //   BoxShadow(
+          //     color: Colors.black54.withOpacity(0.35),
+          //     offset: Offset(0, 10),
+          //     blurRadius: 48,
+          //   ),
+          // ],
+          color: Provider.of<ThemeProvider>(context).themeMode == "light"
+              ? AppTheme.white1
+              : AppTheme.black5,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
               child: ButtonTheme(
-                height: 56,
+                height: 60,
                 child: MaterialButton(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -57,7 +59,10 @@ class _NavigationPageState extends State<NavigationPage> {
                         topRight: Radius.circular(16),
                       ),
                     ),
-                    color: Colors.white,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black5,
                     elevation: 0,
                     child: FittedBox(
                       fit: BoxFit.none,
@@ -87,8 +92,12 @@ class _NavigationPageState extends State<NavigationPage> {
                                                   context)
                                               .currentTabIndex ==
                                           0
-                                      ? AppTheme.green1
-                                      : AppTheme.white9)),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15)),
                         ],
                       ),
                     ),
@@ -101,7 +110,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             Expanded(
               child: ButtonTheme(
-                height: 56,
+                height: 60,
                 child: MaterialButton(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -109,7 +118,10 @@ class _NavigationPageState extends State<NavigationPage> {
                         topRight: Radius.circular(16),
                       ),
                     ),
-                    color: Colors.white,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black5,
                     elevation: 0,
                     child: FittedBox(
                       fit: BoxFit.none,
@@ -130,23 +142,21 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 4),
-                          Text('Arama Yap',
+                          Text('Pazaryeri',
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
-                                  fontWeight:
-                                      Provider.of<NavigationPageProvider>(
-                                                      context)
-                                                  .currentTabIndex ==
-                                              1
-                                          ? FontWeight.w600
-                                          : FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: Provider.of<NavigationPageProvider>(
                                                   context)
                                               .currentTabIndex ==
                                           1
-                                      ? AppTheme.green1
-                                      : AppTheme.white9)),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15)),
                         ],
                       ),
                     ),
@@ -159,7 +169,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             Expanded(
               child: ButtonTheme(
-                height: 56,
+                height: 60,
                 child: MaterialButton(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -167,7 +177,10 @@ class _NavigationPageState extends State<NavigationPage> {
                         topRight: Radius.circular(16),
                       ),
                     ),
-                    color: Colors.white,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black5,
                     elevation: 0,
                     child: FittedBox(
                       fit: BoxFit.none,
@@ -188,23 +201,21 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 4),
-                          Text('Kütüphane',
+                          Text('Firmalar',
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
-                                  fontWeight:
-                                      Provider.of<NavigationPageProvider>(
-                                                      context)
-                                                  .currentTabIndex ==
-                                              2
-                                          ? FontWeight.w600
-                                          : FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: Provider.of<NavigationPageProvider>(
                                                   context)
                                               .currentTabIndex ==
                                           2
-                                      ? AppTheme.green1
-                                      : AppTheme.white9)),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15)),
                         ],
                       ),
                     ),
@@ -217,7 +228,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             Expanded(
               child: ButtonTheme(
-                height: 56,
+                height: 60,
                 child: MaterialButton(
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -225,7 +236,10 @@ class _NavigationPageState extends State<NavigationPage> {
                         topRight: Radius.circular(16),
                       ),
                     ),
-                    color: Colors.white,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black5,
                     elevation: 0,
                     child: FittedBox(
                       fit: BoxFit.none,
@@ -245,24 +259,22 @@ class _NavigationPageState extends State<NavigationPage> {
                                           ? AppTheme.blue2
                                           : AppTheme.blue1
                                       : AppTheme.white15),
-                          SizedBox(height: 4),
-                          Text('Profil',
+                          SizedBox(height: 5),
+                          Text('Panelim',
                               style: TextStyle(
-                                  fontSize: 10,
+                                  fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
-                                  fontWeight:
-                                      Provider.of<NavigationPageProvider>(
-                                                      context)
-                                                  .currentTabIndex ==
-                                              3
-                                          ? FontWeight.w600
-                                          : FontWeight.w500,
+                                  fontWeight: FontWeight.w600,
                                   color: Provider.of<NavigationPageProvider>(
                                                   context)
                                               .currentTabIndex ==
                                           3
-                                      ? AppTheme.green1
-                                      : AppTheme.white9)),
+                                      ? Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.blue1
+                                      : AppTheme.white15)),
                         ],
                       ),
                     ),
