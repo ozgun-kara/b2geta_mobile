@@ -1,9 +1,8 @@
-import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -110,11 +109,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: emailController1,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -169,11 +170,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: emailController2,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -228,11 +231,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: passwordController1,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -288,11 +293,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: passwordController2,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 obscureText: true,
                 decoration: InputDecoration(
@@ -348,11 +355,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: companyNameController,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -407,11 +416,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: authorizedNameController,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -466,11 +477,13 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
                 controller: authorizedPhoneController,
                 style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w500,
-                  color: AppTheme.white2,
-                ), // WHILE WRITING
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
                 maxLines: 1,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
@@ -602,113 +615,109 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               SizedBox(height: 23),
-              Column(
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      FlutterSwitch(
-                        width: 42,
-                        height: 21,
-                        toggleSize: 17,
-                        padding: 2,
-                        borderRadius: 100,
-                        inactiveColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white7
-                                : AppTheme.black10,
-                        activeColor: AppTheme.green1,
-                        toggleColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white1
-                                : AppTheme.black4,
+                  FlutterSwitch(
+                    width: 42,
+                    height: 21,
+                    toggleSize: 17,
+                    padding: 2,
+                    borderRadius: 100,
+                    inactiveColor:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white7
+                            : AppTheme.black10,
+                    activeColor: AppTheme.green1,
+                    toggleColor:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black4,
 
-                        // value: Provider.of<LoginRegisterPageProvider>(context)
-                        //     .registerSwitch,
+                    // value: Provider.of<LoginRegisterPageProvider>(context)
+                    //     .registerSwitch,
 
-                        value: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
+                    value:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
                             ? false
                             : true,
 
-                        onToggle: (value) {
-                          if (value == false) {
-                            Provider.of<ThemeProvider>(context, listen: false)
-                                .setLightMode();
-                          } else {
-                            Provider.of<ThemeProvider>(context, listen: false)
-                                .setDarkMode();
-                          }
+                    onToggle: (value) {
+                      if (value == false) {
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .setLightMode();
+                        debugPrint('Light Theme Activated');
+                      } else {
+                        Provider.of<ThemeProvider>(context, listen: false)
+                            .setDarkMode();
+                        debugPrint('Dark Theme Activated');
+                      }
 
-                          // Provider.of<LoginRegisterPageProvider>(context,
-                          //         listen: false)
-                          //     .updateregisterSwitch(value);
-                        },
-                      ),
-                      SizedBox(width: 13),
-                      Expanded(
-                        child: Text(
-                          "Kullanıcı sözleşmesişni okudum onaylıyorum",
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: AppTheme.white14),
-                        ),
-                      ),
-                    ],
+                      // Provider.of<LoginRegisterPageProvider>(context,
+                      //         listen: false)
+                      //     .updateregisterSwitch(value);
+                    },
                   ),
-                  SizedBox(height: 30),
-                  ButtonTheme(
-                    minWidth: deviceWidth,
-                    height: 52,
-                    child: Container(
-                      height: 52,
-                      decoration: BoxDecoration(
-                          color: AppTheme.green1,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.outer,
-                          //     offset: Offset(0, -4),
-                          //     blurRadius: 16,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, -2),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, 1),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF000000).withOpacity(0.18),
-                          //   ),
-                          // ],
-
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
-                      child: MaterialButton(
-                          elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                          ),
-                          child: Text(
-                            "Üye Ol",
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.white1),
-                          ),
-                          onPressed: () async {}),
+                  SizedBox(width: 13),
+                  Expanded(
+                    child: Text(
+                      "Kullanıcı sözleşmesişni okudum onaylıyorum",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: AppTheme.white14),
                     ),
                   ),
                 ],
+              ),
+              SizedBox(height: 30),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     blurStyle: BlurStyle.outer,
+                      //     offset: Offset(0, -4),
+                      //     blurRadius: 16,
+                      //     spreadRadius: 0,
+                      //     color: Color(0xFF0E0E0F).withOpacity(0.17),
+                      //   ),
+                      //   BoxShadow(
+                      //     blurStyle: BlurStyle.normal,
+                      //     offset: Offset(0, -2),
+                      //     blurRadius: 2,
+                      //     spreadRadius: 0,
+                      //     color: Color(0xFFFFFFFF).withOpacity(0.25),
+                      //   ),
+                      //   BoxShadow(
+                      //     blurStyle: BlurStyle.normal,
+                      //     offset: Offset(0, 1),
+                      //     blurRadius: 2,
+                      //     spreadRadius: 0,
+                      //     color: Color(0xFF000000).withOpacity(0.18),
+                      //   ),
+                      // ],
+
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        "Üye Ol",
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () async {}),
+                ),
               ),
             ],
           ),

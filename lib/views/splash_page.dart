@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/language_selection_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,8 @@ class _SplashPageState extends State<SplashPage> {
                 MaterialPageRoute(builder: (BuildContext context) {
               // return LoginPage();
               // return LanguageSelectionPage();
-              return RegisterPage();
+              // return RegisterPage();
+              return NavigationPage();
             })));
   }
 
