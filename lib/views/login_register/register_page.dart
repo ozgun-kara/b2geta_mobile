@@ -45,11 +45,9 @@ class _RegisterPageState extends State<RegisterPage> {
     deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      // backgroundColor: Color(0xFF21233A),
-
-      // backgroundColor: Provider.of<ThemeProvider>(context).themeSwitch
-      //     ? AppTheme.white1
-      //     : AppTheme.black12,
+      backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
+          ? AppTheme.white1
+          : AppTheme.black12,
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(116),
           child: Padding(
@@ -65,16 +63,15 @@ class _RegisterPageState extends State<RegisterPage> {
                   'assets/icons/back.png',
                   width: 27,
                   height: 13,
-                  // color: Provider.of<ThemeProvider>(context).themeSwitch
-                  //     ? AppTheme.blue3
-                  //     : AppTheme.white14
+                  color:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.blue3
+                          : AppTheme.white14,
                 ),
                 onPressed: () {
-                  // Navigator.pop(context);
+                  Navigator.pop(context);
                 },
               ),
-              // title:
-              actions: <Widget>[],
               flexibleSpace: Padding(
                 padding: EdgeInsets.only(top: 65),
                 // padding: EdgeInsets.only(top: 49),
@@ -93,28 +90,6 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
             ),
           )),
-      // appBar: PreferredSize(
-      //     preferredSize: const Size.fromHeight(70),
-      //     child: Padding(
-      //       padding: EdgeInsets.only(top: deviceTopPadding),
-      //       child: AppBar(
-      //         toolbarHeight: 30,
-      //         backgroundColor: Colors.red,
-      //         elevation: 0,
-      //         centerTitle: true,
-      //         leading: IconButton(
-      //           splashRadius: 24,
-      //           icon: Image.asset(
-      //             'assets/icons/back.png',
-      //             width: 27,
-      //             height: 13,
-      //           ),
-      //           onPressed: () {
-      //             // Navigator.pop(context);
-      //           },
-      //         ),
-      //       ),
-      //     )),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
@@ -584,25 +559,29 @@ class _RegisterPageState extends State<RegisterPage> {
                         activeColor: AppTheme.green1,
                         inactiveColor: AppTheme.black10,
                         toggleColor: AppTheme.black4,
+
                         // value: Provider.of<LoginRegisterPageProvider>(context)
                         //     .registerSwitch,
-                        value: Provider.of<LoginRegisterPageProvider>(context)
-                            .registerSwitch,
+
+                        value: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? false
+                            : true,
+
                         onToggle: (value) {
-                          Provider.of<LoginRegisterPageProvider>(context,
-                                  listen: false)
-                              .updateregisterSwitch(value);
-                          // Provider.of<ThemeProvider>(context, listen: false)
-                          //     .updateThemeSwitch(value);
+                          if (value == false) {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .setLightMode();
+                          } else {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .setDarkMode();
+                          }
+
+                          // Provider.of<LoginRegisterPageProvider>(context,
+                          //         listen: false)
+                          //     .updateregisterSwitch(value);
                         },
                       ),
-                      // IconButton(
-                      //   icon: Icon(Icons.brightness_6),
-                      //   color: Colors.white,
-                      //   onPressed: () {
-                      //     debugPrint("Swap it");
-                      //   },
-                      // ),
                       SizedBox(width: 13),
                       Expanded(
                         child: Text(
@@ -753,101 +732,6 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
-
-      // bottomNavigationBar: Container(
-      //     color: Colors.transparent,
-      //     child: SizedBox(
-      //       width: deviceWidth,
-      //       height: 158 + 23,
-      //       child: Padding(
-      //         padding: EdgeInsets.fromLTRB(30, 23, 30, 55),
-      //         child: Column(
-      //           children: [
-      //             Row(
-      //               children: [
-      //                 FlutterSwitch(
-      //                   width: 42,
-      //                   height: 21,
-      //                   toggleSize: 17,
-      //                   padding: 2,
-      //                   borderRadius: 100,
-      //                   activeColor: AppTheme().green1,
-      //                   inactiveColor: AppTheme().black10,
-      //                   toggleColor: AppTheme().black4,
-      //                   value: Provider.of<LoginRegisterPageProvider>(context)
-      //                       .registerSwitch,
-      //                   onToggle: (value) {
-      //                     Provider.of<LoginRegisterPageProvider>(context,
-      //                             listen: false)
-      //                         .updateregisterSwitch(value);
-      //                   },
-      //                 ),
-      //                 SizedBox(width: 13),
-      //                 Expanded(
-      //                   child: Text(
-      //                     "Kullanıcı sözleşmesişni okudum onaylıyorum",
-      //                     style: TextStyle(
-      //                         fontSize: 12,
-      //                         fontFamily: AppTheme().appFontFamily,
-      //                         fontWeight: FontWeight.w400,
-      //                         color: AppTheme().white14),
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //             SizedBox(height: 30),
-      //             ButtonTheme(
-      //               minWidth: deviceWidth,
-      //               height: 52,
-      //               child: Container(
-      //                 height: 52,
-      //                 decoration: BoxDecoration(
-      //                     color: AppTheme().green1,
-      //                     // boxShadow: [
-      //                     //   BoxShadow(
-      //                     //     blurStyle: BlurStyle.outer,
-      //                     //     offset: Offset(0, -4),
-      //                     //     blurRadius: 16,
-      //                     //     spreadRadius: 0,
-      //                     //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-      //                     //   ),
-      //                     //   BoxShadow(
-      //                     //     blurStyle: BlurStyle.normal,
-      //                     //     offset: Offset(0, -2),
-      //                     //     blurRadius: 2,
-      //                     //     spreadRadius: 0,
-      //                     //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-      //                     //   ),
-      //                     //   BoxShadow(
-      //                     //     blurStyle: BlurStyle.normal,
-      //                     //     offset: Offset(0, 1),
-      //                     //     blurRadius: 2,
-      //                     //     spreadRadius: 0,
-      //                     //     color: Color(0xFF000000).withOpacity(0.18),
-      //                     //   ),
-      //                     // ],
-      //
-      //                     borderRadius: BorderRadius.all(Radius.circular(16))),
-      //                 child: MaterialButton(
-      //                     elevation: 0,
-      //                     shape: const RoundedRectangleBorder(
-      //                       borderRadius: BorderRadius.all(Radius.circular(16)),
-      //                     ),
-      //                     child: Text(
-      //                       "Üye Ol",
-      //                       style: TextStyle(
-      //                           fontSize: 16,
-      //                           fontFamily: AppTheme().appFontFamily,
-      //                           fontWeight: FontWeight.w700,
-      //                           color: AppTheme().white1),
-      //                     ),
-      //                     onPressed: () async {}),
-      //               ),
-      //             ),
-      //           ],
-      //         ),
-      //       ),
-      //     )),
     );
   }
 }

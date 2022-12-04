@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/language_selection_page.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
+import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 import 'package:provider/provider.dart';
 
 class SplashPage extends StatefulWidget {
@@ -26,11 +24,12 @@ class _SplashPageState extends State<SplashPage> {
 
     // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
     Timer(
-        const Duration(milliseconds: 200000000),
+        const Duration(milliseconds: 8000),
         () => Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (BuildContext context) {
               // return LoginPage();
-              return LanguageSelectionPage();
+              // return LanguageSelectionPage();
+              return RegisterPage();
             })));
   }
 
@@ -70,63 +69,38 @@ class _SplashPageState extends State<SplashPage> {
                       height: 27.35,
                     ),
             ),
-
-            SizedBox(height: 30),
-
-            Text(
-              Provider.of<ThemeProvider>(context).themeMode == "light"
-                  ? "LIGHT TEMA AKTIF"
-                  : "DARK TEMA AKTIF",
-              style: TextStyle(
-                  fontFamily: AppTheme.appFontFamily,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.lightBlue),
+            Column(
+              children: [
+                SizedBox(height: 30),
+                Text(
+                  Provider.of<ThemeProvider>(context).themeMode == "light"
+                      ? "LIGHT TEMA AKTIF"
+                      : "DARK TEMA AKTIF",
+                  style: TextStyle(
+                      fontFamily: AppTheme.appFontFamily,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.lightBlue),
+                ),
+                SizedBox(height: 30),
+                MaterialButton(
+                  onPressed: () => {
+                    debugPrint('Set Light Theme'),
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setLightMode()
+                  },
+                  child: Text('Set Light Theme'),
+                ),
+                MaterialButton(
+                  onPressed: () => {
+                    debugPrint('Set Dark theme'),
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setDarkMode()
+                  },
+                  child: Text('Set Dark theme'),
+                ),
+              ],
             ),
-            SizedBox(height: 30),
-            MaterialButton(
-              onPressed: () => {
-                debugPrint('Set Light Theme'),
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setLightMode()
-              },
-              child: Text('Set Light Theme'),
-            ),
-            MaterialButton(
-              onPressed: () => {
-                debugPrint('Set Dark theme'),
-                Provider.of<ThemeProvider>(context, listen: false).setDarkMode()
-              },
-              child: Text('Set Dark theme'),
-            ),
-
-            // IconButton(
-            //   icon: Icon(Icons.brightness_6),
-            //   color: Colors.white,
-            //   onPressed: () {
-            //     debugPrint("Swap it");
-            //     Provider.of<ThemeProvider>(context, listen: false).swapTheme();
-            //   },
-            // ),
-            // FlutterSwitch(
-            //   width: 41,
-            //   height: 24,
-            //   toggleSize: 18,
-            //   padding: 3,
-            //   borderRadius: 100,
-            //   activeColor: Colors.green,
-            //   inactiveColor: Color(0xFFD6D8E7),
-            //   toggleColor: Colors.white,
-            //   value: Provider.of<ThemeProvider>(context).themeSwitch,
-            //   onToggle: (value) {
-            //     Provider.of<ThemeProvider>(context, listen: false)
-            //         .updateThemeSwitch(value);
-            //
-            //     // context
-            //     //     .read<ThemeProvider>()
-            //     //     .updateThemeSwitch(value);
-            //   },
-            // ),
           ],
         ),
       ),
