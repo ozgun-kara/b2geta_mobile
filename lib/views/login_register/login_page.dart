@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -49,10 +50,34 @@ class _LoginPageState extends State<LoginPage> {
           ? AppTheme.white1
           : AppTheme.black12,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(30, 0, 30, 16),
+        padding: EdgeInsets.fromLTRB(30, deviceTopPadding + 32, 30, 16),
         child: Column(
           children: [
+            Image.asset(
+              'assets/images/b2geta_logo_white.png',
+              width: 153,
+              height: 20.65,
+            ),
             Spacer(),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    "Üye Girişi",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w600,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.blue2
+                          : AppTheme.white1,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 20),
             TextFormField(
               validator: (value) {
                 if (value == null || value.trim().isEmpty) {
@@ -78,10 +103,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                 filled: true,
-                fillColor:
-                    Provider.of<ThemeProvider>(context).themeMode == "light"
-                        ? AppTheme.white5
-                        : AppTheme.black7,
+                fillColor: Colors.transparent,
                 hintText: "E-mail",
                 hintStyle: TextStyle(
                   fontSize: 14,
@@ -95,13 +117,19 @@ class _LoginPageState extends State<LoginPage> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Colors.transparent,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.white10
+                          : AppTheme.black14,
                       width: 1,
                     )),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Colors.transparent,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.white10
+                          : AppTheme.black14,
                       width: 1,
                     )),
                 focusedBorder: OutlineInputBorder(
@@ -140,10 +168,7 @@ class _LoginPageState extends State<LoginPage> {
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                 filled: true,
-                fillColor:
-                    Provider.of<ThemeProvider>(context).themeMode == "light"
-                        ? AppTheme.white5
-                        : AppTheme.black7,
+                fillColor: Colors.transparent,
                 hintText: "Şifre",
                 hintStyle: TextStyle(
                   fontSize: 14,
@@ -157,13 +182,19 @@ class _LoginPageState extends State<LoginPage> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Colors.transparent,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.white10
+                          : AppTheme.black14,
                       width: 1,
                     )),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide(
-                      color: Colors.transparent,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.white10
+                          : AppTheme.black14,
                       width: 1,
                     )),
                 focusedBorder: OutlineInputBorder(
@@ -175,64 +206,66 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            SizedBox(height: 13),
-            SizedBox(height: 23),
-            Row(
-              children: [
-                FlutterSwitch(
-                  width: 42,
-                  height: 21,
-                  toggleSize: 17,
-                  padding: 2,
-                  borderRadius: 100,
-                  inactiveColor:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white7
-                          : AppTheme.black10,
-                  activeColor: AppTheme.green1,
-                  toggleColor:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white1
-                          : AppTheme.black4,
-
-                  // value: Provider.of<LoginRegisterPageProvider>(context)
-                  //     .registerSwitch,
-
-                  value:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? false
-                          : true,
-
-                  onToggle: (value) {
-                    if (value == false) {
-                      Provider.of<ThemeProvider>(context, listen: false)
-                          .setLightMode();
-                      debugPrint('Light Theme Activated');
-                    } else {
-                      Provider.of<ThemeProvider>(context, listen: false)
-                          .setDarkMode();
-                      debugPrint('Dark Theme Activated');
-                    }
-
-                    // Provider.of<LoginRegisterPageProvider>(context,
-                    //         listen: false)
-                    //     .updateregisterSwitch(value);
-                  },
-                ),
-                SizedBox(width: 13),
-                Expanded(
-                  child: Text(
-                    "Kullanıcı sözleşmesişni okudum onaylıyorum",
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: AppTheme.white14),
+            SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.only(left: 7, right: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        "Beni hatırla:",
+                        style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color: AppTheme.white14),
+                      ),
+                      SizedBox(width: 9),
+                      FlutterSwitch(
+                        width: 42,
+                        height: 21,
+                        toggleSize: 17,
+                        padding: 2,
+                        borderRadius: 100,
+                        inactiveColor:
+                            Provider.of<ThemeProvider>(context).themeMode ==
+                                    "light"
+                                ? AppTheme.white7
+                                : AppTheme.black10,
+                        activeColor: AppTheme.green1,
+                        toggleColor:
+                            Provider.of<ThemeProvider>(context).themeMode ==
+                                    "light"
+                                ? AppTheme.white1
+                                : AppTheme.black4,
+                        value: Provider.of<LoginRegisterPageProvider>(context)
+                            .loginSwitch,
+                        onToggle: (value) {
+                          Provider.of<LoginRegisterPageProvider>(context,
+                                  listen: false)
+                              .updateloginSwitch(value);
+                        },
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                  InkWell(
+                    onTap: () {},
+                    borderRadius: BorderRadius.all(Radius.circular(6)),
+                    child: Text(
+                      "Şifremi Unuttum?",
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: AppTheme.white14),
+                    ),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 22),
             Row(
               children: [
                 Expanded(
