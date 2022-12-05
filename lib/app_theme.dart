@@ -18,6 +18,7 @@ class AppTheme {
   static Color white13 = const Color(0xFF9FA7BE);
   static Color white14 = const Color(0xFF9B9CB0);
   static Color white15 = const Color(0xFF8695AC);
+  static Color white16 = const Color(0xFFF3F6FB);
 
   static Color green1 = const Color(0xFF4CBD17);
 

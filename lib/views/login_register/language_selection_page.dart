@@ -11,25 +11,31 @@ class LanguageSelectionPage extends StatefulWidget {
 }
 
 class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
+  late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
   @override
   Widget build(BuildContext context) {
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: Color(0xFF21233A),
+      backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
+          ? AppTheme.white2
+          : AppTheme.black12,
       body: Center(
         child: Padding(
           padding: EdgeInsets.fromLTRB(23, 0, 23, 0),
           child: Container(
             width: deviceWidth,
-            height: deviceHeight * 0.6,
+            height: 480,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(23),
-              color: Color(0xFF2D304B),
+              color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.white1
+                  : AppTheme.black3,
               boxShadow: [
                 BoxShadow(
                     offset: Offset(0, 4),
@@ -49,20 +55,28 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                       child: Text(
                         'Dil Seçimi',
                         style: TextStyle(
-                            fontFamily: AppTheme.appFontFamily,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                          fontFamily: AppTheme.appFontFamily,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white1,
+                        ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(height: 32),
                 Container(
-                  height: 250,
+                  height: 274,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(19),
-                    color: Color(0xFF21233A),
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white16
+                            : AppTheme.black12,
                   ),
                 ),
                 SizedBox(height: 21),
@@ -72,7 +86,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                   child: Container(
                     height: 64,
                     decoration: BoxDecoration(
-                        color: Color(0xFF2943D6),
+                        color: AppTheme.blue2,
                         boxShadow: [
                           BoxShadow(
                               offset: Offset(0, -2),
@@ -100,7 +114,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w700,
-                              color: Colors.white),
+                              color: AppTheme.white1),
                         ),
                         onPressed: () async {}),
                   ),
