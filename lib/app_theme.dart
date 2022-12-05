@@ -38,4 +38,5 @@ class AppTheme {
   static Color black10 = const Color(0xFF4F547A);
   static Color black11 = const Color(0xFF636484);
   static Color black12 = const Color(0xFF21233A);
+  static Color black13 = const Color(0xFF565978);
 }
