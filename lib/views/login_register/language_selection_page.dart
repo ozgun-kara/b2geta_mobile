@@ -1,7 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/language_dummy_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 class LanguageSelectionPage extends StatefulWidget {
   const LanguageSelectionPage({Key? key}) : super(key: key);
@@ -11,6 +14,8 @@ class LanguageSelectionPage extends StatefulWidget {
 }
 
 class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
+  ScrollController scrollController = ScrollController();
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -77,6 +82,119 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                         Provider.of<ThemeProvider>(context).themeMode == "light"
                             ? AppTheme.white16
                             : AppTheme.black12,
+                  ),
+                  child: FutureBuilder(
+                    future: GeneralService().getLanguageList(),
+                    builder: (context, data) {
+                      if (data.hasData) {
+                        var items = data.data as List<LanguageDummyModel>;
+
+                        return ListView.builder(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            itemCount: items.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 11, 0),
+                                child: Center(
+                                  child: Text(
+                                    items[index].language ?? '',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }));
+                      } else {
+                        return ListView.builder(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          itemCount: 10,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SkeletonAnimation(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    shimmerDuration: 1000,
+                                    shimmerColor: index % 2 != 0
+                                        ? Colors.grey
+                                        : Colors.white54,
+                                    child: Container(
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color:
+                                            Color.fromRGBO(225, 230, 250, 0.8),
+                                        // color: Colors.grey[300]
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 6,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      SkeletonAnimation(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        shimmerDuration: 1000,
+                                        shimmerColor: index % 2 != 0
+                                            ? Colors.grey
+                                            : Colors.white54,
+                                        child: Container(
+                                          width: deviceWidth * 0.5,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            // color: Colors.grey[300]
+
+                                            color: Color.fromRGBO(
+                                                225, 230, 250, 0.8),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 6,
+                                      ),
+                                      SkeletonAnimation(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        shimmerColor: index % 2 != 0
+                                            ? Colors.grey
+                                            : Colors.white54,
+                                        child: Container(
+                                          width: deviceWidth * 0.2,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                            // color: Colors.grey[300]
+
+                                            color: Color.fromRGBO(
+                                                225, 230, 250, 0.8),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ); // SEKELATON ANIMATION
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: 21),
