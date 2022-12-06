@@ -95,7 +95,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                             itemCount: items.length,
                             itemBuilder: ((context, index) {
                               return Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 11, 0),
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
                                 child: Center(
                                   child: Text(
                                     items[index].language ?? '',
