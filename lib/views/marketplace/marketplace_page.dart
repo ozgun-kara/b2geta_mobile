@@ -246,45 +246,40 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
               SizedBox(height: 11),
-              FutureBuilder(
-                future: GeneralService().getProductList(),
-                builder: (context, data) {
-                  if (data.hasData) {
-                    var items = data.data as List<ProductDummyModel>;
+              Visibility(
+                visible:
+                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                        ? false
+                        : true,
+                child: FutureBuilder(
+                  future: GeneralService().getProductList(),
+                  builder: (context, data) {
+                    if (data.hasData) {
+                      var items = data.data as List<ProductDummyModel>;
 
-                    return ListView.builder(
+                      return GridView.builder(
                         controller: scrollController,
                         shrinkWrap: true,
                         itemCount: items.length,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 21,
+                          mainAxisExtent: 312,
+                        ),
                         itemBuilder: ((context, index) {
                           return Padding(
-                            padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                            padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
                             child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(3)),
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.white1
-                                    : AppTheme.black7,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurStyle: BlurStyle.normal,
-                                    offset: Offset(0, -4),
-                                    blurRadius: 26,
-                                    spreadRadius: 0,
-                                    color: Color(0xFF2B3361).withOpacity(0.10),
-                                  ),
-                                ],
-                              ),
-                              padding: EdgeInsets.all(8),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              decoration:
+                                  BoxDecoration(color: Colors.transparent),
+                              child: Column(
                                 children: [
                                   Container(
-                                    width: 126,
-                                    height: 145,
+                                    // width: 126,
+                                    // height: 145,
+                                    width: deviceWidth,
+                                    height: 206,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: NetworkImage(
@@ -293,35 +288,31 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         fit: BoxFit.cover,
                                       ),
                                       borderRadius: BorderRadius.all(
-                                        Radius.circular(2),
+                                        Radius.circular(9),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 10),
+                                  SizedBox(height: 11),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        width:
-                                            deviceWidth - (24 + 16 + 126 + 10),
-                                        height: 35,
-                                        child: Text(
-                                          items[index].title ?? '',
-                                          maxLines: 2,
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w500,
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue3
-                                                : AppTheme.white11,
-                                          ),
+                                      Text(
+                                        items[index].title ?? '',
+                                        maxLines: 2,
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w500,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue3
+                                              : AppTheme.white11,
                                         ),
                                       ),
+                                      SizedBox(height: 2),
                                       Text(
                                         items[index].price ?? '',
                                         style: TextStyle(
@@ -336,109 +327,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               : AppTheme.white1,
                                         ),
                                       ),
+                                      SizedBox(height: 2),
                                       Text(
                                         items[index].subTitle ?? '',
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 12,
                                           fontFamily: AppTheme.appFontFamily,
                                           fontWeight: FontWeight.w500,
                                           color: AppTheme.white15,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        items[index].province ?? '',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppTheme.white15,
-                                        ),
-                                      ),
-                                      SizedBox(height: 1),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            items[index].company ?? '',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w700,
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white11,
-                                            ),
-                                          ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            items[index].totalRate ?? '',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w800,
-                                              color: AppTheme.white15,
-                                            ),
-                                          ),
-                                          SizedBox(width: 4),
-                                          Image.asset('assets/icons/star.png',
-                                              width: 15, height: 15),
-                                        ],
-                                      ),
-                                      SizedBox(height: 2),
-                                      SizedBox(
-                                        height: 24,
-                                        child: ButtonTheme(
-                                          // minWidth: deviceWidth,
-                                          height: 22,
-
-                                          child: MaterialButton(
-                                              elevation: 0,
-                                              color: Colors.transparent,
-                                              shape: RoundedRectangleBorder(
-                                                side: BorderSide(
-                                                    width: 1,
-                                                    color: AppTheme.white19),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(36)),
-                                              ),
-                                              padding: EdgeInsets.fromLTRB(
-                                                  10, 2, 10, 3.5),
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
-                                                children: [
-                                                  Image.asset(
-                                                      'assets/icons/comment.png',
-                                                      width: 12.5,
-                                                      height: 12.5,
-                                                      color: AppTheme.black16),
-                                                  SizedBox(width: 3.5),
-                                                  Text(
-                                                    "Tedarikçiye Ulaşın",
-                                                    style: TextStyle(
-                                                      fontSize: 10,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue2
-                                                          : AppTheme.white1,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              onPressed: () async {}),
                                         ),
                                       ),
                                     ],
@@ -447,101 +343,333 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               ),
                             ),
                           );
-                        }));
-                  } else {
-                    // return ListView.builder(
-                    //   controller: scrollController,
-                    //   shrinkWrap: true,
-                    //   itemCount: 10,
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     return Padding(
-                    //       padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                    //       child: Row(
-                    //         mainAxisAlignment: MainAxisAlignment.center,
-                    //         children: [
-                    //           SkeletonAnimation(
-                    //             borderRadius: BorderRadius.circular(10.0),
-                    //             shimmerDuration: 1000,
-                    //             shimmerColor: index % 2 != 0
-                    //                 ? Colors.grey
-                    //                 : Colors.white54,
-                    //             child: Container(
-                    //               height: 60,
-                    //               width: 60,
-                    //               decoration: BoxDecoration(
-                    //                 borderRadius: BorderRadius.circular(5),
-                    //                 color: Color.fromRGBO(225, 230, 250, 0.8),
-                    //                 // color: Colors.grey[300]
-                    //               ),
-                    //             ),
-                    //           ),
-                    //           SizedBox(
-                    //             width: 6,
-                    //           ),
-                    //           Column(
-                    //             crossAxisAlignment: CrossAxisAlignment.start,
-                    //             children: <Widget>[
-                    //               SkeletonAnimation(
-                    //                 borderRadius: BorderRadius.circular(10.0),
-                    //                 shimmerDuration: 1000,
-                    //                 shimmerColor: index % 2 != 0
-                    //                     ? Colors.grey
-                    //                     : Colors.white54,
-                    //                 child: Container(
-                    //                   width: deviceWidth * 0.5,
-                    //                   height: 30,
-                    //                   decoration: BoxDecoration(
-                    //                     borderRadius:
-                    //                         BorderRadius.circular(10.0),
-                    //                     // color: Colors.grey[300]
-                    //
-                    //                     color:
-                    //                         Color.fromRGBO(225, 230, 250, 0.8),
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //               SizedBox(
-                    //                 height: 6,
-                    //               ),
-                    //               SkeletonAnimation(
-                    //                 borderRadius: BorderRadius.circular(10.0),
-                    //                 shimmerColor: index % 2 != 0
-                    //                     ? Colors.grey
-                    //                     : Colors.white54,
-                    //                 child: Container(
-                    //                   width: deviceWidth * 0.2,
-                    //                   height: 30,
-                    //                   decoration: BoxDecoration(
-                    //                     borderRadius:
-                    //                         BorderRadius.circular(10.0),
-                    //                     // color: Colors.grey[300]
-                    //
-                    //                     color:
-                    //                         Color.fromRGBO(225, 230, 250, 0.8),
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             ],
-                    //           ),
-                    //         ],
-                    //       ),
-                    //     );
-                    //   },
-                    // ); // SEKELATON ANIMATION
+                        }),
+                      );
+                    } else {
+                      return SizedBox(
+                        height: deviceWidth + 115,
+                        child: Center(
+                            child: CupertinoActivityIndicator(
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black1
+                                  : AppTheme.white1,
+                          radius: 12,
+                        )),
+                      );
+                    }
+                  },
+                ),
+              ),
+              Visibility(
+                visible:
+                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                        ? true
+                        : false,
+                child: FutureBuilder(
+                  future: GeneralService().getProductList(),
+                  builder: (context, data) {
+                    if (data.hasData) {
+                      var items = data.data as List<ProductDummyModel>;
 
-                    return SizedBox(
-                      height: deviceWidth + 115,
-                      child: Center(
-                          child: CupertinoActivityIndicator(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black1
-                            : AppTheme.white1,
-                        radius: 12,
-                      )),
-                    );
-                  }
-                },
+                      return ListView.builder(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          itemCount: items.length,
+                          itemBuilder: ((context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(3)),
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.white1
+                                      : AppTheme.black7,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurStyle: BlurStyle.normal,
+                                      offset: Offset(0, -4),
+                                      blurRadius: 26,
+                                      spreadRadius: 0,
+                                      color:
+                                          Color(0xFF2B3361).withOpacity(0.10),
+                                    ),
+                                  ],
+                                ),
+                                padding: EdgeInsets.all(8),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 126,
+                                      height: 145,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            items[index].imgUrl ?? '',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(2),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 10),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: deviceWidth -
+                                              (24 + 16 + 126 + 10),
+                                          height: 35,
+                                          child: Text(
+                                            items[index].title ?? '',
+                                            maxLines: 2,
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w500,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.blue3
+                                                  : AppTheme.white11,
+                                            ),
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].price ?? '',
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].subTitle ?? '',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        SizedBox(height: 8),
+                                        Text(
+                                          items[index].province ?? '',
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        SizedBox(height: 1),
+                                        Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              items[index].company ?? '',
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white11,
+                                              ),
+                                            ),
+                                            SizedBox(width: 5),
+                                            Text(
+                                              items[index].totalRate ?? '',
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w800,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(width: 4),
+                                            Image.asset('assets/icons/star.png',
+                                                width: 15, height: 15),
+                                          ],
+                                        ),
+                                        SizedBox(height: 2),
+                                        SizedBox(
+                                          height: 24,
+                                          child: ButtonTheme(
+                                            // minWidth: deviceWidth,
+                                            height: 22,
+
+                                            child: MaterialButton(
+                                                elevation: 0,
+                                                color: Colors.transparent,
+                                                shape: RoundedRectangleBorder(
+                                                  side: BorderSide(
+                                                      width: 1,
+                                                      color: AppTheme.white19),
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(36)),
+                                                ),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    10, 2, 10, 3.5),
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.end,
+                                                  children: [
+                                                    Image.asset(
+                                                        'assets/icons/comment.png',
+                                                        width: 12.5,
+                                                        height: 12.5,
+                                                        color:
+                                                            AppTheme.black16),
+                                                    SizedBox(width: 3.5),
+                                                    Text(
+                                                      "Tedarikçiye Ulaşın",
+                                                      style: TextStyle(
+                                                        fontSize: 10,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.blue2
+                                                            : AppTheme.white1,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                onPressed: () async {}),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }));
+                    } else {
+                      // return ListView.builder(
+                      //   controller: scrollController,
+                      //   shrinkWrap: true,
+                      //   itemCount: 10,
+                      //   itemBuilder: (BuildContext context, int index) {
+                      //     return Padding(
+                      //       padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                      //       child: Row(
+                      //         mainAxisAlignment: MainAxisAlignment.center,
+                      //         children: [
+                      //           SkeletonAnimation(
+                      //             borderRadius: BorderRadius.circular(10.0),
+                      //             shimmerDuration: 1000,
+                      //             shimmerColor: index % 2 != 0
+                      //                 ? Colors.grey
+                      //                 : Colors.white54,
+                      //             child: Container(
+                      //               height: 60,
+                      //               width: 60,
+                      //               decoration: BoxDecoration(
+                      //                 borderRadius: BorderRadius.circular(5),
+                      //                 color: Color.fromRGBO(225, 230, 250, 0.8),
+                      //                 // color: Colors.grey[300]
+                      //               ),
+                      //             ),
+                      //           ),
+                      //           SizedBox(
+                      //             width: 6,
+                      //           ),
+                      //           Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: <Widget>[
+                      //               SkeletonAnimation(
+                      //                 borderRadius: BorderRadius.circular(10.0),
+                      //                 shimmerDuration: 1000,
+                      //                 shimmerColor: index % 2 != 0
+                      //                     ? Colors.grey
+                      //                     : Colors.white54,
+                      //                 child: Container(
+                      //                   width: deviceWidth * 0.5,
+                      //                   height: 30,
+                      //                   decoration: BoxDecoration(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(10.0),
+                      //                     // color: Colors.grey[300]
+                      //
+                      //                     color:
+                      //                         Color.fromRGBO(225, 230, 250, 0.8),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //               SizedBox(
+                      //                 height: 6,
+                      //               ),
+                      //               SkeletonAnimation(
+                      //                 borderRadius: BorderRadius.circular(10.0),
+                      //                 shimmerColor: index % 2 != 0
+                      //                     ? Colors.grey
+                      //                     : Colors.white54,
+                      //                 child: Container(
+                      //                   width: deviceWidth * 0.2,
+                      //                   height: 30,
+                      //                   decoration: BoxDecoration(
+                      //                     borderRadius:
+                      //                         BorderRadius.circular(10.0),
+                      //                     // color: Colors.grey[300]
+                      //
+                      //                     color:
+                      //                         Color.fromRGBO(225, 230, 250, 0.8),
+                      //                   ),
+                      //                 ),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     );
+                      //   },
+                      // ); // SEKELATON ANIMATION
+
+                      return SizedBox(
+                        height: deviceWidth + 115,
+                        child: Center(
+                            child: CupertinoActivityIndicator(
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black1
+                                  : AppTheme.white1,
+                          radius: 12,
+                        )),
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
