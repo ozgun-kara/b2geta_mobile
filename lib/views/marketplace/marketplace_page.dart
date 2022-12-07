@@ -34,7 +34,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
           : AppTheme.black12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 55),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 14),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -245,6 +245,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   ],
                 ),
               ),
+              SizedBox(height: 11),
               FutureBuilder(
                 future: GeneralService().getProductList(),
                 builder: (context, data) {
