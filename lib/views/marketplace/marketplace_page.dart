@@ -1,8 +1,11 @@
+import 'package:b2geta_mobile/models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:skeleton_text/skeleton_text.dart';
 
 class MarketplacePage extends StatefulWidget {
   const MarketplacePage({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class MarketplacePage extends StatefulWidget {
 }
 
 class _MarketplacePageState extends State<MarketplacePage> {
+  ScrollController scrollController = ScrollController();
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -148,7 +153,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                         "light"
                                                     ? AppTheme.black8
                                                     : AppTheme.white17
-                                                : AppTheme.black8),
+                                                : Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? AppTheme.white18
+                                                    : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -194,7 +204,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                         "light"
                                                     ? AppTheme.black8
                                                     : AppTheme.white17
-                                                : AppTheme.black8),
+                                                : Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? AppTheme.white18
+                                                    : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -220,6 +235,165 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     ),
                   ],
                 ),
+              ),
+              FutureBuilder(
+                future: GeneralService().getProductList(),
+                builder: (context, data) {
+                  if (data.hasData) {
+                    var items = data.data as List<ProductDummyModel>;
+
+                    return ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        itemCount: items.length,
+                        itemBuilder: ((context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(3)),
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white1
+                                    : AppTheme.black7,
+                              ),
+                              padding: EdgeInsets.all(8),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        width: 126,
+                                        height: 145,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              items[index].imgUrl ?? '',
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(8),
+                                          ),
+                                          boxShadow: <BoxShadow>[
+                                            BoxShadow(
+                                                color: Colors.grey.shade400,
+                                                blurRadius: 1,
+                                                offset: Offset(0.0, 1.5))
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(width: 16),
+                                    ],
+                                  ),
+                                  Container(
+                                    width: 1,
+                                    height: 54,
+                                    color: AppTheme.white1.withOpacity(0.2),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        items[index].totalRate ?? '',
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color: AppTheme.white1),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }));
+                  } else {
+                    return ListView.builder(
+                      controller: scrollController,
+                      shrinkWrap: true,
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SkeletonAnimation(
+                                borderRadius: BorderRadius.circular(10.0),
+                                shimmerDuration: 1000,
+                                shimmerColor: index % 2 != 0
+                                    ? Colors.grey
+                                    : Colors.white54,
+                                child: Container(
+                                  height: 60,
+                                  width: 60,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Color.fromRGBO(225, 230, 250, 0.8),
+                                    // color: Colors.grey[300]
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 6,
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  SkeletonAnimation(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    shimmerDuration: 1000,
+                                    shimmerColor: index % 2 != 0
+                                        ? Colors.grey
+                                        : Colors.white54,
+                                    child: Container(
+                                      width: deviceWidth * 0.5,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        // color: Colors.grey[300]
+
+                                        color:
+                                            Color.fromRGBO(225, 230, 250, 0.8),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 6,
+                                  ),
+                                  SkeletonAnimation(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    shimmerColor: index % 2 != 0
+                                        ? Colors.grey
+                                        : Colors.white54,
+                                    child: Container(
+                                      width: deviceWidth * 0.2,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                        // color: Colors.grey[300]
+
+                                        color:
+                                            Color.fromRGBO(225, 230, 250, 0.8),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ); // SEKELATON ANIMATION
+                  }
+                },
               ),
             ],
           ),
