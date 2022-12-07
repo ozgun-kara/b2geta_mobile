@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -102,6 +103,102 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         "light"
                                     ? AppTheme.white4
                                     : AppTheme.black15,
+                          ),
+                          padding: EdgeInsets.all(5),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Provider.of<MarketPlacePageProvider>(context,
+                                          listen: false)
+                                      .updateFilterSwitch(false);
+                                },
+                                child: Container(
+                                  width: 32,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(11)),
+                                      color:
+                                          Provider.of<MarketPlacePageProvider>(
+                                                          context)
+                                                      .filterSwitch ==
+                                                  false
+                                              ? Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.white1
+                                                  : AppTheme.black4
+                                              : Colors.transparent),
+                                  padding: EdgeInsets.all(7),
+                                  child: Center(
+                                    child: Image.asset(
+                                        'assets/icons/grid_1.png',
+                                        width: 17.06,
+                                        height: 17.06,
+                                        color:
+                                            Provider.of<MarketPlacePageProvider>(
+                                                            context)
+                                                        .filterSwitch ==
+                                                    false
+                                                ? Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? AppTheme.black8
+                                                    : AppTheme.white17
+                                                : AppTheme.black8),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 4),
+                              InkWell(
+                                onTap: () {
+                                  Provider.of<MarketPlacePageProvider>(context,
+                                          listen: false)
+                                      .updateFilterSwitch(true);
+                                },
+                                child: Container(
+                                  width: 32,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(11)),
+                                      color:
+                                          Provider.of<MarketPlacePageProvider>(
+                                                          context)
+                                                      .filterSwitch ==
+                                                  true
+                                              ? Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.white1
+                                                  : AppTheme.black4
+                                              : Colors.transparent),
+                                  padding: EdgeInsets.all(7),
+                                  child: Center(
+                                    child: Image.asset(
+                                        'assets/icons/grid_2.png',
+                                        width: 14.62,
+                                        height: 13.38,
+                                        color:
+                                            Provider.of<MarketPlacePageProvider>(
+                                                            context)
+                                                        .filterSwitch ==
+                                                    true
+                                                ? Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? AppTheme.black8
+                                                    : AppTheme.white17
+                                                : AppTheme.black8),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                         SizedBox(width: 12),

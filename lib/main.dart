@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_selection_page.dart';
@@ -20,6 +21,9 @@ void main() {
     ),
     ChangeNotifierProvider<NavigationPageProvider>(
       create: (BuildContext context) => NavigationPageProvider(),
+    ),
+    ChangeNotifierProvider<MarketPlacePageProvider>(
+      create: (BuildContext context) => MarketPlacePageProvider(),
     ),
   ], child: MyApp()));
 }
