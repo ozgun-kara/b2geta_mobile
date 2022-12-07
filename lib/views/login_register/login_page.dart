@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/services/login_register/login_service.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,28 +17,16 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final emailController1 = TextEditingController();
-  final emailController2 = TextEditingController();
   final passwordController1 = TextEditingController();
-  final passwordController2 = TextEditingController();
-  final companyNameController = TextEditingController();
-  final authorizedNameController = TextEditingController();
-  final authorizedPhoneController = TextEditingController();
-
-  final List<String> dropdownItems = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
-  String? dropdownSelectedValue;
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -315,6 +304,12 @@ class _LoginPageState extends State<LoginPage> {
                                 color: AppTheme.white1),
                           ),
                           onPressed: () async {
+                            var data = LoginService().loginCall(
+                                email: emailController1.text,
+                                password: passwordController1.text);
+
+                            debugPrint("DATA: " + data.toString());
+
                             // Navigator.push(
                             //     context,
                             //     MaterialPageRoute(
