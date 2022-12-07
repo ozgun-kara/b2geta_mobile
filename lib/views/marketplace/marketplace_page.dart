@@ -78,7 +78,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
-                              color: AppTheme.white1,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white1,
                             ),
                           ),
                           TextSpan(
@@ -90,7 +94,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w700,
-                              color: AppTheme.white1,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white1,
                             ),
                           ),
                         ],
@@ -377,6 +385,50 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           Image.asset('assets/icons/star.png',
                                               width: 15, height: 15),
                                         ],
+                                      ),
+                                      ButtonTheme(
+                                        // minWidth: deviceWidth,
+                                        height: 22,
+                                        child: Container(
+                                          height: 22,
+                                          decoration: BoxDecoration(
+                                              color: AppTheme.green1,
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(36))),
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
+                                              ),
+                                              child: Row(
+                                                children: [
+                                                  Image.asset(
+                                                      'assets/icons/comment.png',
+                                                      width: 12.5,
+                                                      height: 12.5),
+                                                  SizedBox(width: 3.5),
+                                                  Text(
+                                                    "Tedarikçiye Ulaşın",
+                                                    style: TextStyle(
+                                                      fontSize: 10,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.blue2
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              onPressed: () async {}),
+                                        ),
                                       ),
                                     ],
                                   ),
