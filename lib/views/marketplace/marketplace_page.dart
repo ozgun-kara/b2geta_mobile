@@ -258,52 +258,125 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         "light"
                                     ? AppTheme.white1
                                     : AppTheme.black7,
+                                boxShadow: [
+                                  BoxShadow(
+                                    blurStyle: BlurStyle.normal,
+                                    offset: Offset(0, -4),
+                                    blurRadius: 26,
+                                    spreadRadius: 0,
+                                    color: Color(0xFF2B3361).withOpacity(0.10),
+                                  ),
+                                ],
                               ),
                               padding: EdgeInsets.all(8),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width: 126,
-                                        height: 145,
-                                        decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              items[index].imgUrl ?? '',
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(8),
-                                          ),
-                                          boxShadow: <BoxShadow>[
-                                            BoxShadow(
-                                                color: Colors.grey.shade400,
-                                                blurRadius: 1,
-                                                offset: Offset(0.0, 1.5))
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(width: 16),
-                                    ],
-                                  ),
                                   Container(
-                                    width: 1,
-                                    height: 54,
-                                    color: AppTheme.white1.withOpacity(0.2),
+                                    width: 126,
+                                    height: 145,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          items[index].imgUrl ?? '',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(2),
+                                      ),
+                                    ),
                                   ),
+                                  SizedBox(width: 10),
                                   Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        items[index].totalRate ?? '',
-                                        style: TextStyle(
-                                            fontSize: 18,
+                                      SizedBox(
+                                        width:
+                                            deviceWidth - (24 + 16 + 126 + 10),
+                                        height: 35,
+                                        child: Text(
+                                          items[index].title ?? '',
+                                          maxLines: 2,
+                                          style: TextStyle(
+                                            fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
-                                            color: AppTheme.white1),
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue3
+                                                : AppTheme.white11,
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        items[index].price ?? '',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w500,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                      Text(
+                                        items[index].subTitle ?? '',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppTheme.white15,
+                                        ),
+                                      ),
+                                      Text(
+                                        items[index].province ?? '',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.white15,
+                                        ),
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            items[index].company ?? '',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w700,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.blue3
+                                                  : AppTheme.white11,
+                                            ),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            items[index].totalRate ?? '',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w800,
+                                              color: AppTheme.white15,
+                                            ),
+                                          ),
+                                          SizedBox(width: 4),
+                                          Image.asset('assets/icons/star.png',
+                                              width: 15, height: 15),
+                                        ],
                                       ),
                                     ],
                                   ),
