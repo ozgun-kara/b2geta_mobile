@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -447,85 +448,97 @@ class _MarketplacePageState extends State<MarketplacePage> {
                           );
                         }));
                   } else {
-                    return ListView.builder(
-                      controller: scrollController,
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SkeletonAnimation(
-                                borderRadius: BorderRadius.circular(10.0),
-                                shimmerDuration: 1000,
-                                shimmerColor: index % 2 != 0
-                                    ? Colors.grey
-                                    : Colors.white54,
-                                child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: Color.fromRGBO(225, 230, 250, 0.8),
-                                    // color: Colors.grey[300]
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 6,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  SkeletonAnimation(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    shimmerDuration: 1000,
-                                    shimmerColor: index % 2 != 0
-                                        ? Colors.grey
-                                        : Colors.white54,
-                                    child: Container(
-                                      width: deviceWidth * 0.5,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        // color: Colors.grey[300]
+                    // return ListView.builder(
+                    //   controller: scrollController,
+                    //   shrinkWrap: true,
+                    //   itemCount: 10,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return Padding(
+                    //       padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    //       child: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           SkeletonAnimation(
+                    //             borderRadius: BorderRadius.circular(10.0),
+                    //             shimmerDuration: 1000,
+                    //             shimmerColor: index % 2 != 0
+                    //                 ? Colors.grey
+                    //                 : Colors.white54,
+                    //             child: Container(
+                    //               height: 60,
+                    //               width: 60,
+                    //               decoration: BoxDecoration(
+                    //                 borderRadius: BorderRadius.circular(5),
+                    //                 color: Color.fromRGBO(225, 230, 250, 0.8),
+                    //                 // color: Colors.grey[300]
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           SizedBox(
+                    //             width: 6,
+                    //           ),
+                    //           Column(
+                    //             crossAxisAlignment: CrossAxisAlignment.start,
+                    //             children: <Widget>[
+                    //               SkeletonAnimation(
+                    //                 borderRadius: BorderRadius.circular(10.0),
+                    //                 shimmerDuration: 1000,
+                    //                 shimmerColor: index % 2 != 0
+                    //                     ? Colors.grey
+                    //                     : Colors.white54,
+                    //                 child: Container(
+                    //                   width: deviceWidth * 0.5,
+                    //                   height: 30,
+                    //                   decoration: BoxDecoration(
+                    //                     borderRadius:
+                    //                         BorderRadius.circular(10.0),
+                    //                     // color: Colors.grey[300]
+                    //
+                    //                     color:
+                    //                         Color.fromRGBO(225, 230, 250, 0.8),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //               SizedBox(
+                    //                 height: 6,
+                    //               ),
+                    //               SkeletonAnimation(
+                    //                 borderRadius: BorderRadius.circular(10.0),
+                    //                 shimmerColor: index % 2 != 0
+                    //                     ? Colors.grey
+                    //                     : Colors.white54,
+                    //                 child: Container(
+                    //                   width: deviceWidth * 0.2,
+                    //                   height: 30,
+                    //                   decoration: BoxDecoration(
+                    //                     borderRadius:
+                    //                         BorderRadius.circular(10.0),
+                    //                     // color: Colors.grey[300]
+                    //
+                    //                     color:
+                    //                         Color.fromRGBO(225, 230, 250, 0.8),
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     );
+                    //   },
+                    // ); // SEKELATON ANIMATION
 
-                                        color:
-                                            Color.fromRGBO(225, 230, 250, 0.8),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 6,
-                                  ),
-                                  SkeletonAnimation(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    shimmerColor: index % 2 != 0
-                                        ? Colors.grey
-                                        : Colors.white54,
-                                    child: Container(
-                                      width: deviceWidth * 0.2,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.0),
-                                        // color: Colors.grey[300]
-
-                                        color:
-                                            Color.fromRGBO(225, 230, 250, 0.8),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ); // SEKELATON ANIMATION
+                    return SizedBox(
+                      height: deviceWidth + 115,
+                      child: Center(
+                          child: CupertinoActivityIndicator(
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.black1
+                            : AppTheme.white1,
+                        radius: 12,
+                      )),
+                    );
                   }
                 },
               ),
