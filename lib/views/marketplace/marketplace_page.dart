@@ -278,6 +278,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               ),
                               padding: EdgeInsets.all(8),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     width: 126,
@@ -342,6 +343,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           color: AppTheme.white15,
                                         ),
                                       ),
+                                      SizedBox(height: 8),
                                       Text(
                                         items[index].province ?? '',
                                         style: TextStyle(
@@ -351,6 +353,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           color: AppTheme.white15,
                                         ),
                                       ),
+                                      SizedBox(height: 1),
                                       Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -386,28 +389,34 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               width: 15, height: 15),
                                         ],
                                       ),
-                                      ButtonTheme(
-                                        // minWidth: deviceWidth,
-                                        height: 22,
-                                        child: Container(
+                                      SizedBox(height: 2),
+                                      SizedBox(
+                                        height: 24,
+                                        child: ButtonTheme(
+                                          // minWidth: deviceWidth,
                                           height: 22,
-                                          decoration: BoxDecoration(
-                                              color: AppTheme.green1,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(36))),
+
                                           child: MaterialButton(
                                               elevation: 0,
-                                              shape:
-                                                  const RoundedRectangleBorder(
+                                              color: Colors.transparent,
+                                              shape: RoundedRectangleBorder(
+                                                side: BorderSide(
+                                                    width: 1,
+                                                    color: AppTheme.white19),
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(36)),
                                               ),
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10, 2, 10, 3.5),
                                               child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
                                                 children: [
                                                   Image.asset(
                                                       'assets/icons/comment.png',
                                                       width: 12.5,
-                                                      height: 12.5),
+                                                      height: 12.5,
+                                                      color: AppTheme.black16),
                                                   SizedBox(width: 3.5),
                                                   Text(
                                                     "Tedarikçiye Ulaşın",
