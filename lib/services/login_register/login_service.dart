@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/models/login_model.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:dio/dio.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
   // Future<LoginModel> fetch() async {

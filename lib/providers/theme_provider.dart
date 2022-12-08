@@ -1,22 +1,22 @@
-import 'package:b2geta_mobile/services/storage_manager.dart';
+import 'package:b2geta_mobile/services/theme_service.dart';
 import 'package:flutter/material.dart';
 
 class ThemeProvider with ChangeNotifier {
   final darkTheme = ThemeData(
-    // primarySwatch: Colors.grey,
-    // primaryColor: Colors.black,
-    // brightness: Brightness.dark,
-    // backgroundColor: const Color(0xFF212121),
-    // dividerColor: Colors.black12,
-  );
+      // primarySwatch: Colors.grey,
+      // primaryColor: Colors.black,
+      // brightness: Brightness.dark,
+      // backgroundColor: const Color(0xFF212121),
+      // dividerColor: Colors.black12,
+      );
 
   final lightTheme = ThemeData(
-    // primarySwatch: Colors.grey,
-    // primaryColor: Colors.white,
-    // brightness: Brightness.light,
-    // backgroundColor: const Color(0xFFE5E5E5),
-    // dividerColor: Colors.white54,
-  );
+      // primarySwatch: Colors.grey,
+      // primaryColor: Colors.white,
+      // brightness: Brightness.light,
+      // backgroundColor: const Color(0xFFE5E5E5),
+      // dividerColor: Colors.white54,
+      );
 
   var themeMode;
 
@@ -24,7 +24,7 @@ class ThemeProvider with ChangeNotifier {
   ThemeData? getTheme() => _themeData;
 
   ThemeProvider() {
-    StorageManager.readData('themeMode').then((value) {
+    ThemeService.readData('themeMode').then((value) {
       print('value read from storage: ' + value.toString());
       // var themeMode = value ?? 'light';
 
@@ -46,7 +46,7 @@ class ThemeProvider with ChangeNotifier {
   void setDarkMode() async {
     _themeData = darkTheme;
     themeMode = 'dark';
-    StorageManager.saveData('themeMode', 'dark');
+    ThemeService.saveData('themeMode', 'dark');
 
     notifyListeners();
   }
@@ -54,7 +54,7 @@ class ThemeProvider with ChangeNotifier {
   void setLightMode() async {
     _themeData = lightTheme;
     themeMode = 'light';
-    StorageManager.saveData('themeMode', 'light');
+    ThemeService.saveData('themeMode', 'light');
     notifyListeners();
   }
 }
