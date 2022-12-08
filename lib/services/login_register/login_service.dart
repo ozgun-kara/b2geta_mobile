@@ -25,6 +25,8 @@ class LoginService {
 
       // var result = LoginModel.fromJson(response.body);
 
+      var token = json.decode(response.body)["access_token"];
+      debugPrint("TOKEN: " + token.toString());
     } else {
       debugPrint("DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
 
