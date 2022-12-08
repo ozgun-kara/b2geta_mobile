@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_selection_page.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -20,16 +23,39 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
-    Timer(
-        const Duration(milliseconds: 2000),
-        () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (BuildContext context) {
-              // return LoginPage();
-              // return LanguageSelectionPage();
-              return RegisterPage();
-              // return NavigationPage();
-            })));
+    // // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
+    // Timer(
+    //     const Duration(milliseconds: 2000),
+    //     () => Navigator.of(context).pushReplacement(
+    //             MaterialPageRoute(builder: (BuildContext context) {
+    //           // return LoginPage();
+    //           // return LanguageSelectionPage();
+    //           return RegisterPage();
+    //           // return NavigationPage();
+    //         })));
+
+    //  THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 1.5 SECONDS.
+    Timer(Duration(milliseconds: 1500), () => checkToken());
+  }
+
+  checkToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString("token");
+
+    if (token == null) {
+      print("GİRİŞ BAŞARISIZ");
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+        return LoginPage();
+      }));
+    } else {
+      print("GİRİŞ BAŞARILI");
+
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+        return NavigationPage();
+      }));
+    }
   }
 
   late double deviceTopPadding;

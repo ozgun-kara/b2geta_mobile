@@ -5,25 +5,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DatabaseHelper {
   String serverUrl = "https://api.businessucces.com/api";
   var status;
+
+  var loginResponse;
+
   var token;
 
-  void loginData(String email, String password) async {
+  loginData(String email, String password) async {
     var uri = Uri.https(serverUrl, "/member/login");
 
     final response = await http.post(uri,
         headers: {'Accept': 'application/json'},
         body: {"username": email, "password": password});
 
-    status = response.body.contains('error');
+    // status = response.body.contains('error');
+
+    loginResponse = response;
 
     var data = json.decode(response.body);
 
-    if (status) {
-      print('data : ${data["error"]}');
-    } else {
-      print('data : ${data["token"]}');
-      _save(data["token"]);
-    }
+
+    print("YANIT: " + loginResponse.statusCode.toString());
+
+    // if (status) {
+    //   print('data : ${data["error"]}');
+    // } else {
+    //   print('data : ${data["token"]}');
+    //   _save(data["token"]);
+    // }
   }
 
   //////////////////////////////////////////////////////////////////////////
