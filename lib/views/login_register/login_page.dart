@@ -304,11 +304,14 @@ class _LoginPageState extends State<LoginPage> {
                                 color: AppTheme.white1),
                           ),
                           onPressed: () async {
-                            var data = LoginService().loginCall(
-                                email: emailController1.text,
-                                password: passwordController1.text);
+                            debugPrint("email: " + emailController1.text);
+                            debugPrint("password: " + passwordController1.text);
 
-                            debugPrint("DATA: " + data.toString());
+                            // var data = LoginService().loginCall(
+                            //     email: emailController1.text,
+                            //     password: passwordController1.text);
+                            //
+                            // debugPrint("DATA: " + data.toString());
 
                             // Navigator.push(
                             //     context,
