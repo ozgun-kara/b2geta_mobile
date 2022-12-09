@@ -1,5 +1,4 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/services/login_register/database_helper.dart';
 import 'package:b2geta_mobile/services/login_register/login_service.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -8,8 +7,6 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,75 +19,9 @@ class _LoginPageState extends State<LoginPage> {
   final emailController1 = TextEditingController();
   final passwordController1 = TextEditingController();
 
-  DatabaseHelper databaseHelper = new DatabaseHelper();
-  String msgStatus = '';
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
-
-  @override
-  void initState() {
-    // read();
-    super.initState();
-  }
-
-  read() async {
-    final prefs = await SharedPreferences.getInstance();
-    final key = 'token';
-    final value = prefs.get(key) ?? 0;
-    if (value != '0') {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NavigationPage(),
-          ));
-    }
-  }
-
-  onPressed() {
-    setState(() {
-      if (emailController1.text.trim().toLowerCase().isNotEmpty &&
-          passwordController1.text.trim().isNotEmpty) {
-        databaseHelper
-            .loginData(emailController1.text.trim().toLowerCase(),
-                passwordController1.text.trim())
-            .whenComplete(() {
-          if (databaseHelper.token == null) {
-            _showDialog();
-            msgStatus = 'Check email or password';
-          } else {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => NavigationPage(),
-                ));
-          }
-        });
-      }
-    });
-  }
-
-  void _showDialog() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Failed'),
-            content: Text('Check your email or password'),
-            actions: <Widget>[
-              MaterialButton(
-                child: Text(
-                  'Close',
-                ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        });
-  }
 
   @override
   Widget build(BuildContext context) {

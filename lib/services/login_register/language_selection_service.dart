@@ -3,8 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 class LanguageSelectionService {
-
-
   void func() async {
     var url = Uri.https(Constants.apiUrl, '/languages', {'q': '{http}'});
 
