@@ -9,7 +9,8 @@ import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
-  void loginCall({required String email, required String password}) async {
+  Future<bool> loginCall(
+      {required String email, required String password}) async {
     final response = await http.post(
       Uri.parse(Constants.apiUrl + 'member/login'),
       headers: {
@@ -25,12 +26,22 @@ class LoginService {
 
       // var result = LoginModel.fromJson(response.body);
 
-      var token = json.decode(response.body)["access_token"];
-      debugPrint("TOKEN: " + token.toString());
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        var token = json.decode(response.body)["access_token"];
+        debugPrint("TOKEN: " + token.toString());
+
+        return true;
+      } else {
+        return false;
+      }
     } else {
       debugPrint("DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
 
       // throw ("Bir sorun oluştu ${response.statusCode}");
+
+      return false;
     }
   }
 }

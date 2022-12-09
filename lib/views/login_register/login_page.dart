@@ -370,23 +370,21 @@ class _LoginPageState extends State<LoginPage> {
                             debugPrint("email: " + emailController1.text);
                             debugPrint("password: " + passwordController1.text);
 
-                            LoginService().loginCall(
-                                email: emailController1.text,
-                                password: passwordController1.text);
+                            LoginService()
+                                .loginCall(
+                                    email: emailController1.text,
+                                    password: passwordController1.text)
+                                .then((value) {
+                              if (value == true) {
+                                return Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => NavigationPage(),
+                                    ));
+                              }
+                            });
 
                             // onPressed();
-
-                            // var data = LoginService().loginCall(
-                            //     email: emailController1.text,
-                            //     password: passwordController1.text);
-                            //
-                            // debugPrint("DATA: " + data.toString());
-
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => NavigationPage(),
-                            //     ));
                           }),
                     ),
                   ),
