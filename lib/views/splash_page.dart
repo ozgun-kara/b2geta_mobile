@@ -23,37 +23,26 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
 
-    // // THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 2 SECONDS.
-    // Timer(
-    //     const Duration(milliseconds: 2000),
-    //     () => Navigator.of(context).pushReplacement(
-    //             MaterialPageRoute(builder: (BuildContext context) {
-    //           // return LoginPage();
-    //           // return LanguageSelectionPage();
-    //           return RegisterPage();
-    //           // return NavigationPage();
-    //         })));
-
     //  THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 1.5 SECONDS.
     Timer(Duration(milliseconds: 1500), () => checkToken());
   }
 
   checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString("token");
+    String? token = prefs.getString("Token");
 
     if (token == null) {
-      print("GİRİŞ BAŞARISIZ");
+      debugPrint("TOKEN NOT AVAILABLE");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return LoginPage();
+        return const LoginPage();
       }));
     } else {
-      print("GİRİŞ BAŞARILI");
+      debugPrint("TOKEN AVAILABLE");
 
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return NavigationPage();
+        return const NavigationPage();
       }));
     }
   }

@@ -1,11 +1,7 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/login_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
-import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginService {
@@ -31,7 +27,7 @@ class LoginService {
       if (status == true) {
         var token = json.decode(response.body)["access_token"];
         debugPrint("TOKEN: " + token.toString());
-
+        saveToken(token);
         return true;
       } else {
         return false;
@@ -43,5 +39,19 @@ class LoginService {
 
       return false;
     }
+  }
+
+  Future<void> saveToken(String token) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('Token', token);
+    debugPrint("TOKEN HAS SAVED");
+    readToken();
+  }
+
+  Future<String?> readToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = prefs.getString('Token');
+    debugPrint("TOKEN HAS FETCHED: " + token.toString());
+    return token;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/login_register/database_helper.dart';
 import 'package:b2geta_mobile/services/login_register/login_service.dart';
+import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -436,12 +437,12 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
                           ),
-                          onPressed: () async {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => NavigationPage(),
-                            //     ));
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => RegisterPage(),
+                                ));
                           }),
                     ),
                   ),
