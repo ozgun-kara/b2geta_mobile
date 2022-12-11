@@ -2,7 +2,7 @@ import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/login_register/language_selection_page.dart';
+import 'package:b2geta_mobile/views/login_register/language_page.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
       // home: NavigationPage(),
       // home: LoginPage(),
       // home: RegisterPage(),
-      // home: LanguageSelectionPage(),
+      // home: LanguagePage(),
     );
   }
 }

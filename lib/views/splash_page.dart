@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/login_register/language_selection_page.dart';
+import 'package:b2geta_mobile/views/login_register/language_page.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';

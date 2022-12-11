@@ -2,23 +2,31 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/language_dummy_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/services/login_register/language_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeleton_text/skeleton_text.dart';
 
-class LanguageSelectionPage extends StatefulWidget {
-  const LanguageSelectionPage({Key? key}) : super(key: key);
+class LanguagePage extends StatefulWidget {
+  const LanguagePage({Key? key}) : super(key: key);
 
   @override
-  State<LanguageSelectionPage> createState() => _LanguageSelectionPageState();
+  State<LanguagePage> createState() => _LanguagePageState();
 }
 
-class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
+class _LanguagePageState extends State<LanguagePage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  @override
+  void initState() {
+    LanguageService().getLanguages();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
