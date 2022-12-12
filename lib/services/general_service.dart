@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:b2geta_mobile/models/language_dummy_model.dart';
-import 'package:b2geta_mobile/models/product_dummy_model.dart';
+import 'package:b2geta_mobile/models/dummy/language_dummy_model.dart';
+import 'package:b2geta_mobile/models/dummy/product_dummy_model.dart';
 import 'package:flutter/services.dart' as rootBundle;
 
 class GeneralService {

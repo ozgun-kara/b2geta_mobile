@@ -8,7 +8,7 @@ class LoginService {
   Future<bool> loginCall(
       {required String email, required String password}) async {
     final response = await http.post(
-      Uri.parse(Constants.apiUrl + 'member/login'),
+      Uri.parse('${Constants.apiUrl}/member/login'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },

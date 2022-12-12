@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/models/product_dummy_model.dart';
+import 'package:b2geta_mobile/models/dummy/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/cupertino.dart';

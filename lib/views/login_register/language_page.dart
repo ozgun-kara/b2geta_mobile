@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/language_model.dart';
+import 'package:b2geta_mobile/models/login_register/language_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/login_register/language_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -202,26 +202,29 @@ class _LanguagePageState extends State<LanguagePage> {
                       if (data.hasData) {
                         var items = data.data as List<LanguageModel>;
 
-                        return ListView.builder(
-                            controller: scrollController,
-                            shrinkWrap: true,
-                            itemCount: items.length,
-                            itemBuilder: ((context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                child: Center(
-                                  child: Text(
-                                    items[index].languageName ?? '',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
+                        return Center(
+                          child: ListView.builder(
+                              controller: scrollController,
+                              shrinkWrap: true,
+                              itemCount: items.length,
+                              itemBuilder: ((context, index) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                  child: Center(
+                                    child: Text(
+                                      items[index].languageName ?? '',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            }));
+                                );
+                              })),
+                        );
                       } else {
                         return Center(
                             child: CupertinoActivityIndicator(
