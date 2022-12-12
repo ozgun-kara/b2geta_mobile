@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/login_register/language_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/login_register/language_service.dart';
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +16,11 @@ class LanguagePage extends StatefulWidget {
 
 class _LanguagePageState extends State<LanguagePage> {
   ScrollController scrollController = ScrollController();
+  final List<String> dropdownItems = [
+    'English',
+    'Turkish',
+  ];
+  String? dropdownSelectedValue;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -74,15 +80,17 @@ class _LanguagePageState extends State<LanguagePage> {
                   ],
                 ),
                 SizedBox(height: 32),
+                Spacer(),
                 Container(
-                  height: 274,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(19),
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.white16
-                            : AppTheme.black12,
-                  ),
+                  // height: 274,
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(19),
+                  //   color:
+                  //   Provider.of<ThemeProvider>(context).themeMode == "light"
+                  //       ? AppTheme.white16
+                  //       : AppTheme.black12,
+                  // ),
+
                   // child: FutureBuilder(
                   //   future: GeneralService().getLanguageList(),
                   //   builder: (context, data) {
@@ -196,48 +204,140 @@ class _LanguagePageState extends State<LanguagePage> {
                   //     }
                   //   },
                   // ),
-                  child: FutureBuilder(
-                    future: LanguageService().getLanguageList(),
-                    builder: (context, data) {
-                      if (data.hasData) {
-                        var items = data.data as List<LanguageModel>;
 
-                        return Center(
-                          child: ListView.builder(
-                              controller: scrollController,
-                              shrinkWrap: true,
-                              itemCount: items.length,
-                              itemBuilder: ((context, index) {
-                                return Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                  child: Center(
-                                    child: Text(
-                                      items[index].languageName ?? '',
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              })),
-                        );
-                      } else {
-                        return Center(
-                            child: CupertinoActivityIndicator(
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      // alignment: AlignmentDirectional.center,
+                      // isExpanded: true,
+                      hint: Text(
+                        "Language",
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
                           color:
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
-                          radius: 12,
-                        ));
-                      }
-                    },
+                                  ? AppTheme.black11
+                                  : AppTheme.white14,
+                        ),
+                        overflow: TextOverflow.visible,
+                      ),
+                      items: dropdownItems
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Center(
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.black11
+                                          : AppTheme.white14,
+                                    ),
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: dropdownSelectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          dropdownSelectedValue = value as String;
+                        });
+                      },
+                      icon: Center(
+                        child: Image.asset(
+                          'assets/icons/dropdown.png',
+                          width: 10,
+                          height: 6,
+                        ),
+                      ),
+                      iconSize: 24,
+                      // iconEnabledColor: Colors.yellow,
+                      // iconDisabledColor: Colors.grey,
+                      // icon: Container(),
+                      buttonHeight: 57,
+                      buttonWidth: deviceWidth,
+                      buttonPadding: EdgeInsets.only(left: 25, right: 17),
+                      buttonDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        // border:
+                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                        // color: Colors.transparent,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // buttonElevation: 2,
+                      itemHeight: 40,
+                      itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                      dropdownMaxHeight: 200,
+                      // dropdownWidth: deviceWidth,
+                      dropdownPadding: null,
+                      dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        // color: Color(0xFFEFF0F7),
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // dropdownElevation: 8,
+                      scrollbarRadius: const Radius.circular(40),
+                      scrollbarThickness: 4,
+                      scrollbarAlwaysShow: true,
+                      offset: const Offset(0, 0),
+                    ),
                   ),
+
+                  // child: FutureBuilder(
+                  //   future: LanguageService().getLanguageList(),
+                  //   builder: (context, data) {
+                  //     if (data.hasData) {
+                  //       var items = data.data as List<LanguageModel>;
+                  //
+                  //       return Center(
+                  //         child: ListView.builder(
+                  //             controller: scrollController,
+                  //             shrinkWrap: true,
+                  //             itemCount: items.length,
+                  //             itemBuilder: ((context, index) {
+                  //               return Padding(
+                  //                 padding:
+                  //                     const EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  //                 child: Center(
+                  //                   child: Text(
+                  //                     items[index].languageName ?? '',
+                  //                     style: TextStyle(
+                  //                       fontSize: 18,
+                  //                       fontFamily: AppTheme.appFontFamily,
+                  //                       fontWeight: FontWeight.w600,
+                  //                       color: Colors.white,
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               );
+                  //             })),
+                  //       );
+                  //     } else {
+                  //       return Center(
+                  //           child: CupertinoActivityIndicator(
+                  //         color:
+                  //             Provider.of<ThemeProvider>(context).themeMode ==
+                  //                     "light"
+                  //                 ? AppTheme.black1
+                  //                 : AppTheme.white1,
+                  //         radius: 12,
+                  //       ));
+                  //     }
+                  //   },
+                  // ),
                 ),
                 SizedBox(height: 21),
                 ButtonTheme(
@@ -279,6 +379,7 @@ class _LanguagePageState extends State<LanguagePage> {
                         onPressed: () async {}),
                   ),
                 ),
+                Spacer()
               ],
             ),
           ),

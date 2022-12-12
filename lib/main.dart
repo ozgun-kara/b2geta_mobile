@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -25,7 +26,7 @@ void main() {
     ChangeNotifierProvider<MarketPlacePageProvider>(
       create: (BuildContext context) => MarketPlacePageProvider(),
     ),
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -35,17 +36,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: AppLanguages(),
       locale: Get.deviceLocale,
       fallbackLocale: const Locale('en', 'US'),
-      // translations: AppLanguages(),
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      home: SplashPage(),
+      // home: SplashPage(),
       // home: NavigationPage(),
       // home: LoginPage(),
       // home: RegisterPage(),
-      // home: LanguagePage(),
+      home: LanguagePage(),
     );
   }
 }
