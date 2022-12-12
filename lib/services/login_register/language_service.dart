@@ -47,27 +47,25 @@ class LanguageService {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      // encoding: Encoding.getByName('utf-8'),
     );
 
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: " + response.statusCode.toString());
-      debugPrint("RESPONSE DATA: " + response.body.toString());
-
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
         var result = LanguagesModel.fromJson(response.body);
+
         final list = result.data as List<dynamic>;
 
         return list;
       } else {
-        throw ("Bir sorun oluştu ${response.statusCode}");
+        debugPrint(
+            "DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
+        throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
       }
     } else {
-      debugPrint("DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
-
-      throw ("Bir sorun oluştu ${response.statusCode}");
+      debugPrint("API ERROR\nSTATUS CODE: " + response.statusCode.toString());
+      throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
     }
   }
 

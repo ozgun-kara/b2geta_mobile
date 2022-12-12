@@ -24,11 +24,6 @@ class _LanguagePageState extends State<LanguagePage> {
   late double deviceHeight;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
