@@ -1,13 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/language_dummy_model.dart';
-import 'package:b2geta_mobile/models/languages_model.dart';
+import 'package:b2geta_mobile/models/language_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:b2geta_mobile/services/login_register/language_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:skeleton_text/skeleton_text.dart';
 
 class LanguagePage extends StatefulWidget {
   const LanguagePage({Key? key}) : super(key: key);
@@ -200,10 +197,10 @@ class _LanguagePageState extends State<LanguagePage> {
                   //   },
                   // ),
                   child: FutureBuilder(
-                    future: LanguageService().getLanguagesList(),
+                    future: LanguageService().getLanguageList(),
                     builder: (context, data) {
                       if (data.hasData) {
-                        var items = data.data as List<LanguagesDataModel>;
+                        var items = data.data as List<LanguageModel>;
 
                         return ListView.builder(
                             controller: scrollController,

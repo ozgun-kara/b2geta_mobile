@@ -43,9 +43,9 @@ class MyApp extends StatelessWidget {
       title: 'B2GETA',
       // home: SplashPage(),
       // home: NavigationPage(),
-      // home: LoginPage(),
+      home: LoginPage(),
       // home: RegisterPage(),
-      home: LanguagePage(),
+      // home: LanguagePage(),
     );
   }
 }
