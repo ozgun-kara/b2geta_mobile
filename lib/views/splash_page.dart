@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
       debugPrint("TOKEN NOT AVAILABLE");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return const LoginPage();
+        return const LanguagePage();
       }));
     } else {
       debugPrint("TOKEN AVAILABLE");

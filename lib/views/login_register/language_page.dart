@@ -2,10 +2,11 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/login_register/language_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/login_register/language_service.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -257,6 +258,18 @@ class _LanguagePageState extends State<LanguagePage> {
                         onChanged: (value) {
                           setState(() {
                             dropdownSelectedValue = value as String;
+                            debugPrint("VALUE:" + value);
+
+                            if (value == "English") {
+                              var locale = Locale('en', 'US');
+                              Get.updateLocale(locale);
+                            } else if (value == "Turkish") {
+                              var locale = Locale('tr', 'TR');
+                              Get.updateLocale(locale);
+                            } else if (value == "Deutsch") {
+                              var locale = Locale('de', 'DE');
+                              Get.updateLocale(locale);
+                            }
                           });
                         },
                         icon: Center(
@@ -387,7 +400,13 @@ class _LanguagePageState extends State<LanguagePage> {
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
                           ),
-                          onPressed: () async {}),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => LoginPage(),
+                                ));
+                          }),
                     ),
                   ),
                 ],

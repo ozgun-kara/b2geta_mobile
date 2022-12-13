@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      // home: SplashPage(),
+      home: SplashPage(),
       // home: NavigationPage(),
       // home: LoginPage(),
       // home: RegisterPage(),
-      home: LanguagePage(),
+      // home: LanguagePage(),
     );
   }
 }
