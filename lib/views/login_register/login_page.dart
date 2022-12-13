@@ -120,7 +120,10 @@ class _LoginPageState extends State<LoginPage> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
-                    color: AppTheme.white1,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
                     width: 1,
                   ),
                 ),
@@ -185,7 +188,10 @@ class _LoginPageState extends State<LoginPage> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide(
-                    color: AppTheme.white1,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
                     width: 1,
                   ),
                 ),
@@ -314,10 +320,10 @@ class _LoginPageState extends State<LoginPage> {
                                     MaterialPageRoute(
                                       builder: (context) => NavigationPage(),
                                     ));
+                              } else {
+                                showAlertDialog(context);
                               }
                             });
-
-                            showAlertDialog(context);
 
                             // onPressed();
                           }),
@@ -497,7 +503,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "E-mail Veya Şifre Hatalı",
+                  'Login Error'.tr,
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
@@ -547,7 +553,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
-                          "Kapat",
+                          'Close'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,

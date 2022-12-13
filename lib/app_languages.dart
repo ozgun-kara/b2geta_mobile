@@ -20,6 +20,8 @@ class AppLanguages extends Translations {
           'Terms and Conditions': 'Terms and Conditions',
           'Contact': 'Contact',
           'Copyright': 'Copyright 2022 B2Geta. All rights reserved',
+          'Login Error': 'Invalid Email or Password',
+          'Close': 'Close',
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -38,6 +40,8 @@ class AppLanguages extends Translations {
           'Terms and Conditions': 'Kurallar ve Şartlar',
           'Contact': 'İletişim',
           'Copyright': 'Copright 2022 B2Geta. Tüm Hakları Saklıdır',
+          'Login Error': 'E-mail Veya Şifre Hatalı',
+          'Close': 'Kapat',
         },
         'de_DE': {
           // LANGUAGE PAGE
