@@ -317,6 +317,8 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             });
 
+                            showAlertDialog(context);
+
                             // onPressed();
                           }),
                     ),
@@ -474,6 +476,94 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          content: Container(
+            width: deviceWidth,
+            height: 150,
+            decoration: BoxDecoration(
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black12,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "E-mail Veya Şifre Hatalı",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w600,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
+                  ),
+                ),
+                SizedBox(height: 16),
+                ButtonTheme(
+                  // minWidth: deviceWidth,
+                  height: 36,
+                  child: Container(
+                    height: 36,
+                    decoration: BoxDecoration(
+                        color: AppTheme.green1,
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.outer,
+                        //     offset: Offset(0, -4),
+                        //     blurRadius: 16,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF0E0E0F).withOpacity(0.17),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, -2),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFFFFFFFF).withOpacity(0.25),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, 1),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF000000).withOpacity(0.18),
+                        //   ),
+                        // ],
+
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    child: MaterialButton(
+                        elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          "Kapat",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
