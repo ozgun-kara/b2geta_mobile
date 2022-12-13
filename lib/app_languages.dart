@@ -22,6 +22,11 @@ class AppLanguages extends Translations {
           'Copyright': 'Copyright 2022 B2Geta. All rights reserved',
           'Login Error': 'Invalid Email or Password',
           'Close': 'Close',
+          // NAVIGATION PAGE
+          'Homepage': 'Homepage',
+          'Marketplace': 'Marketplace',
+          'Companies': 'Companies',
+          'My Panel': 'My Panel',
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -42,6 +47,11 @@ class AppLanguages extends Translations {
           'Copyright': 'Copright 2022 B2Geta. Tüm Hakları Saklıdır',
           'Login Error': 'E-mail Veya Şifre Hatalı',
           'Close': 'Kapat',
+          // NAVIGATION PAGE
+          'Homepage': 'Anasayfa',
+          'Marketplace': 'Pazaryeri',
+          'Companies': 'Firmalar',
+          'My Panel': 'Panelim',
         },
         'de_DE': {
           // LANGUAGE PAGE

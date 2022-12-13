@@ -1,8 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 
 class NavigationPage extends StatefulWidget {
@@ -158,7 +158,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 4),
-                          Text('Anasayfa',
+                          Text('Homepage'.tr,
                               style: TextStyle(
                                   fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
@@ -217,7 +217,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 4),
-                          Text('Pazaryeri',
+                          Text('Marketplace'.tr,
                               style: TextStyle(
                                   fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
@@ -276,7 +276,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 4),
-                          Text('Firmalar',
+                          Text('Companies'.tr,
                               style: TextStyle(
                                   fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
@@ -335,7 +335,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                           SizedBox(height: 5),
-                          Text('Panelim',
+                          Text('My Panel'.tr,
                               style: TextStyle(
                                   fontSize: 9,
                                   fontFamily: AppTheme.appFontFamily,
