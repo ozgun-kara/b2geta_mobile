@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       translations: AppLanguages(),
       locale: box.read("language") == null
           ? Get.deviceLocale
-          : box.read("language") == "tr"
+          : box.read("language") == "tr_TR"
               ? const Locale("tr", "TR")
               : const Locale("en", "US"),
       // fallbackLocale: const Locale('en', 'US'), // DEFAULT LANGUAGE

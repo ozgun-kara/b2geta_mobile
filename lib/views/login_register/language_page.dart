@@ -33,6 +33,22 @@ class _LanguagePageState extends State<LanguagePage> {
 
   @override
   void initState() {
+    if (box.read("language") == null) {
+      var deviceLanguage = Get.deviceLocale.toString();
+
+      if (deviceLanguage == 'tr_TR') {
+        dropdownSelectedValue = 'Turkish';
+      } else if (deviceLanguage == 'en_US') {
+        dropdownSelectedValue = 'English';
+      } else {
+        dropdownSelectedValue = 'English';
+      }
+    } else {
+      box.read("language") == "tr_TR"
+          ? dropdownSelectedValue = 'Turkish'
+          : dropdownSelectedValue = 'English';
+    }
+
     super.initState();
   }
 
@@ -221,7 +237,7 @@ class _LanguagePageState extends State<LanguagePage> {
                         // alignment: AlignmentDirectional.center,
                         // isExpanded: true,
                         hint: Text(
-                          "Language",
+                          dropdownSelectedValue.toString(),
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -260,14 +276,13 @@ class _LanguagePageState extends State<LanguagePage> {
                         onChanged: (value) {
                           setState(() {
                             dropdownSelectedValue = value as String;
-                            debugPrint("VALUE:" + value);
 
                             if (value == "English") {
-                              box.write("language", "en");
+                              box.write("language", "en_US");
                               var locale = Locale('en', 'US');
                               Get.updateLocale(locale);
                             } else if (value == "Turkish") {
-                              box.write("language", "tr");
+                              box.write("language", "tr_TR");
                               var locale = Locale('tr', 'TR');
                               Get.updateLocale(locale);
                             } else if (value == "Deutsch") {
