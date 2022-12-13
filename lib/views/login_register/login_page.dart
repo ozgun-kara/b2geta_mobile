@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/services/login_register/login_service.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -47,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Expanded(
                   child: Text(
-                    "Üye Girişi",
+                    'Member Login'.tr,
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: AppTheme.appFontFamily,
@@ -88,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                 filled: true,
                 fillColor: Colors.transparent,
-                hintText: "E-mail",
+                hintText: 'E-mail'.tr,
                 hintStyle: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
@@ -153,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                 contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
                 filled: true,
                 fillColor: Colors.transparent,
-                hintText: "Şifre",
+                hintText: 'Password'.tr,
                 hintStyle: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
@@ -199,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     children: [
                       Text(
-                        "Beni hatırla:",
+                        'Remember me:'.tr,
                         style: TextStyle(
                             fontSize: 12,
                             fontFamily: AppTheme.appFontFamily,
@@ -238,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
                     onTap: () {},
                     borderRadius: BorderRadius.all(Radius.circular(6)),
                     child: Text(
-                      "Şifremi Unuttum?",
+                      'Forgot Password'.tr,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: AppTheme.appFontFamily,
@@ -291,7 +292,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
-                            "Giriş Yap",
+                            'Login'.tr,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: AppTheme.appFontFamily,
@@ -361,7 +362,7 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
-                            "Üye Ol",
+                            'Sign Up'.tr,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: AppTheme.appFontFamily,
@@ -388,7 +389,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   child: Text(
-                    "Hakkmızda",
+                    'About Us'.tr,
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
@@ -404,7 +405,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   child: Text(
-                    "Gizlilik",
+                    'Privacy'.tr,
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
@@ -420,7 +421,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   child: Text(
-                    "Kurallar ve Şartlar",
+                    'Terms and Conditions'.tr,
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
@@ -436,7 +437,7 @@ class _LoginPageState extends State<LoginPage> {
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
                   child: Text(
-                    "İletişim",
+                    'Contact'.tr,
                     style: TextStyle(
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
@@ -455,7 +456,7 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 Expanded(
                   child: Text(
-                    "Copright 2022 B2Geta. Tüm Hakları Saklıdır",
+                    'Copyright'.tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 12,

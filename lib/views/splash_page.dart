@@ -19,10 +19,10 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
-    super.initState();
-
     //  THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 1.5 SECONDS.
     Timer(const Duration(milliseconds: 1500), () => checkToken());
+
+    super.initState();
   }
 
   checkToken() async {
