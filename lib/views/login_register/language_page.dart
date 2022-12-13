@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/services/login_register/language_service.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _LanguagePageState extends State<LanguagePage> {
   final List<String> dropdownItems = [
     'English',
     'Turkish',
+    'Deutsch',
   ];
   String? dropdownSelectedValue;
 
@@ -71,7 +73,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       SizedBox(width: 6),
                       Expanded(
                         child: Text(
-                          'Dil Seçimi',
+                          'Language Selection'.tr,
                           style: TextStyle(
                             fontFamily: AppTheme.appFontFamily,
                             fontSize: 20,
@@ -378,7 +380,7 @@ class _LanguagePageState extends State<LanguagePage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
-                            "Kaydet",
+                            'Save'.tr,
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: AppTheme.appFontFamily,
