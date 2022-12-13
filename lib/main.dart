@@ -10,9 +10,12 @@ import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeProvider>(
       create: (BuildContext context) => ThemeProvider(),
@@ -26,23 +29,27 @@ void main() {
     ChangeNotifierProvider<MarketPlacePageProvider>(
       create: (BuildContext context) => MarketPlacePageProvider(),
     ),
-  ], child: const MyApp()));
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  GetStorage box = GetStorage();
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       translations: AppLanguages(),
-      locale: Get.deviceLocale,
+      locale: box.read("language") == null
+          ? Get.deviceLocale
+          : box.read("language") == "tr"
+              ? const Locale("tr", "TR")
+              : const Locale("en", "US"),
       // fallbackLocale: const Locale('en', 'US'), // DEFAULT LANGUAGE
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      home: SplashPage(),
+      home: const SplashPage(),
       // home: NavigationPage(),
       // home: LoginPage(),
       // home: RegisterPage(),

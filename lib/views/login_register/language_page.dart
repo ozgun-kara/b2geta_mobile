@@ -7,6 +7,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 
 class LanguagePage extends StatefulWidget {
@@ -17,6 +18,7 @@ class LanguagePage extends StatefulWidget {
 }
 
 class _LanguagePageState extends State<LanguagePage> {
+  GetStorage box = GetStorage();
   ScrollController scrollController = ScrollController();
   final List<String> dropdownItems = [
     'English',
@@ -261,9 +263,11 @@ class _LanguagePageState extends State<LanguagePage> {
                             debugPrint("VALUE:" + value);
 
                             if (value == "English") {
+                              box.write("language", "en");
                               var locale = Locale('en', 'US');
                               Get.updateLocale(locale);
                             } else if (value == "Turkish") {
+                              box.write("language", "tr");
                               var locale = Locale('tr', 'TR');
                               Get.updateLocale(locale);
                             } else if (value == "Deutsch") {
