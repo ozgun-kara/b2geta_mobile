@@ -28,6 +28,7 @@ class AppLanguages extends Translations {
           'Login Error': 'Invalid Email or Password',
           'Close': 'Close',
           // REGISTER PAGE
+          'Create Account': 'Create Account',
           'E-mail (confirm)': 'E-mail (confirm)',
           'Password (confirm)': 'Password (confirm)',
           'Company Name': 'Company Name',
@@ -65,6 +66,7 @@ class AppLanguages extends Translations {
           'Login Error': 'E-mail Veya Şifre Hatalı',
           'Close': 'Kapat',
           // REGISTER PAGE
+          'Create Account': 'Hesap Oluştur',
           'E-mail (confirm)': 'E-mail (tekrar)',
           'Password (confirm)': 'Şifre (tekrar)',
           'Company Name': 'Firma Adı',
