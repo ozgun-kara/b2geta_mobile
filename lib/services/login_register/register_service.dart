@@ -4,15 +4,28 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterService {
-  Future<bool> registerCall(
-      {required String email, required String password}) async {
-    final response = await http.post(
-      Uri.parse('${Constants.apiUrl}/member/login'),
+  Future<bool> registerCall({
+    required String email,
+    required String password,
+    required String companyName,
+    String? officialPerson,
+    String? officialPhone,
+    String? country,
+  }) async {
+    final response = await http.put(
+      Uri.parse('${Constants.apiUrl}/member'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       // encoding: Encoding.getByName('utf-8'),
-      body: {"username": email, "password": password},
+      body: {
+        "username": email,
+        "password": password,
+        "company_name": companyName,
+        "firstname": officialPerson,
+        "phone_number": officialPhone,
+        "country": country
+      },
     );
 
     if (response.statusCode == 200) {
