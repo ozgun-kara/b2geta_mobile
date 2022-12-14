@@ -527,11 +527,11 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w500,
                     color:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.blue2
-                            : AppTheme.white1,
+                            ? AppTheme.black16
+                            : AppTheme.white14,
                   ),
                 ),
                 SizedBox(height: 16),
