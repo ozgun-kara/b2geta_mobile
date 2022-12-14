@@ -36,6 +36,9 @@ class AppLanguages extends Translations {
           'Official Phone': 'Official Phone',
           'Country': 'Country',
           'User Agreement': 'I have read and accept the user agreement',
+          'E-mail Validate-3': 'Unmatched email address',
+          'Password Validate-3': 'Unmatched password',
+          'Company Name Validate': 'Please enter a company name',
           // NAVIGATION PAGE
           'Homepage': 'Homepage',
           'Marketplace': 'Marketplace',
@@ -74,6 +77,9 @@ class AppLanguages extends Translations {
           'Official Phone': 'Yetkili Telefon',
           'Country': 'Ülke',
           'User Agreement': 'Kullanıcı sözleşmesini okudum onaylıyorum',
+          'E-mail Validate-3': 'Email adresleri uyuşmuyor',
+          'Password Validate-3': 'Şifreler uyuşmuyor',
+          'Company Name Validate': 'Lütfen firma adını giriniz',
           // NAVIGATION PAGE
           'Homepage': 'Anasayfa',
           'Marketplace': 'Pazaryeri',

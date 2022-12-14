@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -171,6 +172,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
                       return 'E-mail Validate-2'.tr;
                     }
+
+                    if (value != emailController1.text) {
+                      return 'E-mail Validate-3'.tr;
+                    }
                     return null;
                   },
 
@@ -229,13 +234,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email address';
+                      return 'Password Validate-1'.tr;
                     }
-                    // Check if the entered email has the right format
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
+                    if (value.trim().length < 8) {
+                      return 'Password Validate-2'.tr;
                     }
-                    // Return null if the entered email is valid
                     return null;
                   },
                   controller: passwordController1,
@@ -294,13 +297,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email address';
+                      return 'Password Validate-1'.tr;
                     }
-                    // Check if the entered email has the right format
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
+                    if (value.trim().length < 8) {
+                      return 'Password Validate-2'.tr;
                     }
-                    // Return null if the entered email is valid
+                    if (value != passwordController1.text) {
+                      return 'Password Validate-3'.tr;
+                    }
                     return null;
                   },
                   controller: passwordController2,
@@ -359,13 +363,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email address';
+                      return 'Company Name Validate'.tr;
                     }
-                    // Check if the entered email has the right format
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    // Return null if the entered email is valid
                     return null;
                   },
                   controller: companyNameController,
@@ -421,17 +420,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: 13),
                 TextFormField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email address';
-                    }
-                    // Check if the entered email has the right format
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    // Return null if the entered email is valid
-                    return null;
-                  },
                   controller: officialPersonController,
                   style: TextStyle(
                       fontSize: 16,
@@ -485,17 +473,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 SizedBox(height: 13),
                 TextFormField(
-                  validator: (value) {
-                    if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email address';
-                    }
-                    // Check if the entered email has the right format
-                    if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                      return 'Please enter a valid email address';
-                    }
-                    // Return null if the entered email is valid
-                    return null;
-                  },
                   controller: officialPhoneController,
                   style: TextStyle(
                       fontSize: 16,
@@ -742,12 +719,40 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.w700,
                               color: AppTheme.white1),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
                           //       builder: (context) => NavigationPage(),
                           //     ));
+
+                          if (formKey2.currentState!.validate()) {
+                            debugPrint("email: " + emailController1.text);
+                            debugPrint("password: " + passwordController1.text);
+
+                            RegisterService()
+                                .registerCall(
+                                    email: emailController1.text,
+                                    password: passwordController1.text,
+                                    companyName: companyNameController.text,
+                                    officialPerson:
+                                        officialPersonController.text,
+                                    officialPhone: officialPhoneController.text)
+                                .then((value) {
+                              if (value == true) {
+                                showAlertDialog(context);
+
+                                return Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NavigationPage(),
+                                    ));
+                              } else {
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }
                         }),
                   ),
                 ),
@@ -756,6 +761,184 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void showAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          content: Container(
+            width: deviceWidth,
+            height: 150,
+            decoration: BoxDecoration(
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black12,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  // 'Login Error'.tr,
+                  "Üyelik Başarılı",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black16
+                            : AppTheme.white14,
+                  ),
+                ),
+                SizedBox(height: 16),
+                ButtonTheme(
+                  // minWidth: deviceWidth,
+                  height: 36,
+                  child: Container(
+                    height: 36,
+                    decoration: BoxDecoration(
+                        color: AppTheme.green1,
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.outer,
+                        //     offset: Offset(0, -4),
+                        //     blurRadius: 16,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF0E0E0F).withOpacity(0.17),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, -2),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFFFFFFFF).withOpacity(0.25),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, 1),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF000000).withOpacity(0.18),
+                        //   ),
+                        // ],
+
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    child: MaterialButton(
+                        elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Close'.tr,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void showAlertDialog2(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          content: Container(
+            width: deviceWidth,
+            height: 150,
+            decoration: BoxDecoration(
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black12,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  // 'Login Error'.tr,
+                  "Üyelik Başarısız",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black16
+                            : AppTheme.white14,
+                  ),
+                ),
+                SizedBox(height: 16),
+                ButtonTheme(
+                  // minWidth: deviceWidth,
+                  height: 36,
+                  child: Container(
+                    height: 36,
+                    decoration: BoxDecoration(
+                        color: AppTheme.green1,
+                        // boxShadow: [
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.outer,
+                        //     offset: Offset(0, -4),
+                        //     blurRadius: 16,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF0E0E0F).withOpacity(0.17),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, -2),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFFFFFFFF).withOpacity(0.25),
+                        //   ),
+                        //   BoxShadow(
+                        //     blurStyle: BlurStyle.normal,
+                        //     offset: Offset(0, 1),
+                        //     blurRadius: 2,
+                        //     spreadRadius: 0,
+                        //     color: Color(0xFF000000).withOpacity(0.18),
+                        //   ),
+                        // ],
+
+                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                    child: MaterialButton(
+                        elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Close'.tr,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        }),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
