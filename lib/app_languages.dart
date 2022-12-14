@@ -27,6 +27,14 @@ class AppLanguages extends Translations {
               'Password must be at least 8 characters in length',
           'Login Error': 'Invalid Email or Password',
           'Close': 'Close',
+          // REGISTER PAGE
+          'E-mail (confirm)': 'E-mail (confirm)',
+          'Password (confirm)': 'Password (confirm)',
+          'Company Name': 'Company Name',
+          'Official Person': 'Official Person',
+          'Official Phone': 'Official Phone',
+          'Country': 'Country',
+          'User Agreement': 'I have read and accept the user agreement',
           // NAVIGATION PAGE
           'Homepage': 'Homepage',
           'Marketplace': 'Marketplace',
@@ -56,6 +64,14 @@ class AppLanguages extends Translations {
           'Password Validate-2': 'Şifre en az 8 karakter uzunluğunda olmalıdır',
           'Login Error': 'E-mail Veya Şifre Hatalı',
           'Close': 'Kapat',
+          // REGISTER PAGE
+          'E-mail (confirm)': 'E-mail (tekrar)',
+          'Password (confirm)': 'Şifre (tekrar)',
+          'Company Name': 'Firma Adı',
+          'Official Person': 'Yetkili Kişi',
+          'Official Phone': 'Yetkili Telefon',
+          'Country': 'Ülke',
+          'User Agreement': 'Kullanıcı sözleşmesini okudum onaylıyorum',
           // NAVIGATION PAGE
           'Homepage': 'Anasayfa',
           'Marketplace': 'Pazaryeri',
