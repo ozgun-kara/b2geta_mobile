@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/login_register/register_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,22 +33,25 @@ class RegisterService {
       debugPrint("STATUS CODE: " + response.statusCode.toString());
       debugPrint("RESPONSE DATA: " + response.body.toString());
 
-      // var result = LoginModel.fromJson(response.body);
-
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
-        var token = json.decode(response.body)["access_token"];
+        var data = json.decode(response.body)["data"];
+
+        var result = RegisterModel.fromJson(data);
+
+        debugPrint("userId: " + result.userId.toString());
+        debugPrint("verifyCode: " + result.verifyCode.toString());
 
         return true;
       } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return false;
       }
     } else {
-      debugPrint("DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
-
-      // throw ("Bir sorun oluştu ${response.statusCode}");
-
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
     }
   }

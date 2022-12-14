@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -729,6 +730,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           if (formKey2.currentState!.validate()) {
                             debugPrint("email: " + emailController1.text);
                             debugPrint("password: " + passwordController1.text);
+                            debugPrint(
+                                "companyName: " + companyNameController.text);
+                            debugPrint("officialPerson: " +
+                                officialPersonController.text);
+                            debugPrint("officialPhone: " +
+                                officialPhoneController.text);
 
                             RegisterService()
                                 .registerCall(
@@ -745,8 +752,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 return Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NavigationPage(),
+                                      builder: (context) => const LoginPage(),
                                     ));
                               } else {
                                 showAlertDialog2(context);
