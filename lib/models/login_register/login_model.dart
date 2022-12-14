@@ -4,7 +4,7 @@ class LoginModel {
   String? responseText;
   List<dynamic>? errors;
   String? accessToken;
-  Data? data;
+  LoginDataModel? data;
 
   LoginModel(
       {this.status,
@@ -25,18 +25,18 @@ class LoginModel {
       });
     }
     accessToken = json['access_token'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? LoginDataModel.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['responseCode'] = this.responseCode;
-    data['responseText'] = this.responseText;
-    if (this.errors != null) {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['status'] = status;
+    data['responseCode'] = responseCode;
+    data['responseText'] = responseText;
+    if (errors != null) {
       // data['errors'] = this.errors!.map((v) => v.toList());
     }
-    data['access_token'] = this.accessToken;
+    data['access_token'] = accessToken;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -44,24 +44,24 @@ class LoginModel {
   }
 }
 
-class Data {
+class LoginDataModel {
   String? userId;
   String? refreshToken;
   String? refreshTokenExpire;
 
-  Data({this.userId, this.refreshToken, this.refreshTokenExpire});
+  LoginDataModel({this.userId, this.refreshToken, this.refreshTokenExpire});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  LoginDataModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
     refreshToken = json['refresh_token'];
     refreshTokenExpire = json['refresh_token_expire'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['user_id'] = this.userId;
-    data['refresh_token'] = this.refreshToken;
-    data['refresh_token_expire'] = this.refreshTokenExpire;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['user_id'] = userId;
+    data['refresh_token'] = refreshToken;
+    data['refresh_token_expire'] = refreshTokenExpire;
     return data;
   }
 }

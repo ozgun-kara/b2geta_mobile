@@ -718,11 +718,11 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () async {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => NavigationPage(),
-                            ));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => NavigationPage(),
+                        //     ));
                       }),
                 ),
               ),
