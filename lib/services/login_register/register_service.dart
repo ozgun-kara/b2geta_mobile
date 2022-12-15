@@ -20,9 +20,9 @@ class RegisterService {
       },
       body: {
         "type": "company",
-        "email": "memo9921711@netteyim.net",
-        "password": "123456789",
-        "company_name": "Firma Adim",
+        "email": email,
+        "password": password,
+        "company_name": companyName,
         // "firstname": officialPerson,
         // "phone_number": officialPhone,
         // "country": country
@@ -30,8 +30,8 @@ class RegisterService {
     );
 
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: " + response.statusCode.toString());
-      debugPrint("RESPONSE DATA: " + response.body.toString());
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
 
       var status = json.decode(response.body)["status"];
 
@@ -40,8 +40,8 @@ class RegisterService {
 
         var result = RegisterModel.fromJson(data);
 
-        debugPrint("userId: " + result.userId.toString());
-        debugPrint("verifyCode: " + result.verifyCode.toString());
+        debugPrint("userId: ${result.userId}");
+        debugPrint("verifyCode: ${result.verifyCode}");
 
         return true;
       } else {

@@ -16,8 +16,8 @@ class LoginService {
     );
 
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: " + response.statusCode.toString());
-      debugPrint("RESPONSE DATA: " + response.body.toString());
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
 
       // var result = LoginModel.fromJson(response.body);
 
@@ -29,12 +29,14 @@ class LoginService {
         saveToken(token);
         return true;
       } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
         return false;
       }
     } else {
-      debugPrint("DATA ERROR\nSTATUS CODE: " + response.statusCode.toString());
-
-      // throw ("Bir sorun oluştu ${response.statusCode}");
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
       return false;
     }
