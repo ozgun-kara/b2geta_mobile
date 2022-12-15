@@ -39,6 +39,8 @@ class AppLanguages extends Translations {
           'E-mail Validate-3': 'Unmatched email address',
           'Password Validate-3': 'Unmatched password',
           'Company Name Validate': 'Please enter a company name',
+          'Register Alert-1': 'Registration Successful',
+          'Register Alert-2': 'Check Your Information',
           // NAVIGATION PAGE
           'Homepage': 'Homepage',
           'Marketplace': 'Marketplace',
@@ -80,6 +82,8 @@ class AppLanguages extends Translations {
           'E-mail Validate-3': 'Email adresleri uyuşmuyor',
           'Password Validate-3': 'Şifreler uyuşmuyor',
           'Company Name Validate': 'Lütfen firma adını giriniz',
+          'Register Alert-1': 'Üyelik Başarılı',
+          'Register Alert-2': 'Bilgilerinizi Kontrol Ediniz',
           // NAVIGATION PAGE
           'Homepage': 'Anasayfa',
           'Marketplace': 'Pazaryeri',

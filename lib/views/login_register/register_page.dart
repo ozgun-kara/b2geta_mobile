@@ -22,8 +22,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "r112@netteyim.net");
-  final emailController2 = TextEditingController(text: "r112@netteyim.net");
+  final emailController1 = TextEditingController(text: "r212@netteyim.net");
+  final emailController2 = TextEditingController(text: "r212@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "fghfhffhfh");
@@ -828,8 +828,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      // 'Login Error'.tr,
-                      "Üyelik Başarılı",
+                      'Register Alert-1'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: AppTheme.appFontFamily,
@@ -931,8 +930,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      // 'Login Error'.tr,
-                      "Bilgilerinizi Kontrol Ediniz",
+                      'Register Alert-2'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         fontFamily: AppTheme.appFontFamily,
