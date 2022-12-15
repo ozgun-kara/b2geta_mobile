@@ -22,8 +22,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "v1@netteyim.net");
-  final emailController2 = TextEditingController(text: "v1@netteyim.net");
+  final emailController1 = TextEditingController(text: "v111@netteyim.net");
+  final emailController2 = TextEditingController(text: "v111@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "fghfhffhfh");
@@ -736,6 +736,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 officialPersonController.text);
                             debugPrint("officialPhone: " +
                                 officialPhoneController.text);
+                            debugPrint(
+                                "country: " + dropdownSelectedValue.toString());
 
                             RegisterService()
                                 .registerCall(
@@ -820,18 +822,32 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  // 'Login Error'.tr,
-                  "Üyelik Başarılı",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      // 'Login Error'.tr,
+                      "Üyelik Başarılı",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
                             ? AppTheme.black16
                             : AppTheme.white14,
-                  ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.check_circle_outlined,
+                      size: 24,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black16
+                          : AppTheme.white14,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 16),
                 ButtonTheme(
@@ -909,18 +925,32 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  // 'Login Error'.tr,
-                  "Üyelik Başarısız",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      // 'Login Error'.tr,
+                      "Bilgilerinizi Kontrol Ediniz",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
                             ? AppTheme.black16
                             : AppTheme.white14,
-                  ),
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                    Icon(
+                      Icons.error_outline_sharp,
+                      size: 24,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black16
+                          : AppTheme.white14,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 16),
                 ButtonTheme(
