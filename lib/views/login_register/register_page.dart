@@ -20,10 +20,10 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "n13111131@netteyim.net");
-  final emailController2 = TextEditingController();
+  final emailController1 = TextEditingController(text: "v1@netteyim.net");
+  final emailController2 = TextEditingController(text: "v1@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
-  final passwordController2 = TextEditingController();
+  final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "fghfhffhfh");
   final officialPersonController = TextEditingController(text: "123");
   final officialPhoneController = TextEditingController(text: "123");
@@ -43,6 +43,11 @@ class _RegisterPageState extends State<RegisterPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -722,77 +727,73 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.w700,
                               color: AppTheme.white1),
                         ),
+                        onPressed: () {
+                          if (formKey2.currentState!.validate()) {
+                            debugPrint("email: " + emailController1.text);
+                            debugPrint("password: " + passwordController1.text);
+                            debugPrint(
+                                "companyName: " + companyNameController.text);
+                            debugPrint("officialPerson: " +
+                                officialPersonController.text);
+                            debugPrint("officialPhone: " +
+                                officialPhoneController.text);
+
+                            RegisterService()
+                                .registerCall(
+                              email: emailController1.text,
+                              password: passwordController1.text,
+                              companyName: companyNameController.text,
+                              officialPerson: officialPersonController.text,
+                              officialPhone: officialPhoneController.text,
+                              country: dropdownSelectedValue,
+                            )
+                                .then((value) {
+                              if (value == true) {
+                                showAlertDialog(context);
+
+                                Timer(
+                                    const Duration(milliseconds: 2000),
+                                    () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage(),
+                                        )));
+                              } else {
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }
+                        }
+
                         // onPressed: () {
-                        //   // Navigator.push(
-                        //   //     context,
-                        //   //     MaterialPageRoute(
-                        //   //       builder: (context) => NavigationPage(),
-                        //   //     ));
+                        //   RegisterService()
+                        //       .registerCall(
+                        //     email: emailController1.text,
+                        //     password: passwordController1.text,
+                        //     companyName: companyNameController.text,
+                        //     officialPerson: officialPersonController.text,
+                        //     officialPhone: officialPhoneController.text,
+                        //     country: "Turkey",
+                        //   )
+                        //       .then((value) {
+                        //     if (value == true) {
+                        //       showAlertDialog(context);
                         //
-                        //   if (
-                        //
-                        //       // formKey2.currentState!.validate()
-                        //
-                        //       true) {
-                        //     debugPrint("email: " + emailController1.text);
-                        //     debugPrint("password: " + passwordController1.text);
-                        //     debugPrint(
-                        //         "companyName: " + companyNameController.text);
-                        //     debugPrint("officialPerson: " +
-                        //         officialPersonController.text);
-                        //     debugPrint("officialPhone: " +
-                        //         officialPhoneController.text);
-                        //
-                        //     RegisterService()
-                        //         .registerCall(
-                        //             email: emailController1.text,
-                        //             password: passwordController1.text,
-                        //             companyName: companyNameController.text,
-                        //             officialPerson:
-                        //                 officialPersonController.text,
-                        //             officialPhone: officialPhoneController.text)
-                        //         .then((value) {
-                        //       if (value == true) {
-                        //         showAlertDialog(context);
-                        //
-                        //         return Navigator.push(
-                        //             context,
-                        //             MaterialPageRoute(
-                        //               builder: (context) => const LoginPage(),
-                        //             ));
-                        //       } else {
-                        //         showAlertDialog2(context);
-                        //       }
-                        //     });
-                        //   }
+                        //       Timer(
+                        //           const Duration(milliseconds: 2000),
+                        //           () => Navigator.push(
+                        //               context,
+                        //               MaterialPageRoute(
+                        //                 builder: (context) => const LoginPage(),
+                        //               )));
+                        //     } else {
+                        //       showAlertDialog2(context);
+                        //     }
+                        //   });
                         // }
 
-                        onPressed: () {
-                          RegisterService()
-                              .registerCall(
-                            email: emailController1.text,
-                            password: passwordController1.text,
-                            companyName: companyNameController.text,
-                            officialPerson: officialPersonController.text,
-                            officialPhone: officialPhoneController.text,
-                            country: "Turkey",
-                          )
-                              .then((value) {
-                            if (value == true) {
-                              showAlertDialog(context);
-
-                              Timer(
-                                  const Duration(milliseconds: 2000),
-                                  () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const LoginPage(),
-                                      )));
-                            } else {
-                              showAlertDialog2(context);
-                            }
-                          });
-                        }),
+                        ),
                   ),
                 ),
               ],
