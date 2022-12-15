@@ -12,7 +12,6 @@ class LoginService {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      // encoding: Encoding.getByName('utf-8'),
       body: {"username": email, "password": password},
     );
 

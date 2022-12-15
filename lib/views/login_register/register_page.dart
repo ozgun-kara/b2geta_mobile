@@ -18,13 +18,13 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController();
+  final emailController1 = TextEditingController(text: "memo2222@netteyim.net");
   final emailController2 = TextEditingController();
-  final passwordController1 = TextEditingController();
+  final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController();
-  final companyNameController = TextEditingController();
-  final officialPersonController = TextEditingController();
-  final officialPhoneController = TextEditingController();
+  final companyNameController = TextEditingController(text: "123");
+  final officialPersonController = TextEditingController(text: "123");
+  final officialPhoneController = TextEditingController(text: "123");
 
   final List<String> dropdownItems = [
     'Item1',
@@ -720,45 +720,74 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.w700,
                               color: AppTheme.white1),
                         ),
+                        // onPressed: () {
+                        //   // Navigator.push(
+                        //   //     context,
+                        //   //     MaterialPageRoute(
+                        //   //       builder: (context) => NavigationPage(),
+                        //   //     ));
+                        //
+                        //   if (
+                        //
+                        //       // formKey2.currentState!.validate()
+                        //
+                        //       true) {
+                        //     debugPrint("email: " + emailController1.text);
+                        //     debugPrint("password: " + passwordController1.text);
+                        //     debugPrint(
+                        //         "companyName: " + companyNameController.text);
+                        //     debugPrint("officialPerson: " +
+                        //         officialPersonController.text);
+                        //     debugPrint("officialPhone: " +
+                        //         officialPhoneController.text);
+                        //
+                        //     RegisterService()
+                        //         .registerCall(
+                        //             email: emailController1.text,
+                        //             password: passwordController1.text,
+                        //             companyName: companyNameController.text,
+                        //             officialPerson:
+                        //                 officialPersonController.text,
+                        //             officialPhone: officialPhoneController.text)
+                        //         .then((value) {
+                        //       if (value == true) {
+                        //         showAlertDialog(context);
+                        //
+                        //         return Navigator.push(
+                        //             context,
+                        //             MaterialPageRoute(
+                        //               builder: (context) => const LoginPage(),
+                        //             ));
+                        //       } else {
+                        //         showAlertDialog2(context);
+                        //       }
+                        //     });
+                        //   }
+                        // }
+
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => NavigationPage(),
-                          //     ));
+                          RegisterService()
+                              .registerCall(
+                            email: emailController1.text,
+                            password: passwordController1.text,
+                            companyName: companyNameController.text,
+                            officialPerson: officialPersonController.text,
+                            officialPhone: officialPhoneController.text,
+                            country: "Turkey",
+                          )
+                              .then((value) {
+                            if (value == true) {
+                              showAlertDialog(context);
 
-                          if (formKey2.currentState!.validate()) {
-                            debugPrint("email: " + emailController1.text);
-                            debugPrint("password: " + passwordController1.text);
-                            debugPrint(
-                                "companyName: " + companyNameController.text);
-                            debugPrint("officialPerson: " +
-                                officialPersonController.text);
-                            debugPrint("officialPhone: " +
-                                officialPhoneController.text);
-
-                            RegisterService()
-                                .registerCall(
-                                    email: emailController1.text,
-                                    password: passwordController1.text,
-                                    companyName: companyNameController.text,
-                                    officialPerson:
-                                        officialPersonController.text,
-                                    officialPhone: officialPhoneController.text)
-                                .then((value) {
-                              if (value == true) {
-                                showAlertDialog(context);
-
-                                return Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginPage(),
-                                    ));
-                              } else {
-                                showAlertDialog2(context);
-                              }
-                            });
-                          }
+                              return Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ));
+                            } else {
+                              showAlertDialog2(context);
+                            }
+                          });
                         }),
                   ),
                 ),

@@ -49,10 +49,10 @@ class MyApp extends StatelessWidget {
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      home: const SplashPage(),
+      // home: const SplashPage(),
       // home: NavigationPage(),
       // home: LoginPage(),
-      // home: RegisterPage(),
+      home: RegisterPage(),
       // home: LanguagePage(),
     );
   }

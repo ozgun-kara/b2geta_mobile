@@ -18,14 +18,14 @@ class RegisterService {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      // encoding: Encoding.getByName('utf-8'),
       body: {
-        "username": email,
-        "password": password,
-        "company_name": companyName,
-        "firstname": officialPerson,
-        "phone_number": officialPhone,
-        "country": country
+        "type": "company",
+        "email": "memo9921711@netteyim.net",
+        "password": "123456789",
+        "company_name": "Firma Adim",
+        // "firstname": officialPerson,
+        // "phone_number": officialPhone,
+        // "country": country
       },
     );
 
