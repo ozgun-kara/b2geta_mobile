@@ -38,14 +38,14 @@ class _RegisterPageState extends State<RegisterPage> {
   late double deviceHeight;
 
   @override
-  initState() {
+  void initState() {
     fetch();
 
     super.initState();
   }
 
   fetch() async {
-    dropdownItems = (await CountryService().getCountryList()).cast<String>();
+    dropdownItems = await CountryService().getCountryList();
   }
 
   @override
