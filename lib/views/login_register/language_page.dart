@@ -423,7 +423,8 @@ class _LanguagePageState extends State<LanguagePage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const LoginPage(),
+                                  builder: (context) =>
+                                      LoginPage(email: "", password: ""),
                                 ));
                           }),
                     ),

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 class LoginRegisterPageProvider with ChangeNotifier {
+  // LOGIN PAGE
   bool loginSwitch = false;
+
+  // REGISTER PAGE
   bool registerSwitch = false;
 
-  void updateloginSwitch(bool value) {
+  void updateLoginSwitch(bool value) {
     loginSwitch = value;
     notifyListeners();
   }
 
-  void updateregisterSwitch(bool value) {
+  void updateRegisterSwitch(bool value) {
     registerSwitch = value;
     notifyListeners();
   }

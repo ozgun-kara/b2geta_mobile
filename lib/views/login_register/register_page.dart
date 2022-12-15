@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:b2geta_mobile/models/login_register/country_model.dart';
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/login_register/country_service.dart';
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
@@ -753,12 +754,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 showAlertDialog(context);
 
                                 Timer(
-                                    const Duration(milliseconds: 2000),
+                                    const Duration(milliseconds: 1500),
                                     () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginPage(),
+                                          builder: (context) => LoginPage(
+                                              email: emailController1.text,
+                                              password:
+                                                  passwordController1.text),
                                         )));
                               } else {
                                 showAlertDialog2(context);

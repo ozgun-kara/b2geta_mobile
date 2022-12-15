@@ -10,7 +10,12 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  // const LoginPage({Key? key}) : super(key: key);
+
+  final String email;
+  final String password;
+
+  const LoginPage({super.key, required this.email, required this.password});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -18,12 +23,20 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final emailController1 = TextEditingController();
-  final passwordController1 = TextEditingController();
+  TextEditingController emailController1 = TextEditingController();
+  TextEditingController passwordController1 = TextEditingController();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  @override
+  void initState() {
+    emailController1.text = widget.email;
+    passwordController1.text = widget.password;
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -246,7 +259,7 @@ class _LoginPageState extends State<LoginPage> {
                               onToggle: (value) {
                                 Provider.of<LoginRegisterPageProvider>(context,
                                         listen: false)
-                                    .updateloginSwitch(value);
+                                    .updateLoginSwitch(value);
                               },
                             ),
                           ],
