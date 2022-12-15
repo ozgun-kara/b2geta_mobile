@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CountryService {
+  List<String> countries = [];
+
   Future<List<CountryModel>> getCountryList() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/countries'),

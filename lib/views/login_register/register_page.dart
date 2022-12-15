@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:b2geta_mobile/models/login_register/country_model.dart';
+import 'package:b2geta_mobile/services/login_register/country_service.dart';
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -28,16 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final officialPersonController = TextEditingController(text: "123");
   final officialPhoneController = TextEditingController(text: "123");
 
-  final List<String> dropdownItems = [
-    'Item1',
-    'Item2',
-    'Item3',
-    'Item4',
-    'Item5',
-    'Item6',
-    'Item7',
-    'Item8',
-  ];
+  List<String> dropdownItems = [];
   String? dropdownSelectedValue;
 
   late double deviceTopPadding;
@@ -45,11 +38,14 @@ class _RegisterPageState extends State<RegisterPage> {
   late double deviceHeight;
 
   @override
-  void initState() {
-
-
+  initState() {
+    fetch();
 
     super.initState();
+  }
+
+  fetch() async {
+    dropdownItems = (await CountryService().getCountryList()).cast<String>();
   }
 
   @override
