@@ -23,9 +23,9 @@ class RegisterService {
         "email": email,
         "password": password,
         "company_name": companyName,
-        // "firstname": officialPerson,
-        // "phone_number": officialPhone,
-        // "country": country
+        "firstname": officialPerson,
+        "phone_number": officialPhone,
+        "country": country
       },
     );
 

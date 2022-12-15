@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:b2geta_mobile/models/login_register/country_model.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/login_register/country_service.dart';
@@ -23,8 +22,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "v111@netteyim.net");
-  final emailController2 = TextEditingController(text: "v111@netteyim.net");
+  final emailController1 = TextEditingController(text: "r112@netteyim.net");
+  final emailController2 = TextEditingController(text: "r112@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "fghfhffhfh");
@@ -747,7 +746,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               companyName: companyNameController.text,
                               officialPerson: officialPersonController.text,
                               officialPhone: officialPhoneController.text,
-                              country: dropdownSelectedValue,
+                              country: dropdownSelectedValue ?? "",
                             )
                                 .then((value) {
                               if (value == true) {
