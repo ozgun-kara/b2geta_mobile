@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -18,7 +20,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "n13113@netteyim.net");
+  final emailController1 = TextEditingController(text: "n13111131@netteyim.net");
   final emailController2 = TextEditingController();
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController();
@@ -779,11 +781,13 @@ class _RegisterPageState extends State<RegisterPage> {
                             if (value == true) {
                               showAlertDialog(context);
 
-                              return Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const LoginPage(),
-                                  ));
+                              Timer(
+                                  const Duration(milliseconds: 2000),
+                                  () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const LoginPage(),
+                                      )));
                             } else {
                               showAlertDialog2(context);
                             }
