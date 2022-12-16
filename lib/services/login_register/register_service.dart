@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class RegisterService {
-  Future<bool> registerCall({
+  Future<String> registerCall({
     required String email,
     required String password,
     required String companyName,
@@ -43,21 +43,23 @@ class RegisterService {
         debugPrint("userId: ${result.userId}");
         debugPrint("verifyCode: ${result.verifyCode}");
 
-        return true;
+        return result.verifyCode.toString();
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return "error";
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+      return "error";
     }
   }
 
-  Future<bool> verifyCall(
-      {required String email, required String verifyCode}) async {
+  Future<bool> verifyCall({
+    required String email,
+    required String verifyCode,
+  }) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/member/verify'),
       headers: {
@@ -76,13 +78,6 @@ class RegisterService {
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
-        // var data = json.decode(response.body)["data"];
-        //
-        // var result = RegisterModel.fromJson(data);
-        //
-        // debugPrint("userId: ${result.userId}");
-        // debugPrint("verifyCode: ${result.verifyCode}");
-
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");

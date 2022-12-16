@@ -22,8 +22,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "r2117@netteyim.net");
-  final emailController2 = TextEditingController(text: "r2117@netteyim.net");
+  final emailController1 = TextEditingController(text: "r2118@netteyim.net");
+  final emailController2 = TextEditingController(text: "r2118@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "Company-1");
@@ -749,54 +749,41 @@ class _RegisterPageState extends State<RegisterPage> {
                               country: dropdownSelectedValue ?? "",
                             )
                                 .then((value) {
-                              if (value == true) {
-                                showAlertDialog(context);
+                              if (value != "error") {
+                                debugPrint("REGISTRATION SUCCESSFUL");
 
-                                Timer(
-                                    const Duration(milliseconds: 1500),
-                                    () => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => LoginPage(
-                                              email: emailController1.text,
-                                              password:
-                                                  passwordController1.text),
-                                        )));
+                                RegisterService()
+                                    .verifyCall(
+                                        email: emailController1.text,
+                                        verifyCode: value)
+                                    .then((value2) {
+                                  if (value2 == true) {
+                                    debugPrint("VERIFICATION SUCCESSFUL");
+
+                                    showAlertDialog(context);
+
+                                    Timer(
+                                        const Duration(milliseconds: 1500),
+                                        () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => LoginPage(
+                                                  email: emailController1.text,
+                                                  password:
+                                                      passwordController1.text),
+                                            )));
+                                  } else {
+                                    debugPrint("VERIFICATION FAILED");
+                                    showAlertDialog2(context);
+                                  }
+                                });
                               } else {
+                                debugPrint("REGISTRATION FAILED");
                                 showAlertDialog2(context);
                               }
                             });
                           }
-                        }
-
-                        // onPressed: () {
-                        //   RegisterService()
-                        //       .registerCall(
-                        //     email: emailController1.text,
-                        //     password: passwordController1.text,
-                        //     companyName: companyNameController.text,
-                        //     officialPerson: officialPersonController.text,
-                        //     officialPhone: officialPhoneController.text,
-                        //     country: "Turkey",
-                        //   )
-                        //       .then((value) {
-                        //     if (value == true) {
-                        //       showAlertDialog(context);
-                        //
-                        //       Timer(
-                        //           const Duration(milliseconds: 2000),
-                        //           () => Navigator.push(
-                        //               context,
-                        //               MaterialPageRoute(
-                        //                 builder: (context) => const LoginPage(),
-                        //               )));
-                        //     } else {
-                        //       showAlertDialog2(context);
-                        //     }
-                        //   });
-                        // }
-
-                        ),
+                        }),
                   ),
                 ),
               ],
