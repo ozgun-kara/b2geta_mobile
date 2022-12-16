@@ -23,6 +23,8 @@ class _NavigationPageState extends State<NavigationPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
+    var themeMode = Provider.of<ThemeProvider>(context).themeMode;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
@@ -96,7 +98,17 @@ class _NavigationPageState extends State<NavigationPage> {
                   height: 19,
                   color: AppTheme.white15,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  if (themeMode == "dark") {
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setLightMode();
+                    debugPrint('Light Theme Activated');
+                  } else {
+                    Provider.of<ThemeProvider>(context, listen: false)
+                        .setDarkMode();
+                    debugPrint('Dark Theme Activated');
+                  }
+                },
               ),
             ),
           ]),
