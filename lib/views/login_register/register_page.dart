@@ -4,7 +4,6 @@ import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/login_register/country_service.dart';
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
-import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';

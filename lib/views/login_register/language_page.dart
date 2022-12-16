@@ -390,20 +390,19 @@ class _LanguagePageState extends State<LanguagePage> {
                       height: 64,
                       decoration: BoxDecoration(
                           color: AppTheme.blue2,
-                          boxShadow: [
-                            BoxShadow(
-                                offset: Offset(0, -2),
-                                color: Color(0xFFFFFFFF).withOpacity(0.25),
-                                blurRadius: 2,
-                                spreadRadius: 0),
-                            BoxShadow(
-                                offset: Offset(0, 1),
-                                color: Color(0xFF000000).withOpacity(0.18),
-                                blurRadius: 2,
-                                spreadRadius: 0),
-                          ],
 
-                          // gradient:
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //       offset: Offset(0, -2),
+                          //       color: Color(0xFFFFFFFF).withOpacity(0.25),
+                          //       blurRadius: 2,
+                          //       spreadRadius: 0),
+                          //   BoxShadow(
+                          //       offset: Offset(0, 1),
+                          //       color: Color(0xFF000000).withOpacity(0.18),
+                          //       blurRadius: 2,
+                          //       spreadRadius: 0),
+                          // ],
 
                           borderRadius: BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
@@ -424,7 +423,7 @@ class _LanguagePageState extends State<LanguagePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      LoginPage(email: "", password: ""),
+                                      const LoginPage(email: "", password: ""),
                                 ));
                           }),
                     ),
