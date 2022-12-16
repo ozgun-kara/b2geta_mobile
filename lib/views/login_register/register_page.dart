@@ -22,12 +22,12 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "r212@netteyim.net");
-  final emailController2 = TextEditingController(text: "r212@netteyim.net");
+  final emailController1 = TextEditingController(text: "r2113@netteyim.net");
+  final emailController2 = TextEditingController(text: "r2113@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
-  final companyNameController = TextEditingController(text: "fghfhffhfh");
-  final officialPersonController = TextEditingController(text: "123");
+  final companyNameController = TextEditingController(text: "Company-1");
+  final officialPersonController = TextEditingController(text: "Person-1");
   final officialPhoneController = TextEditingController(text: "123");
 
   List<String> dropdownItems = [];
