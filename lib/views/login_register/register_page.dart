@@ -22,8 +22,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "r2113@netteyim.net");
-  final emailController2 = TextEditingController(text: "r2113@netteyim.net");
+  final emailController1 = TextEditingController(text: "r2117@netteyim.net");
+  final emailController2 = TextEditingController(text: "r2117@netteyim.net");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "Company-1");
