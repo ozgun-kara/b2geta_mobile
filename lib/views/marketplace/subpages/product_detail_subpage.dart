@@ -31,7 +31,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
     return Scaffold(
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
           ? AppTheme.white2
-          : AppTheme.black12,
+          : AppTheme.black7,
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 14),
@@ -406,6 +406,138 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                             ),
                                           ],
                                         ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         ButtonTheme(
                                           // minWidth: double.minPositive,
                                           height: 39,
@@ -481,39 +613,191 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                             ),
                                           ],
                                         ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Mağaza puanı",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            SizedBox(height: 2),
+                                            Text(
+                                              "9.2 / 10",
+                                              style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black2
+                                                        : AppTheme.white1,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                         ButtonTheme(
                                           // minWidth: double.minPositive,
                                           height: 39,
                                           child: MaterialButton(
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.white22
-                                                  : AppTheme.black18,
+                                              color: Colors.transparent,
                                               elevation: 0,
-                                              shape:
-                                                  const RoundedRectangleBorder(
+                                              shape: RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(5)),
+                                                side: BorderSide(
+                                                    width: 1,
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.blue2
+                                                            : AppTheme.blue5),
                                               ),
                                               padding: EdgeInsets.fromLTRB(
                                                   22, 0, 22, 0),
-                                              child: Text(
-                                                "Firma Profili",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
+                                              child: Row(
+                                                children: [
+                                                  Image.asset(
+                                                    'assets/icons/bag.png',
+                                                    width: 14,
+                                                    height: 14,
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.blue2
+                                                            : AppTheme.blue4,
+                                                  ),
+                                                  SizedBox(width: 6),
+                                                  Text(
+                                                    "Mağaza",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      color: Provider.of<ThemeProvider>(
                                                                       context)
                                                                   .themeMode ==
                                                               "light"
                                                           ? AppTheme.blue2
-                                                          : AppTheme.white1,
-                                                ),
+                                                          : AppTheme.blue4,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                               onPressed: () {}),
                                         ),
