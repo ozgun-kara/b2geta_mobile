@@ -69,142 +69,226 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    Row(
+                    Column(
                       children: [
-                        Text(
-                          "Teslimat süresi:",
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
+                        Row(
+                          children: [
+                            Text(
+                              "Teslimat süresi:",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
                                         "light"
                                     ? AppTheme.black2
                                     : AppTheme.white11,
-                          ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    Table(
-                      border: TableBorder.all(
-                          width: 1,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
+                        SizedBox(height: 8),
+                        Table(
+                          border: TableBorder.all(
+                              borderRadius: BorderRadius.circular(4),
+                              width: 1,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
                                       "light"
                                   ? AppTheme.white20
                                   : AppTheme.black17),
-                      children: [
-                        TableRow(children: [
-                          Text(
-                            "Adet",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "1-20",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "21-60",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "60+",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                        ]),
-                        TableRow(children: [
-                          Text(
-                            "Adet",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "1-20",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "21-60",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                          Text(
-                            "60+",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white15
-                                  : AppTheme.white11,
-                            ),
-                          ),
-                        ]),
+                          columnWidths: {
+                            0: FlexColumnWidth(7),
+                            1: FlexColumnWidth(5),
+                            2: FlexColumnWidth(6),
+                            3: FlexColumnWidth(18),
+                          },
+                          children: [
+                            TableRow(children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "Adet",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "1-20",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "21-60",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "60+",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                            ]),
+                            TableRow(children: [
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "Gün",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "15",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "20",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12),
+                                child: Text(
+                                  "Müzakere Edilecek",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white15
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ],
+                        ),
                       ],
-                    ),
+                    ), // DELIVERY TIME
+                    SizedBox(height: 11),
+                    Column(
+                      children: [
+                        Container(
+                          width: deviceWidth,
+                          height: 400,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            border: Border.all(
+                              width: 1,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white21
+                                  : AppTheme.black18,
+                            ),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                width: deviceWidth,
+                                height: 70,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white1
+                                    : AppTheme.black18,
+                                child: Center(
+                                  child: Text(
+                                    "Tedarikçi",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue2
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ), // SUPPLIER INFORMATION
                   ],
                 ),
               ),
