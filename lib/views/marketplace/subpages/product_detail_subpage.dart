@@ -246,7 +246,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                       children: [
                         Container(
                           width: deviceWidth,
-                          height: 400,
+                          height: 600,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
@@ -284,6 +284,85 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   ),
                                 ),
                               ),
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.white21
+                                      : AppTheme.black18),
+                              Column(
+                                children: [
+                                  SizedBox(height: 48),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "9,2",
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.white15,
+                                        ),
+                                      ),
+                                      SizedBox(width: 2),
+                                      Padding(
+                                        padding: EdgeInsets.only(bottom: 4),
+                                        child: Image.asset(
+                                          'assets/icons/star.png',
+                                          width: 15,
+                                          height: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 6),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "İteme İnşaat ve Tesisat",
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w700,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.black2
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                      Image.asset(
+                                        'assets/icons/check.png',
+                                        width: 23,
+                                        height: 23,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 4),
+                                  Text(
+                                    "İstanbul, Türkiye",
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15),
+                                  ),
+                                  SizedBox(height: 24),
+                                ],
+                              ),
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.white21
+                                      : AppTheme.black18),
                             ],
                           ),
                         ),
