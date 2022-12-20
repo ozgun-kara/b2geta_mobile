@@ -26,6 +26,7 @@ class LoginService {
       if (status == true) {
         var token = json.decode(response.body)["access_token"];
         debugPrint("TOKEN: " + token.toString());
+        Constants.userToken = token;
         saveToken(token);
         return true;
       } else {
