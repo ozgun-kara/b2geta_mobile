@@ -33,7 +33,7 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 200),
+              SizedBox(height: 100),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -78,6 +78,58 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                             debugPrint("COMPANY SUCCESSFULLY ADDED");
                           } else {
                             debugPrint("THE COMPANY HAS NOT ADDED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'UPDATE COMPANY',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .updateCompanyCall(
+                                id: 346,
+                                companyName: 'ABC Firma LTD updated',
+                                taxOffice: 'Beşiktaş',
+                                taxNumber: '1234567890',
+                                phoneNumber: '+905556667788',
+                                email: 'example@company.com',
+                                wantEmail: '1',
+                                country: 'TR',
+                                city: '34',
+                                district: '45',
+                                address: 'Mecidiyeköy mah abc sokak',
+                                postalCode: '34387',
+                                about: 'Firma hakkında bilgiler',
+                                languageCode: 'tr',
+                                countryCode: 'TR',
+                                timezone: '3')
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("COMPANY SUCCESSFULLY UPDATED");
+                          } else {
+                            debugPrint("THE COMPANY HAS NOT UPDATED");
                             showAlertDialog2(context);
                           }
                         });
