@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CompanyServices {
-
   // ADD COMPANY
-
   Future<bool> addCompanyCall({
     required String companyName,
     String? taxOffice,
