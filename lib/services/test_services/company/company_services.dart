@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/services/login_register/login_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CompanyServices {
+
   // ADD COMPANY
   Future<bool> addCompanyCall({
     required String companyName,
@@ -26,6 +28,7 @@ class CompanyServices {
       Uri.parse('${Constants.apiUrl}/company/add'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
       },
       body: {
         "company_name": companyName,
@@ -56,6 +59,10 @@ class CompanyServices {
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return false;
       }

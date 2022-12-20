@@ -56,28 +56,8 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        // debugPrint("email: " + emailController1.text);
-                        // debugPrint("password: " + passwordController1.text);
-                        // debugPrint(
-                        //     "companyName: " + companyNameController.text);
-                        // debugPrint("officialPerson: " +
-                        //     officialPersonController.text);
-                        // debugPrint(
-                        //     "officialPhone: " + officialPhoneController.text);
-                        // debugPrint(
-                        //     "country: " + dropdownSelectedValue.toString());
-
                         CompanyServices()
                             .addCompanyCall(
-                                // companyName: 'ABC Firma LTD',
-                                // taxNumber: '1234567890',
-                                // email: 'example@company.com',
-                                // wantEmail: '1',
-                                // city: '34',
-                                // district: '45',
-                                // about: 'Firma hakkında bilgiler',
-                                // timezone: '3'
-
                                 companyName: 'ABC Firma LTD',
                                 taxOffice: 'Beşiktaş',
                                 taxNumber: '1234567890',

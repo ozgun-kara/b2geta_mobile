@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_page.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
@@ -37,6 +38,7 @@ class _SplashPageState extends State<SplashPage> {
       }));
     } else {
       debugPrint("TOKEN AVAILABLE");
+      Constants.userToken = token;
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
         return const NavigationPage();
