@@ -136,6 +136,45 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                       }),
                 ),
               ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.black18,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'INVITE',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .inviteCall(
+                                companyId: 22,
+                                email: 'mehmetcan@yandex.com',
+                                userId: 57)
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("INVITED");
+                          } else {
+                            debugPrint("HAS NOT INVITED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
             ],
           ),
         ),
