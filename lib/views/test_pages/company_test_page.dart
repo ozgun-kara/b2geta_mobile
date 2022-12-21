@@ -175,6 +175,41 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                       }),
                 ),
               ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'LIST MY COMPANIES',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices().listMyCompaniesCall().then((value) {
+                          if (value == true) {
+                            debugPrint("MY COMPANIES HAS SUCCESSFULLY LISTED");
+                          } else {
+                            debugPrint("MY COMPANIES HAS NOT LISTED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
             ],
           ),
         ),
