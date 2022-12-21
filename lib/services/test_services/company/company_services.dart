@@ -216,4 +216,74 @@ class CompanyServices {
       return false;
     }
   }
+
+  // AWAIT COMPANY LIST
+  Future<bool> awaitCompanyListCall() async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/company/await_list'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
+
+  // INVITES
+  Future<bool> invitesCall({
+    required int companyId,
+  }) async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/company/invites/$companyId'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
 }

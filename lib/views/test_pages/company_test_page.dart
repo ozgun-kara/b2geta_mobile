@@ -210,6 +210,77 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                 ),
               ),
               SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'AWAIT COMPANY LIST',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices().awaitCompanyListCall().then((value) {
+                          if (value == true) {
+                            debugPrint(
+                                "AWAIT COMPANY LIST HAS SUCCESSFULLY CALLED");
+                          } else {
+                            debugPrint("AWAIT COMPANY LIST HAS NOT CALLED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.black18,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'INVITES',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .invitesCall(companyId: 56)
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("INVITES HAS SUCCESSFULLY LISTED");
+                          } else {
+                            debugPrint("INVITES HAS NOT LISTED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
             ],
           ),
         ),
