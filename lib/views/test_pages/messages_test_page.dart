@@ -1,18 +1,18 @@
-import 'package:b2geta_mobile/services/test_services/others/others_services.dart';
+import 'package:b2geta_mobile/services/test_services/messages/messages_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class OthersTestPage extends StatefulWidget {
-  const OthersTestPage({Key? key}) : super(key: key);
+class MessagesTestPage extends StatefulWidget {
+  const MessagesTestPage({Key? key}) : super(key: key);
 
   @override
-  State<OthersTestPage> createState() => _OthersTestPageState();
+  State<MessagesTestPage> createState() => _MessagesTestPageState();
 }
 
-class _OthersTestPageState extends State<OthersTestPage> {
+class _MessagesTestPageState extends State<MessagesTestPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -48,7 +48,7 @@ class _OthersTestPageState extends State<OthersTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'INDEX',
+                        'GET MESSAGES',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -56,149 +56,13 @@ class _OthersTestPageState extends State<OthersTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        OthersServices().indexCall().then((value) {
-                          if (value == true) {
-                            debugPrint("INDEX HAS SUCCESSFULLY CALLED");
-                          } else {
-                            debugPrint("INDEX HAS NOT CALLED");
-                            showAlertDialog2(context);
-                          }
-                        });
-                      }),
-                ),
-              ),
-              SizedBox(height: 16),
-              ButtonTheme(
-                minWidth: deviceWidth,
-                height: 52,
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                      color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
-                  child: MaterialButton(
-                      elevation: 0,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'LANGUAGES',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        OthersServices().languagesCall().then((value) {
-                          if (value == true) {
-                            debugPrint("LANGUAGES HAS SUCCESSFULLY CALLED");
-                          } else {
-                            debugPrint("LANGUAGES HAS NOT CALLED");
-                            showAlertDialog2(context);
-                          }
-                        });
-                      }),
-                ),
-              ),
-              SizedBox(height: 16),
-              ButtonTheme(
-                minWidth: deviceWidth,
-                height: 52,
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                      color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
-                  child: MaterialButton(
-                      elevation: 0,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'COUNTRIES',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        OthersServices().countriesCall().then((value) {
-                          if (value == true) {
-                            debugPrint("COUNTRIES HAS SUCCESSFULLY CALLED");
-                          } else {
-                            debugPrint("COUNTRIES HAS NOT CALLED");
-                            showAlertDialog2(context);
-                          }
-                        });
-                      }),
-                ),
-              ),
-              SizedBox(height: 16),
-              ButtonTheme(
-                minWidth: deviceWidth,
-                height: 52,
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                      color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
-                  child: MaterialButton(
-                      elevation: 0,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'BRANDS',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        OthersServices().brandsCall().then((value) {
-                          if (value == true) {
-                            debugPrint("BRANDS HAS SUCCESSFULLY CALLED");
-                          } else {
-                            debugPrint("BRANDS HAS NOT CALLED");
-                            showAlertDialog2(context);
-                          }
-                        });
-                      }),
-                ),
-              ),
-              SizedBox(height: 16),
-              ButtonTheme(
-                minWidth: deviceWidth,
-                height: 52,
-                child: Container(
-                  height: 52,
-                  decoration: BoxDecoration(
-                      color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
-                  child: MaterialButton(
-                      elevation: 0,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'CITIES',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        OthersServices()
-                            .citiesCall(country: 'TR')
+                        MessagesServices()
+                            .getMessagesCall(offset: '0', limit: '5')
                             .then((value) {
                           if (value == true) {
-                            debugPrint("CITIES HAS SUCCESSFULLY CALLED");
+                            debugPrint("MESSAGES HAS SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("CITIES HAS NOT CALLED");
+                            debugPrint("MESSAGES HAS NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
@@ -220,7 +84,7 @@ class _OthersTestPageState extends State<OthersTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'TOWN LIST',
+                        'SEND MESSAGE',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -228,13 +92,54 @@ class _OthersTestPageState extends State<OthersTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        OthersServices()
-                            .townListCall(city: '2182')
+                        MessagesServices()
+                            .sendMessageCall(
+                                toId: '97',
+                                message:
+                                    'Ek olarak kargo suresi hakkinda da bilgi verebilir misiniz?')
                             .then((value) {
                           if (value == true) {
-                            debugPrint("TOWN LIST HAS SUCCESSFULLY CALLED");
+                            debugPrint("MESSAGES HAS SUCCESSFULLY SENT");
                           } else {
-                            debugPrint("TOWN LIST HAS NOT CALLED");
+                            debugPrint("MESSAGES HAS NOT SENT");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'GET MESSAGE DETAIL',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        MessagesServices()
+                            .getMessageDetailCall(
+                                offset: '0', limit: '25', lastMessageId: '3')
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint(
+                                "MESSAGE DETAIL HAS SUCCESSFULLY FETCHED");
+                          } else {
+                            debugPrint("MESSAGE DETAIL HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
