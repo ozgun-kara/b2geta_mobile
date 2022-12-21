@@ -45,6 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   fetch() async {
     dropdownItems = await CountryService().getCountryList();
+    setState(() {});
   }
 
   @override
