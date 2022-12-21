@@ -323,6 +323,120 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                 ),
               ),
               SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.black18,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'REJECT INVITE',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .rejectInviteCall(
+                          companyId: "331",
+                        )
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("INVITED HAS SUCCESSFULLY REJECTED");
+                          } else {
+                            debugPrint("INVITED HAS NOT REJECTED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.black18,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'DELETE INVITE',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .deleteInviteCall(
+                          companyId: "331",
+                          userId: '',
+                          email: '',
+                        )
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("INVITED HAS SUCCESSFULLY DELETED");
+                          } else {
+                            debugPrint("INVITED HAS NOT DELETED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'CHANGE PROFILE ANOTHER COMPANY',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        CompanyServices()
+                            .changeProfileAnotherCompanyCall(userId: '331')
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("PROFILE HAS SUCCESSFULLY CHANGED");
+                          } else {
+                            debugPrint("PROFILE HAS NOT CHANGED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 60),
             ],
           ),
         ),

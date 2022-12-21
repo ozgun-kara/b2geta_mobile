@@ -325,4 +325,122 @@ class CompanyServices {
       return false;
     }
   }
+
+  // REJECT INVITE
+  Future<bool> rejectInviteCall({
+    required String companyId,
+  }) async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/company/reject_invite'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+      body: {
+        "company_id": companyId,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
+
+  // DELETE INVITE
+  Future<bool> deleteInviteCall({
+    required String companyId,
+    required String userId,
+    required String email,
+  }) async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/company/delete_invite'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+      body: {
+        "company_id": companyId,
+        "user_id": companyId,
+        "email": companyId,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
+
+  // CHANGE PROFILE ANOTHER COMPANY
+  Future<bool> changeProfileAnotherCompanyCall({
+    required String userId,
+  }) async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/member/change/$userId'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
 }
