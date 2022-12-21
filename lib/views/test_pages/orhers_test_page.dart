@@ -206,6 +206,42 @@ class _OthersTestPageState extends State<OthersTestPage> {
                 ),
               ),
               SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'TOWN LIST',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        OthersServices()
+                            .townListCall(city: '2182')
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("TOWN LIST HAS SUCCESSFULLY CALLED");
+                          } else {
+                            debugPrint("TOWN LIST HAS NOT CALLED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
               SizedBox(height: 60),
             ],
           ),
