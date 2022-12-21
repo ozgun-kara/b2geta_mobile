@@ -142,9 +142,9 @@ class CompanyServices {
 
   // INVITE
   Future<bool> inviteCall({
-    required int companyId,
+    required String companyId,
     required String email,
-    required int userId,
+    required String userId,
   }) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/invite'),

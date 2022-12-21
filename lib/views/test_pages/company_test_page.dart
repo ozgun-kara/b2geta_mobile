@@ -161,9 +161,13 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                       onPressed: () {
                         CompanyServices()
                             .inviteCall(
-                                companyId: 22,
-                                email: 'mehmetcan@yandex.com',
-                                userId: 57)
+                                // companyId: 22,
+                                //    email: 'mehmetcan@yandex.com',
+                                //    userId: 57
+
+                                companyId: "331",
+                                email: 'test016@gmail.com',
+                                userId: "58")
                             .then((value) {
                           if (value == true) {
                             debugPrint("INVITED");
