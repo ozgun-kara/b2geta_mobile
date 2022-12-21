@@ -3,15 +3,15 @@ import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:b2geta_mobile/views/test_pages/company_test_page.dart';
+import 'package:b2geta_mobile/views/test_pages/orhers_test_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationPageProvider with ChangeNotifier {
   int currentTabIndex = 0;
 
   final List pages = [
-
-    CompanyTestPage(),
-
+    // CompanyTestPage(),
+    OthersTestPage(),
 
     // HomePage(),
     MarketplacePage(),

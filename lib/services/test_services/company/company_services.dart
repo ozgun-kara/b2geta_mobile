@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/services/login_register/login_service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
