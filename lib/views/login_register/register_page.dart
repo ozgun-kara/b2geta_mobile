@@ -19,8 +19,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "test021@gmail.com");
-  final emailController2 = TextEditingController(text: "test021@gmail.com");
+  final emailController1 = TextEditingController(text: "newtest003@gmail.com");
+  final emailController2 = TextEditingController(text: "newtest003@gmail.com");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "Company-1");
@@ -33,7 +33,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    Provider.of<LoginRegisterPageProvider>(context, listen: false).fetch();
+    Provider.of<LoginRegisterPageProvider>(context, listen: false)
+        .fetchDropdownList();
 
     super.initState();
   }

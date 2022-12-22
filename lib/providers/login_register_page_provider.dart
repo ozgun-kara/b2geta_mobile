@@ -20,7 +20,7 @@ class LoginRegisterPageProvider with ChangeNotifier {
   }
 
   // REGISTER PAGE
-  fetch() async {
+  fetchDropdownList() async {
     dropdownItems = await CountryService().getCountryList();
     notifyListeners();
   }
