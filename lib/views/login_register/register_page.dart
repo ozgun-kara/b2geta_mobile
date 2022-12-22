@@ -29,23 +29,15 @@ class _RegisterPageState extends State<RegisterPage> {
   final officialPersonController = TextEditingController(text: "Person-1");
   final officialPhoneController = TextEditingController(text: "");
 
-  List<String> dropdownItems = [];
-  String? dropdownSelectedValue;
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
   @override
   void initState() {
-    fetch();
+    Provider.of<LoginRegisterPageProvider>(context, listen: false).fetch();
 
     super.initState();
-  }
-
-  fetch() async {
-    dropdownItems = await CountryService().getCountryList();
-    setState(() {});
   }
 
   @override
@@ -550,7 +542,8 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       overflow: TextOverflow.visible,
                     ),
-                    items: dropdownItems
+                    items: Provider.of<LoginRegisterPageProvider>(context)
+                        .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
                               value: item,
                               child: Center(
@@ -571,11 +564,13 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ))
                         .toList(),
-                    value: dropdownSelectedValue,
+                    value: Provider.of<LoginRegisterPageProvider>(context)
+                        .dropdownSelectedValue,
+
                     onChanged: (value) {
-                      setState(() {
-                        dropdownSelectedValue = value as String;
-                      });
+                      Provider.of<LoginRegisterPageProvider>(context,
+                              listen: false)
+                          .updateDropdownSelectedValue(value as String);
                     },
                     icon: Center(
                       child: Image.asset(
@@ -736,8 +731,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 officialPersonController.text);
                             debugPrint("officialPhone: " +
                                 officialPhoneController.text);
-                            debugPrint(
-                                "country: " + dropdownSelectedValue.toString());
+                            debugPrint("country: " +
+                                Provider.of<LoginRegisterPageProvider>(context,
+                                        listen: false)
+                                    .dropdownSelectedValue
+                                    .toString());
 
                             RegisterService()
                                 .registerCall(
@@ -746,7 +744,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               companyName: companyNameController.text,
                               officialPerson: officialPersonController.text,
                               officialPhone: officialPhoneController.text,
-                              country: dropdownSelectedValue ?? "",
+                              country: Provider.of<LoginRegisterPageProvider>(
+                                      context,
+                                      listen: false)
+                                  .dropdownSelectedValue
+                                  .toString(),
                             )
                                 .then((value) {
                               if (value != "error") {
