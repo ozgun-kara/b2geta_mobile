@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CountryService {
-  Future<List<String>> getCountryList() async {
+  Future<List<CountryModel>> getCountryList() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/countries'),
       headers: {
@@ -24,12 +24,18 @@ class CountryService {
         // return list.map((e) => CountryModel.fromJson(e)).toList();
 
         List<String> countries = [];
+        List<String> codes = [];
+
+        List<CountryModel> countriess = [];
 
         var list = json.decode(response.body)["data"];
         for (var element in list) {
-          countries.add(element["name"]);
+          // countries.add(element["name"]);
+          // codes.add(element["code"]);
+
+          countriess.add(CountryModel.fromJson(element));
         }
-        return countries;
+        return countriess;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");

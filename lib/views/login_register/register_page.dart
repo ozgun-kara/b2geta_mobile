@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:b2geta_mobile/models/login_register/country_model.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/services/login_register/country_service.dart';
 import 'package:b2geta_mobile/services/login_register/register_service.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +19,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  final emailController1 = TextEditingController(text: "test002@gmail.com");
-  final emailController2 = TextEditingController(text: "test002@gmail.com");
+  final emailController1 = TextEditingController(text: "test021@gmail.com");
+  final emailController2 = TextEditingController(text: "test021@gmail.com");
   final passwordController1 = TextEditingController(text: "12345678");
   final passwordController2 = TextEditingController(text: "12345678");
   final companyNameController = TextEditingController(text: "Company-1");
@@ -545,10 +543,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     items: Provider.of<LoginRegisterPageProvider>(context)
                         .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
-                              value: item,
+                              value: item.code,
                               child: Center(
                                 child: Text(
-                                  item,
+                                  item.name ?? '',
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
