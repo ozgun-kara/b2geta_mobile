@@ -85,7 +85,7 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'SEND MESSAGE',
+                        'CATEGORIES NESTED',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -93,16 +93,14 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices()
-                            .sendMessageCall(
-                                toId: '97',
-                                message:
-                                    'Ek olarak kargo suresi hakkinda da bilgi verebilir misiniz?')
+                        CategoriesServices()
+                            .categoriesNestedCall()
                             .then((value) {
                           if (value == true) {
-                            debugPrint("MESSAGES HAS SUCCESSFULLY SENT");
+                            debugPrint(
+                                "CATEGORIES NESTED HAS SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("MESSAGES HAS NOT SENT");
+                            debugPrint("CATEGORIES NESTED HAS NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
