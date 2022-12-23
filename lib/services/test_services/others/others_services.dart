@@ -15,7 +15,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -48,7 +50,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -81,7 +85,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -114,7 +120,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -151,7 +159,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -188,7 +198,9 @@ class OthersServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 

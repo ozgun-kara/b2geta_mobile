@@ -14,10 +14,10 @@ class NavigationPageProvider with ChangeNotifier {
 
   final List pages = [
     // CompanyTestPage(),
-    // OthersTestPage(),
+    OthersTestPage(),
     // MessagesTestPage(),
     // CategoriesTestPage(),
-    ProductsTestPage(),
+    // ProductsTestPage(),
 
 
     // HomePage(),
