@@ -57,9 +57,9 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        CategoriesServices()
-                            .categoriesCall(parentId: '764')
-                            .then((value) {
+                        CategoriesServices().categoriesCall(
+                          queryParameters: {"parent_id": '764'},
+                        ).then((value) {
                           if (value == true) {
                             debugPrint("CATEGORIES HAS SUCCESSFULLY FETCHED");
                           } else {

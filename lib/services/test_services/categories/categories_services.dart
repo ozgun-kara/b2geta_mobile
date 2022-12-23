@@ -6,12 +6,11 @@ import 'package:http/http.dart' as http;
 class CategoriesServices {
   // CATEGORIES
   Future<bool> categoriesCall({
-    required String parentId,
+    required Map<String, String> queryParameters,
   }) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/categories').replace(queryParameters: {
-        'parent_id': parentId,
-      }),
+      Uri.parse('${Constants.apiUrl}/categories')
+          .replace(queryParameters: queryParameters),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
