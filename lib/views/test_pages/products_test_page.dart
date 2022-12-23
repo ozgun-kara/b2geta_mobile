@@ -98,7 +98,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'CATEGORIES NESTED',
+                        'GET PRODUCTS',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -106,14 +106,15 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        CategoriesServices()
-                            .categoriesNestedCall(language: 'tr')
-                            .then((value) {
+                        ProductsServices().getProductsCall(
+                            productId: '3361',
+                            queryParameters: {
+                              "stock": '1',
+                            }).then((value) {
                           if (value == true) {
-                            debugPrint(
-                                "CATEGORIES NESTED HAS SUCCESSFULLY FETCHED");
+                            debugPrint("PRODUCTS HAVE SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("CATEGORIES NESTED HAS NOT FETCHED");
+                            debugPrint("PRODUCTS HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
@@ -135,7 +136,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'CATEGORY FEATURES',
+                        'PRODUCTS LIST AND SEARCH',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -143,16 +144,26 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        CategoriesServices().categoryFeaturesCall(
-                            queryParameters: {
-                              "category_id[]": '780',
-                              "category_id[]": '781'
-                            }).then((value) {
+                        ProductsServices()
+                            .productsListAndSearchCall(queryParameters: {
+                          "cid[]": '1',
+                          "cid[]": '2',
+                          "keyword": 'etek',
+                          "f[1]": '5656',
+                          "price[min]": '5',
+                          "price[max]": '15',
+                          "sort": 'price_up',
+                          "sort_method": 'asc',
+                          "stock": '1',
+                          "offset": '0',
+                          "limit": '1',
+                        }).then((value) {
                           if (value == true) {
                             debugPrint(
-                                "CATEGORY FEATURES HAVE SUCCESSFULLY FETCHED");
+                                "PRODUCTS LIST AND SEARCH HAVE SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("CATEGORY FEATURES HAVE NOT FETCHED");
+                            debugPrint(
+                                "PRODUCTS LIST AND SEARCH HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
