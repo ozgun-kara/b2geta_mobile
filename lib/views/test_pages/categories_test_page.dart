@@ -1,5 +1,4 @@
 import 'package:b2geta_mobile/services/test_services/categories/categories_services.dart';
-import 'package:b2geta_mobile/services/test_services/messages/messages_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -58,9 +57,8 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                       ),
                       onPressed: () {
                         CategoriesServices().categoriesCall(
-                          queryParameters: {"parent_id": '764'},
-                          language: 'tr'
-                        ).then((value) {
+                            queryParameters: {"parent_id": '764'},
+                            language: 'tr').then((value) {
                           if (value == true) {
                             debugPrint("CATEGORIES HAS SUCCESSFULLY FETCHED");
                           } else {
@@ -95,7 +93,7 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                       ),
                       onPressed: () {
                         CategoriesServices()
-                            .categoriesNestedCall()
+                            .categoriesNestedCall(language: 'tr')
                             .then((value) {
                           if (value == true) {
                             debugPrint(
@@ -123,7 +121,7 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'GET MESSAGE DETAIL',
+                        'CATEGORY FEATURES',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -131,15 +129,16 @@ class _CategoriesTestPageState extends State<CategoriesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices()
-                            .getMessageDetailCall(
-                                offset: '0', limit: '25', lastMessageId: '3')
-                            .then((value) {
+                        CategoriesServices().categoryFeaturesCall(
+                            queryParameters: {
+                              "category_id[]": '780',
+                              "category_id[]": '781'
+                            }).then((value) {
                           if (value == true) {
                             debugPrint(
-                                "MESSAGE DETAIL HAS SUCCESSFULLY FETCHED");
+                                "CATEGORY FEATURES HAVE SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("MESSAGE DETAIL HAVE NOT FETCHED");
+                            debugPrint("CATEGORY FEATURES HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
