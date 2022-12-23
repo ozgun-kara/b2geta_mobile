@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/services/test_services/categories/categories_services.dart';
+import 'package:b2geta_mobile/services/test_services/products/products_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +49,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'CATEGORIES',
+                        'PRODUCTS LIST AND SEARCH',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -56,13 +57,26 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        CategoriesServices().categoriesCall(
-                            queryParameters: {"parent_id": '764'},
-                            language: 'tr').then((value) {
+                        ProductsServices()
+                            .productsListAndSearchCall(queryParameters: {
+                          "cid[]": '1',
+                          "cid[]": '2',
+                          "keyword": 'etek',
+                          "f[1]": '5656',
+                          "price[min]": '5',
+                          "price[max]": '15',
+                          "sort": 'price_up',
+                          "sort_method": 'asc',
+                          "stock": '1',
+                          "offset": '0',
+                          "limit": '1',
+                        }).then((value) {
                           if (value == true) {
-                            debugPrint("CATEGORIES HAS SUCCESSFULLY FETCHED");
+                            debugPrint(
+                                "PRODUCTS LIST AND SEARCH HAVE SUCCESSFULLY FETCHED");
                           } else {
-                            debugPrint("CATEGORIES HAS NOT FETCHED");
+                            debugPrint(
+                                "PRODUCTS LIST AND SEARCH HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
