@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/views/test_pages/categories_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/company_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/messages_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/orhers_test_page.dart';
+import 'package:b2geta_mobile/views/test_pages/products_test_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationPageProvider with ChangeNotifier {
@@ -15,8 +16,8 @@ class NavigationPageProvider with ChangeNotifier {
     // CompanyTestPage(),
     // OthersTestPage(),
     // MessagesTestPage(),
-    CategoriesTestPage(),
-
+    // CategoriesTestPage(),
+    ProductsTestPage(),
 
 
     // HomePage(),
