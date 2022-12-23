@@ -5,20 +5,22 @@ import 'package:http/http.dart' as http;
 
 class CategoriesServices {
   // CATEGORIES
-  Future<bool> categoriesCall({
-    required Map<String, String> queryParameters,
-  }) async {
+  Future<bool> categoriesCall(
+      {required Map<String, String> queryParameters,
+      required String language}) async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/categories')
           .replace(queryParameters: queryParameters),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Accept-Language": language,
       },
     );
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
