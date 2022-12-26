@@ -1,5 +1,4 @@
 import 'package:b2geta_mobile/services/test_services/follow_services/follow_services.dart';
-import 'package:b2geta_mobile/services/test_services/messages/messages_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -85,7 +84,7 @@ class _FollowServicesTestPageState extends State<FollowServicesTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'SEND MESSAGE',
+                        'UNFOLLOW',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -93,16 +92,53 @@ class _FollowServicesTestPageState extends State<FollowServicesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices()
-                            .sendMessageCall(
-                                toId: '97',
-                                message:
-                                    'Ek olarak kargo suresi hakkinda da bilgi verebilir misiniz?')
+                        FollowServices()
+                            .unfollowCall(userId: '100')
                             .then((value) {
                           if (value == true) {
-                            debugPrint("MESSAGES HAS SUCCESSFULLY SENT");
+                            debugPrint("SUCCESSFULLY UNFOLLOWED");
                           } else {
-                            debugPrint("MESSAGES HAS NOT SENT");
+                            debugPrint("UNFOLLOW OPERATION FAILED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.black18,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'MY FOLLOWERS',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        FollowServices().myFollowersCall(
+                            userId: '100',
+                            queryParameters: {
+                              "offset": '5',
+                              "limit": '5'
+                            }).then((value) {
+                          if (value == true) {
+                            debugPrint(
+                                "MY FOLLOWERS HAVE SUCCESSFULLY FETCHED");
+                          } else {
+                            debugPrint("MY FOLLOWERS HAVE NOT FETCHED");
                             showAlertDialog2(context);
                           }
                         });
@@ -124,7 +160,7 @@ class _FollowServicesTestPageState extends State<FollowServicesTestPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'GET MESSAGE DETAIL',
+                        'FOLLOWED ME',
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -132,18 +168,17 @@ class _FollowServicesTestPageState extends State<FollowServicesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices().getMessageDetailCall(
-                          queryParameters: {
-                            "offset": '0',
-                            "limit": '25',
-                            "lastMessageId": '3'
-                          },
-                        ).then((value) {
+                        FollowServices().followedMeCall(
+                            userId: '100',
+                            queryParameters: {
+                              "offset": '5',
+                              "limit": '5'
+                            }).then((value) {
                           if (value == true) {
                             debugPrint(
-                                "MESSAGE DETAIL HAS SUCCESSFULLY FETCHED");
+                                "FOLLOWED ME OPERATION HAS SUCCESSFULLY DONE");
                           } else {
-                            debugPrint("MESSAGE DETAIL HAVE NOT FETCHED");
+                            debugPrint("FOLLOWED ME OPERATION FAILED");
                             showAlertDialog2(context);
                           }
                         });
