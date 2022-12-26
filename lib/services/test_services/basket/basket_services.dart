@@ -122,4 +122,76 @@ class BasketServices {
       return false;
     }
   }
+
+  // DELETE A PRODUCT IN BASKET
+  Future<bool> deleteProductInBasketCall({
+    required String param1,
+  }) async {
+    final response = await http
+        .delete(Uri.parse('${Constants.apiUrl}/basket/$param1'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+    });
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
+      return false;
+    }
+  }
+
+  // EMPTY BASKET
+  Future<bool> emptyBasketCall() async {
+    final response = await http
+        .delete(Uri.parse('${Constants.apiUrl}/basket/empty'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+    });
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
+      return false;
+    }
+  }
 }
