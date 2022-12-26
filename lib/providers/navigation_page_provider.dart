@@ -15,13 +15,13 @@ class NavigationPageProvider with ChangeNotifier {
   int currentTabIndex = 0;
 
   final List pages = [
-    // CompanyTestPage(),
-    // OthersTestPage(),
+    // ProductsTestPage(),
+    // BasketTestPage(),
+    CompanyTestPage(),
+    // FollowServicesTestPage(),
     // MessagesTestPage(),
     // CategoriesTestPage(),
-    // ProductsTestPage(),
-    // FollowServicesTestPage(),
-    BasketTestPage(),
+    // OthersTestPage(),
 
     // HomePage(),
     MarketplacePage(),
