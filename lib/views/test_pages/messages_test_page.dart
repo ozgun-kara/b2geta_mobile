@@ -56,9 +56,10 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices()
-                            .getMessagesCall(offset: '0', limit: '5')
-                            .then((value) {
+                        MessagesServices().getMessagesCall(queryParameters: {
+                          "offset": '0',
+                          "limit": '5'
+                        }).then((value) {
                           if (value == true) {
                             debugPrint("MESSAGES HAS SUCCESSFULLY FETCHED");
                           } else {
@@ -131,10 +132,13 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
-                        MessagesServices()
-                            .getMessageDetailCall(
-                                offset: '0', limit: '25', lastMessageId: '3')
-                            .then((value) {
+                        MessagesServices().getMessageDetailCall(
+                          queryParameters: {
+                            "offset": '0',
+                            "limit": '25',
+                            "lastMessageId": '3'
+                          },
+                        ).then((value) {
                           if (value == true) {
                             debugPrint(
                                 "MESSAGE DETAIL HAS SUCCESSFULLY FETCHED");

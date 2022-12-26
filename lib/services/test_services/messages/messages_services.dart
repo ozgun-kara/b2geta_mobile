@@ -6,14 +6,11 @@ import 'package:http/http.dart' as http;
 class MessagesServices {
   // GET MESSAGES
   Future<bool> getMessagesCall({
-    required String offset,
-    required String limit,
+    required Map<String, String> queryParameters,
   }) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/messages').replace(queryParameters: {
-        'offset': offset,
-        'limit': limit,
-      }),
+      Uri.parse('${Constants.apiUrl}/messages')
+          .replace(queryParameters: queryParameters),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
@@ -22,7 +19,9 @@ class MessagesServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -60,7 +59,9 @@ class MessagesServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 
@@ -84,16 +85,11 @@ class MessagesServices {
 
   // GET MESSAGE DETAIL
   Future<bool> getMessageDetailCall({
-    required String offset,
-    required String limit,
-    required String lastMessageId,
+    required Map<String, String> queryParameters,
   }) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/messages').replace(queryParameters: {
-        'offset': offset,
-        'limit': limit,
-        'last_message_id': lastMessageId,
-      }),
+      Uri.parse('${Constants.apiUrl}/messages')
+          .replace(queryParameters: queryParameters),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
@@ -102,7 +98,9 @@ class MessagesServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: ${response.body}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 

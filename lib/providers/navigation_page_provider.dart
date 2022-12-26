@@ -15,8 +15,8 @@ class NavigationPageProvider with ChangeNotifier {
   final List pages = [
     // CompanyTestPage(),
     // OthersTestPage(),
-    // MessagesTestPage(),
-    CategoriesTestPage(),
+    MessagesTestPage(),
+    // CategoriesTestPage(),
     // ProductsTestPage(),
 
 
