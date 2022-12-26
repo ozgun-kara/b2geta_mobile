@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:b2geta_mobile/views/test_pages/categories_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/company_test_page.dart';
+import 'package:b2geta_mobile/views/test_pages/follow_services_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/messages_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/orhers_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/products_test_page.dart';
@@ -15,10 +16,10 @@ class NavigationPageProvider with ChangeNotifier {
   final List pages = [
     // CompanyTestPage(),
     // OthersTestPage(),
-    MessagesTestPage(),
+    // MessagesTestPage(),
     // CategoriesTestPage(),
     // ProductsTestPage(),
-
+    FollowServicesTestPage(),
 
     // HomePage(),
     MarketplacePage(),
