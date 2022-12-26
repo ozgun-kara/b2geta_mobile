@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/views/test_pages/basket_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/categories_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/company_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/follow_services_test_page.dart';
+import 'package:b2geta_mobile/views/test_pages/member_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/messages_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/orhers_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/products_test_page.dart';
@@ -15,9 +16,10 @@ class NavigationPageProvider with ChangeNotifier {
   int currentTabIndex = 0;
 
   final List pages = [
+    MemberTestPage(),
     // ProductsTestPage(),
     // BasketTestPage(),
-    CompanyTestPage(),
+    // CompanyTestPage(),
     // FollowServicesTestPage(),
     // MessagesTestPage(),
     // CategoriesTestPage(),
