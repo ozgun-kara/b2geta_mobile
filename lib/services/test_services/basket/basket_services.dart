@@ -40,12 +40,54 @@ class BasketServices {
   }
 
   // ADD A PRODUCT
-  Future<bool> addAProductCall({
+  Future<bool> addProductCall({
     required String productId,
     required String quantity,
   }) async {
     final response =
         await http.post(Uri.parse('${Constants.apiUrl}/basket/add'), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer ${Constants.userToken}",
+    }, body: {
+      "product_id": productId,
+      "quantity": quantity
+    });
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
+      return false;
+    }
+  }
+
+  // UPDATE A PRODUCT IN BASKET
+  Future<bool> updateProductInBasketCall({
+    required String productId,
+    required String quantity,
+  }) async {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/basket/update'), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
     }, body: {

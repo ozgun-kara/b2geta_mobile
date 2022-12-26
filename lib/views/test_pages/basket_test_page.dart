@@ -93,12 +93,50 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       ),
                       onPressed: () {
                         BasketServices()
-                            .addAProductCall(productId: '3440', quantity: '1')
+                            .addProductCall(productId: '3440', quantity: '1')
                             .then((value) {
                           if (value == true) {
                             debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
                           } else {
                             debugPrint("PRODUCT HAS NOT ADDED");
+                            showAlertDialog2(context);
+                          }
+                        });
+                      }),
+                ),
+              ),
+              SizedBox(height: 16),
+              ButtonTheme(
+                minWidth: deviceWidth,
+                height: 52,
+                child: Container(
+                  height: 52,
+                  decoration: BoxDecoration(
+                      color: AppTheme.green1,
+                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                  child: MaterialButton(
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(16)),
+                      ),
+                      child: Text(
+                        'UPDATE A PRODUCT IN BASKET',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1),
+                      ),
+                      onPressed: () {
+                        BasketServices()
+                            .updateProductInBasketCall(
+                                productId: '3440', quantity: '5')
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint(
+                                "PRODUCT HAS SUCCESSFULLY UPDATED IN BASKET");
+                          } else {
+                            debugPrint("PRODUCT HAS NOT UPDATED");
                             showAlertDialog2(context);
                           }
                         });
