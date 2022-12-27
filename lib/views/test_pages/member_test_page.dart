@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/test_services/member/addresses/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/test_services/member/interested/member_interested_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -106,6 +107,88 @@ class _MemberTestPageState extends State<MemberTestPage> {
                               } else {
                                 debugPrint(
                                     "INTERESTED CATEGORIES HAVE NOT SAVED");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    width: deviceWidth,
+                    height: 4,
+                    color: AppTheme.white14,
+                  ),
+                  SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'GET ALL',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberAddressesServices().getAllCall(
+                                queryParameters: {
+                                  "offset": '2',
+                                  "limit": '10'
+                                }).then((value) {
+                              if (value == true) {
+                                debugPrint(
+                                    "GET ALL OPERATION HAS SUCCESSFULLY DONE");
+                              } else {
+                                debugPrint("GET ALL OPERATION HAS NOT DONE");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'GET',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberAddressesServices()
+                                .getCall(id: '38')
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint(
+                                    "GET OPERATION HAS SUCCESSFULLY DONE");
+                              } else {
+                                debugPrint("GET OPERATION HAS NOT DONE");
                                 showAlertDialog2(context);
                               }
                             });
