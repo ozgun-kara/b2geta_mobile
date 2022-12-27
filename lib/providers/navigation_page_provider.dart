@@ -19,7 +19,7 @@ class NavigationPageProvider with ChangeNotifier {
     MemberTestPage(),
     // ProductsTestPage(),
     // BasketTestPage(),
-    // CompanyTestPage(),
+    CompanyTestPage(),
     // FollowServicesTestPage(),
     // MessagesTestPage(),
     // CategoriesTestPage(),

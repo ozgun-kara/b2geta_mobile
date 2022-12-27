@@ -4,22 +4,22 @@ import 'package:flutter/material.dart';
 
 class LoginRegisterPageProvider with ChangeNotifier {
   // LOGIN PAGE
+
   bool loginSwitch = false;
 
-  // REGISTER PAGE
-  List<CountryModel> dropdownItems = [];
-  String? dropdownSelectedValue;
-  bool registerSwitch = false;
-
-////////////////////////////////////////////////
-
-  // LOGIN PAGE
   void updateLoginSwitch(bool value) {
     loginSwitch = value;
     notifyListeners();
   }
 
+////////////////////////////////////////////////
+
   // REGISTER PAGE
+
+  List<CountryModel> dropdownItems = [];
+  String? dropdownSelectedValue;
+  bool registerSwitch = false;
+
   fetchDropdownList() async {
     dropdownItems = await CountryService().getCountryList();
     notifyListeners();
