@@ -1,6 +1,5 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/test_services/member/interested/member_interested_services.dart';
-import 'package:b2geta_mobile/services/test_services/messages/messages_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -75,6 +74,44 @@ class _MemberTestPageState extends State<MemberTestPage> {
                     ),
                   ),
                   SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'INTERESTED CATEGORIES SAVE',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberInterestedServices()
+                                .interestedCategoriesSaveCall(
+                                    language: 'tr', param1: '1', param2: '2')
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint(
+                                    "INTERESTED CATEGORIES HAVE SUCCESSFULLY SAVED");
+                              } else {
+                                debugPrint(
+                                    "INTERESTED CATEGORIES HAVE NOT SAVED");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
                 ],
               ),
             ),
