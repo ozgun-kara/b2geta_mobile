@@ -182,7 +182,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           ),
                           onPressed: () {
                             MemberAddressesServices()
-                                .getCall(id: '38')
+                                .getCall(id: '56')
                                 .then((value) {
                               if (value == true) {
                                 debugPrint(
@@ -238,6 +238,93 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
+                  SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'UPDATE AN ADDRESS',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberAddressesServices()
+                                .updateAddressCall(
+                              id: '53',
+                              name: 'Ev Adresim edit',
+                              country: 'TR',
+                              city: '2170',
+                              district: '108963',
+                              address: 'Kuştepe Mah. Tan Sokak edit',
+                              postalCode: '34000',
+                            )
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint("ADDRESS HAS SUCCESSFULLY UPDATED");
+                              } else {
+                                debugPrint("ADDRESS HAS NOT UPDATED");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'DELETE AN ADDRESS',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberAddressesServices()
+                                .deleteAddressCall(id: '53')
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint("ADDRESS HAS SUCCESSFULLY DELETED");
+                              } else {
+                                debugPrint("ADDRESS HAS NOT DELETED");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Container(
+                    width: deviceWidth,
+                    height: 4,
+                    color: AppTheme.white14,
+                  ),
+                  SizedBox(height: 16),
                 ],
               ),
             ),
