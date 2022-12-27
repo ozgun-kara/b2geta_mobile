@@ -195,6 +195,49 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
+                  SizedBox(height: 16),
+                  ButtonTheme(
+                    minWidth: deviceWidth,
+                    height: 52,
+                    child: Container(
+                      height: 52,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'ADD AN ADDRESS',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            MemberAddressesServices()
+                                .addAddressCall(
+                              name: 'Ev Adresim',
+                              country: 'TR',
+                              city: '2170',
+                              district: '108963',
+                              address: 'Kuştepe Mah. Tan Sokak',
+                              postalCode: '34000',
+                            )
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint("ADDRESS HAS SUCCESSFULLY ADDED");
+                              } else {
+                                debugPrint("ADDRESS HAS NOT ADDED");
+                                showAlertDialog2(context);
+                              }
+                            });
+                          }),
+                    ),
+                  ),
                 ],
               ),
             ),
