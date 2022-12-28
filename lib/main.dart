@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_languages.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -15,6 +16,7 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await GetStorage.init();
+  setupLocator();
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider<ThemeProvider>(
