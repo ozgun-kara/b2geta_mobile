@@ -163,7 +163,7 @@ class GeneralService {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE DATA: $responseBody");
+      debugPrint("RESPONSE BODY: $responseBody");
 
       var status = responseBody["status"];
 
