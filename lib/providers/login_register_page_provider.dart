@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/login_register/country_model.dart';
 import 'package:b2geta_mobile/services/login_register/country_service.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class LoginRegisterPageProvider with ChangeNotifier {
   bool registerSwitch = false;
 
   fetchDropdownList() async {
-    dropdownItems = await CountryService().getCountryList();
+    dropdownItems = await locator.get<CountryService>().getCountryList();
     notifyListeners();
   }
 
