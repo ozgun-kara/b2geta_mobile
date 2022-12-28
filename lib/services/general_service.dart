@@ -157,31 +157,26 @@ class GeneralService {
 
   Future<List<CountryModel>> countriesCall() async {
     final response = await http.get(Uri.parse('${Constants.apiUrl}/countries'));
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
     List<CountryModel> countries = [];
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: $responseBody");
 
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
-
-      var status = json.decode(response.body)["status"];
+      var status = responseBody["status"];
 
       if (status == true) {
-        var data = jsonDecode(utf8.decode(response.bodyBytes))["data"];
-
+        var data = responseBody["data"];
         for (var element in data) {
-          // countries.add(element["name"]);
           countries.add(CountryModel.fromJson(element));
         }
         return countries;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return countries;
       }
