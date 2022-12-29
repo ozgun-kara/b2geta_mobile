@@ -1,6 +1,7 @@
 import 'dart:async';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/services/login_register/register_service.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -736,7 +737,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     .dropdownSelectedValue
                                     .toString());
 
-                            RegisterService()
+                            locator<MemberServices>()
                                 .registerCall(
                               email: emailController1.text,
                               password: passwordController1.text,
@@ -753,7 +754,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               if (value != "error") {
                                 debugPrint("REGISTRATION SUCCESSFUL");
 
-                                RegisterService()
+                                locator<MemberServices>()
                                     .verifyCall(
                                         email: emailController1.text,
                                         verifyCode: value)

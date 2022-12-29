@@ -1,5 +1,6 @@
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/services/login_register/login_service.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
@@ -337,7 +338,7 @@ class _LoginPageState extends State<LoginPage> {
                                     debugPrint("password: " +
                                         passwordController1.text);
 
-                                    LoginService()
+                                    locator<MemberServices>()
                                         .loginCall(
                                             email: emailController1.text,
                                             password: passwordController1.text)

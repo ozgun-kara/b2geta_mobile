@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/test_services/member/addresses/member_addresses_services.dart';
-import 'package:b2geta_mobile/services/test_services/member/interested/member_interested_services.dart';
+import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/interested/member_interested_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
