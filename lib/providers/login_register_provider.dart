@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class LoginRegisterProvider with ChangeNotifier {
   // LOGIN PAGE
-
   bool loginSwitch = false;
 
   void updateLoginSwitch(bool value) {
@@ -16,7 +15,6 @@ class LoginRegisterProvider with ChangeNotifier {
 ////////////////////////////////////////////////
 
   // REGISTER PAGE
-
   List<CountryModel> dropdownItems = [];
   String? dropdownSelectedValue;
   bool registerSwitch = false;
