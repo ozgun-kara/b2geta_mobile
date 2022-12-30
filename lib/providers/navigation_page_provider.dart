@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/views/homepage/home_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/shopping_summary_subpage.dart';
 import 'package:b2geta_mobile/views/test_pages/basket_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/categories_test_page.dart';
 import 'package:b2geta_mobile/views/test_pages/company_test_page.dart';
@@ -27,7 +28,7 @@ class NavigationPageProvider with ChangeNotifier {
 
     // HomePage(),
     MarketplacePage(),
-    RegisterPage(),
+    ShoppingSummarySubpage(),
     ProductDetailSubpage(),
   ];
 
