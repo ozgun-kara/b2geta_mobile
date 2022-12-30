@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_page.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +18,6 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   @override
-
   void initState() {
     //  THIS FUNCTION MAKES THE SPLASH SCREEN APPEAR FOR AT LEAST 1.5 SECONDS.
     Timer(const Duration(milliseconds: 1500), () => checkToken());
@@ -40,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
     } else {
       debugPrint("TOKEN AVAILABLE");
       Constants.userToken = token;
-      debugPrint("TOKEN:" + Constants.userToken.toString());
+      debugPrint("TOKEN:${Constants.userToken}");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
         return const NavigationPage();
@@ -89,38 +87,6 @@ class _SplashPageState extends State<SplashPage> {
                       height: 27.35,
                     ),
             ),
-            // Column(
-            //   children: [
-            //     SizedBox(height: 30),
-            //     Text(
-            //       Provider.of<ThemeProvider>(context).themeMode == "light"
-            //           ? "LIGHT TEMA AKTIF"
-            //           : "DARK TEMA AKTIF",
-            //       style: TextStyle(
-            //           fontFamily: AppTheme.appFontFamily,
-            //           fontSize: 20,
-            //           fontWeight: FontWeight.w600,
-            //           color: Colors.lightBlue),
-            //     ),
-            //     SizedBox(height: 30),
-            //     MaterialButton(
-            //       onPressed: () => {
-            //         debugPrint('Set Light Theme'),
-            //         Provider.of<ThemeProvider>(context, listen: false)
-            //             .setLightMode()
-            //       },
-            //       child: Text('Set Light Theme'),
-            //     ),
-            //     MaterialButton(
-            //       onPressed: () => {
-            //         debugPrint('Set Dark theme'),
-            //         Provider.of<ThemeProvider>(context, listen: false)
-            //             .setDarkMode()
-            //       },
-            //       child: Text('Set Dark theme'),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
       ),

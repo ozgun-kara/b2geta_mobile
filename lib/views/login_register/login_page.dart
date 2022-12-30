@@ -334,9 +334,9 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   if (formKey.currentState!.validate()) {
                                     debugPrint(
-                                        "email: " + emailController1.text);
-                                    debugPrint("password: " +
-                                        passwordController1.text);
+                                        "email: ${emailController1.text}");
+                                    debugPrint(
+                                        "password: ${passwordController1.text}");
 
                                     locator<MemberServices>()
                                         .loginCall(
