@@ -108,7 +108,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                 ),
                                 padding: EdgeInsets.fromLTRB(12, 23, 27, 20),
                                 child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  // crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Column(
                                       children: [
@@ -152,19 +152,38 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          items[index].companyName ?? '',
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w600,
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black19
-                                                : AppTheme.white1,
-                                          ),
+                                        Row(
+                                          children: [
+                                            SizedBox(
+                                              width: deviceWidth * 0.48,
+                                              child: Text(
+                                                items[index].companyName ?? '',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color:
+                                                      Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.black19
+                                                          : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ),
+                                            Visibility(
+                                              visible:
+                                                  items[index].verification ??
+                                                      true,
+                                              child: Image.asset(
+                                                  'assets/icons/check.png',
+                                                  width: 23,
+                                                  height: 23),
+                                            ),
+                                          ],
                                         ),
                                         Text(
                                           items[index].location ?? '',
@@ -177,38 +196,28 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                         ),
                                         SizedBox(height: 4),
                                         SizedBox(
-                                          height: 24,
+                                          height: 22,
                                           child: ButtonTheme(
-                                            // minWidth: deviceWidth,
+                                            minWidth: double.minPositive,
                                             height: 22,
-
                                             child: MaterialButton(
                                                 elevation: 0,
-                                                color: Colors.transparent,
+                                                color: AppTheme.blue2,
                                                 shape: RoundedRectangleBorder(
-                                                  side: BorderSide(
-                                                      width: 1,
-                                                      color: AppTheme.white19),
                                                   borderRadius:
                                                       BorderRadius.all(
                                                           Radius.circular(36)),
                                                 ),
                                                 padding: EdgeInsets.fromLTRB(
-                                                    10, 2, 10, 3.5),
+                                                    12, 2, 12, 0),
                                                 child: Text(
-                                                  "Takip Et",
+                                                  "Takip",
                                                   style: TextStyle(
                                                     fontSize: 11,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w700,
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue2
-                                                            : AppTheme.white1,
+                                                    color: AppTheme.white1,
                                                   ),
                                                 ),
                                                 onPressed: () async {}),

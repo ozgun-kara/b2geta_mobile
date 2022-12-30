@@ -1,8 +1,9 @@
 [
   {
     "id": 0,
-    "imgUrl": "https://s9.gifyu.com/images/dummy-logo-2.png",
+    "imgUrl": "https://s3.gifyu.com/images/dummy-logo-2.png",
     "companyName": "RAINBOW POLIKARBONAT",
+    "verification": true,
     "location": "İstanbul, Türkiye",
     "rating": "9,2"
   },
@@ -10,6 +11,7 @@
     "id": 1,
     "imgUrl": "https://s3.gifyu.com/images/dummy-logo-1.png",
     "companyName": "SİLVERLİNE ENDÜSTRİ VE TİCARET",
+    "verification": false,
     "location": "İstanbul, Türkiye",
     "rating": "9,2"
   }
