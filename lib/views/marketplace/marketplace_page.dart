@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
-import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -123,7 +123,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Provider.of<MarketPlacePageProvider>(context,
+                                  Provider.of<MarketPlaceProvider>(context,
                                           listen: false)
                                       .updateFilterSwitch(false);
                                 },
@@ -134,7 +134,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(11)),
                                       color:
-                                          Provider.of<MarketPlacePageProvider>(
+                                          Provider.of<MarketPlaceProvider>(
                                                           context)
                                                       .filterSwitch ==
                                                   false
@@ -152,7 +152,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         width: 17.06,
                                         height: 17.06,
                                         color:
-                                            Provider.of<MarketPlacePageProvider>(
+                                            Provider.of<MarketPlaceProvider>(
                                                             context)
                                                         .filterSwitch ==
                                                     false
@@ -174,7 +174,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               SizedBox(width: 4),
                               InkWell(
                                 onTap: () {
-                                  Provider.of<MarketPlacePageProvider>(context,
+                                  Provider.of<MarketPlaceProvider>(context,
                                           listen: false)
                                       .updateFilterSwitch(true);
                                 },
@@ -185,7 +185,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(11)),
                                       color:
-                                          Provider.of<MarketPlacePageProvider>(
+                                          Provider.of<MarketPlaceProvider>(
                                                           context)
                                                       .filterSwitch ==
                                                   true
@@ -203,7 +203,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         width: 14.62,
                                         height: 13.38,
                                         color:
-                                            Provider.of<MarketPlacePageProvider>(
+                                            Provider.of<MarketPlaceProvider>(
                                                             context)
                                                         .filterSwitch ==
                                                     true
@@ -248,7 +248,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               SizedBox(height: 11),
               Visibility(
                 visible:
-                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                    Provider.of<MarketPlaceProvider>(context).filterSwitch
                         ? false
                         : true,
                 child: FutureBuilder(
@@ -365,7 +365,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
               Visibility(
                 visible:
-                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                    Provider.of<MarketPlaceProvider>(context).filterSwitch
                         ? true
                         : false,
                 child: FutureBuilder(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomePageProvider with ChangeNotifier {
+class HomepageProvider with ChangeNotifier {
   bool checkBox = true;
 
   void updateCheckBox(bool value) {

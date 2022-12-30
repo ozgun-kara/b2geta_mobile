@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -254,11 +254,11 @@ class _LoginPageState extends State<LoginPage> {
                                       "light"
                                   ? AppTheme.white1
                                   : AppTheme.black4,
-                              value: Provider.of<LoginRegisterPageProvider>(
+                              value: Provider.of<LoginRegisterProvider>(
                                       context)
                                   .loginSwitch,
                               onToggle: (value) {
-                                Provider.of<LoginRegisterPageProvider>(context,
+                                Provider.of<LoginRegisterProvider>(context,
                                         listen: false)
                                     .updateLoginSwitch(value);
                               },

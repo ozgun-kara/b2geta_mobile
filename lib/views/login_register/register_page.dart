@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    Provider.of<LoginRegisterPageProvider>(context, listen: false)
+    Provider.of<LoginRegisterProvider>(context, listen: false)
         .fetchDropdownList();
 
     super.initState();
@@ -550,7 +550,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       overflow: TextOverflow.visible,
                     ),
-                    items: Provider.of<LoginRegisterPageProvider>(context)
+                    items: Provider.of<LoginRegisterProvider>(context)
                         .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
                               value: item.code,
@@ -572,11 +572,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ))
                         .toList(),
-                    value: Provider.of<LoginRegisterPageProvider>(context)
+                    value: Provider.of<LoginRegisterProvider>(context)
                         .dropdownSelectedValue,
 
                     onChanged: (value) {
-                      Provider.of<LoginRegisterPageProvider>(context,
+                      Provider.of<LoginRegisterProvider>(context,
                               listen: false)
                           .updateDropdownSelectedValue(value as String);
                     },
@@ -740,7 +740,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             debugPrint(
                                 "officialPhone: ${officialPhoneController.text}");
                             debugPrint(
-                                "country: ${Provider.of<LoginRegisterPageProvider>(context, listen: false).dropdownSelectedValue}");
+                                "country: ${Provider.of<LoginRegisterProvider>(context, listen: false).dropdownSelectedValue}");
 
                             locator<MemberServices>()
                                 .registerCall(
@@ -749,7 +749,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               companyName: companyNameController.text,
                               officialPerson: officialPersonController.text,
                               officialPhone: officialPhoneController.text,
-                              country: Provider.of<LoginRegisterPageProvider>(
+                              country: Provider.of<LoginRegisterProvider>(
                                       context,
                                       listen: false)
                                   .dropdownSelectedValue

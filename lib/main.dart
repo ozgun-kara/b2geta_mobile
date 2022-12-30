@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_page.dart';
@@ -22,14 +22,14 @@ void main() async {
     ChangeNotifierProvider<ThemeProvider>(
       create: (BuildContext context) => ThemeProvider(),
     ),
-    ChangeNotifierProvider<LoginRegisterPageProvider>(
-      create: (BuildContext context) => LoginRegisterPageProvider(),
+    ChangeNotifierProvider<LoginRegisterProvider>(
+      create: (BuildContext context) => LoginRegisterProvider(),
     ),
     ChangeNotifierProvider<NavigationPageProvider>(
       create: (BuildContext context) => NavigationPageProvider(),
     ),
-    ChangeNotifierProvider<MarketPlacePageProvider>(
-      create: (BuildContext context) => MarketPlacePageProvider(),
+    ChangeNotifierProvider<MarketPlaceProvider>(
+      create: (BuildContext context) => MarketPlaceProvider(),
     ),
   ], child: MyApp()));
 }

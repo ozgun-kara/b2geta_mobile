@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/models/general_models/country_model.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 
-class LoginRegisterPageProvider with ChangeNotifier {
+class LoginRegisterProvider with ChangeNotifier {
   // LOGIN PAGE
 
   bool loginSwitch = false;
