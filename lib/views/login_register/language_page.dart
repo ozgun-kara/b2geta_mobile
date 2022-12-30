@@ -1,5 +1,4 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/login_register/language_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';

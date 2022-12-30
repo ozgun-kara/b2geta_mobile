@@ -1,12 +1,12 @@
-import 'package:b2geta_mobile/models/dummy/product_dummy_model.dart';
+import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:skeleton_text/skeleton_text.dart';
 
 class MarketplacePage extends StatefulWidget {
   const MarketplacePage({Key? key}) : super(key: key);
@@ -252,7 +252,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         ? false
                         : true,
                 child: FutureBuilder(
-                  future: GeneralService().getProductList(),
+                  future: DummyService().getProductList(),
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data as List<ProductDummyModel>;
@@ -369,7 +369,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         ? true
                         : false,
                 child: FutureBuilder(
-                  future: GeneralService().getProductList(),
+                  future: DummyService().getProductList(),
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data as List<ProductDummyModel>;
