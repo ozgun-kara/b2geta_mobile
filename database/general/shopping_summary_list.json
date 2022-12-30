@@ -1,13 +1,16 @@
 [
   {
     "id": 0,
-    "imgUrl": "https://s4.gifyu.com/images/course-4.png",
-    "imgCount": 5,
-    "title": "Ethical Hacking Learning System\nProject",
-    "subTitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit vitae eget erat at turpis at. Tortor eget aliquam neque, faucibus quis volutpat amet nunc. Id suspendisse egestas aenean quam vitae mollis cursus convallis habitasse. Sed faucibus volutpat amet in eget.",
-    "avatarImgUrl": "https://s4.gifyu.com/images/course-2.png",
-    "subTitle2": "Character Art School: Complete Coloring and Painting Course",
-    "likeCount": 24,
-    "dislikeCount": 24
+    "imgUrl": "https://s9.gifyu.com/images/dummy-logo-2.png",
+    "companyName": "RAINBOW POLIKARBONAT",
+    "location": "İstanbul, Türkiye",
+    "rating": "9,2"
+  },
+  {
+    "id": 1,
+    "imgUrl": "https://s3.gifyu.com/images/dummy-logo-1.png",
+    "companyName": "SİLVERLİNE ENDÜSTRİ VE TİCARET",
+    "location": "İstanbul, Türkiye",
+    "rating": "9,2"
   }
 ]
