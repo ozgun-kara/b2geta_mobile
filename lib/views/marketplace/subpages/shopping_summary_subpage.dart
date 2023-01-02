@@ -90,11 +90,19 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                 decoration: BoxDecoration(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(22)),
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white21
+                                        : AppTheme.black15,
+                                  ),
                                   color: Provider.of<ThemeProvider>(context)
                                               .themeMode ==
                                           "light"
                                       ? AppTheme.white1
-                                      : AppTheme.black7,
+                                      : AppTheme.black15,
                                   boxShadow: [
                                     BoxShadow(
                                       blurStyle: BlurStyle.normal,
@@ -117,6 +125,15 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                           height: 55,
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
+                                            border: Border.all(
+                                                width: 1,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.white21
+                                                        : AppTheme.black20),
                                             image: DecorationImage(
                                               image: NetworkImage(
                                                 items[index].imgUrl ?? '',
@@ -211,7 +228,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                 padding: EdgeInsets.fromLTRB(
                                                     12, 2, 12, 0),
                                                 child: Text(
-                                                  "Takip",
+                                                  "Takip Et",
                                                   style: TextStyle(
                                                     fontSize: 11,
                                                     fontFamily:
