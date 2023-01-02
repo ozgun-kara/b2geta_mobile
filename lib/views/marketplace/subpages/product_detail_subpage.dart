@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -828,20 +829,117 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         "light"
                                     ? AppTheme.white1
                                     : AppTheme.black18,
-                            child: Center(
-                              child: Text(
-                                "Tedarikçi",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue2
-                                      : AppTheme.white1,
+                            // child: Center(
+                            //   child: Text(
+                            //     "Tedarikçi",
+                            //     style: TextStyle(
+                            //       fontSize: 14,
+                            //       fontFamily: AppTheme.appFontFamily,
+                            //       fontWeight: FontWeight.w600,
+                            //       color: Provider.of<ThemeProvider>(context)
+                            //                   .themeMode ==
+                            //               "light"
+                            //           ? AppTheme.blue2
+                            //           : AppTheme.white1,
+                            //     ),
+                            //   ),
+                            // ),
+
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      GestureDetector(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Courses',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.blue6
+                                                        : AppTheme.white14),
+                                              ),
+                                              SizedBox(height: 4),
+                                              Container(
+                                                width: 88,
+                                                height: 3,
+                                                decoration: BoxDecoration(
+                                                    color: Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.blue6
+                                                        : Colors.transparent),
+                                              ),
+                                            ],
+                                          ),
+                                          onTap: () {
+                                            Provider.of<MarketPlaceProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .updateProductDetailTab(0);
+                                          }),
+                                      GestureDetector(
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'eBooks',
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.blue6
+                                                        : AppTheme.white14),
+                                              ),
+                                              SizedBox(height: 4),
+                                              Container(
+                                                width: 88,
+                                                height: 3,
+                                                decoration: BoxDecoration(
+                                                    color: Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.blue6
+                                                        : Colors.transparent),
+                                              ),
+                                            ],
+                                          ),
+                                          onTap: () {
+                                            Provider.of<MarketPlaceProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .updateProductDetailTab(1);
+                                          }),
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Container(
+                                      height: 1,
+                                      color:
+                                          Color.fromRGBO(110, 113, 145, 0.25)),
+                                ),
+                                SizedBox(height: 16),
+                                // ExploreSthNewSubpage(),
+                              ],
                             ),
                           ),
                           Container(
