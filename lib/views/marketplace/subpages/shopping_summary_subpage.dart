@@ -1,4 +1,3 @@
-import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/models/dummy_models/shopping_summary_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,6 +82,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                           controller: scrollController,
                           shrinkWrap: true,
                           itemCount: items.length,
+                          padding: const EdgeInsets.all(0),
                           itemBuilder: ((context, index) {
                             return Column(
                               children: [
@@ -349,6 +349,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                     }
                   },
                 ),
+                SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 52),
                   child: Text(
