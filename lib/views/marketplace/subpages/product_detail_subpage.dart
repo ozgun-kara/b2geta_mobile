@@ -857,30 +857,51 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'Courses',
+                                                'Ürün Detayları',
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 16,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Provider.of<MarketPlaceProvider>(
+                                                    color: Provider.of<ThemeProvider>(
                                                                     context)
-                                                                .productDetailTab ==
-                                                            0
-                                                        ? AppTheme.blue6
-                                                        : AppTheme.white14),
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                0
+                                                            ? AppTheme.blue2
+                                                            : AppTheme.white24
+                                                        : Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                0
+                                                            ? AppTheme.white1
+                                                            : AppTheme.white15),
                                               ),
                                               SizedBox(height: 4),
                                               Container(
-                                                width: 88,
-                                                height: 3,
+                                                width: deviceWidth * 0.4,
+                                                height: 1,
                                                 decoration: BoxDecoration(
-                                                    color: Provider.of<MarketPlaceProvider>(
+                                                    color: Provider.of<ThemeProvider>(
                                                                     context)
-                                                                .productDetailTab ==
-                                                            0
-                                                        ? AppTheme.blue6
-                                                        : Colors.transparent),
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                0
+                                                            ? AppTheme.blue2
+                                                            : Colors.transparent
+                                                        : Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                0
+                                                            ? AppTheme.blue4
+                                                            : Colors
+                                                                .transparent),
                                               ),
                                             ],
                                           ),
@@ -894,30 +915,51 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'eBooks',
+                                                'Alıcı Yorumları (8)',
                                                 style: TextStyle(
-                                                    fontSize: 14,
+                                                    fontSize: 16,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w600,
-                                                    color: Provider.of<MarketPlaceProvider>(
+                                                    color: Provider.of<ThemeProvider>(
                                                                     context)
-                                                                .productDetailTab ==
-                                                            1
-                                                        ? AppTheme.blue6
-                                                        : AppTheme.white14),
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                1
+                                                            ? AppTheme.blue2
+                                                            : AppTheme.white24
+                                                        : Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                1
+                                                            ? AppTheme.white1
+                                                            : AppTheme.white15),
                                               ),
                                               SizedBox(height: 4),
                                               Container(
-                                                width: 88,
-                                                height: 3,
+                                                width: deviceWidth * 0.4,
+                                                height: 1,
                                                 decoration: BoxDecoration(
-                                                    color: Provider.of<MarketPlaceProvider>(
+                                                    color: Provider.of<ThemeProvider>(
                                                                     context)
-                                                                .productDetailTab ==
-                                                            1
-                                                        ? AppTheme.blue6
-                                                        : Colors.transparent),
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                1
+                                                            ? AppTheme.blue2
+                                                            : Colors.transparent
+                                                        : Provider.of<MarketPlaceProvider>(
+                                                                        context)
+                                                                    .productDetailTab ==
+                                                                1
+                                                            ? AppTheme.blue4
+                                                            : Colors
+                                                                .transparent),
                                               ),
                                             ],
                                           ),
