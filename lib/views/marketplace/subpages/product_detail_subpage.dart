@@ -965,7 +965,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           Color.fromRGBO(110, 113, 145, 0.25)),
                                 ),
                                 SizedBox(height: 16),
-                                SizedBox(height: 160),
                                 Provider.of<MarketPlaceProvider>(context)
                                             .productDetailTab ==
                                         0
