@@ -816,20 +816,18 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
                                   ? AppTheme.white1
-                                  : AppTheme.black21,
+                                  : AppTheme.black18,
                         ),
                       ),
                       child: Column(
                         children: [
                           Container(
                             width: deviceWidth,
-                            // height: 70,
                             color:
                                 Provider.of<ThemeProvider>(context).themeMode ==
                                         "light"
                                     ? AppTheme.white1
-                                    : AppTheme.black18,
-
+                                    : Colors.transparent,
                             child: Column(
                               children: [
                                 Padding(
@@ -965,11 +963,12 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           Color.fromRGBO(110, 113, 145, 0.25)),
                                 ),
                                 SizedBox(height: 16),
+                                SizedBox(height: 160),
+                                Container(), // PRODUCT DETAILS
                                 // ExploreSthNewSubpage(),
                               ],
                             ),
                           ),
-                          SizedBox(height: 160),
                         ],
                       ),
                     ), // PRODUCT DETAILS / CUSTOMERS COMMENTS
