@@ -2,16 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
-import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
@@ -40,8 +31,6 @@ class _ProductDetailSecondTabSubpageState
     return Column(
       children: [
         Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               '4.8',
@@ -89,15 +78,56 @@ class _ProductDetailSecondTabSubpageState
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 14),
             Text(
-              '3 yoruma göre',
+              '2 yorum',
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
-                fontWeight: FontWeight.w400,
-                color: Color(0xFF4E4B66),
+                fontWeight: FontWeight.w600,
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.blue3
+                    : AppTheme.white1,
               ),
+            ),
+            SizedBox(height: 14),
+            Row(
+              children: [
+
+                Text(
+                  '5',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w600,
+                    color:
+                    Provider.of<ThemeProvider>(context).themeMode == "light"
+                        ? AppTheme.blue3
+                        : AppTheme.white11,
+                  ),
+                ),
+                SizedBox(width: 5),
+                Image.asset(
+                  'assets/icons/star-fill.png',
+                  width: 17,
+                  height: 17,
+                ),
+                SizedBox(width: 7),
+                LinearPercentIndicator(
+                  width: deviceWidth - 60,
+                  padding: EdgeInsets.all(0),
+                  animation: true,
+                  lineHeight: 10,
+                  animationDuration: 0,
+                  percent: 75 / 100,
+                  barRadius: Radius.circular(22),
+                  progressColor: AppTheme.blue2,
+                  backgroundColor:
+                  Provider.of<ThemeProvider>(context).themeMode == "light"
+                      ? AppTheme.white27
+                      : AppTheme.black23,
+                ),
+              ],
             ),
           ],
         ),
