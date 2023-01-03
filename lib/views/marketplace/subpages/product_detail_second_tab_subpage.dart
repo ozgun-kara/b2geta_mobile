@@ -91,43 +91,48 @@ class _ProductDetailSecondTabSubpageState
               ),
             ),
             SizedBox(height: 14),
-            Row(
-              children: [
-
-                Text(
-                  '5',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w600,
-                    color:
-                    Provider.of<ThemeProvider>(context).themeMode == "light"
-                        ? AppTheme.blue3
-                        : AppTheme.white11,
+            Container(
+              color: Colors.greenAccent,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      '5',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white11,
+                      ),
+                    ),
                   ),
-                ),
-                SizedBox(width: 5),
-                Image.asset(
-                  'assets/icons/star-fill.png',
-                  width: 17,
-                  height: 17,
-                ),
-                SizedBox(width: 7),
-                LinearPercentIndicator(
-                  width: deviceWidth - 60,
-                  padding: EdgeInsets.all(0),
-                  animation: true,
-                  lineHeight: 10,
-                  animationDuration: 0,
-                  percent: 75 / 100,
-                  barRadius: Radius.circular(22),
-                  progressColor: AppTheme.blue2,
-                  backgroundColor:
-                  Provider.of<ThemeProvider>(context).themeMode == "light"
-                      ? AppTheme.white27
-                      : AppTheme.black23,
-                ),
-              ],
+                  SizedBox(width: 5),
+                  Image.asset(
+                    'assets/icons/star-fill.png',
+                    width: 17,
+                    height: 17,
+                  ),
+                  SizedBox(width: 7),
+                  LinearPercentIndicator(
+                    width: deviceWidth - 80,
+                    padding: EdgeInsets.all(0),
+                    animation: true,
+                    lineHeight: 10,
+                    animationDuration: 0,
+                    percent: 75 / 100,
+                    barRadius: Radius.circular(22),
+                    progressColor: AppTheme.blue2,
+                    backgroundColor:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white27
+                            : AppTheme.black23,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
