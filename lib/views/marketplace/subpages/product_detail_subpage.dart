@@ -1,4 +1,6 @@
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -964,8 +966,11 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 ),
                                 SizedBox(height: 16),
                                 SizedBox(height: 160),
-                                Container(), // PRODUCT DETAILS
-                                // ExploreSthNewSubpage(),
+                                Provider.of<MarketPlaceProvider>(context)
+                                            .productDetailTab ==
+                                        0
+                                    ? ProductDetailFirstTabSubpage()
+                                    : ProductDetailSecondTabSubpage(),
                               ],
                             ),
                           ),
