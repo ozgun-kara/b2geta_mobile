@@ -30,15 +30,18 @@ class _ProductDetailFirstTabSubpageState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Hızlı Detaylar",
-          style: TextStyle(
-            fontSize: 14,
-            fontFamily: AppTheme.appFontFamily,
-            fontWeight: FontWeight.w600,
-            color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                ? AppTheme.blue3
-                : AppTheme.white11,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+          child: Text(
+            "Hızlı Detaylar",
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w600,
+              color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.blue3
+                  : AppTheme.white11,
+            ),
           ),
         ),
         SizedBox(height: 22),
@@ -47,6 +50,7 @@ class _ProductDetailFirstTabSubpageState
           child: Row(
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Özel kullanım:",
@@ -59,7 +63,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Tür:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -69,7 +73,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Uygulama:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -79,7 +83,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Malzeme:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -89,7 +93,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Katlanmış:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -99,7 +103,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Marka adı:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -109,7 +113,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Ürün adı:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -119,7 +123,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Tarzı:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -129,7 +133,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Renk:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -139,7 +143,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Adedi:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -149,7 +153,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Özel kullanım:",
+                    "Çerçeve:",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -161,6 +165,7 @@ class _ProductDetailFirstTabSubpageState
               ),
               SizedBox(width: 22),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     "Otel sandalye",
@@ -176,7 +181,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Otel mobilya",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -189,7 +194,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Mutfak, Ev ofis, Oturma odası",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -202,7 +207,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Plastik",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -215,7 +220,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Hiçbir",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -228,7 +233,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "FIR",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -241,7 +246,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Çocuklar sandalye ve masa",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -254,7 +259,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Avrupa Modern oturma Furntiure",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -267,7 +272,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Beyaz siyah altın mavi kırmızı",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -280,7 +285,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "50 Adet",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -293,7 +298,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                   SizedBox(height: 12),
                   Text(
-                    "Otel sandalye",
+                    "Plastik çerçeve",
                     style: TextStyle(
                       fontSize: 13,
                       fontFamily: AppTheme.appFontFamily,
@@ -309,6 +314,146 @@ class _ProductDetailFirstTabSubpageState
             ],
           ),
         ),
+        SizedBox(height: 34),
+        Container(
+            height: 1,
+            color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                ? AppTheme.white25
+                : AppTheme.black21),
+        SizedBox(height: 31),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+          child: Text(
+            "Tedarik Kapasitesi",
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w600,
+              color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.blue3
+                  : AppTheme.white11,
+            ),
+          ),
+        ),
+        SizedBox(height: 22),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
+          child: Row(
+            children: [
+              Text(
+                "Tedarik Kapasitesi:",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: AppTheme.appFontFamily,
+                  fontWeight: FontWeight.w400,
+                  color: AppTheme.white15,
+                ),
+              ),
+              SizedBox(width: 4),
+              Text(
+                "5000 Adet / Adet per Month",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: AppTheme.appFontFamily,
+                  fontWeight: FontWeight.w400,
+                  color:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.blue3
+                          : AppTheme.white1,
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 34),
+        Container(
+            height: 1,
+            color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                ? AppTheme.white25
+                : AppTheme.black21),
+        SizedBox(height: 31),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
+          child: Text(
+            "Ambalajlama ve Teslimat",
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w600,
+              color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.blue3
+                  : AppTheme.white11,
+            ),
+          ),
+        ),
+        SizedBox(height: 22),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Paketleme Detayları:",
+                style: TextStyle(
+                  fontSize: 13,
+                  fontFamily: AppTheme.appFontFamily,
+                  fontWeight: FontWeight.w400,
+                  color: AppTheme.white15,
+                ),
+              ),
+              SizedBox(width: 9),
+              Expanded(
+                child: Text(
+                  "1. All items would be covered with a plastic bubble wrap or soft paper,to ensure that the legs and the fabric would not be damaged.",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(height: 34),
+        Container(
+            height: 1,
+            color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                ? AppTheme.white25
+                : AppTheme.black21),
+        SizedBox(height: 19),
+        Container(
+          width: deviceWidth,
+          height: 305,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                "https://s3.gifyu.com/images/dummy-product-1.png",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        SizedBox(height: 14),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(17, 0, 17, 0),
+          child: Text(
+            "Foshan Shiguang Furniture Co.,Ltd is located in Shunde District, Foshan City, which is a famous base of furniture manufacture and procurement.Our company speacializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is ",
+            style: TextStyle(
+              fontSize: 15,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w400,
+              color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.blue3
+                  : AppTheme.white11,
+            ),
+          ),
+        ),
+        SizedBox(height: 28),
       ],
     );
   }

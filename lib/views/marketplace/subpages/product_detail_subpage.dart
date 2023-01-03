@@ -957,13 +957,13 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Container(
-                                      height: 1,
-                                      color:
-                                          Color.fromRGBO(110, 113, 145, 0.25)),
-                                ),
+                                Container(
+                                    height: 1,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white25
+                                        : AppTheme.black21),
                                 SizedBox(height: 16),
                                 Provider.of<MarketPlaceProvider>(context)
                                             .productDetailTab ==
