@@ -103,17 +103,20 @@ class _ProductDetailSecondTabSubpageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: ratingCheckBox1
+                        color: Provider.of<MarketPlaceProvider>(context)
+                                .ratingCheckBox1
                             ? AppTheme.green2
                             : Colors.transparent,
                         borderRadius: BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: ratingCheckBox1
+                            color: Provider.of<MarketPlaceProvider>(context)
+                                    .ratingCheckBox1
                                 ? Colors.transparent
                                 : AppTheme.white24),
                       ),
-                      child: ratingCheckBox1
+                      child: Provider.of<MarketPlaceProvider>(context)
+                              .ratingCheckBox1
                           ? Center(
                               child: Image.asset(
                                 'assets/icons/check-3.png',
@@ -125,9 +128,8 @@ class _ProductDetailSecondTabSubpageState
                           : Container(),
                     ),
                     onTap: () {
-                      setState(() {
-                        ratingCheckBox1 = !ratingCheckBox1;
-                      });
+                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                          .updateRatingCheckBox1();
                     },
                   ),
                   SizedBox(width: 11),
