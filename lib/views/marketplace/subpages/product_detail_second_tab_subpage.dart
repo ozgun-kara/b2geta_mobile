@@ -568,7 +568,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
@@ -616,7 +616,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
@@ -664,7 +664,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 16),
+                          SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
