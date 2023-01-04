@@ -517,15 +517,193 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 18),
+            SizedBox(height: 20),
             Container(
                 height: 1,
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
           ],
-        ),
+        ), // RATING SELECTION PANEL
         SizedBox(height: 24),
+        Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(21, 0, 21, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Filtrele',
+                    style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue2
+                            : AppTheme.blue4),
+                  ),
+                  GestureDetector(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Tümü',
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            0
+                                        ? AppTheme.blue3
+                                        : AppTheme.white15
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            0
+                                        ? AppTheme.white1
+                                        : AppTheme.white15),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            width: deviceWidth * 0.2,
+                            height: 1,
+                            decoration: BoxDecoration(
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            0
+                                        ? AppTheme.blue2
+                                        : Colors.transparent
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            0
+                                        ? AppTheme.blue2
+                                        : Colors.transparent),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                            .updateProductCommentsTab(0);
+                      }),
+                  GestureDetector(
+                      child: Column(
+                        children: [
+                          Text(
+                            'Fotoğraflı',
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            1
+                                        ? AppTheme.blue3
+                                        : AppTheme.white15
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            1
+                                        ? AppTheme.white1
+                                        : AppTheme.white15),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            width: deviceWidth * 0.2,
+                            height: 1,
+                            decoration: BoxDecoration(
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            1
+                                        ? AppTheme.blue2
+                                        : Colors.transparent
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            1
+                                        ? AppTheme.blue2
+                                        : Colors.transparent),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                            .updateProductCommentsTab(1);
+                      }),
+                  GestureDetector(
+                      child: Column(
+                        children: [
+                          Text(
+                            'En yeniler',
+                            style: TextStyle(
+                                fontSize: 13,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            2
+                                        ? AppTheme.blue3
+                                        : AppTheme.white15
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            2
+                                        ? AppTheme.white1
+                                        : AppTheme.white15),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            width: deviceWidth * 0.2,
+                            height: 1,
+                            decoration: BoxDecoration(
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            2
+                                        ? AppTheme.blue2
+                                        : Colors.transparent
+                                    : Provider.of<MarketPlaceProvider>(context)
+                                                .productCommentsTab ==
+                                            2
+                                        ? AppTheme.blue2
+                                        : Colors.transparent),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                            .updateProductCommentsTab(2);
+                      }),
+                ],
+              ),
+            ),
+            Container(
+                height: 1,
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white25
+                    : AppTheme.black21),
+            SizedBox(height: 16),
+            Provider.of<MarketPlaceProvider>(context).productCommentsTab == 0
+                ? Container()
+                : Container(),
+            SizedBox(height: 80),
+          ],
+        ),
       ],
     );
   }

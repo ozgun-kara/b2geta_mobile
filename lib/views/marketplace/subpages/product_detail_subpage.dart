@@ -823,159 +823,152 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   : AppTheme.black18,
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          Container(
-                            width: deviceWidth,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white1
-                                    : Colors.transparent,
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 16, 10, 0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      GestureDetector(
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'Ürün Detayları',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Provider.of<ThemeProvider>(
+                      child: Container(
+                        width: deviceWidth,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white1
+                            : Colors.transparent,
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(10, 16, 10, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Ürün Detayları',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color: Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? Provider.of<MarketPlaceProvider>(
                                                                     context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                0
-                                                            ? AppTheme.blue2
-                                                            : AppTheme.white24
-                                                        : Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                0
-                                                            ? AppTheme.white1
-                                                            : AppTheme.white15),
-                                              ),
-                                              SizedBox(height: 16),
-                                              Container(
-                                                width: deviceWidth * 0.4,
-                                                height: 1,
-                                                decoration: BoxDecoration(
-                                                    color: Provider.of<ThemeProvider>(
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white24
+                                                    : Provider.of<MarketPlaceProvider>(
                                                                     context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                0
-                                                            ? AppTheme.blue2
-                                                            : Colors.transparent
-                                                        : Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                0
-                                                            ? AppTheme.blue4
-                                                            : Colors
-                                                                .transparent),
-                                              ),
-                                            ],
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.white1
+                                                        : AppTheme.white15),
                                           ),
-                                          onTap: () {
-                                            Provider.of<MarketPlaceProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .updateProductDetailTab(0);
-                                          }),
-                                      GestureDetector(
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'Alıcı Yorumları (8)',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Provider.of<ThemeProvider>(
+                                          SizedBox(height: 16),
+                                          Container(
+                                            width: deviceWidth * 0.4,
+                                            height: 1,
+                                            decoration: BoxDecoration(
+                                                color: Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? Provider.of<MarketPlaceProvider>(
                                                                     context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                1
-                                                            ? AppTheme.blue2
-                                                            : AppTheme.white24
-                                                        : Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                1
-                                                            ? AppTheme.white1
-                                                            : AppTheme.white15),
-                                              ),
-                                              SizedBox(height: 16),
-                                              Container(
-                                                width: deviceWidth * 0.4,
-                                                height: 1,
-                                                decoration: BoxDecoration(
-                                                    color: Provider.of<ThemeProvider>(
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.blue2
+                                                        : Colors.transparent
+                                                    : Provider.of<MarketPlaceProvider>(
                                                                     context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                1
-                                                            ? AppTheme.blue2
-                                                            : Colors.transparent
-                                                        : Provider.of<MarketPlaceProvider>(
-                                                                        context)
-                                                                    .productDetailTab ==
-                                                                1
-                                                            ? AppTheme.blue4
-                                                            : Colors
-                                                                .transparent),
-                                              ),
-                                            ],
+                                                                .productDetailTab ==
+                                                            0
+                                                        ? AppTheme.blue4
+                                                        : Colors.transparent),
                                           ),
-                                          onTap: () {
-                                            Provider.of<MarketPlaceProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .updateProductDetailTab(1);
-                                          }),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                    height: 1,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.white25
-                                        : AppTheme.black21),
-                                SizedBox(height: 16),
-                                Provider.of<MarketPlaceProvider>(context)
-                                            .productDetailTab ==
-                                        0
-                                    ? ProductDetailFirstTabSubpage()
-                                    : ProductDetailSecondTabSubpage(),
-                              ],
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        Provider.of<MarketPlaceProvider>(
+                                                context,
+                                                listen: false)
+                                            .updateProductDetailTab(0);
+                                      }),
+                                  GestureDetector(
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Alıcı Yorumları (8)',
+                                            style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color: Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white24
+                                                    : Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.white1
+                                                        : AppTheme.white15),
+                                          ),
+                                          SizedBox(height: 16),
+                                          Container(
+                                            width: deviceWidth * 0.4,
+                                            height: 1,
+                                            decoration: BoxDecoration(
+                                                color: Provider.of<ThemeProvider>(
+                                                                context)
+                                                            .themeMode ==
+                                                        "light"
+                                                    ? Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.blue2
+                                                        : Colors.transparent
+                                                    : Provider.of<MarketPlaceProvider>(
+                                                                    context)
+                                                                .productDetailTab ==
+                                                            1
+                                                        ? AppTheme.blue4
+                                                        : Colors.transparent),
+                                          ),
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        Provider.of<MarketPlaceProvider>(
+                                                context,
+                                                listen: false)
+                                            .updateProductDetailTab(1);
+                                      }),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                            Container(
+                                height: 1,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white25
+                                    : AppTheme.black21),
+                            SizedBox(height: 16),
+                            Provider.of<MarketPlaceProvider>(context)
+                                        .productDetailTab ==
+                                    0
+                                ? ProductDetailFirstTabSubpage()
+                                : ProductDetailSecondTabSubpage(),
+                          ],
+                        ),
                       ),
                     ), // PRODUCT DETAILS / CUSTOMERS COMMENTS
                     SizedBox(height: 28),

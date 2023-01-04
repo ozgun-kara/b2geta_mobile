@@ -18,6 +18,7 @@ class MarketPlaceProvider with ChangeNotifier {
   bool ratingCheckBox3 = false;
   bool ratingCheckBox4 = false;
   bool ratingCheckBox5 = false;
+  int productCommentsTab = 0;
 
   void updateProductDetailTab(int value) {
     productDetailTab = value;
@@ -36,6 +37,11 @@ class MarketPlaceProvider with ChangeNotifier {
     } else {
       ratingCheckBox5 = !ratingCheckBox5;
     }
+    notifyListeners();
+  }
+
+  void updateProductCommentsTab(int value) {
+    productCommentsTab = value;
     notifyListeners();
   }
 }
