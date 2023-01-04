@@ -24,8 +24,18 @@ class MarketPlaceProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateRatingCheckBox1() {
-    ratingCheckBox1 = !ratingCheckBox1;
+  void updateRatingCheckBox(int checkBoxNumber) {
+    if (checkBoxNumber == 1) {
+      ratingCheckBox1 = !ratingCheckBox1;
+    } else if (checkBoxNumber == 2) {
+      ratingCheckBox2 = !ratingCheckBox2;
+    } else if (checkBoxNumber == 3) {
+      ratingCheckBox3 = !ratingCheckBox3;
+    } else if (checkBoxNumber == 4) {
+      ratingCheckBox4 = !ratingCheckBox4;
+    } else {
+      ratingCheckBox5 = !ratingCheckBox5;
+    }
     notifyListeners();
   }
 }

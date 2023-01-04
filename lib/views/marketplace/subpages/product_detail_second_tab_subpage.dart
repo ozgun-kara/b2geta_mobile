@@ -129,7 +129,7 @@ class _ProductDetailSecondTabSubpageState
                     ),
                     onTap: () {
                       Provider.of<MarketPlaceProvider>(context, listen: false)
-                          .updateRatingCheckBox1();
+                          .updateRatingCheckBox(1);
                     },
                   ),
                   SizedBox(width: 11),
@@ -168,6 +168,85 @@ class _ProductDetailSecondTabSubpageState
                         Provider.of<ThemeProvider>(context).themeMode == "light"
                             ? AppTheme.white27
                             : AppTheme.black23,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Row(
+                children: [
+                  InkWell(
+                    radius: 24,
+                    child: Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        color: Provider.of<MarketPlaceProvider>(context)
+                            .ratingCheckBox2
+                            ? AppTheme.green2
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        border: Border.all(
+                            width: 1,
+                            color: Provider.of<MarketPlaceProvider>(context)
+                                .ratingCheckBox2
+                                ? Colors.transparent
+                                : AppTheme.white24),
+                      ),
+                      child: Provider.of<MarketPlaceProvider>(context)
+                          .ratingCheckBox2
+                          ? Center(
+                        child: Image.asset(
+                          'assets/icons/check-3.png',
+                          width: 10,
+                          height: 8,
+                          // color: Colors.red,
+                        ),
+                      )
+                          : Container(),
+                    ),
+                    onTap: () {
+                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                          .updateRatingCheckBox(2);
+                    },
+                  ),
+                  SizedBox(width: 11),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Text(
+                      '5',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                            "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white11,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 5),
+                  Image.asset(
+                    'assets/icons/star-fill.png',
+                    width: 17,
+                    height: 17,
+                  ),
+                  SizedBox(width: 7),
+                  LinearPercentIndicator(
+                    width: deviceWidth - 120,
+                    padding: EdgeInsets.all(0),
+                    animation: true,
+                    lineHeight: 10,
+                    animationDuration: 0,
+                    percent: 75 / 100,
+                    barRadius: Radius.circular(22),
+                    progressColor: AppTheme.blue2,
+                    backgroundColor:
+                    Provider.of<ThemeProvider>(context).themeMode == "light"
+                        ? AppTheme.white27
+                        : AppTheme.black23,
                   ),
                 ],
               ),
