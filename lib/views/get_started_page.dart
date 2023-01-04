@@ -1,9 +1,3 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
-import 'package:mobile/app_theme.dart';
-import 'package:mobile/providers/get_started_page_provider.dart';
-import 'package:provider/provider.dart';
-
 class GetStartedPage extends StatefulWidget {
   const GetStartedPage({Key? key}) : super(key: key);
 

@@ -14,8 +14,6 @@ class _ConnectionPageState extends State<ConnectionPage> {
   var deviceHeight;
   var deviceTopPadding;
 
-  var TEST123;
-
   @override
   void initState() {
     super.initState();
