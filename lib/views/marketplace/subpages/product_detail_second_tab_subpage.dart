@@ -18,6 +18,8 @@ class _ProductDetailSecondTabSubpageState
     extends State<ProductDetailSecondTabSubpage> {
   ScrollController scrollController = ScrollController();
 
+  bool ratingCheckBox1 = true;
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -91,10 +93,44 @@ class _ProductDetailSecondTabSubpageState
               ),
             ),
             SizedBox(height: 14),
-            Container(
-              color: Colors.greenAccent,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
+                  InkWell(
+                    radius: 24,
+                    child: Container(
+                      width: 18,
+                      height: 18,
+                      decoration: BoxDecoration(
+                        color: ratingCheckBox1
+                            ? AppTheme.green2
+                            : Colors.transparent,
+                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        border: Border.all(
+                            width: 1,
+                            color: ratingCheckBox1
+                                ? Colors.transparent
+                                : AppTheme.white24),
+                      ),
+                      child: ratingCheckBox1
+                          ? Center(
+                              child: Image.asset(
+                                'assets/icons/check-3.png',
+                                width: 10,
+                                height: 8,
+                                // color: Colors.red,
+                              ),
+                            )
+                          : Container(),
+                    ),
+                    onTap: () {
+                      setState(() {
+                        ratingCheckBox1 = !ratingCheckBox1;
+                      });
+                    },
+                  ),
+                  SizedBox(width: 11),
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Text(
@@ -118,7 +154,7 @@ class _ProductDetailSecondTabSubpageState
                   ),
                   SizedBox(width: 7),
                   LinearPercentIndicator(
-                    width: deviceWidth - 80,
+                    width: deviceWidth - 120,
                     padding: EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
