@@ -10,10 +10,6 @@ class ConnectionPage extends StatefulWidget {
 }
 
 class _ConnectionPageState extends State<ConnectionPage> {
-  var deviceWidth;
-  var deviceHeight;
-  var deviceTopPadding;
-
   @override
   void initState() {
     super.initState();
