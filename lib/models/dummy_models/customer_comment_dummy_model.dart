@@ -6,17 +6,17 @@ class CustomerCommentDummyModel {
   String? flagImgUrl;
   String? country;
   String? comment;
-  List<dynamic>? images;
+  List<Null>? images;
 
   CustomerCommentDummyModel(
       {this.id,
-      this.name,
-      this.rating,
-      this.date,
-      this.flagImgUrl,
-      this.country,
-      this.comment,
-      this.images});
+        this.name,
+        this.rating,
+        this.date,
+        this.flagImgUrl,
+        this.country,
+        this.comment,
+        this.images});
 
   CustomerCommentDummyModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -29,7 +29,7 @@ class CustomerCommentDummyModel {
     if (json['images'] != null) {
       images = <Null>[];
       json['images'].forEach((v) {
-        images!.add(v);
+        // images!.add(new Null.fromJson(v));
       });
     }
   }
