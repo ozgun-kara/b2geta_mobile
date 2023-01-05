@@ -20,8 +20,6 @@ class _ProductDetailSecondTabSubpageState
     extends State<ProductDetailSecondTabSubpage> {
   ScrollController scrollController = ScrollController();
 
-  bool ratingCheckBox1 = true;
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -699,7 +697,7 @@ class _ProductDetailSecondTabSubpageState
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
-            SizedBox(height: 16),
+            SizedBox(height: 0),
             Provider.of<MarketPlaceProvider>(context).productCommentsTab == 0
                 ? FutureBuilder(
                     future: DummyService().getCustomerCommentsList(),
@@ -708,163 +706,168 @@ class _ProductDetailSecondTabSubpageState
                         var items =
                             data.data as List<CustomerCommentDummyModel>;
 
-                        return ListView.builder(
+                        return ListView.separated(
                             controller: scrollController,
                             shrinkWrap: true,
                             itemCount: items.length,
+                            padding: const EdgeInsets.all(0),
+                            separatorBuilder: (context, index) {
+                              return Container(
+                                  height: 1,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.white25
+                                      : AppTheme.black21);
+                            },
                             itemBuilder: ((context, index) {
-                              return Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                                child: Container(
-                                  color: Colors.greenAccent.withOpacity(0.2),
-                                  padding: EdgeInsets.all(16),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(
-                                                items[index].name!.replaceRange(
-                                                    1,
-                                                    items[index].name!.length -
-                                                        1,
-                                                    "*" *
-                                                        (items[index]
-                                                                .name!
-                                                                .length -
-                                                            2)),
-                                                style: TextStyle(
-                                                  fontSize: 15,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.black1
-                                                          : AppTheme.white1,
-                                                ),
-                                              ),
-                                              SizedBox(width: 9),
-                                              Padding(
-                                                padding:
-                                                    EdgeInsets.only(bottom: 6),
-                                                child: Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      'assets/icons/star-fill.png',
-                                                      width: 9.84,
-                                                      height: 9.84,
-                                                      color: int.parse(items[
-                                                                      index]
-                                                                  .rating!) >
-                                                              0
-                                                          ? AppTheme.yellow1
-                                                          : AppTheme.white26,
-                                                    ),
-                                                    SizedBox(width: 2),
-                                                    Image.asset(
-                                                      'assets/icons/star-fill.png',
-                                                      width: 9.84,
-                                                      height: 9.84,
-                                                      color: int.parse(items[
-                                                                      index]
-                                                                  .rating!) >
-                                                              1
-                                                          ? AppTheme.yellow1
-                                                          : AppTheme.white26,
-                                                    ),
-                                                    SizedBox(width: 2),
-                                                    Image.asset(
-                                                      'assets/icons/star-fill.png',
-                                                      width: 9.84,
-                                                      height: 9.84,
-                                                      color: int.parse(items[
-                                                                      index]
-                                                                  .rating!) >
-                                                              2
-                                                          ? AppTheme.yellow1
-                                                          : AppTheme.white26,
-                                                    ),
-                                                    SizedBox(width: 2),
-                                                    Image.asset(
-                                                      'assets/icons/star-fill.png',
-                                                      width: 9.84,
-                                                      height: 9.84,
-                                                      color: int.parse(items[
-                                                                      index]
-                                                                  .rating!) >
-                                                              3
-                                                          ? AppTheme.yellow1
-                                                          : AppTheme.white26,
-                                                    ),
-                                                    SizedBox(width: 2),
-                                                    Image.asset(
-                                                      'assets/icons/star-fill.png',
-                                                      width: 9.84,
-                                                      height: 9.84,
-                                                      color: int.parse(items[
-                                                                      index]
-                                                                  .rating!) >
-                                                              4
-                                                          ? AppTheme.yellow1
-                                                          : AppTheme.white26,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          Text(
-                                            items[index].date ?? '',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppTheme.white15,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            width: 19,
-                                            height: 13,
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  items[index].flagImgUrl ?? '',
-                                                ),
-                                                fit: BoxFit.cover,
+                              return Container(
+                                padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(
+                                              items[index].name.replaceRange(
+                                                  1,
+                                                  items[index].name.length - 1,
+                                                  "*" *
+                                                      (items[index]
+                                                              .name
+                                                              .length -
+                                                          2)),
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black1
+                                                        : AppTheme.white1,
                                               ),
                                             ),
+                                            SizedBox(width: 9),
+                                            Padding(
+                                              padding:
+                                                  EdgeInsets.only(bottom: 6),
+                                              child: Row(
+                                                children: [
+                                                  Image.asset(
+                                                    'assets/icons/star-fill.png',
+                                                    width: 9.84,
+                                                    height: 9.84,
+                                                    color: int.parse(
+                                                                items[index]
+                                                                    .rating) >
+                                                            0
+                                                        ? AppTheme.yellow1
+                                                        : AppTheme.white26,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Image.asset(
+                                                    'assets/icons/star-fill.png',
+                                                    width: 9.84,
+                                                    height: 9.84,
+                                                    color: int.parse(
+                                                                items[index]
+                                                                    .rating) >
+                                                            1
+                                                        ? AppTheme.yellow1
+                                                        : AppTheme.white26,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Image.asset(
+                                                    'assets/icons/star-fill.png',
+                                                    width: 9.84,
+                                                    height: 9.84,
+                                                    color: int.parse(
+                                                                items[index]
+                                                                    .rating) >
+                                                            2
+                                                        ? AppTheme.yellow1
+                                                        : AppTheme.white26,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Image.asset(
+                                                    'assets/icons/star-fill.png',
+                                                    width: 9.84,
+                                                    height: 9.84,
+                                                    color: int.parse(
+                                                                items[index]
+                                                                    .rating) >
+                                                            3
+                                                        ? AppTheme.yellow1
+                                                        : AppTheme.white26,
+                                                  ),
+                                                  SizedBox(width: 2),
+                                                  Image.asset(
+                                                    'assets/icons/star-fill.png',
+                                                    width: 9.84,
+                                                    height: 9.84,
+                                                    color: int.parse(
+                                                                items[index]
+                                                                    .rating) >
+                                                            4
+                                                        ? AppTheme.yellow1
+                                                        : AppTheme.white26,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          items[index].date,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
                                           ),
-                                          SizedBox(width: 5),
-                                          Text(
-                                            items[index].country ?? '',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppTheme.white15,
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 8),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          width: 19,
+                                          height: 13,
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                items[index].flagImgUrl,
+                                              ),
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 18),
+                                        ),
+                                        SizedBox(width: 5),
+                                        Text(
+                                          items[index].country,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    if (items[index].comment.isNotEmpty)
                                       Padding(
-                                        padding: EdgeInsets.only(right: 7),
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 18, 7, 0),
                                         child: Text(
-                                          items[index].comment ?? '',
+                                          items[index].comment,
                                           style: TextStyle(
                                             fontSize: 13,
                                             fontFamily: AppTheme.appFontFamily,
@@ -877,10 +880,14 @@ class _ProductDetailSecondTabSubpageState
                                                 : AppTheme.white11,
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      if (items[index].images!.isNotEmpty)
-                                        Row(
+                                      )
+                                    else
+                                      Container(),
+                                    if (items[index].images.isNotEmpty)
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 9, 0, 0),
+                                        child: Row(
                                           children: [
                                             Container(
                                               width: deviceWidth * 0.5 - 36,
@@ -888,8 +895,7 @@ class _ProductDetailSecondTabSubpageState
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                   image: NetworkImage(
-                                                    items[index].images![0] ??
-                                                        '',
+                                                    items[index].images[0],
                                                   ),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -902,19 +908,18 @@ class _ProductDetailSecondTabSubpageState
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                   image: NetworkImage(
-                                                    items[index].images![1] ??
-                                                        '',
+                                                    items[index].images[1],
                                                   ),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
                                           ],
-                                        )
-                                      else
-                                        Container(),
-                                    ],
-                                  ),
+                                        ),
+                                      )
+                                    else
+                                      Container(),
+                                  ],
                                 ),
                               );
                             }));
@@ -939,7 +944,28 @@ class _ProductDetailSecondTabSubpageState
                         1
                     ? Container()
                     : Container(),
-            SizedBox(height: 80),
+            Container(
+                height: 1,
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white25
+                    : AppTheme.black21),
+            SizedBox(height: 32),
+            InkWell(
+              onTap: () {},
+              child: Text(
+                "Daha fazla göster",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontFamily: AppTheme.appFontFamily,
+                  fontWeight: FontWeight.w600,
+                  color:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.blue2
+                          : AppTheme.white1,
+                ),
+              ),
+            ),
+            SizedBox(height: 34),
           ],
         ),
       ],
