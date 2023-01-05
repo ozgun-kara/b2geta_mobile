@@ -1,3 +1,5 @@
+import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
+import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -699,8 +701,244 @@ class _ProductDetailSecondTabSubpageState
                     : AppTheme.black21),
             SizedBox(height: 16),
             Provider.of<MarketPlaceProvider>(context).productCommentsTab == 0
-                ? Container()
-                : Container(),
+                ? FutureBuilder(
+                    future: DummyService().getCustomerCommentsList(),
+                    builder: (context, data) {
+                      if (data.hasData) {
+                        var items =
+                            data.data as List<CustomerCommentDummyModel>;
+
+                        return ListView.builder(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            itemCount: items.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(3)),
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.white1
+                                        : AppTheme.black22,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        blurStyle: BlurStyle.normal,
+                                        offset: Offset(0, -4),
+                                        blurRadius: 26,
+                                        spreadRadius: 0,
+                                        color:
+                                            Color(0xFF2B3361).withOpacity(0.10),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 126,
+                                        height: 145,
+                                        decoration: BoxDecoration(
+                                          // image: DecorationImage(
+                                          //   image: NetworkImage(
+                                          //     items[index].images[0] ?? '',
+                                          //   ),
+                                          //   fit: BoxFit.cover,
+                                          // ),
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(2),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(width: 10),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: deviceWidth -
+                                                (24 + 16 + 126 + 10),
+                                            height: 35,
+                                            child: Text(
+                                              items[index].name ?? '',
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white11,
+                                              ),
+                                            ),
+                                          ),
+                                          Text(
+                                            items[index].name ?? '',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w500,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white1,
+                                            ),
+                                          ),
+                                          Text(
+                                            items[index].name ?? '',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppTheme.white15,
+                                            ),
+                                          ),
+                                          SizedBox(height: 8),
+                                          Text(
+                                            items[index].country ?? '',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppTheme.white15,
+                                            ),
+                                          ),
+                                          SizedBox(height: 1),
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                items[index].country ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color:
+                                                      Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white11,
+                                                ),
+                                              ),
+                                              SizedBox(width: 5),
+                                              Text(
+                                                items[index].rating ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w800,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              SizedBox(width: 4),
+                                              Image.asset(
+                                                  'assets/icons/star.png',
+                                                  width: 15,
+                                                  height: 15),
+                                            ],
+                                          ),
+                                          SizedBox(height: 2),
+                                          SizedBox(
+                                            height: 24,
+                                            child: ButtonTheme(
+                                              // minWidth: deviceWidth,
+                                              height: 22,
+
+                                              child: MaterialButton(
+                                                  elevation: 0,
+                                                  color: Colors.transparent,
+                                                  shape: RoundedRectangleBorder(
+                                                    side: BorderSide(
+                                                        width: 1,
+                                                        color:
+                                                            AppTheme.white19),
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                36)),
+                                                  ),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      10, 2, 10, 3.5),
+                                                  child: Row(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment.end,
+                                                    children: [
+                                                      Image.asset(
+                                                          'assets/icons/comment.png',
+                                                          width: 12.5,
+                                                          height: 12.5,
+                                                          color:
+                                                              AppTheme.black16),
+                                                      SizedBox(width: 3.5),
+                                                      Text(
+                                                        "Tedarikçiye Ulaşın",
+                                                        style: TextStyle(
+                                                          fontSize: 10,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: Provider.of<ThemeProvider>(
+                                                                          context)
+                                                                      .themeMode ==
+                                                                  "light"
+                                                              ? AppTheme.blue2
+                                                              : AppTheme.white1,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  onPressed: () async {}),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }));
+                      } else {
+                        return SizedBox(
+                          height: deviceWidth + 115,
+                          child: Center(
+                              child: CupertinoActivityIndicator(
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black1
+                                    : AppTheme.white1,
+                            radius: 12,
+                          )),
+                        );
+                      }
+                    },
+                  )
+                : Provider.of<MarketPlaceProvider>(context)
+                            .productCommentsTab ==
+                        1
+                    ? Container()
+                    : Container(),
             SizedBox(height: 80),
           ],
         ),
