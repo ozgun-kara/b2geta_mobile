@@ -879,6 +879,40 @@ class _ProductDetailSecondTabSubpageState
                                         ),
                                       ),
                                       SizedBox(height: 8),
+                                      if (items[index].images!.isNotEmpty)
+                                        Row(
+                                          children: [
+                                            Container(
+                                              width: deviceWidth * 0.5 - 36,
+                                              height: deviceWidth * 0.5 - 36,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    items[index].images![0] ??
+                                                        '',
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 18),
+                                            Container(
+                                              width: deviceWidth * 0.5 - 36,
+                                              height: deviceWidth * 0.5 - 36,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    items[index].images![1] ??
+                                                        '',
+                                                  ),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      else
+                                        Container(),
                                     ],
                                   ),
                                 ),
