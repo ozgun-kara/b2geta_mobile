@@ -697,7 +697,6 @@ class _ProductDetailSecondTabSubpageState
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
-            SizedBox(height: 0),
             Provider.of<MarketPlaceProvider>(context).productCommentsTab == 0
                 ? FutureBuilder(
                     future: DummyService().getCustomerCommentsList(),
@@ -722,7 +721,7 @@ class _ProductDetailSecondTabSubpageState
                             },
                             itemBuilder: ((context, index) {
                               return Container(
-                                padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
+                                padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
                                 child: Column(
                                   children: [
                                     Row(
@@ -967,7 +966,7 @@ class _ProductDetailSecondTabSubpageState
             ),
             SizedBox(height: 34),
           ],
-        ),
+        ), // CUSTOMERS COMMENTS PANEL
       ],
     );
   }
