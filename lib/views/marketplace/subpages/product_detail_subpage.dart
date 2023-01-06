@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_ta
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -23,6 +24,20 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   late double deviceWidth;
   late double deviceHeight;
 
+  // @override
+  // void initState() {
+  //   scrollController = ScrollController();
+  //
+  //   super.initState();
+  // }
+
+  //
+  // @override
+  // void dispose() {
+  //   scrollController.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -34,6 +49,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
           ? AppTheme.white2
           : AppTheme.black7,
       body: SingleChildScrollView(
+        controller: scrollController,
         child: Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 0, 36),
           child: Column(
@@ -997,7 +1013,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                           var items = data.data as List<ProductDummyModel>;
 
                           return ListView.builder(
-                              controller: scrollController,
+                              physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               itemCount: items.length,
                               itemBuilder: ((context, index) {
@@ -1321,6 +1337,25 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: AnimatedBuilder(
+        animation: scrollController,
+        builder: (context, child) {
+          return AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              height: scrollController.hasClients
+                  ? scrollController.position.userScrollDirection ==
+                          ScrollDirection.reverse
+                      ? 0
+                      : 120
+                  : 120,
+              child: child);
+        },
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 60),
+          child:
+              Container(width: deviceWidth, height: 60, color: AppTheme.blue2),
         ),
       ),
     );
