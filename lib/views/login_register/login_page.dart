@@ -11,8 +11,6 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginPage extends StatefulWidget {
-  // const LoginPage({Key? key}) : super(key: key);
-
   final String email;
   final String password;
 
@@ -35,7 +33,6 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     emailController1.text = widget.email;
     passwordController1.text = widget.password;
-
     super.initState();
   }
 
@@ -237,30 +234,32 @@ class _LoginPageState extends State<LoginPage> {
                                   color: AppTheme.white14),
                             ),
                             SizedBox(width: 9),
-                            FlutterSwitch(
-                              width: 42,
-                              height: 21,
-                              toggleSize: 17,
-                              padding: 2,
-                              borderRadius: 100,
-                              inactiveColor: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white7
-                                  : AppTheme.black10,
-                              activeColor: AppTheme.green1,
-                              toggleColor: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.white1
-                                  : AppTheme.black4,
-                              value: Provider.of<LoginRegisterProvider>(
-                                      context)
-                                  .loginSwitch,
-                              onToggle: (value) {
-                                Provider.of<LoginRegisterProvider>(context,
-                                        listen: false)
-                                    .updateLoginSwitch(value);
+                            Consumer<LoginRegisterProvider>(
+                              builder: (context, provider, child) {
+                                return FlutterSwitch(
+                                  width: 42,
+                                  height: 21,
+                                  toggleSize: 17,
+                                  padding: 2,
+                                  borderRadius: 100,
+                                  inactiveColor:
+                                      Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.white7
+                                          : AppTheme.black10,
+                                  activeColor: AppTheme.green1,
+                                  toggleColor:
+                                      Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.white1
+                                          : AppTheme.black4,
+                                  value: provider.loginSwitch,
+                                  onToggle: (value) {
+                                    provider.updateLoginSwitch(value);
+                                  },
+                                );
                               },
                             ),
                           ],
