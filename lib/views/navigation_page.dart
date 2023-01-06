@@ -125,8 +125,8 @@ class _NavigationPageState extends State<NavigationPage> {
             width: deviceWidth,
             height: 60,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+              // borderRadius: BorderRadius.only(
+              //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
               // boxShadow: [
               //   BoxShadow(
               //     color: Colors.black54.withOpacity(0.35),

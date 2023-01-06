@@ -24,20 +24,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   late double deviceWidth;
   late double deviceHeight;
 
-  // @override
-  // void initState() {
-  //   scrollController = ScrollController();
-  //
-  //   super.initState();
-  // }
-
-  //
-  // @override
-  // void dispose() {
-  //   scrollController.dispose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -1354,8 +1340,92 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
         },
         child: Padding(
           padding: EdgeInsets.only(bottom: 60),
-          child:
-              Container(width: deviceWidth, height: 60, color: AppTheme.blue2),
+          child: Container(
+            width: deviceWidth,
+            height: 60,
+            color: AppTheme.blue2,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(11, 0, 9, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          "50 - 199 Adet",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color: AppTheme.white15,
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Text(
+                          "98,94₺",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color: AppTheme.white1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      ButtonTheme(
+                        minWidth: double.minPositive,
+                        height: 41,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color: AppTheme.green2,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7)),
+                            ),
+                            child: Text(
+                              "Sepete Ekle",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: () {}),
+                      ),
+                      SizedBox(width: 8),
+                      ButtonTheme(
+                        minWidth: double.minPositive,
+                        height: 41,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color: AppTheme.blue7,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(7)),
+                            ),
+                            child: Text(
+                              "Satıcıya Sor",
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: () {}),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
