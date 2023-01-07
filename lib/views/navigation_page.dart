@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,11 @@ class _NavigationPageState extends State<NavigationPage> {
     deviceHeight = MediaQuery.of(context).size.height;
 
     var themeMode = Provider.of<ThemeProvider>(context).themeMode;
+
+    void navigateToBasketPage() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const BasketPage()));
+    }
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -72,7 +78,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   height: 16.39,
                   color: AppTheme.white15,
                 ),
-                onPressed: () {},
+                onPressed:navigateToBasketPage,
               ),
               SizedBox(width: 4),
               IconButton(

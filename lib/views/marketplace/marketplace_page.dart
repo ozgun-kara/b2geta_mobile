@@ -428,6 +428,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
+                                          //? bu kısım sorulacak.
                                           SizedBox(
                                             width: deviceWidth -
                                                 (24 + 16 + 126 + 10),
