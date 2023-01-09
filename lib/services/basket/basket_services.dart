@@ -3,39 +3,34 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../../models/basket_model.dart';
+
 class BasketServices {
   // GET ALL
-  Future<bool> getAllCall() async {
+  Future<List<Basket>> getAllCall() async {
+    List<Basket> basketList = [];
+
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}",
+      "Authorization":"Bearer ${Constants.userToken}",
     });
-
+    debugPrint(Constants.userToken);
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: ${response.statusCode}");
-      // debugPrint("RESPONSE DATA: ${response.body}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
-
       var status = json.decode(response.body)["status"];
 
+
       if (status == true) {
-        return true;
+        var data = jsonDecode(response.body)['data'];
+
+        for (var basket in data) {
+          basketList.add(Basket.fromJson(basket));
+        }
+        return basketList;
       } else {
-        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return basketList;
       }
     } else {
-      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
-      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
-      return false;
+      return basketList;
     }
   }
 

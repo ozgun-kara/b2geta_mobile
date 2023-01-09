@@ -1,7 +1,10 @@
+import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../app_theme.dart';
+import '../../models/basket_model.dart';
 import '../../providers/theme_provider.dart';
 
 class BasketPage extends StatefulWidget {
@@ -25,18 +28,38 @@ class _BasketPageState extends State<BasketPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: _appBar( context),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 1),
-            _pagePathName(),
-            _basketCount(),
-            _cartItem('Öz Turanlar Mobilya', 2),
-            _cartItem( 'Self Mobilya', 1),
-            _orderSummary()
-          ],
-        ),
+      appBar: _appBar(context),
+      body: Column(
+        children: [
+          const SizedBox(height: 1),
+          _pagePathName(),
+          _basketCount(),
+          FutureBuilder<List<Basket>>(
+            future: BasketServices().getAllCall(),
+            builder: (context, data) {
+              if (data.hasData) {
+                var basketList = data.data;
+                return Expanded(
+                  child: ListView.builder(
+                    itemCount: basketList!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _cartItem(basketList[index]);
+                    },
+                  ),
+                );
+              } else {
+                return Expanded(
+                  child: Center(
+                      child: CupertinoActivityIndicator(
+                    color: themeMode ? AppTheme.black1 : AppTheme.white1,
+                    radius: 12,
+                  )),
+                );
+              }
+            },
+          ),
+          _orderSummary()
+        ],
       ),
     );
   }
@@ -139,7 +162,7 @@ class _BasketPageState extends State<BasketPage> {
   Widget _basketCount() {
     return Container(
       width: deviceWidth,
-      height: 83.0,
+      height: 63.0,
       padding: const EdgeInsets.symmetric(horizontal: 26.0),
       decoration: BoxDecoration(
         color: AppTheme.blue2,
@@ -185,7 +208,7 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Widget _cartItem(String cartItemTitle, int cartContentCount) {
+  Widget _cartItem(Basket basket) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -201,7 +224,7 @@ class _BasketPageState extends State<BasketPage> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              cartItemTitle,
+              basket.product!.brand ?? '',
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
@@ -212,154 +235,167 @@ class _BasketPageState extends State<BasketPage> {
           ),
         ),
         //cart item content
-        for (int i = 0; i < cartContentCount; i++)
-          Container(
-            width: deviceWidth,
-            padding: const EdgeInsets.symmetric(horizontal: 9.0),
-            decoration: BoxDecoration(
-              color: themeMode ? AppTheme.white1 : AppTheme.black7,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 9,
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //cart item content image
-                    Container(
-                      width: 82.0,
-                      height: 82.0,
-                      decoration: BoxDecoration(
+        Container(
+          width: deviceWidth,
+          padding: const EdgeInsets.symmetric(horizontal: 9.0),
+          decoration: BoxDecoration(
+            color: themeMode ? AppTheme.white1 : AppTheme.black7,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 9,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //cart item content image
+                  Container(
+                    width: 82.0,
+                    height: 82.0,
+                    decoration: BoxDecoration(
+                        color: themeMode ? AppTheme.white21 : AppTheme.black20,
+                        border: Border.all(
                           color:
                               themeMode ? AppTheme.white21 : AppTheme.black20,
-                          border: Border.all(
-                            color:
-                                themeMode ? AppTheme.white21 : AppTheme.black20,
-                          ),
-                          borderRadius: BorderRadius.circular(8.0)),
-                      child: Image.asset('assets/images/bag_image.png'),
-                    ),
-                    const SizedBox(
-                      width: 14,
-                    ),
-                    //cart item content title
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            "Karaca Keenover 10 Parça Bıçak",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Boyut:",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppTheme.white15),
-                              ),
-                              Text(
-                                "30*29*55cm",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: themeMode
-                                      ? AppTheme.green3
-                                      : AppTheme.green4,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Renk:",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppTheme.white15),
-                              ),
-                              const SizedBox(
-                                width: 2,
-                              ),
-                              Container(
-                                width: 16.0,
-                                height: 16.0,
-                                decoration: BoxDecoration(
-                                    color: AppTheme.white15,
-                                    border: Border.all(
-                                      color: AppTheme.white15,
-                                    ),
-                                    borderRadius: BorderRadius.circular(2.0)),
-                                child:
-                                    const ColoredBox(color: Color(0xFFFF9330)),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                "Teslimat Süresi:",
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppTheme.white15),
-                              ),
-                              Text(
-                                "Müzakere edilecek",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: themeMode
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 14,
-                ),
-                //basket quantity change buttons
-                Container(
-                  width: 133,
-                  height: 33,
-                  margin: const EdgeInsets.only(left: 96),
-                  decoration: BoxDecoration(
-                    color: themeMode ? AppTheme.white22 : AppTheme.black18,
-                    borderRadius: BorderRadius.circular(8),
+                        ),
+                        borderRadius: BorderRadius.circular(8.0)),
+                    child: Image.asset('assets/images/bag_image.png'),
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
+                  const SizedBox(
+                    width: 14,
+                  ),
+                  //cart item content title
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          basket.product!.productName ?? '',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Boyut:",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white15),
+                            ),
+                            Text(
+                              "30*29*55cm",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: themeMode
+                                    ? AppTheme.green3
+                                    : AppTheme.green4,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Renk:",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white15),
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            Container(
+                              width: 16.0,
+                              height: 16.0,
+                              decoration: BoxDecoration(
+                                  color: AppTheme.white15,
+                                  border: Border.all(
+                                    color: AppTheme.white15,
+                                  ),
+                                  borderRadius: BorderRadius.circular(2.0)),
+                              child: const ColoredBox(color: Color(0xFFFF9330)),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 12,
+                        ),
+                        Row(
+                          children: [
+                            Text(
+                              "Teslimat Süresi:",
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white15),
+                            ),
+                            Text(
+                              "Müzakere edilecek",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: themeMode
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 14,
+              ),
+              //basket quantity change buttons
+              Container(
+                width: 133,
+                height: 33,
+                margin: const EdgeInsets.only(left: 96),
+                decoration: BoxDecoration(
+                  color: themeMode ? AppTheme.white22 : AppTheme.black18,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        var basketQuantity = int.parse(basket.quantity!);
+
+                        if (basketQuantity > 1) {
+                          BasketServices()
+                              .updateProductInBasketCall(
+                                  productId: basket.productId!,
+                                  quantity:
+                                      "${int.parse(basket.quantity!) - 1}")
+                              .then((bool value) {
+                            if (value) {
+                              setState(() {});
+                            }
+                          });
+                        }
+                      },
+                      child: Container(
                         width: 30,
                         height: 31,
                         margin: const EdgeInsets.only(left: 1),
@@ -380,18 +416,31 @@ class _BasketPageState extends State<BasketPage> {
                           ),
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          "150",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                          ),
+                    ),
+                    Center(
+                      child: Text(
+                        basket.quantity ?? '0',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                         ),
                       ),
-                      Container(
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        BasketServices()
+                            .updateProductInBasketCall(
+                                productId: basket.productId!,
+                                quantity: "${int.parse(basket.quantity!) + 1}")
+                            .then((bool value) {
+                          if (value) {
+                            setState(() {});
+                          }
+                        });
+                      },
+                      child: Container(
                         width: 30,
                         height: 31,
                         margin: const EdgeInsets.only(right: 1.0),
@@ -412,88 +461,87 @@ class _BasketPageState extends State<BasketPage> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 19,
-                ),
-                //delete button and price info
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 41.0),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 19.0,
-                            height: 19.0,
-                            child: Image.asset(
-                              "assets/icons/delete.png",
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 6,
-                          ),
-                          Text(
-                            "Sil",
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
-                    const SizedBox(
-                      width: 45,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 19,
+              ),
+              //delete button and price info
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 41.0),
+                    child: Column(
                       children: [
-                        Text(
-                          "Toplam Ücret",
-                          style: TextStyle(
-                              fontSize: 10,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: AppTheme.white15),
-                        ),
-                        Text(
-                          "98,94₺",
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color:
-                                themeMode ? AppTheme.green3 : AppTheme.green4,
+                        SizedBox(
+                          width: 19.0,
+                          height: 19.0,
+                          child: Image.asset(
+                            "assets/icons/delete.png",
                           ),
                         ),
+                        const SizedBox(
+                          height: 6,
+                        ),
                         Text(
-                          "Adet başı ücret 8,5₺",
+                          "Sil",
                           style: TextStyle(
                             fontSize: 11,
                             fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
                         ),
                       ],
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 19,
-                ),
-                const Divider(
-                  height: 1,
-                ),
-              ],
-            ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 45,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Toplam Ücret",
+                        style: TextStyle(
+                            fontSize: 10,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color: AppTheme.white15),
+                      ),
+                      Text(
+                        basket.product!.price ?? '0' "₺",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.green3 : AppTheme.green4,
+                        ),
+                      ),
+                      Text(
+                        "Adet başı ücret 8,5₺",
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 19,
+              ),
+              const Divider(
+                height: 1,
+              ),
+            ],
           ),
+        ),
       ],
     );
   }
@@ -506,54 +554,64 @@ class _BasketPageState extends State<BasketPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Sipariş Özeti",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w700,
-                  color: themeMode ? AppTheme.blue2 : AppTheme.blue6),
-            ),
-            Text(
-              "Toplam Ücret",
-              style: TextStyle(
-                  fontSize: 14,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: AppTheme.white15),
-            ),
-            Text(
-              '3.298,94₺',
-              style: TextStyle(
-                fontSize: 32,
-                fontFamily: AppTheme.appFontFamily,
-                fontWeight: FontWeight.w500,
-                color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-              ),
-            ),
-            const SizedBox(
-              height: 13,
-            ),
-            Container(
-              width: deviceWidth,
-              height: 52,
-              decoration: BoxDecoration(
-                  color: AppTheme.green2,
-                  borderRadius: BorderRadius.circular(16.0)),
-              child: Center(
-                child: Text(
-                  'Sepeti Onayla',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.white1,
+            Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Sipariş Özeti",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w700,
+                          color: themeMode ? AppTheme.blue2 : AppTheme.blue6),
+                    ),
+                    Text(
+                      "Toplam Ücret",
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: AppTheme.white15),
+                    ),
+                    Text(
+                      '3.298,94₺',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 45,
+                    decoration: BoxDecoration(
+                        color: AppTheme.green2,
+                        borderRadius: BorderRadius.circular(16.0)),
+                    child: Center(
+                      child: Text(
+                        'Sepeti Onayla',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.white1,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
             const SizedBox(
-              height: 36,
+              height: 5,
             ),
           ],
         ));
