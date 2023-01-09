@@ -34,7 +34,7 @@ class _BasketPageState extends State<BasketPage> {
           const SizedBox(height: 1),
           _pagePathName(),
           _basketCount(),
-          FutureBuilder<List<Basket>>(
+          FutureBuilder<List<BasketModel>>(
             future: BasketServices().getAllCall(),
             builder: (context, data) {
               if (data.hasData) {
@@ -208,7 +208,7 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Widget _cartItem(Basket basket) {
+  Widget _cartItem(BasketModel basket) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

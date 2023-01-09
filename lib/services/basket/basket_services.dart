@@ -7,8 +7,8 @@ import '../../models/basket_model.dart';
 
 class BasketServices {
   // GET ALL
-  Future<List<Basket>> getAllCall() async {
-    List<Basket> basketList = [];
+  Future<List<BasketModel>> getAllCall() async {
+    List<BasketModel> basketList = [];
 
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
@@ -23,7 +23,7 @@ class BasketServices {
         var data = jsonDecode(response.body)['data'];
 
         for (var basket in data) {
-          basketList.add(Basket.fromJson(basket));
+          basketList.add(BasketModel.fromJson(basket));
         }
         return basketList;
       } else {
