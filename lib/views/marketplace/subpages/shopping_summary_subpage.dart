@@ -90,104 +90,105 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                                  child: FittedBox(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(22)),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Provider.of<ThemeProvider>(
-                                                          context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.white21
-                                              : AppTheme.black15,
-                                        ),
+                                  child: Container(
+                                    width: deviceWidth,
+                                    decoration: BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(22)),
+                                      border: Border.all(
+                                        width: 1,
                                         color:
                                             Provider.of<ThemeProvider>(context)
                                                         .themeMode ==
                                                     "light"
-                                                ? AppTheme.white1
+                                                ? AppTheme.white21
                                                 : AppTheme.black15,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            blurStyle: BlurStyle.normal,
-                                            offset: Offset(0, -4),
-                                            blurRadius: 26,
-                                            spreadRadius: 0,
-                                            color: Color(0xFF2B3361)
-                                                .withOpacity(0.10),
-                                          ),
-                                        ],
                                       ),
-                                      padding:
-                                          EdgeInsets.fromLTRB(12, 23, 27, 20),
-                                      child: Row(
-                                        // crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Column(
-                                            children: [
-                                              Container(
-                                                width: 55,
-                                                height: 55,
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                  border: Border.all(
-                                                      width: 1,
-                                                      color: Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.white21
-                                                          : AppTheme.black20),
-                                                  image: DecorationImage(
-                                                    image: NetworkImage(
-                                                      items[index].imgUrl ?? '',
-                                                    ),
-                                                    fit: BoxFit.cover,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.white1
+                                          : AppTheme.black15,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurStyle: BlurStyle.normal,
+                                          offset: Offset(0, -4),
+                                          blurRadius: 26,
+                                          spreadRadius: 0,
+                                          color: Color(0xFF2B3361)
+                                              .withOpacity(0.10),
+                                        ),
+                                      ],
+                                    ),
+                                    padding:
+                                        EdgeInsets.fromLTRB(12, 23, 27, 20),
+                                    child: Row(
+                                      // crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Column(
+                                          children: [
+                                            Container(
+                                              width: 55,
+                                              height: 55,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.white21
+                                                            : AppTheme.black20),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    items[index].imgUrl ?? '',
                                                   ),
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
-                                              SizedBox(height: 4),
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    items[index].rating ?? '',
-                                                    style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      color: AppTheme.white15,
-                                                    ),
+                                            ),
+                                            SizedBox(height: 4),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  items[index].rating ?? '',
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: AppTheme.white15,
                                                   ),
-                                                  SizedBox(width: 4),
-                                                  Image.asset(
-                                                      'assets/icons/star.png',
-                                                      width: 15,
-                                                      height: 15),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(width: 10),
-                                          Column(
+                                                ),
+                                                SizedBox(width: 4),
+                                                Image.asset(
+                                                    'assets/icons/star.png',
+                                                    width: 15,
+                                                    height: 15),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(width: 10),
+                                        Expanded(
+                                          child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  SizedBox(
-                                                    width: deviceWidth * 0.48,
+                                                  Expanded(
                                                     child: Text(
                                                       items[index]
                                                               .companyName ??
                                                           '',
-                                                      maxLines: 1,
                                                       style: TextStyle(
                                                         fontSize: 13,
                                                         fontFamily: AppTheme
@@ -260,8 +261,8 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                               ),
                                             ],
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
