@@ -1349,33 +1349,37 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          "50 - 199 Adet",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.white15,
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            "50 - 199 Adet",
+                            overflow: TextOverflow.visible,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.white15,
+                            ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        child: Text(
-                          "98,94₺",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.white1,
+                        Flexible(
+                          child: Text(
+                            "98,94₺",
+                            overflow: TextOverflow.visible,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.white1,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Row(
                     children: [
