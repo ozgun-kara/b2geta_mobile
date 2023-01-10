@@ -72,12 +72,267 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
+                    Wrap(
+                      spacing: 15,
+                      runSpacing: 13,
+                      children: [
+                        SizedBox(
+                          width: deviceWidth * 0.5 - 17.5,
+                          height: 39,
+                          child: MaterialButton(
+                              minWidth: deviceWidth * 0.5 - 17.5,
+                              height: 39,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                              ),
+                              color: Provider.of<MarketPlaceProvider>(context)
+                                          .productCountIndex ==
+                                      0
+                                  ? AppTheme.blue2
+                                  : themeMode
+                                      ? AppTheme.white31
+                                      : AppTheme.black18,
+                              // padding: const EdgeInsets.all(7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "50 - 199 Adet",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              0
+                                          ? AppTheme.white30
+                                          : AppTheme.white15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "98,94₺",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              0
+                                          ? AppTheme.white1
+                                          : themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Provider.of<MarketPlaceProvider>(context,
+                                        listen: false)
+                                    .updateProductCountIndex(0);
+                              }),
+                        ),
+                        SizedBox(
+                          width: deviceWidth * 0.5 - 17.5,
+                          height: 39,
+                          child: MaterialButton(
+                              minWidth: deviceWidth * 0.5 - 17.5,
+                              height: 39,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                              ),
+                              color: Provider.of<MarketPlaceProvider>(context)
+                                          .productCountIndex ==
+                                      1
+                                  ? AppTheme.blue2
+                                  : themeMode
+                                      ? AppTheme.white31
+                                      : AppTheme.black18,
+                              // padding: const EdgeInsets.all(7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "200 - 499 Adet",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              1
+                                          ? AppTheme.white30
+                                          : AppTheme.white15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "89,05₺",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              1
+                                          ? AppTheme.white1
+                                          : themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Provider.of<MarketPlaceProvider>(context,
+                                        listen: false)
+                                    .updateProductCountIndex(1);
+                              }),
+                        ),
+                        SizedBox(
+                          width: deviceWidth * 0.5 - 17.5,
+                          height: 39,
+                          child: MaterialButton(
+                              minWidth: deviceWidth * 0.5 - 17.5,
+                              height: 39,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                              ),
+                              color: Provider.of<MarketPlaceProvider>(context)
+                                          .productCountIndex ==
+                                      2
+                                  ? AppTheme.blue2
+                                  : themeMode
+                                      ? AppTheme.white31
+                                      : AppTheme.black18,
+                              // padding: const EdgeInsets.all(7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "500 - 999 Adet",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              2
+                                          ? AppTheme.white30
+                                          : AppTheme.white15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "83,11₺",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              2
+                                          ? AppTheme.white1
+                                          : themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Provider.of<MarketPlaceProvider>(context,
+                                        listen: false)
+                                    .updateProductCountIndex(2);
+                              }),
+                        ),
+                        SizedBox(
+                          width: deviceWidth * 0.5 - 17.5,
+                          height: 39,
+                          child: MaterialButton(
+                              minWidth: deviceWidth * 0.5 - 17.5,
+                              height: 39,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                              ),
+                              color: Provider.of<MarketPlaceProvider>(context)
+                                          .productCountIndex ==
+                                      3
+                                  ? AppTheme.blue2
+                                  : themeMode
+                                      ? AppTheme.white31
+                                      : AppTheme.black18,
+                              // padding: const EdgeInsets.all(7),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    ">= 1000 Adet",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              3
+                                          ? AppTheme.white30
+                                          : AppTheme.white15,
+                                    ),
+                                  ),
+                                  Text(
+                                    "79,15₺",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .productCountIndex ==
+                                              3
+                                          ? AppTheme.white1
+                                          : themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Provider.of<MarketPlaceProvider>(context,
+                                        listen: false)
+                                    .updateProductCountIndex(3);
+                              }),
+                        ),
+                      ],
+                    ), // PRODUCT COUNT
+                    SizedBox(height: 17),
+                    Container(
+                        height: 1,
+                        color: themeMode ? AppTheme.white29 : AppTheme.black21),
+                    SizedBox(height: 24),
                     Column(
                       children: [
                         Row(
                           children: [
                             Text(
-                              "Boyut::",
+                              "Boyut:",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
