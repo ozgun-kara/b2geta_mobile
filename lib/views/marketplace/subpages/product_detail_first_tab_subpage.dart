@@ -47,270 +47,371 @@ class _ProductDetailFirstTabSubpageState
         SizedBox(height: 22),
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
-          child: Row(
+          child: Column(
             children: [
-              Column(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Özel kullanım:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Özel kullanım:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Tür:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Uygulama:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Malzeme:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Katlanmış:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Marka adı:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Ürün adı:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Tarzı:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Renk:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Adedi:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Çerçeve:",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: AppTheme.white15,
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Otel sandalye",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
                     ),
                   ),
                 ],
               ),
-              SizedBox(width: 22),
-              Column(
+              SizedBox(height: 16),
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Otel sandalye",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Tür:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
                     ),
                   ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Otel mobilya",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Mutfak, Ev ofis, Oturma odası",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Plastik",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Hiçbir",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "FIR",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Çocuklar sandalye ve masa",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Avrupa Modern oturma Furntiure",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Beyaz siyah altın mavi kırmızı",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "50 Adet",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
-                    ),
-                  ),
-                  SizedBox(height: 12),
-                  Text(
-                    "Plastik çerçeve",
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Otel mobilya",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Uygulama:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Mutfak, Ev ofis, Oturma odası",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Malzeme:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Plastik",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Katlanmış:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Hiçbir",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Marka adı:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "FIR",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Ürün adı:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Çocuklar sandalye ve masa",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Tarzı:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Avrupa Modern oturma Furntiure",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Renk:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Beyaz siyah altın mavi kırmızı",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Adedi:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "50 adet",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 90,
+                    child: Text(
+                      "Çerçeve:",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 7),
+                  Expanded(
+                    child: Text(
+                      "Plastik çerçeve",
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
             ],
           ),
         ),
@@ -339,6 +440,7 @@ class _ProductDetailFirstTabSubpageState
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 "Tedarik Kapasitesi:",
@@ -350,16 +452,18 @@ class _ProductDetailFirstTabSubpageState
                 ),
               ),
               SizedBox(width: 4),
-              Text(
-                "5000 Adet / Adet per Month",
-                style: TextStyle(
-                  fontSize: 13,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.blue3
-                          : AppTheme.white1,
+              Expanded(
+                child: Text(
+                  "5000 Adet / Adet per Month",
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                  ),
                 ),
               ),
             ],
