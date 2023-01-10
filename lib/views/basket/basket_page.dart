@@ -39,14 +39,20 @@ class _BasketPageState extends State<BasketPage> {
             builder: (context, data) {
               if (data.hasData) {
                 var basketList = data.data;
-                return Expanded(
-                  child: ListView.builder(
-                    itemCount: basketList!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return _cartItem(basketList[index]);
-                    },
-                  ),
-                );
+                if (basketList!.isNotEmpty) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: basketList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return _cartItem(basketList[index]);
+                      },
+                    ),
+                  );
+                } else {
+                  return const Expanded(
+                      child: Center(
+                          child: Text("Sepetinizde ürün bulunmamaktadır.")));
+                }
               } else {
                 return Expanded(
                   child: Center(
@@ -393,6 +399,18 @@ class _BasketPageState extends State<BasketPage> {
                               setState(() {});
                             }
                           });
+                        }else{
+                           showAlertDialog(context, () {
+                            BasketServices()
+                                .deleteProductInBasketCall(
+                                    param1: basket.product!.id!)
+                                .then((bool value) {
+                              if (value) {
+                                Navigator.pop(context);
+                                setState(() {});
+                              }
+                            });
+                          });
                         }
                       },
                       child: Container(
@@ -473,28 +491,43 @@ class _BasketPageState extends State<BasketPage> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 41.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          width: 19.0,
-                          height: 19.0,
-                          child: Image.asset(
-                            "assets/icons/delete.png",
+                    child: GestureDetector(
+                       onTap: () {
+                        showAlertDialog(context, () {
+                          BasketServices()
+                              .deleteProductInBasketCall(
+                                  param1: basket.product!.id!)
+                              .then((bool value) {
+                            if (value) {
+                              Navigator.pop(context);
+                              setState(() {});
+                            }
+                          });
+                        });
+                      },
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            width: 19.0,
+                            height: 19.0,
+                            child: Image.asset(
+                              "assets/icons/delete.png",
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 6,
-                        ),
-                        Text(
-                          "Sil",
-                          style: TextStyle(
-                            fontSize: 11,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          const SizedBox(
+                            height: 6,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "Sil",
+                            style: TextStyle(
+                              fontSize: 11,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w400,
+                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(
@@ -615,5 +648,37 @@ class _BasketPageState extends State<BasketPage> {
             ),
           ],
         ));
+  }
+
+   void showAlertDialog(BuildContext context, VoidCallback onPressed) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: const Text("İptal"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = TextButton(
+      child: const Text("Sil"),
+      onPressed: onPressed,
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Sepetten ürün çıkartma"),
+      content: const Text("Silmek istediğinizden emin misiniz?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
