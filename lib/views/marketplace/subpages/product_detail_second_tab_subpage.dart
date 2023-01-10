@@ -7,6 +7,8 @@ import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class ProductDetailSecondTabSubpage extends StatefulWidget {
   ProductDetailSecondTabSubpage({Key? key}) : super(key: key);
@@ -888,28 +890,50 @@ class _ProductDetailSecondTabSubpageState
                                             EdgeInsets.fromLTRB(0, 9, 0, 0),
                                         child: Row(
                                           children: [
-                                            Container(
-                                              width: deviceWidth * 0.5 - 36,
-                                              height: deviceWidth * 0.5 - 36,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    items[index].images[0],
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            GalleryWidget(
+                                                              urlImages:
+                                                                  items[index]
+                                                                      .images,
+                                                            )));
+                                              },
+                                              child: Container(
+                                                width: deviceWidth * 0.5 - 36,
+                                                height: deviceWidth * 0.5 - 36,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        items[index].images[0]),
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
                                             SizedBox(width: 18),
-                                            Container(
-                                              width: deviceWidth * 0.5 - 36,
-                                              height: deviceWidth * 0.5 - 36,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    items[index].images[1],
+                                            InkWell(
+                                              onTap: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            GalleryWidget(
+                                                              urlImages:
+                                                                  items[index]
+                                                                      .images,
+                                                            )));
+                                              },
+                                              child: Container(
+                                                width: deviceWidth * 0.5 - 36,
+                                                height: deviceWidth * 0.5 - 36,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: NetworkImage(
+                                                        items[index].images[1]),
+                                                    fit: BoxFit.cover,
                                                   ),
-                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             ),
@@ -969,5 +993,33 @@ class _ProductDetailSecondTabSubpageState
         ), // CUSTOMERS COMMENTS PANEL
       ],
     );
+  }
+}
+
+class GalleryWidget extends StatefulWidget {
+  final List<String> urlImages;
+
+  const GalleryWidget({super.key, required this.urlImages});
+
+  @override
+  State<GalleryWidget> createState() => _GalleryWidgetState();
+}
+
+class _GalleryWidgetState extends State<GalleryWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: PhotoViewGallery.builder(
+      itemCount: widget.urlImages.length,
+      builder: (context, index) {
+        final urlImage = widget.urlImages[index];
+
+        return PhotoViewGalleryPageOptions(
+          imageProvider: NetworkImage(urlImage),
+          minScale: PhotoViewComputedScale.contained,
+          maxScale: PhotoViewComputedScale.contained * 4,
+        );
+      },
+    ));
   }
 }
