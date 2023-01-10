@@ -13,6 +13,7 @@ class MarketPlaceProvider with ChangeNotifier {
 
   // PRODUCT DETAIL SUBPAGE
 
+  int productImageIndex = 0;
   int productCountIndex = 0;
   int productDimensionIndex = 0;
   int productColorIndex = 0;
@@ -23,6 +24,11 @@ class MarketPlaceProvider with ChangeNotifier {
   bool ratingCheckBox4 = false;
   bool ratingCheckBox5 = false;
   int productCommentsTab = 0;
+
+  void updateProductImageIndex(int value) {
+    productImageIndex = value;
+    notifyListeners();
+  }
 
   void updateProductCountIndex(int value) {
     productCountIndex = value;
