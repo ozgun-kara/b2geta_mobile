@@ -77,6 +77,290 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                         Row(
                           children: [
                             Text(
+                              "Renk:",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white11,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 9),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: [
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      0
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.blue8),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(0);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      1
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.black1),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(1);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      2
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.red1),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(2);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      3
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.white1),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(3);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      4
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.green5),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(4);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      5
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.purple1),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(5);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: 38,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: 38,
+                                    height: 38,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color:
+                                              Provider.of<MarketPlaceProvider>(
+                                                              context)
+                                                          .productColorIndex ==
+                                                      6
+                                                  ? AppTheme.blue2
+                                                  : Colors.transparent),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    color: AppTheme.white28,
+                                    padding: const EdgeInsets.all(7),
+                                    child: Container(
+                                      width: 24,
+                                      height: 24,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.yellow2),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductColorIndex(6);
+                                    }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ), // PRODUCT COLOR
+                    SizedBox(height: 20),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
                               "Teslimat süresi:",
                               style: TextStyle(
                                 fontSize: 14,
@@ -85,7 +369,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? AppTheme.black2
+                                    ? AppTheme.blue3
                                     : AppTheme.white11,
                               ),
                             ),
@@ -335,7 +619,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                           context)
                                                       .themeMode ==
                                                   "light"
-                                              ? AppTheme.black2
+                                              ? AppTheme.blue3
                                               : AppTheme.white1,
                                         ),
                                       ),
@@ -404,7 +688,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -438,7 +722,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -472,7 +756,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -506,7 +790,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -581,7 +865,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -615,7 +899,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -649,7 +933,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.black2
+                                                        ? AppTheme.blue3
                                                         : AppTheme.white1,
                                               ),
                                             ),
@@ -1349,33 +1633,37 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          "50 - 199 Adet",
-                          style: TextStyle(
-                            fontSize: 12,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.white15,
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            "50 - 199 Adet",
+                            overflow: TextOverflow.visible,
+                            style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.white15,
+                            ),
                           ),
                         ),
-                      ),
-                      Flexible(
-                        child: Text(
-                          "98,94₺",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: AppTheme.white1,
+                        Flexible(
+                          child: Text(
+                            "98,94₺",
+                            overflow: TextOverflow.visible,
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: AppTheme.white1,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Row(
                     children: [

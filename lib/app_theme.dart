@@ -30,24 +30,32 @@ class AppTheme {
   static Color white25 = const Color(0xFFEEF0F5);
   static Color white26 = const Color(0xFFD9DCE1);
   static Color white27 = const Color(0xFFEEEFF5);
+  static Color white28 = const Color(0xFFF1F1F1);
 
   static Color green1 = const Color(0xFF4CBD17);
   static Color green2 = const Color(0xFF36B843);
   static Color green3 = const Color(0xFF25B019);
   static Color green4 = const Color(0xFF67D65D);
+  static Color green5 = const Color(0xFF44CF41);
 
   static Color yellow1 = const Color(0xFFFFCA43);
+  static Color yellow2 = const Color(0xFFFFAC30);
 
   static Color blue1 = const Color(0xFF5F77FF);
   static Color blue2 = const Color(0xFF2943D6);
-  static Color blue3 = const Color(0xFF022255); //! blue3 ile black2 aynı renk
+  static Color blue3 = const Color(0xFF022255);
   static Color blue4 = const Color(0xFF8B9DFF);
   static Color blue5 = const Color(0xFF4D67F8);
   static Color blue6 = const Color(0xFF69C0FF);
   static Color blue7 = const Color(0xFF192C99);
+  static Color blue8 = const Color(0xFF306AFF);
+
+  static Color red1 = const Color(0xFFFF3062);
+
+  static Color purple1 = const Color(0xFF9730FF);
 
   static Color black1 = const Color(0xFF000000);
-  static Color black2 = const Color(0xFF022255);
+
   static Color black3 = const Color(0xFF2D304B);
   static Color black4 = const Color(0xFF22243B);
   static Color black5 = const Color(0xFF141526);
