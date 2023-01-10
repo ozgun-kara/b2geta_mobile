@@ -23,12 +23,14 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+  late bool themeMode;
 
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
+    themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Scaffold(
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -45,9 +47,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               Container(
                 width: deviceWidth,
                 height: 32,
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black5,
+                color: themeMode ? AppTheme.white1 : AppTheme.black5,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 13),
                   child: Row(
@@ -72,6 +72,185 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Boyut::",
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white11,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 9),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Wrap(
+                            spacing: 15,
+                            runSpacing: 14,
+                            children: [
+                              SizedBox(
+                                width: deviceWidth * 0.5 - 17.5,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: deviceWidth * 0.5 - 17.5,
+                                    height: 117,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color: Provider.of<MarketPlaceProvider>(
+                                                          context)
+                                                      .productDimensionIndex ==
+                                                  0
+                                              ? themeMode
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.blue6
+                                              : themeMode
+                                                  ? AppTheme.white20
+                                                  : AppTheme.black17),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    // color: AppTheme.white28,
+                                    // padding: const EdgeInsets.all(7),
+                                    child: Text(
+                                      "30*29*55cm",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: Provider.of<MarketPlaceProvider>(
+                                                        context)
+                                                    .productDimensionIndex ==
+                                                0
+                                            ? themeMode
+                                                ? AppTheme.green3
+                                                : AppTheme.green4
+                                            : themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white11,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductDimensionIndex(0);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: deviceWidth * 0.5 - 17.5,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: deviceWidth * 0.5 - 17.5,
+                                    height: 117,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color: Provider.of<MarketPlaceProvider>(
+                                                          context)
+                                                      .productDimensionIndex ==
+                                                  1
+                                              ? themeMode
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.blue6
+                                              : themeMode
+                                                  ? AppTheme.white20
+                                                  : AppTheme.black17),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    // color: AppTheme.white28,
+                                    // padding: const EdgeInsets.all(7),
+                                    child: Text(
+                                      "30*29*55cm",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: Provider.of<MarketPlaceProvider>(
+                                                        context)
+                                                    .productDimensionIndex ==
+                                                1
+                                            ? themeMode
+                                                ? AppTheme.green3
+                                                : AppTheme.green4
+                                            : themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white11,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductDimensionIndex(1);
+                                    }),
+                              ),
+                              SizedBox(
+                                width: deviceWidth * 0.5 - 17.5,
+                                height: 38,
+                                child: MaterialButton(
+                                    minWidth: deviceWidth * 0.5 - 17.5,
+                                    height: 117,
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          width: 1,
+                                          color: Provider.of<MarketPlaceProvider>(
+                                                          context)
+                                                      .productDimensionIndex ==
+                                                  2
+                                              ? themeMode
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.blue6
+                                              : themeMode
+                                                  ? AppTheme.white20
+                                                  : AppTheme.black17),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                    ),
+                                    // color: AppTheme.white28,
+                                    // padding: const EdgeInsets.all(7),
+                                    child: Text(
+                                      "30*29*55cm",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: Provider.of<MarketPlaceProvider>(
+                                                        context)
+                                                    .productDimensionIndex ==
+                                                2
+                                            ? themeMode
+                                                ? AppTheme.green3
+                                                : AppTheme.green4
+                                            : themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white11,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Provider.of<MarketPlaceProvider>(context,
+                                              listen: false)
+                                          .updateProductDimensionIndex(2);
+                                    }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ), // PRODUCT DIMENSION
+                    SizedBox(height: 23),
                     Column(
                       children: [
                         Row(

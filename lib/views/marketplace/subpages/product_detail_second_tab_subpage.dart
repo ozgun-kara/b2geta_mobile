@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
+import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -993,33 +994,5 @@ class _ProductDetailSecondTabSubpageState
         ), // CUSTOMERS COMMENTS PANEL
       ],
     );
-  }
-}
-
-class GalleryWidget extends StatefulWidget {
-  final List<String> urlImages;
-
-  const GalleryWidget({super.key, required this.urlImages});
-
-  @override
-  State<GalleryWidget> createState() => _GalleryWidgetState();
-}
-
-class _GalleryWidgetState extends State<GalleryWidget> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: PhotoViewGallery.builder(
-      itemCount: widget.urlImages.length,
-      builder: (context, index) {
-        final urlImage = widget.urlImages[index];
-
-        return PhotoViewGalleryPageOptions(
-          imageProvider: NetworkImage(urlImage),
-          minScale: PhotoViewComputedScale.contained,
-          maxScale: PhotoViewComputedScale.contained * 4,
-        );
-      },
-    ));
   }
 }
