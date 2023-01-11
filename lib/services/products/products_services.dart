@@ -1,16 +1,13 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/services/products/product_list_dummy.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import '../../models/product_model.dart';
-
 class ProductsServices {
   // PRODUCTS LIST AND SEARCH
-  Future<List<ProductModel>> productsListAndSearchCall(
+  Future<List<String>> productsListAndSearchCall(
       {required Map<String, String> queryParameters}) async {
-    List<ProductModel> productList = [];
+    List<String> productList = [];
 
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/products')
@@ -25,15 +22,7 @@ class ProductsServices {
         var dataList = json.decode(response.body)["data"]['products'];
 
         for (var i = 0; i < 10; i++) {
-          ProductModel newProduct = ProductModel(
-              id: dataList[i]["id"] ?? productListDummyData[i]["id"],
-              productName: dataList[i]["title"][0] ?? productListDummyData[i]["title"],
-              productDescription: dataList[i]["description"][0] ?? '',
-              productSummary: dataList[i]["summary"][0] ?? '',
-              price: dataList[i]["price"] ?? '',
-              currency: dataList[i]["currency"] ?? '',
-              image: productListDummyData[i]["imgUrl"].toString());
-          productList.add(newProduct);
+          productList.add(dataList[i]["id"]);
         }
 
         return productList;
