@@ -3,14 +3,13 @@ import 'package:b2geta_mobile/models/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/services/products/products_services.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-
-import '../../models/product_list_model.dart';
-import '../../services/products/products_services.dart';
 
 class MarketplacePage extends StatefulWidget {
   const MarketplacePage({Key? key}) : super(key: key);
@@ -265,12 +264,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
-                      var items = data.data;
+                      var items = data.data as List<ProductDummyModel>;
 
                       return GridView.builder(
                         controller: scrollController,
                         shrinkWrap: true,
-                        itemCount: items!.length,
+                        itemCount: items.length,
                         padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
@@ -280,7 +279,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         ),
                         itemBuilder: ((context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProductDetailSubpage(),
+                                  ));
+                            },
                             child: Container(
                               decoration:
                                   BoxDecoration(color: Colors.transparent),
@@ -292,12 +298,16 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                     width: deviceWidth,
                                     height: 206,
                                     decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                          items[index].imgUrl ?? '',
+                                        ),
+                                        fit: BoxFit.cover,
+                                      ),
                                       borderRadius: BorderRadius.all(
                                         Radius.circular(9),
                                       ),
                                     ),
-                                    child: Image.asset('assets/images/bag_image.png',fit: BoxFit.cover
-                                    ,),
                                   ),
                                   SizedBox(height: 11),
                                   Column(
@@ -305,7 +315,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        items[index].productName?? '',
+                                        items[index].title ?? '',
                                         maxLines: 2,
                                         style: TextStyle(
                                           fontSize: 12,
@@ -336,7 +346,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       ),
                                       SizedBox(height: 2),
                                       Text(
-                                        items[index].productName ?? '',
+                                        items[index].subTitle ?? '',
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontFamily: AppTheme.appFontFamily,
@@ -390,18 +400,24 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
-                      var items = data.data;
-                    
+                      var items = data.data as List<ProductDummyModel>;
 
                       return ListView.builder(
                           controller: scrollController,
                           shrinkWrap: true,
-                          itemCount: items!.length,
+                          itemCount: items.length,
                           itemBuilder: ((context, index) {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductDetailSubpage(),
+                                      ));
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:
@@ -431,13 +447,16 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         width: 126,
                                         height: 145,
                                         decoration: BoxDecoration(
-                                          
+                                          image: DecorationImage(
+                                            image: NetworkImage(
+                                              items[index].imgUrl ?? '',
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(2),
                                           ),
                                         ),
-                                        child: Image.asset('assets/images/bag_image.png',fit: BoxFit.cover
-                                    ,),
                                       ),
                                       SizedBox(width: 10),
                                       Column(
@@ -450,7 +469,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                 (24 + 16 + 126 + 10),
                                             height: 35,
                                             child: Text(
-                                              items[index].productName ?? '',
+                                              items[index].title ?? '',
                                               maxLines: 2,
                                               style: TextStyle(
                                                 fontSize: 11,
@@ -483,7 +502,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             ),
                                           ),
                                           Text(
-                                            items[index].productName ?? '',
+                                            items[index].subTitle ?? '',
                                             style: TextStyle(
                                               fontSize: 10,
                                               fontFamily:
@@ -494,7 +513,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           ),
                                           SizedBox(height: 8),
                                           Text(
-                                            items[index].currency ?? '',
+                                            items[index].province ?? '',
                                             style: TextStyle(
                                               fontSize: 10,
                                               fontFamily:
@@ -509,7 +528,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                items[index].productName ?? '',
+                                                items[index].company ?? '',
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
@@ -526,7 +545,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               ),
                                               SizedBox(width: 5),
                                               Text(
-                                                items[index].price ?? '',
+                                                items[index].totalRate ?? '',
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
