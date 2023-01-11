@@ -3,11 +3,7 @@ Yatırımcıya sunum için bir deadline belirledik 15’i için.
 
 2-sosyalmedya tarafında gezinip, porfili ve oradaki sayfaları görüntüleyebilmeli
 
-1.
-+login register ui ve servisleri tamamlanmalı(ui tamamlandı servisleri düzenlecek)
-+prodoct list ve product details tamamlanmalı (product list tamamlandı servisleri düzenlenecek .PRODUCT DETAİLS TAMAMLANMALI)
-+sepet ve sipariş onaylandı ekranı tamamlanmalı (Sepet ui tamamlandı servis ve küçük bir kaç işi kaldı
-2.
-+home page , profil pageleri tamamlanmalı
 
-+Bunlar için modeller düzgünce ayarlanıp token işlemleri tamamlanmalı servise kısımları düzenlenmeli.
+
+1.kısım tamamlandı.
++home page , profil pageleri tamamlanmalı
