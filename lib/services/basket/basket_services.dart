@@ -2,22 +2,21 @@ import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
 import '../../models/basket_model.dart';
 
 class BasketServices {
   // GET ALL
   Future<List<BasketModel>> getAllCall() async {
+
     List<BasketModel> basketList = [];
 
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
-      "Authorization":"Bearer ${Constants.userToken}",
+      "Authorization": "Bearer ${Constants.userToken}",
     });
     debugPrint(Constants.userToken);
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
-
 
       if (status == true) {
         var data = jsonDecode(response.body)['data'];
@@ -120,6 +119,7 @@ class BasketServices {
 
   // DELETE A PRODUCT IN BASKET
   Future<bool> deleteProductInBasketCall({
+
     required String param1,
   }) async {
     final response = await http
