@@ -413,7 +413,7 @@ class _BasketPageState extends State<BasketPage> {
                           });
                         }
                       },
-                      child: Container(
+                      child:  Container(
                         width: 30,
                         height: 31,
                         margin: const EdgeInsets.only(left: 1),
@@ -437,7 +437,7 @@ class _BasketPageState extends State<BasketPage> {
                     ),
                     Center(
                       child: Text(
-                        basket.quantity ?? '0',
+                        basket.quantity ?? '1',
                         style: TextStyle(
                           fontSize: 15,
                           fontFamily: AppTheme.appFontFamily,
