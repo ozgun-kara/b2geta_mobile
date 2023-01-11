@@ -1,7 +1,9 @@
 import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
+import 'package:b2geta_mobile/models/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -245,8 +247,21 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
                     ? false
                     : true,
-                child: FutureBuilder(
-                  future: DummyService().getProductList(),
+                child: FutureBuilder<List<ProductModel>>(
+                  future: ProductsServices()
+                      .productsListAndSearchCall(queryParameters: {
+                    "cid[]": '1',
+                    "cid[]": '2',
+                    "keyword": 'etek',
+                    "f[1]": '5656',
+                    "price[min]": '5',
+                    "price[max]": '15',
+                    "sort": 'price_up',
+                    "sort_method": 'asc',
+                    "stock": '1',
+                    "offset": '0',
+                    "limit": '50',
+                  }),
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data as List<ProductDummyModel>;
@@ -368,8 +383,21 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
                     ? true
                     : false,
-                child: FutureBuilder(
-                  future: DummyService().getProductList(),
+                child: FutureBuilder<List<ProductModel>>(
+                  future: ProductsServices()
+                      .productsListAndSearchCall(queryParameters: {
+                    "cid[]": '1',
+                    "cid[]": '2',
+                    "keyword": 'etek',
+                    "f[1]": '5656',
+                    "price[min]": '5',
+                    "price[max]": '15',
+                    "sort": 'price_up',
+                    "sort_method": 'asc',
+                    "stock": '1',
+                    "offset": '0',
+                    "limit": '50',
+                  }),
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data as List<ProductDummyModel>;
