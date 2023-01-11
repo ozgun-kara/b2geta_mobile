@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/member/register_model.dart';
@@ -96,7 +98,9 @@ class MemberServices {
 
   // LOGIN
   Future<bool> loginCall(
-      {required String email, required String password}) async {
+      {
+      required String email,
+      required String password}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/member/login'),
       headers: {
