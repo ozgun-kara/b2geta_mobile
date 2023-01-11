@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -133,41 +134,38 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(11)),
-                                      color:
-                                          Provider.of<MarketPlaceProvider>(
-                                                          context)
-                                                      .filterSwitch ==
-                                                  false
-                                              ? Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.white1
-                                                  : AppTheme.black4
-                                              : Colors.transparent),
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .filterSwitch ==
+                                              false
+                                          ? Provider.of<ThemeProvider>(context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.white1
+                                              : AppTheme.black4
+                                          : Colors.transparent),
                                   padding: EdgeInsets.all(7),
                                   child: Center(
                                     child: Image.asset(
                                         'assets/icons/grid_1.png',
                                         width: 17.06,
                                         height: 17.06,
-                                        color:
-                                            Provider.of<MarketPlaceProvider>(
+                                        color: Provider.of<MarketPlaceProvider>(
+                                                        context)
+                                                    .filterSwitch ==
+                                                false
+                                            ? Provider.of<ThemeProvider>(
                                                             context)
-                                                        .filterSwitch ==
-                                                    false
-                                                ? Provider.of<ThemeProvider>(
-                                                                context)
-                                                            .themeMode ==
-                                                        "light"
-                                                    ? AppTheme.black8
-                                                    : AppTheme.white17
-                                                : Provider.of<ThemeProvider>(
-                                                                context)
-                                                            .themeMode ==
-                                                        "light"
-                                                    ? AppTheme.white18
-                                                    : AppTheme.black8),
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black8
+                                                : AppTheme.white17
+                                            : Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.white18
+                                                : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -184,41 +182,38 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(11)),
-                                      color:
-                                          Provider.of<MarketPlaceProvider>(
-                                                          context)
-                                                      .filterSwitch ==
-                                                  true
-                                              ? Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.white1
-                                                  : AppTheme.black4
-                                              : Colors.transparent),
+                                      color: Provider.of<MarketPlaceProvider>(
+                                                      context)
+                                                  .filterSwitch ==
+                                              true
+                                          ? Provider.of<ThemeProvider>(context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.white1
+                                              : AppTheme.black4
+                                          : Colors.transparent),
                                   padding: EdgeInsets.all(7),
                                   child: Center(
                                     child: Image.asset(
                                         'assets/icons/grid_2.png',
                                         width: 14.62,
                                         height: 13.38,
-                                        color:
-                                            Provider.of<MarketPlaceProvider>(
+                                        color: Provider.of<MarketPlaceProvider>(
+                                                        context)
+                                                    .filterSwitch ==
+                                                true
+                                            ? Provider.of<ThemeProvider>(
                                                             context)
-                                                        .filterSwitch ==
-                                                    true
-                                                ? Provider.of<ThemeProvider>(
-                                                                context)
-                                                            .themeMode ==
-                                                        "light"
-                                                    ? AppTheme.black8
-                                                    : AppTheme.white17
-                                                : Provider.of<ThemeProvider>(
-                                                                context)
-                                                            .themeMode ==
-                                                        "light"
-                                                    ? AppTheme.white18
-                                                    : AppTheme.black8),
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black8
+                                                : AppTheme.white17
+                                            : Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.white18
+                                                : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -247,10 +242,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
               SizedBox(height: 11),
               Visibility(
-                visible:
-                    Provider.of<MarketPlaceProvider>(context).filterSwitch
-                        ? false
-                        : true,
+                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                    ? false
+                    : true,
                 child: FutureBuilder(
                   future: DummyService().getProductList(),
                   builder: (context, data) {
@@ -270,7 +264,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         ),
                         itemBuilder: ((context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProductDetailSubpage(),
+                                  ));
+                            },
                             child: Container(
                               decoration:
                                   BoxDecoration(color: Colors.transparent),
@@ -364,10 +365,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
               Visibility(
-                visible:
-                    Provider.of<MarketPlaceProvider>(context).filterSwitch
-                        ? true
-                        : false,
+                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                    ? true
+                    : false,
                 child: FutureBuilder(
                   future: DummyService().getProductList(),
                   builder: (context, data) {
@@ -382,7 +382,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductDetailSubpage(),
+                                      ));
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:
