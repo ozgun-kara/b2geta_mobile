@@ -433,19 +433,21 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "50 - 199 Adet",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Provider.of<MarketPlaceProvider>(
-                                                              context)
-                                                          .productCountIndex ==
-                                                      0
-                                                  ? AppTheme.white30
-                                                  : AppTheme.white15,
+                                      Expanded(
+                                        child: Text(
+                                          "50 - 199 Adet",
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Provider.of<MarketPlaceProvider>(
+                                                                context)
+                                                            .productCountIndex ==
+                                                        0
+                                                    ? AppTheme.white30
+                                                    : AppTheme.white15,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -497,19 +499,21 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "200 - 499 Adet",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Provider.of<MarketPlaceProvider>(
-                                                              context)
-                                                          .productCountIndex ==
-                                                      1
-                                                  ? AppTheme.white30
-                                                  : AppTheme.white15,
+                                      Expanded(
+                                        child: Text(
+                                          "200 - 499 Adet",
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Provider.of<MarketPlaceProvider>(
+                                                                context)
+                                                            .productCountIndex ==
+                                                        1
+                                                    ? AppTheme.white30
+                                                    : AppTheme.white15,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -561,19 +565,21 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "500 - 999 Adet",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Provider.of<MarketPlaceProvider>(
-                                                              context)
-                                                          .productCountIndex ==
-                                                      2
-                                                  ? AppTheme.white30
-                                                  : AppTheme.white15,
+                                      Expanded(
+                                        child: Text(
+                                          "500 - 999 Adet",
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Provider.of<MarketPlaceProvider>(
+                                                                context)
+                                                            .productCountIndex ==
+                                                        2
+                                                    ? AppTheme.white30
+                                                    : AppTheme.white15,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -625,19 +631,21 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        ">= 1000 Adet",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color:
-                                              Provider.of<MarketPlaceProvider>(
-                                                              context)
-                                                          .productCountIndex ==
-                                                      3
-                                                  ? AppTheme.white30
-                                                  : AppTheme.white15,
+                                      Expanded(
+                                        child: Text(
+                                          ">= 1000 Adet",
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color:
+                                                Provider.of<MarketPlaceProvider>(
+                                                                context)
+                                                            .productCountIndex ==
+                                                        3
+                                                    ? AppTheme.white30
+                                                    : AppTheme.white15,
+                                          ),
                                         ),
                                       ),
                                       Text(
@@ -1448,11 +1456,10 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           ? AppTheme.white21
                                           : AppTheme.black18),
                                   Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(60, 30, 60, 24),
+                                    padding: EdgeInsets.fromLTRB(0, 30, 0, 24),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceEvenly,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
@@ -1745,13 +1752,13 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(60, 0, 60, 24),
+                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 24),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         ButtonTheme(
-                                          // minWidth: double.minPositive,
+                                          minWidth: 117,
                                           height: 39,
                                           child: MaterialButton(
                                               color: Provider.of<ThemeProvider>(
@@ -1766,8 +1773,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(5)),
                                               ),
-                                              padding: EdgeInsets.fromLTRB(
-                                                  22, 0, 22, 0),
                                               child: Text(
                                                 "Firma Profili",
                                                 style: TextStyle(
@@ -1787,7 +1792,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                               onPressed: () {}),
                                         ),
                                         ButtonTheme(
-                                          // minWidth: double.minPositive,
+                                          minWidth: 117,
                                           height: 39,
                                           child: MaterialButton(
                                               color: Colors.transparent,
@@ -1805,8 +1810,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                             ? AppTheme.blue2
                                                             : AppTheme.blue5),
                                               ),
-                                              padding: EdgeInsets.fromLTRB(
-                                                  22, 0, 22, 0),
                                               child: Row(
                                                 children: [
                                                   Padding(
