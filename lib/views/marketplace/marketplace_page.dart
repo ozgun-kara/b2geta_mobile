@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/models/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -206,6 +207,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                     .filterSwitch ==
                                                 true
                                             ? Provider.of<ThemeProvider>(
+
                                                             context)
                                                         .themeMode ==
                                                     "light"
@@ -248,6 +250,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
                     ? false
                     : true,
+                    
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
                       .productsListAndSearchCall(queryParameters: {
@@ -263,6 +266,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     "offset": '0',
                     "limit": '50',
                   }),
+
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data;
@@ -280,7 +284,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         ),
                         itemBuilder: ((context, index) {
                           return InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ProductDetailSubpage(),
+                                  ));
+                            },
                             child: Container(
                               decoration:
                                   BoxDecoration(color: Colors.transparent),
@@ -388,6 +399,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     "offset": '0',
                     "limit": '50',
                   }),
+
                   builder: (context, data) {
                     if (data.hasData) {
                       var items = data.data;
@@ -401,7 +413,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductDetailSubpage(),
+                                      ));
+                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius:

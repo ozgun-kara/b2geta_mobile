@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
+import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
@@ -44,10 +45,88 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black7,
+      appBar: AppBar(
+          toolbarHeight: 68,
+          backgroundColor:
+              Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.white1
+                  : AppTheme.black5,
+          elevation: 0,
+          // centerTitle: true,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/menu.png',
+                width: 27,
+                height: 19,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+          ),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/message.png',
+                  width: 17.17,
+                  height: 14.05,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              ),
+              SizedBox(width: 4),
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/shopping_car.png',
+                  width: 17.95,
+                  height: 16.39,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BasketPage()));
+                },
+              ),
+              SizedBox(width: 4),
+              IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/bell.png',
+                  width: 14.05,
+                  height: 15.61,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              )
+            ],
+          ),
+          actions: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: IconButton(
+                splashRadius: 24,
+                icon: Image.asset(
+                  'assets/icons/search.png',
+                  width: 19,
+                  height: 19,
+                  color: AppTheme.white15,
+                ),
+                onPressed: () {},
+              ),
+            ),
+          ]),
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 96),
+          padding: EdgeInsets.fromLTRB(0, 0, 0, 96),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -2442,12 +2521,12 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                   ? scrollController.position.userScrollDirection ==
                           ScrollDirection.reverse
                       ? 0
-                      : 120
-                  : 120,
+                      : 60
+                  : 60,
               child: child);
         },
         child: Padding(
-          padding: EdgeInsets.only(bottom: 60),
+          padding: EdgeInsets.only(bottom: 0),
           child: Container(
             width: deviceWidth,
             height: 60,

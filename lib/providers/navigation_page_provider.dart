@@ -29,7 +29,8 @@ class NavigationPageProvider with ChangeNotifier {
     // HomePage(),
     MarketplacePage(),
     ShoppingSummarySubpage(),
-    ProductDetailSubpage(),
+    // ProductDetailSubpage(),
+    Container(),
   ];
 
   void updateCurrentTabIndex(int value) {
