@@ -19,6 +19,8 @@ class _BasketPageState extends State<BasketPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -44,6 +46,7 @@ class _BasketPageState extends State<BasketPage> {
                     child: ListView.builder(
                       itemCount: basketList.length,
                       itemBuilder: (BuildContext context, int index) {
+
                         return _cartItem(basketList[index]);
                       },
                     ),
@@ -199,7 +202,7 @@ class _BasketPageState extends State<BasketPage> {
                 ),
               ),
               TextSpan(
-                text: ' (3)',
+                text: ' (2)',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: AppTheme.appFontFamily,
@@ -230,7 +233,7 @@ class _BasketPageState extends State<BasketPage> {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              basket.product!.brand ?? '',
+              "Rosebella",
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
@@ -267,7 +270,7 @@ class _BasketPageState extends State<BasketPage> {
                               themeMode ? AppTheme.white21 : AppTheme.black20,
                         ),
                         borderRadius: BorderRadius.circular(8.0)),
-                    child: Image.asset('assets/images/bag_image.png'),
+                    child: Image.network("https://s4.gifyu.com/images/product_2.png",),
                   ),
                   const SizedBox(
                     width: 14,
@@ -290,56 +293,8 @@ class _BasketPageState extends State<BasketPage> {
                             color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              "Boyut:",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppTheme.white15),
-                            ),
-                            Text(
-                              "30*29*55cm",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: themeMode
-                                    ? AppTheme.green3
-                                    : AppTheme.green4,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Renk:",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppTheme.white15),
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            Container(
-                              width: 16.0,
-                              height: 16.0,
-                              decoration: BoxDecoration(
-                                  color: AppTheme.white15,
-                                  border: Border.all(
-                                    color: AppTheme.white15,
-                                  ),
-                                  borderRadius: BorderRadius.circular(2.0)),
-                              child: const ColoredBox(color: Color(0xFFFF9330)),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 12,
+                         const SizedBox(
+                          height: 25,
                         ),
                         Row(
                           children: [
@@ -400,17 +355,9 @@ class _BasketPageState extends State<BasketPage> {
                             }
                           });
                         } else {
-                          showAlertDialog(context, () {
-                            BasketServices()
-                                .deleteProductInBasketCall(
-                                    param1: basket.product!.id!)
-                                .then((bool value) {
-                              if (value) {
-                                Navigator.pop(context);
-                                setState(() {});
-                              }
-                            });
-                          });
+                         setState(() {
+
+                         });
                         }
                       },
                       child: Container(
@@ -418,7 +365,7 @@ class _BasketPageState extends State<BasketPage> {
                         height: 31,
                         margin: const EdgeInsets.only(left: 1),
                         decoration: BoxDecoration(
-                          color: themeMode ? AppTheme.white1 : AppTheme.black7,
+                          color:  int.parse(basket.quantity!)==1 ?  themeMode ? AppTheme.white1.withOpacity(.5) : AppTheme.black7.withOpacity(.5) : themeMode ? AppTheme.white1 : AppTheme.black7,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
@@ -695,8 +642,8 @@ class _BasketPageState extends State<BasketPage> {
       },
     );
     Widget continueButton = TextButton(
-      child: const Text("Sil"),
       onPressed: onPressed,
+      child: const Text("Sil"),
     );
 
     // set up the AlertDialog
