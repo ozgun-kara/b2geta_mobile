@@ -339,8 +339,9 @@ class _LoginPageState extends State<LoginPage> {
 
                                     locator<MemberServices>()
                                         .loginCall(
-                                            email: emailController1.text,
-                                            password: passwordController1.text)
+                                            email: emailController1.text.trim(),
+                                            password:
+                                                passwordController1.text.trim())
                                         .then((value) {
                                       if (value == true) {
                                         return Navigator.push(
