@@ -399,8 +399,8 @@ class _BasketPageState extends State<BasketPage> {
                               setState(() {});
                             }
                           });
-                        }else{
-                           showAlertDialog(context, () {
+                        } else {
+                          showAlertDialog(context, () {
                             BasketServices()
                                 .deleteProductInBasketCall(
                                     param1: basket.product!.id!)
@@ -413,7 +413,7 @@ class _BasketPageState extends State<BasketPage> {
                           });
                         }
                       },
-                      child:  Container(
+                      child: Container(
                         width: 30,
                         height: 31,
                         margin: const EdgeInsets.only(left: 1),
@@ -492,7 +492,7 @@ class _BasketPageState extends State<BasketPage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 41.0),
                     child: GestureDetector(
-                       onTap: () {
+                      onTap: () {
                         showAlertDialog(context, () {
                           BasketServices()
                               .deleteProductInBasketCall(
@@ -523,7 +523,8 @@ class _BasketPageState extends State<BasketPage> {
                               fontSize: 11,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w400,
-                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
                             ),
                           ),
                         ],
@@ -544,24 +545,48 @@ class _BasketPageState extends State<BasketPage> {
                             fontWeight: FontWeight.w400,
                             color: AppTheme.white15),
                       ),
-                      Text(
-                        basket.product!.price ?? '0' "₺",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.green3 : AppTheme.green4,
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: basket.product!.price ?? '0.0 ',
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                themeMode ? AppTheme.green3 : AppTheme.green4,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "Adet başı ücret 8,5₺",
-                        style: TextStyle(
-                          fontSize: 11,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        TextSpan(
+                          text: "₺",
+                          style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                themeMode ? AppTheme.green3 : AppTheme.green4,
+                          ),
+                        )
+                      ])),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          text: "Adet başı ücret 8,5 ",
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
                         ),
-                      ),
+                        TextSpan(
+                          text: "₺",
+                          style: TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w500,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
+                        )
+                      ])),
                     ],
                   )
                 ],
@@ -608,15 +633,26 @@ class _BasketPageState extends State<BasketPage> {
                           fontWeight: FontWeight.w400,
                           color: AppTheme.white15),
                     ),
-                    Text(
-                      '3.298,94₺',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w500,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                    RichText(
+                        text: TextSpan(children: [
+                      TextSpan(
+                        text: '3.298,94 ',
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
                       ),
-                    ),
+                      TextSpan(
+                        text: "₺",
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      )
+                    ])),
                   ],
                 ),
                 const SizedBox(
@@ -650,7 +686,7 @@ class _BasketPageState extends State<BasketPage> {
         ));
   }
 
-   void showAlertDialog(BuildContext context, VoidCallback onPressed) {
+  void showAlertDialog(BuildContext context, VoidCallback onPressed) {
     // set up the buttons
     Widget cancelButton = TextButton(
       child: const Text("İptal"),
