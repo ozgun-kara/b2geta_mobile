@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/product_list_model.dart';
+import 'package:b2geta_mobile/services/products/product_list_dummy.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,15 +24,15 @@ class ProductsServices {
       if (status == true) {
         var dataList = json.decode(response.body)["data"]['products'];
 
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < 10; i++) {
           ProductModel newProduct = ProductModel(
-            id: dataList[i]["id"] ?? '',
-            productName: dataList[i]["name"][0] ?? '',
-            productDescription: dataList[i]["description"][0] ?? '',
-            productSummary: dataList[i]["summary"][0] ?? '',
-            price: dataList[i]["price"] ?? '',
-            currency: dataList[i]["currency"] ?? '',
-          );
+              id: dataList[i]["id"] ?? productListDummyData[i]["id"],
+              productName: dataList[i]["title"][0] ?? productListDummyData[i]["title"],
+              productDescription: dataList[i]["description"][0] ?? '',
+              productSummary: dataList[i]["summary"][0] ?? '',
+              price: dataList[i]["price"] ?? '',
+              currency: dataList[i]["currency"] ?? '',
+              image: productListDummyData[i]["imgUrl"].toString());
           productList.add(newProduct);
         }
 
