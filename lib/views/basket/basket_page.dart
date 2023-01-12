@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
-import 'package:b2geta_mobile/utils.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/shopping_summary_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +19,7 @@ class _BasketPageState extends State<BasketPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-
+  ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,118 +30,55 @@ class _BasketPageState extends State<BasketPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: _appBar(context),
-      body: Column(
-        children: [
-          const SizedBox(height: 1),
-          _pagePathName(),
-          _basketCount(),
-          FutureBuilder<List<BasketModel>>(
-            future: BasketServices().getAllCall(),
-            builder: (context, data) {
-              if (data.hasData) {
-                var basketList = data.data;
-                if (basketList!.isNotEmpty) {
-                  return Expanded(
-                    child: ListView.builder(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 1),
+            _pagePathName(),
+            _basketCount(),
+            FutureBuilder<List<BasketModel>>(
+              future: BasketServices().getAllCall(),
+              builder: (context, data) {
+                if (data.hasData) {
+                  var basketList = data.data;
+                  if (basketList!.isNotEmpty) {
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      controller: scrollController,
+                      shrinkWrap: true,
                       itemCount: basketList.length,
                       itemBuilder: (BuildContext context, int index) {
-
                         return _cartItem(basketList[index]);
                       },
-                    ),
-                  );
+                    );
+                  } else {
+                    return
+                      SizedBox(
+                        width: deviceWidth,
+                        height: deviceHeight*.4,
+                        child: const Center(
+                            child: Text("Sepetinizde ürün bulunmamaktadır.")),
+                      );
+                  }
                 } else {
-                  return const Expanded(
+                  return
+                    SizedBox(
+                      width: deviceWidth,
+                      height: deviceHeight*.4,
                       child: Center(
-                          child: Text("Sepetinizde ürün bulunmamaktadır.")));
+                          child: CupertinoActivityIndicator(
+                            color: themeMode ? AppTheme.black1 : AppTheme.white1,
+                            radius: 12,
+                          )),
+                    );
                 }
-              } else {
-                return Expanded(
-                  child: Center(
-                      child: CupertinoActivityIndicator(
-                    color: themeMode ? AppTheme.black1 : AppTheme.white1,
-                    radius: 12,
-                  )),
-                );
-              }
-            },
-          ),
-          _orderSummary()
-        ],
+              },
+            ),
+              _orderSummary(),
+          ],
+        ),
       ),
     );
-  }
-
-  AppBar _appBar(BuildContext context) {
-    return AppBar(
-        toolbarHeight: 68,
-        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/menu.png',
-              width: 23,
-              height: 17,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {},
-          ),
-        ),
-        title: SizedBox(
-            width: 103.74,
-            height: 14.0,
-            child: themeMode
-                ? Image.asset('assets/images/b2geta_logo_light.png')
-                : Image.asset('assets/images/b2geta_logo_dark.png')),
-        actions: [
-          IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/search.png',
-              width: 19,
-              height: 19,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {
-              if (themeMode) {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setDarkMode();
-                showSnackbar(context: context, message: 'Dark Theme Activated');
-              } else {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setLightMode();
-                showSnackbar(
-                    context: context, message: 'Light Theme Activated');
-              }
-            },
-          ),
-          const SizedBox(width: 4),
-          IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/bell.png',
-              width: 16.0,
-              height: 18.0,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {},
-          ),
-          const SizedBox(width: 4),
-          IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/message.png',
-              width: 19.0,
-              height: 16.0,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {},
-          ),
-        ]);
   }
 
   Widget _pagePathName() {
@@ -555,7 +492,7 @@ class _BasketPageState extends State<BasketPage> {
     return Container(
         width: deviceWidth,
         color: themeMode ? AppTheme.white1 : AppTheme.black7,
-        padding: const EdgeInsets.only(top: 21, left: 25, right: 25),
+        padding: const EdgeInsets.only(top: 15,left: 25, right: 25,bottom:60,),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -582,52 +519,54 @@ class _BasketPageState extends State<BasketPage> {
                     ),
                     RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                        text: '3.298,94 ',
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "₺",
-                        style: TextStyle(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      )
-                    ])),
+                          TextSpan(
+                            text: '3.298,94 ',
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "₺",
+                            style: TextStyle(
+                              fontSize: 26,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          )
+                        ])),
                   ],
                 ),
                 const SizedBox(
                   width: 16,
                 ),
                 Expanded(
-                  child: Container(
-                    height: 45,
-                    decoration: BoxDecoration(
-                        color: AppTheme.green2,
-                        borderRadius: BorderRadius.circular(16.0)),
-                    child: Center(
-                      child: Text(
-                        'Sepeti Onayla',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w700,
-                          color: AppTheme.white1,
+                  child: InkWell(
+                    onTap: (){
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ShoppingSummarySubpage(),));
+                    },
+                    child: Container(
+                      height: 45,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green2,
+                          borderRadius: BorderRadius.circular(16.0)),
+                      child: Center(
+                        child: Text(
+                          'Sepeti Onayla',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: AppTheme.white1,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 5,
             ),
           ],
         ));

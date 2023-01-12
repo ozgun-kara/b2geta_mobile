@@ -24,7 +24,7 @@ class _NavigationPageState extends State<NavigationPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
-    var themeMode = Provider.of<ThemeProvider>(context).themeMode;
+    var themeMode = Provider.of<ThemeProvider>(context).themeMode=="light";
 
     void navigateToBasketPage() {
       Navigator.push(
@@ -37,88 +37,69 @@ class _NavigationPageState extends State<NavigationPage> {
 
       appBar: AppBar(
           toolbarHeight: 68,
-          backgroundColor:
-              Provider.of<ThemeProvider>(context).themeMode == "light"
-                  ? AppTheme.white1
-                  : AppTheme.black5,
+          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
           elevation: 0,
-          // centerTitle: true,
           leading: Padding(
             padding: const EdgeInsets.only(left: 8),
             child: IconButton(
               splashRadius: 24,
               icon: Image.asset(
                 'assets/icons/menu.png',
-                width: 27,
-                height: 19,
+                width: 23,
+                height: 17,
                 color: AppTheme.white15,
               ),
               onPressed: () {},
             ),
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                splashRadius: 24,
-                icon: Image.asset(
-                  'assets/icons/message.png',
-                  width: 17.17,
-                  height: 14.05,
-                  color: AppTheme.white15,
-                ),
-                onPressed: () {},
+          title: SizedBox(
+              width: 103.74,
+              height: 14.0,
+              child: themeMode
+                  ? Image.asset('assets/images/b2geta_logo_light.png')
+                  : Image.asset('assets/images/b2geta_logo_dark.png')),
+          actions: [
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/search.png',
+                width: 19,
+                height: 19,
+                color: AppTheme.white15,
               ),
-              SizedBox(width: 4),
-              IconButton(
-                splashRadius: 24,
-                icon: Image.asset(
-                  'assets/icons/shopping_car.png',
-                  width: 17.95,
-                  height: 16.39,
-                  color: AppTheme.white15,
-                ),
-                onPressed:navigateToBasketPage,
+              onPressed: () {
+                if (themeMode) {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setDarkMode();
+                } else {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setLightMode();
+                }
+              },
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/bell.png',
+                width: 16.0,
+                height: 18.0,
+                color: AppTheme.white15,
               ),
-              SizedBox(width: 4),
-              IconButton(
-                splashRadius: 24,
-                icon: Image.asset(
-                  'assets/icons/bell.png',
-                  width: 14.05,
-                  height: 15.61,
-                  color: AppTheme.white15,
-                ),
-                onPressed: () {},
-              )
-            ],
-          ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: IconButton(
-                splashRadius: 24,
-                icon: Image.asset(
-                  'assets/icons/search.png',
-                  width: 19,
-                  height: 19,
-                  color: AppTheme.white15,
-                ),
-                onPressed: () {
-                  if (themeMode == "dark") {
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setLightMode();
-                    debugPrint('Light Theme Activated');
-                  } else {
-                    Provider.of<ThemeProvider>(context, listen: false)
-                        .setDarkMode();
-                    debugPrint('Dark Theme Activated');
-                  }
-                },
+              onPressed: () {},
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/message.png',
+                width: 19.0,
+                height: 16.0,
+                color: AppTheme.white15,
               ),
+              onPressed: () {},
             ),
           ]),
-
       body: Consumer<NavigationPageProvider>(
         builder: (context, provider, child) {
           return provider.pages[provider.currentTabIndex];
@@ -269,7 +250,7 @@ class _NavigationPageState extends State<NavigationPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('assets/icons/people.png',
+                              Image.asset('assets/icons/shopping_car.png',
                                   width: 21,
                                   height: 21,
                                   color: provider.currentTabIndex == 2
@@ -280,7 +261,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           : AppTheme.blue1
                                       : AppTheme.white15),
                               SizedBox(height: 4),
-                              Text('Companies'.tr,
+                              Text('My Basket'.tr,
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontFamily: AppTheme.appFontFamily,

@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/homepage/home_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
@@ -18,7 +19,8 @@ class NavigationPageProvider with ChangeNotifier {
 
   final List pages = [
     // MemberTestPage(),
-    ProductsTestPage(),
+    HomePage(),
+    //ProductsTestPage(),
     // BasketTestPage(),
     // CompanyTestPage(),
     // FollowServicesTestPage(),
@@ -28,7 +30,7 @@ class NavigationPageProvider with ChangeNotifier {
 
     // HomePage(),
     MarketplacePage(),
-    ShoppingSummarySubpage(),
+    BasketPage(),
     // ProductDetailSubpage(),
     Container(),
   ];
