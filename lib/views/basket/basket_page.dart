@@ -377,7 +377,7 @@ class _BasketPageState extends State<BasketPage> {
                     padding: const EdgeInsets.only(left: 41.0),
                     child: GestureDetector(
                       onTap: () {
-                        showAlertDialog(context, () {
+                        showAlertDialog(context:context, titleText:"Silmek İstediğinizden Emin misiniz ? ",buttonText:"Sil",buttonColor: AppTheme.red1,onPressed: () {
                           BasketServices()
                               .deleteProductInBasketCall(
                                   param1: basket.product!.id!)
@@ -545,7 +545,12 @@ class _BasketPageState extends State<BasketPage> {
                 Expanded(
                   child: InkWell(
                     onTap: (){
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ShoppingSummarySubpage(),));
+                      showAlertDialog(context: context, titleText: 'Siparişi Onaylamak istediğinizde emin misiniz ?', buttonText: 'Onayla', buttonColor: AppTheme.green1,onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShoppingSummarySubpage(),));
+                        BasketServices().emptyBasketCall();
+                      });
+
+
                     },
                     child: Container(
                       height: 45,
@@ -572,35 +577,90 @@ class _BasketPageState extends State<BasketPage> {
         ));
   }
 
-  void showAlertDialog(BuildContext context, VoidCallback onPressed) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: const Text("İptal"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-    Widget continueButton = TextButton(
-      onPressed: onPressed,
-      child: const Text("Sil"),
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: const Text("Sepetten ürün çıkartma"),
-      content: const Text("Silmek istediğinizden emin misiniz?"),
-      actions: [
-        cancelButton,
-        continueButton,
-      ],
-    );
-
-    // show the dialog
+  void showAlertDialog({required BuildContext context,required String titleText,required String buttonText,required buttonColor,required VoidCallback onPressed}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return alert;
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          content: Container(
+            width: deviceWidth,
+            padding: const EdgeInsets.all(10.0),
+            height: 150,
+            decoration: BoxDecoration(
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black12,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  titleText,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w500,
+                    color: Provider.of<ThemeProvider>(context).themeMode ==
+                        "light"
+                        ? AppTheme.black16
+                        : AppTheme.white14,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Container(
+                      height: 28.0,
+                      decoration: BoxDecoration(
+                          color: AppTheme.blue3,
+                          borderRadius: const BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            "Kapat",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                    const SizedBox(width: 16.0,),
+                    Container(
+                      height: 28.0,
+                      decoration: BoxDecoration(
+                          color: buttonColor,
+                          borderRadius: const BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          onPressed: onPressed,
+                          child:  Text(
+                            buttonText,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                    ),
+                    )],
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }
+
 }

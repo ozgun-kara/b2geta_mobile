@@ -100,6 +100,7 @@ class _NavigationPageState extends State<NavigationPage> {
               onPressed: () {},
             ),
           ]),
+
       body: Consumer<NavigationPageProvider>(
         builder: (context, provider, child) {
           return provider.pages[provider.currentTabIndex];
