@@ -87,7 +87,7 @@ class AppLanguages extends Translations {
           // NAVIGATION PAGE
           'Homepage': 'Anasayfa',
           'Marketplace': 'Pazaryeri',
-          'Companies': 'Firmalar',
+          'My Basket': 'Sepetim',
           'My Panel': 'Panelim',
         },
         'de_DE': {
