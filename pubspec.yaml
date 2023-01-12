@@ -85,6 +85,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/images/dummy_images/
     - database/general/
 
   # An image asset can refer to one or more resolution-specific "variants", see
