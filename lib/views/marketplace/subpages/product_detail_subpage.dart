@@ -20,7 +20,8 @@ class ProductDetailSubpage extends StatefulWidget {
     Key? key,
     required this.productId,
     required this.productName,
-    required this.imageUrl, required this.price,
+    required this.imageUrl,
+    required this.price,
   }) : super(key: key);
 
   final String productId;
@@ -124,7 +125,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               onPressed: () {},
             ),
           ]),
-
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
@@ -2556,7 +2556,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                         ),
                         Flexible(
                           child: Text(
-                            widget.price+" ₺",
+                            widget.price + " ₺",
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 18,
@@ -2589,7 +2589,15 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   color: AppTheme.white1),
                             ),
                             onPressed: () {
-                              BasketServices().addProductCall(productId: widget.productId, quantity: '1').then((value) => showSnackbar(context: context,message:"Ürün sepete ekledi."),);
+                              BasketServices()
+                                  .addProductCall(
+                                      productId: widget.productId,
+                                      quantity: '1')
+                                  .then(
+                                    (value) => showSnackbar(
+                                        context: context,
+                                        message: "Ürün sepete ekledi."),
+                                  );
                             }),
                       ),
                       SizedBox(width: 8),
