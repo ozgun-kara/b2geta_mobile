@@ -1,19 +1,32 @@
-import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
-import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/basket/basket_page.dart';
-import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
+import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
+import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/dummy_service.dart';
+import 'package:b2geta_mobile/views/basket/basket_page.dart';
+import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
+
+import '../../../utils.dart';
 
 class ProductDetailSubpage extends StatefulWidget {
-  const ProductDetailSubpage({Key? key}) : super(key: key);
+  const ProductDetailSubpage({
+    Key? key,
+    required this.productId,
+    required this.productName,
+    required this.imageUrl, required this.price,
+  }) : super(key: key);
+
+  final String productId;
+  final String productName;
+  final String price;
+  final String imageUrl;
 
   @override
   State<ProductDetailSubpage> createState() => _ProductDetailSubpageState();
@@ -21,14 +34,6 @@ class ProductDetailSubpage extends StatefulWidget {
 
 class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   ScrollController scrollController = ScrollController();
-
-  List<String> imgList = [
-    "https://s4.gifyu.com/images/product_2.png",
-    "https://s9.gifyu.com/images/product189633b2e73d1e24.md.png",
-    "https://s9.gifyu.com/images/p3d5d47e58ec160062.jpg",
-    "https://s9.gifyu.com/images/p204c8b4628e774f40.jpg"
-  ];
-
   int rating = 4;
 
   late double deviceTopPadding;
@@ -38,6 +43,13 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> imgList = [
+      widget.imageUrl,
+      "https://s4.gifyu.com/images/product_2.png",
+      "https://s9.gifyu.com/images/product189633b2e73d1e24.md.png",
+      "https://s9.gifyu.com/images/p3d5d47e58ec160062.jpg",
+      "https://s9.gifyu.com/images/p204c8b4628e774f40.jpg"
+    ];
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
@@ -92,7 +104,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BasketPage()));
+                          builder: (context) =>  BasketPage()));
                 },
               ),
               SizedBox(width: 4),
@@ -398,7 +410,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                           children: [
                             Expanded(
                               child: Text(
-                                "Onleap Sunon üretici depolama tasarım ofis mobilyaları ergonomik",
+                                widget.productName,
                                 style: TextStyle(
                                   fontSize: 17,
                                   fontFamily: AppTheme.appFontFamily,
@@ -530,10 +542,9 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         ),
                                       ),
                                       Text(
-                                        "98,94₺",
+                                        widget.price,
                                         style: TextStyle(
                                           fontSize: 15,
-                                          fontFamily: AppTheme.appFontFamily,
                                           fontWeight: FontWeight.w500,
                                           color:
                                               Provider.of<MarketPlaceProvider>(
@@ -2543,7 +2554,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                       children: [
                         Flexible(
                           child: Text(
-                            "50 - 199 Adet",
+                            "1 Adet",
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 12,
@@ -2555,11 +2566,10 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                         ),
                         Flexible(
                           child: Text(
-                            "98,94₺",
+                            widget.price+" ₺",
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 18,
-                              fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color: AppTheme.white1,
                             ),
@@ -2588,7 +2598,9 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   fontWeight: FontWeight.w700,
                                   color: AppTheme.white1),
                             ),
-                            onPressed: () {}),
+                            onPressed: () {
+                              BasketServices().addProductCall(productId: widget.productId, quantity: '1').then((value) => showSnackbar(context: context,message:"Ürün sepete ekledi."),);
+                            }),
                       ),
                       SizedBox(width: 8),
                       ButtonTheme(
