@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/dummy_models/shopping_summary_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,6 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
-
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -30,6 +30,73 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
           ? AppTheme.white2
           : AppTheme.black7,
+      appBar: AppBar(
+          toolbarHeight: 68,
+          backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light" ? AppTheme.white1 : AppTheme.black5,
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/back.png',
+                width: 23,
+                height: 17,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => NavigationPage(),), (route) => false);
+              },
+            ),
+          ),
+          title: SizedBox(
+              width: 103.74,
+              height: 14.0,
+              child: Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? Image.asset('assets/images/b2geta_logo_light.png')
+                  : Image.asset('assets/images/b2geta_logo_dark.png')),
+          actions: [
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/search.png',
+                width: 19,
+                height: 19,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {
+                if (Provider.of<ThemeProvider>(context).themeMode == "light") {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setDarkMode();
+                } else {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setLightMode();
+                }
+              },
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/bell.png',
+                width: 16.0,
+                height: 18.0,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/message.png',
+                width: 19.0,
+                height: 16.0,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.fromLTRB(0, 63, 0, 84),
