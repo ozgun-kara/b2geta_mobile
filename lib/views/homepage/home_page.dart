@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -17,7 +16,6 @@ class _HomePageState extends State<HomePage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  // TabController _tabController =TabController(length: 2, vsync: vsync)
 
   List<Map<String, Object>> storeImage = [
     {
@@ -66,7 +64,7 @@ class _HomePageState extends State<HomePage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Scaffold(
-      backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
+      backgroundColor: themeMode ? AppTheme.white33 : AppTheme.black24,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -199,84 +197,248 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Container(
-              color: themeMode ? AppTheme.white1 : AppTheme.black5,
-              width: deviceWidth,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: ButtonTheme(
-                      height: 43,
-                      child: MaterialButton(
-                          elevation: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FittedBox(
-                                fit: BoxFit.none,
-                                child: Image.asset(
-                                  'assets/icons/post.png',
-                                  width: 15,
-                                  height: 15,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8.5,
-                              ),
-                              Text(
-                                "Postlar",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppTheme.blue2,
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {}),
-                    ),
-                  ),
-                  Expanded(
-                    child: ButtonTheme(
-                      height: 43,
-                      child: MaterialButton(
-                          elevation: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FittedBox(
-                                fit: BoxFit.none,
-                                child: Image.asset(
-                                  'assets/icons/star2.png',
-                                  width: 15,
-                                  height: 15,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 8.5,
-                              ),
-                              Text(
-                                "Reels",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppTheme.white15,
-                                ),
-                              )
-                            ],
-                          ),
-                          onPressed: () {}),
-                    ),
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 8.0,
             ),
             Container(
               width: deviceWidth,
-              height: deviceHeight,
-              color: Colors.pinkAccent,
+              color: themeMode ? AppTheme.white1 : AppTheme.black7,
+              child: Column(
+                children: [
+                  Container(
+                    width: deviceWidth,
+                    height: 40,
+                    margin: const EdgeInsets.only(left: 10, top: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(
+                                "assets/images/dummy_images/post_profile.png",
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10.0,
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Özturanlar Mobilya',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w800,
+                                        color: themeMode
+                                            ? AppTheme.blue3
+                                            : AppTheme.white1,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: ' gönderi paylaştı.',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: Image.asset(
+                            "assets/icons/post_menu.png",
+                            color:
+                                themeMode ? AppTheme.blue3 : AppTheme.white12,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 14,
+                      top: 10,
+                      right: 36,
+                    ),
+                    child: Text(
+                      "Build secure apps on top of ANY database or API faster t",
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: themeMode ? AppTheme.black9 : AppTheme.white9,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  SizedBox(
+                    width: deviceWidth,
+                    height: 279,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          "assets/images/dummy_images/post_image_1.png",
+                          fit: BoxFit.cover,
+                          height: 279,
+                        ),
+                        Positioned(
+                          top: 220,
+                          left: deviceWidth - 80.0,
+                          child: Container(
+                            width: 60,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF2F2F2F).withOpacity(.66),
+                              borderRadius: BorderRadius.circular(13.0),
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/post_image_add.png",
+                                  width: 18,
+                                  height: 18,
+                                ),
+                                Text(
+                                  "8",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.white1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 49,
+                    margin: const EdgeInsets.only(left: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/like.png",
+                                  width: 15,
+                                  height: 15,
+                                ),
+                                const SizedBox(
+                                  width: 4.0,
+                                ),
+                                Text(
+                                  "Beğen",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white15,
+                                  ),
+                                ),
+                              ],
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/comment2.png",
+                                  width: 17.5,
+                                  height: 17.5,
+                                ),
+                                const SizedBox(
+                                  width: 4.0,
+                                ),
+                                Text(
+                                  "Yorum yap",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white15,
+                                  ),
+                                ),
+                              ],
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/share.png",
+                                  width: 18,
+                                  height: 15,
+                                ),
+                                const SizedBox(
+                                  width: 4.0,
+                                ),
+                                Text(
+                                  "Paylaş",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white15,
+                                  ),
+                                ),
+                              ],
+                            )),
+                        TextButton(
+                            onPressed: () {},
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.asset(
+                                  "assets/icons/save.png",
+                                  width: 12,
+                                  height: 15,
+                                ),
+                                const SizedBox(
+                                  width: 4.0,
+                                ),
+                                Text(
+                                  "Kaydet",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white15,
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 100,
             )
           ],
         ),
