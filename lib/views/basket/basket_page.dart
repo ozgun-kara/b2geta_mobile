@@ -52,29 +52,36 @@ class _BasketPageState extends State<BasketPage> {
                       },
                     );
                   } else {
-                    return
-                      SizedBox(
-                        width: deviceWidth,
-                        height: deviceHeight*.4,
-                        child: const Center(
-                            child: Text("Sepetinizde ürün bulunmamaktadır.")),
-                      );
+                    return SizedBox(
+                      width: deviceWidth,
+                      height: deviceHeight * .4,
+                      child: Center(
+                          child: Text(
+                        "Sepetinizde ürün bulunmamaktadır.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color:
+                              themeMode ? AppTheme.black12 : AppTheme.white24,
+                        ),
+                      )),
+                    );
                   }
                 } else {
-                  return
-                    SizedBox(
-                      width: deviceWidth,
-                      height: deviceHeight*.4,
-                      child: Center(
-                          child: CupertinoActivityIndicator(
-                            color: themeMode ? AppTheme.black1 : AppTheme.white1,
-                            radius: 12,
-                          )),
-                    );
+                  return SizedBox(
+                    width: deviceWidth,
+                    height: deviceHeight * .4,
+                    child: Center(
+                        child: CupertinoActivityIndicator(
+                      color: themeMode ? AppTheme.black1 : AppTheme.white1,
+                      radius: 12,
+                    )),
+                  );
                 }
               },
             ),
-              _orderSummary(),
+            _orderSummary(),
           ],
         ),
       ),
@@ -207,7 +214,9 @@ class _BasketPageState extends State<BasketPage> {
                               themeMode ? AppTheme.white21 : AppTheme.black20,
                         ),
                         borderRadius: BorderRadius.circular(8.0)),
-                    child: Image.network("https://s4.gifyu.com/images/product_2.png",),
+                    child: Image.network(
+                      "https://s4.gifyu.com/images/product_2.png",
+                    ),
                   ),
                   const SizedBox(
                     width: 14,
@@ -230,7 +239,7 @@ class _BasketPageState extends State<BasketPage> {
                             color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
                         ),
-                         const SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         Row(
@@ -273,51 +282,58 @@ class _BasketPageState extends State<BasketPage> {
                   color: themeMode ? AppTheme.white22 : AppTheme.black18,
                   borderRadius: BorderRadius.circular(8),
                 ),
+                padding: EdgeInsets.all(1),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        var basketQuantity = int.parse(basket.quantity!);
-
-                        if (basketQuantity > 1) {
-                          BasketServices()
-                              .updateProductInBasketCall(
-                                  productId: basket.productId!,
-                                  quantity:
-                                      "${int.parse(basket.quantity!) - 1}")
-                              .then((bool value) {
-                            if (value) {
-                              setState(() {});
-                            }
-                          });
-                        } else {
-                         setState(() {
-
-                         });
-                        }
-                      },
-                      child: Container(
-                        width: 30,
-                        height: 31,
-                        margin: const EdgeInsets.only(left: 1),
-                        decoration: BoxDecoration(
-                          color:  int.parse(basket.quantity!)==1 ?  themeMode ? AppTheme.white1.withOpacity(.5) : AppTheme.black7.withOpacity(.5) : themeMode ? AppTheme.white1 : AppTheme.black7,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "-",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white15,
+                    SizedBox(
+                      width: 30,
+                      child: MaterialButton(
+                          minWidth: 30,
+                          height: 31,
+                          elevation: 0,
+                          color: int.parse(basket.quantity!) == 1
+                              ? themeMode
+                                  ? AppTheme.white1.withOpacity(.5)
+                                  : AppTheme.black7.withOpacity(.5)
+                              : themeMode
+                                  ? AppTheme.white1
+                                  : AppTheme.black7,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(7)),
+                          ),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Center(
+                            child: Text(
+                              "-",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: themeMode
+                                    ? AppTheme.blue2
+                                    : AppTheme.white15,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            var basketQuantity = int.parse(basket.quantity!);
+
+                            if (basketQuantity > 1) {
+                              BasketServices()
+                                  .updateProductInBasketCall(
+                                      productId: basket.productId!,
+                                      quantity:
+                                          "${int.parse(basket.quantity!) - 1}")
+                                  .then((bool value) {
+                                if (value) {
+                                  setState(() {});
+                                }
+                              });
+                            } else {
+                              setState(() {});
+                            }
+                          }),
                     ),
                     Center(
                       child: Text(
@@ -330,39 +346,42 @@ class _BasketPageState extends State<BasketPage> {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        BasketServices()
-                            .updateProductInBasketCall(
-                                productId: basket.productId!,
-                                quantity: "${int.parse(basket.quantity!) + 1}")
-                            .then((bool value) {
-                          if (value) {
-                            setState(() {});
-                          }
-                        });
-                      },
-                      child: Container(
-                        width: 30,
-                        height: 31,
-                        margin: const EdgeInsets.only(right: 1.0),
-                        decoration: BoxDecoration(
+                    SizedBox(
+                      width: 30,
+                      child: MaterialButton(
+                          minWidth: 30,
+                          height: 31,
+                          elevation: 0,
                           color: themeMode ? AppTheme.white1 : AppTheme.black7,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "+",
-                            style: TextStyle(
-                              fontSize: 15,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white15,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(7)),
+                          ),
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Center(
+                            child: Text(
+                              "+",
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: themeMode
+                                    ? AppTheme.blue2
+                                    : AppTheme.white15,
+                              ),
                             ),
                           ),
-                        ),
-                      ),
+                          onPressed: () {
+                            BasketServices()
+                                .updateProductInBasketCall(
+                                    productId: basket.productId!,
+                                    quantity:
+                                        "${int.parse(basket.quantity!) + 1}")
+                                .then((bool value) {
+                              if (value) {
+                                setState(() {});
+                              }
+                            });
+                          }),
                     ),
                   ],
                 ),
@@ -377,17 +396,22 @@ class _BasketPageState extends State<BasketPage> {
                     padding: const EdgeInsets.only(left: 41.0),
                     child: GestureDetector(
                       onTap: () {
-                        showAlertDialog(context:context, titleText:"Silmek İstediğinizden Emin misiniz ? ",buttonText:"Sil",buttonColor: AppTheme.red1,onPressed: () {
-                          BasketServices()
-                              .deleteProductInBasketCall(
-                                  param1: basket.product!.id!)
-                              .then((bool value) {
-                            if (value) {
-                              Navigator.pop(context);
-                              setState(() {});
-                            }
-                          });
-                        });
+                        showAlertDialog(
+                            context: context,
+                            titleText: "Silmek İstediğinizden Emin misiniz ? ",
+                            buttonText: "Sil",
+                            buttonColor: Colors.red.shade600,
+                            onPressed: () {
+                              BasketServices()
+                                  .deleteProductInBasketCall(
+                                      param1: basket.product!.id!)
+                                  .then((bool value) {
+                                if (value) {
+                                  Navigator.pop(context);
+                                  setState(() {});
+                                }
+                              });
+                            });
                       },
                       child: Column(
                         children: [
@@ -492,9 +516,13 @@ class _BasketPageState extends State<BasketPage> {
     return Container(
         width: deviceWidth,
         color: themeMode ? AppTheme.white1 : AppTheme.black7,
-        padding: const EdgeInsets.only(top: 15,left: 25, right: 25,bottom:60,),
+        padding: const EdgeInsets.only(
+          top: 15,
+          left: 25,
+          right: 25,
+          bottom: 60,
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -519,65 +547,70 @@ class _BasketPageState extends State<BasketPage> {
                     ),
                     RichText(
                         text: TextSpan(children: [
-                          TextSpan(
-                            text: '3.298,94 ',
-                            style: TextStyle(
-                              fontSize: 26,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "₺",
-                            style: TextStyle(
-                              fontSize: 26,
-                              fontWeight: FontWeight.w500,
-                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                            ),
-                          )
-                        ])),
-                  ],
-                ),
-                const SizedBox(
-                  width: 16,
-                ),
-                Expanded(
-                  child: InkWell(
-                    onTap: (){
-                      showAlertDialog(context: context, titleText: 'Siparişi Onaylamak istediğinizde emin misiniz ?', buttonText: 'Onayla', buttonColor: AppTheme.green1,onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => ShoppingSummarySubpage(),));
-                        BasketServices().emptyBasketCall();
-                      });
-
-
-                    },
-                    child: Container(
-                      height: 45,
-                      decoration: BoxDecoration(
-                          color: AppTheme.green2,
-                          borderRadius: BorderRadius.circular(16.0)),
-                      child: Center(
-                        child: Text(
-                          'Sepeti Onayla',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1,
-                          ),
+                      TextSpan(
+                        text: '3.298,94 ',
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                         ),
                       ),
-                    ),
-                  ),
+                      TextSpan(
+                        text: "₺",
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      )
+                    ])),
+                  ],
                 ),
               ],
             ),
+            SizedBox(height: 16),
+            MaterialButton(
+                minWidth: deviceWidth,
+                height: 52,
+                elevation: 0,
+                color: AppTheme.green2,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: Text(
+                  'Sepeti Onayla',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.white1),
+                ),
+                onPressed: () {
+                  showAlertDialog(
+                      context: context,
+                      titleText:
+                          'Siparişi Onaylamak istediğinizde emin misiniz ?',
+                      buttonText: 'Onayla',
+                      buttonColor: AppTheme.green1,
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ShoppingSummarySubpage(),
+                        ));
+                        BasketServices().emptyBasketCall();
+                      });
+                }),
+            SizedBox(height: 36),
           ],
         ));
   }
 
-  void showAlertDialog({required BuildContext context,required String titleText,required String buttonText,required buttonColor,required VoidCallback onPressed}) {
+  void showAlertDialog(
+      {required BuildContext context,
+      required String titleText,
+      required String buttonText,
+      required buttonColor,
+      required VoidCallback onPressed}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -585,7 +618,7 @@ class _BasketPageState extends State<BasketPage> {
           backgroundColor: Colors.transparent,
           content: Container(
             width: deviceWidth,
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(16.0),
             height: 150,
             decoration: BoxDecoration(
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -597,24 +630,27 @@ class _BasketPageState extends State<BasketPage> {
               children: [
                 Text(
                   titleText,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w500,
-                    color: Provider.of<ThemeProvider>(context).themeMode ==
-                        "light"
-                        ? AppTheme.black16
-                        : AppTheme.white14,
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.black16
+                            : AppTheme.white14,
                   ),
                 ),
                 const SizedBox(height: 16),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       height: 28.0,
                       decoration: BoxDecoration(
                           color: AppTheme.blue3,
-                          borderRadius: const BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -632,28 +668,32 @@ class _BasketPageState extends State<BasketPage> {
                             Navigator.of(context).pop();
                           }),
                     ),
-                    const SizedBox(width: 16.0,),
+                    const SizedBox(
+                      width: 16.0,
+                    ),
                     Container(
                       height: 28.0,
                       decoration: BoxDecoration(
                           color: buttonColor,
-                          borderRadius: const BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
-                          elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                          ),
-                          onPressed: onPressed,
-                          child:  Text(
-                            buttonText,
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.white1),
-                          ),
-                    ),
-                    )],
+                        elevation: 0,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        onPressed: onPressed,
+                        child: Text(
+                          buttonText,
+                          style: TextStyle(
+                              fontSize: 12,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
@@ -662,5 +702,4 @@ class _BasketPageState extends State<BasketPage> {
       },
     );
   }
-
 }
