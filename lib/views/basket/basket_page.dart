@@ -55,8 +55,17 @@ class _BasketPageState extends State<BasketPage> {
                     return SizedBox(
                       width: deviceWidth,
                       height: deviceHeight * .4,
-                      child: const Center(
-                          child: Text("Sepetinizde ürün bulunmamaktadır.")),
+                      child: Center(
+                          child: Text(
+                        "Sepetinizde ürün bulunmamaktadır.",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color:
+                              themeMode ? AppTheme.black12 : AppTheme.white24,
+                        ),
+                      )),
                     );
                   }
                 } else {
@@ -391,7 +400,7 @@ class _BasketPageState extends State<BasketPage> {
                             context: context,
                             titleText: "Silmek İstediğinizden Emin misiniz ? ",
                             buttonText: "Sil",
-                            buttonColor: AppTheme.red1,
+                            buttonColor: Colors.red.shade600,
                             onPressed: () {
                               BasketServices()
                                   .deleteProductInBasketCall(
@@ -609,7 +618,7 @@ class _BasketPageState extends State<BasketPage> {
           backgroundColor: Colors.transparent,
           content: Container(
             width: deviceWidth,
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(16.0),
             height: 150,
             decoration: BoxDecoration(
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -621,6 +630,7 @@ class _BasketPageState extends State<BasketPage> {
               children: [
                 Text(
                   titleText,
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
@@ -633,6 +643,7 @@ class _BasketPageState extends State<BasketPage> {
                 ),
                 const SizedBox(height: 16),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
                       height: 28.0,
