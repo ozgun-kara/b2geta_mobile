@@ -24,7 +24,7 @@ class _NavigationPageState extends State<NavigationPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
-    var themeMode = Provider.of<ThemeProvider>(context).themeMode=="light";
+    var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     void navigateToBasketPage() {
       Navigator.push(
@@ -157,7 +157,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue2
-                                          : AppTheme.blue1
+                                          : AppTheme.white1
                                       : AppTheme.white15),
                               SizedBox(height: 4),
                               Text('Homepage'.tr,
@@ -170,7 +170,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                       .themeMode ==
                                                   "light"
                                               ? AppTheme.blue2
-                                              : AppTheme.blue1
+                                              : AppTheme.white1
                                           : AppTheme.white15)),
                             ],
                           ),
@@ -208,7 +208,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue2
-                                          : AppTheme.blue1
+                                          : AppTheme.white1
                                       : AppTheme.white15),
                               SizedBox(height: 4),
                               Text('Marketplace'.tr,
@@ -221,7 +221,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                       .themeMode ==
                                                   "light"
                                               ? AppTheme.blue2
-                                              : AppTheme.blue1
+                                              : AppTheme.white1
                                           : AppTheme.white15)),
                             ],
                           ),
@@ -259,7 +259,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue2
-                                          : AppTheme.blue1
+                                          : AppTheme.white1
                                       : AppTheme.white15),
                               SizedBox(height: 4),
                               Text('My Basket'.tr,
@@ -272,7 +272,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                       .themeMode ==
                                                   "light"
                                               ? AppTheme.blue2
-                                              : AppTheme.blue1
+                                              : AppTheme.white1
                                           : AppTheme.white15)),
                             ],
                           ),
@@ -302,18 +302,13 @@ class _NavigationPageState extends State<NavigationPage> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Image.asset('assets/icons/panel.png',
-                                  width: 19,
-                                  height: 19,
-                                  color: provider.currentTabIndex == 3
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.blue1
-                                      : AppTheme.white15),
+                              Image.asset(
+                                'assets/icons/profile.png',
+                                width: 24,
+                                height: 24,
+                              ),
                               SizedBox(height: 5),
-                              Text('My Panel'.tr,
+                              Text('My Account'.tr,
                                   style: TextStyle(
                                       fontSize: 9,
                                       fontFamily: AppTheme.appFontFamily,
@@ -323,7 +318,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                                       .themeMode ==
                                                   "light"
                                               ? AppTheme.blue2
-                                              : AppTheme.blue1
+                                              : AppTheme.white1
                                           : AppTheme.white15)),
                             ],
                           ),
