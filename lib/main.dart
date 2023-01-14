@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/company_profile_provider.dart';
+import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/login_register_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -32,6 +33,9 @@ void main() async {
     ),
     ChangeNotifierProvider<CompanyProfileProvider>(
       create: (BuildContext context) => CompanyProfileProvider(),
+    ),
+    ChangeNotifierProvider<HomePageProvider>(
+      create: (BuildContext context) => HomePageProvider(),
     ),
   ], child: MyApp()));
 }
