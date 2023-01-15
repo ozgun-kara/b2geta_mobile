@@ -88,7 +88,7 @@ class AppLanguages extends Translations {
           'Homepage': 'Anasayfa',
           'Marketplace': 'Pazaryeri',
           'My Basket': 'Sepetim',
-          'My Panel': 'Panelim',
+          'My Account': 'Hesabım',
         },
         'de_DE': {
           // LANGUAGE PAGE
