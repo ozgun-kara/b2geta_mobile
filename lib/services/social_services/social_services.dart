@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/models/feed_model.dart';
-import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,7 +20,9 @@ class SocialServices {
       if (status == true) {
         var dataList = json.decode(response.body)["data"]["feeds"];
         int limit = jsonDecode(response.body)["data"]["limit"];
-        for (var i = 0; i < 13; i++) {
+        int total = jsonDecode(response.body)["data"]["total"];
+        var dataListLength = total > limit ? limit : total;
+        for (var i = 0; i < dataListLength; i++) {
           feedList.add(FeedModel.fromJson(dataList[i]));
         }
         return feedList;
