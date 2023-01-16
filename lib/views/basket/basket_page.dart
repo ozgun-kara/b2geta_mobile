@@ -54,7 +54,7 @@ class _BasketPageState extends State<BasketPage> {
                   } else {
                     return SizedBox(
                       width: deviceWidth,
-                      height: deviceHeight * .4,
+                      height: deviceHeight,
                       child: Center(
                           child: Text(
                         "Sepetinizde ürün bulunmamaktadır.",
@@ -569,7 +569,7 @@ class _BasketPageState extends State<BasketPage> {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             MaterialButton(
                 minWidth: deviceWidth,
                 height: 52,

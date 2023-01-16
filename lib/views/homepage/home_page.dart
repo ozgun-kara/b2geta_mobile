@@ -1,4 +1,7 @@
+import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
+import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -17,6 +20,25 @@ class _HomePageState extends State<HomePage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+  List<FeedModel> feeds = [];
+  final SocialServices _socialServices = SocialServices();
+
+  @override
+  void initState() {
+    super.initState();
+    getFeeds();
+  }
+
+  void getFeeds() async {
+    await _socialServices.getAllFeedCall(queryParameters: {
+      "offset": "0",
+      "limit": "25",
+      "type": "feed"
+    }).then((feedList) {
+      feeds = feedList;
+      setState(() {});
+    });
+  }
 
   List<Map<String, Object>> storeImage = [
     {
@@ -81,7 +103,6 @@ class _HomePageState extends State<HomePage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white33 : AppTheme.black24,
       body: Consumer<HomePageProvider>(
@@ -225,26 +246,35 @@ class _HomePageState extends State<HomePage> {
                                       ),
                                     ),
                                   )
-                                : Container(
-                                    width: 50,
-                                    height: 50,
-                                    margin: const EdgeInsets.only(
-                                      right: 10,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      border: Border.all(
-                                        color:
-                                            storeImage[index]["isOpen"] as bool
-                                                ? AppTheme.white1
-                                                : const Color(0XFF29B7D6),
-                                        width: 2,
+                                : GestureDetector(
+                                    onTap: () {
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MoreStories(),
+                                      ));
+                                    },
+                                    child: Container(
+                                      width: 50,
+                                      height: 50,
+                                      margin: const EdgeInsets.only(
+                                        right: 10,
                                       ),
-                                    ),
-                                    child: Image.asset(
-                                      storeImage[index]["image_name"]
-                                          .toString(),
-                                      fit: BoxFit.contain,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: storeImage[index]["isOpen"]
+                                                  as bool
+                                              ? AppTheme.white1
+                                              : const Color(0XFF29B7D6),
+                                          width: 2,
+                                        ),
+                                      ),
+                                      child: Image.asset(
+                                        storeImage[index]["image_name"]
+                                            .toString(),
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                   );
                           },
@@ -343,13 +373,15 @@ class _HomePageState extends State<HomePage> {
                   )
                 : SliverList(
                     delegate: SliverChildBuilderDelegate(
-                      childCount: 10,
+                      childCount: feeds.length,
                       (context, index) {
+                        var feed = feeds[index];
                         return Container(
                           width: deviceWidth,
                           color: themeMode ? AppTheme.white1 : AppTheme.black7,
                           margin: const EdgeInsets.symmetric(vertical: 6.5),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const SizedBox(
                                 height: 8.0,
@@ -365,16 +397,26 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Row(
                                       children: [
-                                        Container(
-                                          width: 40,
-                                          height: 40,
-                                          decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Image.asset(
-                                            "assets/images/dummy_images/post_profile.png",
-                                          ),
-                                        ),
+                                        feed.user!.photo != null
+                                            ? ClipOval(
+                                                child: Image.network(
+                                                  width: 40,
+                                                  height: 40,
+                                                  feed.user!.photo!,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      Image.asset(
+                                                    "assets/images/dummy_images/post_profile.png",
+                                                  ),
+                                                ),
+                                              )
+                                            : ClipOval(
+                                                child: Image.asset(
+                                                  width: 40,
+                                                  height: 40,
+                                                  "assets/images/dummy_images/post_profile.png",
+                                                ),
+                                              ),
                                         const SizedBox(
                                           width: 10.0,
                                         ),
@@ -387,7 +429,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               children: [
                                                 TextSpan(
-                                                  text: 'Özturanlar Mobilya',
+                                                  text:
+                                                      feed.user!.name ?? "Name",
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w800,
                                                     color: themeMode
@@ -425,7 +468,7 @@ class _HomePageState extends State<HomePage> {
                                   right: 36,
                                 ),
                                 child: Text(
-                                  "Build secure apps on top of ANY database or API faster t",
+                                  feed.content ?? "Feed Content",
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -436,59 +479,75 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 15.0,
-                              ),
-                              SizedBox(
-                                width: deviceWidth,
-                                height: 279,
-                                child: Stack(
+                              if (feed.images!.isNotEmpty)
+                                Column(
                                   children: [
-                                    Image.asset(
-                                      "assets/images/dummy_images/post_image_1.png",
-                                      fit: BoxFit.cover,
-                                      height: 279,
+                                    const SizedBox(
+                                      height: 5.0,
                                     ),
-                                    Positioned(
-                                      top: 220,
-                                      left: deviceWidth - 80.0,
-                                      child: Container(
-                                        width: 60,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFF2F2F2F)
-                                              .withOpacity(.66),
-                                          borderRadius:
-                                              BorderRadius.circular(13.0),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Image.asset(
-                                              "assets/icons/post_image_add.png",
-                                              width: 18,
-                                              height: 18,
+                                    SizedBox(
+                                      width: deviceWidth,
+                                      height: 279,
+                                      child: Stack(
+                                        children: [
+                                          Image.network(
+                                            feed.images![0]!.url.toString(),
+                                            width: deviceWidth,
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              "assets/images/dummy_images/post_image_1.png",
+                                              width: deviceWidth,
+                                              fit: BoxFit.cover,
                                             ),
-                                            Text(
-                                              "8",
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: AppTheme.white1,
+                                          ),
+                                          Positioned(
+                                            top: 220,
+                                            left: deviceWidth - 80.0,
+                                            child: Container(
+                                              width: 60,
+                                              height: 40,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF2F2F2F)
+                                                    .withOpacity(.66),
+                                                borderRadius:
+                                                    BorderRadius.circular(13.0),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/icons/post_image_add.png",
+                                                    width: 18,
+                                                    height: 18,
+                                                  ),
+                                                  Text(
+                                                    "8",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          )
+                                        ],
                                       ),
                                     )
                                   ],
-                                ),
-                              ),
+                                )
+                              else
+                                const SizedBox(),
                               Container(
                                 height: 49,
                                 margin: const EdgeInsets.only(left: 15),
@@ -622,15 +681,16 @@ class _HomePageState extends State<HomePage> {
                                                       AppTheme.appFontFamily,
                                                   color: AppTheme.white15,
                                                 ),
-                                                children: const [
+                                                children: [
                                                   TextSpan(
-                                                    text: '1.741',
-                                                    style: TextStyle(
+                                                    text:
+                                                        feed.likes!.toString(),
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
                                                   ),
-                                                  TextSpan(
+                                                  const TextSpan(
                                                     text: ' Beğeni',
                                                     style: TextStyle(
                                                       fontWeight:
