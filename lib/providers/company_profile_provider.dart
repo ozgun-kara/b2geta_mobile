@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CompanyProfileProvider with ChangeNotifier {
-  int currentTabIndex = 0;
+  int currentTabIndex = 4;
 
   final List pages = [];
 

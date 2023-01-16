@@ -40,6 +40,20 @@ class _RegisterPageState extends State<RegisterPage> {
   late double deviceWidth;
   late double deviceHeight;
 
+  final List<String> items = [
+    'A_Item1',
+    'A_Item2',
+    'A_Item3',
+    'A_Item4',
+    'B_Item1',
+    'B_Item2',
+    'B_Item3',
+    'B_Item4',
+  ];
+
+  String? selectedValue;
+  final TextEditingController textEditingController = TextEditingController();
+
   @override
   void initState() {
     Provider.of<LoginRegisterProvider>(context, listen: false)
@@ -533,6 +547,97 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 SizedBox(height: 13),
+                // DropdownButtonHideUnderline(
+                //   child: DropdownButton2(
+                //     // alignment: AlignmentDirectional.center,
+                //     // isExpanded: true,
+                //     hint: Text(
+                //       'Country'.tr,
+                //       style: TextStyle(
+                //         fontSize: 14,
+                //         fontFamily: AppTheme.appFontFamily,
+                //         fontWeight: FontWeight.w400,
+                //         color: Provider.of<ThemeProvider>(context).themeMode ==
+                //                 "light"
+                //             ? AppTheme.black11
+                //             : AppTheme.white14,
+                //       ),
+                //       overflow: TextOverflow.visible,
+                //     ),
+                //     items: Provider.of<LoginRegisterProvider>(context)
+                //         .dropdownItems
+                //         .map((item) => DropdownMenuItem<String>(
+                //               value: item.code,
+                //               child: Center(
+                //                 child: Text(
+                //                   item.name ?? '',
+                //                   style: TextStyle(
+                //                     fontSize: 14,
+                //                     fontFamily: AppTheme.appFontFamily,
+                //                     fontWeight: FontWeight.w400,
+                //                     color: Provider.of<ThemeProvider>(context)
+                //                                 .themeMode ==
+                //                             "light"
+                //                         ? AppTheme.black11
+                //                         : AppTheme.white14,
+                //                   ),
+                //                   overflow: TextOverflow.visible,
+                //                 ),
+                //               ),
+                //             ))
+                //         .toList(),
+                //     value: Provider.of<LoginRegisterProvider>(context)
+                //         .dropdownSelectedValue,
+                //
+                //     onChanged: (value) {
+                //       Provider.of<LoginRegisterProvider>(context, listen: false)
+                //           .updateDropdownSelectedValue(value as String);
+                //     },
+                //     icon: Center(
+                //       child: Image.asset(
+                //         'assets/icons/dropdown.png',
+                //         width: 10,
+                //         height: 6,
+                //       ),
+                //     ),
+                //     iconSize: 24,
+                //     // iconEnabledColor: Colors.yellow,
+                //     // iconDisabledColor: Colors.grey,
+                //     // icon: Container(),
+                //     buttonHeight: 57,
+                //     buttonWidth: deviceWidth,
+                //     buttonPadding: EdgeInsets.only(left: 25, right: 17),
+                //     buttonDecoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10),
+                //       // border:
+                //       //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                //       // color: Colors.transparent,
+                //       color: Provider.of<ThemeProvider>(context).themeMode ==
+                //               "light"
+                //           ? AppTheme.white5
+                //           : AppTheme.black7,
+                //     ),
+                //     // buttonElevation: 2,
+                //     itemHeight: 40,
+                //     itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                //     dropdownMaxHeight: 200,
+                //     // dropdownWidth: deviceWidth,
+                //     dropdownPadding: null,
+                //     dropdownDecoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(14),
+                //       // color: Color(0xFFEFF0F7),
+                //       color: Provider.of<ThemeProvider>(context).themeMode ==
+                //               "light"
+                //           ? AppTheme.white5
+                //           : AppTheme.black7,
+                //     ),
+                //     // dropdownElevation: 8,
+                //     scrollbarRadius: const Radius.circular(40),
+                //     scrollbarThickness: 4,
+                //     scrollbarAlwaysShow: true,
+                //     offset: const Offset(0, 0),
+                //   ),
+                // ),
                 DropdownButtonHideUnderline(
                   child: DropdownButton2(
                     // alignment: AlignmentDirectional.center,
@@ -576,10 +681,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         .dropdownSelectedValue,
 
                     onChanged: (value) {
-                      Provider.of<LoginRegisterProvider>(context,
-                              listen: false)
+                      Provider.of<LoginRegisterProvider>(context, listen: false)
                           .updateDropdownSelectedValue(value as String);
                     },
+
                     icon: Center(
                       child: Image.asset(
                         'assets/icons/dropdown.png',
@@ -623,6 +728,53 @@ class _RegisterPageState extends State<RegisterPage> {
                     scrollbarThickness: 4,
                     scrollbarAlwaysShow: true,
                     offset: const Offset(0, 0),
+
+                    searchController: textEditingController,
+                    searchInnerWidget: Padding(
+                      padding: const EdgeInsets.only(
+                        top: 8,
+                        bottom: 4,
+                        right: 8,
+                        left: 8,
+                      ),
+                      child: TextFormField(
+                        controller: textEditingController,
+                        decoration: InputDecoration(
+                          isDense: true,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 8,
+                          ),
+                          hintText: 'Search for an item...',
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black11
+                                    : AppTheme.white14,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
+                    ),
+                    searchMatchFn: (item, searchValue) {
+                      debugPrint("ITEM:" + item.value.toString());
+
+                      return (item.value
+                          .toLowerCase()
+                          .contains(searchValue.toLowerCase()));
+                    },
+                    //This to clear the search value when you close the menu
+                    onMenuStateChange: (isOpen) {
+                      if (!isOpen) {
+                        textEditingController.clear();
+                      }
+                    },
                   ),
                 ),
                 SizedBox(height: 23),
