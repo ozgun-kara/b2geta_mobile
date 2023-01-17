@@ -6,11 +6,11 @@ import 'package:http/http.dart' as http;
 class SocialServices {
   // FEED LİST
   Future<List<FeedModel>> getAllFeedCall(
-      {required Map<String, String> queryParameters}) async {
+      {required Map<String, String> queryParameters,required String userId}) async {
     List<FeedModel> feedList = [];
 
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/feeds/57')
+      Uri.parse('${Constants.apiUrl}/feeds/$userId')
           .replace(queryParameters: queryParameters),
       headers: {"Authorization": "Bearer ${Constants.userToken}"},
     );
