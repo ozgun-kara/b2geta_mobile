@@ -70,12 +70,8 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(3)),
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white1
-                                    : AppTheme.black7,
+                                themeMode ? AppTheme.white1 : AppTheme.black7,
                             boxShadow: [
                               BoxShadow(
                                 blurStyle: BlurStyle.normal,
@@ -86,184 +82,194 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                               ),
                             ],
                           ),
-                          padding: EdgeInsets.all(8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          child: Column(
                             children: [
-                              Container(
-                                width: 126,
-                                height: 145,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(2),
-                                  ),
-                                ),
-                                child: Image.network(
-                                  items[index].imgUrl ?? '',
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  //? bu kısım sorulacak.
-                                  SizedBox(
-                                    width: deviceWidth - (24 + 16 + 126 + 10),
-                                    height: 35,
-                                    child: Text(
-                                      items[index].title ?? '',
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue3
-                                                : AppTheme.white11,
-                                      ),
-                                    ),
-                                  ),
-                                  RichText(
-                                      text: TextSpan(children: [
-                                    TextSpan(
-                                      text: items[index].totalPayment ?? '',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: "₺",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
-                                      ),
-                                    )
-                                  ])),
-
-                                  Text(
-                                    "10 adet min. sipariş",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppTheme.white15,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    "İstanbul, Türkiye",
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppTheme.white15,
-                                    ),
-                                  ),
-                                  SizedBox(height: 1),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "İteme İnşaat",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w700,
-                                          color: Provider.of<ThemeProvider>(
-                                                          context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue3
-                                              : AppTheme.white11,
-                                        ),
-                                      ),
-                                      SizedBox(width: 5),
-                                      Text(
-                                        "9,2",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w800,
-                                          color: AppTheme.white15,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 4),
-                                      Image.asset('assets/icons/star.png',
-                                          width: 15, height: 15),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 2),
-                                  SizedBox(
-                                    height: 24,
-                                    child: ButtonTheme(
-                                      // minWidth: deviceWidth,
-                                      height: 22,
-
-                                      child: MaterialButton(
-                                          elevation: 0,
-                                          color: Colors.transparent,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: 1,
-                                                color: AppTheme.white19),
-                                            borderRadius:
-                                                const BorderRadius.all(
-                                                    Radius.circular(36)),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(21, 21, 21, 23),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tarih:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
                                           ),
-                                          padding: const EdgeInsets.fromLTRB(
-                                              10, 2, 10, 3.5),
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Image.asset(
-                                                  'assets/icons/comment.png',
-                                                  width: 12.5,
-                                                  height: 12.5,
-                                                  color: AppTheme.black16),
-                                              const SizedBox(width: 3.5),
-                                              Text(
-                                                "Tedarikçiye Ulaşın",
+                                        ),
+                                        Text(
+                                          items[index].date ?? '',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Satıcı:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].seller ?? '',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Sipariş No:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].orderNumber ?? '',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Miktar:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].quantity ?? '',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Ürün No:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        Text(
+                                          items[index].productNumber ?? '',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                        SizedBox(height: 16),
+                                        Text(
+                                          "Durum:",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
+                                        ),
+                                        items[index].status == "1"
+                                            ? Text(
+                                                "Onaylandı",
                                                 style: TextStyle(
-                                                  fontSize: 10,
+                                                  fontSize: 13,
                                                   fontFamily:
                                                       AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue2
-                                                          : AppTheme.white1,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.green6
+                                                      : AppTheme.green7,
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          onPressed: () async {}),
+                                              )
+                                            : items[index].status == "0"
+                                                ? Text(
+                                                    "Değerlendiriliyor",
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  )
+                                                : Text(
+                                                    "Reddedildi",
+                                                    style: TextStyle(
+                                                      fontSize: 13,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: themeMode
+                                                          ? AppTheme.red2
+                                                          : AppTheme.red3,
+                                                    ),
+                                                  )
+                                      ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: themeMode
+                                      ? AppTheme.white32
+                                      : Colors.transparent),
+                              SizedBox(height: 80),
                             ],
                           ),
                         ),
