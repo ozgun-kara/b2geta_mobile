@@ -24,20 +24,29 @@ class _HomePageState extends State<HomePage> {
 
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
+  List<FeedModel> stories = [];
 
   @override
   void initState() {
     super.initState();
     getFeeds();
+    getStories();
   }
 
   void getFeeds() async {
-    await _socialServices.getAllFeedCall(queryParameters: {
-      "offset": "0",
-      "limit": "25",
-      "type": "feed"
-    }).then((feedList) {
+    await _socialServices.getAllFeedCall(
+        queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
+        userId: "57").then((feedList) {
       feeds = feedList;
+      setState(() {});
+    });
+  }
+
+  void getStories() async {
+    await _socialServices.getAllFeedCall(
+        queryParameters: {"offset": "0", "limit": "9", "type": "story"},
+        userId: "408").then((feedList) {
+      stories = feedList;
       setState(() {});
     });
   }
@@ -74,6 +83,10 @@ class _HomePageState extends State<HomePage> {
     {
       "isOpen": true,
       "image_name": "assets/images/dummy_images/store_image_3.png",
+    },
+    {
+      "isOpen": true,
+      "image_name": "assets/images/dummy_images/store_image_4.png",
     },
     {
       "isOpen": true,
@@ -222,9 +235,12 @@ class _HomePageState extends State<HomePage> {
                         margin: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                         color: themeMode ? AppTheme.white1 : AppTheme.black5,
                         child: ListView.builder(
-                          itemCount: storeImage.length,
+                          itemCount: stories.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
+                            var story = stories[index];
+                            debugPrint(stories.length.toString());
+
                             return index == 0
                                 ? Padding(
                                     padding: const EdgeInsets.only(left: 11.0),
@@ -252,8 +268,9 @@ class _HomePageState extends State<HomePage> {
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            const MoreStories(),
+                                        builder: (context) => MoreStories(
+                                          stories: stories,
+                                        ),
                                       ));
                                     },
                                     child: Container(
@@ -265,18 +282,31 @@ class _HomePageState extends State<HomePage> {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                          color: storeImage[index]["isOpen"]
-                                                  as bool
-                                              ? AppTheme.white1
-                                              : const Color(0XFF29B7D6),
+                                          color: const Color(0XFF29B7D6),
                                           width: 2,
                                         ),
                                       ),
-                                      child: Image.asset(
-                                        storeImage[index]["image_name"]
-                                            .toString(),
-                                        fit: BoxFit.contain,
-                                      ),
+                                      child: story.user!.photo == null
+                                          ? ClipOval(
+                                              child: Image.network(
+                                                width: 40,
+                                                height: 40,
+                                                story.user!.photo!,
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    Image.asset(
+                                                  "assets/images/dummy_images/post_profile.png",
+                                                ),
+                                              ),
+                                            )
+                                          : ClipOval(
+                                              child: Image.asset(
+                                                width: 40,
+                                                height: 40,
+                                                storeImage[index]["image_name"]
+                                                    .toString(),
+                                              ),
+                                            ),
                                     ),
                                   );
                           },
@@ -487,60 +517,64 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(
                                       height: 5.0,
                                     ),
-                                    Stack(
-                                      children: [
-                                        Image.network(
-                                          feed.images![0]!.url.toString(),
-                                          width: deviceWidth,
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Image.asset(
-                                            "assets/images/dummy_images/post_image_1.png",
-                                            height: 279,
+                                    SizedBox(
+                                      width: deviceWidth,
+                                      height: 279,
+                                      child: Stack(
+                                        children: [
+                                          Image.network(
+                                            feed.images![0]!.url.toString(),
                                             width: deviceWidth,
                                             fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                        Positioned(
-                                          top: 231,
-                                          right: 20,
-                                          child: Container(
-                                            width: 59,
-                                            height: 37,
-                                            decoration: BoxDecoration(
-                                              color: const Color(0xFF2F2F2F)
-                                                  .withOpacity(.66),
-                                              borderRadius:
-                                                  BorderRadius.circular(13.0),
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              "assets/images/dummy_images/post_image_1.png",
+                                              width: deviceWidth,
+                                              fit: BoxFit.cover,
                                             ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icons/post_image_add.png",
-                                                  width: 18,
-                                                  height: 18,
-                                                ),
-                                                const SizedBox(
-                                                  width: 8,
-                                                ),
-                                                Text(
-                                                  "8",
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppTheme.white1,
+                                          ),
+                                          Positioned(
+                                            top: 231,
+                                            right: 20,
+                                            child: Container(
+                                              width: 59,
+                                              height: 37,
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF2F2F2F)
+                                                    .withOpacity(.66),
+                                                borderRadius:
+                                                    BorderRadius.circular(13.0),
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/icons/post_image_add.png",
+                                                    width: 18,
+                                                    height: 18,
                                                   ),
-                                                ),
-                                              ],
+                                                  const SizedBox(
+                                                    width: 8,
+                                                  ),
+                                                  Text(
+                                                    "8",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     )
                                   ],
                                 )
