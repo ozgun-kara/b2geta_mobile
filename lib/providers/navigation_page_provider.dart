@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/shopping_summary_subpage.dart';
+import 'package:b2geta_mobile/views/profile/company/company_orders_subpages.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_menu_subpage.dart';
 import 'package:b2geta_mobile/views/profile/company/conpany_profile_page.dart';
 import 'package:b2geta_mobile/views/test_pages/basket_test_page.dart';
@@ -34,7 +35,8 @@ class NavigationPageProvider with ChangeNotifier {
     MarketplacePage(),
     BasketPage(),
     // ProductDetailSubpage(),
-    // CompanyProfileMenuSubpage()
+    // CompanyProfileMenuSubpage(),
+    // CompanyOrdersSubpage(),
     CompanyProfilPage()
   ];
 
