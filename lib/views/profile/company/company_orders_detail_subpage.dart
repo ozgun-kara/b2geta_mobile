@@ -2,19 +2,23 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/dummy_models/company_order_dummy_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/profile/company/company_orders_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CompanyOrdersSubpage extends StatefulWidget {
-  const CompanyOrdersSubpage({Key? key}) : super(key: key);
+class CompanyOrdersDetailSubpage extends StatefulWidget {
+  const CompanyOrdersDetailSubpage({Key? key, required this.orderIndex})
+      : super(key: key);
+
+  final int orderIndex;
 
   @override
-  State<CompanyOrdersSubpage> createState() => _CompanyOrdersSubpageState();
+  State<CompanyOrdersDetailSubpage> createState() =>
+      _CompanyOrdersDetailSubpageState();
 }
 
-class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
+class _CompanyOrdersDetailSubpageState
+    extends State<CompanyOrdersDetailSubpage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -67,14 +71,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
 
                       return InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    CompanyOrdersDetailSubpage(
-                                  orderIndex: index,
-                                ),
-                              ));
+                          // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailSubpage(productId: productIdList[index], productName: productList["title"].toString(), imageUrl: productList["imgUrl"].toString(),price: productList["price"].toString()),),);
                         },
                         child: Container(
                           decoration: BoxDecoration(
