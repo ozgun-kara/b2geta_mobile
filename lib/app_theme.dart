@@ -57,6 +57,7 @@ class AppTheme {
   static Color blue7 = const Color(0xFF192C99);
   static Color blue8 = const Color(0xFF306AFF);
   static Color blue9 = const Color(0xFF34CEFF);
+  static Color blue10 = const Color(0xFF3D5AFF);
 
   static Color red1 = const Color(0xFFFF3062);
   static Color red2 = const Color(0xFFD91E34);

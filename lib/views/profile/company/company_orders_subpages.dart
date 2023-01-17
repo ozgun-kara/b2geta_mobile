@@ -59,7 +59,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                     shrinkWrap: true,
                     itemCount: productIdList!.length,
                     separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: 8);
+                      return SizedBox(height: 12);
                     },
                     itemBuilder: ((context, index) {
                       var items = data.data as List<CompanyOrderDummyModel>;
@@ -87,8 +87,6 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(21, 21, 21, 23),
                                 child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Column(
                                       crossAxisAlignment:
@@ -137,6 +135,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(width: 44),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -184,6 +183,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                         ),
                                       ],
                                     ),
+                                    SizedBox(width: 44),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -267,9 +267,76 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                   width: deviceWidth,
                                   height: 1,
                                   color: themeMode
-                                      ? AppTheme.white32
-                                      : Colors.transparent),
-                              SizedBox(height: 80),
+                                      ? AppTheme.white21
+                                      : AppTheme.black18),
+                              SizedBox(height: 2),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(21, 8, 21, 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            child: Image.asset(
+                                                'assets/icons/message.png',
+                                                width: 12,
+                                                height: 10,
+                                                color: AppTheme.white15),
+                                          ),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            "Mesaj Gönder",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: themeMode
+                                                    ? AppTheme.blue2
+                                                    : AppTheme.blue10),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(width: 20),
+                                    InkWell(
+                                      onTap: () {},
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            child: Image.asset(
+                                                'assets/icons/arrow.png',
+                                                width: 8,
+                                                height: 8,
+                                                color: AppTheme.white15),
+                                          ),
+                                          SizedBox(width: 6),
+                                          Text(
+                                            "Detaylar",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: themeMode
+                                                    ? AppTheme.blue2
+                                                    : AppTheme.blue10),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -291,6 +358,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                 }
               },
             ),
+            SizedBox(height: 82),
           ],
         ),
       ),
