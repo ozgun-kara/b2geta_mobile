@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
+import 'package:b2geta_mobile/views/messages/messages_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,11 @@ class _NavigationPageState extends State<NavigationPage> {
     void navigateToBasketPage() {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => const BasketPage()));
+    }
+
+    void navigateToMessagePage() {
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => const MessagesPage()));
     }
 
     return Scaffold(
@@ -77,7 +83,6 @@ class _NavigationPageState extends State<NavigationPage> {
                 }
               },
             ),
-            const SizedBox(width: 4),
             IconButton(
               splashRadius: 24,
               icon: Image.asset(
@@ -88,7 +93,6 @@ class _NavigationPageState extends State<NavigationPage> {
               ),
               onPressed: () {},
             ),
-            const SizedBox(width: 4),
             IconButton(
               splashRadius: 24,
               icon: Image.asset(
@@ -97,7 +101,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 height: 16.0,
                 color: AppTheme.white15,
               ),
-              onPressed: () {},
+              onPressed: navigateToMessagePage,
             ),
           ]),
 
