@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CompanyOrdersDetailSubpage extends StatefulWidget {
-  const CompanyOrdersDetailSubpage({Key? key, required this.orderIndex})
+  const CompanyOrdersDetailSubpage({Key? key, required this.passedObject})
       : super(key: key);
 
-  final int orderIndex;
+  final CompanyOrderDummyModel passedObject;
 
   @override
   State<CompanyOrdersDetailSubpage> createState() =>
@@ -35,6 +35,76 @@ class _CompanyOrdersDetailSubpageState
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
+      appBar: AppBar(
+          toolbarHeight: 68,
+          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+          elevation: 0,
+          // leading: Padding(
+          //   padding: const EdgeInsets.only(left: 8),
+          //   child: IconButton(
+          //     splashRadius: 24,
+          //     icon: Image.asset(
+          //       'assets/icons/menu.png',
+          //       width: 23,
+          //       height: 17,
+          //       color: AppTheme.white15,
+          //     ),
+          //     onPressed: () {},
+          //   ),
+          // ),
+          // leading: SizedBox(),
+          leadingWidth: 125.74,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 22),
+            child: SizedBox(
+                width: 103.74,
+                height: 14.0,
+                child: themeMode
+                    ? Image.asset('assets/images/b2geta_logo_light.png')
+                    : Image.asset('assets/images/b2geta_logo_dark.png')),
+          ),
+          actions: [
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/search.png',
+                width: 19,
+                height: 19,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {
+                if (themeMode) {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setDarkMode();
+                } else {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .setLightMode();
+                }
+              },
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/bell.png',
+                width: 16.0,
+                height: 18.0,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+            const SizedBox(width: 4),
+            IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/message.png',
+                width: 19.0,
+                height: 16.0,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {},
+            ),
+          ]),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -42,17 +112,34 @@ class _CompanyOrdersDetailSubpageState
                 width: deviceWidth,
                 height: 1,
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
-            SizedBox(height: 21),
-            Text(
-              "Siparişlerim",
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: AppTheme.appFontFamily,
-                fontWeight: FontWeight.w600,
-                color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-              ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: IconButton(
+                    splashRadius: 24,
+                    icon: Image.asset(
+                      'assets/icons/back-2.png',
+                      width: 14,
+                      height: 12,
+                      color: AppTheme.white15,
+                    ),
+                    onPressed: () {},
+                  ),
+                ),
+                Text(
+                  "Sipariş Detay #${widget.passedObject.orderNumber}",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w600,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 22),
+            SizedBox(height: 8),
             FutureBuilder(
               future: DummyService().getCompanyOrdersList(),
               builder: (context, data) {
@@ -89,6 +176,7 @@ class _CompanyOrdersDetailSubpageState
                           ),
                           child: Column(
                             children: [
+                              SizedBox(height: 60),
                               Padding(
                                 padding: EdgeInsets.fromLTRB(21, 21, 21, 23),
                                 child: Row(

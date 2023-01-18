@@ -72,7 +72,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                               MaterialPageRoute(
                                 builder: (context) =>
                                     CompanyOrdersDetailSubpage(
-                                  orderIndex: index,
+                                  passedObject: items[index],
                                 ),
                               ));
                         },
