@@ -726,21 +726,25 @@ class _RegisterPageState extends State<RegisterPage> {
 
                     searchController: textEditingController,
                     searchInnerWidget: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 8,
-                        bottom: 4,
-                        right: 8,
-                        left: 8,
-                      ),
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
                       child: TextFormField(
                         controller: textEditingController,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black11
+                                    : AppTheme.white1), // WHILE WRITING
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 10,
+                            horizontal: 16,
                             vertical: 8,
                           ),
-                          hintText: 'Search for an item...',
+                          hintText: 'Country Dropdown'.tr,
                           hintStyle: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -752,7 +756,27 @@ class _RegisterPageState extends State<RegisterPage> {
                                     : AppTheme.white14,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: AppTheme.white15,
+                                width: 1,
+                              )),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: AppTheme.white15,
+                                width: 1,
+                              )),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white10
+                                  : AppTheme.white1,
+                              width: 1,
+                            ),
                           ),
                         ),
                       ),
