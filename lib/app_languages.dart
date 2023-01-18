@@ -79,7 +79,7 @@ class AppLanguages extends Translations {
           'Official Person': 'Yetkili Kişi',
           'Official Phone': 'Yetkili Telefon',
           'Country': 'Ülke',
-          "Country Dropdown": 'Ülke country...',
+          "Country Dropdown": 'Ülke ara...',
           'User Agreement': 'Kullanıcı sözleşmesini okudum onaylıyorum',
           'E-mail Validate-3': 'Email adresleri uyuşmuyor',
           'Password Validate-3': 'Şifreler uyuşmuyor',
