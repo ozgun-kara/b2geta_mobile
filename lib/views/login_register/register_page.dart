@@ -20,13 +20,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  // final emailController1 = TextEditingController(text: "newtest003@gmail.com");
-  // final emailController2 = TextEditingController(text: "newtest003@gmail.com");
-  // final passwordController1 = TextEditingController(text: "12345678");
-  // final passwordController2 = TextEditingController(text: "12345678");
-  // final companyNameController = TextEditingController(text: "Company-1");
-  // final officialPersonController = TextEditingController(text: "Person-1");
-  // final officialPhoneController = TextEditingController(text: "");
 
   final emailController1 = TextEditingController();
   final emailController2 = TextEditingController();
@@ -35,23 +28,12 @@ class _RegisterPageState extends State<RegisterPage> {
   final companyNameController = TextEditingController();
   final officialPersonController = TextEditingController();
   final officialPhoneController = TextEditingController();
+  var countryCode;
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
-  final List<String> items = [
-    'A_Item1',
-    'A_Item2',
-    'A_Item3',
-    'A_Item4',
-    'B_Item1',
-    'B_Item2',
-    'B_Item3',
-    'B_Item4',
-  ];
-
-  String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -67,6 +49,9 @@ class _RegisterPageState extends State<RegisterPage> {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
+
+    var countryList = Provider.of<LoginRegisterProvider>(context, listen: false)
+        .dropdownItems;
 
     return Scaffold(
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -658,7 +643,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     items: Provider.of<LoginRegisterProvider>(context)
                         .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
-                              value: item.code,
+                              value: item.name,
                               child: Center(
                                 child: Text(
                                   item.name ?? '',
@@ -683,6 +668,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     onChanged: (value) {
                       Provider.of<LoginRegisterProvider>(context, listen: false)
                           .updateDropdownSelectedValue(value as String);
+
+                      var countryIndex = countryList
+                          .indexWhere(((element) => element.name == value));
+                      if (countryIndex != -1) {
+                        debugPrint('COUNTRY INDEX: $countryIndex');
+                        debugPrint(
+                            'COUNTRY CODE: ${countryList[countryIndex].code}');
+
+                        countryCode = countryList[countryIndex].code;
+                      }
                     },
 
                     icon: Center(
@@ -891,8 +886,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "officialPerson: ${officialPersonController.text}");
                             debugPrint(
                                 "officialPhone: ${officialPhoneController.text}");
-                            debugPrint(
-                                "country: ${Provider.of<LoginRegisterProvider>(context, listen: false).dropdownSelectedValue}");
+                            debugPrint("country: $countryCode");
 
                             locator<MemberServices>()
                                 .registerCall(
@@ -901,11 +895,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               companyName: companyNameController.text,
                               officialPerson: officialPersonController.text,
                               officialPhone: officialPhoneController.text,
-                              country: Provider.of<LoginRegisterProvider>(
-                                      context,
-                                      listen: false)
-                                  .dropdownSelectedValue
-                                  .toString(),
+                              country: countryCode.toString(),
                             )
                                 .then((value) {
                               if (value != "error") {
