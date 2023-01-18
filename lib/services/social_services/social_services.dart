@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:flutter/material.dart';
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
 class SocialServices {
   // FEED LİST
   Future<List<FeedModel>> getAllFeedCall(
-      {required Map<String, String> queryParameters,required String userId}) async {
+      {required Map<String, String> queryParameters,
+      required String userId}) async {
     List<FeedModel> feedList = [];
 
     final response = await http.get(
@@ -34,6 +36,48 @@ class SocialServices {
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
       return feedList;
+    }
+  }
+
+// FEED LIKE
+  Future<bool> feedLikeCall({required String feedId}) async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/like/$feedId'),
+      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+    );
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
+
+  // FEED UNLIKE
+  Future<bool> feedUnLikeCall({required String feedId}) async {
+    final response = await http.delete(
+      Uri.parse('${Constants.apiUrl}/unlike/$feedId'),
+      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+    );
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
     }
   }
 }

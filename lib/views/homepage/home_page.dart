@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -239,7 +240,6 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
                             var story = stories[index];
-                            debugPrint(stories.length.toString());
 
                             return index == 0
                                 ? Padding(
@@ -588,7 +588,15 @@ class _HomePageState extends State<HomePage> {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     TextButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          if (feed.likeStatus!) {
+                                            _socialServices.feedUnLikeCall(
+                                                feedId: feed.id!);
+                                          } else {
+                                            _socialServices.feedLikeCall(
+                                                feedId: feed.id!);
+                                          }
+                                        },
                                         child: Row(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -602,7 +610,9 @@ class _HomePageState extends State<HomePage> {
                                               width: 4.0,
                                             ),
                                             Text(
-                                              "Beğen",
+                                              feed.likeStatus!
+                                                  ? "Beğendin"
+                                                  : "Beğen",
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
