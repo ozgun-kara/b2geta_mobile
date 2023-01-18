@@ -36,8 +36,8 @@ class NavigationPageProvider with ChangeNotifier {
     BasketPage(),
     // ProductDetailSubpage(),
     // CompanyProfileMenuSubpage(),
-    CompanyOrdersSubpage(),
-    // CompanyProfilPage()
+    // CompanyOrdersSubpage(),
+    CompanyProfilPage()
   ];
 
   void updateCurrentTabIndex(int value) {
