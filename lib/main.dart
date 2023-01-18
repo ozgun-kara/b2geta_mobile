@@ -59,7 +59,6 @@ class MyApp extends StatelessWidget {
       title: 'B2GETA',
       home: const SplashPage(),
       // home: NavigationPage(),
-      // home: LoginPage(),
       // home: RegisterPage(),
       // home: LanguagePage(),
     );

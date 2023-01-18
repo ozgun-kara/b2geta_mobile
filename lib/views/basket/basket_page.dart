@@ -205,17 +205,16 @@ class _BasketPageState extends State<BasketPage> {
                 children: [
                   //cart item content image
                   Container(
-                    width: 82.0,
-                    height: 82.0,
+                    width: 82,
+                    height: 82,
                     decoration: BoxDecoration(
-                        color: themeMode ? AppTheme.white21 : AppTheme.black20,
-                        border: Border.all(
-                          color:
-                              themeMode ? AppTheme.white21 : AppTheme.black20,
-                        ),
-                        borderRadius: BorderRadius.circular(8.0)),
-                    child: Image.network(
-                      "https://s4.gifyu.com/images/product_2.png",
+                      image: DecorationImage(
+                        image: NetworkImage(
+                            "https://s4.gifyu.com/images/product_2.png"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(width: 1, color: AppTheme.white21),
                     ),
                   ),
                   const SizedBox(

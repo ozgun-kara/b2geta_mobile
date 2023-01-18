@@ -27,8 +27,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -249,10 +247,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
               const SizedBox(height: 11),
               Visibility(
-                visible:
-                    Provider.of<MarketPlaceProvider>(context).filterSwitch
-                        ? false
-                        : true,
+                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                    ? false
+                    : true,
                 child: FutureBuilder<List<String>>(
                   future: ProductsServices()
                       .productsListAndSearchCall(queryParameters: {
@@ -288,7 +285,18 @@ class _MarketplacePageState extends State<MarketplacePage> {
 
                           return InkWell(
                             onTap: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailSubpage(productId: productIdList[index], productName: productList["title"].toString(), imageUrl: productList["imgUrl"].toString(),price: productList["price"].toString()),),);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailSubpage(
+                                      productId: productIdList[index],
+                                      productName:
+                                          productList["title"].toString(),
+                                      imageUrl:
+                                          productList["imgUrl"].toString(),
+                                      price: productList["price"].toString()),
+                                ),
+                              );
                             },
                             child: Container(
                               decoration: const BoxDecoration(
@@ -337,8 +345,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           text: "${productList["price"]} ",
                                           style: TextStyle(
                                             fontSize: 16,
-                                            fontFamily:
-                                                AppTheme.appFontFamily,
+                                            fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color: Provider.of<ThemeProvider>(
                                                             context)
@@ -398,10 +405,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
               Visibility(
-                visible:
-                    Provider.of<MarketPlaceProvider>(context).filterSwitch
-                        ? true
-                        : false,
+                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                    ? true
+                    : false,
                 child: FutureBuilder<List<String>>(
                   future: ProductsServices()
                       .productsListAndSearchCall(queryParameters: {
@@ -429,11 +435,23 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             var productList = productListPageDummyData[index];
 
                             return Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
                               child: InkWell(
                                 onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailSubpage(productId: productIdList[index], productName: productList["title"].toString(), imageUrl: productList["imgUrl"].toString(),price: productList["price"].toString()),),);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProductDetailSubpage(
+                                              productId: productIdList[index],
+                                              productName: productList["title"]
+                                                  .toString(),
+                                              imageUrl: productList["imgUrl"]
+                                                  .toString(),
+                                              price: productList["price"]
+                                                  .toString()),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
@@ -450,8 +468,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         offset: Offset(0, -4),
                                         blurRadius: 26,
                                         spreadRadius: 0,
-                                        color: Color(0xFF2B3361)
-                                            .withOpacity(0.10),
+                                        color:
+                                            Color(0xFF2B3361).withOpacity(0.10),
                                       ),
                                     ],
                                   ),
@@ -506,8 +524,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           RichText(
                                               text: TextSpan(children: [
                                             TextSpan(
-                                              text:
-                                                  "${productList["price"]} ",
+                                              text: "${productList["price"]} ",
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontFamily:
@@ -608,32 +625,29 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               child: MaterialButton(
                                                   elevation: 0,
                                                   color: Colors.transparent,
-                                                  shape:
-                                                      RoundedRectangleBorder(
+                                                  shape: RoundedRectangleBorder(
                                                     side: BorderSide(
                                                         width: 1,
                                                         color:
                                                             AppTheme.white19),
                                                     borderRadius:
-                                                        const BorderRadius
-                                                                .all(
+                                                        const BorderRadius.all(
                                                             Radius.circular(
                                                                 36)),
                                                   ),
-                                                  padding: const EdgeInsets
-                                                          .fromLTRB(
-                                                      10, 2, 10, 3.5),
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          10, 2, 10, 3.5),
                                                   child: Row(
                                                     crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .end,
+                                                        CrossAxisAlignment.end,
                                                     children: [
                                                       Image.asset(
                                                           'assets/icons/comment.png',
                                                           width: 12.5,
                                                           height: 12.5,
-                                                          color: AppTheme
-                                                              .black16),
+                                                          color:
+                                                              AppTheme.black16),
                                                       const SizedBox(
                                                           width: 3.5),
                                                       Text(
@@ -649,8 +663,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                                       .themeMode ==
                                                                   "light"
                                                               ? AppTheme.blue2
-                                                              : AppTheme
-                                                                  .white1,
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                     ],
