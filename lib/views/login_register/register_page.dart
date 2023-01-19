@@ -643,19 +643,17 @@ class _RegisterPageState extends State<RegisterPage> {
                         .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
                               value: item.name,
-                              child: Center(
-                                child: Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.black11
-                                        : AppTheme.white14,
-                                  ),
+                              child: Text(
+                                item.name ?? '',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.black11
+                                      : AppTheme.white14,
                                 ),
                               ),
                             ))
@@ -704,8 +702,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     // buttonElevation: 2,
                     itemHeight: 40,
-                    itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                    dropdownMaxHeight: 200,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                    // dropdownMaxHeight: deviceHeight * 0.4,
+                    dropdownMaxHeight: 350,
                     // dropdownWidth: deviceWidth,
                     dropdownPadding: null,
                     dropdownDecoration: BoxDecoration(
@@ -720,7 +719,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     scrollbarRadius: const Radius.circular(40),
                     scrollbarThickness: 4,
                     scrollbarAlwaysShow: true,
-                    offset: const Offset(0, 0),
+                    offset: Offset(0, 180),
 
                     searchController: textEditingController,
                     searchInnerWidget: Padding(
