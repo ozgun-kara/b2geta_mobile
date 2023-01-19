@@ -1,7 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/dummy_models/company_order_dummy_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,8 +17,6 @@ class CompanyOrdersDetailSubpage extends StatefulWidget {
 
 class _CompanyOrdersDetailSubpageState
     extends State<CompanyOrdersDetailSubpage> {
-  ScrollController scrollController = ScrollController();
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -178,13 +175,16 @@ class _CompanyOrdersDetailSubpageState
                         const SizedBox(
                           width: 14,
                         ),
-                        Text(
-                          widget.passedObject.title ?? '',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        Expanded(
+                          child: Text(
+                            widget.passedObject.title ?? '',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w400,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
                           ),
                         ),
                       ],

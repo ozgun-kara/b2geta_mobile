@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/profile/company/subpages/company_orders_subpages.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +43,13 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                   color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                 ),
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CompanyOrdersSubpage(),
+                    ));
+              }),
           SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
