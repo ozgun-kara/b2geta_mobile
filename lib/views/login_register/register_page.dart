@@ -626,7 +626,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 DropdownButtonHideUnderline(
                   child: DropdownButton2(
                     // alignment: AlignmentDirectional.center,
-                    // isExpanded: true,
+                    isExpanded: true,
                     hint: Text(
                       'Country'.tr,
                       style: TextStyle(
@@ -638,7 +638,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             ? AppTheme.black11
                             : AppTheme.white14,
                       ),
-                      overflow: TextOverflow.visible,
                     ),
                     items: Provider.of<LoginRegisterProvider>(context)
                         .dropdownItems
@@ -657,7 +656,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ? AppTheme.black11
                                         : AppTheme.white14,
                                   ),
-                                  overflow: TextOverflow.visible,
                                 ),
                               ),
                             ))
@@ -742,7 +740,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
                             horizontal: 16,
-                            vertical: 8,
+                            vertical: 12,
                           ),
                           hintText: 'Country Dropdown'.tr,
                           hintStyle: TextStyle(
