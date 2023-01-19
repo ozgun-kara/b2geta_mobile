@@ -20,13 +20,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   GlobalKey<FormState> formKey2 = GlobalKey<FormState>();
-  // final emailController1 = TextEditingController(text: "newtest003@gmail.com");
-  // final emailController2 = TextEditingController(text: "newtest003@gmail.com");
-  // final passwordController1 = TextEditingController(text: "12345678");
-  // final passwordController2 = TextEditingController(text: "12345678");
-  // final companyNameController = TextEditingController(text: "Company-1");
-  // final officialPersonController = TextEditingController(text: "Person-1");
-  // final officialPhoneController = TextEditingController(text: "");
 
   final emailController1 = TextEditingController();
   final emailController2 = TextEditingController();
@@ -35,23 +28,12 @@ class _RegisterPageState extends State<RegisterPage> {
   final companyNameController = TextEditingController();
   final officialPersonController = TextEditingController();
   final officialPhoneController = TextEditingController();
+  var countryCode;
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
-  final List<String> items = [
-    'A_Item1',
-    'A_Item2',
-    'A_Item3',
-    'A_Item4',
-    'B_Item1',
-    'B_Item2',
-    'B_Item3',
-    'B_Item4',
-  ];
-
-  String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
 
   @override
@@ -67,6 +49,9 @@ class _RegisterPageState extends State<RegisterPage> {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
+
+    var countryList = Provider.of<LoginRegisterProvider>(context, listen: false)
+        .dropdownItems;
 
     return Scaffold(
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -641,7 +626,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 DropdownButtonHideUnderline(
                   child: DropdownButton2(
                     // alignment: AlignmentDirectional.center,
-                    // isExpanded: true,
+                    isExpanded: true,
                     hint: Text(
                       'Country'.tr,
                       style: TextStyle(
@@ -653,26 +638,22 @@ class _RegisterPageState extends State<RegisterPage> {
                             ? AppTheme.black11
                             : AppTheme.white14,
                       ),
-                      overflow: TextOverflow.visible,
                     ),
                     items: Provider.of<LoginRegisterProvider>(context)
                         .dropdownItems
                         .map((item) => DropdownMenuItem<String>(
-                              value: item.code,
-                              child: Center(
-                                child: Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.black11
-                                        : AppTheme.white14,
-                                  ),
-                                  overflow: TextOverflow.visible,
+                              value: item.name,
+                              child: Text(
+                                item.name ?? '',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.black11
+                                      : AppTheme.white14,
                                 ),
                               ),
                             ))
@@ -683,6 +664,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     onChanged: (value) {
                       Provider.of<LoginRegisterProvider>(context, listen: false)
                           .updateDropdownSelectedValue(value as String);
+
+                      var countryIndex = countryList
+                          .indexWhere(((element) => element.name == value));
+                      if (countryIndex != -1) {
+                        debugPrint('COUNTRY INDEX: $countryIndex');
+                        debugPrint(
+                            'COUNTRY CODE: ${countryList[countryIndex].code}');
+
+                        countryCode = countryList[countryIndex].code;
+                      }
                     },
 
                     icon: Center(
@@ -711,8 +702,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     // buttonElevation: 2,
                     itemHeight: 40,
-                    itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                    dropdownMaxHeight: 200,
+                    itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                    // dropdownMaxHeight: deviceHeight * 0.4,
+                    dropdownMaxHeight: 350,
                     // dropdownWidth: deviceWidth,
                     dropdownPadding: null,
                     dropdownDecoration: BoxDecoration(
@@ -727,25 +719,29 @@ class _RegisterPageState extends State<RegisterPage> {
                     scrollbarRadius: const Radius.circular(40),
                     scrollbarThickness: 4,
                     scrollbarAlwaysShow: true,
-                    offset: const Offset(0, 0),
+                    offset: Offset(0, 180),
 
                     searchController: textEditingController,
                     searchInnerWidget: Padding(
-                      padding: const EdgeInsets.only(
-                        top: 8,
-                        bottom: 4,
-                        right: 8,
-                        left: 8,
-                      ),
+                      padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
                       child: TextFormField(
                         controller: textEditingController,
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black11
+                                    : AppTheme.white1), // WHILE WRITING
                         decoration: InputDecoration(
                           isDense: true,
                           contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 8,
+                            horizontal: 16,
+                            vertical: 12,
                           ),
-                          hintText: 'Search for an item...',
+                          hintText: 'Country Dropdown'.tr,
                           hintStyle: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -757,7 +753,27 @@ class _RegisterPageState extends State<RegisterPage> {
                                     : AppTheme.white14,
                           ),
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: AppTheme.white15,
+                                width: 1,
+                              )),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: AppTheme.white15,
+                                width: 1,
+                              )),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white10
+                                  : AppTheme.white1,
+                              width: 1,
+                            ),
                           ),
                         ),
                       ),
@@ -891,8 +907,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "officialPerson: ${officialPersonController.text}");
                             debugPrint(
                                 "officialPhone: ${officialPhoneController.text}");
-                            debugPrint(
-                                "country: ${Provider.of<LoginRegisterProvider>(context, listen: false).dropdownSelectedValue}");
+                            debugPrint("country: $countryCode");
 
                             locator<MemberServices>()
                                 .registerCall(
@@ -901,11 +916,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               companyName: companyNameController.text,
                               officialPerson: officialPersonController.text,
                               officialPhone: officialPhoneController.text,
-                              country: Provider.of<LoginRegisterProvider>(
-                                      context,
-                                      listen: false)
-                                  .dropdownSelectedValue
-                                  .toString(),
+                              country: countryCode.toString(),
                             )
                                 .then((value) {
                               if (value != "error") {
