@@ -9,4 +9,11 @@ class CompanyProfileProvider with ChangeNotifier {
     currentTabIndex = value;
     notifyListeners();
   }
+
+  bool filterSwitch = true;
+
+  void updateFilterSwitch(bool value) {
+    filterSwitch = value;
+    notifyListeners();
+  }
 }
