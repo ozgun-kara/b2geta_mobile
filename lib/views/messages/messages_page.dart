@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/views/messages/message_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -178,74 +179,83 @@ class _MessagesPageState extends State<MessagesPage> {
               shrinkWrap: true,
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                  child: Container(
-                    padding: const EdgeInsets.all(12.0),
-                    margin: const EdgeInsets.only(
-                      bottom: 7,
-                    ),
-                    width: deviceWidth,
-                    height: 79,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(22.0),
-                        border: Border.all(
-                          width: index < 3 ? 2 : 1,
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MessageDetailsPage(),
+                        ));
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(12.0),
+                      margin: const EdgeInsets.only(
+                        bottom: 7,
+                      ),
+                      width: deviceWidth,
+                      height: 79,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(22.0),
+                          border: Border.all(
+                            width: index < 3 ? 2 : 1,
+                            color: index < 3
+                                ? AppTheme.blue2
+                                : themeMode
+                                    ? AppTheme.white21
+                                    : AppTheme.black7,
+                          ),
                           color: index < 3
                               ? AppTheme.blue2
                               : themeMode
-                                  ? AppTheme.white21
-                                  : AppTheme.black7,
-                        ),
-                        color: index < 3
-                            ? AppTheme.blue2
-                            : themeMode
-                                ? AppTheme.white1
-                                : AppTheme.black7),
-                    child: Row(
-                      children: [
-                        ClipOval(
-                          child: Image.asset(
-                            "assets/images/dummy_images/post_profile.png",
-                            width: 55,
-                            height: 55,
+                                  ? AppTheme.white1
+                                  : AppTheme.black7),
+                      child: Row(
+                        children: [
+                          ClipOval(
+                            child: Image.asset(
+                              "assets/images/dummy_images/post_profile.png",
+                              width: 55,
+                              height: 55,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "RAINBOW POLIKARBONAT",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w600,
-                                color: index < 3
-                                    ? AppTheme.white1
-                                    : themeMode
-                                        ? AppTheme.black19
-                                        : AppTheme.white1,
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "RAINBOW POLIKARBONAT",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w600,
+                                  color: index < 3
+                                      ? AppTheme.white1
+                                      : themeMode
+                                          ? AppTheme.black19
+                                          : AppTheme.white1,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 6.0,
-                            ),
-                            Text(
-                              "İstanbul, Türkiye",
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.white15,
+                              SizedBox(
+                                height: 6.0,
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              Text(
+                                "İstanbul, Türkiye",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white15,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
