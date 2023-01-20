@@ -269,6 +269,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                           "İstanbul, Türkiye",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
+                            height: 1,
                             fontSize: 12,
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w400,
@@ -333,12 +334,18 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                   height: 40,
                   child: Center(
                     child: Card(
-                      color: AppTheme.blue3,
+                      color: AppTheme.white24,
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5.0, vertical: 7.0),
                         child: Text(
                           DateFormat.yMMMd().format(message.date),
-                          style: TextStyle(color: AppTheme.white1),
+                          style: TextStyle(
+                              color: AppTheme.white1,
+                              height: 1,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400),
                         ),
                       ),
                     ),
@@ -383,10 +390,10 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                         child: Text(
                           message.text,
                           style: TextStyle(
-                            height: 1,
                             fontFamily: AppTheme.appFontFamily,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
+                            height: 1,
                             color:
                                 themeMode ? AppTheme.black19 : AppTheme.white1,
                           ),
@@ -415,6 +422,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 });
               }),
               style: TextStyle(
+                height: 1,
                 fontSize: 12,
                 fontFamily: AppTheme.appFontFamily,
                 fontWeight: FontWeight.w600,
