@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/message_model.dart';
+import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/messages/message_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +22,23 @@ class _MessagesPageState extends State<MessagesPage> {
   late bool themeMode;
 
   final ScrollController _scrollController = ScrollController();
+
+  final MessagesServices _messagesServices = MessagesServices();
+  List<MessageModel> _messageList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getMessageList();
+  }
+
+  getMessageList() async {
+    _messageList = await _messagesServices.getMessagesCall(queryParameters: {
+      "offset": "0",
+      "limit": "5",
+    });
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +181,7 @@ class _MessagesPageState extends State<MessagesPage> {
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Text(
-                "Sohbetlerim (28)",
+                "Sohbetlerim (1)",
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
@@ -177,8 +196,9 @@ class _MessagesPageState extends State<MessagesPage> {
             ListView.builder(
               controller: _scrollController,
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: _messageList.length,
               itemBuilder: (BuildContext context, int index) {
+                var message = _messageList[index];
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -199,14 +219,14 @@ class _MessagesPageState extends State<MessagesPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(22.0),
                           border: Border.all(
-                            width: index < 3 ? 2 : 1,
-                            color: index < 3
+                            width: int.parse(message.isRead!) == 1 ? 2 : 1,
+                            color: int.parse(message.isRead!) == 1
                                 ? AppTheme.blue2
                                 : themeMode
                                     ? AppTheme.white21
                                     : AppTheme.black7,
                           ),
-                          color: index < 3
+                          color: int.parse(message.isRead!) == 1
                               ? AppTheme.blue2
                               : themeMode
                                   ? AppTheme.white1
@@ -214,11 +234,22 @@ class _MessagesPageState extends State<MessagesPage> {
                       child: Row(
                         children: [
                           ClipOval(
-                            child: Image.asset(
-                              "assets/images/dummy_images/post_profile.png",
-                              width: 55,
-                              height: 55,
-                            ),
+                            child: message.toAvatar != null
+                                ? Image.network(
+                                    width: 40,
+                                    height: 40,
+                                    message.toAvatar!,
+                                    errorBuilder:
+                                        (context, error, stackTrace) =>
+                                            Image.asset(
+                                      "assets/images/dummy_images/post_profile.png",
+                                    ),
+                                  )
+                                : Image.asset(
+                                    "assets/images/dummy_images/post_profile.png",
+                                    width: 55,
+                                    height: 55,
+                                  ),
                           ),
                           SizedBox(
                             width: 10,
@@ -228,12 +259,14 @@ class _MessagesPageState extends State<MessagesPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "RAINBOW POLIKARBONAT",
+                                message.toFullname != null
+                                    ? message.toFullname!
+                                    : "RAINBOW POLIKARBONAT",
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w600,
-                                  color: index < 3
+                                  color: int.parse(message.isRead!) == 1
                                       ? AppTheme.white1
                                       : themeMode
                                           ? AppTheme.black19

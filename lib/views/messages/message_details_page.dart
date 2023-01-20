@@ -1,108 +1,47 @@
-import 'package:b2geta_mobile/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import '../../models/message_model.dart';
+
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/services/messages/messages_services.dart';
+
+import '../../models/message_details_model.dart';
+import '../../models/message_model2.dart';
 import '../../providers/theme_provider.dart';
 
 class MessageDetailsPage extends StatefulWidget {
   const MessageDetailsPage({Key? key}) : super(key: key);
-
   @override
   State<MessageDetailsPage> createState() => _MessageDetailsPageState();
 }
-
-List<MessageModel> messages = [
-  MessageModel(
-      text: "Merhaba",
-      date: DateTime.now().subtract(const Duration(days: 11, minutes: 10)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Nasıl sın ? ",
-      date: DateTime.now().subtract(const Duration(days: 11, minutes: 9)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba, iyiyim sen nasıl sın? ",
-      date: DateTime.now().subtract(const Duration(days: 11, minutes: 8)),
-      isSentByMe: false),
-  MessageModel(
-      text: "İyiyim bende sağ ol ",
-      date: DateTime.now().subtract(const Duration(days: 11, minutes: 7)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba",
-      date: DateTime.now().subtract(const Duration(days: 10, minutes: 10)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Nasıl sın ? ",
-      date: DateTime.now().subtract(const Duration(days: 10, minutes: 9)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba, iyiyim sen nasıl sın? ",
-      date: DateTime.now().subtract(const Duration(days: 10, minutes: 8)),
-      isSentByMe: false),
-  MessageModel(
-      text: "İyiyim bende sağ ol ",
-      date: DateTime.now().subtract(const Duration(days: 10, minutes: 7)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba",
-      date: DateTime.now().subtract(const Duration(days: 5, minutes: 10)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Nasıl sın ? ",
-      date: DateTime.now().subtract(const Duration(days: 5, minutes: 9)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba, iyiyim sen nasıl sın? ",
-      date: DateTime.now().subtract(const Duration(days: 5, minutes: 8)),
-      isSentByMe: false),
-  MessageModel(
-      text: "İyiyim bende sağ ol ",
-      date: DateTime.now().subtract(const Duration(days: 5, minutes: 7)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba",
-      date: DateTime.now().subtract(const Duration(days: 4, minutes: 10)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Nasıl sın ? ",
-      date: DateTime.now().subtract(const Duration(days: 4, minutes: 9)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba, iyiyim sen nasıl sın? ",
-      date: DateTime.now().subtract(const Duration(days: 4, minutes: 8)),
-      isSentByMe: false),
-  MessageModel(
-      text: "İyiyim bende sağ ol ",
-      date: DateTime.now().subtract(const Duration(days: 4, minutes: 7)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba",
-      date: DateTime.now().subtract(const Duration(days: 3, minutes: 10)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Nasıl sın ? ",
-      date: DateTime.now().subtract(const Duration(days: 3, minutes: 9)),
-      isSentByMe: true),
-  MessageModel(
-      text: "Merhaba, iyiyim sen nasıl sın? ",
-      date: DateTime.now().subtract(const Duration(days: 3, minutes: 8)),
-      isSentByMe: false),
-  MessageModel(
-      text: "İyiyim bende sağ ol ",
-      date: DateTime.now().subtract(const Duration(days: 3, minutes: 7)),
-      isSentByMe: true),
-];
-
-TextEditingController _messageController = TextEditingController();
 
 class _MessageDetailsPageState extends State<MessageDetailsPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  final TextEditingController _messageController = TextEditingController();
+
+  final MessagesServices _messagesServices = MessagesServices();
+  List<MessageDetailsModel> _messagesList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getMessageDetailsList();
+  }
+
+  getMessageDetailsList() async {
+    var total = await _messagesServices.getTotal();
+    _messagesList =
+        await _messagesServices.getMessageDetailCall(queryParameters: {
+      "offset": "0",
+      "limit": total.toString(),
+    });
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -252,7 +191,9 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "SİLVERLİNE ENDÜSTRİ VE TİCARET A.Ş",
+                          _messagesList.isNotEmpty
+                              ? _messagesList[0].toFullname!
+                              : "",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             fontSize: 13,
@@ -318,49 +259,28 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
             child: Container(
               decoration: BoxDecoration(
                   color: themeMode ? AppTheme.white1 : AppTheme.black7),
-              child: GroupedListView<MessageModel, DateTime>(
+              child: GroupedListView<MessageDetailsModel, DateTime>(
                 reverse: true,
                 order: GroupedListOrder.DESC,
                 useStickyGroupSeparators: true,
                 floatingHeader: true,
                 padding: const EdgeInsets.all(8.0),
-                elements: messages,
-                groupBy: ((message) => DateTime(
-                      message.date.year,
-                      message.date.month,
-                      message.date.day,
-                    )),
-                groupHeaderBuilder: (message) => SizedBox(
-                  height: 40,
-                  child: Center(
-                    child: Card(
-                      color: AppTheme.white24,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 5.0, vertical: 7.0),
-                        child: Text(
-                          DateFormat.yMMMd().format(message.date),
-                          style: TextStyle(
-                              color: AppTheme.white1,
-                              height: 1,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                elements: _messagesList,
+                groupBy: ((message) {
+                  var dateTime = DateTime.parse(message.createDate!);
+                  return dateTime;
+                }),
+                groupHeaderBuilder: (message) => const SizedBox(),
                 itemBuilder: (context, message) => Align(
-                  alignment: message.isSentByMe
+                  alignment: message.toId == "97"
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Padding(
-                    padding: message.isSentByMe
+                    padding: message.toId == "97"
                         ? const EdgeInsets.only(left: 25.0)
                         : const EdgeInsets.only(right: 25.0),
                     child: Card(
-                      shape: message.isSentByMe
+                      shape: message.toId == "97"
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12.0),
@@ -373,7 +293,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                               bottomRight: Radius.circular(12.0),
                               topLeft: Radius.circular(12.0),
                             )),
-                      color: message.isSentByMe
+                      color: message.toId == "97"
                           ? themeMode
                               ? AppTheme.blue11
                               : AppTheme.green8
@@ -388,7 +308,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                           bottom: 13,
                         ),
                         child: Text(
-                          message.text,
+                          message.message ?? "",
                           style: TextStyle(
                             fontFamily: AppTheme.appFontFamily,
                             fontSize: 12,
@@ -413,12 +333,15 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 color: themeMode ? AppTheme.white1 : AppTheme.black7),
             child: TextField(
               controller: _messageController,
-              onSubmitted: ((value) {
-                final message = MessageModel(
-                    text: value, date: DateTime.now(), isSentByMe: true);
-                _messageController.clear();
-                setState(() {
-                  messages.add(message);
+              onSubmitted: ((value) async {
+                await _messagesServices
+                    .sendMessageCall(
+                        toId: "97", message: _messageController.text.trim())
+                    .then((value) async {
+                  if (value) {
+                    _messageController.clear();
+                    getMessageDetailsList();
+                  }
                 });
               }),
               style: TextStyle(
@@ -462,7 +385,18 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 suffixIcon: Container(
                     margin: const EdgeInsets.only(right: 22.82),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _messagesServices
+                            .sendMessageCall(
+                                toId: "97",
+                                message: _messageController.text.trim())
+                            .then((value) async {
+                          if (value) {
+                            _messageController.clear();
+                            getMessageDetailsList();
+                          }
+                        });
+                      },
                       icon: Image.asset(
                         "assets/icons/send.png",
                         width: 23,
