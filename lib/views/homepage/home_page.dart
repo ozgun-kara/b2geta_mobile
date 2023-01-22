@@ -39,8 +39,8 @@ class _HomePageState extends State<HomePage> {
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: "57").then((feedList) {
       feeds = feedList;
-      setState(() {});
     });
+    setState(() {});
   }
 
   void getStories() async {
@@ -582,73 +582,83 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(),
                               Container(
                                 height: 49,
-                                margin: const EdgeInsets.only(left: 15),
+                                color: Colors.green,
+                                padding: const EdgeInsets.only(left: 15),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    TextButton(
-                                        onPressed: () {
-                                          if (feed.likeStatus!) {
-                                            _socialServices.feedUnLikeCall(
-                                                feedId: feed.id!);
-                                          } else {
-                                            _socialServices.feedLikeCall(
-                                                feedId: feed.id!);
-                                          }
-                                        },
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Image.asset(
-                                              "assets/icons/like.png",
-                                              width: 15,
-                                              height: 15,
+                                    Container(
+                                      color: Colors.amber,
+                                      child: TextButton(
+                                          onPressed: () {
+                                            if (feed.likeStatus!) {
+                                              _socialServices.feedUnLikeCall(
+                                                  feedId: feed.id!);
+                                            } else {
+                                              _socialServices.feedLikeCall(
+                                                  feedId: feed.id!);
+                                            }
+                                            getFeeds();
+                                          },
+                                          child: SizedBox(
+                                            child: Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Image.asset(
+                                                  "assets/icons/like.png",
+                                                  width: 15,
+                                                  height: 15,
+                                                ),
+                                                const SizedBox(
+                                                  width: 4.0,
+                                                ),
+                                                Text(
+                                                  feed.likeStatus!
+                                                      ? "Beğendin"
+                                                      : "Beğen",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppTheme.white15,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                            const SizedBox(
-                                              width: 4.0,
-                                            ),
-                                            Text(
-                                              feed.likeStatus!
-                                                  ? "Beğendin"
-                                                  : "Beğen",
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white15,
+                                          )),
+                                    ),
+                                    Container(
+                                      color: Colors.purple,
+                                      child: TextButton(
+                                          onPressed: () {},
+                                          child: Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Image.asset(
+                                                "assets/icons/comment2.png",
+                                                width: 17.5,
+                                                height: 17.5,
                                               ),
-                                            ),
-                                          ],
-                                        )),
-                                    TextButton(
-                                        onPressed: () {},
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Image.asset(
-                                              "assets/icons/comment2.png",
-                                              width: 17.5,
-                                              height: 17.5,
-                                            ),
-                                            const SizedBox(
-                                              width: 4.0,
-                                            ),
-                                            Text(
-                                              "Yorum yap",
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white15,
+                                              const SizedBox(
+                                                width: 4.0,
                                               ),
-                                            ),
-                                          ],
-                                        )),
+                                              Text(
+                                                "Yorum yap",
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                    ),
                                     TextButton(
                                         onPressed: () {},
                                         child: Row(
