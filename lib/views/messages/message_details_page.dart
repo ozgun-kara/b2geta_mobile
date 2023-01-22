@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-
 import '../../models/message_details_model.dart';
-import '../../models/message_model2.dart';
 import '../../providers/theme_provider.dart';
 
 class MessageDetailsPage extends StatefulWidget {
