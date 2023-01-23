@@ -29,172 +29,13 @@ class _NavigationPageState extends State<NavigationPage> {
 
     var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    void navigateToBasketPage() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const BasketPage()));
-    }
-
-    void navigateToMessagePage() {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const MessagesPage()));
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
 
       appBar: Provider.of<NavigationPageProvider>(context).searchState
-          ? AppBar(
-              toolbarHeight: 68,
-              backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              elevation: 0,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: IconButton(
-                  splashRadius: 24,
-                  icon: Image.asset(
-                    'assets/icons/back-2.png',
-                    width: 14,
-                    height: 12,
-                    color: AppTheme.white15,
-                  ),
-                  onPressed: () {
-                    Provider.of<NavigationPageProvider>(context, listen: false)
-                        .updateSearchState();
-                  },
-                ),
-              ),
-              leadingWidth: 45,
-              centerTitle: true,
-              title: SizedBox(
-                height: 39,
-                child: TextFormField(
-                  controller: searchController,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w500,
-                      color: themeMode
-                          ? AppTheme.black11
-                          : AppTheme.white1), // WHILE WRITING
-                  maxLines: 1,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                    filled: true,
-                    fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
-                    hintText: "Aranacak kelimeyi giriniz",
-                    hintStyle: TextStyle(
-                      fontSize: 11,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.white13,
-                    ),
-                    prefixIcon: IconButton(
-                      splashRadius: 24,
-                      onPressed: () {},
-                      icon: SizedBox(
-                        width: 19,
-                        height: 19,
-                        child: Image.asset(
-                          'assets/icons/search.png',
-                          width: 19,
-                          height: 19,
-                          color: AppTheme.white15,
-                        ),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(41),
-                        borderSide: BorderSide(
-                          color:
-                              themeMode ? AppTheme.white10 : AppTheme.black14,
-                          width: 1,
-                        )),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(41),
-                        borderSide: BorderSide(
-                          color:
-                              themeMode ? AppTheme.white10 : AppTheme.black14,
-                          width: 1,
-                        )),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(41),
-                      borderSide: BorderSide(
-                        color: themeMode ? AppTheme.blue2 : AppTheme.white1,
-                        width: 1,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          : AppBar(
-              toolbarHeight: 68,
-              backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              elevation: 0,
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: IconButton(
-                  splashRadius: 24,
-                  icon: Image.asset(
-                    'assets/icons/menu.png',
-                    width: 23,
-                    height: 17,
-                    color: AppTheme.white15,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-              title: SizedBox(
-                  width: 103.74,
-                  height: 14.0,
-                  child: themeMode
-                      ? Image.asset('assets/images/b2geta_logo_light.png')
-                      : Image.asset('assets/images/b2geta_logo_dark.png')),
-              actions: [
-                  IconButton(
-                    splashRadius: 24,
-                    icon: Image.asset(
-                      'assets/icons/search.png',
-                      width: 19,
-                      height: 19,
-                      color: AppTheme.white15,
-                    ),
-                    onPressed: () {
-                      if (themeMode) {
-                        Provider.of<ThemeProvider>(context, listen: false)
-                            .setDarkMode();
-                      } else {
-                        Provider.of<ThemeProvider>(context, listen: false)
-                            .setLightMode();
-                      }
-
-                      // Provider.of<NavigationPageProvider>(context,
-                      //         listen: false)
-                      //     .updateSearchState();
-                    },
-                  ),
-                  IconButton(
-                    splashRadius: 24,
-                    icon: Image.asset(
-                      'assets/icons/bell.png',
-                      width: 16.0,
-                      height: 18.0,
-                      color: AppTheme.white15,
-                    ),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    splashRadius: 24,
-                    icon: Image.asset(
-                      'assets/icons/message.png',
-                      width: 19.0,
-                      height: 16.0,
-                      color: AppTheme.white15,
-                    ),
-                    onPressed: navigateToMessagePage,
-                  ),
-                ]),
+          ? searchAppBar(themeMode)
+          : defaultAppBar(themeMode),
 
       body: Consumer<NavigationPageProvider>(
         builder: (context, provider, child) {
@@ -429,5 +270,169 @@ class _NavigationPageState extends State<NavigationPage> {
         },
       ),
     );
+  }
+
+  PreferredSizeWidget defaultAppBar(themeMode) {
+    return AppBar(
+        toolbarHeight: 68,
+        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/menu.png',
+              width: 23,
+              height: 17,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {},
+          ),
+        ),
+        title: SizedBox(
+            width: 103.74,
+            height: 14.0,
+            child: themeMode
+                ? Image.asset('assets/images/b2geta_logo_light.png')
+                : Image.asset('assets/images/b2geta_logo_dark.png')),
+        actions: [
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/search.png',
+              width: 19,
+              height: 19,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              if (themeMode) {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setDarkMode();
+              } else {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setLightMode();
+              }
+
+              Provider.of<NavigationPageProvider>(context, listen: false)
+                  .updateSearchState();
+            },
+          ),
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/bell.png',
+              width: 16.0,
+              height: 18.0,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/message.png',
+              width: 19.0,
+              height: 16.0,
+              color: AppTheme.white15,
+            ),
+            onPressed: navigateToMessagePage,
+          ),
+        ]);
+  }
+
+  PreferredSizeWidget searchAppBar(themeMode) {
+    return AppBar(
+      toolbarHeight: 68,
+      backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+      elevation: 0,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: IconButton(
+          splashRadius: 24,
+          icon: Image.asset(
+            'assets/icons/back-2.png',
+            width: 14,
+            height: 12,
+            color: AppTheme.white15,
+          ),
+          onPressed: () {
+            Provider.of<NavigationPageProvider>(context, listen: false)
+                .updateSearchState();
+          },
+        ),
+      ),
+      leadingWidth: 45,
+      centerTitle: true,
+      title: SizedBox(
+        height: 39,
+        child: TextFormField(
+          controller: searchController,
+          style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w500,
+              color: themeMode
+                  ? AppTheme.black11
+                  : AppTheme.white1), // WHILE WRITING
+          maxLines: 1,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+            filled: true,
+            fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
+            hintText: "Aranacak kelimeyi giriniz",
+            hintStyle: TextStyle(
+              fontSize: 11,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.white13,
+            ),
+            prefixIcon: IconButton(
+              splashRadius: 24,
+              onPressed: () {},
+              icon: SizedBox(
+                width: 19,
+                height: 19,
+                child: Image.asset(
+                  'assets/icons/search.png',
+                  width: 19,
+                  height: 19,
+                  color: AppTheme.white15,
+                ),
+              ),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(41),
+                borderSide: BorderSide(
+                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                  width: 1,
+                )),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(41),
+                borderSide: BorderSide(
+                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                  width: 1,
+                )),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(41),
+              borderSide: BorderSide(
+                color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                width: 1,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void navigateToBasketPage() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const BasketPage()));
+  }
+
+  void navigateToMessagePage() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MessagesPage()));
   }
 }
