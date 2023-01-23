@@ -307,14 +307,6 @@ class _NavigationPageState extends State<NavigationPage> {
               color: AppTheme.white15,
             ),
             onPressed: () {
-              if (themeMode) {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setDarkMode();
-              } else {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setLightMode();
-              }
-
               Provider.of<NavigationPageProvider>(context, listen: false)
                   .updateSearchState();
             },
@@ -327,7 +319,15 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 18.0,
               color: AppTheme.white15,
             ),
-            onPressed: () {},
+            onPressed: () {
+              if (themeMode) {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setDarkMode();
+              } else {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setLightMode();
+              }
+            },
           ),
           IconButton(
             splashRadius: 24,
