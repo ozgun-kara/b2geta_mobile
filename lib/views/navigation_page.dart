@@ -29,246 +29,247 @@ class _NavigationPageState extends State<NavigationPage> {
 
     var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
+    return Consumer<NavigationPageProvider>(
+      builder: (context, provider, child) {
+        return Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
 
-      appBar: Provider.of<NavigationPageProvider>(context).searchState
-          ? searchAppBar(themeMode)
-          : defaultAppBar(themeMode),
-
-      body: Consumer<NavigationPageProvider>(
-        builder: (context, provider, child) {
-          return provider.pages[provider.currentTabIndex];
-        },
-      ),
-
-      bottomNavigationBar: Consumer<NavigationPageProvider>(
-        builder: (context, provider, child) {
-          return Container(
-            width: deviceWidth,
-            height: 60,
-            decoration: BoxDecoration(
-              // borderRadius: BorderRadius.only(
-              //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black54.withOpacity(0.35),
-              //     offset: Offset(0, 10),
-              //     blurRadius: 48,
-              //   ),
-              // ],
-              color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                  ? AppTheme.white1
-                  : AppTheme.black5,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+            appBar: provider.searchState
+                ? searchAppBar(themeMode)
+                : defaultAppBar(themeMode),
+            body: provider.pages[provider.currentTabIndex],
+            bottomNavigationBar: Container(
+              width: deviceWidth,
+              height: 60,
+              decoration: BoxDecoration(
+                // borderRadius: BorderRadius.only(
+                //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.black54.withOpacity(0.35),
+                //     offset: Offset(0, 10),
+                //     blurRadius: 48,
+                //   ),
+                // ],
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black5,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
                           ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/homepage.png',
-                                  width: 23,
-                                  height: 22,
-                                  color: provider.currentTabIndex == 0
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('Homepage'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 0
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/homepage.png',
+                                    width: 23,
+                                    height: 22,
+                                    color: provider.currentTabIndex == 0
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('Homepage'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 0
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(0);
-                        }),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(0);
+                          }),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
                           ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/market.png',
-                                  width: 22,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 1
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('Marketplace'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 1
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/market.png',
+                                    width: 22,
+                                    height: 21,
+                                    color: provider.currentTabIndex == 1
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('Marketplace'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 1
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(1);
-                        }),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(1);
+                          }),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
                           ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/shopping_car.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 2
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('My Basket'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 2
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/shopping_car.png',
+                                    width: 21,
+                                    height: 21,
+                                    color: provider.currentTabIndex == 2
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('My Basket'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 2
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(2);
-                        }),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(2);
+                          }),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
                           ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/profile.png',
-                                width: 24,
-                                height: 24,
-                              ),
-                              SizedBox(height: 5),
-                              Text('My Account'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 3
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/profile.png',
+                                  width: 24,
+                                  height: 24,
+                                ),
+                                SizedBox(height: 5),
+                                Text('My Account'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 3
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(3);
-                        }),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(3);
+                          }),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
-        },
-      ),
+                ],
+              ),
+            ));
+      },
     );
   }
 
