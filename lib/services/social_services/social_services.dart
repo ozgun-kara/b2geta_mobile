@@ -80,4 +80,65 @@ class SocialServices {
       return false;
     }
   }
+
+  // FEED SHARE
+  Future<bool> feedShareCall({
+    required String content,
+  }) async {
+    final response =
+        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}"
+    }, body: {
+      "type": "feed",
+      "content": content,
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint(status.toString());
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
+
+  // CREATE COMMENT
+  Future<bool> createCommentCall({
+    required String content,
+    required String feedId,
+  }) async {
+    final response =
+        await http.post(Uri.parse('${Constants.apiUrl}/comment/$feedId'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}"
+    }, body: {
+      "type": "posts",
+      "content": content,
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint(status.toString());
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
 }

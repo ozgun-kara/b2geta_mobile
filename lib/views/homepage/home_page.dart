@@ -27,6 +27,9 @@ class _HomePageState extends State<HomePage> {
   List<FeedModel> feeds = [];
   List<FeedModel> stories = [];
 
+  final TextEditingController _postTextController = TextEditingController();
+  final TextEditingController _commentTextController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -331,7 +334,8 @@ class _HomePageState extends State<HomePage> {
                             Expanded(
                                 child: SizedBox(
                               height: 40.0,
-                              child: TextFormField(
+                              child: TextField(
+                                controller: _postTextController,
                                 style: TextStyle(
                                     fontSize: 11,
                                     fontFamily: AppTheme.appFontFamily,
@@ -372,6 +376,20 @@ class _HomePageState extends State<HomePage> {
                                             : AppTheme.black7),
                                   ),
                                 ),
+                                onSubmitted: (value) async {
+                                  if (_postTextController.text.isNotEmpty) {
+                                    await _socialServices
+                                        .feedShareCall(
+                                      content: _postTextController.text.trim(),
+                                    )
+                                        .then((value) {
+                                      if (value) {
+                                        _postTextController.clear();
+                                        getFeeds();
+                                      }
+                                    });
+                                  }
+                                },
                               ),
                             ))
                           ],
@@ -500,7 +518,9 @@ class _HomePageState extends State<HomePage> {
                                   right: 36,
                                 ),
                                 child: Text(
-                                  feed.content ?? "Feed Content",
+                                  feed.content!.length > 1
+                                      ? feed.content.toString()
+                                      : "TEST POST",
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -582,72 +602,39 @@ class _HomePageState extends State<HomePage> {
                                 const SizedBox(),
                               Container(
                                 height: 49,
-                                color: Colors.green,
                                 padding: const EdgeInsets.only(left: 15),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
                                   children: [
-                                    Container(
-                                      color: Colors.amber,
-                                      child: TextButton(
-                                          onPressed: () {
-                                            if (feed.likeStatus!) {
-                                              _socialServices.feedUnLikeCall(
-                                                  feedId: feed.id!);
-                                            } else {
-                                              _socialServices.feedLikeCall(
-                                                  feedId: feed.id!);
-                                            }
-                                            getFeeds();
-                                          },
-                                          child: SizedBox(
-                                            child: Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Image.asset(
-                                                  "assets/icons/like.png",
-                                                  width: 15,
-                                                  height: 15,
-                                                ),
-                                                const SizedBox(
-                                                  width: 4.0,
-                                                ),
-                                                Text(
-                                                  feed.likeStatus!
-                                                      ? "Beğendin"
-                                                      : "Beğen",
-                                                  style: TextStyle(
-                                                    fontSize: 11,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                    Container(
-                                      color: Colors.purple,
-                                      child: TextButton(
-                                          onPressed: () {},
+                                    TextButton(
+                                        onPressed: () {
+                                          if (feed.likeStatus!) {
+                                            _socialServices.feedUnLikeCall(
+                                                feedId: feed.id!);
+                                          } else {
+                                            _socialServices.feedLikeCall(
+                                                feedId: feed.id!);
+                                          }
+                                          getFeeds();
+                                        },
+                                        child: SizedBox(
                                           child: Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Image.asset(
-                                                "assets/icons/comment2.png",
-                                                width: 17.5,
-                                                height: 17.5,
+                                                "assets/icons/like.png",
+                                                width: 15,
+                                                height: 15,
                                               ),
                                               const SizedBox(
                                                 width: 4.0,
                                               ),
                                               Text(
-                                                "Yorum yap",
+                                                feed.likeStatus!
+                                                    ? "Beğendin"
+                                                    : "Beğen",
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
@@ -657,8 +644,35 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                             ],
-                                          )),
-                                    ),
+                                          ),
+                                        )),
+                                    TextButton(
+                                        style: TextButton.styleFrom(),
+                                        onPressed: () {},
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Image.asset(
+                                              "assets/icons/comment2.png",
+                                              width: 17.5,
+                                              height: 17.5,
+                                            ),
+                                            const SizedBox(
+                                              width: 4.0,
+                                            ),
+                                            Text(
+                                              "Yorum yap",
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                          ],
+                                        )),
                                     TextButton(
                                         onPressed: () {},
                                         child: Row(
@@ -819,12 +833,12 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               feed.comments!.comments!.isEmpty
-                                  ? _writeComment()
-                                  : feed.comments!.comments!.length > 1
+                                  ? _writeComment(feed: feed)
+                                  : feed.comments!.comments!.length <= 1
                                       ? Column(
                                           children: [
-                                            _comment(),
-                                            _writeComment(),
+                                            _comment(feed: feed, index: 0),
+                                            _writeComment(feed: feed),
                                           ],
                                         )
                                       : Column(
@@ -873,7 +887,7 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ),
                                             ),
-                                            _comment(),
+                                            _comment(feed: feed, index: 0),
                                             isList
                                                 ? SizedBox(
                                                     height: 250,
@@ -883,11 +897,17 @@ class _HomePageState extends State<HomePage> {
                                                             .comments!
                                                             .length,
                                                         itemBuilder:
-                                                            (context, index) =>
-                                                                _comment()),
+                                                            (context, index) {
+                                                          if (index != 0) {
+                                                            return _comment(
+                                                                feed: feed,
+                                                                index: index);
+                                                          }
+                                                          return const SizedBox();
+                                                        }),
                                                   )
                                                 : const SizedBox(),
-                                            _writeComment(),
+                                            _writeComment(feed: feed),
                                           ],
                                         ),
                             ],
@@ -907,7 +927,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _writeComment() {
+  Widget _writeComment({required FeedModel feed}) {
     return Padding(
       padding: const EdgeInsets.only(right: 12.0, left: 12.0, bottom: 18.0),
       child: Row(
@@ -927,7 +947,8 @@ class _HomePageState extends State<HomePage> {
           Expanded(
             child: SizedBox(
               height: 32.0,
-              child: TextFormField(
+              child: TextField(
+                controller: _commentTextController,
                 style: TextStyle(
                     fontSize: 11,
                     fontFamily: AppTheme.appFontFamily,
@@ -969,6 +990,21 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
+                onSubmitted: (value) async {
+                  if (_commentTextController.text.isNotEmpty) {
+                    await _socialServices
+                        .createCommentCall(
+                      feedId: feed.id!,
+                      content: _commentTextController.text.trim(),
+                    )
+                        .then((value) {
+                      if (value) {
+                        _commentTextController.clear();
+                        getFeeds();
+                      }
+                    });
+                  }
+                },
               ),
             ),
           ),
@@ -977,7 +1013,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _comment() {
+  Widget _comment({required FeedModel feed, required int index}) {
     return Container(
       width: deviceWidth,
       padding: const EdgeInsets.only(left: 12, bottom: 24.0),
@@ -1027,7 +1063,7 @@ class _HomePageState extends State<HomePage> {
                         height: 6.0,
                       ),
                       Text(
-                        "2005 yılında Tuzla’da temeli atılan",
+                        feed.comments!.comments![index]!.content!,
                         style: TextStyle(
                           fontSize: 12,
                           fontFamily: AppTheme.appFontFamily,
