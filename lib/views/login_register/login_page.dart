@@ -28,6 +28,7 @@ class _LoginPageState extends State<LoginPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+  late bool themeMode;
 
   @override
   void initState() {
@@ -41,11 +42,10 @@ class _LoginPageState extends State<LoginPage> {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
+    themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Scaffold(
-      backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
-          ? AppTheme.white1
-          : AppTheme.black12,
+      backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black12,
       body: Padding(
         padding: EdgeInsets.fromLTRB(30, deviceTopPadding + 32, 30, 16),
         child: Column(
@@ -69,11 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w600,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue2
-                                    : AppTheme.white1,
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                           ),
                         ),
                       ),
@@ -96,8 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 16,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w500,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
+                        color: themeMode
                             ? AppTheme.black11
                             : AppTheme.white1), // WHILE WRITING
                     maxLines: 1,
@@ -110,39 +105,26 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black11
-                            : AppTheme.white14,
+                        color: themeMode ? AppTheme.black11 : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
+                                themeMode ? AppTheme.white10 : AppTheme.black14,
                             width: 1,
                           )),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
+                                themeMode ? AppTheme.white10 : AppTheme.black14,
                             width: 1,
                           )),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue2
-                                  : AppTheme.white1,
+                          color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                           width: 1,
                         ),
                       ),
@@ -164,8 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 16,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w500,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
+                        color: themeMode
                             ? AppTheme.black11
                             : AppTheme.white1), // WHILE WRITING
                     maxLines: 1,
@@ -179,39 +160,26 @@ class _LoginPageState extends State<LoginPage> {
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black11
-                            : AppTheme.white14,
+                        color: themeMode ? AppTheme.black11 : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
+                                themeMode ? AppTheme.white10 : AppTheme.black14,
                             width: 1,
                           )),
                       enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
+                                themeMode ? AppTheme.white10 : AppTheme.black14,
                             width: 1,
                           )),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue2
-                                  : AppTheme.white1,
+                          color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                           width: 1,
                         ),
                       ),
@@ -242,19 +210,13 @@ class _LoginPageState extends State<LoginPage> {
                                   toggleSize: 17,
                                   padding: 2,
                                   borderRadius: 100,
-                                  inactiveColor:
-                                      Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.white7
-                                          : AppTheme.black10,
+                                  inactiveColor: themeMode
+                                      ? AppTheme.white7
+                                      : AppTheme.black10,
                                   activeColor: AppTheme.green1,
-                                  toggleColor:
-                                      Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.white1
-                                          : AppTheme.black4,
+                                  toggleColor: themeMode
+                                      ? AppTheme.white1
+                                      : AppTheme.black4,
                                   value: provider.loginSwitch,
                                   onToggle: (value) {
                                     provider.updateLoginSwitch(value);
@@ -264,16 +226,19 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        InkWell(
-                          onTap: () {},
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
-                          child: Text(
-                            'Forgot Password'.tr,
-                            style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: AppTheme.white14),
+                        SizedBox(width: 32),
+                        Flexible(
+                          child: InkWell(
+                            onTap: () {},
+                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            child: Text(
+                              'Forgot Password'.tr,
+                              style: TextStyle(
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white14),
+                            ),
                           ),
                         ),
                       ],
@@ -424,8 +389,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(height: 48),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            Wrap(
+              alignment: WrapAlignment.center,
               children: [
                 InkWell(
                   onTap: () {},
@@ -436,13 +401,11 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.white15
-                          : AppTheme.white14,
+                      color: themeMode ? AppTheme.white15 : AppTheme.white14,
                     ),
                   ),
                 ),
+                SizedBox(width: 16),
                 InkWell(
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -452,13 +415,11 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.white15
-                          : AppTheme.white14,
+                      color: themeMode ? AppTheme.white15 : AppTheme.white14,
                     ),
                   ),
                 ),
+                SizedBox(width: 16),
                 InkWell(
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -468,13 +429,11 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.white15
-                          : AppTheme.white14,
+                      color: themeMode ? AppTheme.white15 : AppTheme.white14,
                     ),
                   ),
                 ),
+                SizedBox(width: 16),
                 InkWell(
                   onTap: () {},
                   borderRadius: BorderRadius.all(Radius.circular(6)),
@@ -484,10 +443,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.white15
-                          : AppTheme.white14,
+                      color: themeMode ? AppTheme.white15 : AppTheme.white14,
                     ),
                   ),
                 ),
@@ -504,10 +460,7 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
                       fontWeight: FontWeight.w400,
-                      color: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? AppTheme.white8
-                          : AppTheme.black13,
+                      color: themeMode ? AppTheme.white8 : AppTheme.black13,
                     ),
                   ),
                 ),
@@ -529,9 +482,7 @@ class _LoginPageState extends State<LoginPage> {
             width: deviceWidth,
             height: 150,
             decoration: BoxDecoration(
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black12,
+                color: themeMode ? AppTheme.white1 : AppTheme.black12,
                 borderRadius: BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -542,10 +493,7 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black16
-                            : AppTheme.white14,
+                    color: themeMode ? AppTheme.black16 : AppTheme.white14,
                   ),
                 ),
                 SizedBox(height: 16),
