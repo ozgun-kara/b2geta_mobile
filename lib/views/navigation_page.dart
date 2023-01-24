@@ -15,6 +15,8 @@ class NavigationPage extends StatefulWidget {
 }
 
 class _NavigationPageState extends State<NavigationPage> {
+  TextEditingController searchController = TextEditingController();
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -27,316 +29,411 @@ class _NavigationPageState extends State<NavigationPage> {
 
     var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    void navigateToBasketPage() {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const BasketPage()));
-    }
+    return Consumer<NavigationPageProvider>(
+      builder: (context, provider, child) {
+        return Scaffold(
+            resizeToAvoidBottomInset: false,
+            extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
 
-    void navigateToMessagePage() {
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => const MessagesPage()));
-    }
-
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      extendBody: true, // FIXED BOTTOM BAR'S BG COLOR
-
-      appBar: AppBar(
-          toolbarHeight: 68,
-          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/menu.png',
-                width: 23,
-                height: 17,
-                color: AppTheme.white15,
+            appBar: provider.searchState
+                ? searchAppBar(themeMode)
+                : defaultAppBar(themeMode),
+            body: provider.pages[provider.currentTabIndex],
+            bottomNavigationBar: Container(
+              width: deviceWidth,
+              height: 60,
+              decoration: BoxDecoration(
+                // borderRadius: BorderRadius.only(
+                //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.black54.withOpacity(0.35),
+                //     offset: Offset(0, 10),
+                //     blurRadius: 48,
+                //   ),
+                // ],
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.white1
+                    : AppTheme.black5,
               ),
-              onPressed: () {},
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                          ),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/homepage.png',
+                                    width: 23,
+                                    height: 22,
+                                    color: provider.currentTabIndex == 0
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('Homepage'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 0
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(0);
+                          }),
+                    ),
+                  ),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                          ),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/market.png',
+                                    width: 22,
+                                    height: 21,
+                                    color: provider.currentTabIndex == 1
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('Marketplace'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 1
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(1);
+                          }),
+                    ),
+                  ),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                          ),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/shopping_car.png',
+                                    width: 21,
+                                    height: 21,
+                                    color: provider.currentTabIndex == 2
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                SizedBox(height: 4),
+                                Text('My Basket'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 2
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(2);
+                          }),
+                    ),
+                  ),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                          ),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/icons/profile.png',
+                                  width: 24,
+                                  height: 24,
+                                ),
+                                SizedBox(height: 5),
+                                Text('My Account'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 3
+                                            ? Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(3);
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+      },
+    );
+  }
+
+  PreferredSizeWidget defaultAppBar(themeMode) {
+    return AppBar(
+        toolbarHeight: 68,
+        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/menu.png',
+              width: 23,
+              height: 17,
+              color: AppTheme.white15,
             ),
+            onPressed: () {},
           ),
-          title: SizedBox(
-              width: 103.74,
-              height: 14.0,
-              child: themeMode
-                  ? Image.asset('assets/images/b2geta_logo_light.png')
-                  : Image.asset('assets/images/b2geta_logo_dark.png')),
-          actions: [
-            IconButton(
+        ),
+        title: SizedBox(
+            width: 103.74,
+            height: 14.0,
+            child: themeMode
+                ? Image.asset('assets/images/b2geta_logo_light.png')
+                : Image.asset('assets/images/b2geta_logo_dark.png')),
+        actions: [
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/search.png',
+              width: 19,
+              height: 19,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              Provider.of<NavigationPageProvider>(context, listen: false)
+                  .updateSearchState();
+            },
+          ),
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/bell.png',
+              width: 16.0,
+              height: 18.0,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              if (themeMode) {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setDarkMode();
+              } else {
+                Provider.of<ThemeProvider>(context, listen: false)
+                    .setLightMode();
+              }
+            },
+          ),
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/message.png',
+              width: 19.0,
+              height: 16.0,
+              color: AppTheme.white15,
+            ),
+            onPressed: navigateToMessagePage,
+          ),
+        ]);
+  }
+
+  PreferredSizeWidget searchAppBar(themeMode) {
+    return AppBar(
+      toolbarHeight: 68,
+      backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+      elevation: 0,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: IconButton(
+          splashRadius: 24,
+          icon: Image.asset(
+            'assets/icons/back-2.png',
+            width: 14,
+            height: 12,
+            color: AppTheme.white15,
+          ),
+          onPressed: () {
+            Provider.of<NavigationPageProvider>(context, listen: false)
+                .updateSearchState();
+          },
+        ),
+      ),
+      leadingWidth: 45,
+      centerTitle: true,
+      title: SizedBox(
+        height: 39,
+        child: TextFormField(
+          controller: searchController,
+          style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w500,
+              color: themeMode
+                  ? AppTheme.black11
+                  : AppTheme.white1), // WHILE WRITING
+          maxLines: 1,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+            filled: true,
+            fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
+            hintText: "Aranacak kelimeyi giriniz",
+            hintStyle: TextStyle(
+              fontSize: 11,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.white13,
+            ),
+            prefixIcon: IconButton(
               splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/search.png',
+              onPressed: () {},
+              icon: SizedBox(
                 width: 19,
                 height: 19,
-                color: AppTheme.white15,
+                child: Image.asset(
+                  'assets/icons/search.png',
+                  width: 19,
+                  height: 19,
+                  color: AppTheme.white15,
+                ),
               ),
-              onPressed: () {
-                if (themeMode) {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setDarkMode();
-                } else {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setLightMode();
-                }
-              },
             ),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/bell.png',
-                width: 16.0,
-                height: 18.0,
-                color: AppTheme.white15,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(41),
+                borderSide: BorderSide(
+                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                  width: 1,
+                )),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(41),
+                borderSide: BorderSide(
+                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                  width: 1,
+                )),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(41),
+              borderSide: BorderSide(
+                color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                width: 1,
               ),
-              onPressed: () {},
             ),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/message.png',
-                width: 19.0,
-                height: 16.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: navigateToMessagePage,
-            ),
-          ]),
-
-      body: Consumer<NavigationPageProvider>(
-        builder: (context, provider, child) {
-          return provider.pages[provider.currentTabIndex];
-        },
-      ),
-
-      bottomNavigationBar: Consumer<NavigationPageProvider>(
-        builder: (context, provider, child) {
-          return Container(
-            width: deviceWidth,
-            height: 60,
-            decoration: BoxDecoration(
-              // borderRadius: BorderRadius.only(
-              //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),
-              // boxShadow: [
-              //   BoxShadow(
-              //     color: Colors.black54.withOpacity(0.35),
-              //     offset: Offset(0, 10),
-              //     blurRadius: 48,
-              //   ),
-              // ],
-              color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                  ? AppTheme.white1
-                  : AppTheme.black5,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/homepage.png',
-                                  width: 23,
-                                  height: 22,
-                                  color: provider.currentTabIndex == 0
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('Homepage'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 0
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
-                          ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(0);
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/market.png',
-                                  width: 22,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 1
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('Marketplace'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 1
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
-                          ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(1);
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/icons/shopping_car.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 2
-                                      ? Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                              SizedBox(height: 4),
-                              Text('My Basket'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 2
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
-                          ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(2);
-                        }),
-                  ),
-                ),
-                Expanded(
-                  child: ButtonTheme(
-                    height: 60,
-                    child: MaterialButton(
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16),
-                            topRight: Radius.circular(16),
-                          ),
-                        ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
-                        elevation: 0,
-                        child: FittedBox(
-                          fit: BoxFit.none,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/icons/profile.png',
-                                width: 24,
-                                height: 24,
-                              ),
-                              SizedBox(height: 5),
-                              Text('My Account'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 3
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
-                          ),
-                        ),
-                        onPressed: () {
-                          provider.updateCurrentTabIndex(3);
-                        }),
-                  ),
-                ),
-              ],
-            ),
-          );
-        },
+          ),
+        ),
       ),
     );
+  }
+
+  void navigateToBasketPage() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const BasketPage()));
+  }
+
+  void navigateToMessagePage() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const MessagesPage()));
   }
 }

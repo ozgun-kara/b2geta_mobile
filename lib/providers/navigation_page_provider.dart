@@ -40,8 +40,15 @@ class NavigationPageProvider with ChangeNotifier {
     CompanyProfilPage()
   ];
 
+  bool searchState = false;
+
   void updateCurrentTabIndex(int value) {
     currentTabIndex = value;
+    notifyListeners();
+  }
+
+  void updateSearchState() {
+    searchState = !searchState;
     notifyListeners();
   }
 }
