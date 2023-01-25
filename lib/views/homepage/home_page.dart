@@ -133,6 +133,7 @@ class _HomePageState extends State<HomePage> {
               expandedHeight: 166,
               pinned: true,
               centerTitle: false,
+              leading: const SizedBox(),
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsets.all(0),
                 expandedTitleScale: 1,
