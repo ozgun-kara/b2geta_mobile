@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:b2geta_mobile/models/dummy_models/company_address_dummy_model.dart';
 import 'package:b2geta_mobile/models/dummy_models/company_order_dummy_model.dart';
 import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
 import 'package:b2geta_mobile/models/dummy_models/language_dummy_model.dart';
@@ -40,5 +41,12 @@ class DummyService {
         .loadString('database/general/company_orders_list.json');
     final list = json.decode(jsondata) as List<dynamic>;
     return list.map((e) => CompanyOrderDummyModel.fromJson(e)).toList();
+  }
+
+  Future<List<CompanyAddressDummyModel>> getCompanyAddressList() async {
+    final jsondata = await rootBundle.rootBundle
+        .loadString('database/general/company_address_list.json');
+    final list = json.decode(jsondata) as List<dynamic>;
+    return list.map((e) => CompanyAddressDummyModel.fromJson(e)).toList();
   }
 }
