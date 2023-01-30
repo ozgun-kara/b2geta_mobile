@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,6 +14,7 @@ import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
 import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
 
+import '../../../providers/navigation_page_provider.dart';
 import '../../../utils.dart';
 
 class ProductDetailSubpage extends StatefulWidget {
@@ -41,6 +43,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
 
   @override
   Widget build(BuildContext context) {
@@ -2611,15 +2614,24 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(7)),
                             ),
+                            onPressed: () {
+                              Provider.of<NavigationPageProvider>(context,
+                                      listen: false)
+                                  .updateCurrentTabIndex(2);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NavigationPage(),
+                                  ));
+                            },
                             child: Text(
-                              "Satıcıya Sor",
+                              "Sepete Git",
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w700,
                                   color: AppTheme.white1),
-                            ),
-                            onPressed: () {}),
+                            )),
                       ),
                     ],
                   ),

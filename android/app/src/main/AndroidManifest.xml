@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.b2geta_mobile">
    <application
+        android:requestLegacyExternalStorage="true"
         android:label="b2geta_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

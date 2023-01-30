@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 import '../../app_theme.dart';
@@ -30,11 +33,23 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
 
+  final ImagePicker _picker = ImagePicker();
+  File? _imageFile;
+
   @override
   void initState() {
     super.initState();
     getFeeds();
     getStories();
+  }
+
+  Future<void> _getFromGallery() async {
+    PickedFile? pickedFile = await _picker.getImage(
+        source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
+    if (pickedFile != null) {
+      _imageFile = File(pickedFile.path);
+      setState(() {});
+    }
   }
 
   void getFeeds() async {
@@ -246,23 +261,35 @@ class _HomePageState extends State<HomePage> {
                             var story = stories[index];
 
                             return index == 0
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 11.0),
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      margin: const EdgeInsets.only(
-                                        right: 10,
-                                      ),
-                                      child: DottedBorder(
-                                        color: AppTheme.blue2,
-                                        borderType: BorderType.Circle,
-                                        dashPattern: const [6, 6],
-                                        child: Center(
-                                          child: Image.asset(
-                                            "assets/icons/add.png",
-                                            width: 14.0,
-                                            height: 14.0,
+                                ? GestureDetector(
+                                    onTap: () {
+                                      _getFromGallery();
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 11.0),
+                                      child: Container(
+                                        width: 50,
+                                        height: 50,
+                                        margin: const EdgeInsets.only(
+                                          right: 10,
+                                        ),
+                                        child: DottedBorder(
+                                          color: AppTheme.blue2,
+                                          borderType: BorderType.Circle,
+                                          dashPattern: const [6, 6],
+                                          child: Center(
+                                            child: _imageFile == null
+                                                ? Image.asset(
+                                                    "assets/icons/add.png",
+                                                    width: 14.0,
+                                                    height: 14.0,
+                                                  )
+                                                : Image.file(
+                                                    _imageFile!,
+                                                    width: 14.0,
+                                                    height: 14.0,
+                                                  ),
                                           ),
                                         ),
                                       ),
