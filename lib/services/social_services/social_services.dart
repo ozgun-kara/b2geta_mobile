@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
@@ -111,13 +112,42 @@ class SocialServices {
     }
   }
 
+  Future<bool> storeShareCall({
+    required File image,
+  }) async {
+    final response =
+        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}"
+    }, body: {
+      "type": "story",
+      "images": [image],
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint(status.toString());
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
+
   // CREATE COMMENT
   Future<bool> createCommentCall({
     required String content,
     required String feedId,
   }) async {
-    final response =
-        await http.post(Uri.parse('${Constants.apiUrl}/comment/$feedId'), headers: {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/comment/$feedId'), headers: {
       "Authorization": "Bearer ${Constants.userToken}"
     }, body: {
       "type": "posts",

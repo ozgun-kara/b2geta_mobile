@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
   List<FeedModel> stories = [];
+  List<FeedModel> meStories = [];
 
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
@@ -40,12 +39,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getFeeds();
+    getMeStories();
     getStories();
   }
 
   Future<void> _getFromGallery() async {
     PickedFile? pickedFile = await _picker.getImage(
-        source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
+      source: ImageSource.gallery,
+    );
     if (pickedFile != null) {
       _imageFile = File(pickedFile.path);
       setState(() {});
@@ -66,6 +67,15 @@ class _HomePageState extends State<HomePage> {
         queryParameters: {"offset": "0", "limit": "9", "type": "story"},
         userId: "408").then((feedList) {
       stories = feedList;
+      setState(() {});
+    });
+  }
+
+  void getMeStories() async {
+    await _socialServices.getAllFeedCall(
+        queryParameters: {"offset": "0", "limit": "1", "type": "story"},
+        userId: "57").then((feedList) {
+      meStories = feedList;
       setState(() {});
     });
   }
@@ -152,9 +162,8 @@ class _HomePageState extends State<HomePage> {
               flexibleSpace: FlexibleSpaceBar(
                 titlePadding: const EdgeInsets.all(0),
                 expandedTitleScale: 1,
-                title: Container(
+                title: SizedBox(
                   width: deviceWidth,
-                  color: Colors.amber,
                   child: Container(
                     color: themeMode ? AppTheme.white1 : AppTheme.black5,
                     width: deviceWidth,
@@ -261,39 +270,57 @@ class _HomePageState extends State<HomePage> {
                             var story = stories[index];
 
                             return index == 0
-                                ? GestureDetector(
-                                    onTap: () {
-                                      _getFromGallery();
-                                    },
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(left: 11.0),
-                                      child: Container(
+                                ? Padding(
+                                    padding: const EdgeInsets.only(left: 11.0),
+                                    child: Container(
                                         width: 50,
                                         height: 50,
                                         margin: const EdgeInsets.only(
                                           right: 10,
                                         ),
-                                        child: DottedBorder(
-                                          color: AppTheme.blue2,
-                                          borderType: BorderType.Circle,
-                                          dashPattern: const [6, 6],
-                                          child: Center(
-                                            child: _imageFile == null
-                                                ? Image.asset(
+                                        child: meStories.isEmpty
+                                            ? GestureDetector(
+                                                onTap: () {
+                                                  _getFromGallery();
+                                                },
+                                                child: DottedBorder(
+                                                  color: AppTheme.blue2,
+                                                  borderType: BorderType.Circle,
+                                                  dashPattern: const [6, 6],
+                                                  child: Center(
+                                                      child: Image.asset(
                                                     "assets/icons/add.png",
                                                     width: 14.0,
                                                     height: 14.0,
-                                                  )
-                                                : Image.file(
-                                                    _imageFile!,
-                                                    width: 14.0,
-                                                    height: 14.0,
+                                                  )),
+                                                ),
+                                              )
+                                            : GestureDetector(
+                                                onTap: () {
+                                                  Navigator.of(context)
+                                                      .push(MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MoreStories(
+                                                      stories: meStories,
+                                                    ),
+                                                  ));
+                                                },
+                                                child: ClipOval(
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: const Color(
+                                                            0XFF29B7D6),
+                                                        width: 2,
+                                                      ),
+                                                    ),
+                                                    child: Image.asset(
+                                                      "assets/images/dummy_images/post_profile.png",
+                                                    ),
                                                   ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                                ),
+                                              )),
                                   )
                                 : GestureDetector(
                                     onTap: () {
