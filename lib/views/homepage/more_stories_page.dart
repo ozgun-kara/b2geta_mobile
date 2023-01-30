@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:story_view/story_view.dart';
 
@@ -26,13 +25,11 @@ class _MoreStoriesState extends State<MoreStories> {
             story.images![0] != null
                 ? StoryItem.pageImage(
                     url: story.images![0]!.url.toString(),
-                    caption: "Still sampling",
                     controller: _storyController,
                   )
                 : StoryItem.pageImage(
                     url:
                         "https://media.giphy.com/media/4EbPq54Rbx5UvBXsRx/giphy.gif",
-                    caption: "Still sampling",
                     controller: _storyController,
                   )
         ],
