@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../app_theme.dart';
 import '../../models/basket_model.dart';
+import '../../models/dummy_models/company_address_dummy_model.dart';
 import '../../providers/theme_provider.dart';
+import '../../services/dummy_service.dart';
 
 class BasketPage extends StatefulWidget {
   const BasketPage({Key? key}) : super(key: key);
@@ -82,6 +84,473 @@ class _BasketPageState extends State<BasketPage> {
               },
             ),
             _orderSummary(),
+            Container(
+              width: deviceWidth,
+              height: 47.0,
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                color: themeMode ? AppTheme.white22 : AppTheme.black18,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Adres Seçimi",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w800,
+                    color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              color: themeMode ? AppTheme.white1 : AppTheme.black7,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 11,
+                  ),
+                  FutureBuilder(
+                    future: DummyService().getCompanyAddressList(),
+                    builder: (context, data) {
+                      if (data.hasData) {
+                        var productIdList = data.data;
+
+                        return ListView.separated(
+                          padding: const EdgeInsets.all(0),
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          itemCount: productIdList!.length,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(height: 10);
+                          },
+                          itemBuilder: ((context, index) {
+                            var items =
+                                data.data as List<CompanyAddressDummyModel>;
+
+                            return InkWell(
+                              onTap: () {},
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 9),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: themeMode
+                                        ? AppTheme.white1
+                                        : AppTheme.black7,
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(5)),
+                                    border: Border.all(
+                                      width: 1,
+                                      color: themeMode
+                                          ? AppTheme.white35
+                                          : AppTheme.black18,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        24, 21, 24, 21),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Flexible(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Name",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].name ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 28),
+                                                  Text(
+                                                    "Şehir",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].city ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Adres",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].address ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 28),
+                                                  Text(
+                                                    "Ülke",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].country ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Flexible(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "İlçe",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].district ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                  const SizedBox(height: 28),
+                                                  Text(
+                                                    "Posta Kodu",
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    items[index].postalCode ??
+                                                        '',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white1,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: SizedBox(
+                                                height: 30,
+                                                child: MaterialButton(
+                                                    height: 30,
+                                                    color: index % 2 == 0
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.green9,
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  8)),
+                                                    ),
+                                                    elevation: 0,
+                                                    child: Text(
+                                                      index % 2 == 1
+                                                          ? "Seçildi "
+                                                          : "Seç",
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color:
+                                                              AppTheme.white1),
+                                                    ),
+                                                    onPressed: () {}),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                        );
+                      } else {
+                        return SizedBox(
+                          height: deviceWidth + 115,
+                          child: Center(
+                              child: CupertinoActivityIndicator(
+                            color:
+                                themeMode ? AppTheme.black1 : AppTheme.white1,
+                            radius: 12,
+                          )),
+                        );
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 9),
+                    child: SizedBox(
+                      height: 47,
+                      child: MaterialButton(
+                          height: 47,
+                          minWidth: deviceWidth,
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                                width: 1,
+                                color: themeMode
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
+                          ),
+                          elevation: 0,
+                          child: Text(
+                            "Adres Ekle",
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w600,
+                                color: themeMode
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1),
+                          ),
+                          onPressed: () {}),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 22,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              width: deviceWidth,
+              height: 47.0,
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              decoration: BoxDecoration(
+                color: themeMode ? AppTheme.white22 : AppTheme.black18,
+              ),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Sözleşme ve Koşullar",
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w800,
+                    color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 9),
+              color: themeMode ? AppTheme.white1 : AppTheme.black7,
+              width: deviceWidth,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 9,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(
+                      top: 18,
+                      left: 18,
+                      right: 21,
+                      bottom: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: themeMode ? AppTheme.white22 : AppTheme.black18,
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Text(
+                      "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MERSİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önceden \nhesaplanamıyorsa fiyatın hesaplanma usulü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önceden hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usulü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
+                      style: TextStyle(
+                        fontSize: 11,
+                        height: 1.44,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: themeMode ? AppTheme.blue12 : AppTheme.white37,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 53,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                        width: 16,
+                        child: Checkbox(
+                          activeColor: AppTheme.blue2,
+                          value: true,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Text(
+                        "Okudum kabul ediyorum",
+                        style: TextStyle(
+                          fontSize: 12,
+                          height: 1,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 51,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 19),
+                    child: MaterialButton(
+                        minWidth: deviceWidth,
+                        height: 52,
+                        elevation: 0,
+                        color: AppTheme.green2,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Sepeti Onayla',
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          showAlertDialog(
+                              context: context,
+                              titleText:
+                                  'Siparişi Onaylamak istediğinizde emin misiniz ?',
+                              buttonText: 'Onayla',
+                              buttonColor: AppTheme.green1,
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) =>
+                                      ShoppingSummarySubpage(),
+                                ));
+                                BasketServices().emptyBasketCall();
+                              });
+                        }),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 75),
           ],
         ),
       ),
@@ -208,7 +677,7 @@ class _BasketPageState extends State<BasketPage> {
                     width: 82,
                     height: 82,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: NetworkImage(
                             "https://s4.gifyu.com/images/product_2.png"),
                         fit: BoxFit.cover,
@@ -519,7 +988,6 @@ class _BasketPageState extends State<BasketPage> {
           top: 15,
           left: 25,
           right: 25,
-          bottom: 60,
         ),
         child: Column(
           children: [
@@ -529,14 +997,6 @@ class _BasketPageState extends State<BasketPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Sipariş Özeti",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w700,
-                          color: themeMode ? AppTheme.blue2 : AppTheme.blue6),
-                    ),
-                    Text(
                       "Toplam Ücret",
                       style: TextStyle(
                           fontSize: 14,
@@ -544,12 +1004,16 @@ class _BasketPageState extends State<BasketPage> {
                           fontWeight: FontWeight.w400,
                           color: AppTheme.white15),
                     ),
+                    const SizedBox(
+                      height: 6,
+                    ),
                     RichText(
                         text: TextSpan(children: [
                       TextSpan(
                         text: '3.298,94 ',
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 32,
+                          height: 1,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1,
@@ -558,48 +1022,20 @@ class _BasketPageState extends State<BasketPage> {
                       TextSpan(
                         text: "₺",
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 32,
+                          height: 1,
                           fontWeight: FontWeight.w500,
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                         ),
                       )
                     ])),
+                    const SizedBox(
+                      height: 7,
+                    ),
                   ],
                 ),
               ],
             ),
-            const SizedBox(height: 16),
-            MaterialButton(
-                minWidth: deviceWidth,
-                height: 52,
-                elevation: 0,
-                color: AppTheme.green2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16)),
-                ),
-                child: Text(
-                  'Sepeti Onayla',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.white1),
-                ),
-                onPressed: () {
-                  showAlertDialog(
-                      context: context,
-                      titleText:
-                          'Siparişi Onaylamak istediğinizde emin misiniz ?',
-                      buttonText: 'Onayla',
-                      buttonColor: AppTheme.green1,
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ShoppingSummarySubpage(),
-                        ));
-                        BasketServices().emptyBasketCall();
-                      });
-                }),
-            SizedBox(height: 36),
           ],
         ));
   }
@@ -702,3 +1138,10 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 }
+
+
+/*
+ 
+
+
+*/
