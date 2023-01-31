@@ -1,9 +1,0 @@
-Yatırımcıya sunum için bir deadline belirledik 15’i için. 
-1-Sunumda mobilden gerçek veri ile giriş yapıp ürünleri gezip sepete ürün ekleyip, siparişi tamamlayabilmeli
-
-2-sosyalmedya tarafında gezinip, porfili ve oradaki sayfaları görüntüleyebilmeli
-
-
-
-1.kısım tamamlandı.
-+home page , profil pageleri tamamlanmalı
