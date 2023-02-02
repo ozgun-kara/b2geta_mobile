@@ -147,9 +147,9 @@ class FeedModelComments {
     if (comments != null) {
       final v = comments;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['comments'] = arr0;
     }
     return data;
@@ -305,9 +305,9 @@ class FeedModel {
     if (images != null) {
       final v = images;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['images'] = arr0;
     }
     data['videos'] = videos;

@@ -12,7 +12,7 @@ class LanguageModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['language_code'] = languageCode;
     data['language_name'] = languageName;
     data['default'] = defaultt;

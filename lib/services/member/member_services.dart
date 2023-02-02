@@ -98,9 +98,7 @@ class MemberServices {
 
   // LOGIN
   Future<bool> loginCall(
-      {
-      required String email,
-      required String password}) async {
+      {required String email, required String password}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/member/login'),
       headers: {
@@ -119,7 +117,7 @@ class MemberServices {
 
       if (status == true) {
         var token = json.decode(response.body)["access_token"];
-        debugPrint("TOKEN: " + token.toString());
+        debugPrint("TOKEN: $token");
         Constants.userToken = token;
         saveToken(token);
         return true;
@@ -147,7 +145,7 @@ class MemberServices {
   Future<String?> readToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = prefs.getString('Token');
-    debugPrint("TOKEN HAS FETCHED: " + token.toString());
+    debugPrint("TOKEN HAS FETCHED: $token");
     return token;
   }
 }

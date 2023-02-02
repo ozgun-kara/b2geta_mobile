@@ -42,19 +42,19 @@ class CompanyOrderDummyModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['imgUrl'] = this.imgUrl;
-    data['date'] = this.date;
-    data['orderNumber'] = this.orderNumber;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['imgUrl'] = imgUrl;
+    data['date'] = date;
+    data['orderNumber'] = orderNumber;
     data['productNumber'] = productNumber;
-    data['seller'] = this.seller;
-    data['address'] = this.address;
-    data['quantity'] = this.quantity;
-    data['status'] = this.status;
-    data['title'] = this.title;
-    data['totalPayment'] = this.totalPayment;
-    data['unitPayment'] = this.unitPayment;
+    data['seller'] = seller;
+    data['address'] = address;
+    data['quantity'] = quantity;
+    data['status'] = status;
+    data['title'] = title;
+    data['totalPayment'] = totalPayment;
+    data['unitPayment'] = unitPayment;
     return data;
   }
 }

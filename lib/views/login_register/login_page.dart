@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           TextFormField(
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                             maxLines: 1,
                             decoration: InputDecoration(
                               contentPadding:
-                                  EdgeInsets.fromLTRB(25, 16, 25, 16),
+                                  const EdgeInsets.fromLTRB(25, 16, 25, 16),
                               filled: true,
                               fillColor: Colors.transparent,
                               hintText: 'E-mail'.tr,
@@ -144,7 +144,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 13),
+                          const SizedBox(height: 13),
                           TextFormField(
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             decoration: InputDecoration(
                               contentPadding:
-                                  EdgeInsets.fromLTRB(25, 16, 25, 16),
+                                  const EdgeInsets.fromLTRB(25, 16, 25, 16),
                               filled: true,
                               fillColor: Colors.transparent,
                               hintText: 'Password'.tr,
@@ -206,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.only(left: 7, right: 3),
                             child: Row(
@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                                           fontWeight: FontWeight.w400,
                                           color: AppTheme.white14),
                                     ),
-                                    SizedBox(width: 9),
+                                    const SizedBox(width: 9),
                                     Consumer<LoginRegisterProvider>(
                                       builder: (context, provider, child) {
                                         return FlutterSwitch(
@@ -247,12 +247,12 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(width: 32),
+                                const SizedBox(width: 32),
                                 Flexible(
                                   child: InkWell(
                                     onTap: () {},
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(6)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(6)),
                                     child: Text(
                                       'Forgot Password'.tr,
                                       style: TextStyle(
@@ -266,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                               ],
                             ),
                           ),
-                          SizedBox(height: 22),
+                          const SizedBox(height: 22),
                           Row(
                             children: [
                               Expanded(
@@ -301,7 +301,7 @@ class _LoginPageState extends State<LoginPage> {
                                         //   ),
                                         // ],
 
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(16))),
                                     child: MaterialButton(
                                         elevation: 0,
@@ -350,7 +350,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 29),
+                              const SizedBox(width: 29),
                               Expanded(
                                 child: ButtonTheme(
                                   // minWidth: deviceWidth,
@@ -383,7 +383,7 @@ class _LoginPageState extends State<LoginPage> {
                                         //   ),
                                         // ],
 
-                                        borderRadius: BorderRadius.all(
+                                        borderRadius: const BorderRadius.all(
                                             Radius.circular(16))),
                                     child: MaterialButton(
                                         elevation: 0,
@@ -405,7 +405,7 @@ class _LoginPageState extends State<LoginPage> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    RegisterPage(),
+                                                    const RegisterPage(),
                                               ));
                                         }),
                                   ),
@@ -416,13 +416,14 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 48),
+                    const SizedBox(height: 48),
                     Wrap(
                       alignment: WrapAlignment.center,
                       children: [
                         InkWell(
                           onTap: () {},
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
                           child: Text(
                             'About Us'.tr,
                             style: TextStyle(
@@ -435,10 +436,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         InkWell(
                           onTap: () {},
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
                           child: Text(
                             'Privacy'.tr,
                             style: TextStyle(
@@ -451,10 +453,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         InkWell(
                           onTap: () {},
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
                           child: Text(
                             'Terms and Conditions'.tr,
                             style: TextStyle(
@@ -467,10 +470,11 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         InkWell(
                           onTap: () {},
-                          borderRadius: BorderRadius.all(Radius.circular(6)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
                           child: Text(
                             'Contact'.tr,
                             style: TextStyle(
@@ -485,7 +489,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         Expanded(
@@ -525,7 +529,7 @@ class _LoginPageState extends State<LoginPage> {
             height: 150,
             decoration: BoxDecoration(
                 color: themeMode ? AppTheme.white1 : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -538,7 +542,7 @@ class _LoginPageState extends State<LoginPage> {
                     color: themeMode ? AppTheme.black16 : AppTheme.white14,
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -570,7 +574,8 @@ class _LoginPageState extends State<LoginPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(

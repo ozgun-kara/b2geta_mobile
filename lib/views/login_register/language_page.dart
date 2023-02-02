@@ -2,7 +2,6 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -21,7 +20,7 @@ class _LanguagePageState extends State<LanguagePage> {
   final List<String> dropdownItems = [
     'English',
     'Turkish',
-    'Deutsch',
+    'Deutsche',
   ];
   String? dropdownSelectedValue;
 
@@ -61,10 +60,10 @@ class _LanguagePageState extends State<LanguagePage> {
           ? AppTheme.white2
           : AppTheme.black12,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(23, 0, 23, 0),
+        padding: const EdgeInsets.fromLTRB(23, 0, 23, 0),
         child: Column(
           children: [
-            Spacer(),
+            const Spacer(),
             Container(
               width: deviceWidth,
               // height: 480,
@@ -73,7 +72,7 @@ class _LanguagePageState extends State<LanguagePage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black3,
-                boxShadow: [
+                boxShadow: const [
                   BoxShadow(
                       offset: Offset(0, 4),
                       color: Color.fromRGBO(41, 67, 214, 0.05),
@@ -81,13 +80,13 @@ class _LanguagePageState extends State<LanguagePage> {
                       spreadRadius: 0),
                 ],
               ),
-              padding: EdgeInsets.all(28),
+              padding: const EdgeInsets.all(28),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: 6),
+                      const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           'Language Selection'.tr,
@@ -105,282 +104,111 @@ class _LanguagePageState extends State<LanguagePage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 32),
-                  Container(
-                    // height: 274,
-                    // decoration: BoxDecoration(
-                    //   borderRadius: BorderRadius.circular(19),
-                    //   color:
-                    //   Provider.of<ThemeProvider>(context).themeMode == "light"
-                    //       ? AppTheme.white16
-                    //       : AppTheme.black12,
-                    // ),
-
-                    // child: FutureBuilder(
-                    //   future: GeneralService().getLanguageList(),
-                    //   builder: (context, data) {
-                    //     if (data.hasData) {
-                    //       var items = data.data as List<LanguageDummyModel>;
-                    //
-                    //       return ListView.builder(
-                    //           controller: scrollController,
-                    //           shrinkWrap: true,
-                    //           itemCount: items.length,
-                    //           itemBuilder: ((context, index) {
-                    //             return Padding(
-                    //               padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    //               child: Center(
-                    //                 child: Text(
-                    //                   items[index].language ?? '',
-                    //                   style: TextStyle(
-                    //                     fontSize: 18,
-                    //                     fontFamily: AppTheme.appFontFamily,
-                    //                     fontWeight: FontWeight.w600,
-                    //                     color: Colors.white,
-                    //                   ),
-                    //                 ),
-                    //               ),
-                    //             );
-                    //           }));
-                    //     } else {
-                    //       return ListView.builder(
-                    //         controller: scrollController,
-                    //         shrinkWrap: true,
-                    //         itemCount: 10,
-                    //         itemBuilder: (BuildContext context, int index) {
-                    //           return Padding(
-                    //             padding: const EdgeInsets.fromLTRB(0, 0, 0, 12),
-                    //             child: Row(
-                    //               mainAxisAlignment: MainAxisAlignment.center,
-                    //               children: [
-                    //                 SkeletonAnimation(
-                    //                   borderRadius: BorderRadius.circular(10.0),
-                    //                   shimmerDuration: 1000,
-                    //                   shimmerColor: index % 2 != 0
-                    //                       ? Colors.grey
-                    //                       : Colors.white54,
-                    //                   child: Container(
-                    //                     height: 60,
-                    //                     width: 60,
-                    //                     decoration: BoxDecoration(
-                    //                       borderRadius: BorderRadius.circular(5),
-                    //                       color:
-                    //                           Color.fromRGBO(225, 230, 250, 0.8),
-                    //                       // color: Colors.grey[300]
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //                 SizedBox(
-                    //                   width: 6,
-                    //                 ),
-                    //                 Column(
-                    //                   crossAxisAlignment:
-                    //                       CrossAxisAlignment.start,
-                    //                   children: <Widget>[
-                    //                     SkeletonAnimation(
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(10.0),
-                    //                       shimmerDuration: 1000,
-                    //                       shimmerColor: index % 2 != 0
-                    //                           ? Colors.grey
-                    //                           : Colors.white54,
-                    //                       child: Container(
-                    //                         width: deviceWidth * 0.5,
-                    //                         height: 30,
-                    //                         decoration: BoxDecoration(
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10.0),
-                    //                           // color: Colors.grey[300]
-                    //
-                    //                           color: Color.fromRGBO(
-                    //                               225, 230, 250, 0.8),
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                     SizedBox(
-                    //                       height: 6,
-                    //                     ),
-                    //                     SkeletonAnimation(
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(10.0),
-                    //                       shimmerColor: index % 2 != 0
-                    //                           ? Colors.grey
-                    //                           : Colors.white54,
-                    //                       child: Container(
-                    //                         width: deviceWidth * 0.2,
-                    //                         height: 30,
-                    //                         decoration: BoxDecoration(
-                    //                           borderRadius:
-                    //                               BorderRadius.circular(10.0),
-                    //                           // color: Colors.grey[300]
-                    //
-                    //                           color: Color.fromRGBO(
-                    //                               225, 230, 250, 0.8),
-                    //                         ),
-                    //                       ),
-                    //                     ),
-                    //                   ],
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           );
-                    //         },
-                    //       ); // SEKELATON ANIMATION
-                    //     }
-                    //   },
-                    // ),
-
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                        // alignment: AlignmentDirectional.center,
-                        // isExpanded: true,
-                        hint: Text(
-                          dropdownSelectedValue.toString(),
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.black11
-                                    : AppTheme.white14,
-                          ),
-                          overflow: TextOverflow.visible,
-                        ),
-                        items: dropdownItems
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Center(
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white14,
-                                      ),
-                                      overflow: TextOverflow.visible,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        value: dropdownSelectedValue,
-                        onChanged: (value) {
-                          setState(() {
-                            dropdownSelectedValue = value as String;
-
-                            if (value == "English") {
-                              box.write("language", "en_US");
-                              var locale = Locale('en', 'US');
-                              Get.updateLocale(locale);
-                            } else if (value == "Turkish") {
-                              box.write("language", "tr_TR");
-                              var locale = Locale('tr', 'TR');
-                              Get.updateLocale(locale);
-                            } else if (value == "Deutsch") {
-                              var locale = Locale('de', 'DE');
-                              Get.updateLocale(locale);
-                            }
-                          });
-                        },
-                        icon: Center(
-                          child: Image.asset(
-                            'assets/icons/dropdown.png',
-                            width: 10,
-                            height: 6,
-                          ),
-                        ),
-                        iconSize: 24,
-                        // iconEnabledColor: Colors.yellow,
-                        // iconDisabledColor: Colors.grey,
-                        // icon: Container(),
-                        buttonHeight: 57,
-                        buttonWidth: deviceWidth,
-                        buttonPadding: EdgeInsets.only(left: 25, right: 17),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // border:
-                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                          // color: Colors.transparent,
+                  const SizedBox(height: 32),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      // alignment: AlignmentDirectional.center,
+                      // isExpanded: true,
+                      hint: Text(
+                        dropdownSelectedValue.toString(),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
                           color:
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
-                                  ? AppTheme.white5
-                                  : AppTheme.black7,
+                                  ? AppTheme.black11
+                                  : AppTheme.white14,
                         ),
-                        // buttonElevation: 2,
-                        itemHeight: 40,
-                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                        dropdownMaxHeight: 200,
-                        // dropdownWidth: deviceWidth,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          // color: Color(0xFFEFF0F7),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white5
-                                  : AppTheme.black7,
-                        ),
-                        // dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 4,
-                        scrollbarAlwaysShow: true,
-                        offset: const Offset(0, 0),
+                        overflow: TextOverflow.visible,
                       ),
-                    ),
+                      items: dropdownItems
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item,
+                                child: Center(
+                                  child: Text(
+                                    item,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.black11
+                                          : AppTheme.white14,
+                                    ),
+                                    overflow: TextOverflow.visible,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: dropdownSelectedValue,
+                      onChanged: (value) {
+                        setState(() {
+                          dropdownSelectedValue = value as String;
 
-                    // child: FutureBuilder(
-                    //   future: LanguageService().getLanguageList(),
-                    //   builder: (context, data) {
-                    //     if (data.hasData) {
-                    //       var items = data.data as List<LanguageModel>;
-                    //
-                    //       return Center(
-                    //         child: ListView.builder(
-                    //             controller: scrollController,
-                    //             shrinkWrap: true,
-                    //             itemCount: items.length,
-                    //             itemBuilder: ((context, index) {
-                    //               return Padding(
-                    //                 padding:
-                    //                     const EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    //                 child: Center(
-                    //                   child: Text(
-                    //                     items[index].languageName ?? '',
-                    //                     style: TextStyle(
-                    //                       fontSize: 18,
-                    //                       fontFamily: AppTheme.appFontFamily,
-                    //                       fontWeight: FontWeight.w600,
-                    //                       color: Colors.white,
-                    //                     ),
-                    //                   ),
-                    //                 ),
-                    //               );
-                    //             })),
-                    //       );
-                    //     } else {
-                    //       return Center(
-                    //           child: CupertinoActivityIndicator(
-                    //         color:
-                    //             Provider.of<ThemeProvider>(context).themeMode ==
-                    //                     "light"
-                    //                 ? AppTheme.black1
-                    //                 : AppTheme.white1,
-                    //         radius: 12,
-                    //       ));
-                    //     }
-                    //   },
-                    // ),
+                          if (value == "English") {
+                            box.write("language", "en_US");
+                            var locale = const Locale('en', 'US');
+                            Get.updateLocale(locale);
+                          } else if (value == "Turkish") {
+                            box.write("language", "tr_TR");
+                            var locale = const Locale('tr', 'TR');
+                            Get.updateLocale(locale);
+                          } else if (value == "Deutsche") {
+                            var locale = const Locale('de', 'DE');
+                            Get.updateLocale(locale);
+                          }
+                        });
+                      },
+                      icon: Center(
+                        child: Image.asset(
+                          'assets/icons/dropdown.png',
+                          width: 10,
+                          height: 6,
+                        ),
+                      ),
+                      iconSize: 24,
+                      // iconEnabledColor: Colors.yellow,
+                      // iconDisabledColor: Colors.grey,
+                      // icon: Container(),
+                      buttonHeight: 57,
+                      buttonWidth: deviceWidth,
+                      buttonPadding: const EdgeInsets.only(left: 25, right: 17),
+                      buttonDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        // border:
+                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                        // color: Colors.transparent,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // buttonElevation: 2,
+                      itemHeight: 40,
+                      itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                      dropdownMaxHeight: 200,
+                      // dropdownWidth: deviceWidth,
+                      dropdownPadding: null,
+                      dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        // color: Color(0xFFEFF0F7),
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // dropdownElevation: 8,
+                      scrollbarRadius: const Radius.circular(40),
+                      scrollbarThickness: 4,
+                      scrollbarAlwaysShow: true,
+                      offset: const Offset(0, 0),
+                    ),
                   ),
-                  SizedBox(height: 21),
+                  const SizedBox(height: 21),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 64,
@@ -402,7 +230,8 @@ class _LanguagePageState extends State<LanguagePage> {
                           //       spreadRadius: 0),
                           // ],
 
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -429,7 +258,7 @@ class _LanguagePageState extends State<LanguagePage> {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
           ],
         ),
       ),

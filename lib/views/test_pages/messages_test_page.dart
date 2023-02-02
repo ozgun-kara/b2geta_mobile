@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -29,11 +31,11 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
           : AppTheme.black12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 55),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -41,7 +43,8 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -70,7 +73,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -78,7 +81,8 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -97,7 +101,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                             .sendMessageCall(
                                 toId: '97',
                                 message:
-                                    'Ek olarak kargo suresi hakkinda da bilgi verebilir misiniz?')
+                                    'Ek olarak kargo suresi hakkında da bilgi verebilir misiniz?')
                             .then((value) {
                           if (value == true) {
                             debugPrint("MESSAGES HAS SUCCESSFULLY SENT");
@@ -109,7 +113,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -117,7 +121,8 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -150,7 +155,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
             ],
           ),
         ),
@@ -171,7 +176,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -190,7 +195,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                             : AppTheme.white14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.error_outline_sharp,
                       size: 24,
@@ -201,7 +206,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -233,7 +238,8 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(

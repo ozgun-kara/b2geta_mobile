@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -29,11 +31,11 @@ class _BasketTestPageState extends State<BasketTestPage> {
           : AppTheme.black12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 55),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -41,7 +43,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -68,7 +71,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -76,7 +79,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -104,7 +108,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -112,7 +116,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -129,7 +134,6 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       onPressed: () {
                         BasketServices()
                             .updateProductInBasketCall(
-                            
                                 productId: '3440', quantity: '5')
                             .then((value) {
                           if (value == true) {
@@ -143,7 +147,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -151,7 +155,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -180,7 +185,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -188,7 +193,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -234,7 +240,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -253,7 +259,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                             : AppTheme.white14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.error_outline_sharp,
                       size: 24,
@@ -264,7 +270,7 @@ class _BasketTestPageState extends State<BasketTestPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -296,7 +302,8 @@ class _BasketTestPageState extends State<BasketTestPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(

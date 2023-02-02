@@ -3,18 +3,17 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 
-class ProductDetailFirstTabSubpage extends StatefulWidget {
-  ProductDetailFirstTabSubpage({Key? key}) : super(key: key);
+class ProductDetailFirstTabSubPage extends StatefulWidget {
+  const ProductDetailFirstTabSubPage({Key? key}) : super(key: key);
 
   @override
-  State<ProductDetailFirstTabSubpage> createState() =>
-      _ProductDetailFirstTabSubpageState();
+  State<ProductDetailFirstTabSubPage> createState() =>
+      _ProductDetailFirstTabSubPageState();
 }
 
-class _ProductDetailFirstTabSubpageState
-    extends State<ProductDetailFirstTabSubpage> {
+class _ProductDetailFirstTabSubPageState
+    extends State<ProductDetailFirstTabSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -44,7 +43,7 @@ class _ProductDetailFirstTabSubpageState
             ),
           ),
         ),
-        SizedBox(height: 22),
+        const SizedBox(height: 22),
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
           child: Column(
@@ -64,7 +63,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Otel sandalye",
@@ -81,7 +80,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -97,7 +96,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Otel mobilya",
@@ -114,7 +113,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -130,7 +129,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Mutfak, Ev ofis, Oturma odası",
@@ -147,7 +146,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -163,7 +162,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Plastik",
@@ -180,7 +179,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -196,7 +195,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Hiçbir",
@@ -213,7 +212,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -229,7 +228,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "FIR",
@@ -246,7 +245,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -262,7 +261,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Çocuklar sandalye ve masa",
@@ -279,7 +278,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -295,10 +294,10 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
-                      "Avrupa Modern oturma Furntiure",
+                      "Avrupa Modern oturma Furniture",
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -312,7 +311,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -328,7 +327,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Beyaz siyah altın mavi kırmızı",
@@ -345,7 +344,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -361,7 +360,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "50 adet",
@@ -378,7 +377,7 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -394,7 +393,7 @@ class _ProductDetailFirstTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   Expanded(
                     child: Text(
                       "Plastik çerçeve",
@@ -411,17 +410,17 @@ class _ProductDetailFirstTabSubpageState
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
             ],
           ),
         ),
-        SizedBox(height: 34),
+        const SizedBox(height: 34),
         Container(
             height: 1,
             color: Provider.of<ThemeProvider>(context).themeMode == "light"
                 ? AppTheme.white25
                 : AppTheme.black21),
-        SizedBox(height: 31),
+        const SizedBox(height: 31),
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
           child: Text(
@@ -436,7 +435,7 @@ class _ProductDetailFirstTabSubpageState
             ),
           ),
         ),
-        SizedBox(height: 22),
+        const SizedBox(height: 22),
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
           child: Row(
@@ -451,7 +450,7 @@ class _ProductDetailFirstTabSubpageState
                   color: AppTheme.white15,
                 ),
               ),
-              SizedBox(width: 4),
+              const SizedBox(width: 4),
               Expanded(
                 child: Text(
                   "5000 Adet / Adet per Month",
@@ -469,13 +468,13 @@ class _ProductDetailFirstTabSubpageState
             ],
           ),
         ),
-        SizedBox(height: 34),
+        const SizedBox(height: 34),
         Container(
             height: 1,
             color: Provider.of<ThemeProvider>(context).themeMode == "light"
                 ? AppTheme.white25
                 : AppTheme.black21),
-        SizedBox(height: 31),
+        const SizedBox(height: 31),
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
           child: Text(
@@ -490,7 +489,7 @@ class _ProductDetailFirstTabSubpageState
             ),
           ),
         ),
-        SizedBox(height: 22),
+        const SizedBox(height: 22),
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 25, 0),
           child: Row(
@@ -505,7 +504,7 @@ class _ProductDetailFirstTabSubpageState
                   color: AppTheme.white15,
                 ),
               ),
-              SizedBox(width: 9),
+              const SizedBox(width: 9),
               Expanded(
                 child: Text(
                   "1. All items would be covered with a plastic bubble wrap or soft paper,to ensure that the legs and the fabric would not be damaged.",
@@ -523,17 +522,17 @@ class _ProductDetailFirstTabSubpageState
             ],
           ),
         ),
-        SizedBox(height: 34),
+        const SizedBox(height: 34),
         Container(
             height: 1,
             color: Provider.of<ThemeProvider>(context).themeMode == "light"
                 ? AppTheme.white25
                 : AppTheme.black21),
-        SizedBox(height: 19),
+        const SizedBox(height: 19),
         Container(
           width: deviceWidth,
           height: 305,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
                 "https://s3.gifyu.com/images/dummy-product-1.png",
@@ -542,11 +541,11 @@ class _ProductDetailFirstTabSubpageState
             ),
           ),
         ),
-        SizedBox(height: 14),
+        const SizedBox(height: 14),
         Padding(
           padding: const EdgeInsets.fromLTRB(17, 0, 17, 0),
           child: Text(
-            "Foshan Shiguang Furniture Co.,Ltd is located in Shunde District, Foshan City, which is a famous base of furniture manufacture and procurement.Our company speacializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is ",
+            "Fostan Shougang Furniture Co.,Ltd is located in Shunned District, Fostan City, which is a famous base of furniture manufacture and procurement.Our company specializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is ",
             style: TextStyle(
               fontSize: 15,
               fontFamily: AppTheme.appFontFamily,
@@ -557,7 +556,7 @@ class _ProductDetailFirstTabSubpageState
             ),
           ),
         ),
-        SizedBox(height: 28),
+        const SizedBox(height: 28),
       ],
     );
   }

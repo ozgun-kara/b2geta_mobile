@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeService {
@@ -10,7 +11,7 @@ class ThemeService {
     } else if (value is bool) {
       prefs.setBool(key, value);
     } else {
-      print("Invalid Type");
+      debugPrint("Invalid Type");
     }
   }
 

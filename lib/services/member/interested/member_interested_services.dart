@@ -1,3 +1,5 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:flutter/material.dart';

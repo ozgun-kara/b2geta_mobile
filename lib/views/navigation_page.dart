@@ -90,7 +90,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text('Homepage'.tr,
                                     style: TextStyle(
                                         fontSize: 9,
@@ -143,7 +143,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text('Marketplace'.tr,
                                     style: TextStyle(
                                         fontSize: 9,
@@ -196,7 +196,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
-                                SizedBox(height: 4),
+                                const SizedBox(height: 4),
                                 Text('My Basket'.tr,
                                     style: TextStyle(
                                         fontSize: 9,
@@ -244,7 +244,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                   width: 24,
                                   height: 24,
                                 ),
-                                SizedBox(height: 5),
+                                const SizedBox(height: 5),
                                 Text('My Account'.tr,
                                     style: TextStyle(
                                         fontSize: 9,
@@ -288,12 +288,7 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 17,
               color: AppTheme.white15,
             ),
-            onPressed: () {
-
-
-
-
-            },
+            onPressed: () {},
           ),
         ),
         title: SizedBox(
@@ -383,7 +378,7 @@ class _NavigationPageState extends State<NavigationPage> {
                   : AppTheme.white1), // WHILE WRITING
           maxLines: 1,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+            contentPadding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
             filled: true,
             fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
             hintText: "Aranacak kelimeyi giriniz",

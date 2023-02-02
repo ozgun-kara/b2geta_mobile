@@ -4,19 +4,19 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CompanyOrdersDetailSubpage extends StatefulWidget {
-  const CompanyOrdersDetailSubpage({Key? key, required this.passedObject})
+class CompanyOrdersDetailSubPage extends StatefulWidget {
+  const CompanyOrdersDetailSubPage({Key? key, required this.passedObject})
       : super(key: key);
 
   final CompanyOrderDummyModel passedObject;
 
   @override
-  State<CompanyOrdersDetailSubpage> createState() =>
-      _CompanyOrdersDetailSubpageState();
+  State<CompanyOrdersDetailSubPage> createState() =>
+      _CompanyOrdersDetailSubPageState();
 }
 
-class _CompanyOrdersDetailSubpageState
-    extends State<CompanyOrdersDetailSubpage> {
+class _CompanyOrdersDetailSubPageState
+    extends State<CompanyOrdersDetailSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -108,7 +108,7 @@ class _CompanyOrdersDetailSubpageState
                 width: deviceWidth,
                 height: 1,
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Row(
               children: [
                 Padding(
@@ -137,17 +137,17 @@ class _CompanyOrdersDetailSubpageState
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Container(
               decoration: BoxDecoration(
                 color: themeMode ? AppTheme.white1 : AppTheme.black7,
                 boxShadow: [
                   BoxShadow(
                     blurStyle: BlurStyle.normal,
-                    offset: Offset(0, -4),
+                    offset: const Offset(0, -4),
                     blurRadius: 26,
                     spreadRadius: 0,
-                    color: Color(0xFF2B3361).withOpacity(0.10),
+                    color: const Color(0xFF2B3361).withOpacity(0.10),
                   ),
                 ],
               ),
@@ -194,9 +194,9 @@ class _CompanyOrdersDetailSubpageState
                       width: deviceWidth,
                       height: 1,
                       color: themeMode ? AppTheme.white21 : AppTheme.black18),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(21, 27, 21, 20),
+                    padding: const EdgeInsets.fromLTRB(21, 27, 21, 20),
                     child: Column(
                       children: [
                         Row(
@@ -226,7 +226,7 @@ class _CompanyOrdersDetailSubpageState
                                           : AppTheme.white1,
                                     ),
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Text(
                                     "Satıcı:",
                                     style: TextStyle(
@@ -274,7 +274,7 @@ class _CompanyOrdersDetailSubpageState
                                           : AppTheme.white1,
                                     ),
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Text(
                                     "Miktar:",
                                     style: TextStyle(
@@ -322,7 +322,7 @@ class _CompanyOrdersDetailSubpageState
                                           : AppTheme.white1,
                                     ),
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Text(
                                     "Durum:",
                                     style: TextStyle(
@@ -374,7 +374,7 @@ class _CompanyOrdersDetailSubpageState
                             ),
                           ],
                         ),
-                        SizedBox(height: 28),
+                        const SizedBox(height: 28),
                         Row(
                           children: [
                             Column(
@@ -400,7 +400,7 @@ class _CompanyOrdersDetailSubpageState
                                         : AppTheme.white1,
                                   ),
                                 ),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 Text(
                                   "Toplam Ücret:",
                                   style: TextStyle(
@@ -480,7 +480,7 @@ class _CompanyOrdersDetailSubpageState
                       width: deviceWidth,
                       height: 1,
                       color: themeMode ? AppTheme.white21 : AppTheme.black18),
-                  SizedBox(height: 2),
+                  const SizedBox(height: 2),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(21, 19, 21, 17),
                     child: Row(
@@ -496,7 +496,7 @@ class _CompanyOrdersDetailSubpageState
                                     height: 10,
                                     color: AppTheme.white15),
                               ),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Text(
                                 "Mesaj Gönder",
                                 style: TextStyle(
@@ -510,7 +510,7 @@ class _CompanyOrdersDetailSubpageState
                             ],
                           ),
                         ),
-                        SizedBox(width: 22),
+                        const SizedBox(width: 22),
                         InkWell(
                           onTap: () {},
                           child: Row(
@@ -522,7 +522,7 @@ class _CompanyOrdersDetailSubpageState
                                     height: 10,
                                     color: AppTheme.white15),
                               ),
-                              SizedBox(width: 5),
+                              const SizedBox(width: 5),
                               Text(
                                 "Anlaşmazlık Başlat",
                                 style: TextStyle(
@@ -560,7 +560,7 @@ class _CompanyOrdersDetailSubpageState
             //
             //           return InkWell(
             //             onTap: () {
-            //               // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailSubpage(productId: productIdList[index], productName: productList["title"].toString(), imageUrl: productList["imgUrl"].toString(),price: productList["price"].toString()),),);
+            //               // Navigator.push(context, MaterialPageRoute(builder: (context) => ProductDetailSubPage(productId: productIdList[index], productName: productList["title"].toString(), imageUrl: productList["imgUrl"].toString(),price: productList["price"].toString()),),);
             //             },
             //             child: Container(
             //               decoration: BoxDecoration(
@@ -870,7 +870,7 @@ class _CompanyOrdersDetailSubpageState
             //     }
             //   },
             // ),
-            SizedBox(height: 82),
+            const SizedBox(height: 82),
           ],
         ),
       ),

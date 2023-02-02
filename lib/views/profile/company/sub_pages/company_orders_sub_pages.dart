@@ -2,19 +2,19 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/dummy_models/company_order_dummy_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/profile/company/subpages/company_orders_detail_subpage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'company_orders_detail_subpage.dart';
 
-class CompanyOrdersSubpage extends StatefulWidget {
-  const CompanyOrdersSubpage({Key? key}) : super(key: key);
+class CompanyOrdersSubPage extends StatefulWidget {
+  const CompanyOrdersSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyOrdersSubpage> createState() => _CompanyOrdersSubpageState();
+  State<CompanyOrdersSubPage> createState() => _CompanyOrdersSubPageState();
 }
 
-class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
+class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -38,7 +38,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                 width: deviceWidth,
                 height: 1,
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
-            SizedBox(height: 21),
+            const SizedBox(height: 21),
             Text(
               "Siparişlerim",
               style: TextStyle(
@@ -48,7 +48,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                 color: themeMode ? AppTheme.blue3 : AppTheme.white1,
               ),
             ),
-            SizedBox(height: 22),
+            const SizedBox(height: 22),
             FutureBuilder(
               future: DummyService().getCompanyOrdersList(),
               builder: (context, data) {
@@ -60,7 +60,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                     shrinkWrap: true,
                     itemCount: productIdList!.length,
                     separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: 8);
+                      return const SizedBox(height: 8);
                     },
                     itemBuilder: ((context, index) {
                       var items = data.data as List<CompanyOrderDummyModel>;
@@ -71,7 +71,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CompanyOrdersDetailSubpage(
+                                    CompanyOrdersDetailSubPage(
                                   passedObject: items[index],
                                 ),
                               ));
@@ -83,17 +83,19 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                             boxShadow: [
                               BoxShadow(
                                 blurStyle: BlurStyle.normal,
-                                offset: Offset(0, -4),
+                                offset: const Offset(0, -4),
                                 blurRadius: 26,
                                 spreadRadius: 0,
-                                color: Color(0xFF2B3361).withOpacity(0.10),
+                                color:
+                                    const Color(0xFF2B3361).withOpacity(0.10),
                               ),
                             ],
                           ),
                           child: Column(
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(21, 21, 21, 23),
+                                padding:
+                                    const EdgeInsets.fromLTRB(21, 21, 21, 23),
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -125,7 +127,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                                   : AppTheme.white1,
                                             ),
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           Text(
                                             "Satıcı:",
                                             style: TextStyle(
@@ -178,7 +180,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                                   : AppTheme.white1,
                                             ),
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           Text(
                                             "Miktar:",
                                             style: TextStyle(
@@ -231,7 +233,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                                   : AppTheme.white1,
                                             ),
                                           ),
-                                          SizedBox(height: 16),
+                                          const SizedBox(height: 16),
                                           Text(
                                             "Durum:",
                                             style: TextStyle(
@@ -294,7 +296,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                   color: themeMode
                                       ? AppTheme.white21
                                       : AppTheme.black18),
-                              SizedBox(height: 2),
+                              const SizedBox(height: 2),
                               Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(21, 8, 21, 8),
@@ -315,7 +317,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                                 height: 10,
                                                 color: AppTheme.white15),
                                           ),
-                                          SizedBox(width: 5),
+                                          const SizedBox(width: 5),
                                           Text(
                                             "Mesaj Gönder",
                                             style: TextStyle(
@@ -330,7 +332,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(width: 20),
+                                    const SizedBox(width: 20),
                                     InkWell(
                                       onTap: () {},
                                       child: Row(
@@ -344,7 +346,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                                                 height: 8,
                                                 color: AppTheme.white15),
                                           ),
-                                          SizedBox(width: 6),
+                                          const SizedBox(width: 6),
                                           Text(
                                             "Detaylar",
                                             style: TextStyle(
@@ -383,7 +385,7 @@ class _CompanyOrdersSubpageState extends State<CompanyOrdersSubpage> {
                 }
               },
             ),
-            SizedBox(height: 82),
+            const SizedBox(height: 82),
           ],
         ),
       ),
