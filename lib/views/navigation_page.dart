@@ -3,6 +3,8 @@ import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
+import 'package:b2geta_mobile/views/profile/company/sub_pages/company_profile_menu_sub_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -288,7 +290,13 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 17,
               color: AppTheme.white15,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const CompanyProfileMenuSubPage(),
+                  ));
+            },
           ),
         ),
         title: SizedBox(

@@ -65,9 +65,7 @@ class AddressModel {
           ? DistrictModel.fromMap(map['district'])
           : null,
       address: map['address'],
-      postalCode: map['postalCode'],
+      postalCode: map['postal_code'],
     );
   }
 }
-
-

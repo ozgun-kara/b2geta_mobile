@@ -2,8 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'company_addresses_subpage.dart';
+import 'company_addresses_sub_page.dart';
 import 'company_orders_sub_pages.dart';
 
 class CompanyProfileMenuSubPage extends StatefulWidget {
@@ -29,6 +28,27 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
+      appBar: AppBar(
+        toolbarHeight: 68,
+        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            splashRadius: 24,
+            icon: Icon(Icons.clear, size: 23, color: AppTheme.white15),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        title: SizedBox(
+            width: 103.74,
+            height: 14.0,
+            child: themeMode
+                ? Image.asset('assets/images/b2geta_logo_light.png')
+                : Image.asset('assets/images/b2geta_logo_dark.png')),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 48),
