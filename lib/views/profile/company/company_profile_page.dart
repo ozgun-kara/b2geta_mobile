@@ -1,9 +1,11 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
 import 'package:b2geta_mobile/providers/company_profile_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +56,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                           color:
                               themeMode ? AppTheme.white31 : AppTheme.black2),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(16, 25, 16, 24),
+                        padding: const EdgeInsets.fromLTRB(16, 25, 16, 24),
                         child: Column(
                           children: [
                             Container(
@@ -64,7 +66,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                 shape: BoxShape.circle,
                                 border: Border.all(
                                     width: 1, color: AppTheme.white21),
-                                image: DecorationImage(
+                                image: const DecorationImage(
                                   image: NetworkImage(
                                     "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                   ),
@@ -72,7 +74,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                 ),
                               ),
                             ),
-                            SizedBox(height: 18),
+                            const SizedBox(height: 18),
                             Text(
                               "İteme İnşaat ve Tesisat",
                               style: TextStyle(
@@ -86,7 +88,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                     : AppTheme.white1,
                               ),
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               "İstanbul, Türkiye",
                               style: TextStyle(
@@ -95,7 +97,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                   fontWeight: FontWeight.w400,
                                   color: AppTheme.white15),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             SizedBox(
                               height: 22,
                               child: ButtonTheme(
@@ -104,11 +106,12 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                 child: MaterialButton(
                                     elevation: 0,
                                     color: AppTheme.blue2,
-                                    shape: RoundedRectangleBorder(
+                                    shape: const RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(36)),
                                     ),
-                                    padding: EdgeInsets.fromLTRB(13, 2, 13, 0),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(13, 2, 13, 0),
                                     child: Text(
                                       "Takip Et",
                                       style: TextStyle(
@@ -129,7 +132,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                           height: 1,
                           color:
                               themeMode ? AppTheme.white31 : AppTheme.black2),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                     ],
                   ),
                 ),
@@ -562,7 +565,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                         Navigator.push(
                                                           context,
                                                           MaterialPageRoute(
-                                                            builder: (context) => ProductDetailSubpage(
+                                                            builder: (context) => ProductDetailSubPage(
                                                                 productId:
                                                                     productIdList[
                                                                         index],
@@ -772,7 +775,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                             Navigator.push(
                                                               context,
                                                               MaterialPageRoute(
-                                                                builder: (context) => ProductDetailSubpage(
+                                                                builder: (context) => ProductDetailSubPage(
                                                                     productId:
                                                                         productIdList[
                                                                             index],
@@ -792,10 +795,10 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                             decoration:
                                                                 BoxDecoration(
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              3)),
+                                                                  const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          3)),
                                                               color: Provider.of<ThemeProvider>(
                                                                               context)
                                                                           .themeMode ==
@@ -810,13 +813,14 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                       BlurStyle
                                                                           .normal,
                                                                   offset:
-                                                                      Offset(0,
+                                                                      const Offset(
+                                                                          0,
                                                                           -4),
                                                                   blurRadius:
                                                                       26,
                                                                   spreadRadius:
                                                                       0,
-                                                                  color: Color(
+                                                                  color: const Color(
                                                                           0xFF2B3361)
                                                                       .withOpacity(
                                                                           0.10),
@@ -824,8 +828,8 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                               ],
                                                             ),
                                                             padding:
-                                                                EdgeInsets.all(
-                                                                    8),
+                                                                const EdgeInsets
+                                                                    .all(8),
                                                             child: Row(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
@@ -835,7 +839,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                   width: 126,
                                                                   height: 145,
                                                                   decoration:
-                                                                      BoxDecoration(
+                                                                      const BoxDecoration(
                                                                     borderRadius:
                                                                         BorderRadius
                                                                             .all(
@@ -854,7 +858,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                         .cover,
                                                                   ),
                                                                 ),
-                                                                SizedBox(
+                                                                const SizedBox(
                                                                     width: 10),
                                                                 Column(
                                                                   crossAxisAlignment:
@@ -947,7 +951,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                             .white15,
                                                                       ),
                                                                     ),
-                                                                    SizedBox(
+                                                                    const SizedBox(
                                                                         height:
                                                                             1),
                                                                     Row(
@@ -970,7 +974,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                                 : AppTheme.white11,
                                                                           ),
                                                                         ),
-                                                                        SizedBox(
+                                                                        const SizedBox(
                                                                             width:
                                                                                 5),
                                                                         Text(
@@ -1124,7 +1128,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                 //       ),
                                                 //     );
                                                 //   },
-                                                // ); // SEKELATON ANIMATION
+                                                // ); // SKELETON ANIMATION
 
                                                 return SizedBox(
                                                   height: deviceWidth + 115,
@@ -1166,10 +1170,10 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                   childCount: 1,
                                   (context, index) {
                                     return Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(21, 19, 21, 36),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          21, 19, 21, 36),
                                       child: Text(
-                                        "Foshan Shiguang Furniture Co.,Ltd is located in Shunde District, Foshan City, which is a famous base of furniture manufacture and procurement.Our company speacializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is popular in more than 30 countries and regions such as Europe, the United States, Africa, Southeast Asia and Russia.The company not only has a better management system, but also has a energetic, efficient and innovative R&D team. Base on 16 years of furniture production experience, the company has formed a standardized production process. It is in accordance with international stringent standards, including the selection of materials, cutting, grinding baking, testing and packaging. Each process has undergone rigorous testing, thus the products have been certified by SGS. Foshan Shiguang Furniture Co.,Ltd is located in Shunde District, Foshan City, which is a famous base of furniture manufacture and procurement.Our company speacializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is popular in more than 30 countries and regions such as Europe, the United States, Africa, Southeast Asia and Russia.The company not only has a better management system, but also has a energetic, efficient and innovative R&D team. Base on 16 years of furniture production experience, the company has formed a standardized production process. It is in accordance with international stringent standards, including the selection of materials, cutting, grinding baking, testing and packaging. Each process has undergone rigorous testing, thus the products have been certified by SGS.",
+                                        "Fostan Shougang Furniture Co.,Ltd is located in Shunned District, Fostan City, which is a famous base of furniture manufacture and procurement.Our company specializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is popular in more than 30 countries and regions such as Europe, the United States, Africa, Southeast Asia and Russia.The company not only has a better management system, but also has a energetic, efficient and innovative R&D team. Base on 16 years of furniture production experience, the company has formed a standardized production process. It is in accordance with international stringent standards, including the selection of materials, cutting, grinding baking, testing and packaging. Each process has undergone rigorous testing, thus the products have been certified by SGS. Fostan Shougang Furniture Co.,Ltd is located in Shunned District, Fostan City, which is a famous base of furniture manufacture and procurement.Our company specializes in the development and production of wicker furniture.Items are fashionable, luxury, and high performance-to-price ratio, so it is popular in more than 30 countries and regions such as Europe, the United States, Africa, Southeast Asia and Russia.The company not only has a better management system, but also has a energetic, efficient and innovative R&D team. Base on 16 years of furniture production experience, the company has formed a standardized production process. It is in accordance with international stringent standards, including the selection of materials, cutting, grinding baking, testing and packaging. Each process has undergone rigorous testing, thus the products have been certified by SGS.",
                                         style: TextStyle(
                                           fontSize: 15,
                                           fontFamily: AppTheme.appFontFamily,

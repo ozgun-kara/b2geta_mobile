@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'dart:async';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_provider.dart';
@@ -82,7 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 },
               ),
               flexibleSpace: Padding(
-                padding: EdgeInsets.only(top: 65),
+                padding: const EdgeInsets.only(top: 65),
                 // padding: EdgeInsets.only(top: 49),
                 child: Text(
                   'Create Account'.tr,
@@ -102,7 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
           )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 55),
           child: Form(
             key: formKey2,
             child: Column(
@@ -129,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -147,13 +149,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -169,7 +171,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -196,7 +198,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -214,13 +216,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -236,7 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -259,7 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   maxLines: 1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -277,13 +279,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -299,7 +301,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -325,7 +327,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   maxLines: 1,
                   obscureText: true,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -343,13 +345,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -365,7 +367,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
@@ -384,7 +386,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -402,13 +404,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -424,7 +426,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   controller: officialPersonController,
                   style: TextStyle(
@@ -437,7 +439,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -455,13 +457,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -477,7 +479,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 TextFormField(
                   controller: officialPhoneController,
                   style: TextStyle(
@@ -491,7 +493,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   maxLines: 1,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -509,13 +511,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1,
                         )),
@@ -531,7 +533,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 13),
+                const SizedBox(height: 13),
                 // DropdownButtonHideUnderline(
                 //   child: DropdownButton2(
                 //     // alignment: AlignmentDirectional.center,
@@ -689,7 +691,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     // icon: Container(),
                     buttonHeight: 57,
                     buttonWidth: deviceWidth,
-                    buttonPadding: EdgeInsets.only(left: 25, right: 17),
+                    buttonPadding: const EdgeInsets.only(left: 25, right: 17),
                     buttonDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       // border:
@@ -719,11 +721,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     scrollbarRadius: const Radius.circular(40),
                     scrollbarThickness: 4,
                     scrollbarAlwaysShow: true,
-                    offset: Offset(0, 180),
+                    offset: const Offset(0, 180),
 
                     searchController: textEditingController,
                     searchInnerWidget: Padding(
-                      padding: EdgeInsets.fromLTRB(16, 16, 16, 4),
+                      padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                       child: TextFormField(
                         controller: textEditingController,
                         style: TextStyle(
@@ -779,7 +781,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                     ),
                     searchMatchFn: (item, searchValue) {
-                      debugPrint("ITEM:" + item.value.toString());
+                      debugPrint("ITEM:${item.value}");
 
                       return (item.value
                           .toLowerCase()
@@ -793,7 +795,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                   ),
                 ),
-                SizedBox(height: 23),
+                const SizedBox(height: 23),
                 Row(
                   children: [
                     FlutterSwitch(
@@ -833,12 +835,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           debugPrint('Dark Theme Activated');
                         }
 
-                        // Provider.of<LoginRegisterPageProvider>(context,
-                        //         listen: false)
-                        //     .updateregisterSwitch(value);
+                      
                       },
                     ),
-                    SizedBox(width: 13),
+                    const SizedBox(width: 13),
                     Expanded(
                       child: Text(
                         'User Agreement'.tr,
@@ -851,7 +851,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 ButtonTheme(
                   minWidth: deviceWidth,
                   height: 52,
@@ -883,7 +883,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(
@@ -977,7 +978,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -996,7 +997,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : AppTheme.white14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.check_circle_outlined,
                       size: 24,
@@ -1007,7 +1008,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -1039,7 +1040,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(
@@ -1079,7 +1081,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -1098,7 +1100,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             : AppTheme.white14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.error_outline_sharp,
                       size: 24,
@@ -1109,7 +1111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -1141,7 +1143,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(

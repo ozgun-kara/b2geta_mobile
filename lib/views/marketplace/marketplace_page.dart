@@ -1,6 +1,8 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -288,7 +290,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProductDetailSubpage(
+                                  builder: (context) => ProductDetailSubPage(
                                       productId: productIdList[index],
                                       productName:
                                           productList["title"].toString(),
@@ -442,7 +444,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          ProductDetailSubpage(
+                                          ProductDetailSubPage(
                                               productId: productIdList[index],
                                               productName: productList["title"]
                                                   .toString(),
@@ -455,8 +457,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(3)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(3)),
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
@@ -465,15 +467,15 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                     boxShadow: [
                                       BoxShadow(
                                         blurStyle: BlurStyle.normal,
-                                        offset: Offset(0, -4),
+                                        offset: const Offset(0, -4),
                                         blurRadius: 26,
                                         spreadRadius: 0,
-                                        color:
-                                            Color(0xFF2B3361).withOpacity(0.10),
+                                        color: const Color(0xFF2B3361)
+                                            .withOpacity(0.10),
                                       ),
                                     ],
                                   ),
-                                  padding: EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(8),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -481,7 +483,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       Container(
                                         width: 126,
                                         height: 145,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           borderRadius: BorderRadius.all(
                                             Radius.circular(2),
                                           ),
@@ -493,7 +495,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                      SizedBox(width: 10),
+                                      const SizedBox(width: 10),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -576,7 +578,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               color: AppTheme.white15,
                                             ),
                                           ),
-                                          SizedBox(height: 1),
+                                          const SizedBox(height: 1),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -597,7 +599,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                           : AppTheme.white11,
                                                 ),
                                               ),
-                                              SizedBox(width: 5),
+                                              const SizedBox(width: 5),
                                               Text(
                                                 "9,2",
                                                 style: TextStyle(
@@ -758,7 +760,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                       //       ),
                       //     );
                       //   },
-                      // ); // SEKELATON ANIMATION
+                      // ); // SKELETON ANIMATION
 
                       return SizedBox(
                         height: deviceWidth + 115,

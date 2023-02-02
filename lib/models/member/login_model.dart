@@ -29,7 +29,7 @@ class LoginModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
     data['responseCode'] = responseCode;
     data['responseText'] = responseText;
@@ -58,7 +58,7 @@ class LoginDataModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['user_id'] = userId;
     data['refresh_token'] = refreshToken;
     data['refresh_token_expire'] = refreshTokenExpire;

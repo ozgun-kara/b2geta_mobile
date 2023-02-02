@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class SettingsModel {
   String? language;
   String? country;
@@ -9,21 +7,20 @@ class SettingsModel {
     this.country,
     this.timezone,
   });
- 
 
   Map<String, dynamic> toMap() {
     final result = <String, dynamic>{};
-  
-    if(language != null){
+
+    if (language != null) {
       result.addAll({'language': language});
     }
-    if(country != null){
+    if (country != null) {
       result.addAll({'country': country});
     }
-    if(timezone != null){
+    if (timezone != null) {
       result.addAll({'timezone': timezone});
     }
-  
+
     return result;
   }
 
@@ -35,7 +32,7 @@ class SettingsModel {
     );
   }
 
-
   @override
-  String toString() => 'SettingsModel(language: $language, country: $country, timezone: $timezone)';
+  String toString() =>
+      'SettingsModel(language: $language, country: $country, timezone: $timezone)';
 }

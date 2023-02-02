@@ -1,9 +1,6 @@
 import 'dart:convert';
-import 'package:b2geta_mobile/models/dummy_models/language_dummy_model.dart';
-import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/models/general_models/country_model.dart';
 import 'package:b2geta_mobile/models/general_models/language_model.dart';
-import 'package:flutter/services.dart' as rootBundle;
 import 'package:b2geta_mobile/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

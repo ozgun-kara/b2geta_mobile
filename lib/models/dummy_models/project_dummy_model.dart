@@ -33,16 +33,16 @@ class ProjectDummyModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['imgUrl'] = this.imgUrl;
-    data['imgCount'] = this.imgCount;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['imgUrl'] = imgUrl;
+    data['imgCount'] = imgCount;
     data['title'] = title;
-    data['subTitle'] = this.subTitle;
-    data['avatarImgUrl'] = this.avatarImgUrl;
-    data['subTitle2'] = this.subTitle2;
-    data['likeCount'] = this.likeCount;
-    data['dislikeCount'] = this.dislikeCount;
+    data['subTitle'] = subTitle;
+    data['avatarImgUrl'] = avatarImgUrl;
+    data['subTitle2'] = subTitle2;
+    data['likeCount'] = likeCount;
+    data['dislikeCount'] = dislikeCount;
     return data;
   }
 }

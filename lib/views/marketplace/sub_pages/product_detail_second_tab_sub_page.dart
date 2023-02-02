@@ -8,19 +8,17 @@ import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:photo_view/photo_view_gallery.dart';
 
-class ProductDetailSecondTabSubpage extends StatefulWidget {
-  ProductDetailSecondTabSubpage({Key? key}) : super(key: key);
+class ProductDetailSecondTabSubPage extends StatefulWidget {
+  const ProductDetailSecondTabSubPage({Key? key}) : super(key: key);
 
   @override
-  State<ProductDetailSecondTabSubpage> createState() =>
-      _ProductDetailSecondTabSubpageState();
+  State<ProductDetailSecondTabSubPage> createState() =>
+      _ProductDetailSecondTabSubPageState();
 }
 
-class _ProductDetailSecondTabSubpageState
-    extends State<ProductDetailSecondTabSubpage> {
+class _ProductDetailSecondTabSubPageState
+    extends State<ProductDetailSecondTabSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -56,25 +54,25 @@ class _ProductDetailSecondTabSubpageState
                   width: 17,
                   height: 17,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Image.asset(
                   'assets/icons/star-fill.png',
                   width: 17,
                   height: 17,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Image.asset(
                   'assets/icons/star-fill.png',
                   width: 17,
                   height: 17,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Image.asset(
                   'assets/icons/star-fill.png',
                   width: 17,
                   height: 17,
                 ),
-                SizedBox(width: 4),
+                const SizedBox(width: 4),
                 Image.asset(
                   'assets/icons/star-fill.png',
                   width: 17,
@@ -83,7 +81,7 @@ class _ProductDetailSecondTabSubpageState
                 ),
               ],
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             Text(
               '2 yorum',
               style: TextStyle(
@@ -95,9 +93,9 @@ class _ProductDetailSecondTabSubpageState
                     : AppTheme.white1,
               ),
             ),
-            SizedBox(height: 14),
+            const SizedBox(height: 14),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
                   InkWell(
@@ -110,7 +108,8 @@ class _ProductDetailSecondTabSubpageState
                                 .ratingCheckBox1
                             ? AppTheme.green2
                             : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
                             color: Provider.of<MarketPlaceProvider>(context)
@@ -139,7 +138,7 @@ class _ProductDetailSecondTabSubpageState
                           .updateRatingCheckBox(1);
                     },
                   ),
-                  SizedBox(width: 11),
+                  const SizedBox(width: 11),
                   Container(
                     width: 8,
                     padding: const EdgeInsets.only(top: 4),
@@ -156,21 +155,21 @@ class _ProductDetailSecondTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset(
                     'assets/icons/star-fill.png',
                     width: 17,
                     height: 17,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   LinearPercentIndicator(
                     width: deviceWidth - 120,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
                     animationDuration: 0,
                     percent: 75 / 100,
-                    barRadius: Radius.circular(22),
+                    barRadius: const Radius.circular(22),
                     progressColor: AppTheme.blue2,
                     backgroundColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -180,9 +179,9 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
                   InkWell(
@@ -195,7 +194,8 @@ class _ProductDetailSecondTabSubpageState
                                 .ratingCheckBox2
                             ? AppTheme.green2
                             : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
                             color: Provider.of<MarketPlaceProvider>(context)
@@ -224,7 +224,7 @@ class _ProductDetailSecondTabSubpageState
                           .updateRatingCheckBox(2);
                     },
                   ),
-                  SizedBox(width: 11),
+                  const SizedBox(width: 11),
                   Container(
                     width: 8,
                     padding: const EdgeInsets.only(top: 4),
@@ -241,21 +241,21 @@ class _ProductDetailSecondTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset(
                     'assets/icons/star-fill.png',
                     width: 17,
                     height: 17,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   LinearPercentIndicator(
                     width: deviceWidth - 120,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
                     animationDuration: 0,
                     percent: 40 / 100,
-                    barRadius: Radius.circular(22),
+                    barRadius: const Radius.circular(22),
                     progressColor: AppTheme.blue2,
                     backgroundColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -265,9 +265,9 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
                   InkWell(
@@ -280,7 +280,8 @@ class _ProductDetailSecondTabSubpageState
                                 .ratingCheckBox3
                             ? AppTheme.green2
                             : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
                             color: Provider.of<MarketPlaceProvider>(context)
@@ -309,7 +310,7 @@ class _ProductDetailSecondTabSubpageState
                           .updateRatingCheckBox(3);
                     },
                   ),
-                  SizedBox(width: 11),
+                  const SizedBox(width: 11),
                   Container(
                     width: 8,
                     padding: const EdgeInsets.only(top: 4),
@@ -326,21 +327,21 @@ class _ProductDetailSecondTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset(
                     'assets/icons/star-fill.png',
                     width: 17,
                     height: 17,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   LinearPercentIndicator(
                     width: deviceWidth - 120,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
                     animationDuration: 0,
                     percent: 0 / 100,
-                    barRadius: Radius.circular(22),
+                    barRadius: const Radius.circular(22),
                     progressColor: AppTheme.blue2,
                     backgroundColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -350,9 +351,9 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
                   InkWell(
@@ -365,7 +366,8 @@ class _ProductDetailSecondTabSubpageState
                                 .ratingCheckBox4
                             ? AppTheme.green2
                             : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
                             color: Provider.of<MarketPlaceProvider>(context)
@@ -394,7 +396,7 @@ class _ProductDetailSecondTabSubpageState
                           .updateRatingCheckBox(4);
                     },
                   ),
-                  SizedBox(width: 11),
+                  const SizedBox(width: 11),
                   Container(
                     width: 8,
                     padding: const EdgeInsets.only(top: 4),
@@ -411,21 +413,21 @@ class _ProductDetailSecondTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset(
                     'assets/icons/star-fill.png',
                     width: 17,
                     height: 17,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   LinearPercentIndicator(
                     width: deviceWidth - 120,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
                     animationDuration: 0,
                     percent: 0 / 100,
-                    barRadius: Radius.circular(22),
+                    barRadius: const Radius.circular(22),
                     progressColor: AppTheme.blue2,
                     backgroundColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -435,9 +437,9 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 4),
+            const SizedBox(height: 4),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: Row(
                 children: [
                   InkWell(
@@ -450,7 +452,8 @@ class _ProductDetailSecondTabSubpageState
                                 .ratingCheckBox5
                             ? AppTheme.green2
                             : Colors.transparent,
-                        borderRadius: BorderRadius.all(Radius.circular(3)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
                             color: Provider.of<MarketPlaceProvider>(context)
@@ -479,7 +482,7 @@ class _ProductDetailSecondTabSubpageState
                           .updateRatingCheckBox(5);
                     },
                   ),
-                  SizedBox(width: 11),
+                  const SizedBox(width: 11),
                   Container(
                     width: 8,
                     padding: const EdgeInsets.only(top: 4),
@@ -496,21 +499,21 @@ class _ProductDetailSecondTabSubpageState
                       ),
                     ),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   Image.asset(
                     'assets/icons/star-fill.png',
                     width: 17,
                     height: 17,
                   ),
-                  SizedBox(width: 7),
+                  const SizedBox(width: 7),
                   LinearPercentIndicator(
                     width: deviceWidth - 120,
-                    padding: EdgeInsets.all(0),
+                    padding: const EdgeInsets.all(0),
                     animation: true,
                     lineHeight: 10,
                     animationDuration: 0,
                     percent: 0 / 100,
-                    barRadius: Radius.circular(22),
+                    barRadius: const Radius.circular(22),
                     progressColor: AppTheme.blue2,
                     backgroundColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -520,7 +523,7 @@ class _ProductDetailSecondTabSubpageState
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
                 height: 1,
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
@@ -528,11 +531,11 @@ class _ProductDetailSecondTabSubpageState
                     : AppTheme.black21),
           ],
         ), // RATING SELECTION PANEL
-        SizedBox(height: 24),
+        const SizedBox(height: 24),
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(21, 0, 21, 0),
+              padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -571,7 +574,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
@@ -619,7 +622,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
@@ -667,7 +670,7 @@ class _ProductDetailSecondTabSubpageState
                                         ? AppTheme.white1
                                         : AppTheme.white15),
                           ),
-                          SizedBox(height: 24),
+                          const SizedBox(height: 24),
                           Container(
                             width: deviceWidth * 0.2,
                             height: 1,
@@ -724,7 +727,8 @@ class _ProductDetailSecondTabSubpageState
                             },
                             itemBuilder: ((context, index) {
                               return Container(
-                                padding: EdgeInsets.fromLTRB(16, 14, 16, 16),
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 14, 16, 16),
                                 child: Column(
                                   children: [
                                     Row(
@@ -756,10 +760,10 @@ class _ProductDetailSecondTabSubpageState
                                                         : AppTheme.white1,
                                               ),
                                             ),
-                                            SizedBox(width: 9),
+                                            const SizedBox(width: 9),
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.only(bottom: 6),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 6),
                                               child: Row(
                                                 children: [
                                                   Image.asset(
@@ -773,7 +777,7 @@ class _ProductDetailSecondTabSubpageState
                                                         ? AppTheme.yellow1
                                                         : AppTheme.white26,
                                                   ),
-                                                  SizedBox(width: 2),
+                                                  const SizedBox(width: 2),
                                                   Image.asset(
                                                     'assets/icons/star-fill.png',
                                                     width: 9.84,
@@ -785,7 +789,7 @@ class _ProductDetailSecondTabSubpageState
                                                         ? AppTheme.yellow1
                                                         : AppTheme.white26,
                                                   ),
-                                                  SizedBox(width: 2),
+                                                  const SizedBox(width: 2),
                                                   Image.asset(
                                                     'assets/icons/star-fill.png',
                                                     width: 9.84,
@@ -797,7 +801,7 @@ class _ProductDetailSecondTabSubpageState
                                                         ? AppTheme.yellow1
                                                         : AppTheme.white26,
                                                   ),
-                                                  SizedBox(width: 2),
+                                                  const SizedBox(width: 2),
                                                   Image.asset(
                                                     'assets/icons/star-fill.png',
                                                     width: 9.84,
@@ -809,7 +813,7 @@ class _ProductDetailSecondTabSubpageState
                                                         ? AppTheme.yellow1
                                                         : AppTheme.white26,
                                                   ),
-                                                  SizedBox(width: 2),
+                                                  const SizedBox(width: 2),
                                                   Image.asset(
                                                     'assets/icons/star-fill.png',
                                                     width: 9.84,
@@ -837,7 +841,7 @@ class _ProductDetailSecondTabSubpageState
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Row(
                                       children: [
                                         Container(
@@ -852,7 +856,7 @@ class _ProductDetailSecondTabSubpageState
                                             ),
                                           ),
                                         ),
-                                        SizedBox(width: 5),
+                                        const SizedBox(width: 5),
                                         Text(
                                           items[index].country,
                                           style: TextStyle(
@@ -866,8 +870,8 @@ class _ProductDetailSecondTabSubpageState
                                     ),
                                     if (items[index].comment.isNotEmpty)
                                       Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 18, 7, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 18, 7, 0),
                                         child: Text(
                                           items[index].comment,
                                           style: TextStyle(
@@ -887,8 +891,8 @@ class _ProductDetailSecondTabSubpageState
                                       Container(),
                                     if (items[index].images.isNotEmpty)
                                       Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 9, 0, 0),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 9, 0, 0),
                                         child: Row(
                                           children: [
                                             InkWell(
@@ -914,7 +918,7 @@ class _ProductDetailSecondTabSubpageState
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(width: 18),
+                                            const SizedBox(width: 18),
                                             InkWell(
                                               onTap: () {
                                                 Navigator.of(context).push(
@@ -973,7 +977,7 @@ class _ProductDetailSecondTabSubpageState
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
-            SizedBox(height: 32),
+            const SizedBox(height: 32),
             InkWell(
               onTap: () {},
               child: Text(
@@ -989,7 +993,7 @@ class _ProductDetailSecondTabSubpageState
                 ),
               ),
             ),
-            SizedBox(height: 34),
+            const SizedBox(height: 34),
           ],
         ), // CUSTOMERS COMMENTS PANEL
       ],

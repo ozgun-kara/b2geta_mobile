@@ -1,4 +1,5 @@
-import 'package:b2geta_mobile/services/categories/categories_services.dart';
+// ignore_for_file: equal_keys_in_map, unrelated_type_equality_checks
+
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -30,11 +31,11 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
           : AppTheme.black12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
+          padding: const EdgeInsets.fromLTRB(30, 0, 30, 55),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 100),
+              const SizedBox(height: 100),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -42,7 +43,8 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -83,7 +85,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -91,7 +93,8 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -121,7 +124,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ButtonTheme(
                 minWidth: deviceWidth,
                 height: 52,
@@ -129,7 +132,8 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                   height: 52,
                   decoration: BoxDecoration(
                       color: AppTheme.green1,
-                      borderRadius: BorderRadius.all(Radius.circular(16))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
                   child: MaterialButton(
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -170,7 +174,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                       }),
                 ),
               ),
-              SizedBox(height: 60),
+              const SizedBox(height: 60),
             ],
           ),
         ),
@@ -191,7 +195,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -210,7 +214,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                             : AppTheme.white14,
                       ),
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Icon(
                       Icons.error_outline_sharp,
                       size: 24,
@@ -221,7 +225,7 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 ButtonTheme(
                   // minWidth: deviceWidth,
                   height: 36,
@@ -253,7 +257,8 @@ class _ProductsTestPageState extends State<ProductsTestPage> {
                         //   ),
                         // ],
 
-                        borderRadius: BorderRadius.all(Radius.circular(16))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
                         elevation: 0,
                         shape: const RoundedRectangleBorder(

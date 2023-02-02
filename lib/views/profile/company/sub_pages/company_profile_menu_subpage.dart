@@ -1,19 +1,20 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/profile/company/subpages/company_addresses_subpage.dart';
-import 'package:b2geta_mobile/views/profile/company/subpages/company_orders_subpages.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CompanyProfileMenuSubpage extends StatefulWidget {
-  const CompanyProfileMenuSubpage({Key? key}) : super(key: key);
+import 'company_addresses_subpage.dart';
+import 'company_orders_sub_pages.dart';
+
+class CompanyProfileMenuSubPage extends StatefulWidget {
+  const CompanyProfileMenuSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyProfileMenuSubpage> createState() =>
-      _CompanyProfileMenuSubpageState();
+  State<CompanyProfileMenuSubPage> createState() =>
+      _CompanyProfileMenuSubPageState();
 }
 
-class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
+class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -30,7 +31,7 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
       body: Column(
         children: [
-          SizedBox(height: 48),
+          const SizedBox(height: 48),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,
@@ -48,10 +49,10 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CompanyOrdersSubpage(),
+                      builder: (context) => const CompanyOrdersSubPage(),
                     ));
               }),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,
@@ -66,7 +67,7 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                 ),
               ),
               onPressed: () {}),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,
@@ -81,7 +82,7 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                 ),
               ),
               onPressed: () {}),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,
@@ -99,10 +100,10 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CompanyAddressesSubpage(),
+                      builder: (context) => const CompanyAddressesSubPage(),
                     ));
               }),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,
@@ -117,7 +118,7 @@ class _CompanyProfileMenuSubpageState extends State<CompanyProfileMenuSubpage> {
                 ),
               ),
               onPressed: () {}),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,
               elevation: 0,

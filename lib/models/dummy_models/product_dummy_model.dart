@@ -30,15 +30,15 @@ class ProductDummyModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['imgUrl'] = this.imgUrl;
-    data['title'] = this.title;
-    data['price'] = this.price;
-    data['subTitle'] = this.subTitle;
-    data['province'] = this.province;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['imgUrl'] = imgUrl;
+    data['title'] = title;
+    data['price'] = price;
+    data['subTitle'] = subTitle;
+    data['province'] = province;
     data['company'] = company;
-    data['totalRate'] = this.totalRate;
+    data['totalRate'] = totalRate;
     return data;
   }
 }

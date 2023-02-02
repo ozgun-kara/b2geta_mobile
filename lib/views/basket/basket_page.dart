@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/shopping_summary_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -92,8 +92,7 @@ class _BasketPageState extends State<BasketPage> {
               height: 47.0,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
-                color:
-                    themeMode ? AppTheme.white22 : AppTheme.black18,
+                color: themeMode ? AppTheme.white22 : AppTheme.black18,
               ),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -103,8 +102,7 @@ class _BasketPageState extends State<BasketPage> {
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w800,
-                    color:
-                        themeMode ? AppTheme.blue2 : AppTheme.white1,
+                    color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                   ),
                 ),
               ),
@@ -118,10 +116,7 @@ class _BasketPageState extends State<BasketPage> {
                   ),
                   FutureBuilder<List<AddressModel>>(
                     future: MemberAddressesServices().getAllCall(
-                        queryParameters: {
-                          "offset": "2",
-                          "limit": "10"
-                        }),
+                        queryParameters: {"offset": "2", "limit": "10"}),
                     builder: (context, data) {
                       if (data.hasData) {
                         var addressList = data.data;
@@ -136,25 +131,22 @@ class _BasketPageState extends State<BasketPage> {
                                 shrinkWrap: true,
                                 itemCount: addressList!.length,
                                 separatorBuilder:
-                                    (BuildContext context,
-                                        int index) {
+                                    (BuildContext context, int index) {
                                   return const SizedBox(height: 10);
                                 },
                                 itemBuilder: ((context, index) {
                                   var addressList = data.data;
                                   var address = addressList![index];
                                   return Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(
-                                            horizontal: 9),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 9),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         color: themeMode
                                             ? AppTheme.white1
                                             : AppTheme.black7,
-                                        borderRadius:
-                                            const BorderRadius.all(
-                                                Radius.circular(5)),
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(5)),
                                         border: Border.all(
                                           width: 1,
                                           color: themeMode
@@ -163,9 +155,8 @@ class _BasketPageState extends State<BasketPage> {
                                         ),
                                       ),
                                       child: Padding(
-                                        padding:
-                                            const EdgeInsets.fromLTRB(
-                                                24, 21, 24, 21),
+                                        padding: const EdgeInsets.fromLTRB(
+                                            24, 21, 24, 21),
                                         child: Column(
                                           children: [
                                             Row(
@@ -181,77 +172,55 @@ class _BasketPageState extends State<BasketPage> {
                                                     children: [
                                                       Text(
                                                         "Name",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
-                                                        address.name ??
-                                                            '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        address.name ?? '',
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
                                                         "Şehir",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
-                                                        address.city!
-                                                                .name ??
+                                                        address.city!.name ??
                                                             '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                     ],
@@ -265,77 +234,55 @@ class _BasketPageState extends State<BasketPage> {
                                                     children: [
                                                       Text(
                                                         "Adres",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
-                                                        address.address ??
-                                                            '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        address.address ?? '',
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
                                                         "Ülke",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
-                                                        address.country!
-                                                                .name ??
+                                                        address.country!.name ??
                                                             '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                     ],
@@ -349,77 +296,57 @@ class _BasketPageState extends State<BasketPage> {
                                                     children: [
                                                       Text(
                                                         "İlçe",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
                                                         address.district!
                                                                 .name ??
                                                             '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
                                                         "Posta Kodu",
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w600,
-                                                          color: AppTheme
-                                                              .white15,
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.white15,
                                                         ),
                                                       ),
                                                       Text(
                                                         address.postalCode ??
                                                             '',
-                                                        style:
-                                                            TextStyle(
-                                                          fontSize:
-                                                              12,
-                                                          fontFamily:
-                                                              AppTheme
-                                                                  .appFontFamily,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
                                                           fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                              FontWeight.w400,
                                                           color: themeMode
-                                                              ? AppTheme
-                                                                  .blue3
-                                                              : AppTheme
-                                                                  .white1,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       ),
                                                     ],
@@ -427,46 +354,43 @@ class _BasketPageState extends State<BasketPage> {
                                                 ),
                                               ],
                                             ),
-                                            const SizedBox(
-                                                height: 16),
+                                            const SizedBox(height: 16),
                                             Row(
                                               children: [
                                                 Expanded(
                                                   child: SizedBox(
                                                     height: 30,
-                                                    child:
-                                                        MaterialButton(
-                                                            height:
-                                                                30,
-                                                            color: AppTheme
-                                                                .blue2,
-                                                            shape:
-                                                                const RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius.all(Radius.circular(8)),
-                                                            ),
-                                                            elevation:
-                                                                0,
-                                                            child:
-                                                                Text(
-                                                              "Seç",
-                                                              style: TextStyle(
-                                                                  fontSize:
-                                                                      12,
-                                                                  fontFamily:
-                                                                      AppTheme.appFontFamily,
-                                                                  fontWeight: FontWeight.w700,
-                                                                  color: AppTheme.white1),
-                                                            ),
-                                                            onPressed:
-                                                                () {
-                                                              selectedAddressIndex =
-                                                                  index;
-                                                              selectedAddressId =
-                                                                  address.id;
-                                                              setState(
-                                                                  () {});
-                                                            }),
+                                                    child: MaterialButton(
+                                                        height: 30,
+                                                        color: AppTheme.blue2,
+                                                        shape:
+                                                            const RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          8)),
+                                                        ),
+                                                        elevation: 0,
+                                                        child: Text(
+                                                          "Seç",
+                                                          style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700,
+                                                              color: AppTheme
+                                                                  .white1),
+                                                        ),
+                                                        onPressed: () {
+                                                          selectedAddressIndex =
+                                                              index;
+                                                          selectedAddressId =
+                                                              address.id;
+                                                          setState(() {});
+                                                        }),
                                                   ),
                                                 ),
                                               ],
@@ -486,18 +410,16 @@ class _BasketPageState extends State<BasketPage> {
                                         height: 10,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets
-                                            .symmetric(horizontal: 9),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 9),
                                         child: Container(
                                           decoration: BoxDecoration(
                                             color: themeMode
                                                 ? AppTheme.white1
                                                 : AppTheme.black7,
                                             borderRadius:
-                                                const BorderRadius
-                                                        .all(
-                                                    Radius.circular(
-                                                        5)),
+                                                const BorderRadius.all(
+                                                    Radius.circular(5)),
                                             border: Border.all(
                                               width: 1,
                                               color: themeMode
@@ -506,8 +428,7 @@ class _BasketPageState extends State<BasketPage> {
                                             ),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets
-                                                    .fromLTRB(
+                                            padding: const EdgeInsets.fromLTRB(
                                                 24, 21, 24, 21),
                                             child: Column(
                                               children: [
@@ -524,14 +445,13 @@ class _BasketPageState extends State<BasketPage> {
                                                         children: [
                                                           Text(
                                                             "Name",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -540,32 +460,31 @@ class _BasketPageState extends State<BasketPage> {
                                                             addressList[selectedAddressIndex!]
                                                                     .name ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                           const SizedBox(
-                                                              height:
-                                                                  28),
+                                                              height: 28),
                                                           Text(
                                                             "Şehir",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -575,17 +494,18 @@ class _BasketPageState extends State<BasketPage> {
                                                                     .city!
                                                                     .name ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                         ],
@@ -599,14 +519,13 @@ class _BasketPageState extends State<BasketPage> {
                                                         children: [
                                                           Text(
                                                             "Adres",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -615,32 +534,31 @@ class _BasketPageState extends State<BasketPage> {
                                                             addressList[selectedAddressIndex!]
                                                                     .address ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                           const SizedBox(
-                                                              height:
-                                                                  28),
+                                                              height: 28),
                                                           Text(
                                                             "Ülke",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -650,17 +568,18 @@ class _BasketPageState extends State<BasketPage> {
                                                                     .country!
                                                                     .name ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                         ],
@@ -674,14 +593,13 @@ class _BasketPageState extends State<BasketPage> {
                                                         children: [
                                                           Text(
                                                             "İlçe",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -691,32 +609,31 @@ class _BasketPageState extends State<BasketPage> {
                                                                     .district!
                                                                     .name ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                           const SizedBox(
-                                                              height:
-                                                                  28),
+                                                              height: 28),
                                                           Text(
                                                             "Posta Kodu",
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w600,
+                                                                  FontWeight
+                                                                      .w600,
                                                               color: AppTheme
                                                                   .white15,
                                                             ),
@@ -725,17 +642,18 @@ class _BasketPageState extends State<BasketPage> {
                                                             addressList[selectedAddressIndex!]
                                                                     .postalCode ??
                                                                 '',
-                                                            style:
-                                                                TextStyle(
-                                                              fontSize:
-                                                                  12,
-                                                              fontFamily:
-                                                                  AppTheme.appFontFamily,
+                                                            style: TextStyle(
+                                                              fontSize: 12,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
                                                               fontWeight:
-                                                                  FontWeight.w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               color: themeMode
-                                                                  ? AppTheme.blue3
-                                                                  : AppTheme.white1,
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
                                                             ),
                                                           ),
                                                         ],
@@ -743,8 +661,7 @@ class _BasketPageState extends State<BasketPage> {
                                                     ),
                                                   ],
                                                 ),
-                                                const SizedBox(
-                                                    height: 16),
+                                                const SizedBox(height: 16),
                                                 Row(
                                                   children: [
                                                     Expanded(
@@ -752,21 +669,29 @@ class _BasketPageState extends State<BasketPage> {
                                                         height: 30,
                                                         child: MaterialButton(
                                                             height: 30,
-                                                            color: AppTheme.green9,
-                                                            shape: const RoundedRectangleBorder(
+                                                            color:
+                                                                AppTheme.green9,
+                                                            shape:
+                                                                const RoundedRectangleBorder(
                                                               borderRadius:
-                                                                  BorderRadius.all(Radius.circular(8)),
+                                                                  BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              8)),
                                                             ),
                                                             elevation: 0,
                                                             child: Text(
                                                               "Seçildi",
                                                               style: TextStyle(
-                                                                  fontSize:
-                                                                      12,
+                                                                  fontSize: 12,
                                                                   fontFamily:
-                                                                      AppTheme.appFontFamily,
-                                                                  fontWeight: FontWeight.w700,
-                                                                  color: AppTheme.white1),
+                                                                      AppTheme
+                                                                          .appFontFamily,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  color: AppTheme
+                                                                      .white1),
                                                             ),
                                                             onPressed: () {}),
                                                       ),
@@ -788,9 +713,8 @@ class _BasketPageState extends State<BasketPage> {
                           height: deviceWidth + 115,
                           child: Center(
                               child: CupertinoActivityIndicator(
-                            color: themeMode
-                                ? AppTheme.black1
-                                : AppTheme.white1,
+                            color:
+                                themeMode ? AppTheme.black1 : AppTheme.white1,
                             radius: 12,
                           )),
                         );
@@ -801,8 +725,7 @@ class _BasketPageState extends State<BasketPage> {
                     height: 22,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 9),
+                    padding: const EdgeInsets.symmetric(horizontal: 9),
                     child: SizedBox(
                       height: 47,
                       child: MaterialButton(
@@ -814,8 +737,8 @@ class _BasketPageState extends State<BasketPage> {
                                 color: themeMode
                                     ? AppTheme.blue3
                                     : AppTheme.white1),
-                            borderRadius: const BorderRadius.all(
-                                Radius.circular(5)),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(5)),
                           ),
                           elevation: 0,
                           child: Text(
@@ -842,8 +765,7 @@ class _BasketPageState extends State<BasketPage> {
               height: 47.0,
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
-                color:
-                    themeMode ? AppTheme.white22 : AppTheme.black18,
+                color: themeMode ? AppTheme.white22 : AppTheme.black18,
               ),
               child: Align(
                 alignment: Alignment.centerLeft,
@@ -853,8 +775,7 @@ class _BasketPageState extends State<BasketPage> {
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w800,
-                    color:
-                        themeMode ? AppTheme.blue2 : AppTheme.white1,
+                    color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                   ),
                 ),
               ),
@@ -876,21 +797,17 @@ class _BasketPageState extends State<BasketPage> {
                       bottom: 20,
                     ),
                     decoration: BoxDecoration(
-                      color: themeMode
-                          ? AppTheme.white22
-                          : AppTheme.black18,
+                      color: themeMode ? AppTheme.white22 : AppTheme.black18,
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Text(
-                      "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MERSİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önceden \nhesaplanamıyorsa fiyatın hesaplanma usulü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önceden hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usulü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
+                      "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MER SİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önce den \nhesaplanamıyorsa fiyatın hesaplanma usul'ü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önce den hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usul'ü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
                       style: TextStyle(
                         fontSize: 11,
                         height: 1.44,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w500,
-                        color: themeMode
-                            ? AppTheme.blue12
-                            : AppTheme.white37,
+                        color: themeMode ? AppTheme.blue12 : AppTheme.white37,
                       ),
                     ),
                   ),
@@ -920,9 +837,7 @@ class _BasketPageState extends State<BasketPage> {
                           height: 1,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w400,
-                          color: themeMode
-                              ? AppTheme.blue3
-                              : AppTheme.white1,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                         ),
                       )
                     ],
@@ -931,16 +846,14 @@ class _BasketPageState extends State<BasketPage> {
                     height: 51,
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 19),
+                    padding: const EdgeInsets.symmetric(horizontal: 19),
                     child: MaterialButton(
                         minWidth: deviceWidth,
                         height: 52,
                         elevation: 0,
                         color: AppTheme.green2,
                         shape: const RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(16)),
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
                           'Sepeti Onayla',
@@ -959,22 +872,18 @@ class _BasketPageState extends State<BasketPage> {
                               buttonColor: AppTheme.green1,
                               onPressed: () {
                                 if (selectedAddressId != null) {
-                                  OrderService()
-                                      .createOrderCall(requestBody: {
-                                    "shipping_address_id":
-                                        selectedAddressId!,
-                                    "billing_address_id":
-                                        selectedAddressId!,
+                                  OrderService().createOrderCall(requestBody: {
+                                    "shipping_address_id": selectedAddressId!,
+                                    "billing_address_id": selectedAddressId!,
                                     "agreement": "1"
                                   }).then((value) {
                                     if (value) {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) =>
-                                            const ShoppingSummarySubpage(),
+                                            const ShoppingSummarySubPage(),
                                       ));
-                                      BasketServices()
-                                          .emptyBasketCall();
+                                      BasketServices().emptyBasketCall();
                                     }
                                   });
                                 } else {
@@ -1186,7 +1095,7 @@ class _BasketPageState extends State<BasketPage> {
                   color: themeMode ? AppTheme.white22 : AppTheme.black18,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                padding: EdgeInsets.all(1),
+                padding: const EdgeInsets.all(1),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -1206,7 +1115,7 @@ class _BasketPageState extends State<BasketPage> {
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Center(
                             child: Text(
                               "-",
@@ -1260,7 +1169,7 @@ class _BasketPageState extends State<BasketPage> {
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(7)),
                           ),
-                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           child: Center(
                             child: Text(
                               "+",
@@ -1495,7 +1404,7 @@ class _BasketPageState extends State<BasketPage> {
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white1
                     : AppTheme.black12,
-                borderRadius: BorderRadius.all(Radius.circular(16))),
+                borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

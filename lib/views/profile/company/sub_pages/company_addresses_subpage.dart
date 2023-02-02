@@ -6,15 +6,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CompanyAddressesSubpage extends StatefulWidget {
-  const CompanyAddressesSubpage({Key? key}) : super(key: key);
+class CompanyAddressesSubPage extends StatefulWidget {
+  const CompanyAddressesSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyAddressesSubpage> createState() =>
-      _CompanyAddressesSubpageState();
+  State<CompanyAddressesSubPage> createState() =>
+      _CompanyAddressesSubPageState();
 }
 
-class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
+class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -38,7 +38,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                 width: deviceWidth,
                 height: 1,
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
             FutureBuilder(
               future: DummyService().getCompanyAddressList(),
               builder: (context, data) {
@@ -50,7 +50,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                     shrinkWrap: true,
                     itemCount: productIdList!.length,
                     separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(height: 10);
+                      return const SizedBox(height: 10);
                     },
                     itemBuilder: ((context, index) {
                       var items = data.data as List<CompanyAddressDummyModel>;
@@ -64,7 +64,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                               color:
                                   themeMode ? AppTheme.white1 : AppTheme.black7,
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5)),
+                                  const BorderRadius.all(Radius.circular(5)),
                               border: Border.all(
                                 width: 1,
                                 color: themeMode
@@ -108,7 +108,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                                                     : AppTheme.white1,
                                               ),
                                             ),
-                                            SizedBox(height: 28),
+                                            const SizedBox(height: 28),
                                             Text(
                                               "Şehir",
                                               style: TextStyle(
@@ -161,7 +161,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                                                     : AppTheme.white1,
                                               ),
                                             ),
-                                            SizedBox(height: 28),
+                                            const SizedBox(height: 28),
                                             Text(
                                               "Ülke",
                                               style: TextStyle(
@@ -214,7 +214,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                                                     : AppTheme.white1,
                                               ),
                                             ),
-                                            SizedBox(height: 28),
+                                            const SizedBox(height: 28),
                                             Text(
                                               "Posta Kodu",
                                               style: TextStyle(
@@ -242,7 +242,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 16),
+                                  const SizedBox(height: 16),
                                   Row(
                                     children: [
                                       Expanded(
@@ -269,7 +269,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                                               onPressed: () {}),
                                         ),
                                       ),
-                                      SizedBox(width: 17),
+                                      const SizedBox(width: 17),
                                       Expanded(
                                         child: SizedBox(
                                           height: 30,
@@ -319,7 +319,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                 }
               },
             ),
-            SizedBox(height: 17),
+            const SizedBox(height: 17),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 9),
               child: SizedBox(
@@ -331,7 +331,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                       side: BorderSide(
                           width: 1,
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1),
-                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
                     ),
                     elevation: 0,
                     child: Text(
@@ -345,7 +345,7 @@ class _CompanyAddressesSubpageState extends State<CompanyAddressesSubpage> {
                     onPressed: () {}),
               ),
             ),
-            SizedBox(height: 60),
+            const SizedBox(height: 60),
           ],
         ),
       ),

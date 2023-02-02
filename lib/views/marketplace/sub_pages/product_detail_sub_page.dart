@@ -9,16 +9,15 @@ import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_first_tab_subpage.dart';
-import 'package:b2geta_mobile/views/marketplace/subpages/product_detail_second_tab_subpage.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_first_tab_sub_page.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_second_tab_sub_page.dart';
 
 import '../../../providers/navigation_page_provider.dart';
 import '../../../utils.dart';
 
-class ProductDetailSubpage extends StatefulWidget {
-  const ProductDetailSubpage({
+class ProductDetailSubPage extends StatefulWidget {
+  const ProductDetailSubPage({
     Key? key,
     required this.productId,
     required this.productName,
@@ -32,10 +31,10 @@ class ProductDetailSubpage extends StatefulWidget {
   final String imageUrl;
 
   @override
-  State<ProductDetailSubpage> createState() => _ProductDetailSubpageState();
+  State<ProductDetailSubPage> createState() => _ProductDetailSubPageState();
 }
 
-class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
+class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   ScrollController scrollController = ScrollController();
   int rating = 4;
 
@@ -43,7 +42,6 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-
 
   @override
   Widget build(BuildContext context) {
@@ -131,17 +129,17 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 96),
+          padding: const EdgeInsets.fromLTRB(0, 0, 0, 96),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 1),
+              const SizedBox(height: 1),
               Container(
                 width: deviceWidth,
                 height: 32,
                 decoration: BoxDecoration(
                   color: themeMode ? AppTheme.white1 : AppTheme.black5,
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       offset: Offset(0, 4),
                       blurRadius: 26,
@@ -155,7 +153,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                     children: [
                       Expanded(
                         child: Text(
-                          "Mobilya ve Dekorasyon   -   Ofiis Mobilyaları",
+                          "Mobilya ve Dekorasyon   -   Ofis Mobilyaları",
                           style: TextStyle(
                             fontSize: 11,
                             fontFamily: AppTheme.appFontFamily,
@@ -212,7 +210,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                       ],
                     ),
                   ), // PRODUCT IMAGE
-                  SizedBox(height: 14),
+                  const SizedBox(height: 14),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
@@ -398,7 +396,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ],
                           ),
                         ), // PRODUCT IMAGES
-                        SizedBox(height: 19),
+                        const SizedBox(height: 19),
                         Row(
                           children: [
                             Expanded(
@@ -416,11 +414,11 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: 4),
                         Row(
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(bottom: 3),
+                              padding: const EdgeInsets.only(bottom: 3),
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -431,7 +429,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         ? AppTheme.yellow1
                                         : AppTheme.white26,
                                   ),
-                                  SizedBox(width: 2),
+                                  const SizedBox(width: 2),
                                   Image.asset(
                                     'assets/icons/star-fill.png',
                                     width: 10,
@@ -440,7 +438,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         ? AppTheme.yellow1
                                         : AppTheme.white26,
                                   ),
-                                  SizedBox(width: 2),
+                                  const SizedBox(width: 2),
                                   Image.asset(
                                     'assets/icons/star-fill.png',
                                     width: 10,
@@ -449,7 +447,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         ? AppTheme.yellow1
                                         : AppTheme.white26,
                                   ),
-                                  SizedBox(width: 2),
+                                  const SizedBox(width: 2),
                                   Image.asset(
                                     'assets/icons/star-fill.png',
                                     width: 10,
@@ -458,7 +456,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         ? AppTheme.yellow1
                                         : AppTheme.white26,
                                   ),
-                                  SizedBox(width: 2),
+                                  const SizedBox(width: 2),
                                   Image.asset(
                                     'assets/icons/star-fill.png',
                                     width: 10,
@@ -470,7 +468,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 ],
                               ),
                             ),
-                            SizedBox(width: 8),
+                            const SizedBox(width: 8),
                             Text(
                               "6 İncelemeler   -   8 alıcılar",
                               style: TextStyle(
@@ -482,13 +480,13 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 11),
+                        const SizedBox(height: 11),
                         Container(
                             height: 1,
                             color: themeMode
                                 ? AppTheme.white29
                                 : AppTheme.black21),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Wrap(
                           spacing: 15,
                           runSpacing: 13,
@@ -500,7 +498,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   minWidth: deviceWidth * 0.5 - 17.5,
                                   height: 39,
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
@@ -565,7 +563,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   minWidth: deviceWidth * 0.5 - 17.5,
                                   height: 39,
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
@@ -631,7 +629,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   minWidth: deviceWidth * 0.5 - 17.5,
                                   height: 39,
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
@@ -697,7 +695,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   minWidth: deviceWidth * 0.5 - 17.5,
                                   height: 39,
                                   elevation: 0,
-                                  shape: RoundedRectangleBorder(
+                                  shape: const RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
@@ -758,13 +756,13 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ), // PRODUCT COUNT
-                        SizedBox(height: 17),
+                        const SizedBox(height: 17),
                         Container(
                             height: 1,
                             color: themeMode
                                 ? AppTheme.white29
                                 : AppTheme.black21),
-                        SizedBox(height: 24),
+                        const SizedBox(height: 24),
                         Column(
                           children: [
                             Row(
@@ -784,7 +782,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 9),
+                            const SizedBox(height: 9),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Wrap(
@@ -811,7 +809,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                   : themeMode
                                                       ? AppTheme.white20
                                                       : AppTheme.black17),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         // color: AppTheme.white28,
@@ -861,7 +859,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                   : themeMode
                                                       ? AppTheme.white20
                                                       : AppTheme.black17),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         // color: AppTheme.white28,
@@ -911,7 +909,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                   : themeMode
                                                       ? AppTheme.white20
                                                       : AppTheme.black17),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         // color: AppTheme.white28,
@@ -946,7 +944,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ), // PRODUCT DIMENSION
-                        SizedBox(height: 23),
+                        const SizedBox(height: 23),
                         Column(
                           children: [
                             Row(
@@ -966,7 +964,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 9),
+                            const SizedBox(height: 9),
                             Align(
                               alignment: Alignment.centerLeft,
                               child: Wrap(
@@ -989,7 +987,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       0
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1025,7 +1023,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       1
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1061,7 +1059,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       2
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1097,7 +1095,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       3
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1133,7 +1131,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       4
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1169,7 +1167,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       5
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1205,7 +1203,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       6
                                                   ? AppTheme.blue2
                                                   : Colors.transparent),
-                                          borderRadius: BorderRadius.all(
+                                          borderRadius: const BorderRadius.all(
                                               Radius.circular(4)),
                                         ),
                                         color: AppTheme.white28,
@@ -1230,7 +1228,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ), // PRODUCT COLOR
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         Column(
                           children: [
                             Row(
@@ -1250,7 +1248,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Table(
                               border: TableBorder.all(
                                   borderRadius: BorderRadius.circular(4),
@@ -1260,7 +1258,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           "light"
                                       ? AppTheme.white20
                                       : AppTheme.black17),
-                              columnWidths: {
+                              columnWidths: const {
                                 0: FlexColumnWidth(7),
                                 1: FlexColumnWidth(5),
                                 2: FlexColumnWidth(6),
@@ -1411,7 +1409,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ), // DELIVERY TIME
-                        SizedBox(height: 11),
+                        const SizedBox(height: 11),
                         Container(
                           width: deviceWidth,
                           decoration: BoxDecoration(
@@ -1465,7 +1463,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           : AppTheme.black18),
                                   Column(
                                     children: [
-                                      SizedBox(height: 48),
+                                      const SizedBox(height: 48),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -1480,9 +1478,10 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                               color: AppTheme.white15,
                                             ),
                                           ),
-                                          SizedBox(width: 2),
+                                          const SizedBox(width: 2),
                                           Padding(
-                                            padding: EdgeInsets.only(bottom: 4),
+                                            padding: const EdgeInsets.only(
+                                                bottom: 4),
                                             child: Image.asset(
                                               'assets/icons/star.png',
                                               width: 15,
@@ -1491,7 +1490,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 6),
+                                      const SizedBox(height: 6),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -1518,7 +1517,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           ),
                                         ],
                                       ),
-                                      SizedBox(height: 4),
+                                      const SizedBox(height: 4),
                                       Text(
                                         "İstanbul, Türkiye",
                                         style: TextStyle(
@@ -1527,7 +1526,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                             fontWeight: FontWeight.w400,
                                             color: AppTheme.white15),
                                       ),
-                                      SizedBox(height: 24),
+                                      const SizedBox(height: 24),
                                     ],
                                   ),
                                   Container(
@@ -1539,7 +1538,8 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                           ? AppTheme.white21
                                           : AppTheme.black18),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 30, 0, 24),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 30, 0, 24),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -1564,7 +1564,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "9.2 / 10",
                                                   style: TextStyle(
@@ -1583,7 +1583,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1598,7 +1598,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "<12saat",
                                                   style: TextStyle(
@@ -1617,7 +1617,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1632,7 +1632,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "2 yıl",
                                                   style: TextStyle(
@@ -1651,7 +1651,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1666,7 +1666,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "574",
                                                   style: TextStyle(
@@ -1685,7 +1685,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             InkWell(
                                               onTap: () {},
                                               child: Row(
@@ -1708,7 +1708,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                           : AppTheme.white1,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 4),
+                                                  const SizedBox(width: 4),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -1742,7 +1742,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "80.0%",
                                                   style: TextStyle(
@@ -1761,7 +1761,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1776,7 +1776,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "246",
                                                   style: TextStyle(
@@ -1795,7 +1795,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(height: 16),
+                                            const SizedBox(height: 16),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -1810,7 +1810,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(height: 2),
+                                                const SizedBox(height: 2),
                                                 Text(
                                                   "2014",
                                                   style: TextStyle(
@@ -1835,7 +1835,8 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 24),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(0, 0, 0, 24),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
@@ -1881,8 +1882,9 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                               color: Colors.transparent,
                                               elevation: 0,
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(5)),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(5)),
                                                 side: BorderSide(
                                                     width: 1,
                                                     color:
@@ -1911,7 +1913,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                           : AppTheme.blue4,
                                                     ),
                                                   ),
-                                                  SizedBox(width: 6),
+                                                  const SizedBox(width: 6),
                                                   Text(
                                                     "Mağaza",
                                                     style: TextStyle(
@@ -1946,7 +1948,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                     shape: BoxShape.circle,
                                     border: Border.all(
                                         width: 1, color: AppTheme.white21),
-                                    image: DecorationImage(
+                                    image: const DecorationImage(
                                       image: NetworkImage(
                                         "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                       ),
@@ -1963,12 +1965,12 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   child: MaterialButton(
                                       elevation: 0,
                                       color: AppTheme.blue2,
-                                      shape: RoundedRectangleBorder(
+                                      shape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(36)),
                                       ),
-                                      padding:
-                                          EdgeInsets.fromLTRB(12, 2, 12, 0),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          12, 2, 12, 0),
                                       child: Text(
                                         "Takip Et",
                                         style: TextStyle(
@@ -1984,7 +1986,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ],
                           ),
                         ), // SUPPLIER INFORMATION
-                        SizedBox(height: 11),
+                        const SizedBox(height: 11),
                         Container(
                           width: deviceWidth,
                           decoration: BoxDecoration(
@@ -2008,7 +2010,8 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             child: Column(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 16, 10, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 16, 10, 0),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -2040,7 +2043,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                             ? AppTheme.white1
                                                             : AppTheme.white15),
                                               ),
-                                              SizedBox(height: 16),
+                                              const SizedBox(height: 16),
                                               Container(
                                                 width: deviceWidth * 0.4,
                                                 height: 1,
@@ -2098,7 +2101,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                             ? AppTheme.white1
                                                             : AppTheme.white15),
                                               ),
-                                              SizedBox(height: 16),
+                                              const SizedBox(height: 16),
                                               Container(
                                                 width: deviceWidth * 0.4,
                                                 height: 1,
@@ -2139,17 +2142,17 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                             "light"
                                         ? AppTheme.white25
                                         : AppTheme.black21),
-                                SizedBox(height: 16),
+                                const SizedBox(height: 16),
                                 Provider.of<MarketPlaceProvider>(context)
                                             .productDetailTab ==
                                         0
-                                    ? ProductDetailFirstTabSubpage()
-                                    : ProductDetailSecondTabSubpage(),
+                                    ? const ProductDetailFirstTabSubPage()
+                                    : const ProductDetailSecondTabSubPage(),
                               ],
                             ),
                           ),
                         ), // PRODUCT DETAILS / CUSTOMERS COMMENTS
-                        SizedBox(height: 28),
+                        const SizedBox(height: 28),
                         Row(
                           children: [
                             Text(
@@ -2167,7 +2170,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 25),
+                        const SizedBox(height: 25),
                         FutureBuilder(
                           future: DummyService().getProductList(),
                           builder: (context, data) {
@@ -2175,7 +2178,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                               var items = data.data as List<ProductDummyModel>;
 
                               return ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
+                                  physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: items.length,
                                   itemBuilder: ((context, index) {
@@ -2186,8 +2189,9 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                         onTap: () {},
                                         child: Container(
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(3)),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(3)),
                                             color: Provider.of<ThemeProvider>(
                                                             context)
                                                         .themeMode ==
@@ -2197,15 +2201,15 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                             boxShadow: [
                                               BoxShadow(
                                                 blurStyle: BlurStyle.normal,
-                                                offset: Offset(0, -4),
+                                                offset: const Offset(0, -4),
                                                 blurRadius: 26,
                                                 spreadRadius: 0,
-                                                color: Color(0xFF2B3361)
+                                                color: const Color(0xFF2B3361)
                                                     .withOpacity(0.10),
                                               ),
                                             ],
                                           ),
-                                          padding: EdgeInsets.all(8),
+                                          padding: const EdgeInsets.all(8),
                                           child: Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -2221,12 +2225,12 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                     fit: BoxFit.cover,
                                                   ),
                                                   borderRadius:
-                                                      BorderRadius.all(
+                                                      const BorderRadius.all(
                                                     Radius.circular(2),
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(width: 10),
+                                              const SizedBox(width: 10),
                                               Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -2280,7 +2284,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       color: AppTheme.white15,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 8),
+                                                  const SizedBox(height: 8),
                                                   Text(
                                                     items[index].province ?? '',
                                                     style: TextStyle(
@@ -2292,7 +2296,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                       color: AppTheme.white15,
                                                     ),
                                                   ),
-                                                  SizedBox(height: 1),
+                                                  const SizedBox(height: 1),
                                                   Row(
                                                     crossAxisAlignment:
                                                         CrossAxisAlignment
@@ -2316,7 +2320,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                   .white11,
                                                         ),
                                                       ),
-                                                      SizedBox(width: 5),
+                                                      const SizedBox(width: 5),
                                                       Text(
                                                         items[index]
                                                                 .totalRate ??
@@ -2331,14 +2335,14 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                               AppTheme.white15,
                                                         ),
                                                       ),
-                                                      SizedBox(width: 4),
+                                                      const SizedBox(width: 4),
                                                       Image.asset(
                                                           'assets/icons/star.png',
                                                           width: 15,
                                                           height: 15),
                                                     ],
                                                   ),
-                                                  SizedBox(height: 2),
+                                                  const SizedBox(height: 2),
                                                   SizedBox(
                                                     height: 24,
                                                     child: ButtonTheme(
@@ -2356,14 +2360,19 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                 color: AppTheme
                                                                     .white19),
                                                             borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
+                                                                const BorderRadius
+                                                                        .all(
+                                                                    Radius
                                                                         .circular(
                                                                             36)),
                                                           ),
-                                                          padding: EdgeInsets
-                                                              .fromLTRB(10, 2,
-                                                                  10, 3.5),
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  10,
+                                                                  2,
+                                                                  10,
+                                                                  3.5),
                                                           child: Row(
                                                             crossAxisAlignment:
                                                                 CrossAxisAlignment
@@ -2375,7 +2384,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                                                   height: 12.5,
                                                                   color: AppTheme
                                                                       .black16),
-                                                              SizedBox(
+                                                              const SizedBox(
                                                                   width: 3.5),
                                                               Text(
                                                                 "Tedarikçiye Ulaşın",
@@ -2490,7 +2499,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                               //       ),
                               //     );
                               //   },
-                              // ); // SEKELATON ANIMATION
+                              // ); // SKELETON ANIMATION
 
                               return SizedBox(
                                 height: deviceWidth + 115,
@@ -2520,7 +2529,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
         animation: scrollController,
         builder: (context, child) {
           return AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               height: scrollController.hasClients
                   ? scrollController.position.userScrollDirection ==
                           ScrollDirection.reverse
@@ -2530,7 +2539,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
               child: child);
         },
         child: Padding(
-          padding: EdgeInsets.only(bottom: 0),
+          padding: const EdgeInsets.only(bottom: 0),
           child: Container(
             width: deviceWidth,
             height: 60,
@@ -2559,7 +2568,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                         ),
                         Flexible(
                           child: Text(
-                            widget.price + " ₺",
+                            "${widget.price} ₺",
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 18,
@@ -2603,7 +2612,7 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                                   );
                             }),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       ButtonTheme(
                         minWidth: double.minPositive,
                         height: 41,
@@ -2621,7 +2630,8 @@ class _ProductDetailSubpageState extends State<ProductDetailSubpage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => NavigationPage(),
+                                    builder: (context) =>
+                                        const NavigationPage(),
                                   ));
                             },
                             child: Text(

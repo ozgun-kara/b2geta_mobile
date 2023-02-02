@@ -6,8 +6,6 @@ import 'package:b2geta_mobile/providers/login_register_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
-import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,10 +35,18 @@ void main() async {
     ChangeNotifierProvider<HomePageProvider>(
       create: (BuildContext context) => HomePageProvider(),
     ),
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   GetStorage box = GetStorage();
 
   // This widget is the root of your application.

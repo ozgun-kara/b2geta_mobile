@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/member/interested/member_interested_services.dart';
@@ -32,11 +34,11 @@ class _MemberTestPageState extends State<MemberTestPage> {
               : AppTheme.black12,
           body: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.fromLTRB(30, 0, 30, 55),
+              padding: const EdgeInsets.fromLTRB(30, 0, 30, 55),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 100),
+                  const SizedBox(height: 100),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -44,7 +46,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -74,7 +77,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -82,7 +85,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -113,13 +117,13 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
                     width: deviceWidth,
                     height: 4,
                     color: AppTheme.white14,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -127,7 +131,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -158,7 +163,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -166,7 +171,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -195,7 +201,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -203,7 +209,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -224,7 +231,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                               country: 'TR',
                               city: '2170',
                               district: '108963',
-                              address: 'Kuştepe Mah. Tan Sokak',
+                              address: 'Kuş tepe Mah. Tan Sokak',
                               postalCode: '34000',
                             )
                                 .then((value) {
@@ -238,7 +245,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -246,7 +253,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -268,7 +276,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                               country: 'TR',
                               city: '2170',
                               district: '108963',
-                              address: 'Kuştepe Mah. Tan Sokak edit',
+                              address: 'Kuş tepe Mah. Tan Sokak edit',
                               postalCode: '34000',
                             )
                                 .then((value) {
@@ -282,7 +290,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -290,7 +298,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
@@ -318,13 +327,13 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           }),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Container(
                     width: deviceWidth,
                     height: 4,
                     color: AppTheme.white14,
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),
@@ -349,7 +358,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       Provider.of<ThemeProvider>(context).themeMode == "light"
                           ? AppTheme.white1
                           : AppTheme.black12,
-                  borderRadius: BorderRadius.all(Radius.circular(16))),
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -369,7 +378,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                                   : AppTheme.white14,
                         ),
                       ),
-                      SizedBox(width: 8),
+                      const SizedBox(width: 8),
                       Icon(
                         Icons.error_outline_sharp,
                         size: 24,
@@ -380,7 +389,7 @@ class _MemberTestPageState extends State<MemberTestPage> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ButtonTheme(
                     // minWidth: deviceWidth,
                     height: 36,
@@ -412,7 +421,8 @@ class _MemberTestPageState extends State<MemberTestPage> {
                           //   ),
                           // ],
 
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(

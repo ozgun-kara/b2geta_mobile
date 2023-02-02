@@ -38,7 +38,7 @@ class CountryModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['code'] = code;
@@ -77,7 +77,7 @@ class Timezones {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['zoneName'] = zoneName;
     data['gmtOffset'] = gmtOffset;
     data['gmtOffsetName'] = gmtOffsetName;

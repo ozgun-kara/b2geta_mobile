@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class ShoppingSummarySubpage extends StatefulWidget {
-  const ShoppingSummarySubpage({Key? key}) : super(key: key);
+class ShoppingSummarySubPage extends StatefulWidget {
+  const ShoppingSummarySubPage({Key? key}) : super(key: key);
 
   @override
-  State<ShoppingSummarySubpage> createState() => _ShoppingSummarySubpageState();
+  State<ShoppingSummarySubPage> createState() => _ShoppingSummarySubPageState();
 }
 
-class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
+class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -32,7 +32,10 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
           : AppTheme.black7,
       appBar: AppBar(
           toolbarHeight: 68,
-          backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light" ? AppTheme.white1 : AppTheme.black5,
+          backgroundColor:
+              Provider.of<ThemeProvider>(context).themeMode == "light"
+                  ? AppTheme.white1
+                  : AppTheme.black5,
           elevation: 0,
           leading: Padding(
             padding: const EdgeInsets.only(left: 8),
@@ -45,7 +48,12 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                 color: AppTheme.white15,
               ),
               onPressed: () {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => NavigationPage(),), (route) => false);
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NavigationPage(),
+                    ),
+                    (route) => false);
               },
             ),
           ),
@@ -99,7 +107,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
           ]),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 63, 0, 84),
+          padding: const EdgeInsets.fromLTRB(0, 63, 0, 84),
           child: Center(
             child: Column(
               children: [
@@ -108,7 +116,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                   width: 75.83,
                   height: 75.83,
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 37),
                   child: Text(
@@ -125,7 +133,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 37),
                   child: Text(
@@ -139,7 +147,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 FutureBuilder(
                   future: DummyService().getShoppingSummaryList(),
                   builder: (context, data) {
@@ -160,8 +168,8 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                   child: Container(
                                     width: deviceWidth,
                                     decoration: BoxDecoration(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(22)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(22)),
                                       border: Border.all(
                                         width: 1,
                                         color:
@@ -179,16 +187,16 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                       boxShadow: [
                                         BoxShadow(
                                           blurStyle: BlurStyle.normal,
-                                          offset: Offset(0, -4),
+                                          offset: const Offset(0, -4),
                                           blurRadius: 26,
                                           spreadRadius: 0,
-                                          color: Color(0xFF2B3361)
+                                          color: const Color(0xFF2B3361)
                                               .withOpacity(0.10),
                                         ),
                                       ],
                                     ),
-                                    padding:
-                                        EdgeInsets.fromLTRB(12, 23, 27, 20),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        12, 23, 27, 20),
                                     child: Row(
                                       // crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
@@ -216,7 +224,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                 ),
                                               ),
                                             ),
-                                            SizedBox(height: 4),
+                                            const SizedBox(height: 4),
                                             Row(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -231,7 +239,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                     color: AppTheme.white15,
                                                   ),
                                                 ),
-                                                SizedBox(width: 4),
+                                                const SizedBox(width: 4),
                                                 Image.asset(
                                                     'assets/icons/star.png',
                                                     width: 15,
@@ -240,7 +248,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 10),
+                                        const SizedBox(width: 10),
                                         Expanded(
                                           child: Column(
                                             crossAxisAlignment:
@@ -292,7 +300,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                   color: AppTheme.white15,
                                                 ),
                                               ),
-                                              SizedBox(height: 4),
+                                              const SizedBox(height: 4),
                                               SizedBox(
                                                 height: 22,
                                                 child: ButtonTheme(
@@ -302,15 +310,15 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                       elevation: 0,
                                                       color: AppTheme.blue2,
                                                       shape:
-                                                          RoundedRectangleBorder(
+                                                          const RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius.all(
                                                                 Radius.circular(
                                                                     36)),
                                                       ),
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              12, 2, 12, 0),
+                                                      padding: const EdgeInsets
+                                                              .fromLTRB(
+                                                          12, 2, 12, 0),
                                                       child: Text(
                                                         "Takip Et",
                                                         style: TextStyle(
@@ -353,7 +361,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                             "light"
                                                         ? AppTheme.blue2
                                                         : AppTheme.blue6),
-                                            SizedBox(width: 4),
+                                            const SizedBox(width: 4),
                                             Text(
                                               "Mesaj Gönder",
                                               style: TextStyle(
@@ -367,7 +375,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(width: 20),
+                                      const SizedBox(width: 20),
                                       InkWell(
                                         onTap: () {},
                                         child: Row(
@@ -387,7 +395,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                                                           ? AppTheme.blue2
                                                           : AppTheme.blue6),
                                             ),
-                                            SizedBox(width: 4),
+                                            const SizedBox(width: 4),
                                             Text(
                                               "Firma Profili",
                                               style: TextStyle(
@@ -423,7 +431,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                     }
                   },
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 52),
                   child: Text(
@@ -437,7 +445,7 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 18),
+                const SizedBox(height: 18),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: ButtonTheme(
@@ -450,7 +458,8 @@ class _ShoppingSummarySubpageState extends State<ShoppingSummarySubpage> {
                             ? AppTheme.white2
                             : AppTheme.black18,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(68)),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(68)),
                           side: BorderSide(
                               width: 1,
                               color: Provider.of<ThemeProvider>(context)
