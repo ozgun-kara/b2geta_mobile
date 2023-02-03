@@ -1,5 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'company_addresses_sub_page.dart';
@@ -152,7 +154,17 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
                   color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                 ),
               ),
-              onPressed: () {}),
+              onPressed: () {
+                MemberServices().logoutCall().then((value) {
+                  if (value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const SplashPage(),
+                        ));
+                  }
+                });
+              }),
         ],
       ),
     );

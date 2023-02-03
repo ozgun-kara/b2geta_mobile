@@ -355,7 +355,8 @@ class _HomePageState extends State<HomePage> {
                                                 errorBuilder: (context, error,
                                                         stackTrace) =>
                                                     Image.asset(
-                                                  "assets/images/dummy_images/post_profile.png",
+                                                  "assets/images/dummy_images/post_image_1.png",
+                                                  fit: BoxFit.cover,
                                                 ),
                                               ),
                                             )
@@ -607,7 +608,6 @@ class _HomePageState extends State<HomePage> {
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               "assets/images/dummy_images/post_image_1.png",
-                                              width: deviceWidth,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
