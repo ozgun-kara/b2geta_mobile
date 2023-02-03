@@ -11,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
@@ -33,6 +32,12 @@ class _SplashPageState extends State<SplashPage> {
     String? token = prefs.getString("Token");
 
     if (token == null) {
+      debugPrint("TOKEN NOT AVAILABLE");
+      Navigator.of(context)
+          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
+        return const LanguagePage();
+      }));
+    } else if (token.isEmpty) {
       debugPrint("TOKEN NOT AVAILABLE");
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {

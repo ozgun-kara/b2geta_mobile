@@ -135,6 +135,32 @@ class MemberServices {
     }
   }
 
+  // LOGOUT
+  Future<bool> logoutCall() async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/member/logout'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint("burada");
+      if (status == true) {
+        deleteToken();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      debugPrint("burada false");
+
+      return false;
+    }
+  }
+
   Future<void> saveToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('Token', token);
@@ -147,5 +173,11 @@ class MemberServices {
     var token = prefs.getString('Token');
     debugPrint("TOKEN HAS FETCHED: $token");
     return token;
+  }
+
+  Future<void> deleteToken() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('Token', '');
+    debugPrint("TOKEN HAS DELETED");
   }
 }
