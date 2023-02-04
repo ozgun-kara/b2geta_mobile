@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
+import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -475,7 +476,18 @@ class _HomePageState extends State<HomePage> {
                       return SizedBox(
                         width: 128,
                         height: 128,
-                        child: Image.asset(reelImage[index]),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ReelsPage(
+                                    imageUrl: reelImage[index],
+                                  ),
+                                ));
+                          },
+                          child: Image.asset(reelImage[index]),
+                        ),
                       );
                     }),
                   )
