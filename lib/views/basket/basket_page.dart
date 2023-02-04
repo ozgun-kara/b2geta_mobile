@@ -892,10 +892,11 @@ class _BasketPageState extends State<BasketPage> {
                               });
                         }),
                   ),
+                  const SizedBox(height: 36)
                 ],
               ),
             ),
-            const SizedBox(height: 75)
+            const SizedBox(height: 60)
           ],
         ),
       ),
