@@ -177,19 +177,31 @@ class _HomePageState extends State<HomePage> {
                             height: 43,
                             child: MaterialButton(
                                 elevation: 0,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    FittedBox(
-                                      fit: BoxFit.none,
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 3),
                                       child: Image.asset(
                                         'assets/icons/post.png',
-                                        width: 15,
-                                        height: 15,
+                                        width: 18,
+                                        height: 18,
+                                        color: themeMode
+                                            ? tabIndex == 0
+                                                ? AppTheme.blue2
+                                                : AppTheme.white15
+                                            : tabIndex == 0
+                                                ? AppTheme.white1
+                                                : AppTheme.white15,
                                       ),
                                     ),
                                     const SizedBox(
-                                      width: 8.5,
+                                      width: 7,
                                     ),
                                     Text(
                                       "Postlar",
@@ -218,19 +230,31 @@ class _HomePageState extends State<HomePage> {
                             height: 43,
                             child: MaterialButton(
                                 elevation: 0,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(12),
+                                  ),
+                                ),
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    FittedBox(
-                                      fit: BoxFit.none,
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 3),
                                       child: Image.asset(
                                         'assets/icons/star2.png',
-                                        width: 15,
-                                        height: 15,
+                                        width: 18,
+                                        height: 18,
+                                        color: themeMode
+                                            ? tabIndex == 1
+                                                ? AppTheme.blue2
+                                                : AppTheme.white15
+                                            : tabIndex == 1
+                                                ? AppTheme.white1
+                                                : AppTheme.white15,
                                       ),
                                     ),
                                     const SizedBox(
-                                      width: 8.5,
+                                      width: 7,
                                     ),
                                     Text(
                                       "Reels",
@@ -401,7 +425,8 @@ class _HomePageState extends State<HomePage> {
                                     fontWeight: FontWeight.w600,
                                     color: AppTheme.white13),
                                 decoration: InputDecoration(
-                                  contentPadding: const EdgeInsets.all(15),
+                                  contentPadding:
+                                      const EdgeInsets.fromLTRB(16, 0, 16, 0),
                                   filled: true,
                                   fillColor: themeMode
                                       ? AppTheme.white3
