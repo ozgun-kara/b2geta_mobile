@@ -40,8 +40,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    Provider.of<LoginRegisterProvider>(context, listen: false)
-        .fetchDropdownList();
+    // Provider.of<LoginRegisterProvider>(context, listen: false)
+    //     .fetchDropdownList();
 
     super.initState();
   }
@@ -52,8 +52,8 @@ class _RegisterPageState extends State<RegisterPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
 
-    var countryList = Provider.of<LoginRegisterProvider>(context, listen: false)
-        .dropdownItems;
+    // var countryList = Provider.of<LoginRegisterProvider>(context, listen: false)
+    //     .dropdownItems;
 
     // return Scaffold(
     //   backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
