@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -204,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 7,
                                     ),
                                     Text(
-                                      "Postlar",
+                                      'Posts'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -257,7 +258,7 @@ class _HomePageState extends State<HomePage> {
                                       width: 7,
                                     ),
                                     Text(
-                                      "Reels",
+                                      'Reels'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -431,8 +432,7 @@ class _HomePageState extends State<HomePage> {
                                   fillColor: themeMode
                                       ? AppTheme.white3
                                       : AppTheme.black7,
-                                  hintText:
-                                      "Firman hakkında takipçilerinle bir şeyler paylaş.",
+                                  hintText: 'Homepage Share'.tr,
                                   hintStyle: TextStyle(
                                       fontSize: 11,
                                       fontFamily: AppTheme.appFontFamily,
