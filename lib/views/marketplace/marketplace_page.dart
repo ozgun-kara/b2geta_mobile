@@ -270,125 +270,142 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   builder: (context, data) {
                     if (data.hasData) {
                       var productIdList = data.data;
-                      return GridView.builder(
-                        controller: scrollController,
-                        shrinkWrap: true,
-                        itemCount: productIdList!.length,
-                        padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 21,
-                          mainAxisExtent: 304,
-                        ),
-                        itemBuilder: ((context, index) {
-                          var productList = productListPageDummyData[index];
+                      if (productIdList!.isNotEmpty) {
+                        return GridView.builder(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          itemCount: productIdList.length,
+                          padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 21,
+                            mainAxisExtent: 304,
+                          ),
+                          itemBuilder: ((context, index) {
+                            var productList = productListPageDummyData[index];
 
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProductDetailSubPage(
-                                      productId: productIdList[index],
-                                      productName:
-                                          productList["title"].toString(),
-                                      imageUrl:
-                                          productList["imgUrl"].toString(),
-                                      price: productList["price"].toString()),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                  color: Colors.transparent),
-                              child: Column(
-                                children: [
-                                  Container(
-                                    // width: 126,
-                                    // height: 145,
-                                    width: deviceWidth,
-                                    height: 206,
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(9),
-                                      ),
-                                    ),
-                                    child: Image.network(
-                                      productList["imgUrl"].toString(),
-                                      fit: BoxFit.cover,
-                                    ),
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductDetailSubPage(
+                                        productId: productIdList[index],
+                                        productName:
+                                            productList["title"].toString(),
+                                        imageUrl:
+                                            productList["imgUrl"].toString(),
+                                        price: productList["price"].toString()),
                                   ),
-                                  const SizedBox(height: 11),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        productList["title"].toString(),
-                                        maxLines: 2,
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color: Provider.of<ThemeProvider>(
-                                                          context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue3
-                                              : AppTheme.white11,
+                                );
+                              },
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                    color: Colors.transparent),
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      // width: 126,
+                                      // height: 145,
+                                      width: deviceWidth,
+                                      height: 206,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(9),
                                         ),
                                       ),
-                                      const SizedBox(height: 2),
-                                      RichText(
-                                          text: TextSpan(children: [
-                                        TextSpan(
-                                          text: "${productList["price"]} ",
+                                      child: Image.network(
+                                        productList["imgUrl"].toString(),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 11),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          productList["title"].toString(),
+                                          maxLines: 2,
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 12,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color: Provider.of<ThemeProvider>(
                                                             context)
                                                         .themeMode ==
                                                     "light"
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
+                                                ? AppTheme.blue3
+                                                : AppTheme.white11,
                                           ),
                                         ),
-                                        TextSpan(
-                                          text: "₺",
+                                        const SizedBox(height: 2),
+                                        RichText(
+                                            text: TextSpan(children: [
+                                          TextSpan(
+                                            text: "${productList["price"]} ",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w500,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white1,
+                                            ),
+                                          ),
+                                          TextSpan(
+                                            text: "₺",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white1,
+                                            ),
+                                          )
+                                        ])),
+                                        const SizedBox(height: 2),
+                                        Text(
+                                          "10 adet min. sipariş",
                                           style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
+                                            color: AppTheme.white15,
                                           ),
-                                        )
-                                      ])),
-                                      const SizedBox(height: 2),
-                                      Text(
-                                        "10 adet min. sipariş",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppTheme.white15,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
+                            );
+                          }),
+                        );
+                      } else {
+                        return SizedBox(
+                          width: deviceWidth,
+                          height: deviceHeight - 200,
+                          child: Center(
+                              child: Text(
+                            "Ürün bulunmamaktadır.",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
                             ),
-                          );
-                        }),
-                      );
+                          )),
+                        );
+                      }
                     } else {
                       return SizedBox(
                         height: deviceWidth + 115,
@@ -429,167 +446,93 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     if (data.hasData) {
                       var productIdList = data.data;
 
-                      return ListView.builder(
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          itemCount: productIdList!.length,
-                          itemBuilder: ((context, index) {
-                            var productList = productListPageDummyData[index];
+                      if (productIdList!.isNotEmpty) {
+                        return ListView.builder(
+                            controller: scrollController,
+                            shrinkWrap: true,
+                            itemCount: productIdList.length,
+                            itemBuilder: ((context, index) {
+                              var productList = productListPageDummyData[index];
 
-                            return Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 8),
-                              child: InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProductDetailSubPage(
-                                              productId: productIdList[index],
-                                              productName: productList["title"]
-                                                  .toString(),
-                                              imageUrl: productList["imgUrl"]
-                                                  .toString(),
-                                              price: productList["price"]
-                                                  .toString()),
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetailSubPage(
+                                                productId: productIdList[index],
+                                                productName:
+                                                    productList["title"]
+                                                        .toString(),
+                                                imageUrl: productList["imgUrl"]
+                                                    .toString(),
+                                                price: productList["price"]
+                                                    .toString()),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(3)),
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.white1
+                                          : AppTheme.black7,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          blurStyle: BlurStyle.normal,
+                                          offset: const Offset(0, -4),
+                                          blurRadius: 26,
+                                          spreadRadius: 0,
+                                          color: const Color(0xFF2B3361)
+                                              .withOpacity(0.10),
+                                        ),
+                                      ],
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(3)),
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.white1
-                                        : AppTheme.black7,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        blurStyle: BlurStyle.normal,
-                                        offset: const Offset(0, -4),
-                                        blurRadius: 26,
-                                        spreadRadius: 0,
-                                        color: const Color(0xFF2B3361)
-                                            .withOpacity(0.10),
-                                      ),
-                                    ],
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 126,
-                                        height: 145,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(2),
+                                    padding: const EdgeInsets.all(8),
+                                    child: Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Container(
+                                          width: 126,
+                                          height: 145,
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(2),
+                                            ),
+                                          ),
+                                          child: Image.network(
+                                            productListPageDummyData[index]
+                                                    ["imgUrl"]
+                                                .toString(),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                        child: Image.network(
-                                          productListPageDummyData[index]
-                                                  ["imgUrl"]
-                                              .toString(),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          //? bu kısım sorulacak.
-                                          SizedBox(
-                                            width: deviceWidth -
-                                                (24 + 16 + 126 + 10),
-                                            height: 35,
-                                            child: Text(
-                                              productList["title"].toString(),
-                                              maxLines: 2,
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white11,
-                                              ),
-                                            ),
-                                          ),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                              text: "${productList["price"]} ",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: "₺",
-                                              style: TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            )
-                                          ])),
-
-                                          Text(
-                                            "10 adet min. sipariş",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppTheme.white15,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            "İstanbul, Türkiye",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppTheme.white15,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 1),
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "İteme İnşaat",
+                                        const SizedBox(width: 10),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            //? bu kısım sorulacak.
+                                            SizedBox(
+                                              width: deviceWidth -
+                                                  (24 + 16 + 126 + 10),
+                                              height: 35,
+                                              child: Text(
+                                                productList["title"].toString(),
+                                                maxLines: 2,
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
                                                       AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
+                                                  fontWeight: FontWeight.w500,
                                                   color:
                                                       Provider.of<ThemeProvider>(
                                                                       context)
@@ -599,88 +542,185 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                           : AppTheme.white11,
                                                 ),
                                               ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                "9,2",
+                                            ),
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    "${productList["price"]} ",
                                                 style: TextStyle(
-                                                  fontSize: 11,
+                                                  fontSize: 16,
                                                   fontFamily:
                                                       AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w800,
-                                                  color: AppTheme.white15,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.blue2
+                                                          : AppTheme.white1,
                                                 ),
                                               ),
-                                              const SizedBox(width: 4),
-                                              Image.asset(
-                                                  'assets/icons/star.png',
-                                                  width: 15,
-                                                  height: 15),
-                                            ],
-                                          ),
-                                          const SizedBox(height: 2),
-                                          SizedBox(
-                                            height: 24,
-                                            child: ButtonTheme(
-                                              // minWidth: deviceWidth,
-                                              height: 22,
+                                              TextSpan(
+                                                text: "₺",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color:
+                                                      Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.blue2
+                                                          : AppTheme.white1,
+                                                ),
+                                              )
+                                            ])),
 
-                                              child: MaterialButton(
-                                                  elevation: 0,
-                                                  color: Colors.transparent,
-                                                  shape: RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        width: 1,
-                                                        color:
-                                                            AppTheme.white19),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                36)),
-                                                  ),
-                                                  padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          10, 2, 10, 3.5),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment.end,
-                                                    children: [
-                                                      Image.asset(
-                                                          'assets/icons/comment.png',
-                                                          width: 12.5,
-                                                          height: 12.5,
-                                                          color:
-                                                              AppTheme.black16),
-                                                      const SizedBox(
-                                                          width: 3.5),
-                                                      Text(
-                                                        "Tedarikçiye Ulaşın",
-                                                        style: TextStyle(
-                                                          fontSize: 10,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: Provider.of<ThemeProvider>(
-                                                                          context)
-                                                                      .themeMode ==
-                                                                  "light"
-                                                              ? AppTheme.blue2
-                                                              : AppTheme.white1,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  onPressed: () async {}),
+                                            Text(
+                                              "10 adet min. sipariş",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w500,
+                                                color: AppTheme.white15,
+                                              ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              "İstanbul, Türkiye",
+                                              style: TextStyle(
+                                                fontSize: 10,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w400,
+                                                color: AppTheme.white15,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 1),
+                                            Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "İteme İnşaat",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w700,
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white11,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 5),
+                                                Text(
+                                                  "9,2",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w800,
+                                                    color: AppTheme.white15,
+                                                  ),
+                                                ),
+                                                const SizedBox(width: 4),
+                                                Image.asset(
+                                                    'assets/icons/star.png',
+                                                    width: 15,
+                                                    height: 15),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 2),
+                                            SizedBox(
+                                              height: 24,
+                                              child: ButtonTheme(
+                                                // minWidth: deviceWidth,
+                                                height: 22,
+
+                                                child: MaterialButton(
+                                                    elevation: 0,
+                                                    color: Colors.transparent,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                          width: 1,
+                                                          color:
+                                                              AppTheme.white19),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                                  .all(
+                                                              Radius.circular(
+                                                                  36)),
+                                                    ),
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        10, 2, 10, 3.5),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .end,
+                                                      children: [
+                                                        Image.asset(
+                                                            'assets/icons/comment.png',
+                                                            width: 12.5,
+                                                            height: 12.5,
+                                                            color: AppTheme
+                                                                .black16),
+                                                        const SizedBox(
+                                                            width: 3.5),
+                                                        Text(
+                                                          "Tedarikçiye Ulaşın",
+                                                          style: TextStyle(
+                                                            fontSize: 10,
+                                                            fontFamily: AppTheme
+                                                                .appFontFamily,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            color: Provider.of<ThemeProvider>(
+                                                                            context)
+                                                                        .themeMode ==
+                                                                    "light"
+                                                                ? AppTheme.blue2
+                                                                : AppTheme
+                                                                    .white1,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onPressed: () async {}),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }));
+                              );
+                            }));
+                      } else {
+                        return SizedBox(
+                          width: deviceWidth,
+                          height: deviceHeight - 200,
+                          child: Center(
+                              child: Text(
+                            "Ürün bulunmamaktadır.",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )),
+                        );
+                      }
                     } else {
                       // return ListView.builder(
                       //   controller: scrollController,
