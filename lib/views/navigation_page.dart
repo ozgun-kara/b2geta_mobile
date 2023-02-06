@@ -389,7 +389,7 @@ class _NavigationPageState extends State<NavigationPage> {
             contentPadding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
             filled: true,
             fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
-            hintText: "Aranacak kelimeyi giriniz",
+            hintText: 'AppBar Search'.tr,
             hintStyle: TextStyle(
               fontSize: 11,
               fontFamily: AppTheme.appFontFamily,

@@ -45,8 +45,14 @@ class AppLanguages extends Translations {
           // NAVIGATION PAGE
           'Homepage': 'Homepage',
           'Marketplace': 'Marketplace',
-          'Companies': 'Companies',
-          'My Panel': 'My Panel',
+          'My Basket': 'My Basket',
+          'My Account': 'My Account',
+          'AppBar Search': 'Search',
+          // HOMEPAGE
+          'Posts': 'Posts',
+          'Reels': 'Reels',
+          'Homepage Share':
+              'Share something about your company with your followers.',
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -91,6 +97,11 @@ class AppLanguages extends Translations {
           'Marketplace': 'Pazaryeri',
           'My Basket': 'Sepetim',
           'My Account': 'Hesabım',
+          'AppBar Search': 'Aranacak kelimeyi giriniz',
+          // HOMEPAGE
+          'Posts': 'Postlar',
+          'Reels': 'Reels',
+          'Homepage Share': 'Firman hakkında takipçilerinle bir şeyler paylaş.',
         },
         'de_DE': {
           // LANGUAGE PAGE
