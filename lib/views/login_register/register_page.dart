@@ -1169,7 +1169,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? AppTheme.black11
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
-                  obscureText: true,
+                  obscureText: !Provider.of<LoginRegisterProvider>(context)
+                      .registerPasswordVisible,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                     filled: true,
@@ -1186,6 +1187,38 @@ class _RegisterPageState extends State<RegisterPage> {
                               "light"
                           ? AppTheme.black11
                           : AppTheme.white14,
+                    ),
+                    suffixIcon: IconButton(
+                      splashRadius: 24,
+                      icon: Provider.of<LoginRegisterProvider>(context)
+                              .registerPasswordVisible
+                          ? SizedBox(
+                              child: Image.asset(
+                                  'assets/icons/eye-off-line.png',
+                                  width: 20,
+                                  height: 20,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.black11
+                                      : AppTheme.white1),
+                            )
+                          : SizedBox(
+                              child: Image.asset('assets/icons/eye-line.png',
+                                  width: 20,
+                                  height: 20,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.black11
+                                      : AppTheme.white1),
+                            ),
+                      splashColor: Colors.transparent,
+                      onPressed: () async {
+                        Provider.of<LoginRegisterProvider>(context,
+                                listen: false)
+                            .updateRegisterPasswordVisible();
+                      },
                     ),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
