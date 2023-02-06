@@ -234,7 +234,7 @@ class _MessagesPageState extends State<MessagesPage> {
                       child: Row(
                         children: [
                           ClipOval(
-                            child: message.toAvatar != null
+                            child: message.toAvatar!.isNotEmpty
                                 ? Image.network(
                                     width: 40,
                                     height: 40,

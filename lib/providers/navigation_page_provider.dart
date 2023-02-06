@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class NavigationPageProvider with ChangeNotifier {
   int currentTabIndex = 0;
 
-  final List pages = [
+  final List<Widget> pages = [
     // MemberTestPage(),
     const HomePage(),
     //ProductsTestPage(),

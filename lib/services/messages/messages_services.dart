@@ -90,6 +90,8 @@ class MessagesServices {
         for (var message in messages) {
           messageDetailList.add(MessageDetailsModel.fromJson(message));
         }
+        debugPrint("${messageDetailList.length}sayi");
+
         return messageDetailList;
       } else {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
@@ -110,7 +112,6 @@ class MessagesServices {
       },
     );
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: ${response.statusCode}");
       var status = json.decode(response.body)["status"];
       var total = json.decode(response.body)["data"]["summary"]["total"];
       if (status == true) {
