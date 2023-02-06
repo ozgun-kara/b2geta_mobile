@@ -164,7 +164,9 @@ class _LoginPageState extends State<LoginPage> {
                                     ? AppTheme.black11
                                     : AppTheme.white1), // WHILE WRITING
                             maxLines: 1,
-                            obscureText: true,
+                            obscureText:
+                                !Provider.of<LoginRegisterProvider>(context)
+                                    .loginPasswordVisible,
                             decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -178,6 +180,44 @@ class _LoginPageState extends State<LoginPage> {
                                 color: themeMode
                                     ? AppTheme.black11
                                     : AppTheme.white14,
+                              ),
+                              suffixIcon: IconButton(
+                                splashRadius: 24,
+                                icon:
+                                    Provider.of<LoginRegisterProvider>(context)
+                                            .loginPasswordVisible
+                                        ? SizedBox(
+                                            child: Image.asset(
+                                                'assets/icons/eye-off-line.png',
+                                                width: 20,
+                                                height: 20,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black11
+                                                        : AppTheme.white1),
+                                          )
+                                        : SizedBox(
+                                            child: Image.asset(
+                                                'assets/icons/eye-line.png',
+                                                width: 20,
+                                                height: 20,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.black11
+                                                        : AppTheme.white1),
+                                          ),
+                                splashColor: Colors.transparent,
+                                onPressed: () async {
+                                  Provider.of<LoginRegisterProvider>(context,
+                                          listen: false)
+                                      .updateLoginPasswordVisible();
+                                },
                               ),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
