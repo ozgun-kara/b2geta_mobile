@@ -40,7 +40,11 @@ class _NavigationPageState extends State<NavigationPage> {
             appBar: provider.searchState
                 ? searchAppBar(themeMode)
                 : defaultAppBar(themeMode),
-            body: provider.pages[provider.currentTabIndex],
+            // body: provider.pages[provider.currentTabIndex],
+            body: IndexedStack(
+              index: provider.currentTabIndex,
+              children: provider.pages,
+            ),
             bottomNavigationBar: Container(
               width: deviceWidth,
               height: 60,

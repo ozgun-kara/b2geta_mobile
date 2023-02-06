@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void getStories() async {
-    await _socialServices.getAllFeedCall(
+    await _socialServices.getAllStoryCall(
         queryParameters: {"offset": "0", "limit": "9", "type": "story"},
         userId: "408").then((feedList) {
       stories = feedList;
@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void getMeStories() async {
-    await _socialServices.getAllFeedCall(
+    await _socialServices.getAllMeStoryCall(
         queryParameters: {"offset": "0", "limit": "1", "type": "story"},
         userId: "57").then((feedList) {
       meStories = feedList;
@@ -382,6 +382,8 @@ class _HomePageState extends State<HomePage> {
                                                         stackTrace) =>
                                                     Image.asset(
                                                   "assets/images/dummy_images/post_image_1.png",
+                                                  width: 40,
+                                                  height: 40,
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -542,16 +544,20 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     Row(
                                       children: [
-                                        feed.user!.photo != null
+                                        feed.user!.photo!.isNotEmpty
                                             ? ClipOval(
                                                 child: Image.network(
                                                   width: 40,
                                                   height: 40,
+                                                  fit: BoxFit.cover,
                                                   feed.user!.photo!,
                                                   errorBuilder: (context, error,
                                                           stackTrace) =>
                                                       Image.asset(
                                                     "assets/images/dummy_images/post_profile.png",
+                                                    width: 40,
+                                                    height: 40,
+                                                    fit: BoxFit.cover,
                                                   ),
                                                 ),
                                               )
@@ -645,6 +651,8 @@ class _HomePageState extends State<HomePage> {
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               "assets/images/dummy_images/post_image_1.png",
+                                              width: 40,
+                                              height: 40,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
