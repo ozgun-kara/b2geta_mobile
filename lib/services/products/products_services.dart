@@ -20,8 +20,14 @@ class ProductsServices {
 
       if (status == true) {
         var dataList = json.decode(response.body)["data"]['products'];
+        var totalData =
+            json.decode(response.body)["data"]['pagination']["total_data"];
+        var limit = int.parse(queryParameters["limit"] ?? "0");
+        totalData = int.parse(totalData);
 
-        for (var i = 0; i < 10; i++) {
+        var dataCount = totalData > limit ? limit : totalData;
+
+        for (var i = 0; i < dataCount; i++) {
           productList.add(dataList[i]["id"]);
         }
 

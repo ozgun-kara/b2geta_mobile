@@ -114,7 +114,10 @@ class MessagesServices {
       var status = json.decode(response.body)["status"];
       var total = json.decode(response.body)["data"]["summary"]["total"];
       if (status == true) {
-        return int.parse(total);
+        if (total is String) {
+          return int.parse(total);
+        }
+        return total;
       } else {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return 0;
