@@ -86,11 +86,17 @@ class MessagesServices {
 
       var status = json.decode(response.body)["status"];
       var messages = json.decode(response.body)["data"]["messages"];
+      var total = json.decode(response.body)["data"]["summary"]["total"];
+      var limit = int.parse(queryParameters["limit"] ?? "0");
+
+      if (total is String) {
+        total = int.parse(total);
+      }
+      var dataCount = total > limit ? limit : total;
       if (status == true) {
-        for (var message in messages) {
-          messageDetailList.add(MessageDetailsModel.fromJson(message));
+        for (int i = 0; i < dataCount; i++) {
+          messageDetailList.add(MessageDetailsModel.fromJson(messages[i]));
         }
-        debugPrint("${messageDetailList.length}sayi");
 
         return messageDetailList;
       } else {
@@ -100,32 +106,6 @@ class MessagesServices {
     } else {
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return messageDetailList;
-    }
-  }
-
-  Future<int> getTotal() async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/messages/2?offset=0'),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
-    );
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-      var total = json.decode(response.body)["data"]["summary"]["total"];
-      if (status == true) {
-        if (total is String) {
-          return int.parse(total);
-        }
-        return total;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return 0;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return 0;
     }
   }
 }

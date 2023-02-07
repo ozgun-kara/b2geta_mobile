@@ -30,11 +30,10 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
   }
 
   getMessageDetailsList() async {
-    var total = await _messagesServices.getTotal();
     _messagesList =
         await _messagesServices.getMessageDetailCall(queryParameters: {
       "offset": "0",
-      "limit": total.toString(),
+      "limit": "5",
     });
     setState(() {});
   }
