@@ -1,15 +1,16 @@
-import 'package:b2geta_mobile/models/dummy_models/shopping_summary_dummy_model.dart';
-import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/navigation_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 
 class ShoppingSummarySubPage extends StatefulWidget {
-  const ShoppingSummarySubPage({Key? key}) : super(key: key);
-
+  const ShoppingSummarySubPage({
+    Key? key,
+    required this.companyInfoList,
+  }) : super(key: key);
+  final List companyInfoList;
   @override
   State<ShoppingSummarySubPage> createState() => _ShoppingSummarySubPageState();
 }
@@ -20,6 +21,14 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+  late List companyInfos;
+
+  @override
+  void initState() {
+    super.initState();
+    companyInfos = widget.companyInfoList;
+  }
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -148,288 +157,247 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                FutureBuilder(
-                  future: DummyService().getShoppingSummaryList(),
-                  builder: (context, data) {
-                    if (data.hasData) {
-                      var items = data.data as List<ShoppingSummaryDummyModel>;
-
-                      return ListView.builder(
-                          controller: scrollController,
-                          shrinkWrap: true,
-                          itemCount: items.length,
-                          padding: const EdgeInsets.all(0),
-                          itemBuilder: ((context, index) {
-                            return Column(
+                ListView.builder(
+                  controller: scrollController,
+                  shrinkWrap: true,
+                  itemCount: companyInfos.length,
+                  padding: const EdgeInsets.all(0),
+                  itemBuilder: ((context, index) {
+                    var company = companyInfos[index];
+                    var companyName = company["seller"]["name"];
+                    var companyPhoto = company["seller"]["photo"];
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(45, 0, 45, 0),
+                          child: Container(
+                            width: deviceWidth,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(22)),
+                              border: Border.all(
+                                width: 1,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white21
+                                    : AppTheme.black15,
+                              ),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white1
+                                  : AppTheme.black15,
+                              boxShadow: [
+                                BoxShadow(
+                                  blurStyle: BlurStyle.normal,
+                                  offset: const Offset(0, -4),
+                                  blurRadius: 26,
+                                  spreadRadius: 0,
+                                  color:
+                                      const Color(0xFF2B3361).withOpacity(0.10),
+                                ),
+                              ],
+                            ),
+                            padding: const EdgeInsets.fromLTRB(12, 23, 27, 20),
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(45, 0, 45, 0),
-                                  child: Container(
-                                    width: deviceWidth,
-                                    decoration: BoxDecoration(
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(22)),
-                                      border: Border.all(
-                                        width: 1,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
+                                Column(
+                                  children: [
+                                    Container(
+                                      width: 55,
+                                      height: 55,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            width: 1,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
                                                         .themeMode ==
                                                     "light"
                                                 ? AppTheme.white21
-                                                : AppTheme.black15,
+                                                : AppTheme.black20),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                            companyPhoto.isNotEmpty
+                                                ? companyPhoto
+                                                : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',
+                                          ),
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                      color: Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.white1
-                                          : AppTheme.black15,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          blurStyle: BlurStyle.normal,
-                                          offset: const Offset(0, -4),
-                                          blurRadius: 26,
-                                          spreadRadius: 0,
-                                          color: const Color(0xFF2B3361)
-                                              .withOpacity(0.10),
-                                        ),
-                                      ],
                                     ),
-                                    padding: const EdgeInsets.fromLTRB(
-                                        12, 23, 27, 20),
-                                    child: Row(
-                                      // crossAxisAlignment: CrossAxisAlignment.start,
+                                    const SizedBox(height: 4),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Column(
-                                          children: [
-                                            Container(
-                                              width: 55,
-                                              height: 55,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                    width: 1,
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white21
-                                                            : AppTheme.black20),
-                                                image: DecorationImage(
-                                                  image: NetworkImage(
-                                                    items[index].imgUrl ?? '',
-                                                  ),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(height: 4),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  items[index].rating ?? '',
-                                                  style: TextStyle(
-                                                    fontSize: 11,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w800,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                const SizedBox(width: 4),
-                                                Image.asset(
-                                                    'assets/icons/star.png',
-                                                    width: 15,
-                                                    height: 15),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(width: 10),
-                                        Expanded(
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Expanded(
-                                                    child: Text(
-                                                      items[index]
-                                                              .companyName ??
-                                                          '',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.black19
-                                                            : AppTheme.white1,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Visibility(
-                                                    visible: items[index]
-                                                            .verification ??
-                                                        true,
-                                                    child: Image.asset(
-                                                        'assets/icons/check.png',
-                                                        width: 23,
-                                                        height: 23),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text(
-                                                items[index].location ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              const SizedBox(height: 4),
-                                              SizedBox(
-                                                height: 22,
-                                                child: ButtonTheme(
-                                                  minWidth: double.minPositive,
-                                                  height: 22,
-                                                  child: MaterialButton(
-                                                      elevation: 0,
-                                                      color: AppTheme.blue2,
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    36)),
-                                                      ),
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          12, 2, 12, 0),
-                                                      child: Text(
-                                                        "Takip Et",
-                                                        style: TextStyle(
-                                                          fontSize: 11,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color:
-                                                              AppTheme.white1,
-                                                        ),
-                                                      ),
-                                                      onPressed: () async {}),
-                                                ),
-                                              ),
-                                            ],
+                                        Text(
+                                          '9,2',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w800,
+                                            color: AppTheme.white15,
                                           ),
                                         ),
+                                        const SizedBox(width: 4),
+                                        Image.asset('assets/icons/star.png',
+                                            width: 15, height: 15),
                                       ],
                                     ),
-                                  ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(60, 8, 60, 20),
-                                  child: Row(
+                                const SizedBox(width: 10),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Row(
-                                          children: [
-                                            Image.asset(
-                                                'assets/icons/message.png',
-                                                width: 13,
-                                                height: 11,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              companyName ?? '',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
                                                 color:
                                                     Provider.of<ThemeProvider>(
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.blue6),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              "Mesaj Gönder",
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white15,
+                                                        ? AppTheme.black19
+                                                        : AppTheme.white1,
                                               ),
                                             ),
-                                          ],
+                                          ),
+                                          Visibility(
+                                            visible: true,
+                                            child: Image.asset(
+                                                'assets/icons/check.png',
+                                                width: 23,
+                                                height: 23),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        'İstanbul, Türkiye',
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.white15,
                                         ),
                                       ),
-                                      const SizedBox(width: 20),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/bag.png',
-                                                  width: 11,
-                                                  height: 11,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue2
-                                                          : AppTheme.blue6),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              "Firma Profili",
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white15,
+                                      const SizedBox(height: 4),
+                                      SizedBox(
+                                        height: 22,
+                                        child: ButtonTheme(
+                                          minWidth: double.minPositive,
+                                          height: 22,
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              color: AppTheme.blue2,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
                                               ),
-                                            ),
-                                          ],
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      12, 2, 12, 0),
+                                              child: Text(
+                                                "Takip Et",
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white1,
+                                                ),
+                                              ),
+                                              onPressed: () async {}),
                                         ),
                                       ),
                                     ],
                                   ),
                                 ),
                               ],
-                            );
-                          }));
-                    } else {
-                      return SizedBox(
-                        height: deviceWidth + 115,
-                        child: Center(
-                            child: CupertinoActivityIndicator(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
-                          radius: 12,
-                        )),
-                      );
-                    }
-                  },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(60, 8, 60, 20),
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {},
+                                child: Row(
+                                  children: [
+                                    Image.asset('assets/icons/message.png',
+                                        width: 13,
+                                        height: 11,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue2
+                                                : AppTheme.blue6),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      "Mesaj Gönder",
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(width: 20),
+                              InkWell(
+                                onTap: () {},
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 2),
+                                      child: Image.asset('assets/icons/bag.png',
+                                          width: 11,
+                                          height: 11,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue2
+                                              : AppTheme.blue6),
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      "Firma Profili",
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
                 const SizedBox(height: 30),
                 Padding(
