@@ -56,7 +56,6 @@ final Map<String, String> tr = {
   'Comment-2': 'Yorum',
   'Comment-3': 'Yorum yaz',
   'Comment-4': 'Önceki yorumlar gör',
-  'Save': 'Kaydet',
   'Answer': 'Yanıtla',
   // MARKETPLACE PAGE
   'Results': 'Sonuçlar',
@@ -71,4 +70,17 @@ final Map<String, String> tr = {
   'Remove': 'Sil',
   'Address Choice': 'Adres Seçimi',
   'Name': 'İsim',
+  'Address': 'Adres',
+  'District': 'İlçe',
+  'City': 'Şehir',
+  'Postal Code': 'Posta Kodu',
+  'Choose': 'Seç',
+  'Add an Address': 'Adres Ekle',
+  'Agreement and Conditions': 'Sözleşme ve Koşullar',
+  'Agreement and Conditions Detail':
+      "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MER SİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önce den \nhesaplanamıyorsa fiyatın hesaplanma usul'ü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önce den hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usul'ü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
+  'I have read and I accept': 'Okudum kabul ediyorum',
+  'Confirm Basket': 'Sepeti Onayla',
+  // PROFILE PAGE
+  'Follow': 'Takip Et',
 };
