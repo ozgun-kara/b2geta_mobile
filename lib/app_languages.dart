@@ -69,6 +69,15 @@ class AppLanguages extends Translations {
           'Results': 'Results',
           'Minimum Order': 'min. order',
           'Contact to Supplier': 'Contact to Supplier',
+          // BASKET PAGE
+          'Basket Page Route': 'Homepage - My Basket',
+          'Delivery Time': 'Delivery Time:',
+          'Delivery State': 'To be discussed',
+          'Total Price': 'Total Price',
+          'Price Per Piece': 'Price per piece',
+          'Remove': 'Remove',
+          'Address Choice': 'Address Choice',
+          'Name': 'Name',
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -135,6 +144,15 @@ class AppLanguages extends Translations {
           'Results': 'Sonuçlar',
           'Minimum Order': 'adet min. sipariş',
           'Contact to Supplier': 'Tedarikçiye Ulaşın',
+          // BASKET PAGE
+          'Basket Page Route': 'Ana Sayfa - Sepetim',
+          'Delivery Time': 'Teslimat Süresi:',
+          'Delivery State': 'Müzakere edilecek',
+          'Total Price': 'Toplam Ücret',
+          'Price Per Piece': 'Adet başı ücret',
+          'Remove': 'Sil',
+          'Address Choice': 'Adres Seçimi',
+          'Name': 'İsim',
         },
         'de_DE': {
           // LANGUAGE PAGE
