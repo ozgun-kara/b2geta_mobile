@@ -51,8 +51,19 @@ class AppLanguages extends Translations {
           // HOMEPAGE
           'Posts': 'Posts',
           'Reels': 'Reels',
-          'Homepage Share':
+          'Homepage Share-1':
               'Share something about your company with your followers.',
+          'Homepage Share-2': 'shared the post',
+          'Homepage Share-3': 'Share',
+          'Homepage Share-4': 'Sharing',
+          'Like-1': 'Like',
+          'Like-2': 'Liked',
+          'Like-3': 'Liked',
+          'Comment-1': 'Comment',
+          'Comment-2': 'Comments',
+          'Comment-3': 'Write a comment',
+          'Save': 'Save',
+
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -101,7 +112,17 @@ class AppLanguages extends Translations {
           // HOMEPAGE
           'Posts': 'Postlar',
           'Reels': 'Reels',
-          'Homepage Share': 'Firman hakkında takipçilerinle bir şeyler paylaş.',
+          'Homepage Share-1': 'Firman hakkında takipçilerinle bir şeyler paylaş.',
+          'Homepage Share-2': 'gönderi paylaştı.',
+          'Homepage Share-3': 'Paylaş',
+          'Homepage Share-4': 'Paylaşım',
+          'Like-1': 'Beğen',
+          'Like-2': 'Beğendin',
+          'Like-3': 'Beğeni',
+          'Comment-1': 'Yorum Yap',
+          'Comment-2': 'Yorum',
+          'Comment-3': 'Yorum yaz',
+          'Save': 'Kaydet',
         },
         'de_DE': {
           // LANGUAGE PAGE
