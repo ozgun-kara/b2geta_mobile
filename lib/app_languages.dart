@@ -62,8 +62,13 @@ class AppLanguages extends Translations {
           'Comment-1': 'Comment',
           'Comment-2': 'Comments',
           'Comment-3': 'Write a comment',
+          'Comment-4': 'See previous comments',
           'Save': 'Save',
-
+          'Answer': 'Answer',
+          // MARKETPLACE PAGE
+          'Results': 'Results',
+          'Minimum Order': 'min. order',
+          'Contact to Supplier': 'Contact to Supplier',
         },
         'tr_TR': {
           // LANGUAGE PAGE
@@ -112,7 +117,8 @@ class AppLanguages extends Translations {
           // HOMEPAGE
           'Posts': 'Postlar',
           'Reels': 'Reels',
-          'Homepage Share-1': 'Firman hakkında takipçilerinle bir şeyler paylaş.',
+          'Homepage Share-1':
+              'Firman hakkında takipçilerinle bir şeyler paylaş.',
           'Homepage Share-2': 'gönderi paylaştı.',
           'Homepage Share-3': 'Paylaş',
           'Homepage Share-4': 'Paylaşım',
@@ -122,7 +128,13 @@ class AppLanguages extends Translations {
           'Comment-1': 'Yorum Yap',
           'Comment-2': 'Yorum',
           'Comment-3': 'Yorum yaz',
+          'Comment-4': 'Önceki yorumlar gör',
           'Save': 'Kaydet',
+          'Answer': 'Yanıtla',
+          // MARKETPLACE PAGE
+          'Results': 'Sonuçlar',
+          'Minimum Order': 'adet min. sipariş',
+          'Contact to Supplier': 'Tedarikçiye Ulaşın',
         },
         'de_DE': {
           // LANGUAGE PAGE

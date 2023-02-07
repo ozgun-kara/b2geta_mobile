@@ -975,7 +975,7 @@ class _HomePageState extends State<HomePage> {
                                                       width: 9.42,
                                                     ),
                                                     Text(
-                                                      "Önceki yorumları gör",
+                                                      'Comment-4'.tr,
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         fontFamily: AppTheme
@@ -1207,7 +1207,7 @@ class _HomePageState extends State<HomePage> {
                       width: 10.0,
                     ),
                     Text(
-                      "Yanıtla",
+                      'Answer'.tr,
                       style: TextStyle(
                         fontSize: 11,
                         fontFamily: AppTheme.appFontFamily,
