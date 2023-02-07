@@ -9,6 +9,7 @@ import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_pag
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyProfilPage extends StatefulWidget {
   const CompanyProfilPage({Key? key}) : super(key: key);
@@ -113,7 +114,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                     padding:
                                         const EdgeInsets.fromLTRB(13, 2, 13, 0),
                                     child: Text(
-                                      "Takip Et",
+                                      'Follow'.tr,
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontFamily: AppTheme.appFontFamily,

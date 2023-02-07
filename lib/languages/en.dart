@@ -56,7 +56,6 @@ final Map<String, String> en = {
   'Comment-2': 'Comments',
   'Comment-3': 'Write a comment',
   'Comment-4': 'See previous comments',
-  'Save': 'Save',
   'Answer': 'Answer',
   // MARKETPLACE PAGE
   'Results': 'Results',
@@ -71,4 +70,17 @@ final Map<String, String> en = {
   'Remove': 'Remove',
   'Address Choice': 'Address Choice',
   'Name': 'Name',
+  'Address': 'Address',
+  'District': 'District',
+  'City': 'City',
+  'Postal Code': 'Postal Code',
+  'Choose': 'Choose',
+  'Add an Address': 'Add an Address',
+  'Agreement and Conditions': 'Agreement and Conditions',
+  'Agreement and Conditions Detail':
+      "Preliminary information\nARTICLE 5 – (1) The consumer must be informed by the seller or the supplier, including all of the following, before the establishment of the distance contract or accepting any corresponding offer.\na) The basic characteristics of the goods or services subject to the contract ,\nb) Name or title of the seller or supplier, MER SİS number, if any,\nc) The full address, telephone number and similar contact information of the seller \nor the supplier, which allows the consumer to contact the seller or provider quickly, and the seller, if any, or Identity and address of the person acting on behalf of or on behalf of the supplier,\n) If there is a different contact information than the one specified in clause (c) for the seller or the supplier to convey the consumer's complaints, information regarding them,\nd) The total price and quality of the good or service, including all taxes If it cannot be calculated beforehand, the procedure for calculating the price, all shipping, delivery and similar additional costs, if any, and Information that additional costs may be paid if the costs cannot be calculated in advance,\ne) Additional costs imposed on consumers in cases where the cost of using the remote communication tool cannot be calculated over the usual fee schedule at the stage of conclusion of the contract,\nf) Information on payment, delivery, performance, and commitments, if any, related thereto. The seller or the supplier's resolution methods for the complaints,\ng) In cases where there is a right of withdrawal, the conditions, duration, procedure of the use of this right and information on the carrier stipulated by the seller for the return,",
+  'I have read and I accept': 'I have read and I accept',
+  'Confirm Basket': 'Confirm Basket',
+  // PROFILE PAGE
+  'Follow': 'Follow',
 };
