@@ -876,12 +876,15 @@ class _BasketPageState extends State<BasketPage> {
                                     "shipping_address_id": selectedAddressId!,
                                     "billing_address_id": selectedAddressId!,
                                     "agreement": "1"
-                                  }).then((value) {
-                                    if (value) {
+                                  }).then((List? value) {
+                                    if (value != null) {
+                                      debugPrint("${value}veri");
+
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) =>
-                                            const ShoppingSummarySubPage(),
+                                            ShoppingSummarySubPage(
+                                                companyInfoList: value),
                                       ));
                                       BasketServices().emptyBasketCall();
                                     }

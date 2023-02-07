@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
+
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  Future<bool> createOrderCall(
+  Future<List?> createOrderCall(
       {required Map<String, String> requestBody}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/orders/create'),
@@ -12,18 +14,21 @@ class OrderService {
       },
       body: requestBody,
     );
+
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
       if (status == true) {
-        return true;
+        List data = json.decode(response.body)["data"];
+        return data;
       } else {
-        // debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return null;
       }
     } else {
-      //debugPrint("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("API ERROR\nSTATUS CODE:  ${response.body}");
 
-      return false;
+      return null;
     }
   }
 }
