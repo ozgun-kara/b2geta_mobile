@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import '../../app_theme.dart';
 import '../../models/basket_model.dart';
@@ -97,7 +98,7 @@ class _BasketPageState extends State<BasketPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Adres Seçimi",
+                  'Address Choice'.tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
@@ -171,7 +172,7 @@ class _BasketPageState extends State<BasketPage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        "Name",
+                                                        'Name'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -198,7 +199,7 @@ class _BasketPageState extends State<BasketPage> {
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
-                                                        "Şehir",
+                                                        'City'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -233,7 +234,7 @@ class _BasketPageState extends State<BasketPage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        "Adres",
+                                                        'Address'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -260,7 +261,7 @@ class _BasketPageState extends State<BasketPage> {
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
-                                                        "Ülke",
+                                                        'Country'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -295,7 +296,7 @@ class _BasketPageState extends State<BasketPage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        "İlçe",
+                                                        'District'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -324,7 +325,7 @@ class _BasketPageState extends State<BasketPage> {
                                                       const SizedBox(
                                                           height: 28),
                                                       Text(
-                                                        "Posta Kodu",
+                                                        'Postal Code'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -373,7 +374,7 @@ class _BasketPageState extends State<BasketPage> {
                                                         ),
                                                         elevation: 0,
                                                         child: Text(
-                                                          "Seç",
+                                                          'Choose'.tr,
                                                           style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -477,7 +478,7 @@ class _BasketPageState extends State<BasketPage> {
                                                           const SizedBox(
                                                               height: 28),
                                                           Text(
-                                                            "Şehir",
+                                                            'City'.tr,
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -551,7 +552,7 @@ class _BasketPageState extends State<BasketPage> {
                                                           const SizedBox(
                                                               height: 28),
                                                           Text(
-                                                            "Ülke",
+                                                            'Country'.tr,
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -626,7 +627,7 @@ class _BasketPageState extends State<BasketPage> {
                                                           const SizedBox(
                                                               height: 28),
                                                           Text(
-                                                            "Posta Kodu",
+                                                            'Postal Code'.tr,
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -742,7 +743,7 @@ class _BasketPageState extends State<BasketPage> {
                           ),
                           elevation: 0,
                           child: Text(
-                            "Adres Ekle",
+                            'Add an Address'.tr,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
@@ -770,7 +771,7 @@ class _BasketPageState extends State<BasketPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "Sözleşme ve Koşullar",
+                  'Agreement and Conditions'.tr,
                   style: TextStyle(
                     fontSize: 14,
                     fontFamily: AppTheme.appFontFamily,
@@ -801,7 +802,7 @@ class _BasketPageState extends State<BasketPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Text(
-                      "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MER SİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önce den \nhesaplanamıyorsa fiyatın hesaplanma usul'ü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önce den hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usul'ü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
+                      'Agreement and Conditions Detail'.tr,
                       style: TextStyle(
                         fontSize: 11,
                         height: 1.44,
@@ -831,7 +832,7 @@ class _BasketPageState extends State<BasketPage> {
                         width: 12,
                       ),
                       Text(
-                        "Okudum kabul ediyorum",
+                        'I have read and I accept'.tr,
                         style: TextStyle(
                           fontSize: 12,
                           height: 1,
@@ -856,7 +857,7 @@ class _BasketPageState extends State<BasketPage> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
-                          'Sepeti Onayla',
+                          'Confirm Basket'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,
@@ -916,7 +917,7 @@ class _BasketPageState extends State<BasketPage> {
         child: Row(
           children: [
             Text(
-              "Ana Sayfa - Sepetim",
+              'Basket Page Route'.tr,
               style: TextStyle(
                 fontSize: 12,
                 fontFamily: AppTheme.appFontFamily,
@@ -955,7 +956,7 @@ class _BasketPageState extends State<BasketPage> {
           RichText(
             text: TextSpan(children: [
               TextSpan(
-                text: 'Sepetim',
+                text: 'My Basket'.tr,
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: AppTheme.appFontFamily,
@@ -1062,15 +1063,16 @@ class _BasketPageState extends State<BasketPage> {
                         Row(
                           children: [
                             Text(
-                              "Teslimat Süresi:",
+                              'Delivery Time'.tr,
                               style: TextStyle(
                                   fontSize: 12,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w400,
                                   color: AppTheme.white15),
                             ),
+                            SizedBox(width: 4),
                             Text(
-                              "Müzakere edilecek",
+                              'Delivery State'.tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: AppTheme.appFontFamily,
@@ -1243,7 +1245,7 @@ class _BasketPageState extends State<BasketPage> {
                             height: 6,
                           ),
                           Text(
-                            "Sil",
+                            'Remove'.tr,
                             style: TextStyle(
                               fontSize: 11,
                               fontFamily: AppTheme.appFontFamily,
@@ -1263,7 +1265,7 @@ class _BasketPageState extends State<BasketPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Toplam Ücret",
+                        'Total Price'.tr,
                         style: TextStyle(
                             fontSize: 10,
                             fontFamily: AppTheme.appFontFamily,
@@ -1295,7 +1297,7 @@ class _BasketPageState extends State<BasketPage> {
                       RichText(
                           text: TextSpan(children: [
                         TextSpan(
-                          text: "Adet başı ücret 8,5 ",
+                          text: 'Price Per Piece'.tr + ' ' + '8,5',
                           style: TextStyle(
                             fontSize: 11,
                             fontFamily: AppTheme.appFontFamily,
@@ -1346,7 +1348,7 @@ class _BasketPageState extends State<BasketPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Toplam Ücret",
+                      'Total Price'.tr,
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,

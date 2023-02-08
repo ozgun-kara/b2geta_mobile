@@ -434,7 +434,7 @@ class _HomePageState extends State<HomePage> {
                                   fillColor: themeMode
                                       ? AppTheme.white3
                                       : AppTheme.black7,
-                                  hintText: 'Homepage Share'.tr,
+                                  hintText: 'Homepage Share-1'.tr,
                                   hintStyle: TextStyle(
                                       fontSize: 11,
                                       fontFamily: AppTheme.appFontFamily,
@@ -590,7 +590,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' gönderi paylaştı.',
+                                                  text: ' ' +
+                                                      'Homepage Share-2'.tr,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     color: AppTheme.white15,
@@ -735,8 +736,8 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                               Text(
                                                 feed.likeStatus!
-                                                    ? "Beğendin"
-                                                    : "Beğen",
+                                                    ? 'Like-2'.tr
+                                                    : 'Like-1'.tr,
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
@@ -764,7 +765,7 @@ class _HomePageState extends State<HomePage> {
                                               width: 4.0,
                                             ),
                                             Text(
-                                              "Yorum yap",
+                                              'Comment-1'.tr,
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -790,7 +791,7 @@ class _HomePageState extends State<HomePage> {
                                               width: 4.0,
                                             ),
                                             Text(
-                                              "Paylaş",
+                                              'Homepage Share-3'.tr,
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -816,7 +817,7 @@ class _HomePageState extends State<HomePage> {
                                               width: 4.0,
                                             ),
                                             Text(
-                                              "Kaydet",
+                                              'Save'.tr,
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -856,8 +857,8 @@ class _HomePageState extends State<HomePage> {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                                const TextSpan(
-                                                  text: ' Beğeni',
+                                                TextSpan(
+                                                  text: ' ' + 'Like-3'.tr,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -875,7 +876,7 @@ class _HomePageState extends State<HomePage> {
                                                     AppTheme.appFontFamily,
                                                 color: AppTheme.white15,
                                               ),
-                                              children: const [
+                                              children: [
                                                 TextSpan(
                                                   text: '48',
                                                   style: TextStyle(
@@ -883,7 +884,7 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' Yorum',
+                                                  text: ' ' + 'Comment-2'.tr,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -901,7 +902,7 @@ class _HomePageState extends State<HomePage> {
                                                     AppTheme.appFontFamily,
                                                 color: AppTheme.white15,
                                               ),
-                                              children: const [
+                                              children: [
                                                 TextSpan(
                                                   text: '93',
                                                   style: TextStyle(
@@ -909,7 +910,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' Paylaşım',
+                                                  text: ' ' +
+                                                      'Homepage Share-4'.tr,
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
@@ -973,7 +975,7 @@ class _HomePageState extends State<HomePage> {
                                                       width: 9.42,
                                                     ),
                                                     Text(
-                                                      "Önceki yorumları gör",
+                                                      'Comment-4'.tr,
                                                       style: TextStyle(
                                                         fontSize: 12,
                                                         fontFamily: AppTheme
@@ -1061,7 +1063,7 @@ class _HomePageState extends State<HomePage> {
                   filled: true,
                   fillColor:
                       themeMode ? const Color(0XFFFAFBFE) : AppTheme.black7,
-                  hintText: "Yorum yaz",
+                  hintText: 'Comment-3'.tr,
                   hintStyle: TextStyle(
                       fontSize: 12,
                       fontFamily: AppTheme.appFontFamily,
@@ -1193,7 +1195,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Beğen",
+                      'Like-1'.tr,
                       style: TextStyle(
                         fontSize: 11,
                         fontFamily: AppTheme.appFontFamily,
@@ -1205,7 +1207,7 @@ class _HomePageState extends State<HomePage> {
                       width: 10.0,
                     ),
                     Text(
-                      "Yanıtla",
+                      'Answer'.tr,
                       style: TextStyle(
                         fontSize: 11,
                         fontFamily: AppTheme.appFontFamily,
