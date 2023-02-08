@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProductDetailFirstTabSubPage extends StatefulWidget {
   const ProductDetailFirstTabSubPage({Key? key}) : super(key: key);
@@ -32,7 +33,7 @@ class _ProductDetailFirstTabSubPageState
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
           child: Text(
-            "Hızlı Detaylar",
+            'Features'.tr,
             style: TextStyle(
               fontSize: 14,
               fontFamily: AppTheme.appFontFamily,
@@ -54,7 +55,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Özel kullanım:",
+                      'Special use'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -87,7 +88,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Tür:",
+                      'Type'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -120,7 +121,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Uygulama:",
+                      'Usage'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -153,7 +154,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Malzeme:",
+                      'Material'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -186,7 +187,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Katlanmış:",
+                      'Folded'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -219,7 +220,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Marka adı:",
+                      'Brand name'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -252,7 +253,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Ürün adı:",
+                      'Product name'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -285,7 +286,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Tarzı:",
+                      'Style'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -318,7 +319,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Renk:",
+                      'Color'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -351,7 +352,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Adedi:",
+                      'Piece-2'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -384,7 +385,7 @@ class _ProductDetailFirstTabSubPageState
                   SizedBox(
                     width: 90,
                     child: Text(
-                      "Çerçeve:",
+                      'Frame'.tr,
                       style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
