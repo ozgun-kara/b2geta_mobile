@@ -523,7 +523,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "50 - 199 " + 'Piece'.tr,
+                                          "50 - 199 " + 'Piece-1'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -588,7 +588,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "200 - 499 " + 'Piece'.tr,
+                                          "200 - 499 " + 'Piece-1'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -654,7 +654,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "500 - 999 " + 'Piece'.tr,
+                                          "500 - 999 " + 'Piece-1'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -720,7 +720,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          ">= 1000 " + 'Piece'.tr,
+                                          ">= 1000 " + 'Piece-1'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -1275,7 +1275,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(12),
                                     child: Text(
-                                      'Piece'.tr,
+                                      'Piece-1'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -2026,7 +2026,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'Ürün Detayları',
+                                                'Product Details'.tr,
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontFamily:
@@ -2084,7 +2084,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'Alıcı Yorumları (8)',
+                                                'Customer Comments'.tr +
+                                                    ' ' +
+                                                    '(8)',
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontFamily:
