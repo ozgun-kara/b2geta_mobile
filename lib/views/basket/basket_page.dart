@@ -1,15 +1,15 @@
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
+import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-import '../../app_theme.dart';
-import '../../models/basket_model.dart';
-import '../../providers/theme_provider.dart';
-import '../../services/member/addresses/member_addresses_services.dart';
 
 class BasketPage extends StatefulWidget {
   const BasketPage({Key? key}) : super(key: key);
@@ -519,7 +519,7 @@ class _BasketPageState extends State<BasketPage> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            "Adres",
+                                                            'Address'.tr,
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -593,7 +593,7 @@ class _BasketPageState extends State<BasketPage> {
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            "İlçe",
+                                                            'District'.tr,
                                                             style: TextStyle(
                                                               fontSize: 12,
                                                               fontFamily: AppTheme
@@ -682,7 +682,7 @@ class _BasketPageState extends State<BasketPage> {
                                                             ),
                                                             elevation: 0,
                                                             child: Text(
-                                                              "Seçildi",
+                                                              'Chosen'.tr,
                                                               style: TextStyle(
                                                                   fontSize: 12,
                                                                   fontFamily:
