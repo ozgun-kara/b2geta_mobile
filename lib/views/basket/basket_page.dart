@@ -1063,7 +1063,7 @@ class _BasketPageState extends State<BasketPage> {
                         Row(
                           children: [
                             Text(
-                              'Delivery Time'.tr,
+                              'Delivery Time-2'.tr,
                               style: TextStyle(
                                   fontSize: 12,
                                   fontFamily: AppTheme.appFontFamily,
@@ -1072,7 +1072,7 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                             SizedBox(width: 4),
                             Text(
-                              'Delivery State'.tr,
+                              'Delivery State-2'.tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: AppTheme.appFontFamily,

@@ -1,4 +1,6 @@
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
+import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +14,7 @@ import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_first_tab_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_second_tab_sub_page.dart';
-
-import '../../../providers/navigation_page_provider.dart';
-import '../../../utils.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProductDetailSubPage extends StatefulWidget {
   const ProductDetailSubPage({
@@ -470,7 +470,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              "6 İncelemeler   -   8 alıcılar",
+                              '6' +
+                                  ' ' +
+                                  'Reviews'.tr +
+                                  '   -   ' +
+                                  '8' +
+                                  ' ' +
+                                  'Receivers'.tr,
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: AppTheme.appFontFamily,
@@ -517,7 +523,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "50 - 199 Adet",
+                                          "50 - 199 " + 'Piece'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -582,7 +588,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "200 - 499 Adet",
+                                          "200 - 499 " + 'Piece'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -648,7 +654,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "500 - 999 Adet",
+                                          "500 - 999 " + 'Piece'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -714,7 +720,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          ">= 1000 Adet",
+                                          ">= 1000 " + 'Piece'.tr,
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -768,7 +774,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                             Row(
                               children: [
                                 Text(
-                                  "Boyut:",
+                                  'Dimension'.tr,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -950,7 +956,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                             Row(
                               children: [
                                 Text(
-                                  "Renk:",
+                                  'Color'.tr,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -1234,7 +1240,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                             Row(
                               children: [
                                 Text(
-                                  "Teslimat süresi:",
+                                  'Delivery Time-1'.tr,
                                   style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -1269,7 +1275,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(12),
                                     child: Text(
-                                      "Adet",
+                                      'Piece'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -1339,7 +1345,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(12),
                                     child: Text(
-                                      "Gün",
+                                      'Day'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -1390,7 +1396,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   Padding(
                                     padding: const EdgeInsets.all(12),
                                     child: Text(
-                                      "Müzakere Edilecek",
+                                      'Delivery State-1'.tr,
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -1438,7 +1444,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         : AppTheme.black18,
                                     child: Center(
                                       child: Text(
-                                        "Tedarikçi",
+                                        'Supplier'.tr,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: AppTheme.appFontFamily,
@@ -1555,7 +1561,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Mağaza puanı",
+                                                  'Seller Rating'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1589,7 +1595,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Yanıt Süresi",
+                                                  'Response Time'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1623,7 +1629,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Üyelik süresi",
+                                                  'Membership Period'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1657,7 +1663,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Toplam ticaret",
+                                                  'Total Trade'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1691,7 +1697,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               child: Row(
                                                 children: [
                                                   Text(
-                                                    "Sertifikalar",
+                                                    'Certificates'.tr,
                                                     style: TextStyle(
                                                       decoration: TextDecoration
                                                           .underline,
@@ -1733,7 +1739,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Zamanında Teslim",
+                                                  'Timely Delivery'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1767,7 +1773,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Personel",
+                                                  'Employee'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1801,7 +1807,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  "Kuruluş",
+                                                  'Establishment'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -1858,7 +1864,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     Radius.circular(5)),
                                               ),
                                               child: Text(
-                                                "Firma Profili",
+                                                'Company Profile'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -1915,7 +1921,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   ),
                                                   const SizedBox(width: 6),
                                                   Text(
-                                                    "Mağaza",
+                                                    'Store'.tr,
                                                     style: TextStyle(
                                                       fontSize: 12,
                                                       fontFamily: AppTheme
@@ -1972,7 +1978,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       padding: const EdgeInsets.fromLTRB(
                                           12, 2, 12, 0),
                                       child: Text(
-                                        "Takip Et",
+                                        'Follow'.tr,
                                         style: TextStyle(
                                           fontSize: 11,
                                           fontFamily: AppTheme.appFontFamily,
@@ -2529,7 +2535,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
         animation: scrollController,
         builder: (context, child) {
           return AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 200),
               height: scrollController.hasClients
                   ? scrollController.position.userScrollDirection ==
                           ScrollDirection.reverse
