@@ -320,7 +320,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                 TextSpan(
                                                   children: [
                                                     TextSpan(
-                                                      text: 'Sonuçlar',
+                                                      text: 'Results'.tr,
                                                       style: TextStyle(
                                                         fontSize: 14,
                                                         fontFamily: AppTheme
@@ -684,7 +684,10 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                 const SizedBox(
                                                                     height: 2),
                                                                 Text(
-                                                                  "10 adet min. sipariş",
+                                                                  "10" +
+                                                                      " " +
+                                                                      'Minimum Order'
+                                                                          .tr,
                                                                   style:
                                                                       TextStyle(
                                                                     fontSize:
@@ -922,7 +925,10 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                         ])),
 
                                                                     Text(
-                                                                      "10 adet min. sipariş",
+                                                                      "10" +
+                                                                          " " +
+                                                                          'Minimum Order'
+                                                                              .tr,
                                                                       style:
                                                                           TextStyle(
                                                                         fontSize:
@@ -1029,7 +1035,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                                 Image.asset('assets/icons/comment.png', width: 12.5, height: 12.5, color: AppTheme.black16),
                                                                                 const SizedBox(width: 3.5),
                                                                                 Text(
-                                                                                  "Tedarikçiye Ulaşın",
+                                                                                  'Contact to Supplier'.tr,
                                                                                   style: TextStyle(
                                                                                     fontSize: 10,
                                                                                     fontFamily: AppTheme.appFontFamily,

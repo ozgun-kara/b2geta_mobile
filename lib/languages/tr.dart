@@ -42,6 +42,13 @@ final Map<String, String> tr = {
   'My Basket': 'Sepetim',
   'My Account': 'Hesabım',
   'AppBar Search': 'Aranacak kelimeyi giriniz',
+  // MENU
+  'My Orders': 'Siparişlerim',
+  'Disputes': 'Anlaşmazlıklar',
+  'Account Settings': 'Hesap Ayarları',
+  'My Addresses': 'Adreslerim',
+  'Follow List': 'Takip Listesi',
+  'Log Out': 'Çıkış',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
@@ -75,6 +82,7 @@ final Map<String, String> tr = {
   'City': 'Şehir',
   'Postal Code': 'Posta Kodu',
   'Choose': 'Seç',
+  'Chosen': 'Seçildi',
   'Add an Address': 'Adres Ekle',
   'Agreement and Conditions': 'Sözleşme ve Koşullar',
   'Agreement and Conditions Detail':

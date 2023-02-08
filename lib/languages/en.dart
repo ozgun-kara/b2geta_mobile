@@ -42,6 +42,13 @@ final Map<String, String> en = {
   'My Basket': 'My Basket',
   'My Account': 'My Account',
   'AppBar Search': 'Search',
+  // MENU
+  'My Orders': 'My Orders',
+  'Disputes': 'Disputes',
+  'Account Settings': 'Account Settings',
+  'My Addresses': 'My Addresses',
+  'Follow List': 'Follow List',
+  'Log Out': 'Log Out',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
@@ -75,6 +82,7 @@ final Map<String, String> en = {
   'City': 'City',
   'Postal Code': 'Postal Code',
   'Choose': 'Choose',
+  'Chosen': 'Chosen',
   'Add an Address': 'Add an Address',
   'Agreement and Conditions': 'Agreement and Conditions',
   'Agreement and Conditions Detail':

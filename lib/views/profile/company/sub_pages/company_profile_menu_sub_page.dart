@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'company_addresses_sub_page.dart';
 import 'company_orders_sub_pages.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyProfileMenuSubPage extends StatefulWidget {
   const CompanyProfileMenuSubPage({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Siparişlerim",
+                'My Orders'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -80,7 +81,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Anlaşmazlıklar",
+                'Disputes'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -95,7 +96,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Hesap Ayarları",
+                'Account Settings'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -110,7 +111,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Adreslerim",
+                'My Addresses'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -131,7 +132,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Takip Listesi",
+                'Follow List'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -146,7 +147,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                "Çıkış",
+                'Log Out'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,

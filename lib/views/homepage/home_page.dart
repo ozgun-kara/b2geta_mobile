@@ -1,8 +1,10 @@
 // ignore_for_file: unused_field, deprecated_member_use
 
 import 'dart:io';
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
@@ -11,8 +13,6 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
-import '../../app_theme.dart';
-import '../../providers/theme_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -151,6 +151,7 @@ class _HomePageState extends State<HomePage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
+
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white33 : AppTheme.black24,
       body: Consumer<HomePageProvider>(
