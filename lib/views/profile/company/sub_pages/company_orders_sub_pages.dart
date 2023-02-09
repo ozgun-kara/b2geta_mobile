@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'company_orders_detail_sub_page.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyOrdersSubPage extends StatefulWidget {
   const CompanyOrdersSubPage({Key? key}) : super(key: key);
@@ -107,7 +108,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
             const SizedBox(height: 21),
             Text(
-              "Siparişlerim",
+              'My Orders'.tr,
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: AppTheme.appFontFamily,
@@ -173,7 +174,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Tarih:",
+                                            'Date:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -196,7 +197,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const SizedBox(height: 16),
                                           Text(
-                                            "Satıcı:",
+                                            'Seller:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -226,7 +227,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Sipariş No:",
+                                            'Order Number:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -249,7 +250,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const SizedBox(height: 16),
                                           Text(
-                                            "Miktar:",
+                                            'Quantity:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -279,7 +280,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            "Ürün No:",
+                                            'Product Number:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -302,7 +303,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const SizedBox(height: 16),
                                           Text(
-                                            "Durum:",
+                                            'Status:'.tr,
                                             style: TextStyle(
                                               fontSize: 12,
                                               fontFamily:
@@ -313,7 +314,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           items[index].status == "1"
                                               ? Text(
-                                                  "Onaylandı",
+                                                  'Approved'.tr,
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily:
@@ -326,7 +327,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                 )
                                               : items[index].status == "0"
                                                   ? Text(
-                                                      "Değerlendiriliyor",
+                                                      'Evaluating'.tr,
                                                       style: TextStyle(
                                                         fontSize: 13,
                                                         fontFamily: AppTheme
@@ -339,7 +340,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                       ),
                                                     )
                                                   : Text(
-                                                      "Reddedildi",
+                                                      'Denied'.tr,
                                                       style: TextStyle(
                                                         fontSize: 13,
                                                         fontFamily: AppTheme
@@ -386,7 +387,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const SizedBox(width: 5),
                                           Text(
-                                            "Mesaj Gönder",
+                                            'Send Message'.tr,
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontFamily:
@@ -415,7 +416,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const SizedBox(width: 6),
                                           Text(
-                                            "Detaylar",
+                                            'Details'.tr,
                                             style: TextStyle(
                                                 fontSize: 12,
                                                 fontFamily:
