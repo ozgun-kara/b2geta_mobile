@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/message_model.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/messages/message_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../providers/theme_provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class MessagesPage extends StatefulWidget {
   const MessagesPage({Key? key}) : super(key: key);
@@ -46,6 +46,7 @@ class _MessagesPageState extends State<MessagesPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
+
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black4,
       appBar: AppBar(
@@ -154,7 +155,7 @@ class _MessagesPageState extends State<MessagesPage> {
                         color: themeMode ? AppTheme.white21 : AppTheme.black18),
                   ),
                   contentPadding: EdgeInsets.only(left: 25.0, top: 20),
-                  hintText: "Mesaj ara",
+                  hintText: 'Search Message'.tr,
                   hintStyle: TextStyle(
                     fontSize: 12,
                     fontFamily: AppTheme.appFontFamily,
@@ -181,7 +182,7 @@ class _MessagesPageState extends State<MessagesPage> {
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Text(
-                "Sohbetlerim (1)",
+                'Chats'.tr + ' (1)',
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
