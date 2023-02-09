@@ -425,7 +425,7 @@ class _ProductDetailFirstTabSubPageState
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
           child: Text(
-            "Tedarik Kapasitesi",
+            'Supply Capacity-1'.tr,
             style: TextStyle(
               fontSize: 14,
               fontFamily: AppTheme.appFontFamily,
@@ -443,7 +443,7 @@ class _ProductDetailFirstTabSubPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Tedarik Kapasitesi:",
+                'Supply Capacity-2'.tr,
                 style: TextStyle(
                   fontSize: 13,
                   fontFamily: AppTheme.appFontFamily,
@@ -479,7 +479,7 @@ class _ProductDetailFirstTabSubPageState
         Padding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 0),
           child: Text(
-            "Ambalajlama ve Teslimat",
+            'Packaging and Delivery'.tr,
             style: TextStyle(
               fontSize: 14,
               fontFamily: AppTheme.appFontFamily,
@@ -497,7 +497,7 @@ class _ProductDetailFirstTabSubPageState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Paketleme Detayları:",
+                'Packaging Details'.tr,
                 style: TextStyle(
                   fontSize: 13,
                   fontFamily: AppTheme.appFontFamily,

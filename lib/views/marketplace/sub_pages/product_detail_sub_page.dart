@@ -2164,7 +2164,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                         Row(
                           children: [
                             Text(
-                              "Firmanın Diğer Ürünleri",
+                              'Other Products of the Company'.tr,
                               style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
@@ -2282,7 +2282,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    items[index].subTitle ?? '',
+                                                    '10' +
+                                                        ' ' +
+                                                        'Minimum Order'.tr,
                                                     style: TextStyle(
                                                       fontSize: 10,
                                                       fontFamily: AppTheme
@@ -2395,7 +2397,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                               const SizedBox(
                                                                   width: 3.5),
                                                               Text(
-                                                                "Tedarikçiye Ulaşın",
+                                                                'Contact to Supplier'
+                                                                    .tr,
                                                                 style:
                                                                     TextStyle(
                                                                   fontSize: 10,
@@ -2564,7 +2567,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       children: [
                         Flexible(
                           child: Text(
-                            "1 Adet",
+                            '1' + ' ' + 'Piece-1'.tr,
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 12,
@@ -2601,7 +2604,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   BorderRadius.all(Radius.circular(7)),
                             ),
                             child: Text(
-                              "Sepete Ekle",
+                              'Add to Basket'.tr,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
@@ -2643,7 +2646,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   ));
                             },
                             child: Text(
-                              "Sepete Git",
+                              'Go To Basket'.tr,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
