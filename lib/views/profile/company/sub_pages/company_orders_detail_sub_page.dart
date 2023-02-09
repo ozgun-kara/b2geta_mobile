@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/models/dummy_models/company_order_dummy_model.dart
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyOrdersDetailSubPage extends StatefulWidget {
   const CompanyOrdersDetailSubPage({Key? key, required this.passedObject})
@@ -127,7 +128,7 @@ class _CompanyOrdersDetailSubPageState
                   ),
                 ),
                 Text(
-                  "Sipariş Detay #${widget.passedObject.orderNumber}",
+                  'Order Detail'.tr + ' #${widget.passedObject.orderNumber}',
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: AppTheme.appFontFamily,
@@ -207,7 +208,7 @@ class _CompanyOrdersDetailSubPageState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Tarih:",
+                                    'Date:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -228,7 +229,7 @@ class _CompanyOrdersDetailSubPageState
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
-                                    "Satıcı:",
+                                    'Seller:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -255,7 +256,7 @@ class _CompanyOrdersDetailSubPageState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Sipariş No:",
+                                    'Order Number:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -276,7 +277,7 @@ class _CompanyOrdersDetailSubPageState
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
-                                    "Miktar:",
+                                    'Quantity:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -303,7 +304,7 @@ class _CompanyOrdersDetailSubPageState
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Ürün No:",
+                                    'Product Number:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -324,7 +325,7 @@ class _CompanyOrdersDetailSubPageState
                                   ),
                                   const SizedBox(height: 16),
                                   Text(
-                                    "Durum:",
+                                    'Status:'.tr,
                                     style: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
@@ -334,7 +335,7 @@ class _CompanyOrdersDetailSubPageState
                                   ),
                                   widget.passedObject.status == "1"
                                       ? Text(
-                                          "Onaylandı",
+                                          'Approved'.tr,
                                           style: TextStyle(
                                             fontSize: 13,
                                             fontFamily: AppTheme.appFontFamily,
@@ -346,7 +347,7 @@ class _CompanyOrdersDetailSubPageState
                                         )
                                       : widget.passedObject.status == "0"
                                           ? Text(
-                                              "Değerlendiriliyor",
+                                              'Evaluating'.tr,
                                               style: TextStyle(
                                                 fontSize: 13,
                                                 fontFamily:
@@ -358,7 +359,7 @@ class _CompanyOrdersDetailSubPageState
                                               ),
                                             )
                                           : Text(
-                                              "Reddedildi",
+                                              'Denied'.tr,
                                               style: TextStyle(
                                                 fontSize: 13,
                                                 fontFamily:
@@ -381,7 +382,7 @@ class _CompanyOrdersDetailSubPageState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Adres:",
+                                  'Address:'.tr,
                                   style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: AppTheme.appFontFamily,
@@ -402,7 +403,7 @@ class _CompanyOrdersDetailSubPageState
                                 ),
                                 const SizedBox(height: 16),
                                 Text(
-                                  "Toplam Ücret:",
+                                  'Total Price:'.tr,
                                   style: TextStyle(
                                     fontSize: 10,
                                     fontFamily: AppTheme.appFontFamily,
@@ -437,7 +438,7 @@ class _CompanyOrdersDetailSubPageState
                                 RichText(
                                     text: TextSpan(children: [
                                   TextSpan(
-                                    text: "Adet başı ücret ",
+                                    text: 'Price Per Piece'.tr + ' ',
                                     style: TextStyle(
                                       fontSize: 11,
                                       fontFamily: AppTheme.appFontFamily,
@@ -498,7 +499,7 @@ class _CompanyOrdersDetailSubPageState
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                "Mesaj Gönder",
+                                'Send Message'.tr,
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: AppTheme.appFontFamily,
@@ -524,7 +525,7 @@ class _CompanyOrdersDetailSubPageState
                               ),
                               const SizedBox(width: 5),
                               Text(
-                                "Anlaşmazlık Başlat",
+                                'Start Dispute'.tr,
                                 style: TextStyle(
                                     fontSize: 12,
                                     fontFamily: AppTheme.appFontFamily,

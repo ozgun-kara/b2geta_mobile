@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/services/member/addresses/member_addresses_service
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyAddressesSubPage extends StatefulWidget {
   const CompanyAddressesSubPage({Key? key}) : super(key: key);
@@ -121,7 +122,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                   children: [
                     Expanded(
                       child: Text(
-                        "AnaSayfa - Adreslerim",
+                        'Edit Address Page Route'.tr,
                         style: TextStyle(
                           fontSize: 11,
                           fontFamily: AppTheme.appFontFamily,
@@ -190,7 +191,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Name",
+                                                'Name'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -213,7 +214,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                               ),
                                               const SizedBox(height: 28),
                                               Text(
-                                                "Şehir",
+                                                'City'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -243,7 +244,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "Adres",
+                                                'Address'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -266,7 +267,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                               ),
                                               const SizedBox(height: 28),
                                               Text(
-                                                "Ülke",
+                                                'Country'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -296,7 +297,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                "İlçe",
+                                                'District'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -319,7 +320,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                               ),
                                               const SizedBox(height: 28),
                                               Text(
-                                                "Posta Kodu",
+                                                'Postal Code'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -362,7 +363,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                 ),
                                                 elevation: 0,
                                                 child: Text(
-                                                  "Düzenle",
+                                                  'Edit'.tr,
                                                   style: TextStyle(
                                                       fontSize: 12,
                                                       fontFamily: AppTheme
@@ -389,7 +390,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                 ),
                                                 elevation: 0,
                                                 child: Text(
-                                                  "Sil",
+                                                  'Remove'.tr,
                                                   style: TextStyle(
                                                       fontSize: 12,
                                                       fontFamily: AppTheme
@@ -443,7 +444,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                     ),
                     elevation: 0,
                     child: Text(
-                      "Adres Ekle",
+                      'Add an Address'.tr,
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
