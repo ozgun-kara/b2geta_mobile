@@ -8,6 +8,7 @@ import 'package:b2geta_mobile/providers/marketplace_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class ProductDetailSecondTabSubPage extends StatefulWidget {
   const ProductDetailSecondTabSubPage({Key? key}) : super(key: key);
@@ -83,7 +84,7 @@ class _ProductDetailSecondTabSubPageState
             ),
             const SizedBox(height: 14),
             Text(
-              '2 yorum',
+              '2' + ' ' + 'Comment'.tr,
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
@@ -541,7 +542,7 @@ class _ProductDetailSecondTabSubPageState
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Filtrele',
+                    'Filter'.tr,
                     style: TextStyle(
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
@@ -555,7 +556,7 @@ class _ProductDetailSecondTabSubPageState
                       child: Column(
                         children: [
                           Text(
-                            'Tümü',
+                            'All'.tr,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: AppTheme.appFontFamily,
@@ -603,7 +604,7 @@ class _ProductDetailSecondTabSubPageState
                       child: Column(
                         children: [
                           Text(
-                            'Fotoğraflı',
+                            'With photo'.tr,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: AppTheme.appFontFamily,
@@ -651,7 +652,7 @@ class _ProductDetailSecondTabSubPageState
                       child: Column(
                         children: [
                           Text(
-                            'En yeniler',
+                            'Latest'.tr,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: AppTheme.appFontFamily,
@@ -981,7 +982,7 @@ class _ProductDetailSecondTabSubPageState
             InkWell(
               onTap: () {},
               child: Text(
-                "Daha fazla göster",
+                'Show more'.tr,
                 style: TextStyle(
                   fontSize: 15,
                   fontFamily: AppTheme.appFontFamily,
