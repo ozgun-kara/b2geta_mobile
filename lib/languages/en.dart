@@ -42,6 +42,11 @@ final Map<String, String> en = {
   'My Basket': 'My Basket',
   'My Account': 'My Account',
   'AppBar Search': 'Search',
+  // MESSAGE PAGE
+  'Search Message': 'Search message',
+  'Chats': 'Chats',
+  'Back to Messages': 'Back to messages',
+  'Write something': 'Write something',
   // MENU
   'My Orders': 'My Orders',
   'Disputes': 'Disputes',
@@ -67,7 +72,6 @@ final Map<String, String> en = {
   'Start Dispute': 'Start Dispute',
   'Edit': 'Edit',
   'Edit Address Page Route': 'Homepage - My Addresses',
-
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',

@@ -42,6 +42,11 @@ final Map<String, String> tr = {
   'My Basket': 'Sepetim',
   'My Account': 'Hesabım',
   'AppBar Search': 'Aranacak kelimeyi giriniz',
+  // MESSAGE PAGE
+  'Search Message': 'Mesaj ara',
+  'Chats': 'Sohbetlerim',
+  'Back to Messages': 'Mesajlara geri dön',
+  'Write something': 'Bir şeyler yaz',
   // MENU
   'My Orders': 'Siparişlerim',
   'Disputes': 'Anlaşmazlıklar',
@@ -67,7 +72,6 @@ final Map<String, String> tr = {
   'Start Dispute': 'Anlaşmazlık Başlat',
   'Edit': 'Düzenle',
   'Edit Address Page Route': 'Anasayfa - Adreslerim',
-
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

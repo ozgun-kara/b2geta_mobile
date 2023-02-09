@@ -1,10 +1,11 @@
+import 'package:b2geta_mobile/models/message_details_model.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import '../../models/message_details_model.dart';
-import '../../providers/theme_provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class MessageDetailsPage extends StatefulWidget {
   const MessageDetailsPage({Key? key}) : super(key: key);
@@ -136,7 +137,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                       width: 6.0,
                     ),
                     Text(
-                      "Mesajlara geri dön",
+                      'Back to Messages'.tr,
                       style: TextStyle(
                         fontSize: 11,
                         fontFamily: AppTheme.appFontFamily,
@@ -323,13 +324,12 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
           ),
           Container(
             width: deviceWidth,
-            height: 48,
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             decoration: BoxDecoration(
                 color: themeMode ? AppTheme.white1 : AppTheme.black7),
-            child: TextField(
+            child: TextFormField(
               controller: _messageController,
-              onSubmitted: ((value) async {
+              onFieldSubmitted: ((value) async {
                 await _messagesServices
                     .sendMessageCall(
                         toId: "97", message: _messageController.text.trim())
@@ -340,9 +340,11 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                   }
                 });
               }),
+              minLines: 1,
+              maxLines: 8,
               style: TextStyle(
                 height: 1,
-                fontSize: 12,
+                fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
                 fontWeight: FontWeight.w600,
                 color: AppTheme.white15,
@@ -365,11 +367,10 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(26),
                   borderSide: BorderSide(
-                      color: themeMode ? AppTheme.white21 : AppTheme.black18),
+                      color: themeMode ? AppTheme.white21 : AppTheme.white1),
                 ),
-                contentPadding:
-                    const EdgeInsets.only(left: 20.0, top: 17.0, bottom: 17.0),
-                hintText: "Bir şeyler yaz",
+                contentPadding: const EdgeInsets.fromLTRB(20, 17, 20, 17),
+                hintText: 'Write something'.tr,
                 hintStyle: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
