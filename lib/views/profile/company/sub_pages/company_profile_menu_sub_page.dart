@@ -5,7 +5,7 @@ import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'company_addresses_sub_page.dart';
-import 'company_orders_sub_pages.dart';
+import 'company_orders_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyProfileMenuSubPage extends StatefulWidget {
