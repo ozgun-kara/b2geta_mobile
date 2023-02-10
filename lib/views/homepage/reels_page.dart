@@ -67,7 +67,6 @@ class _ReelsPageState extends State<ReelsPage> {
                       "SİLVERLİNE ENDÜSTRİ VE TİCARET A. Ş",
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        height: 1,
                         fontSize: 13,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w600,
