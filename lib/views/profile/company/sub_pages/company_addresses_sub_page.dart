@@ -184,8 +184,11 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        Flexible(
+                                        Expanded(
+                                          flex: 2,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -212,33 +215,12 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                       : AppTheme.white1,
                                                 ),
                                               ),
-                                              const SizedBox(height: 28),
-                                              Text(
-                                                'City'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                address.city!.name ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ),
-                                        Flexible(
+                                        Spacer(),
+                                        Expanded(
+                                          flex: 2,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -265,33 +247,12 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                       : AppTheme.white1,
                                                 ),
                                               ),
-                                              const SizedBox(height: 28),
-                                              Text(
-                                                'Country'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                address.country!.name ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ),
-                                        Flexible(
+                                        Spacer(),
+                                        Expanded(
+                                          flex: 2,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -318,7 +279,88 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                                                       : AppTheme.white1,
                                                 ),
                                               ),
-                                              const SizedBox(height: 28),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 28),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'City'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                address.city!.name ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Country'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                address.country!.name ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
                                               Text(
                                                 'Postal Code'.tr,
                                                 style: TextStyle(
