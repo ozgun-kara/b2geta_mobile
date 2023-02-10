@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
 
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
-  List<FeedModel> stories = [];
+  List<FeedModel> stories1 = [];
+  List<FeedModel> stories2 = [];
   List<FeedModel> meStories = [];
 
   final TextEditingController _postTextController = TextEditingController();
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getFeeds();
     getMeStories();
-    getStories();
+    getStories1();
   }
 
   Future<void> _getFromGallery() async {
@@ -66,11 +67,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-  void getStories() async {
+  void getStories1() async {
     await _socialServices.getAllStoryCall(
         queryParameters: {"offset": "0", "limit": "9", "type": "story"},
         userId: "408").then((feedList) {
-      stories = feedList;
+      stories1 = feedList;
       setState(() {});
     });
   }
@@ -84,48 +85,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List<Map<String, Object>> storeImage = [
-    {
-      "isOpen": false,
-      "image_name": "",
-    },
-    {
-      "isOpen": false,
-      "image_name": "assets/images/dummy_images/store_image_1.png",
-    },
-    {
-      "isOpen": false,
-      "image_name": "assets/images/dummy_images/store_image_2.png",
-    },
-    {
-      "isOpen": false,
-      "image_name": "assets/images/dummy_images/store_image_3.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_4.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_1.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_2.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_3.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_4.png",
-    },
-    {
-      "isOpen": true,
-      "image_name": "assets/images/dummy_images/store_image_4.png",
-    },
-  ];
   List reelImage = [
     "assets/images/dummy_images/reels_image_1.png",
     "assets/images/dummy_images/reels_image_2.png",
@@ -293,11 +252,9 @@ class _HomePageState extends State<HomePage> {
                         margin: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                         color: themeMode ? AppTheme.white1 : AppTheme.black5,
                         child: ListView.builder(
-                          itemCount: stories.length,
+                          itemCount: 3,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            var story = stories[index];
-
                             return index == 0
                                 ? Padding(
                                     padding: const EdgeInsets.only(left: 11.0),
@@ -307,98 +264,138 @@ class _HomePageState extends State<HomePage> {
                                         margin: const EdgeInsets.only(
                                           right: 10,
                                         ),
-                                        child: meStories.isEmpty
-                                            ? GestureDetector(
-                                                onTap: () {
-                                                  _getFromGallery();
-                                                },
-                                                child: DottedBorder(
-                                                  color: AppTheme.blue2,
-                                                  borderType: BorderType.Circle,
-                                                  dashPattern: const [6, 6],
-                                                  child: Center(
-                                                      child: Image.asset(
-                                                    "assets/icons/add.png",
-                                                    width: 14.0,
-                                                    height: 14.0,
-                                                  )),
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            _getFromGallery();
+                                          },
+                                          child: DottedBorder(
+                                            color: AppTheme.blue2,
+                                            borderType: BorderType.Circle,
+                                            dashPattern: const [6, 6],
+                                            child: Center(
+                                                child: Image.asset(
+                                              "assets/icons/add.png",
+                                              width: 14.0,
+                                              height: 14.0,
+                                            )),
+                                          ),
+                                        )),
+                                  )
+                                : index == 1
+                                    ? meStories.isNotEmpty
+                                        ? GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MoreStories(
+                                                  stories: meStories,
                                                 ),
-                                              )
-                                            : GestureDetector(
-                                                onTap: () {
-                                                  Navigator.of(context)
-                                                      .push(MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        MoreStories(
-                                                      stories: meStories,
-                                                    ),
-                                                  ));
-                                                },
-                                                child: ClipOval(
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: const Color(
-                                                            0XFF29B7D6),
-                                                        width: 2,
+                                              ));
+                                            },
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              margin: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color:
+                                                      const Color(0XFF29B7D6),
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: meStories[0]
+                                                      .user!
+                                                      .photo!
+                                                      .isNotEmpty
+                                                  ? ClipOval(
+                                                      child: Image.network(
+                                                        width: 40,
+                                                        height: 40,
+                                                        meStories[0]
+                                                            .user!
+                                                            .photo!,
+                                                        errorBuilder: (context,
+                                                                error,
+                                                                stackTrace) =>
+                                                            Image.asset(
+                                                          "assets/images/dummy_images/post_profile.png",
+                                                          width: 40,
+                                                          height: 40,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : ClipOval(
+                                                      child: Image.asset(
+                                                        width: 40,
+                                                        height: 40,
+                                                        "assets/images/dummy_images/post_profile.png",
                                                       ),
                                                     ),
-                                                    child: Image.asset(
-                                                      "assets/images/dummy_images/post_profile.png",
-                                                    ),
-                                                  ),
-                                                ),
-                                              )),
-                                  )
-                                : GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => MoreStories(
-                                          stories: stories,
-                                        ),
-                                      ));
-                                    },
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      margin: const EdgeInsets.only(
-                                        right: 10,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: const Color(0XFF29B7D6),
-                                          width: 2,
-                                        ),
-                                      ),
-                                      child: story.user!.photo == null
-                                          ? ClipOval(
-                                              child: Image.network(
-                                                width: 40,
-                                                height: 40,
-                                                story.user!.photo!,
-                                                errorBuilder: (context, error,
-                                                        stackTrace) =>
-                                                    Image.asset(
-                                                  "assets/images/dummy_images/post_image_1.png",
-                                                  width: 40,
-                                                  height: 40,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            )
-                                          : ClipOval(
-                                              child: Image.asset(
-                                                width: 40,
-                                                height: 40,
-                                                storeImage[index]["image_name"]
-                                                    .toString(),
-                                              ),
                                             ),
-                                    ),
-                                  );
+                                          )
+                                        : const SizedBox()
+                                    : stories1.isNotEmpty
+                                        ? GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: (context) =>
+                                                    MoreStories(
+                                                  stories: stories1,
+                                                ),
+                                              ));
+                                            },
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              margin: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color:
+                                                      const Color(0XFF29B7D6),
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: stories1[0]
+                                                      .user!
+                                                      .photo!
+                                                      .isNotEmpty
+                                                  ? ClipOval(
+                                                      child: Image.network(
+                                                        width: 40,
+                                                        height: 40,
+                                                        stories1[0]
+                                                            .user!
+                                                            .photo!,
+                                                        errorBuilder: (context,
+                                                                error,
+                                                                stackTrace) =>
+                                                            Image.asset(
+                                                          "assets/images/dummy_images/post_image_1.png",
+                                                          width: 40,
+                                                          height: 40,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : ClipOval(
+                                                      child: Image.asset(
+                                                        width: 40,
+                                                        height: 40,
+                                                        "assets/images/dummy_images/post_profile.png",
+                                                      ),
+                                                    ),
+                                            ),
+                                          )
+                                        : const SizedBox();
                           },
                         ),
                       ),
@@ -591,8 +588,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' ' +
-                                                      'Homepage Share-2'.tr,
+                                                  text:
+                                                      ' ${'Homepage Share-2'.tr}',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     color: AppTheme.white15,
@@ -859,8 +856,8 @@ class _HomePageState extends State<HomePage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' ' + 'Like-3'.tr,
-                                                  style: TextStyle(
+                                                  text: ' ${'Like-3'.tr}',
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
@@ -878,15 +875,15 @@ class _HomePageState extends State<HomePage> {
                                                 color: AppTheme.white15,
                                               ),
                                               children: [
-                                                TextSpan(
+                                                const TextSpan(
                                                   text: '48',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' ' + 'Comment-2'.tr,
-                                                  style: TextStyle(
+                                                  text: ' ${'Comment-2'.tr}',
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
@@ -904,16 +901,16 @@ class _HomePageState extends State<HomePage> {
                                                 color: AppTheme.white15,
                                               ),
                                               children: [
-                                                TextSpan(
+                                                const TextSpan(
                                                   text: '93',
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: ' ' +
-                                                      'Homepage Share-4'.tr,
-                                                  style: TextStyle(
+                                                  text:
+                                                      ' ${'Homepage Share-4'.tr}',
+                                                  style: const TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
