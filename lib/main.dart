@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/company_profile_provider.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/login_register_provider.dart';
@@ -29,6 +30,9 @@ void main() async {
     ChangeNotifierProvider<MarketPlaceProvider>(
       create: (BuildContext context) => MarketPlaceProvider(),
     ),
+    ChangeNotifierProvider<BasketPageProvider>(
+      create: (BuildContext context) => BasketPageProvider(),
+    ),
     ChangeNotifierProvider<CompanyProfileProvider>(
       create: (BuildContext context) => CompanyProfileProvider(),
     ),
@@ -39,7 +43,6 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
   const MyApp({super.key});
 
   @override

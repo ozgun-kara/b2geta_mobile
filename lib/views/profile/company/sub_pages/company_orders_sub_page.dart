@@ -272,7 +272,8 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 18),
+                                    const SizedBox(
+                                        height: 18),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

@@ -7,7 +7,6 @@ import '../../models/basket_model.dart';
 class BasketServices {
   // GET ALL
   Future<List<BasketModel>> getAllCall() async {
-
     List<BasketModel> basketList = [];
 
     final response =
@@ -103,7 +102,6 @@ class BasketServices {
 
   // DELETE A PRODUCT IN BASKET
   Future<bool> deleteProductInBasketCall({
-
     required String param1,
   }) async {
     final response = await http
