@@ -72,6 +72,7 @@ final Map<String, String> tr = {
   'Start Dispute': 'Anlaşmazlık Başlat',
   'Edit': 'Düzenle',
   'Addresses Page Route': 'Anasayfa - Adreslerim',
+  'Add an Address Page Route': 'Anasayfa - Adres Ekle',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

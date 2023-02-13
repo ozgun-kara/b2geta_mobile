@@ -72,6 +72,7 @@ final Map<String, String> en = {
   'Start Dispute': 'Start Dispute',
   'Edit': 'Edit',
   'Addresses Page Route': 'Homepage - My Addresses',
+  'Add an Address Page Route': 'Homepage - Add an Address',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
