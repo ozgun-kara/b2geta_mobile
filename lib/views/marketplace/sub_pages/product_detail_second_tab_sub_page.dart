@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -105,7 +105,7 @@ class _ProductDetailSecondTabSubPageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Provider.of<MarketPlaceProvider>(context)
+                        color: Provider.of<MarketPlacePageProvider>(context)
                                 .ratingCheckBox1
                             ? AppTheme.green2
                             : Colors.transparent,
@@ -113,7 +113,7 @@ class _ProductDetailSecondTabSubPageState
                             const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: Provider.of<MarketPlaceProvider>(context)
+                            color: Provider.of<MarketPlacePageProvider>(context)
                                     .ratingCheckBox1
                                 ? Colors.transparent
                                 : Provider.of<ThemeProvider>(context)
@@ -122,7 +122,7 @@ class _ProductDetailSecondTabSubPageState
                                     ? AppTheme.white24
                                     : AppTheme.black21),
                       ),
-                      child: Provider.of<MarketPlaceProvider>(context)
+                      child: Provider.of<MarketPlacePageProvider>(context)
                               .ratingCheckBox1
                           ? Center(
                               child: Image.asset(
@@ -135,7 +135,7 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context, listen: false)
                           .updateRatingCheckBox(1);
                     },
                   ),
@@ -191,7 +191,7 @@ class _ProductDetailSecondTabSubPageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Provider.of<MarketPlaceProvider>(context)
+                        color: Provider.of<MarketPlacePageProvider>(context)
                                 .ratingCheckBox2
                             ? AppTheme.green2
                             : Colors.transparent,
@@ -199,7 +199,7 @@ class _ProductDetailSecondTabSubPageState
                             const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: Provider.of<MarketPlaceProvider>(context)
+                            color: Provider.of<MarketPlacePageProvider>(context)
                                     .ratingCheckBox2
                                 ? Colors.transparent
                                 : Provider.of<ThemeProvider>(context)
@@ -208,7 +208,7 @@ class _ProductDetailSecondTabSubPageState
                                     ? AppTheme.white24
                                     : AppTheme.black21),
                       ),
-                      child: Provider.of<MarketPlaceProvider>(context)
+                      child: Provider.of<MarketPlacePageProvider>(context)
                               .ratingCheckBox2
                           ? Center(
                               child: Image.asset(
@@ -221,7 +221,7 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context, listen: false)
                           .updateRatingCheckBox(2);
                     },
                   ),
@@ -277,7 +277,7 @@ class _ProductDetailSecondTabSubPageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Provider.of<MarketPlaceProvider>(context)
+                        color: Provider.of<MarketPlacePageProvider>(context)
                                 .ratingCheckBox3
                             ? AppTheme.green2
                             : Colors.transparent,
@@ -285,7 +285,7 @@ class _ProductDetailSecondTabSubPageState
                             const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: Provider.of<MarketPlaceProvider>(context)
+                            color: Provider.of<MarketPlacePageProvider>(context)
                                     .ratingCheckBox3
                                 ? Colors.transparent
                                 : Provider.of<ThemeProvider>(context)
@@ -294,7 +294,7 @@ class _ProductDetailSecondTabSubPageState
                                     ? AppTheme.white24
                                     : AppTheme.black21),
                       ),
-                      child: Provider.of<MarketPlaceProvider>(context)
+                      child: Provider.of<MarketPlacePageProvider>(context)
                               .ratingCheckBox3
                           ? Center(
                               child: Image.asset(
@@ -307,7 +307,7 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context, listen: false)
                           .updateRatingCheckBox(3);
                     },
                   ),
@@ -363,7 +363,7 @@ class _ProductDetailSecondTabSubPageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Provider.of<MarketPlaceProvider>(context)
+                        color: Provider.of<MarketPlacePageProvider>(context)
                                 .ratingCheckBox4
                             ? AppTheme.green2
                             : Colors.transparent,
@@ -371,7 +371,7 @@ class _ProductDetailSecondTabSubPageState
                             const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: Provider.of<MarketPlaceProvider>(context)
+                            color: Provider.of<MarketPlacePageProvider>(context)
                                     .ratingCheckBox4
                                 ? Colors.transparent
                                 : Provider.of<ThemeProvider>(context)
@@ -380,7 +380,7 @@ class _ProductDetailSecondTabSubPageState
                                     ? AppTheme.white24
                                     : AppTheme.black21),
                       ),
-                      child: Provider.of<MarketPlaceProvider>(context)
+                      child: Provider.of<MarketPlacePageProvider>(context)
                               .ratingCheckBox4
                           ? Center(
                               child: Image.asset(
@@ -393,7 +393,7 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context, listen: false)
                           .updateRatingCheckBox(4);
                     },
                   ),
@@ -449,7 +449,7 @@ class _ProductDetailSecondTabSubPageState
                       width: 18,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Provider.of<MarketPlaceProvider>(context)
+                        color: Provider.of<MarketPlacePageProvider>(context)
                                 .ratingCheckBox5
                             ? AppTheme.green2
                             : Colors.transparent,
@@ -457,7 +457,7 @@ class _ProductDetailSecondTabSubPageState
                             const BorderRadius.all(Radius.circular(3)),
                         border: Border.all(
                             width: 1,
-                            color: Provider.of<MarketPlaceProvider>(context)
+                            color: Provider.of<MarketPlacePageProvider>(context)
                                     .ratingCheckBox5
                                 ? Colors.transparent
                                 : Provider.of<ThemeProvider>(context)
@@ -466,7 +466,7 @@ class _ProductDetailSecondTabSubPageState
                                     ? AppTheme.white24
                                     : AppTheme.black21),
                       ),
-                      child: Provider.of<MarketPlaceProvider>(context)
+                      child: Provider.of<MarketPlacePageProvider>(context)
                               .ratingCheckBox5
                           ? Center(
                               child: Image.asset(
@@ -479,7 +479,7 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlaceProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context, listen: false)
                           .updateRatingCheckBox(5);
                     },
                   ),
@@ -564,12 +564,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.white1
@@ -583,12 +583,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue2
@@ -597,7 +597,7 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context, listen: false)
                             .updateProductCommentsTab(0);
                       }),
                   GestureDetector(
@@ -612,12 +612,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.white1
@@ -631,12 +631,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue2
@@ -645,7 +645,7 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context, listen: false)
                             .updateProductCommentsTab(1);
                       }),
                   GestureDetector(
@@ -660,12 +660,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.white1
@@ -679,12 +679,12 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlaceProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlaceProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue2
@@ -693,7 +693,7 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlaceProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context, listen: false)
                             .updateProductCommentsTab(2);
                       }),
                 ],
@@ -704,7 +704,7 @@ class _ProductDetailSecondTabSubPageState
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
-            Provider.of<MarketPlaceProvider>(context).productCommentsTab == 0
+            Provider.of<MarketPlacePageProvider>(context).productCommentsTab == 0
                 ? FutureBuilder(
                     future: DummyService().getCustomerCommentsList(),
                     builder: (context, data) {
@@ -968,7 +968,7 @@ class _ProductDetailSecondTabSubPageState
                       }
                     },
                   )
-                : Provider.of<MarketPlaceProvider>(context)
+                : Provider.of<MarketPlacePageProvider>(context)
                             .productCommentsTab ==
                         1
                     ? Container()
