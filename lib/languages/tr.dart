@@ -71,7 +71,7 @@ final Map<String, String> tr = {
   'Total Price:': 'Toplam Ücret:',
   'Start Dispute': 'Anlaşmazlık Başlat',
   'Edit': 'Düzenle',
-  'Edit Address Page Route': 'Anasayfa - Adreslerim',
+  'Addresses Page Route': 'Anasayfa - Adreslerim',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

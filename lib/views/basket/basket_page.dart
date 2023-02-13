@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
-import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:flutter/cupertino.dart';

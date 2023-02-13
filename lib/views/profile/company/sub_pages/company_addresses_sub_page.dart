@@ -1,7 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -122,7 +123,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Edit Address Page Route'.tr,
+                        'Addresses Page Route'.tr,
                         style: TextStyle(
                           fontSize: 11,
                           fontFamily: AppTheme.appFontFamily,
@@ -142,7 +143,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
               width: deviceWidth,
               height: deviceHeight - 215,
               child: FutureBuilder<List<AddressModel>>(
-                future: MemberAddressesServices().getAllCall(
+                future: locator<MemberAddressesServices>().getAllCall(
                     queryParameters: {"offset": "2", "limit": "10"}),
                 builder: (context, data) {
                   if (data.hasData) {
