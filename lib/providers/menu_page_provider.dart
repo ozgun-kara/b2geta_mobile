@@ -1,44 +1,46 @@
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/general_models/city_model.dart';
+import 'package:b2geta_mobile/models/general_models/district_model.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general_models/country_model.dart';
 
 class MenuPageProvider with ChangeNotifier {
-  List<CountryModel> dropdownItems1 = [];
-  String? dropdownSelectedValue1;
-  List<CityModel> dropdownItems2 = [];
-  String? dropdownSelectedValue2;
-  List<CountryModel> dropdownItems3 = [];
-  String? dropdownSelectedValue3;
+  // ADD & UPDATE ADDRESSES SUBPAGE
+  List<CountryModel> countryList = [];
+  String? selectedCountry;
+  List<CityModel> cityList = [];
+  String? selectedCity;
+  List<DistrictModel> districtList = [];
+  String? selectedDistrict;
 
-  fetchDropdownList1() async {
-    dropdownItems1 = await locator<GeneralService>().countriesCall();
+  fetchCountryList() async {
+    countryList = await locator<GeneralService>().countriesCall();
     notifyListeners();
   }
 
-  void updateDropdownSelectedValue1(String value) {
-    dropdownSelectedValue1 = value;
+  void updateSelectedCountry(String value) {
+    selectedCountry = value;
     notifyListeners();
   }
 
-  fetchDropdownList2() async {
-    dropdownItems2 = await locator<GeneralService>().citiesCall2(country: 'TR');
+  fetchCityList() async {
+    cityList = await locator<GeneralService>().citiesCall(country: 'TR');
     notifyListeners();
   }
 
-  void updateDropdownSelectedValue2(String value) {
-    dropdownSelectedValue2 = value;
+  void updateSelectedCity(String value) {
+    selectedCity = value;
     notifyListeners();
   }
 
-  fetchDropdown1List3() async {
-    dropdownItems3 = await locator<GeneralService>().countriesCall();
+  fetchDistrictList() async {
+    districtList = await locator<GeneralService>().townListCall(city: '2188');
     notifyListeners();
   }
 
-  void updateDropdownSelectedValue3(String value) {
-    dropdownSelectedValue3 = value;
+  void updateSelectedDistrict(String value) {
+    selectedDistrict = value;
     notifyListeners();
   }
 }

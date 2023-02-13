@@ -28,7 +28,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
   var countryCode;
   var cityId;
-  var districtCode;
+  var districtId;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -37,8 +37,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
   @override
   void initState() {
-    Provider.of<MenuPageProvider>(context, listen: false).fetchDropdownList1();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchDropdownList2();
+    Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+    Provider.of<MenuPageProvider>(context, listen: false).fetchCityList();
+    Provider.of<MenuPageProvider>(context, listen: false).fetchDistrictList();
 
     super.initState();
   }
@@ -51,9 +52,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     var countryList =
-        Provider.of<MenuPageProvider>(context, listen: false).dropdownItems1;
+        Provider.of<MenuPageProvider>(context, listen: false).countryList;
     var cityList =
-        Provider.of<MenuPageProvider>(context, listen: false).dropdownItems2;
+        Provider.of<MenuPageProvider>(context, listen: false).cityList;
+    var districtList =
+        Provider.of<MenuPageProvider>(context, listen: false).districtList;
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black12,
@@ -329,8 +332,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                   : AppTheme.white14,
                         ),
                       ),
-                      items: Provider.of<MenuPageProvider>(context)
-                          .dropdownItems1
+                      items: countryList
                           .map((item) => DropdownMenuItem<String>(
                                 value: item.name,
                                 child: Text(
@@ -349,11 +351,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               ))
                           .toList(),
                       value: Provider.of<MenuPageProvider>(context)
-                          .dropdownSelectedValue1,
+                          .selectedCountry,
 
                       onChanged: (value) {
                         Provider.of<MenuPageProvider>(context, listen: false)
-                            .updateDropdownSelectedValue1(value as String);
+                            .updateSelectedCountry(value as String);
 
                         var countryIndex = countryList
                             .indexWhere(((element) => element.name == value));
@@ -501,8 +503,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                   : AppTheme.white14,
                         ),
                       ),
-                      items: Provider.of<MenuPageProvider>(context)
-                          .dropdownItems2
+                      items: cityList
                           .map((item) => DropdownMenuItem<String>(
                                 value: item.name,
                                 child: Text(
@@ -520,12 +521,12 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                 ),
                               ))
                           .toList(),
-                      value: Provider.of<MenuPageProvider>(context)
-                          .dropdownSelectedValue2,
+                      value:
+                          Provider.of<MenuPageProvider>(context).selectedCity,
 
                       onChanged: (value) {
                         Provider.of<MenuPageProvider>(context, listen: false)
-                            .updateDropdownSelectedValue2(value as String);
+                            .updateSelectedCity(value as String);
 
                         var cityIndex = cityList
                             .indexWhere(((element) => element.name == value));
@@ -650,6 +651,177 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       onMenuStateChange: (isOpen) {
                         if (!isOpen) {
                           cityController.clear();
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 13),
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                      // alignment: AlignmentDirectional.center,
+                      isExpanded: true,
+                      hint: Text(
+                        'District',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black11
+                                  : AppTheme.white14,
+                        ),
+                      ),
+                      items: districtList
+                          .map((item) => DropdownMenuItem<String>(
+                                value: item.name,
+                                child: Text(
+                                  item.name ?? '',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.black11
+                                        : AppTheme.white14,
+                                  ),
+                                ),
+                              ))
+                          .toList(),
+                      value: Provider.of<MenuPageProvider>(context)
+                          .selectedDistrict,
+
+                      onChanged: (value) {
+                        Provider.of<MenuPageProvider>(context, listen: false)
+                            .updateSelectedDistrict(value as String);
+
+                        var districtIndex = districtList
+                            .indexWhere(((element) => element.name == value));
+                        if (districtIndex != -1) {
+                          debugPrint('DISTRICT INDEX: $districtIndex');
+                          debugPrint(
+                              'DISTRICT ID: ${districtList[districtIndex].id}');
+
+                          districtId = districtList[districtIndex].id;
+                        }
+                      },
+
+                      icon: Center(
+                        child: Image.asset(
+                          'assets/icons/dropdown.png',
+                          width: 10,
+                          height: 6,
+                        ),
+                      ),
+                      iconSize: 24,
+                      // iconEnabledColor: Colors.yellow,
+                      // iconDisabledColor: Colors.grey,
+                      // icon: Container(),
+                      buttonHeight: 57,
+                      buttonWidth: deviceWidth,
+                      buttonPadding: const EdgeInsets.only(left: 25, right: 17),
+                      buttonDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        // border:
+                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                        // color: Colors.transparent,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // buttonElevation: 2,
+                      itemHeight: 40,
+                      itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                      // dropdownMaxHeight: deviceHeight * 0.4,
+                      dropdownMaxHeight: 350,
+                      // dropdownWidth: deviceWidth,
+                      dropdownPadding: null,
+                      dropdownDecoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        // color: Color(0xFFEFF0F7),
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                      ),
+                      // dropdownElevation: 8,
+                      scrollbarRadius: const Radius.circular(40),
+                      scrollbarThickness: 4,
+                      scrollbarAlwaysShow: true,
+                      // offset: const Offset(0, 180),
+
+                      searchController: districtController,
+                      searchInnerWidget: Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                        child: TextFormField(
+                          controller: districtController,
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.black11
+                                  : AppTheme.white1), // WHILE WRITING
+                          decoration: InputDecoration(
+                            isDense: true,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
+                            ),
+                            hintText: 'District Dropdown',
+                            hintStyle: TextStyle(
+                              fontSize: 14,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w400,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.black11
+                                  : AppTheme.white14,
+                            ),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppTheme.white15,
+                                  width: 1,
+                                )),
+                            enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: AppTheme.white15,
+                                  width: 1,
+                                )),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white10
+                                    : AppTheme.white1,
+                                width: 1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      searchMatchFn: (item, searchValue) {
+                        debugPrint("ITEM:${item.value}");
+
+                        return (item.value
+                            .toLowerCase()
+                            .contains(searchValue.toLowerCase()));
+                      },
+                      //This to clear the search value when you close the menu
+                      onMenuStateChange: (isOpen) {
+                        if (!isOpen) {
+                          districtController.clear();
                         }
                       },
                     ),
