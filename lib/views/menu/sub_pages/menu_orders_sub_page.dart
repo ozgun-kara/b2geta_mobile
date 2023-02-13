@@ -5,17 +5,17 @@ import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'company_orders_detail_sub_page.dart';
+import 'menu_orders_detail_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class CompanyOrdersSubPage extends StatefulWidget {
-  const CompanyOrdersSubPage({Key? key}) : super(key: key);
+class MenuOrdersSubPage extends StatefulWidget {
+  const MenuOrdersSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyOrdersSubPage> createState() => _CompanyOrdersSubPageState();
+  State<MenuOrdersSubPage> createState() => _MenuOrdersSubPageState();
 }
 
-class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
+class _MenuOrdersSubPageState extends State<MenuOrdersSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -139,7 +139,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    CompanyOrdersDetailSubPage(
+                                    MenuOrdersDetailSubPage(
                                   passedObject: items[index],
                                 ),
                               ));
@@ -272,8 +272,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(
-                                        height: 18),
+                                    const SizedBox(height: 18),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,

@@ -54,7 +54,6 @@ final Map<String, String> tr = {
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
   'Log Out': 'Çıkış',
-  // MENU CONTENT
   'Date:': 'Tarih:',
   'Order Number:': 'Sipariş No:',
   'Product Number:': 'Ürün No:',

@@ -1,22 +1,21 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'company_addresses_sub_page.dart';
-import 'company_orders_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class CompanyProfileMenuSubPage extends StatefulWidget {
-  const CompanyProfileMenuSubPage({Key? key}) : super(key: key);
+class MenuPage extends StatefulWidget {
+  const MenuPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyProfileMenuSubPage> createState() =>
-      _CompanyProfileMenuSubPageState();
+  State<MenuPage> createState() => _MenuPageState();
 }
 
-class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
+class _MenuPageState extends State<MenuPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -72,7 +71,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CompanyOrdersSubPage(),
+                      builder: (context) => const MenuOrdersSubPage(),
                     ));
               }),
           const SizedBox(height: 8),
@@ -123,7 +122,7 @@ class _CompanyProfileMenuSubPageState extends State<CompanyProfileMenuSubPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CompanyAddressesSubPage(),
+                      builder: (context) => const MenuAddressesSubPage(),
                     ));
               }),
           const SizedBox(height: 8),
