@@ -1,7 +1,7 @@
 // ignore_for_file: equal_keys_in_map
 
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -132,7 +132,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  Provider.of<MarketPlaceProvider>(context,
+                                  Provider.of<MarketPlacePageProvider>(context,
                                           listen: false)
                                       .updateFilterSwitch(false);
                                 },
@@ -142,7 +142,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(11)),
-                                      color: Provider.of<MarketPlaceProvider>(
+                                      color: Provider.of<MarketPlacePageProvider>(
                                                       context)
                                                   .filterSwitch ==
                                               false
@@ -158,7 +158,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         'assets/icons/grid_1.png',
                                         width: 17.06,
                                         height: 17.06,
-                                        color: Provider.of<MarketPlaceProvider>(
+                                        color: Provider.of<MarketPlacePageProvider>(
                                                         context)
                                                     .filterSwitch ==
                                                 false
@@ -180,7 +180,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               const SizedBox(width: 4),
                               InkWell(
                                 onTap: () {
-                                  Provider.of<MarketPlaceProvider>(context,
+                                  Provider.of<MarketPlacePageProvider>(context,
                                           listen: false)
                                       .updateFilterSwitch(true);
                                 },
@@ -190,7 +190,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(11)),
-                                      color: Provider.of<MarketPlaceProvider>(
+                                      color: Provider.of<MarketPlacePageProvider>(
                                                       context)
                                                   .filterSwitch ==
                                               true
@@ -206,7 +206,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         'assets/icons/grid_2.png',
                                         width: 14.62,
                                         height: 13.38,
-                                        color: Provider.of<MarketPlaceProvider>(
+                                        color: Provider.of<MarketPlacePageProvider>(
                                                         context)
                                                     .filterSwitch ==
                                                 true
@@ -250,7 +250,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
               const SizedBox(height: 11),
               Visibility(
-                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                visible: Provider.of<MarketPlacePageProvider>(context).filterSwitch
                     ? false
                     : true,
                 child: FutureBuilder<List<String>>(
@@ -425,7 +425,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
               Visibility(
-                visible: Provider.of<MarketPlaceProvider>(context).filterSwitch
+                visible: Provider.of<MarketPlacePageProvider>(context).filterSwitch
                     ? true
                     : false,
                 child: FutureBuilder<List<String>>(

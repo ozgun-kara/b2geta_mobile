@@ -5,19 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class CompanyOrdersDetailSubPage extends StatefulWidget {
-  const CompanyOrdersDetailSubPage({Key? key, required this.passedObject})
+class MenuOrdersDetailSubPage extends StatefulWidget {
+  const MenuOrdersDetailSubPage({Key? key, required this.passedObject})
       : super(key: key);
 
   final CompanyOrderDummyModel passedObject;
 
   @override
-  State<CompanyOrdersDetailSubPage> createState() =>
-      _CompanyOrdersDetailSubPageState();
+  State<MenuOrdersDetailSubPage> createState() =>
+      _MenuOrdersDetailSubPageState();
 }
 
-class _CompanyOrdersDetailSubPageState
-    extends State<CompanyOrdersDetailSubPage> {
+class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;

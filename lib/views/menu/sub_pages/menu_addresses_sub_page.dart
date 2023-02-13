@@ -1,21 +1,22 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_add_address_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class CompanyAddressesSubPage extends StatefulWidget {
-  const CompanyAddressesSubPage({Key? key}) : super(key: key);
+class MenuAddressesSubPage extends StatefulWidget {
+  const MenuAddressesSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyAddressesSubPage> createState() =>
-      _CompanyAddressesSubPageState();
+  State<MenuAddressesSubPage> createState() => _MenuAddressesSubPageState();
 }
 
-class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
+class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -122,7 +123,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                   children: [
                     Expanded(
                       child: Text(
-                        'Edit Address Page Route'.tr,
+                        'Addresses Page Route'.tr,
                         style: TextStyle(
                           fontSize: 11,
                           fontFamily: AppTheme.appFontFamily,
@@ -142,7 +143,7 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
               width: deviceWidth,
               height: deviceHeight - 215,
               child: FutureBuilder<List<AddressModel>>(
-                future: MemberAddressesServices().getAllCall(
+                future: locator<MemberAddressesServices>().getAllCall(
                     queryParameters: {"offset": "2", "limit": "10"}),
                 builder: (context, data) {
                   if (data.hasData) {
@@ -493,7 +494,14 @@ class _CompanyAddressesSubPageState extends State<CompanyAddressesSubPage> {
                           fontWeight: FontWeight.w600,
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1),
                     ),
-                    onPressed: () {}),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const MenuAddAddressSubPage(),
+                          ));
+                    }),
               ),
             ),
             const SizedBox(height: 60),

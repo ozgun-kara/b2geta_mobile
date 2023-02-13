@@ -54,7 +54,6 @@ final Map<String, String> en = {
   'My Addresses': 'My Addresses',
   'Follow List': 'Follow List',
   'Log Out': 'Log Out',
-  // MENU CONTENT
   'Date:': 'Date:',
   'Order Number:': 'Order Number:',
   'Product Number:': 'Product Number:',
@@ -71,7 +70,8 @@ final Map<String, String> en = {
   'Total Price:': 'Total Price:',
   'Start Dispute': 'Start Dispute',
   'Edit': 'Edit',
-  'Edit Address Page Route': 'Homepage - My Addresses',
+  'Addresses Page Route': 'Homepage - My Addresses',
+  'Add an Address Page Route': 'Homepage - Add an Address',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',

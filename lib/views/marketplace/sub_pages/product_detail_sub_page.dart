@@ -8,7 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
@@ -183,7 +183,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: NetworkImage(imgList[
-                                  Provider.of<MarketPlaceProvider>(context)
+                                  Provider.of<MarketPlacePageProvider>(context)
                                       .productImageIndex]),
                               fit: BoxFit.cover,
                             ),
@@ -231,14 +231,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                           width:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       0
                                                   ? 2
                                                   : 1,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       0
@@ -259,7 +259,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlaceProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(context,
                                               listen: false)
                                           .updateProductImageIndex(0);
                                     }),
@@ -274,14 +274,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                           width:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       1
                                                   ? 2
                                                   : 1,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       1
@@ -302,7 +302,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlaceProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(context,
                                               listen: false)
                                           .updateProductImageIndex(1);
                                     }),
@@ -317,14 +317,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                           width:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       2
                                                   ? 2
                                                   : 1,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       2
@@ -345,7 +345,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlaceProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(context,
                                               listen: false)
                                           .updateProductImageIndex(2);
                                     }),
@@ -360,14 +360,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     shape: RoundedRectangleBorder(
                                       side: BorderSide(
                                           width:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       3
                                                   ? 2
                                                   : 1,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productImageIndex ==
                                                       3
@@ -388,7 +388,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlaceProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(context,
                                               listen: false)
                                           .updateProductImageIndex(3);
                                     }),
@@ -509,7 +509,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
                                   color:
-                                      Provider.of<MarketPlaceProvider>(context)
+                                      Provider.of<MarketPlacePageProvider>(context)
                                                   .productCountIndex ==
                                               0
                                           ? AppTheme.blue2
@@ -529,7 +529,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color:
-                                                Provider.of<MarketPlaceProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .productCountIndex ==
                                                         0
@@ -544,7 +544,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           fontSize: 15,
                                           fontWeight: FontWeight.w500,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productCountIndex ==
                                                       0
@@ -557,7 +557,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlaceProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(context,
                                             listen: false)
                                         .updateProductCountIndex(0);
                                   }),
@@ -574,7 +574,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
                                   color:
-                                      Provider.of<MarketPlaceProvider>(context)
+                                      Provider.of<MarketPlacePageProvider>(context)
                                                   .productCountIndex ==
                                               1
                                           ? AppTheme.blue2
@@ -594,7 +594,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color:
-                                                Provider.of<MarketPlaceProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .productCountIndex ==
                                                         1
@@ -610,7 +610,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           fontFamily: AppTheme.appFontFamily,
                                           fontWeight: FontWeight.w500,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productCountIndex ==
                                                       1
@@ -623,7 +623,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlaceProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(context,
                                             listen: false)
                                         .updateProductCountIndex(1);
                                   }),
@@ -640,7 +640,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
                                   color:
-                                      Provider.of<MarketPlaceProvider>(context)
+                                      Provider.of<MarketPlacePageProvider>(context)
                                                   .productCountIndex ==
                                               2
                                           ? AppTheme.blue2
@@ -660,7 +660,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color:
-                                                Provider.of<MarketPlaceProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .productCountIndex ==
                                                         2
@@ -676,7 +676,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           fontFamily: AppTheme.appFontFamily,
                                           fontWeight: FontWeight.w500,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productCountIndex ==
                                                       2
@@ -689,7 +689,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlaceProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(context,
                                             listen: false)
                                         .updateProductCountIndex(2);
                                   }),
@@ -706,7 +706,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
                                   color:
-                                      Provider.of<MarketPlaceProvider>(context)
+                                      Provider.of<MarketPlacePageProvider>(context)
                                                   .productCountIndex ==
                                               3
                                           ? AppTheme.blue2
@@ -726,7 +726,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
                                             color:
-                                                Provider.of<MarketPlaceProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .productCountIndex ==
                                                         3
@@ -742,7 +742,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           fontFamily: AppTheme.appFontFamily,
                                           fontWeight: FontWeight.w500,
                                           color:
-                                              Provider.of<MarketPlaceProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productCountIndex ==
                                                       3
@@ -755,7 +755,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlaceProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(context,
                                             listen: false)
                                         .updateProductCountIndex(3);
                                   }),
@@ -805,7 +805,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productDimensionIndex ==
                                                       0
@@ -826,7 +826,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontSize: 14,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w400,
-                                            color: Provider.of<MarketPlaceProvider>(
+                                            color: Provider.of<MarketPlacePageProvider>(
                                                             context)
                                                         .productDimensionIndex ==
                                                     0
@@ -839,7 +839,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductDimensionIndex(0);
@@ -855,7 +855,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productDimensionIndex ==
                                                       1
@@ -876,7 +876,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontSize: 14,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w400,
-                                            color: Provider.of<MarketPlaceProvider>(
+                                            color: Provider.of<MarketPlacePageProvider>(
                                                             context)
                                                         .productDimensionIndex ==
                                                     1
@@ -889,7 +889,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductDimensionIndex(1);
@@ -905,7 +905,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productDimensionIndex ==
                                                       2
@@ -926,7 +926,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             fontSize: 14,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w400,
-                                            color: Provider.of<MarketPlaceProvider>(
+                                            color: Provider.of<MarketPlacePageProvider>(
                                                             context)
                                                         .productDimensionIndex ==
                                                     2
@@ -939,7 +939,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           ),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductDimensionIndex(2);
@@ -987,7 +987,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       0
@@ -1007,7 +1007,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.blue8),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(0);
@@ -1023,7 +1023,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       1
@@ -1043,7 +1043,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.black1),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(1);
@@ -1059,7 +1059,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       2
@@ -1079,7 +1079,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.red1),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(2);
@@ -1095,7 +1095,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       3
@@ -1115,7 +1115,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.white1),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(3);
@@ -1131,7 +1131,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       4
@@ -1151,7 +1151,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.green5),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(4);
@@ -1167,7 +1167,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       5
@@ -1187,7 +1187,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.purple1),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(5);
@@ -1203,7 +1203,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         shape: RoundedRectangleBorder(
                                           side: BorderSide(
                                               width: 1,
-                                              color: Provider.of<MarketPlaceProvider>(
+                                              color: Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .productColorIndex ==
                                                       6
@@ -1223,7 +1223,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.yellow2),
                                         ),
                                         onPressed: () {
-                                          Provider.of<MarketPlaceProvider>(
+                                          Provider.of<MarketPlacePageProvider>(
                                                   context,
                                                   listen: false)
                                               .updateProductColorIndex(6);
@@ -2036,13 +2036,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
+                                                        ? Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 0
                                                             ? AppTheme.blue2
                                                             : AppTheme.white24
-                                                        : Provider.of<MarketPlaceProvider>(
+                                                        : Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 0
@@ -2058,13 +2058,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
+                                                        ? Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 0
                                                             ? AppTheme.blue2
                                                             : Colors.transparent
-                                                        : Provider.of<MarketPlaceProvider>(
+                                                        : Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 0
@@ -2075,7 +2075,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             ],
                                           ),
                                           onTap: () {
-                                            Provider.of<MarketPlaceProvider>(
+                                            Provider.of<MarketPlacePageProvider>(
                                                     context,
                                                     listen: false)
                                                 .updateProductDetailTab(0);
@@ -2096,13 +2096,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
+                                                        ? Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 1
                                                             ? AppTheme.blue2
                                                             : AppTheme.white24
-                                                        : Provider.of<MarketPlaceProvider>(
+                                                        : Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 1
@@ -2118,13 +2118,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     context)
                                                                 .themeMode ==
                                                             "light"
-                                                        ? Provider.of<MarketPlaceProvider>(
+                                                        ? Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 1
                                                             ? AppTheme.blue2
                                                             : Colors.transparent
-                                                        : Provider.of<MarketPlaceProvider>(
+                                                        : Provider.of<MarketPlacePageProvider>(
                                                                         context)
                                                                     .productDetailTab ==
                                                                 1
@@ -2135,7 +2135,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             ],
                                           ),
                                           onTap: () {
-                                            Provider.of<MarketPlaceProvider>(
+                                            Provider.of<MarketPlacePageProvider>(
                                                     context,
                                                     listen: false)
                                                 .updateProductDetailTab(1);
@@ -2151,7 +2151,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         ? AppTheme.white25
                                         : AppTheme.black21),
                                 const SizedBox(height: 16),
-                                Provider.of<MarketPlaceProvider>(context)
+                                Provider.of<MarketPlacePageProvider>(context)
                                             .productDetailTab ==
                                         0
                                     ? const ProductDetailFirstTabSubPage()

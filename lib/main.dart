@@ -1,9 +1,11 @@
 import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/company_profile_provider.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
+import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
-import 'package:b2geta_mobile/providers/login_register_provider.dart';
-import 'package:b2geta_mobile/providers/marketplace_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
@@ -20,17 +22,23 @@ void main() async {
     ChangeNotifierProvider<ThemeProvider>(
       create: (BuildContext context) => ThemeProvider(),
     ),
-    ChangeNotifierProvider<LoginRegisterProvider>(
-      create: (BuildContext context) => LoginRegisterProvider(),
+    ChangeNotifierProvider<LoginRegisterPageProvider>(
+      create: (BuildContext context) => LoginRegisterPageProvider(),
     ),
     ChangeNotifierProvider<NavigationPageProvider>(
       create: (BuildContext context) => NavigationPageProvider(),
     ),
-    ChangeNotifierProvider<MarketPlaceProvider>(
-      create: (BuildContext context) => MarketPlaceProvider(),
+    ChangeNotifierProvider<MenuPageProvider>(
+      create: (BuildContext context) => MenuPageProvider(),
     ),
-    ChangeNotifierProvider<CompanyProfileProvider>(
-      create: (BuildContext context) => CompanyProfileProvider(),
+    ChangeNotifierProvider<MarketPlacePageProvider>(
+      create: (BuildContext context) => MarketPlacePageProvider(),
+    ),
+    ChangeNotifierProvider<BasketPageProvider>(
+      create: (BuildContext context) => BasketPageProvider(),
+    ),
+    ChangeNotifierProvider<CompanyProfilePageProvider>(
+      create: (BuildContext context) => CompanyProfilePageProvider(),
     ),
     ChangeNotifierProvider<HomePageProvider>(
       create: (BuildContext context) => HomePageProvider(),
@@ -39,7 +47,6 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
-
   const MyApp({super.key});
 
   @override

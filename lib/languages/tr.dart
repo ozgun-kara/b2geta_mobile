@@ -54,7 +54,6 @@ final Map<String, String> tr = {
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
   'Log Out': 'Çıkış',
-  // MENU CONTENT
   'Date:': 'Tarih:',
   'Order Number:': 'Sipariş No:',
   'Product Number:': 'Ürün No:',
@@ -71,7 +70,8 @@ final Map<String, String> tr = {
   'Total Price:': 'Toplam Ücret:',
   'Start Dispute': 'Anlaşmazlık Başlat',
   'Edit': 'Düzenle',
-  'Edit Address Page Route': 'Anasayfa - Adreslerim',
+  'Addresses Page Route': 'Anasayfa - Adreslerim',
+  'Add an Address Page Route': 'Anasayfa - Adres Ekle',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

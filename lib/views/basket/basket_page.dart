@@ -1,9 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
-import 'package:b2geta_mobile/services/member/addresses/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,6 +27,13 @@ class _BasketPageState extends State<BasketPage> {
   ScrollController scrollController = ScrollController();
   int? selectedAddressIndex;
   String? selectedAddressId;
+
+  @override
+  void initState() {
+    Provider.of<BasketPageProvider>(context, listen: false)
+        .setQuantityListLength();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +62,7 @@ class _BasketPageState extends State<BasketPage> {
                       shrinkWrap: true,
                       itemCount: basketList.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return _cartItem(basketList[index]);
+                        return _cartItem(basketList[index], index);
                       },
                     );
                   } else {
@@ -980,7 +988,7 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Widget _cartItem(BasketModel basket) {
+  Widget _cartItem(BasketModel basket, int index) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -1136,27 +1144,34 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
+                            Provider.of<BasketPageProvider>(context,
+                                    listen: false)
+                                .decreaseItemCount(index);
+
                             var basketQuantity = int.parse(basket.quantity!);
 
                             if (basketQuantity > 1) {
-                              BasketServices()
-                                  .updateProductInBasketCall(
-                                      productId: basket.productId!,
-                                      quantity:
-                                          "${int.parse(basket.quantity!) - 1}")
-                                  .then((bool value) {
-                                if (value) {
-                                  setState(() {});
-                                }
-                              });
-                            } else {
-                              setState(() {});
+                              BasketServices().updateProductInBasketCall(
+                                  productId: basket.productId!,
+                                  quantity:
+                                      "${int.parse(basket.quantity!) - 1}");
                             }
                           }),
                     ),
                     Center(
                       child: Text(
-                        basket.quantity ?? '1',
+                        // basket.quantity ?? '1',
+                        //
+
+                        Provider.of<BasketPageProvider>(context, listen: true)
+                                .quantityList
+                                .isEmpty
+                            ? '1'
+                            : Provider.of<BasketPageProvider>(context,
+                                    listen: true)
+                                .quantityList[index]
+                                .toString(),
+
                         style: TextStyle(
                           fontSize: 15,
                           fontFamily: AppTheme.appFontFamily,
@@ -1190,16 +1205,13 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            BasketServices()
-                                .updateProductInBasketCall(
-                                    productId: basket.productId!,
-                                    quantity:
-                                        "${int.parse(basket.quantity!) + 1}")
-                                .then((bool value) {
-                              if (value) {
-                                setState(() {});
-                              }
-                            });
+                            Provider.of<BasketPageProvider>(context,
+                                    listen: false)
+                                .increaseItemCount(index);
+
+                            BasketServices().updateProductInBasketCall(
+                                productId: basket.productId!,
+                                quantity: "${int.parse(basket.quantity!) + 1}");
                           }),
                     ),
                   ],
@@ -1221,6 +1233,10 @@ class _BasketPageState extends State<BasketPage> {
                             buttonText: "Sil",
                             buttonColor: Colors.red.shade600,
                             onPressed: () {
+                              Provider.of<BasketPageProvider>(context,
+                                      listen: false)
+                                  .deleteItemCount(index);
+
                               BasketServices()
                                   .deleteProductInBasketCall(
                                       param1: basket.product!.id!)

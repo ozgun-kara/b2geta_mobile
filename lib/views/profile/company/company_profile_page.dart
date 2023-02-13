@@ -2,7 +2,7 @@
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
-import 'package:b2geta_mobile/providers/company_profile_provider.dart';
+import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
@@ -35,8 +35,8 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      body: Consumer<CompanyProfileProvider>(
-        builder: (context, CompanyProfileProvider provider, child) {
+      body: Consumer<CompanyProfilePageProvider>(
+        builder: (context, CompanyProfilePageProvider provider, child) {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -381,7 +381,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                       children: [
                                                         InkWell(
                                                           onTap: () {
-                                                            Provider.of<CompanyProfileProvider>(
+                                                            Provider.of<CompanyProfilePageProvider>(
                                                                     context,
                                                                     listen:
                                                                         false)
@@ -397,7 +397,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                             .all(
                                                                         Radius.circular(
                                                                             11)),
-                                                                    color: Provider.of<CompanyProfileProvider>(context).filterSwitch ==
+                                                                    color: Provider.of<CompanyProfilePageProvider>(context).filterSwitch ==
                                                                             false
                                                                         ? Provider.of<ThemeProvider>(context).themeMode ==
                                                                                 "light"
@@ -415,7 +415,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                   'assets/icons/grid_1.png',
                                                                   width: 17.06,
                                                                   height: 17.06,
-                                                                  color: Provider.of<CompanyProfileProvider>(context)
+                                                                  color: Provider.of<CompanyProfilePageProvider>(context)
                                                                               .filterSwitch ==
                                                                           false
                                                                       ? Provider.of<ThemeProvider>(context).themeMode ==
@@ -437,7 +437,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                             width: 4),
                                                         InkWell(
                                                           onTap: () {
-                                                            Provider.of<CompanyProfileProvider>(
+                                                            Provider.of<CompanyProfilePageProvider>(
                                                                     context,
                                                                     listen:
                                                                         false)
@@ -453,7 +453,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                             .all(
                                                                         Radius.circular(
                                                                             11)),
-                                                                    color: Provider.of<CompanyProfileProvider>(context).filterSwitch ==
+                                                                    color: Provider.of<CompanyProfilePageProvider>(context).filterSwitch ==
                                                                             true
                                                                         ? Provider.of<ThemeProvider>(context).themeMode ==
                                                                                 "light"
@@ -471,7 +471,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                                                   'assets/icons/grid_2.png',
                                                                   width: 14.62,
                                                                   height: 13.38,
-                                                                  color: Provider.of<CompanyProfileProvider>(context)
+                                                                  color: Provider.of<CompanyProfilePageProvider>(context)
                                                                               .filterSwitch ==
                                                                           true
                                                                       ? Provider.of<ThemeProvider>(context).themeMode ==
@@ -516,7 +516,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                         const SizedBox(height: 11),
                                         Visibility(
                                           visible:
-                                              Provider.of<CompanyProfileProvider>(
+                                              Provider.of<CompanyProfilePageProvider>(
                                                           context)
                                                       .filterSwitch
                                                   ? false
@@ -732,7 +732,7 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                                         ),
                                         Visibility(
                                           visible:
-                                              Provider.of<CompanyProfileProvider>(
+                                              Provider.of<CompanyProfilePageProvider>(
                                                           context)
                                                       .filterSwitch
                                                   ? true

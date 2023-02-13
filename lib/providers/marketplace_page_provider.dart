@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MarketPlaceProvider with ChangeNotifier {
+class MarketPlacePageProvider with ChangeNotifier {
   // MARKETPLACE PAGE
   bool filterSwitch = true;
 
