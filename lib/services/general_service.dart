@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:b2geta_mobile/models/general_models/city_model.dart';
 import 'package:b2geta_mobile/models/general_models/country_model.dart';
 import 'package:b2geta_mobile/models/general_models/language_model.dart';
 import 'package:b2geta_mobile/constants.dart';
@@ -103,40 +104,6 @@ class GeneralService {
   }
 
   // COUNTRIES
-  Future<bool> countriesCallTest() async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/countries'),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    );
-
-    if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: ${response.statusCode}");
-      // debugPrint("RESPONSE DATA: ${response.body}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
-
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        return true;
-      } else {
-        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
-      }
-    } else {
-      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
-    }
-  }
-
   Future<List<CountryModel>> countriesCall() async {
     final response = await http.get(Uri.parse('${Constants.apiUrl}/countries'));
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
@@ -241,6 +208,47 @@ class GeneralService {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
+    }
+  }
+
+  Future<List<CityModel>> citiesCall2({
+    required String country,
+  }) async {
+    final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/cities').replace(queryParameters: {
+          'country': country,
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        });
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<CityModel> cities = [];
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE BODY: $responseBody");
+
+      var status = responseBody["status"];
+
+      if (status == true) {
+        var data = responseBody["data"];
+        for (var element in data) {
+          cities.add(CityModel.fromJson(element));
+        }
+        return cities;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return cities;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return cities;
     }
   }
 
