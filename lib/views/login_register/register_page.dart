@@ -2,7 +2,7 @@
 
 import 'dart:async';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/login_register_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
@@ -1169,7 +1169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ? AppTheme.black11
                           : AppTheme.white1), // WHILE WRITING
                   maxLines: 1,
-                  obscureText: !Provider.of<LoginRegisterProvider>(context)
+                  obscureText: !Provider.of<LoginRegisterPageProvider>(context)
                       .registerPasswordVisible,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
@@ -1190,7 +1190,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     suffixIcon: IconButton(
                       splashRadius: 24,
-                      icon: Provider.of<LoginRegisterProvider>(context)
+                      icon: Provider.of<LoginRegisterPageProvider>(context)
                               .registerPasswordVisible
                           ? SizedBox(
                               child: Image.asset(
@@ -1215,7 +1215,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                       splashColor: Colors.transparent,
                       onPressed: () async {
-                        Provider.of<LoginRegisterProvider>(context,
+                        Provider.of<LoginRegisterPageProvider>(context,
                                 listen: false)
                             .updateRegisterPasswordVisible();
                       },

@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/providers/login_register_provider.dart';
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                                     : AppTheme.white1), // WHILE WRITING
                             maxLines: 1,
                             obscureText:
-                                !Provider.of<LoginRegisterProvider>(context)
+                                !Provider.of<LoginRegisterPageProvider>(context)
                                     .loginPasswordVisible,
                             decoration: InputDecoration(
                               contentPadding:
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                               suffixIcon: IconButton(
                                 splashRadius: 24,
                                 icon:
-                                    Provider.of<LoginRegisterProvider>(context)
+                                    Provider.of<LoginRegisterPageProvider>(context)
                                             .loginPasswordVisible
                                         ? SizedBox(
                                             child: Image.asset(
@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                 splashColor: Colors.transparent,
                                 onPressed: () async {
-                                  Provider.of<LoginRegisterProvider>(context,
+                                  Provider.of<LoginRegisterPageProvider>(context,
                                           listen: false)
                                       .updateLoginPasswordVisible();
                                 },
@@ -263,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                                           color: AppTheme.white14),
                                     ),
                                     const SizedBox(width: 9),
-                                    Consumer<LoginRegisterProvider>(
+                                    Consumer<LoginRegisterPageProvider>(
                                       builder: (context, provider, child) {
                                         return FlutterSwitch(
                                           width: 42,
