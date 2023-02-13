@@ -2,8 +2,8 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
+import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
-import 'package:b2geta_mobile/views/profile/company/sub_pages/company_profile_menu_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -298,7 +298,7 @@ class _NavigationPageState extends State<NavigationPage> {
               Navigator.push(
                   context,
                   CupertinoPageRoute(
-                    builder: (context) => const CompanyProfileMenuSubPage(),
+                    builder: (context) => const MenuPage(),
                   ));
             },
           ),

@@ -8,21 +8,35 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class CompanyAddAddressSubPage extends StatefulWidget {
-  const CompanyAddAddressSubPage({Key? key}) : super(key: key);
+class MenuAddAddressSubPage extends StatefulWidget {
+  const MenuAddAddressSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyAddAddressSubPage> createState() =>
-      _CompanyAddAddressSubPageState();
+  State<MenuAddAddressSubPage> createState() => _MenuAddAddressSubPageState();
 }
 
-class _CompanyAddAddressSubPageState extends State<CompanyAddAddressSubPage> {
+class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
   ScrollController scrollController = ScrollController();
+  final addressNameController = TextEditingController();
+  final addressController = TextEditingController();
+  final postalCodeController = TextEditingController();
+
+  var countryCode;
+  var cityCode;
+  var districtCode;
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  @override
+  void initState() {
+    // Provider.of<LoginRegisterProvider>(context, listen: false)
+    //     .fetchDropdownList();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,12 +155,6 @@ class _CompanyAddAddressSubPageState extends State<CompanyAddAddressSubPage> {
               padding: EdgeInsets.fromLTRB(30, 30, 30, 37),
               child: Column(
                 children: [
-
-
-
-
-
-
                   SizedBox(height: 28),
                   MaterialButton(
                       minWidth: deviceWidth,

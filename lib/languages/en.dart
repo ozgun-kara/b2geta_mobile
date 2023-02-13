@@ -54,7 +54,6 @@ final Map<String, String> en = {
   'My Addresses': 'My Addresses',
   'Follow List': 'Follow List',
   'Log Out': 'Log Out',
-  // MENU CONTENT
   'Date:': 'Date:',
   'Order Number:': 'Order Number:',
   'Product Number:': 'Product Number:',
