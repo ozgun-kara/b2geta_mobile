@@ -364,6 +364,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           countryCode = countryList[countryIndex].code;
 
                           Provider.of<MenuPageProvider>(context, listen: false)
+                              .selectedCity = null;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
                               .fetchCityList(countryCode);
                         }
                       },
@@ -540,6 +543,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           debugPrint('CITY ID: ${cityList[cityIndex].id}');
 
                           cityId = cityList[cityIndex].id;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .selectedDistrict = null;
 
                           Provider.of<MenuPageProvider>(context, listen: false)
                               .fetchDistrictList(cityId);
