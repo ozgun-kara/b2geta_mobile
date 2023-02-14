@@ -25,6 +25,8 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   fetchCityList(String countryCode) async {
+    cityList.clear();
+    districtList.clear();
     cityList = await locator<GeneralService>().citiesCall(country: countryCode);
     notifyListeners();
   }
