@@ -146,6 +146,21 @@ class _MenuPageState extends State<MenuPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
+                'Settings'.tr,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontFamily: AppTheme.appFontFamily,
+                  fontWeight: FontWeight.w400,
+                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                ),
+              ),
+              onPressed: () {}),
+          const SizedBox(height: 8),
+          MaterialButton(
+              minWidth: deviceWidth,
+              elevation: 0,
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: Text(
                 'Log Out'.tr,
                 style: TextStyle(
                   fontSize: 16,

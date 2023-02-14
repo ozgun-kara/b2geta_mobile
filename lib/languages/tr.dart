@@ -53,6 +53,7 @@ final Map<String, String> tr = {
   'Account Settings': 'Hesap Ayarları',
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
+  'Settings': 'Ayarlar',
   'Log Out': 'Çıkış',
   'Date:': 'Tarih:',
   'Order Number:': 'Sipariş No:',
