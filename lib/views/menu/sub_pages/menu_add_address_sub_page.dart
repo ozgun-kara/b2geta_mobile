@@ -59,7 +59,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
         Provider.of<MenuPageProvider>(context, listen: false).districtList;
 
     return Scaffold(
-      backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black12,
+      backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black7,
       appBar: AppBar(
           toolbarHeight: 68,
           backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -175,7 +175,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         fontWeight: FontWeight.w500,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white1), // WHILE WRITING
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -184,16 +184,16 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       fillColor:
                           Provider.of<ThemeProvider>(context).themeMode ==
                                   "light"
-                              ? AppTheme.white5
-                              : AppTheme.black7,
-                      hintText: 'Adres Adı',
+                              ? AppTheme.white39
+                              : AppTheme.black18,
+                      hintText: 'Address Name'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
@@ -433,7 +433,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'Country Dropdown'.tr,
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -491,7 +491,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       // alignment: AlignmentDirectional.center,
                       isExpanded: true,
                       hint: Text(
-                        'City',
+                        'City'.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -603,7 +603,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'City Dropdown',
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -661,7 +661,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       // alignment: AlignmentDirectional.center,
                       isExpanded: true,
                       hint: Text(
-                        'District',
+                        'District'.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -774,7 +774,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'District Dropdown',
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -837,7 +837,8 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                 "light"
                             ? AppTheme.black11
                             : AppTheme.white1), // WHILE WRITING
-                    maxLines: 1,
+                    minLines: 1,
+                    maxLines: 5,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                       filled: true,
@@ -846,7 +847,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                   "light"
                               ? AppTheme.white5
                               : AppTheme.black7,
-                      hintText: 'Adres',
+                      hintText: 'Address'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
@@ -884,6 +885,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                   SizedBox(height: 13),
                   TextFormField(
                     controller: postalCodeController,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(
                         fontSize: 16,
                         fontFamily: AppTheme.appFontFamily,
@@ -901,7 +903,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                   "light"
                               ? AppTheme.white5
                               : AppTheme.black7,
-                      hintText: 'Posta Kodu',
+                      hintText: 'Postal Code'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
@@ -946,7 +948,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'Adres Ekle',
+                        'Add an Address'.tr,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -964,7 +966,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'Geri Git',
+                        'Go Back'.tr,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
