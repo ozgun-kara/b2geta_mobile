@@ -53,6 +53,7 @@ final Map<String, String> en = {
   'Account Settings': 'Account Settings',
   'My Addresses': 'My Addresses',
   'Follow List': 'Follow List',
+  'Settings': 'Settings',
   'Log Out': 'Log Out',
   'Date:': 'Date:',
   'Order Number:': 'Order Number:',

@@ -37,8 +37,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
   @override
   void initState() {
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchCityList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchDistrictList();
 
     super.initState();
   }
@@ -364,6 +362,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               'COUNTRY CODE: ${countryList[countryIndex].code}');
 
                           countryCode = countryList[countryIndex].code;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .fetchCityList(countryCode);
                         }
                       },
 
@@ -539,6 +540,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           debugPrint('CITY ID: ${cityList[cityIndex].id}');
 
                           cityId = cityList[cityIndex].id;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .fetchDistrictList(cityId);
                         }
                       },
 
