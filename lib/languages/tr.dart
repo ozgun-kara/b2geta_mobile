@@ -53,6 +53,7 @@ final Map<String, String> tr = {
   'Account Settings': 'Hesap Ayarları',
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
+  'Settings': 'Ayarlar',
   'Log Out': 'Çıkış',
   'Date:': 'Tarih:',
   'Order Number:': 'Sipariş No:',
@@ -72,6 +73,9 @@ final Map<String, String> tr = {
   'Edit': 'Düzenle',
   'Addresses Page Route': 'Anasayfa - Adreslerim',
   'Add an Address Page Route': 'Anasayfa - Adres Ekle',
+  'Address Name': 'Address Adı',
+  'Search...': 'Ara...',
+  'Go Back': 'Geri Git',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

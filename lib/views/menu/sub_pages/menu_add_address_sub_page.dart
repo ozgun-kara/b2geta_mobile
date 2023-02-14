@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -38,8 +37,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
   @override
   void initState() {
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchCityList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchDistrictList();
 
     super.initState();
   }
@@ -59,7 +56,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
         Provider.of<MenuPageProvider>(context, listen: false).districtList;
 
     return Scaffold(
-      backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black12,
+      backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black7,
       appBar: AppBar(
           toolbarHeight: 68,
           backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -175,7 +172,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         fontWeight: FontWeight.w500,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white1), // WHILE WRITING
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -184,16 +181,16 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       fillColor:
                           Provider.of<ThemeProvider>(context).themeMode ==
                                   "light"
-                              ? AppTheme.white5
-                              : AppTheme.black7,
-                      hintText: 'Adres Adı',
+                              ? AppTheme.white39
+                              : AppTheme.black18,
+                      hintText: 'Address Name'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
@@ -328,7 +325,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           color:
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                         ),
                       ),
@@ -344,7 +341,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
-                                        ? AppTheme.black11
+                                        ? AppTheme.blue3
                                         : AppTheme.white14,
                                   ),
                                 ),
@@ -365,6 +362,12 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               'COUNTRY CODE: ${countryList[countryIndex].code}');
 
                           countryCode = countryList[countryIndex].code;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .selectedCity = null;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .fetchCityList(countryCode);
                         }
                       },
 
@@ -373,6 +376,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           'assets/icons/dropdown.png',
                           width: 10,
                           height: 6,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white15,
                         ),
                       ),
                       iconSize: 24,
@@ -386,11 +394,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.circular(10),
                         // border:
                         //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                        // color: Colors.transparent,
+
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // buttonElevation: 2,
                       itemHeight: 40,
@@ -401,11 +409,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       dropdownPadding: null,
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        // color: Color(0xFFEFF0F7),
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // dropdownElevation: 8,
                       scrollbarRadius: const Radius.circular(40),
@@ -419,21 +426,22 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         child: TextFormField(
                           controller: countryController,
                           style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.black11
-                                  : AppTheme.white1), // WHILE WRITING
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                          ), // WHILE WRITING
                           decoration: InputDecoration(
                             isDense: true,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'Country Dropdown'.tr,
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -441,7 +449,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                             ),
                             border: OutlineInputBorder(
@@ -462,7 +470,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? AppTheme.white10
+                                    ? AppTheme.blue3
                                     : AppTheme.white1,
                                 width: 1,
                               ),
@@ -491,7 +499,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       // alignment: AlignmentDirectional.center,
                       isExpanded: true,
                       hint: Text(
-                        'City',
+                        'City'.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -499,7 +507,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           color:
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                         ),
                       ),
@@ -515,7 +523,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
-                                        ? AppTheme.black11
+                                        ? AppTheme.blue3
                                         : AppTheme.white14,
                                   ),
                                 ),
@@ -535,6 +543,12 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           debugPrint('CITY ID: ${cityList[cityIndex].id}');
 
                           cityId = cityList[cityIndex].id;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .selectedDistrict = null;
+
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .fetchDistrictList(cityId);
                         }
                       },
 
@@ -543,6 +557,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           'assets/icons/dropdown.png',
                           width: 10,
                           height: 6,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white15,
                         ),
                       ),
                       iconSize: 24,
@@ -556,11 +575,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.circular(10),
                         // border:
                         //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                        // color: Colors.transparent,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // buttonElevation: 2,
                       itemHeight: 40,
@@ -571,11 +589,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       dropdownPadding: null,
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        // color: Color(0xFFEFF0F7),
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // dropdownElevation: 8,
                       scrollbarRadius: const Radius.circular(40),
@@ -589,21 +606,22 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         child: TextFormField(
                           controller: cityController,
                           style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.black11
-                                  : AppTheme.white1), // WHILE WRITING
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                          ), // WHILE WRITING
                           decoration: InputDecoration(
                             isDense: true,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'City Dropdown',
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -611,7 +629,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                             ),
                             border: OutlineInputBorder(
@@ -632,7 +650,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? AppTheme.white10
+                                    ? AppTheme.blue3
                                     : AppTheme.white1,
                                 width: 1,
                               ),
@@ -661,7 +679,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       // alignment: AlignmentDirectional.center,
                       isExpanded: true,
                       hint: Text(
-                        'District',
+                        'District'.tr,
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -669,7 +687,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           color:
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                         ),
                       ),
@@ -685,7 +703,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
-                                        ? AppTheme.black11
+                                        ? AppTheme.blue3
                                         : AppTheme.white14,
                                   ),
                                 ),
@@ -714,6 +732,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           'assets/icons/dropdown.png',
                           width: 10,
                           height: 6,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white15,
                         ),
                       ),
                       iconSize: 24,
@@ -727,11 +750,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.circular(10),
                         // border:
                         //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                        // color: Colors.transparent,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // buttonElevation: 2,
                       itemHeight: 40,
@@ -742,11 +764,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       dropdownPadding: null,
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(14),
-                        // color: Color(0xFFEFF0F7),
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.white5
-                            : AppTheme.black7,
+                            ? AppTheme.white39
+                            : AppTheme.black18,
                       ),
                       // dropdownElevation: 8,
                       scrollbarRadius: const Radius.circular(40),
@@ -760,21 +781,22 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         child: TextFormField(
                           controller: districtController,
                           style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.black11
-                                  : AppTheme.white1), // WHILE WRITING
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                          ), // WHILE WRITING
                           decoration: InputDecoration(
                             isDense: true,
                             contentPadding: const EdgeInsets.symmetric(
                               horizontal: 16,
                               vertical: 12,
                             ),
-                            hintText: 'District Dropdown',
+                            hintText: 'Search...'.tr,
                             hintStyle: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -782,7 +804,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
-                                  ? AppTheme.black11
+                                  ? AppTheme.blue3
                                   : AppTheme.white14,
                             ),
                             border: OutlineInputBorder(
@@ -803,7 +825,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? AppTheme.white10
+                                    ? AppTheme.blue3
                                     : AppTheme.white1,
                                 width: 1,
                               ),
@@ -835,25 +857,26 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         fontWeight: FontWeight.w500,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white1), // WHILE WRITING
-                    maxLines: 1,
+                    minLines: 1,
+                    maxLines: 5,
                     decoration: InputDecoration(
                       contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                       filled: true,
                       fillColor:
                           Provider.of<ThemeProvider>(context).themeMode ==
                                   "light"
-                              ? AppTheme.white5
-                              : AppTheme.black7,
-                      hintText: 'Adres',
+                              ? AppTheme.white39
+                              : AppTheme.black18,
+                      hintText: 'Address'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
@@ -884,13 +907,14 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                   SizedBox(height: 13),
                   TextFormField(
                     controller: postalCodeController,
+                    keyboardType: TextInputType.number,
                     style: TextStyle(
                         fontSize: 16,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w500,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white1), // WHILE WRITING
                     maxLines: 1,
                     decoration: InputDecoration(
@@ -899,16 +923,16 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       fillColor:
                           Provider.of<ThemeProvider>(context).themeMode ==
                                   "light"
-                              ? AppTheme.white5
-                              : AppTheme.black7,
-                      hintText: 'Posta Kodu',
+                              ? AppTheme.white39
+                              : AppTheme.black18,
+                      hintText: 'Postal Code'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
                         fontWeight: FontWeight.w400,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black11
+                            ? AppTheme.blue3
                             : AppTheme.white14,
                       ),
                       border: OutlineInputBorder(
@@ -946,7 +970,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'Adres Ekle',
+                        'Add an Address'.tr,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -964,7 +988,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'Geri Git',
+                        'Go Back'.tr,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,

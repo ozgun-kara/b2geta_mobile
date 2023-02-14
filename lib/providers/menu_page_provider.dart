@@ -24,8 +24,10 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchCityList() async {
-    cityList = await locator<GeneralService>().citiesCall(country: 'TR');
+  fetchCityList(String countryCode) async {
+    cityList.clear();
+    districtList.clear();
+    cityList = await locator<GeneralService>().citiesCall(country: countryCode);
     notifyListeners();
   }
 
@@ -34,8 +36,8 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchDistrictList() async {
-    districtList = await locator<GeneralService>().townListCall(city: '2188');
+  fetchDistrictList(String cityId) async {
+    districtList = await locator<GeneralService>().townListCall(city: cityId);
     notifyListeners();
   }
 
