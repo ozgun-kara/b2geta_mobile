@@ -988,14 +988,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         debugPrint("Address: ${addressController.text}");
                         debugPrint("Postal Code: ${postalCodeController.text}");
 
-
-
-
-
-
-
-
-
                         MemberAddressesServices()
                             .addAddressCall(
                           name: 'Ev Adresim',
@@ -1014,10 +1006,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           }
                         });
 
-
-
-
-
+                        Navigator.pop(context);
                       }),
                   SizedBox(height: 18),
                   MaterialButton(
@@ -1048,7 +1037,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     );
   }
 
-
   void showAlertDialog2(BuildContext context) {
     showDialog(
       context: context,
@@ -1061,9 +1049,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
               height: 150,
               decoration: BoxDecoration(
                   color:
-                  Provider.of<ThemeProvider>(context).themeMode == "light"
-                      ? AppTheme.white1
-                      : AppTheme.black12,
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white1
+                          : AppTheme.black12,
                   borderRadius: const BorderRadius.all(Radius.circular(16))),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -1078,10 +1066,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
                           color:
-                          Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                              ? AppTheme.black16
-                              : AppTheme.white14,
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black16
+                                  : AppTheme.white14,
                         ),
                       ),
                       const SizedBox(width: 8),
@@ -1089,7 +1077,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         Icons.error_outline_sharp,
                         size: 24,
                         color: Provider.of<ThemeProvider>(context).themeMode ==
-                            "light"
+                                "light"
                             ? AppTheme.black16
                             : AppTheme.white14,
                       ),
@@ -1128,7 +1116,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           // ],
 
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(16))),
+                              const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
                           elevation: 0,
                           shape: const RoundedRectangleBorder(
