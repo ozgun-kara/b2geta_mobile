@@ -446,30 +446,8 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                                                   debugPrint(
                                                       "Address Id: ${address.id}");
 
-                                                  showAlertDialog(
-                                                      context: context,
-                                                      titleText:
-                                                          'Remove Dialog'.tr,
-                                                      buttonText: 'Remove'.tr,
-                                                      buttonColor:
-                                                          Colors.red.shade600,
-                                                      onPressed: () {
-                                                        locator<MemberAddressesServices>()
-                                                            .deleteAddressCall(
-                                                                id: address.id
-                                                                    .toString())
-                                                            .then((value) {
-                                                          if (value == true) {
-                                                            debugPrint(
-                                                                "ADDRESS HAS SUCCESSFULLY DELETED");
-                                                          } else {
-                                                            debugPrint(
-                                                                "ADDRESS HAS NOT DELETED");
-                                                            showAlertDialog2(
-                                                                context);
-                                                          }
-                                                        });
-                                                      });
+                                                  deleteConfirmDialog(
+                                                      address.id.toString());
                                                 }),
                                           ),
                                         ),
@@ -538,12 +516,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
     );
   }
 
-  void showAlertDialog(
-      {required BuildContext context,
-      required String titleText,
-      required String buttonText,
-      required buttonColor,
-      required VoidCallback onPressed}) {
+  void deleteConfirmDialog(String addressId) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -554,24 +527,19 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
             padding: const EdgeInsets.all(16.0),
             height: 150,
             decoration: BoxDecoration(
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black12,
+                color: themeMode ? AppTheme.white1 : AppTheme.black12,
                 borderRadius: const BorderRadius.all(Radius.circular(16))),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  titleText,
+                  'Remove Dialog'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black16
-                            : AppTheme.white14,
+                    color: themeMode ? AppTheme.black16 : AppTheme.white14,
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -607,7 +575,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                     Container(
                       height: 28.0,
                       decoration: BoxDecoration(
-                          color: buttonColor,
+                          color: Colors.red.shade600,
                           borderRadius:
                               const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(
@@ -615,9 +583,22 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
-                        onPressed: onPressed,
+                        onPressed: () {
+                          locator<MemberAddressesServices>()
+                              .deleteAddressCall(id: addressId)
+                              .then((value) {
+                            if (value == true) {
+                              debugPrint("ADDRESS HAS SUCCESSFULLY DELETED");
+                              Navigator.of(context).pop();
+                              setState(() {});
+                            } else {
+                              debugPrint("ADDRESS HAS NOT DELETED");
+                              showAlertDialog2(context);
+                            }
+                          });
+                        },
                         child: Text(
-                          buttonText,
+                          'Remove'.tr,
                           style: TextStyle(
                               fontSize: 12,
                               fontFamily: AppTheme.appFontFamily,
