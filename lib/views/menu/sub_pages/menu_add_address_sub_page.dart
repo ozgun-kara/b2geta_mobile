@@ -996,6 +996,13 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           district: '108963',
                           address: 'Kuş tepe Mah. Tan Sokak',
                           postalCode: '34000',
+
+                          // name: addressNameController.text,
+                          // country: countryCode,
+                          // city: cityId,
+                          // district: districtId,
+                          // address: addressController.text,
+                          // postalCode: postalCodeController.text,
                         )
                             .then((value) {
                           if (value == true) {
