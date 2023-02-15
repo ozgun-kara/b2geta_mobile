@@ -1229,8 +1229,8 @@ class _BasketPageState extends State<BasketPage> {
                       onTap: () {
                         showAlertDialog(
                             context: context,
-                            titleText: "Silmek İstediğinizden Emin misiniz ? ",
-                            buttonText: "Sil",
+                            titleText: 'Remove Dialog'.tr,
+                            buttonText: 'Remove'.tr,
                             buttonColor: Colors.red.shade600,
                             onPressed: () {
                               Provider.of<BasketPageProvider>(context,
@@ -1459,7 +1459,7 @@ class _BasketPageState extends State<BasketPage> {
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
-                            "Kapat",
+                            'Close'.tr,
                             style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: AppTheme.appFontFamily,

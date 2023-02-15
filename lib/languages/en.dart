@@ -147,6 +147,7 @@ final Map<String, String> en = {
   'Total Price': 'Total Price',
   'Price Per Piece': 'Price per piece',
   'Remove': 'Remove',
+  'Remove Dialog' : 'Are you sure you want to remove?',
   'Address Choice': 'Address Choice',
   'Name': 'Name',
   'Address': 'Address',
