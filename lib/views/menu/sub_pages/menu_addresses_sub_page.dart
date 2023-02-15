@@ -502,10 +502,11 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const MenuAddAddressSubPage(),
-                          ));
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const MenuAddAddressSubPage()))
+                          .then((_) => setState(() {}));
                     }),
               ),
             ),
