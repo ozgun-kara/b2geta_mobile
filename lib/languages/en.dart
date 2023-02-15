@@ -2,6 +2,9 @@ final Map<String, String> en = {
   // LANGUAGE PAGE
   'Language Selection': 'Language Selection',
   'Save': 'Save',
+  // DIALOGS
+  'Operation Failed Dialog': 'Operation failed',
+  'Remove Dialog': 'Are you sure you want to remove?',
   // LOGIN PAGE
   'Member Login': 'Member Login',
   'E-mail': 'E-mail',
@@ -147,7 +150,6 @@ final Map<String, String> en = {
   'Total Price': 'Total Price',
   'Price Per Piece': 'Price per piece',
   'Remove': 'Remove',
-  'Remove Dialog' : 'Are you sure you want to remove?',
   'Address Choice': 'Address Choice',
   'Name': 'Name',
   'Address': 'Address',
