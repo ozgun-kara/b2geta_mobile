@@ -37,7 +37,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
   @override
   void initState() {
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
-
     super.initState();
   }
 
@@ -365,6 +364,8 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
                           Provider.of<MenuPageProvider>(context, listen: false)
                               .selectedCity = null;
+                          cityId = null;
+                          districtId = null;
 
                           Provider.of<MenuPageProvider>(context, listen: false)
                               .fetchCityList(countryCode);
@@ -546,6 +547,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
                           Provider.of<MenuPageProvider>(context, listen: false)
                               .selectedDistrict = null;
+                          districtId = null;
 
                           Provider.of<MenuPageProvider>(context, listen: false)
                               .fetchDistrictList(cityId);
@@ -977,7 +979,15 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                             fontWeight: FontWeight.w700,
                             color: AppTheme.white1),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        debugPrint(
+                            "\nAddress Name: ${addressNameController.text}");
+                        debugPrint("Country Code: $countryCode");
+                        debugPrint("City Id: $cityId");
+                        debugPrint("District Id: $districtId");
+                        debugPrint("Address: ${addressController.text}");
+                        debugPrint("Postal Code: ${postalCodeController.text}");
+                      }),
                   SizedBox(height: 18),
                   MaterialButton(
                       minWidth: deviceWidth,

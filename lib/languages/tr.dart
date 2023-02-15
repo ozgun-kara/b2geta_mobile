@@ -148,6 +148,7 @@ final Map<String, String> tr = {
   'Total Price': 'Toplam Ücret',
   'Price Per Piece': 'Adet başı ücret',
   'Remove': 'Sil',
+  'Remove Dialog' : 'Silmek istediğinize emin misiniz?',
   'Address Choice': 'Adres Seçimi',
   'Name': 'İsim',
   'Address': 'Adres',
