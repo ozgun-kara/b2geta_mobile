@@ -987,6 +987,37 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         debugPrint("District Id: $districtId");
                         debugPrint("Address: ${addressController.text}");
                         debugPrint("Postal Code: ${postalCodeController.text}");
+
+
+
+
+
+
+
+
+
+                        MemberAddressesServices()
+                            .addAddressCall(
+                          name: 'Ev Adresim',
+                          country: 'TR',
+                          city: '2170',
+                          district: '108963',
+                          address: 'Kuş tepe Mah. Tan Sokak',
+                          postalCode: '34000',
+                        )
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("ADDRESS HAS SUCCESSFULLY ADDED");
+                          } else {
+                            debugPrint("ADDRESS HAS NOT ADDED");
+                            showAlertDialog2(context);
+                          }
+                        });
+
+
+
+
+
                       }),
                   SizedBox(height: 18),
                   MaterialButton(
@@ -1014,6 +1045,114 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
           ],
         ),
       ),
+    );
+  }
+
+
+  void showAlertDialog2(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: AlertDialog(
+            backgroundColor: Colors.transparent,
+            content: Container(
+              width: deviceWidth,
+              height: 150,
+              decoration: BoxDecoration(
+                  color:
+                  Provider.of<ThemeProvider>(context).themeMode == "light"
+                      ? AppTheme.white1
+                      : AppTheme.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'THE OPERATION FAILED',
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color:
+                          Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                              ? AppTheme.black16
+                              : AppTheme.white14,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.error_outline_sharp,
+                        size: 24,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                            "light"
+                            ? AppTheme.black16
+                            : AppTheme.white14,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  ButtonTheme(
+                    // minWidth: deviceWidth,
+                    height: 36,
+                    child: Container(
+                      height: 36,
+                      decoration: BoxDecoration(
+                          color: AppTheme.green1,
+                          // boxShadow: [
+                          //   BoxShadow(
+                          //     blurStyle: BlurStyle.outer,
+                          //     offset: Offset(0, -4),
+                          //     blurRadius: 16,
+                          //     spreadRadius: 0,
+                          //     color: Color(0xFF0E0E0F).withOpacity(0.17),
+                          //   ),
+                          //   BoxShadow(
+                          //     blurStyle: BlurStyle.normal,
+                          //     offset: Offset(0, -2),
+                          //     blurRadius: 2,
+                          //     spreadRadius: 0,
+                          //     color: Color(0xFFFFFFFF).withOpacity(0.25),
+                          //   ),
+                          //   BoxShadow(
+                          //     blurStyle: BlurStyle.normal,
+                          //     offset: Offset(0, 1),
+                          //     blurRadius: 2,
+                          //     spreadRadius: 0,
+                          //     color: Color(0xFF000000).withOpacity(0.18),
+                          //   ),
+                          // ],
+
+                          borderRadius:
+                          const BorderRadius.all(Radius.circular(16))),
+                      child: MaterialButton(
+                          elevation: 0,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
