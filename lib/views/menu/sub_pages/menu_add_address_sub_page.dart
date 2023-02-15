@@ -1007,13 +1007,14 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                             .then((value) {
                           if (value == true) {
                             debugPrint("ADDRESS HAS SUCCESSFULLY ADDED");
+                            Navigator.pop(context);
                           } else {
                             debugPrint("ADDRESS HAS NOT ADDED");
                             showAlertDialog2(context);
                           }
                         });
 
-                        Navigator.pop(context);
+
                       }),
                   SizedBox(height: 18),
                   MaterialButton(
