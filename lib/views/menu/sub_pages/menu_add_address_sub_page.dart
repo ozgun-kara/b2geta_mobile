@@ -8,6 +8,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'dart:ui';
 
 class MenuAddAddressSubPage extends StatefulWidget {
   const MenuAddAddressSubPage({Key? key}) : super(key: key);
@@ -1058,11 +1059,11 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                   Navigator.pop(context);
                                 } else {
                                   debugPrint("ADDRESS HAS NOT ADDED");
-                                  showAlertDialog2(context);
+                                  operationFailedDialog(context);
                                 }
                               });
                             } else {
-                              validationError(context);
+                              validationErrorDialog(context);
                             }
                           }
                         }),
@@ -1096,88 +1097,55 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     );
   }
 
-  void showAlertDialog2(BuildContext context) {
+  void operationFailedDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return Center(
-          child: AlertDialog(
-            backgroundColor: Colors.transparent,
-            content: Container(
-              width: deviceWidth,
-              height: 150,
-              decoration: BoxDecoration(
-                  color:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white1
-                          : AppTheme.black12,
-                  borderRadius: const BorderRadius.all(Radius.circular(16))),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'THE OPERATION FAILED',
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w500,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
                                   ? AppTheme.black16
-                                  : AppTheme.white14,
+                                  : AppTheme.white1,
+                            ),
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Icon(
-                        Icons.error_outline_sharp,
-                        size: 24,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black16
-                            : AppTheme.white14,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 16),
-                  ButtonTheme(
-                    // minWidth: deviceWidth,
-                    height: 36,
-                    child: Container(
-                      height: 36,
-                      decoration: BoxDecoration(
-                          color: AppTheme.green1,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.outer,
-                          //     offset: Offset(0, -4),
-                          //     blurRadius: 16,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, -2),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, 1),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF000000).withOpacity(0.18),
-                          //   ),
-                          // ],
-
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
                       child: MaterialButton(
                           elevation: 0,
+                          color: AppTheme.green1,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
@@ -1193,8 +1161,8 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                             Navigator.of(context).pop();
                           }),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -1203,67 +1171,55 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     );
   }
 
-  void validationError(BuildContext context) {
+  void validationErrorDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return Center(
-          child: AlertDialog(
-            backgroundColor: Colors.transparent,
-            content: Container(
-              width: deviceWidth,
-              decoration: BoxDecoration(
-                  color:
-                      Provider.of<ThemeProvider>(context).themeMode == "light"
-                          ? AppTheme.white1
-                          : AppTheme.black12,
-                  borderRadius: const BorderRadius.all(Radius.circular(16))),
-              padding: EdgeInsets.fromLTRB(32, 32, 32, 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
                           child: Text(
-                            'Lütfen eksi sdfds dsfsdfsdf fddgdgdfgdf asdada',
+                            'Lütfen Eksik Alanları Doldurunuz',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
+                              color: themeMode
                                   ? AppTheme.black16
-                                  : AppTheme.white14,
+                                  : AppTheme.white1,
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      Icon(
-                        Icons.error_outline_sharp,
-                        size: 24,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black16
-                            : AppTheme.white14,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  ButtonTheme(
-                    height: 36,
-                    child: Container(
-                      height: 36,
-                      decoration: BoxDecoration(
-                          color: AppTheme.green1,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
                       child: MaterialButton(
                           elevation: 0,
+                          color: AppTheme.green1,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
@@ -1279,8 +1235,8 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                             Navigator.of(context).pop();
                           }),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
