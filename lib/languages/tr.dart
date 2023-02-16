@@ -3,7 +3,8 @@ final Map<String, String> tr = {
   'Language Selection': 'Dil Seçimi',
   'Save': 'Kaydet',
   // DIALOGS
-  'Operation Failed Dialog': 'İşlem başarısız',
+  'Validation Error Dialog': 'Lütfen Eksik Alanları Doldurunuz',
+  'Operation Failed Dialog': 'İşlem Başarısız',
   'Remove Dialog': 'Silmek istediğinize emin misiniz?',
   // LOGIN PAGE
   'Member Login': 'Üye Girişi',
@@ -79,6 +80,9 @@ final Map<String, String> tr = {
   'Address Name': 'Address Adı',
   'Search...': 'Ara...',
   'Go Back': 'Geri Git',
+  'Address Name Validate': 'Lütfen adres adını giriniz',
+  'Address Validate': 'Lütfen adresi giriniz',
+  'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

@@ -1,6 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
@@ -170,7 +169,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                     TextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Company Name Validate'.tr;
+                          return 'Address Name Validate'.tr;
                         }
                         return null;
                       },
@@ -179,31 +178,22 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1), // WHILE WRITING
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
                       maxLines: 1,
                       decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.fromLTRB(25, 16, 25, 16),
                         filled: true,
                         fillColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white39
-                                : AppTheme.black18,
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
                         hintText: 'Address Name'.tr,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -220,11 +210,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue2
-                                    : AppTheme.white1,
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                             width: 1,
                           ),
                         ),
@@ -880,7 +866,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                     TextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Company Name Validate'.tr;
+                          return 'Address Validate'.tr;
                         }
                         return null;
                       },
@@ -889,11 +875,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1), // WHILE WRITING
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
                       minLines: 1,
                       maxLines: 5,
                       decoration: InputDecoration(
@@ -901,20 +885,13 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                             const EdgeInsets.fromLTRB(25, 16, 25, 16),
                         filled: true,
                         fillColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white39
-                                : AppTheme.black18,
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
                         hintText: 'Address'.tr,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -931,11 +908,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue2
-                                    : AppTheme.white1,
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                             width: 1,
                           ),
                         ),
@@ -945,7 +918,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                     TextFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Company Name Validate'.tr;
+                          return 'Postal Code Validate'.tr;
                         }
                         return null;
                       },
@@ -955,31 +928,22 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1), // WHILE WRITING
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
                       maxLines: 1,
                       decoration: InputDecoration(
                         contentPadding:
                             const EdgeInsets.fromLTRB(25, 16, 25, 16),
                         filled: true,
                         fillColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white39
-                                : AppTheme.black18,
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
                         hintText: 'Postal Code'.tr,
                         hintStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
                         ),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -996,11 +960,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue2
-                                    : AppTheme.white1,
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                             width: 1,
                           ),
                         ),
@@ -1037,7 +997,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               debugPrint(
                                   "Postal Code: ${postalCodeController.text}");
 
-                              MemberAddressesServices()
+                              locator<MemberAddressesServices>()
                                   .addAddressCall(
                                 // name: 'Ev Adresim',
                                 // country: 'TR',
@@ -1097,7 +1057,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     );
   }
 
-  void operationFailedDialog(BuildContext context) {
+  void validationErrorDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1120,7 +1080,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         const SizedBox(width: 40),
                         Expanded(
                           child: Text(
-                            'Operation Failed Dialog'.tr,
+                            'Validation Error Dialog'.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,
@@ -1171,7 +1131,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     );
   }
 
-  void validationErrorDialog(BuildContext context) {
+  void operationFailedDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1194,7 +1154,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                         const SizedBox(width: 40),
                         Expanded(
                           child: Text(
-                            'Lütfen Eksik Alanları Doldurunuz',
+                            'Operation Failed Dialog'.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,
