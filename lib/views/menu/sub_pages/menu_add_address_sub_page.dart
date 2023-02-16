@@ -175,7 +175,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       },
                       controller: addressNameController,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
                           color: themeMode
@@ -217,99 +217,6 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       ),
                     ),
                     SizedBox(height: 13),
-                    // DropdownButtonHideUnderline(
-                    //   child: DropdownButton2(
-                    //     // alignment: AlignmentDirectional.center,
-                    //     // isExpanded: true,
-                    //     hint: Text(
-                    //       'Country'.tr,
-                    //       style: TextStyle(
-                    //         fontSize: 14,
-                    //         fontFamily: AppTheme.appFontFamily,
-                    //         fontWeight: FontWeight.w400,
-                    //         color:
-                    //             Provider.of<ThemeProvider>(context).themeMode ==
-                    //                     "light"
-                    //                 ? AppTheme.black11
-                    //                 : AppTheme.white14,
-                    //       ),
-                    //       overflow: TextOverflow.visible,
-                    //     ),
-                    //     items: Provider.of<MenuPageProvider>(context)
-                    //         .dropdownItems1
-                    //         .map((item) => DropdownMenuItem<String>(
-                    //               value: item.code,
-                    //               child: Center(
-                    //                 child: Text(
-                    //                   item.name ?? '',
-                    //                   style: TextStyle(
-                    //                     fontSize: 14,
-                    //                     fontFamily: AppTheme.appFontFamily,
-                    //                     fontWeight: FontWeight.w400,
-                    //                     color: Provider.of<ThemeProvider>(context)
-                    //                                 .themeMode ==
-                    //                             "light"
-                    //                         ? AppTheme.black11
-                    //                         : AppTheme.white14,
-                    //                   ),
-                    //                   overflow: TextOverflow.visible,
-                    //                 ),
-                    //               ),
-                    //             ))
-                    //         .toList(),
-                    //     value: Provider.of<MenuPageProvider>(context)
-                    //         .dropdownSelectedValue1,
-                    //
-                    //     onChanged: (value) {
-                    //       Provider.of<MenuPageProvider>(context, listen: false)
-                    //           .updateDropdownSelectedValue1(value as String);
-                    //     },
-                    //     icon: Center(
-                    //       child: Image.asset(
-                    //         'assets/icons/dropdown.png',
-                    //         width: 10,
-                    //         height: 6,
-                    //       ),
-                    //     ),
-                    //     iconSize: 24,
-                    //     // iconEnabledColor: Colors.yellow,
-                    //     // iconDisabledColor: Colors.grey,
-                    //     // icon: Container(),
-                    //     buttonHeight: 57,
-                    //     buttonWidth: deviceWidth,
-                    //     buttonPadding: EdgeInsets.only(left: 25, right: 17),
-                    //     buttonDecoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(10),
-                    //       // border:
-                    //       //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                    //       // color: Colors.transparent,
-                    //       color: Provider.of<ThemeProvider>(context).themeMode ==
-                    //               "light"
-                    //           ? AppTheme.white5
-                    //           : AppTheme.black7,
-                    //     ),
-                    //     // buttonElevation: 2,
-                    //     itemHeight: 40,
-                    //     itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                    //     dropdownMaxHeight: 200,
-                    //     // dropdownWidth: deviceWidth,
-                    //     dropdownPadding: null,
-                    //     dropdownDecoration: BoxDecoration(
-                    //       borderRadius: BorderRadius.circular(14),
-                    //       // color: Color(0xFFEFF0F7),
-                    //       color: Provider.of<ThemeProvider>(context).themeMode ==
-                    //               "light"
-                    //           ? AppTheme.white5
-                    //           : AppTheme.black7,
-                    //     ),
-                    //     // dropdownElevation: 8,
-                    //     scrollbarRadius: const Radius.circular(40),
-                    //     scrollbarThickness: 4,
-                    //     scrollbarAlwaysShow: true,
-                    //     offset: const Offset(0, 0),
-                    //   ),
-                    // ),
-                    // SizedBox(height: 13),
                     DropdownButtonHideUnderline(
                       child: DropdownButton2(
                         // alignment: AlignmentDirectional.center,
@@ -340,7 +247,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue3
-                                          : AppTheme.white14,
+                                          : AppTheme.white1,
                                     ),
                                   ),
                                 ))
@@ -438,7 +345,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
+                                  : AppTheme.white1,
                             ), // WHILE WRITING
                             decoration: InputDecoration(
                               isDense: true,
@@ -529,7 +436,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue3
-                                          : AppTheme.white14,
+                                          : AppTheme.white1,
                                     ),
                                   ),
                                 ))
@@ -624,7 +531,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
+                                  : AppTheme.white1,
                             ), // WHILE WRITING
                             decoration: InputDecoration(
                               isDense: true,
@@ -715,7 +622,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                                   .themeMode ==
                                               "light"
                                           ? AppTheme.blue3
-                                          : AppTheme.white14,
+                                          : AppTheme.white1,
                                     ),
                                   ),
                                 ))
@@ -802,7 +709,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
+                                  : AppTheme.white1,
                             ), // WHILE WRITING
                             decoration: InputDecoration(
                               isDense: true,
@@ -872,7 +779,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       },
                       controller: addressController,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
                           color: themeMode
@@ -925,7 +832,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       controller: postalCodeController,
                       keyboardType: TextInputType.number,
                       style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w500,
                           color: themeMode

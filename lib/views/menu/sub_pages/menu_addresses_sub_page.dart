@@ -466,10 +466,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                       height: deviceWidth + 115,
                       child: Center(
                           child: CupertinoActivityIndicator(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black1
-                            : AppTheme.white1,
+                        color: themeMode ? AppTheme.black1 : AppTheme.white1,
                         radius: 12,
                       )),
                     );
