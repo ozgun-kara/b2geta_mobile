@@ -3,7 +3,8 @@ final Map<String, String> en = {
   'Language Selection': 'Language Selection',
   'Save': 'Save',
   // DIALOGS
-  'Operation Failed Dialog': 'Operation failed',
+  'Validation Error Dialog': 'Please Fill In The Missing Fields',
+  'Operation Failed Dialog': 'Operation Failed',
   'Remove Dialog': 'Are you sure you want to remove?',
   // LOGIN PAGE
   'Member Login': 'Member Login',
@@ -79,6 +80,9 @@ final Map<String, String> en = {
   'Address Name': 'Address Name',
   'Search...': 'Search...',
   'Go Back': 'Go Back',
+  'Address Name Validate': 'Please enter your address name',
+  'Address Validate': 'Please enter your address',
+  'Postal Code Validate': 'Please enter your postal code',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
