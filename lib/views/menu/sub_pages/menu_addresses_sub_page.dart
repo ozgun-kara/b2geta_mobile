@@ -416,7 +416,19 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                                                           FontWeight.w700,
                                                       color: AppTheme.white1),
                                                 ),
-                                                onPressed: () {}),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MenuAddAddressSubPage(
+                                                                passedObject:
+                                                                    address,
+                                                                operation:
+                                                                    'Edit',
+                                                              ))).then(
+                                                      (_) => setState(() {}));
+                                                }),
                                           ),
                                         ),
                                         const SizedBox(width: 17),
@@ -500,11 +512,11 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const MenuAddAddressSubPage()))
-                          .then((_) => setState(() {}));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MenuAddAddressSubPage(
+                                    operation: 'Add',
+                                  ))).then((_) => setState(() {}));
                     }),
               ),
             ),

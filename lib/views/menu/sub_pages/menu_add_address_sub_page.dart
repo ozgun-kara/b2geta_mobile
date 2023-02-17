@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
@@ -10,7 +11,12 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
 class MenuAddAddressSubPage extends StatefulWidget {
-  const MenuAddAddressSubPage({Key? key}) : super(key: key);
+  const MenuAddAddressSubPage(
+      {Key? key, this.passedObject, required this.operation})
+      : super(key: key);
+
+  final AddressModel? passedObject;
+  final String operation;
 
   @override
   State<MenuAddAddressSubPage> createState() => _MenuAddAddressSubPageState();
@@ -37,7 +43,37 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
   @override
   void initState() {
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCity = null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+        null;
+
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+
+    if (widget.operation == 'Edit') {
+      countryCode = widget.passedObject!.country!.code;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+          widget.passedObject!.country!.name;
+
+      cityId = widget.passedObject!.city!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCity =
+          widget.passedObject!.city!.name;
+
+      districtId = widget.passedObject!.district!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+          widget.passedObject!.district!.name;
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchCityList(countryCode);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchDistrictList(cityId);
+
+      addressNameController.text = widget.passedObject!.name.toString();
+      addressController.text = widget.passedObject!.address.toString();
+      postalCodeController.text = widget.passedObject!.postalCode.toString();
+    }
+
     super.initState();
   }
 
@@ -883,7 +919,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
-                          'Add an Address'.tr,
+                          widget.operation == 'Add'
+                              ? 'Add an Address'.tr
+                              : 'Edit an Address'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,
@@ -904,31 +942,62 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               debugPrint(
                                   "Postal Code: ${postalCodeController.text}");
 
-                              locator<MemberAddressesServices>()
-                                  .addAddressCall(
-                                // name: 'Ev Adresim',
-                                // country: 'TR',
-                                // city: '2170',
-                                // district: '108963',
-                                // address: 'Kuş tepe Mah. Tan Sokak',
-                                // postalCode: '34000',
+                              if (widget.operation == 'Add') {
+                                locator<MemberAddressesServices>()
+                                    .addAddressCall(
+                                  // name: 'Ev Adresim',
+                                  // country: 'TR',
+                                  // city: '2170',
+                                  // district: '108963',
+                                  // address: 'Kuş tepe Mah. Tan Sokak',
+                                  // postalCode: '34000',
 
-                                name: addressNameController.text,
-                                country: countryCode,
-                                city: cityId,
-                                district: districtId,
-                                address: addressController.text,
-                                postalCode: postalCodeController.text,
-                              )
-                                  .then((value) {
-                                if (value == true) {
-                                  debugPrint("ADDRESS HAS SUCCESSFULLY ADDED");
-                                  Navigator.pop(context);
-                                } else {
-                                  debugPrint("ADDRESS HAS NOT ADDED");
-                                  operationFailedDialog(context);
-                                }
-                              });
+                                  name: addressNameController.text,
+                                  country: countryCode,
+                                  city: cityId,
+                                  district: districtId,
+                                  address: addressController.text,
+                                  postalCode: postalCodeController.text,
+                                )
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY ADDED");
+                                    Navigator.pop(context);
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT ADDED");
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              } else {
+                                locator<MemberAddressesServices>()
+                                    .updateAddressCall(
+                                  // name: 'Ev Adresim',
+                                  // country: 'TR',
+                                  // city: '2170',
+                                  // district: '108963',
+                                  // address: 'Kuş tepe Mah. Tan Sokak',
+                                  // postalCode: '34000',
+
+                                  name: addressNameController.text,
+                                  country: countryCode,
+                                  city: cityId,
+                                  district: districtId,
+                                  address: addressController.text,
+                                  postalCode: postalCodeController.text,
+                                  id: widget.passedObject!.id.toString(),
+                                )
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY UPDATED");
+                                    Navigator.pop(context);
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT UPDATED");
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              }
                             } else {
                               validationErrorDialog(context);
                             }
