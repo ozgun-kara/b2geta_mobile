@@ -79,6 +79,7 @@ final Map<String, String> tr = {
   'Add an Address Page Route': 'Anasayfa - Adres Ekle',
   'Address Name': 'Address Adı',
   'Search...': 'Ara...',
+  'Edit an Address': 'Adresi Güncelle',
   'Go Back': 'Geri Git',
   'Address Name Validate': 'Lütfen adres adını giriniz',
   'Address Validate': 'Lütfen adresi giriniz',
