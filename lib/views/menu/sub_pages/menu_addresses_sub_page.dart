@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'dart:ui';
 
 class MenuAddressesSubPage extends StatefulWidget {
   const MenuAddressesSubPage({Key? key}) : super(key: key);
@@ -518,97 +519,107 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          content: Container(
-            width: deviceWidth,
-            padding: const EdgeInsets.all(16.0),
-            height: 150,
-            decoration: BoxDecoration(
-                color: themeMode ? AppTheme.white1 : AppTheme.black12,
-                borderRadius: const BorderRadius.all(Radius.circular(16))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Remove Dialog'.tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color: themeMode ? AppTheme.black16 : AppTheme.white14,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      height: 28.0,
-                      decoration: BoxDecoration(
-                          color: AppTheme.blue3,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
-                      child: MaterialButton(
-                          elevation: 0,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                          ),
+                    Row(
+                      children: [
+                        Expanded(
                           child: Text(
-                            'Close'.tr,
+                            'Remove Dialog'.tr,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                                fontSize: 12,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.white1),
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          }),
-                    ),
-                    const SizedBox(
-                      width: 16.0,
-                    ),
-                    Container(
-                      height: 28.0,
-                      decoration: BoxDecoration(
-                          color: Colors.red.shade600,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
-                      child: MaterialButton(
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        onPressed: () {
-                          locator<MemberAddressesServices>()
-                              .deleteAddressCall(id: addressId)
-                              .then((value) {
-                            if (value == true) {
-                              debugPrint("ADDRESS HAS SUCCESSFULLY DELETED");
-                              Navigator.of(context).pop();
-                              setState(() {});
-                            } else {
-                              debugPrint("ADDRESS HAS NOT DELETED");
-                              Navigator.of(context).pop();
-                              operationFailedDialog();
-                            }
-                          });
-                        },
-                        child: Text(
-                          'Remove'.tr,
-                          style: TextStyle(
-                              fontSize: 12,
+                              fontSize: 15,
                               fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.white1),
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
                         ),
-                      ),
-                    )
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ButtonTheme(
+                          height: 32,
+                          child: MaterialButton(
+                              elevation: 0,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.black18,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                'Close'.tr,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        ButtonTheme(
+                          height: 32,
+                          child: MaterialButton(
+                              elevation: 0,
+                              color: Colors.red.shade600,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                'Remove'.tr,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                locator<MemberAddressesServices>()
+                                    .deleteAddressCall(id: addressId)
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY DELETED");
+                                    Navigator.of(context).pop();
+                                    setState(() {});
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT DELETED");
+                                    Navigator.of(context).pop();
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         );
@@ -616,65 +627,63 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
     );
   }
 
-  void operationFailedDialog() {
+  void operationFailedDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          content: Container(
-            width: deviceWidth,
-            padding: const EdgeInsets.all(16.0),
-            height: 150,
-            decoration: BoxDecoration(
-                color: themeMode ? AppTheme.white1 : AppTheme.black12,
-                borderRadius: const BorderRadius.all(Radius.circular(16))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text(
-                      'Operation Failed Dialog'.tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w500,
-                        color: themeMode ? AppTheme.black16 : AppTheme.white14,
-                      ),
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: Icon(
-                        Icons.error_outline_sharp,
-                        size: 24,
-                        color: themeMode ? AppTheme.black16 : AppTheme.white14,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: 28.0,
-                      decoration: BoxDecoration(
-                          color: AppTheme.blue3,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
                       child: MaterialButton(
                           elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
                             'Close'.tr,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
@@ -685,7 +694,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
           ),
         );

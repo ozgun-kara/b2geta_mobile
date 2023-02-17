@@ -1012,14 +1012,15 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       height: 32,
                       child: MaterialButton(
                           elevation: 0,
-                          color: AppTheme.green1,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
                             'Close'.tr,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
@@ -1086,14 +1087,15 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       height: 32,
                       child: MaterialButton(
                           elevation: 0,
-                          color: AppTheme.green1,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
                             'Close'.tr,
                             style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
