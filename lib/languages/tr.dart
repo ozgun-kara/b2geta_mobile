@@ -121,7 +121,6 @@ final Map<String, String> tr = {
   'Certificates': 'Sertifikalar',
   'Company Profile': 'Firma Profili',
   'Store': 'Mağaza',
-  'Store': 'Store',
   'Product Details': 'Ürün Detayları',
   'Customer Comments': 'Alıcı Yorumları',
   'Features': 'Hızlı Detaylar',
@@ -171,4 +170,12 @@ final Map<String, String> tr = {
   'Confirm Basket': 'Sepeti Onayla',
   // PROFILE PAGE
   'Follow': 'Takip Et',
+
+  //App Exception
+  'Bad Request': 'Geçersiz istek',
+  'Unable to process': 'İşlenemiyor',
+  'Api not responded in time': 'API zamanında yanıt vermedi',
+  'UnAuthorized request': 'Yetkisiz istek',
+  'Error occurred': 'Hata Oluştu',
+  'No internet connection': 'İnternet bağlantısı yok',
 };

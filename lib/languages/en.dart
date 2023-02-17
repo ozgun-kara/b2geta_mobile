@@ -170,4 +170,12 @@ final Map<String, String> en = {
   'Confirm Basket': 'Confirm Basket',
   // PROFILE PAGE
   'Follow': 'Follow',
+
+  //App Exception
+  'Bad Request': 'Bad Request',
+  'Unable to process': 'Unable to process',
+  'Api not responded in time': 'Api not responded in time',
+  'UnAuthorized request': 'UnAuthorized request',
+  'Error occurred': 'Error occurred',
+  'No internet connection': 'No internet connection',
 };
