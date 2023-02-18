@@ -2,6 +2,10 @@ final Map<String, String> tr = {
   // LANGUAGE PAGE
   'Language Selection': 'Dil Seçimi',
   'Save': 'Kaydet',
+  // DIALOGS
+  'Validation Error Dialog': 'Lütfen Eksik Alanları Doldurunuz',
+  'Operation Failed Dialog': 'İşlem Başarısız',
+  'Remove Dialog': 'Silmek istediğinize emin misiniz?',
   // LOGIN PAGE
   'Member Login': 'Üye Girişi',
   'E-mail': 'E-mail',
@@ -75,7 +79,11 @@ final Map<String, String> tr = {
   'Add an Address Page Route': 'Anasayfa - Adres Ekle',
   'Address Name': 'Address Adı',
   'Search...': 'Ara...',
+  'Edit an Address': 'Adresi Güncelle',
   'Go Back': 'Geri Git',
+  'Address Name Validate': 'Lütfen adres adını giriniz',
+  'Address Validate': 'Lütfen adresi giriniz',
+  'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',

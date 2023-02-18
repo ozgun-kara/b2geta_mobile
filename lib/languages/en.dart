@@ -2,6 +2,10 @@ final Map<String, String> en = {
   // LANGUAGE PAGE
   'Language Selection': 'Language Selection',
   'Save': 'Save',
+  // DIALOGS
+  'Validation Error Dialog': 'Please Fill In The Missing Fields',
+  'Operation Failed Dialog': 'Operation Failed',
+  'Remove Dialog': 'Are you sure you want to remove?',
   // LOGIN PAGE
   'Member Login': 'Member Login',
   'E-mail': 'E-mail',
@@ -75,7 +79,11 @@ final Map<String, String> en = {
   'Add an Address Page Route': 'Homepage - Add an Address',
   'Address Name': 'Address Name',
   'Search...': 'Search...',
+  'Edit an Address': 'Update Address',
   'Go Back': 'Go Back',
+  'Address Name Validate': 'Please enter your address name',
+  'Address Validate': 'Please enter your address',
+  'Postal Code Validate': 'Please enter your postal code',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',

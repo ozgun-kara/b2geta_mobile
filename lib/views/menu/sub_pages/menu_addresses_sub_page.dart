@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'dart:ui';
 
 class MenuAddressesSubPage extends StatefulWidget {
   const MenuAddressesSubPage({Key? key}) : super(key: key);
@@ -415,7 +416,19 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                                                           FontWeight.w700,
                                                       color: AppTheme.white1),
                                                 ),
-                                                onPressed: () {}),
+                                                onPressed: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              MenuAddAddressSubPage(
+                                                                passedObject:
+                                                                    address,
+                                                                operation:
+                                                                    'Edit',
+                                                              ))).then(
+                                                      (_) => setState(() {}));
+                                                }),
                                           ),
                                         ),
                                         const SizedBox(width: 17),
@@ -442,7 +455,13 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                                                           FontWeight.w700,
                                                       color: AppTheme.white1),
                                                 ),
-                                                onPressed: () {}),
+                                                onPressed: () {
+                                                  debugPrint(
+                                                      "Address Id: ${address.id}");
+
+                                                  deleteConfirmDialog(
+                                                      address.id.toString());
+                                                }),
                                           ),
                                         ),
                                       ],
@@ -460,10 +479,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                       height: deviceWidth + 115,
                       child: Center(
                           child: CupertinoActivityIndicator(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.black1
-                            : AppTheme.white1,
+                        color: themeMode ? AppTheme.black1 : AppTheme.white1,
                         radius: 12,
                       )),
                     );
@@ -498,9 +514,9 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                const MenuAddAddressSubPage(),
-                          ));
+                              builder: (context) => const MenuAddAddressSubPage(
+                                    operation: 'Add',
+                                  ))).then((_) => setState(() {}));
                     }),
               ),
             ),
@@ -508,6 +524,193 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void deleteConfirmDialog(String addressId) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            'Remove Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ButtonTheme(
+                          height: 32,
+                          child: MaterialButton(
+                              elevation: 0,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.black18,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                'Close'.tr,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        ButtonTheme(
+                          height: 32,
+                          child: MaterialButton(
+                              elevation: 0,
+                              color: Colors.red.shade600,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                'Remove'.tr,
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                locator<MemberAddressesServices>()
+                                    .deleteAddressCall(id: addressId)
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY DELETED");
+                                    Navigator.of(context).pop();
+                                    setState(() {});
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT DELETED");
+                                    Navigator.of(context).pop();
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              }),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

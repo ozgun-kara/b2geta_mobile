@@ -8,9 +8,15 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'dart:ui';
 
 class MenuAddAddressSubPage extends StatefulWidget {
-  const MenuAddAddressSubPage({Key? key}) : super(key: key);
+  const MenuAddAddressSubPage(
+      {Key? key, this.passedObject, required this.operation})
+      : super(key: key);
+
+  final AddressModel? passedObject;
+  final String operation;
 
   @override
   State<MenuAddAddressSubPage> createState() => _MenuAddAddressSubPageState();
@@ -18,6 +24,7 @@ class MenuAddAddressSubPage extends StatefulWidget {
 
 class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
   ScrollController scrollController = ScrollController();
+  GlobalKey<FormState> addressGlobalKey = GlobalKey<FormState>();
   final addressNameController = TextEditingController();
   final countryController = TextEditingController();
   final cityController = TextEditingController();
@@ -36,7 +43,36 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
 
   @override
   void initState() {
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCity = null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+        null;
+
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+
+    if (widget.operation == 'Edit') {
+      countryCode = widget.passedObject!.country!.code;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+          widget.passedObject!.country!.name;
+
+      cityId = widget.passedObject!.city!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCity =
+          widget.passedObject!.city!.name;
+
+      districtId = widget.passedObject!.district!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+          widget.passedObject!.district!.name;
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchCityList(countryCode);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchDistrictList(cityId);
+
+      addressNameController.text = widget.passedObject!.name.toString();
+      addressController.text = widget.passedObject!.address.toString();
+      postalCodeController.text = widget.passedObject!.postalCode.toString();
+    }
 
     super.initState();
   }
@@ -162,848 +198,988 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(30, 30, 30, 37),
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: addressNameController,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w500,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1), // WHILE WRITING
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                      filled: true,
-                      fillColor:
-                          Provider.of<ThemeProvider>(context).themeMode ==
-                                  "light"
-                              ? AppTheme.white39
-                              : AppTheme.black18,
-                      hintText: 'Address Name'.tr,
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white14,
-                      ),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          )),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          )),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue2
-                                  : AppTheme.white1,
-                          width: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 13),
-                  // DropdownButtonHideUnderline(
-                  //   child: DropdownButton2(
-                  //     // alignment: AlignmentDirectional.center,
-                  //     // isExpanded: true,
-                  //     hint: Text(
-                  //       'Country'.tr,
-                  //       style: TextStyle(
-                  //         fontSize: 14,
-                  //         fontFamily: AppTheme.appFontFamily,
-                  //         fontWeight: FontWeight.w400,
-                  //         color:
-                  //             Provider.of<ThemeProvider>(context).themeMode ==
-                  //                     "light"
-                  //                 ? AppTheme.black11
-                  //                 : AppTheme.white14,
-                  //       ),
-                  //       overflow: TextOverflow.visible,
-                  //     ),
-                  //     items: Provider.of<MenuPageProvider>(context)
-                  //         .dropdownItems1
-                  //         .map((item) => DropdownMenuItem<String>(
-                  //               value: item.code,
-                  //               child: Center(
-                  //                 child: Text(
-                  //                   item.name ?? '',
-                  //                   style: TextStyle(
-                  //                     fontSize: 14,
-                  //                     fontFamily: AppTheme.appFontFamily,
-                  //                     fontWeight: FontWeight.w400,
-                  //                     color: Provider.of<ThemeProvider>(context)
-                  //                                 .themeMode ==
-                  //                             "light"
-                  //                         ? AppTheme.black11
-                  //                         : AppTheme.white14,
-                  //                   ),
-                  //                   overflow: TextOverflow.visible,
-                  //                 ),
-                  //               ),
-                  //             ))
-                  //         .toList(),
-                  //     value: Provider.of<MenuPageProvider>(context)
-                  //         .dropdownSelectedValue1,
-                  //
-                  //     onChanged: (value) {
-                  //       Provider.of<MenuPageProvider>(context, listen: false)
-                  //           .updateDropdownSelectedValue1(value as String);
-                  //     },
-                  //     icon: Center(
-                  //       child: Image.asset(
-                  //         'assets/icons/dropdown.png',
-                  //         width: 10,
-                  //         height: 6,
-                  //       ),
-                  //     ),
-                  //     iconSize: 24,
-                  //     // iconEnabledColor: Colors.yellow,
-                  //     // iconDisabledColor: Colors.grey,
-                  //     // icon: Container(),
-                  //     buttonHeight: 57,
-                  //     buttonWidth: deviceWidth,
-                  //     buttonPadding: EdgeInsets.only(left: 25, right: 17),
-                  //     buttonDecoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //       // border:
-                  //       //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                  //       // color: Colors.transparent,
-                  //       color: Provider.of<ThemeProvider>(context).themeMode ==
-                  //               "light"
-                  //           ? AppTheme.white5
-                  //           : AppTheme.black7,
-                  //     ),
-                  //     // buttonElevation: 2,
-                  //     itemHeight: 40,
-                  //     itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                  //     dropdownMaxHeight: 200,
-                  //     // dropdownWidth: deviceWidth,
-                  //     dropdownPadding: null,
-                  //     dropdownDecoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(14),
-                  //       // color: Color(0xFFEFF0F7),
-                  //       color: Provider.of<ThemeProvider>(context).themeMode ==
-                  //               "light"
-                  //           ? AppTheme.white5
-                  //           : AppTheme.black7,
-                  //     ),
-                  //     // dropdownElevation: 8,
-                  //     scrollbarRadius: const Radius.circular(40),
-                  //     scrollbarThickness: 4,
-                  //     scrollbarAlwaysShow: true,
-                  //     offset: const Offset(0, 0),
-                  //   ),
-                  // ),
-                  // SizedBox(height: 13),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      // alignment: AlignmentDirectional.center,
-                      isExpanded: true,
-                      hint: Text(
-                        'Country'.tr,
-                        style: TextStyle(
+              child: Form(
+                key: addressGlobalKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Address Name Validate'.tr;
+                        }
+                        return null;
+                      },
+                      controller: addressNameController,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                        filled: true,
+                        fillColor:
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
+                        hintText: 'Address Name'.tr,
+                        hintStyle: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                            width: 1,
+                          ),
                         ),
                       ),
-                      items: countryList
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item.name,
-                                child: Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.blue3
-                                        : AppTheme.white14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      value: Provider.of<MenuPageProvider>(context)
-                          .selectedCountry,
-
-                      onChanged: (value) {
-                        Provider.of<MenuPageProvider>(context, listen: false)
-                            .updateSelectedCountry(value as String);
-
-                        var countryIndex = countryList
-                            .indexWhere(((element) => element.name == value));
-                        if (countryIndex != -1) {
-                          debugPrint('COUNTRY INDEX: $countryIndex');
-                          debugPrint(
-                              'COUNTRY CODE: ${countryList[countryIndex].code}');
-
-                          countryCode = countryList[countryIndex].code;
-
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .selectedCity = null;
-
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .fetchCityList(countryCode);
-                        }
-                      },
-
-                      icon: Center(
-                        child: Image.asset(
-                          'assets/icons/dropdown.png',
-                          width: 10,
-                          height: 6,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
-                        ),
-                      ),
-                      iconSize: 24,
-                      // iconEnabledColor: Colors.yellow,
-                      // iconDisabledColor: Colors.grey,
-                      // icon: Container(),
-                      buttonHeight: 57,
-                      buttonWidth: deviceWidth,
-                      buttonPadding: const EdgeInsets.only(left: 25, right: 17),
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        // border:
-                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // buttonElevation: 2,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                      // dropdownMaxHeight: deviceHeight * 0.4,
-                      dropdownMaxHeight: 350,
-                      // dropdownWidth: deviceWidth,
-                      dropdownPadding: null,
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // dropdownElevation: 8,
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 4,
-                      scrollbarAlwaysShow: true,
-                      // offset: const Offset(0, 180),
-
-                      searchController: countryController,
-                      searchInnerWidget: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                        child: TextFormField(
-                          controller: countryController,
+                    ),
+                    SizedBox(height: 13),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        // alignment: AlignmentDirectional.center,
+                        isExpanded: true,
+                        hint: Text(
+                          'Country'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color:
                                 Provider.of<ThemeProvider>(context).themeMode ==
                                         "light"
                                     ? AppTheme.blue3
                                     : AppTheme.white14,
-                          ), // WHILE WRITING
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            hintText: 'Search...'.tr,
-                            hintStyle: TextStyle(
+                          ),
+                        ),
+                        items: countryList
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item.name,
+                                  child: Text(
+                                    item.name ?? '',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: Provider.of<MenuPageProvider>(context)
+                            .selectedCountry,
+
+                        onChanged: (value) {
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .updateSelectedCountry(value as String);
+
+                          var countryIndex = countryList
+                              .indexWhere(((element) => element.name == value));
+                          if (countryIndex != -1) {
+                            debugPrint('COUNTRY INDEX: $countryIndex');
+                            debugPrint(
+                                'COUNTRY CODE: ${countryList[countryIndex].code}');
+
+                            countryCode = countryList[countryIndex].code;
+
+                            Provider.of<MenuPageProvider>(context,
+                                    listen: false)
+                                .selectedCity = null;
+                            cityId = null;
+                            districtId = null;
+
+                            Provider.of<MenuPageProvider>(context,
+                                    listen: false)
+                                .fetchCityList(countryCode);
+                          }
+                        },
+
+                        icon: Center(
+                          child: Image.asset(
+                            'assets/icons/dropdown.png',
+                            width: 10,
+                            height: 6,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                          ),
+                        ),
+                        iconSize: 24,
+                        // iconEnabledColor: Colors.yellow,
+                        // iconDisabledColor: Colors.grey,
+                        // icon: Container(),
+                        buttonHeight: 57,
+                        buttonWidth: deviceWidth,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 25, right: 17),
+                        buttonDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // border:
+                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                        // dropdownMaxHeight: deviceHeight * 0.4,
+                        dropdownMaxHeight: 350,
+                        // dropdownWidth: deviceWidth,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // dropdownElevation: 8,
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 4,
+                        scrollbarAlwaysShow: true,
+                        // offset: const Offset(0, 180),
+
+                        searchController: countryController,
+                        searchInnerWidget: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                          child: TextFormField(
+                            controller: countryController,
+                            style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
+                                  : AppTheme.white1,
+                            ), // WHILE WRITING
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              hintText: 'Search...'.tr,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
                                     ? AppTheme.blue3
-                                    : AppTheme.white1,
-                                width: 1,
+                                    : AppTheme.white14,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                  width: 1,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      searchMatchFn: (item, searchValue) {
-                        debugPrint("ITEM:${item.value}");
+                        searchMatchFn: (item, searchValue) {
+                          debugPrint("ITEM:${item.value}");
 
-                        return (item.value
-                            .toLowerCase()
-                            .contains(searchValue.toLowerCase()));
-                      },
-                      //This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          countryController.clear();
-                        }
-                      },
+                          return (item.value
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase()));
+                        },
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            countryController.clear();
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 13),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      // alignment: AlignmentDirectional.center,
-                      isExpanded: true,
-                      hint: Text(
-                        'City'.tr,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
-                        ),
-                      ),
-                      items: cityList
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item.name,
-                                child: Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.blue3
-                                        : AppTheme.white14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      value:
-                          Provider.of<MenuPageProvider>(context).selectedCity,
-
-                      onChanged: (value) {
-                        Provider.of<MenuPageProvider>(context, listen: false)
-                            .updateSelectedCity(value as String);
-
-                        var cityIndex = cityList
-                            .indexWhere(((element) => element.name == value));
-                        if (cityIndex != -1) {
-                          debugPrint('CITY INDEX: $cityIndex');
-                          debugPrint('CITY ID: ${cityList[cityIndex].id}');
-
-                          cityId = cityList[cityIndex].id;
-
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .selectedDistrict = null;
-
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .fetchDistrictList(cityId);
-                        }
-                      },
-
-                      icon: Center(
-                        child: Image.asset(
-                          'assets/icons/dropdown.png',
-                          width: 10,
-                          height: 6,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
-                        ),
-                      ),
-                      iconSize: 24,
-                      // iconEnabledColor: Colors.yellow,
-                      // iconDisabledColor: Colors.grey,
-                      // icon: Container(),
-                      buttonHeight: 57,
-                      buttonWidth: deviceWidth,
-                      buttonPadding: const EdgeInsets.only(left: 25, right: 17),
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        // border:
-                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // buttonElevation: 2,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                      // dropdownMaxHeight: deviceHeight * 0.4,
-                      dropdownMaxHeight: 350,
-                      // dropdownWidth: deviceWidth,
-                      dropdownPadding: null,
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // dropdownElevation: 8,
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 4,
-                      scrollbarAlwaysShow: true,
-                      // offset: const Offset(0, 180),
-
-                      searchController: cityController,
-                      searchInnerWidget: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                        child: TextFormField(
-                          controller: cityController,
+                    SizedBox(height: 13),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        // alignment: AlignmentDirectional.center,
+                        isExpanded: true,
+                        hint: Text(
+                          'City'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color:
                                 Provider.of<ThemeProvider>(context).themeMode ==
                                         "light"
                                     ? AppTheme.blue3
                                     : AppTheme.white14,
-                          ), // WHILE WRITING
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            hintText: 'Search...'.tr,
-                            hintStyle: TextStyle(
+                          ),
+                        ),
+                        items: cityList
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item.name,
+                                  child: Text(
+                                    item.name ?? '',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value:
+                            Provider.of<MenuPageProvider>(context).selectedCity,
+
+                        onChanged: (value) {
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .updateSelectedCity(value as String);
+
+                          var cityIndex = cityList
+                              .indexWhere(((element) => element.name == value));
+                          if (cityIndex != -1) {
+                            debugPrint('CITY INDEX: $cityIndex');
+                            debugPrint('CITY ID: ${cityList[cityIndex].id}');
+
+                            cityId = cityList[cityIndex].id;
+
+                            Provider.of<MenuPageProvider>(context,
+                                    listen: false)
+                                .selectedDistrict = null;
+                            districtId = null;
+
+                            Provider.of<MenuPageProvider>(context,
+                                    listen: false)
+                                .fetchDistrictList(cityId);
+                          }
+                        },
+
+                        icon: Center(
+                          child: Image.asset(
+                            'assets/icons/dropdown.png',
+                            width: 10,
+                            height: 6,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                          ),
+                        ),
+                        iconSize: 24,
+                        // iconEnabledColor: Colors.yellow,
+                        // iconDisabledColor: Colors.grey,
+                        // icon: Container(),
+                        buttonHeight: 57,
+                        buttonWidth: deviceWidth,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 25, right: 17),
+                        buttonDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // border:
+                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                        // dropdownMaxHeight: deviceHeight * 0.4,
+                        dropdownMaxHeight: 350,
+                        // dropdownWidth: deviceWidth,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // dropdownElevation: 8,
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 4,
+                        scrollbarAlwaysShow: true,
+                        // offset: const Offset(0, 180),
+
+                        searchController: cityController,
+                        searchInnerWidget: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                          child: TextFormField(
+                            controller: cityController,
+                            style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
+                                  : AppTheme.white1,
+                            ), // WHILE WRITING
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              hintText: 'Search...'.tr,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
                                     ? AppTheme.blue3
-                                    : AppTheme.white1,
-                                width: 1,
+                                    : AppTheme.white14,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                  width: 1,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      searchMatchFn: (item, searchValue) {
-                        debugPrint("ITEM:${item.value}");
+                        searchMatchFn: (item, searchValue) {
+                          debugPrint("ITEM:${item.value}");
 
-                        return (item.value
-                            .toLowerCase()
-                            .contains(searchValue.toLowerCase()));
-                      },
-                      //This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          cityController.clear();
-                        }
-                      },
+                          return (item.value
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase()));
+                        },
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            cityController.clear();
+                          }
+                        },
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 13),
-                  DropdownButtonHideUnderline(
-                    child: DropdownButton2(
-                      // alignment: AlignmentDirectional.center,
-                      isExpanded: true,
-                      hint: Text(
-                        'District'.tr,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w400,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
-                        ),
-                      ),
-                      items: districtList
-                          .map((item) => DropdownMenuItem<String>(
-                                value: item.name,
-                                child: Text(
-                                  item.name ?? '',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.blue3
-                                        : AppTheme.white14,
-                                  ),
-                                ),
-                              ))
-                          .toList(),
-                      value: Provider.of<MenuPageProvider>(context)
-                          .selectedDistrict,
-
-                      onChanged: (value) {
-                        Provider.of<MenuPageProvider>(context, listen: false)
-                            .updateSelectedDistrict(value as String);
-
-                        var districtIndex = districtList
-                            .indexWhere(((element) => element.name == value));
-                        if (districtIndex != -1) {
-                          debugPrint('DISTRICT INDEX: $districtIndex');
-                          debugPrint(
-                              'DISTRICT ID: ${districtList[districtIndex].id}');
-
-                          districtId = districtList[districtIndex].id;
-                        }
-                      },
-
-                      icon: Center(
-                        child: Image.asset(
-                          'assets/icons/dropdown.png',
-                          width: 10,
-                          height: 6,
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
-                        ),
-                      ),
-                      iconSize: 24,
-                      // iconEnabledColor: Colors.yellow,
-                      // iconDisabledColor: Colors.grey,
-                      // icon: Container(),
-                      buttonHeight: 57,
-                      buttonWidth: deviceWidth,
-                      buttonPadding: const EdgeInsets.only(left: 25, right: 17),
-                      buttonDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        // border:
-                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // buttonElevation: 2,
-                      itemHeight: 40,
-                      itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                      // dropdownMaxHeight: deviceHeight * 0.4,
-                      dropdownMaxHeight: 350,
-                      // dropdownWidth: deviceWidth,
-                      dropdownPadding: null,
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white39
-                            : AppTheme.black18,
-                      ),
-                      // dropdownElevation: 8,
-                      scrollbarRadius: const Radius.circular(40),
-                      scrollbarThickness: 4,
-                      scrollbarAlwaysShow: true,
-                      // offset: const Offset(0, 180),
-
-                      searchController: districtController,
-                      searchInnerWidget: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                        child: TextFormField(
-                          controller: districtController,
+                    SizedBox(height: 13),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        // alignment: AlignmentDirectional.center,
+                        isExpanded: true,
+                        hint: Text(
+                          'District'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w400,
                             color:
                                 Provider.of<ThemeProvider>(context).themeMode ==
                                         "light"
                                     ? AppTheme.blue3
                                     : AppTheme.white14,
-                          ), // WHILE WRITING
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 12,
-                            ),
-                            hintText: 'Search...'.tr,
-                            hintStyle: TextStyle(
+                          ),
+                        ),
+                        items: districtList
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item.name,
+                                  child: Text(
+                                    item.name ?? '',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: Provider.of<MenuPageProvider>(context)
+                            .selectedDistrict,
+
+                        onChanged: (value) {
+                          Provider.of<MenuPageProvider>(context, listen: false)
+                              .updateSelectedDistrict(value as String);
+
+                          var districtIndex = districtList
+                              .indexWhere(((element) => element.name == value));
+                          if (districtIndex != -1) {
+                            debugPrint('DISTRICT INDEX: $districtIndex');
+                            debugPrint(
+                                'DISTRICT ID: ${districtList[districtIndex].id}');
+
+                            districtId = districtList[districtIndex].id;
+                          }
+                        },
+
+                        icon: Center(
+                          child: Image.asset(
+                            'assets/icons/dropdown.png',
+                            width: 10,
+                            height: 6,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                          ),
+                        ),
+                        iconSize: 24,
+                        // iconEnabledColor: Colors.yellow,
+                        // iconDisabledColor: Colors.grey,
+                        // icon: Container(),
+                        buttonHeight: 57,
+                        buttonWidth: deviceWidth,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 25, right: 17),
+                        buttonDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // border:
+                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                        // dropdownMaxHeight: deviceHeight * 0.4,
+                        dropdownMaxHeight: 350,
+                        // dropdownWidth: deviceWidth,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                        ),
+                        // dropdownElevation: 8,
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 4,
+                        scrollbarAlwaysShow: true,
+                        // offset: const Offset(0, 180),
+
+                        searchController: districtController,
+                        searchInnerWidget: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                          child: TextFormField(
+                            controller: districtController,
+                            style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
                               color: Provider.of<ThemeProvider>(context)
                                           .themeMode ==
                                       "light"
                                   ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: AppTheme.white15,
-                                  width: 1,
-                                )),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
+                                  : AppTheme.white1,
+                            ), // WHILE WRITING
+                            decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 12,
+                              ),
+                              hintText: 'Search...'.tr,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
                                     ? AppTheme.blue3
-                                    : AppTheme.white1,
-                                width: 1,
+                                    : AppTheme.white14,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: AppTheme.white15,
+                                    width: 1,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                  width: 1,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      searchMatchFn: (item, searchValue) {
-                        debugPrint("ITEM:${item.value}");
+                        searchMatchFn: (item, searchValue) {
+                          debugPrint("ITEM:${item.value}");
 
-                        return (item.value
-                            .toLowerCase()
-                            .contains(searchValue.toLowerCase()));
-                      },
-                      //This to clear the search value when you close the menu
-                      onMenuStateChange: (isOpen) {
-                        if (!isOpen) {
-                          districtController.clear();
+                          return (item.value
+                              .toLowerCase()
+                              .contains(searchValue.toLowerCase()));
+                        },
+                        //This to clear the search value when you close the menu
+                        onMenuStateChange: (isOpen) {
+                          if (!isOpen) {
+                            districtController.clear();
+                          }
+                        },
+                      ),
+                    ),
+                    SizedBox(height: 13),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Address Validate'.tr;
                         }
+                        return null;
                       },
-                    ),
-                  ),
-                  SizedBox(height: 13),
-                  TextFormField(
-                    controller: addressController,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w500,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1), // WHILE WRITING
-                    minLines: 1,
-                    maxLines: 5,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                      filled: true,
-                      fillColor:
-                          Provider.of<ThemeProvider>(context).themeMode ==
-                                  "light"
-                              ? AppTheme.white39
-                              : AppTheme.black18,
-                      hintText: 'Address'.tr,
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white14,
-                      ),
-                      border: OutlineInputBorder(
+                      controller: addressController,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
+                      minLines: 1,
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                        filled: true,
+                        fillColor:
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
+                        hintText: 'Address'.tr,
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
+                          borderSide: BorderSide(
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                             width: 1,
-                          )),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          )),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue2
-                                  : AppTheme.white1,
-                          width: 1,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 13),
-                  TextFormField(
-                    controller: postalCodeController,
-                    keyboardType: TextInputType.number,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w500,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1), // WHILE WRITING
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                      filled: true,
-                      fillColor:
-                          Provider.of<ThemeProvider>(context).themeMode ==
-                                  "light"
-                              ? AppTheme.white39
-                              : AppTheme.black18,
-                      hintText: 'Postal Code'.tr,
-                      hintStyle: TextStyle(
-                        fontSize: 14,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white14,
-                      ),
-                      border: OutlineInputBorder(
+                    SizedBox(height: 13),
+                    TextFormField(
+                      validator: (value) {
+                        if (value == null || value.trim().isEmpty) {
+                          return 'Postal Code Validate'.tr;
+                        }
+                        return null;
+                      },
+                      controller: postalCodeController,
+                      keyboardType: TextInputType.number,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color: themeMode
+                              ? AppTheme.blue3
+                              : AppTheme.white1), // WHILE WRITING
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        contentPadding:
+                            const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                        filled: true,
+                        fillColor:
+                            themeMode ? AppTheme.white39 : AppTheme.black18,
+                        hintText: 'Postal Code'.tr,
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1,
+                            )),
+                        focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
+                          borderSide: BorderSide(
+                            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
                             width: 1,
-                          )),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1,
-                          )),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.blue2
-                                  : AppTheme.white1,
-                          width: 1,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 28),
-                  MaterialButton(
-                      minWidth: deviceWidth,
-                      height: 52,
-                      elevation: 0,
-                      color: AppTheme.green1,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'Add an Address'.tr,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {}),
-                  SizedBox(height: 18),
-                  MaterialButton(
-                      minWidth: deviceWidth,
-                      height: 52,
-                      elevation: 0,
-                      color: AppTheme.white38,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'Go Back'.tr,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                ],
+                    SizedBox(height: 28),
+                    MaterialButton(
+                        minWidth: deviceWidth,
+                        height: 52,
+                        elevation: 0,
+                        color: AppTheme.green1,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          widget.operation == 'Add'
+                              ? 'Add an Address'.tr
+                              : 'Edit an Address'.tr,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          if (addressGlobalKey.currentState!.validate()) {
+                            if (countryCode.toString() != 'null' &&
+                                cityId.toString() != 'null' &&
+                                districtId.toString() != 'null') {
+                              debugPrint(
+                                  "\nAddress Name: ${addressNameController.text}");
+                              debugPrint("Country Code: $countryCode");
+                              debugPrint("City Id: $cityId");
+                              debugPrint("District Id: $districtId");
+                              debugPrint("Address: ${addressController.text}");
+                              debugPrint(
+                                  "Postal Code: ${postalCodeController.text}");
+
+                              if (widget.operation == 'Add') {
+                                locator<MemberAddressesServices>()
+                                    .addAddressCall(
+                                  // name: 'Ev Adresim',
+                                  // country: 'TR',
+                                  // city: '2170',
+                                  // district: '108963',
+                                  // address: 'Kuş tepe Mah. Tan Sokak',
+                                  // postalCode: '34000',
+
+                                  name: addressNameController.text,
+                                  country: countryCode,
+                                  city: cityId,
+                                  district: districtId,
+                                  address: addressController.text,
+                                  postalCode: postalCodeController.text,
+                                )
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY ADDED");
+                                    Navigator.pop(context);
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT ADDED");
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              } else {
+                                locator<MemberAddressesServices>()
+                                    .updateAddressCall(
+                                  // name: 'Ev Adresim',
+                                  // country: 'TR',
+                                  // city: '2170',
+                                  // district: '108963',
+                                  // address: 'Kuş tepe Mah. Tan Sokak',
+                                  // postalCode: '34000',
+
+                                  name: addressNameController.text,
+                                  country: countryCode,
+                                  city: cityId,
+                                  district: districtId,
+                                  address: addressController.text,
+                                  postalCode: postalCodeController.text,
+                                  id: widget.passedObject!.id.toString(),
+                                )
+                                    .then((value) {
+                                  if (value == true) {
+                                    debugPrint(
+                                        "ADDRESS HAS SUCCESSFULLY UPDATED");
+                                    Navigator.pop(context);
+                                  } else {
+                                    debugPrint("ADDRESS HAS NOT UPDATED");
+                                    operationFailedDialog(context);
+                                  }
+                                });
+                              }
+                            } else {
+                              validationErrorDialog(context);
+                            }
+                          }
+                        }),
+                    SizedBox(height: 18),
+                    MaterialButton(
+                        minWidth: deviceWidth,
+                        height: 52,
+                        elevation: 0,
+                        color: AppTheme.white38,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Go Back'.tr,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  void validationErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Validation Error Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
