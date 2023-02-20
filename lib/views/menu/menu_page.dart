@@ -81,7 +81,7 @@ class _MenuPageState extends State<MenuPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                'Disputes'.tr,
+                'Disagreements'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,

@@ -165,82 +165,99 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
             const SizedBox(
               height: 120,
             ),
-            Container(
-              width: 74,
-              height: 35,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                color: themeMode ? AppTheme.white40 : AppTheme.black26,
-              ),
-              padding: const EdgeInsets.all(3),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32),
               child: Row(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Provider.of<ThemeProvider>(context, listen: false)
-                          .setDarkMode();
-                    },
-                    child: themeMode == false
-                        ? Container(
-                            width: 34,
-                            height: 29,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(6)),
-                                color: AppTheme.black2),
-                            child: Center(
-                              child: Image.asset(
-                                'assets/icons/dark-mode.png',
-                                width: 18,
-                                height: 18,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            width: 34,
-                            height: 29,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6)),
-                            ),
-                          ),
+                  Text(
+                    'Theme'.tr,
+                    style: TextStyle(
+                      fontFamily: AppTheme.appFontFamily,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                    ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      Provider.of<ThemeProvider>(context, listen: false)
-                          .setLightMode();
-                    },
-                    child: themeMode == true
-                        ? Container(
-                            width: 34,
-                            height: 29,
-                            decoration: BoxDecoration(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(6)),
-                                color: AppTheme.white1),
-                            child: Center(
-                              child: Image.asset(
-                                'assets/icons/ri_sun-line.png',
-                                width: 24,
-                                height: 24,
-                              ),
-                            ),
-                          )
-                        : Container(
-                            width: 34,
-                            height: 29,
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(6)),
-                            ),
-                          ),
+                  SizedBox(width: 24),
+                  Container(
+                    width: 74,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(8)),
+                      color: themeMode ? AppTheme.white40 : AppTheme.black26,
+                    ),
+                    padding: const EdgeInsets.all(3),
+                    child: Row(
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .setDarkMode();
+                          },
+                          child: themeMode == false
+                              ? Container(
+                                  width: 34,
+                                  height: 29,
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(6)),
+                                      color: AppTheme.black2),
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/icons/dark-mode.png',
+                                      width: 18,
+                                      height: 18,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  width: 34,
+                                  height: 29,
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                  ),
+                                ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Provider.of<ThemeProvider>(context, listen: false)
+                                .setLightMode();
+                          },
+                          child: themeMode == true
+                              ? Container(
+                                  width: 34,
+                                  height: 29,
+                                  decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(6)),
+                                      color: AppTheme.white1),
+                                  child: Center(
+                                    child: Image.asset(
+                                      'assets/icons/ri_sun-line.png',
+                                      width: 24,
+                                      height: 24,
+                                    ),
+                                  ),
+                                )
+                              : Container(
+                                  width: 34,
+                                  height: 29,
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(6)),
+                                  ),
+                                ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 60),
             Container(
-              width: deviceWidth - 36,
+              width: deviceWidth - 32,
               // height: 480,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(23),
@@ -269,11 +286,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                             fontFamily: AppTheme.appFontFamily,
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
                         ),
                       ),

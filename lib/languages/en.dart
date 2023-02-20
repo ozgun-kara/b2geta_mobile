@@ -53,7 +53,7 @@ final Map<String, String> en = {
   'Write something': 'Write something',
   // MENU
   'My Orders': 'My Orders',
-  'Disputes': 'Disputes',
+  'Disagreements': 'Disagreements',
   'Account Settings': 'Account Settings',
   'My Addresses': 'My Addresses',
   'Follow List': 'Follow List',
@@ -85,6 +85,7 @@ final Map<String, String> en = {
   'Address Validate': 'Please enter your address',
   'Postal Code Validate': 'Please enter your postal code',
   'Settings Page Route': 'Homepage - Settings',
+  'Theme': 'Theme',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
