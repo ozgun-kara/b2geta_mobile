@@ -173,6 +173,7 @@ final Map<String, String> tr = {
   'I have read and I accept': 'Okudum kabul ediyorum',
   'Confirm Basket': 'Sepeti Onayla',
   'Confirm': 'Onayla',
+  'Empty Chart': 'Sepetinizde ürün bulunmamaktadır',
   // PROFILE PAGE
   'Follow': 'Takip Et',
   // APP EXCEPTION

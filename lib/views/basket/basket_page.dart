@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
-import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
@@ -28,13 +27,6 @@ class _BasketPageState extends State<BasketPage> {
   ScrollController scrollController = ScrollController();
   int? selectedAddressIndex;
   String? selectedAddressId;
-
-  @override
-  void initState() {
-    Provider.of<BasketPageProvider>(context, listen: false)
-        .setQuantityListLength();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +64,7 @@ class _BasketPageState extends State<BasketPage> {
                       height: deviceHeight - 200,
                       child: Center(
                           child: Text(
-                        "Sepetinizde ürün bulunmamaktadır.",
+                        'Empty Chart'.tr,
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
@@ -1143,10 +1135,6 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            Provider.of<BasketPageProvider>(context,
-                                    listen: false)
-                                .decreaseItemCount(index);
-
                             var basketQuantity = int.parse(basket.quantity!);
 
                             if (basketQuantity > 1) {
@@ -1155,22 +1143,13 @@ class _BasketPageState extends State<BasketPage> {
                                   quantity:
                                       "${int.parse(basket.quantity!) - 1}");
                             }
+
+                            setState(() {});
                           }),
                     ),
                     Center(
                       child: Text(
-                        // basket.quantity ?? '1',
-                        //
-
-                        Provider.of<BasketPageProvider>(context, listen: true)
-                                .quantityList
-                                .isEmpty
-                            ? '1'
-                            : Provider.of<BasketPageProvider>(context,
-                                    listen: true)
-                                .quantityList[index]
-                                .toString(),
-
+                        basket.quantity ?? '1',
                         style: TextStyle(
                           fontSize: 15,
                           fontFamily: AppTheme.appFontFamily,
@@ -1204,13 +1183,11 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            Provider.of<BasketPageProvider>(context,
-                                    listen: false)
-                                .increaseItemCount(index);
-
                             BasketServices().updateProductInBasketCall(
                                 productId: basket.productId!,
                                 quantity: "${int.parse(basket.quantity!) + 1}");
+
+                            setState(() {});
                           }),
                     ),
                   ],
@@ -1231,10 +1208,6 @@ class _BasketPageState extends State<BasketPage> {
                           buttonText: 'Remove'.tr,
                           buttonColor: Colors.red.shade600,
                           onPressed: () {
-                            Provider.of<BasketPageProvider>(context,
-                                    listen: false)
-                                .deleteItemCount(index);
-
                             BasketServices()
                                 .deleteProductInBasketCall(
                                     param1: basket.product!.id!)

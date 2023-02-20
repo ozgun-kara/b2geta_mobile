@@ -173,6 +173,7 @@ final Map<String, String> en = {
   'I have read and I accept': 'I have read and I accept',
   'Confirm Basket': 'Confirm Basket',
   'Confirm': 'Confirm',
+  'Empty Chart': 'There are no items in your cart',
   // PROFILE PAGE
   'Follow': 'Follow',
   // APP EXCEPTION
