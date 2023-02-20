@@ -49,6 +49,10 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
     Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
         null;
 
+    Provider.of<MenuPageProvider>(context, listen: false).countryList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).cityList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).districtList.clear();
+
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
 
     if (widget.operation == 'Edit') {

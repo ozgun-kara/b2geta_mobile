@@ -1759,24 +1759,28 @@ class _RegisterPageState extends State<RegisterPage> {
                               ? AppTheme.white1
                               : AppTheme.black4,
 
-                      // value: Provider.of<LoginRegisterPageProvider>(context)
-                      //     .registerSwitch,
+                      value: Provider.of<LoginRegisterPageProvider>(context)
+                          .registerSwitch,
 
-                      value: Provider.of<ThemeProvider>(context).themeMode ==
-                              "light"
-                          ? false
-                          : true,
+                      // value: Provider.of<ThemeProvider>(context).themeMode ==
+                      //         "light"
+                      //     ? false
+                      //     : true,
 
                       onToggle: (value) {
-                        if (value == false) {
-                          Provider.of<ThemeProvider>(context, listen: false)
-                              .setLightMode();
-                          debugPrint('Light Theme Activated');
-                        } else {
-                          Provider.of<ThemeProvider>(context, listen: false)
-                              .setDarkMode();
-                          debugPrint('Dark Theme Activated');
-                        }
+                        // if (value == false) {
+                        //   Provider.of<ThemeProvider>(context, listen: false)
+                        //       .setLightMode();
+                        //   debugPrint('Light Theme Activated');
+                        // } else {
+                        //   Provider.of<ThemeProvider>(context, listen: false)
+                        //       .setDarkMode();
+                        //   debugPrint('Dark Theme Activated');
+                        // }
+
+                        Provider.of<LoginRegisterPageProvider>(context,
+                                listen: false)
+                            .updateRegisterSwitch(value);
                       },
                     ),
                     const SizedBox(width: 13),
