@@ -166,7 +166,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
               height: 120,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
+              padding: const EdgeInsets.symmetric(horizontal: 48),
               child: Row(
                 children: [
                   Text(
@@ -255,7 +255,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 32),
             Container(
               width: deviceWidth - 32,
               // height: 480,

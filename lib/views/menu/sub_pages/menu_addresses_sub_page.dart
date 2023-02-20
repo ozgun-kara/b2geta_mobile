@@ -535,6 +535,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
+              insetPadding: const EdgeInsets.all(16),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
@@ -556,7 +557,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color: themeMode
-                                  ? AppTheme.black16
+                                  ? AppTheme.black25
                                   : AppTheme.white1,
                             ),
                           ),
@@ -647,6 +648,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
+              insetPadding: const EdgeInsets.all(16),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
@@ -669,7 +671,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color: themeMode
-                                  ? AppTheme.black16
+                                  ? AppTheme.black25
                                   : AppTheme.white1,
                             ),
                           ),
