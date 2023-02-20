@@ -45,13 +45,4 @@ class MenuPageProvider with ChangeNotifier {
     selectedDistrict = value;
     notifyListeners();
   }
-
-// SETTINGS SUBPAGE
-
-  late bool themeSwitch;
-
-  void updateThemeSwitch(bool value) {
-    themeSwitch = value;
-    notifyListeners();
-  }
 }
