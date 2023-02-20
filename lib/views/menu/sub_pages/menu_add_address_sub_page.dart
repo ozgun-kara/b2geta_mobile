@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
@@ -871,6 +872,9 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                       },
                       controller: postalCodeController,
                       keyboardType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                      ],
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -1045,6 +1049,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
+              insetPadding: const EdgeInsets.all(16),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
@@ -1067,7 +1072,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color: themeMode
-                                  ? AppTheme.black16
+                                  ? AppTheme.black25
                                   : AppTheme.white1,
                             ),
                           ),
@@ -1120,6 +1125,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
+              insetPadding: const EdgeInsets.all(16),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
@@ -1142,7 +1148,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color: themeMode
-                                  ? AppTheme.black16
+                                  ? AppTheme.black25
                                   : AppTheme.white1,
                             ),
                           ),
