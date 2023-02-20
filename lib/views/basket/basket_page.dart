@@ -1,7 +1,7 @@
+import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
-import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
@@ -27,13 +27,6 @@ class _BasketPageState extends State<BasketPage> {
   ScrollController scrollController = ScrollController();
   int? selectedAddressIndex;
   String? selectedAddressId;
-
-  @override
-  void initState() {
-    Provider.of<BasketPageProvider>(context, listen: false)
-        .setQuantityListLength();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +64,7 @@ class _BasketPageState extends State<BasketPage> {
                       height: deviceHeight - 200,
                       child: Center(
                           child: Text(
-                        "Sepetinizde ürün bulunmamaktadır.",
+                        'Empty Chart'.tr,
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
@@ -873,11 +866,9 @@ class _BasketPageState extends State<BasketPage> {
                               color: AppTheme.white1),
                         ),
                         onPressed: () {
-                          showAlertDialog(
-                              context: context,
-                              titleText:
-                                  'Siparişi Onaylamak istediğinizde emin misiniz ?',
-                              buttonText: 'Onayla',
+                          dialog(
+                              titleText: 'Confirm Basket Dialog'.tr,
+                              buttonText: 'Confirm'.tr,
                               buttonColor: AppTheme.green1,
                               onPressed: () {
                                 if (selectedAddressId != null) {
@@ -899,7 +890,7 @@ class _BasketPageState extends State<BasketPage> {
                                     }
                                   });
                                 } else {
-                                  showAlertDialog2(context);
+                                  operationFailedDialog(context);
                                 }
                               });
                         }),
@@ -1144,10 +1135,6 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            Provider.of<BasketPageProvider>(context,
-                                    listen: false)
-                                .decreaseItemCount(index);
-
                             var basketQuantity = int.parse(basket.quantity!);
 
                             if (basketQuantity > 1) {
@@ -1156,22 +1143,13 @@ class _BasketPageState extends State<BasketPage> {
                                   quantity:
                                       "${int.parse(basket.quantity!) - 1}");
                             }
+
+                            setState(() {});
                           }),
                     ),
                     Center(
                       child: Text(
-                        // basket.quantity ?? '1',
-                        //
-
-                        Provider.of<BasketPageProvider>(context, listen: true)
-                                .quantityList
-                                .isEmpty
-                            ? '1'
-                            : Provider.of<BasketPageProvider>(context,
-                                    listen: true)
-                                .quantityList[index]
-                                .toString(),
-
+                        basket.quantity ?? '1',
                         style: TextStyle(
                           fontSize: 15,
                           fontFamily: AppTheme.appFontFamily,
@@ -1205,13 +1183,11 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            Provider.of<BasketPageProvider>(context,
-                                    listen: false)
-                                .increaseItemCount(index);
-
                             BasketServices().updateProductInBasketCall(
                                 productId: basket.productId!,
                                 quantity: "${int.parse(basket.quantity!) + 1}");
+
+                            setState(() {});
                           }),
                     ),
                   ],
@@ -1227,26 +1203,22 @@ class _BasketPageState extends State<BasketPage> {
                     padding: const EdgeInsets.only(left: 41.0),
                     child: GestureDetector(
                       onTap: () {
-                        showAlertDialog(
-                            context: context,
-                            titleText: 'Remove Dialog'.tr,
-                            buttonText: 'Remove'.tr,
-                            buttonColor: Colors.red.shade600,
-                            onPressed: () {
-                              Provider.of<BasketPageProvider>(context,
-                                      listen: false)
-                                  .deleteItemCount(index);
-
-                              BasketServices()
-                                  .deleteProductInBasketCall(
-                                      param1: basket.product!.id!)
-                                  .then((bool value) {
-                                if (value) {
-                                  Navigator.pop(context);
-                                  setState(() {});
-                                }
-                              });
+                        dialog(
+                          titleText: 'Remove Dialog'.tr,
+                          buttonText: 'Remove'.tr,
+                          buttonColor: Colors.red.shade600,
+                          onPressed: () {
+                            BasketServices()
+                                .deleteProductInBasketCall(
+                                    param1: basket.product!.id!)
+                                .then((bool value) {
+                              if (value) {
+                                Navigator.pop(context);
+                                setState(() {});
+                              }
                             });
+                          },
+                        );
                       },
                       child: Column(
                         children: [
@@ -1407,61 +1379,162 @@ class _BasketPageState extends State<BasketPage> {
         ));
   }
 
-  void showAlertDialog(
-      {required BuildContext context,
-      required String titleText,
+  void dialog(
+      {required String titleText,
       required String buttonText,
       required buttonColor,
       required VoidCallback onPressed}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          content: Container(
-            width: deviceWidth,
-            padding: const EdgeInsets.all(16.0),
-            height: 150,
-            decoration: BoxDecoration(
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black12,
-                borderRadius: const BorderRadius.all(Radius.circular(16))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  titleText,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color:
-                        Provider.of<ThemeProvider>(context).themeMode == "light"
-                            ? AppTheme.black16
-                            : AppTheme.white14,
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog(
+            insetPadding: const EdgeInsets.all(16),
+            backgroundColor: Colors.transparent,
+            content: Container(
+              width: deviceWidth,
+              decoration: BoxDecoration(
+                  color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          titleText,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                themeMode ? AppTheme.black25 : AppTheme.white1,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonTheme(
+                        height: 32,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color:
+                                themeMode ? AppTheme.black16 : AppTheme.black18,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                            child: Text(
+                              'Close'.tr,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            }),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      ButtonTheme(
+                        height: 32,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color: buttonColor,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                            child: Text(
+                              buttonText,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: onPressed),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(16),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      height: 28.0,
-                      decoration: BoxDecoration(
-                          color: AppTheme.blue3,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
                       child: MaterialButton(
                           elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),
                           child: Text(
                             'Close'.tr,
                             style: TextStyle(
-                                fontSize: 12,
+                                fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
@@ -1470,93 +1543,9 @@ class _BasketPageState extends State<BasketPage> {
                             Navigator.of(context).pop();
                           }),
                     ),
-                    const SizedBox(
-                      width: 16.0,
-                    ),
-                    Container(
-                      height: 28.0,
-                      decoration: BoxDecoration(
-                          color: buttonColor,
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(16))),
-                      child: MaterialButton(
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        onPressed: onPressed,
-                        child: Text(
-                          buttonText,
-                          style: TextStyle(
-                              fontSize: 12,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.white1),
-                        ),
-                      ),
-                    )
                   ],
                 ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void showAlertDialog2(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.transparent,
-          content: Container(
-            width: deviceWidth,
-            height: 150,
-            decoration: BoxDecoration(
-                color: themeMode ? AppTheme.white1 : AppTheme.black12,
-                borderRadius: const BorderRadius.all(Radius.circular(16))),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Hata',
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w500,
-                    color: themeMode ? AppTheme.black16 : AppTheme.white14,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                ButtonTheme(
-                  height: 36,
-                  child: Container(
-                    height: 36,
-                    decoration: BoxDecoration(
-                        color: AppTheme.green1,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(16))),
-                    child: MaterialButton(
-                        elevation: 0,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        child: Text(
-                          "Kapat",
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.white1),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        }),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         );

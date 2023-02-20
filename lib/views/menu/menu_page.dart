@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,7 +81,7 @@ class _MenuPageState extends State<MenuPage> {
               elevation: 0,
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: Text(
-                'Disputes'.tr,
+                'Disagreements'.tr,
                 style: TextStyle(
                   fontSize: 16,
                   fontFamily: AppTheme.appFontFamily,
@@ -154,7 +155,13 @@ class _MenuPageState extends State<MenuPage> {
                   color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                 ),
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SettingsSubPage(),
+                    ));
+              }),
           const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,

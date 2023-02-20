@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general_models/country_model.dart';
 
 class MenuPageProvider with ChangeNotifier {
-  // ADD & UPDATE ADDRESSES SUBPAGE
+  // MY ADDRESSES SUBPAGE
   List<CountryModel> countryList = [];
   String? selectedCountry;
   List<CityModel> cityList = [];

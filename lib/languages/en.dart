@@ -6,6 +6,7 @@ final Map<String, String> en = {
   'Validation Error Dialog': 'Please Fill In The Missing Fields',
   'Operation Failed Dialog': 'Operation Failed',
   'Remove Dialog': 'Are you sure you want to remove?',
+  'Confirm Basket Dialog': 'Are you sure you want to confirm the order?',
   // LOGIN PAGE
   'Member Login': 'Member Login',
   'E-mail': 'E-mail',
@@ -53,7 +54,7 @@ final Map<String, String> en = {
   'Write something': 'Write something',
   // MENU
   'My Orders': 'My Orders',
-  'Disputes': 'Disputes',
+  'Disagreements': 'Disagreements',
   'Account Settings': 'Account Settings',
   'My Addresses': 'My Addresses',
   'Follow List': 'Follow List',
@@ -84,6 +85,8 @@ final Map<String, String> en = {
   'Address Name Validate': 'Please enter your address name',
   'Address Validate': 'Please enter your address',
   'Postal Code Validate': 'Please enter your postal code',
+  'Settings Page Route': 'Homepage - Settings',
+  'Theme': 'Theme',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
@@ -169,10 +172,11 @@ final Map<String, String> en = {
       "Preliminary information\nARTICLE 5 – (1) The consumer must be informed by the seller or the supplier, including all of the following, before the establishment of the distance contract or accepting any corresponding offer.\na) The basic characteristics of the goods or services subject to the contract ,\nb) Name or title of the seller or supplier, MER SİS number, if any,\nc) The full address, telephone number and similar contact information of the seller \nor the supplier, which allows the consumer to contact the seller or provider quickly, and the seller, if any, or Identity and address of the person acting on behalf of or on behalf of the supplier,\n) If there is a different contact information than the one specified in clause (c) for the seller or the supplier to convey the consumer's complaints, information regarding them,\nd) The total price and quality of the good or service, including all taxes If it cannot be calculated beforehand, the procedure for calculating the price, all shipping, delivery and similar additional costs, if any, and Information that additional costs may be paid if the costs cannot be calculated in advance,\ne) Additional costs imposed on consumers in cases where the cost of using the remote communication tool cannot be calculated over the usual fee schedule at the stage of conclusion of the contract,\nf) Information on payment, delivery, performance, and commitments, if any, related thereto. The seller or the supplier's resolution methods for the complaints,\ng) In cases where there is a right of withdrawal, the conditions, duration, procedure of the use of this right and information on the carrier stipulated by the seller for the return,",
   'I have read and I accept': 'I have read and I accept',
   'Confirm Basket': 'Confirm Basket',
+  'Confirm': 'Confirm',
+  'Empty Chart': 'There are no items in your cart',
   // PROFILE PAGE
   'Follow': 'Follow',
-
-  //App Exception
+  // APP EXCEPTION
   'Bad Request': 'Bad Request',
   'Unable to process': 'Unable to process',
   'Api not responded in time': 'Api not responded in time',

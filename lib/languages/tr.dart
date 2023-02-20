@@ -6,6 +6,7 @@ final Map<String, String> tr = {
   'Validation Error Dialog': 'Lütfen Eksik Alanları Doldurunuz',
   'Operation Failed Dialog': 'İşlem Başarısız',
   'Remove Dialog': 'Silmek istediğinize emin misiniz?',
+  'Confirm Basket Dialog': 'Siparişi onaylamak istediğinizde emin misiniz?',
   // LOGIN PAGE
   'Member Login': 'Üye Girişi',
   'E-mail': 'E-mail',
@@ -53,7 +54,7 @@ final Map<String, String> tr = {
   'Write something': 'Bir şeyler yaz',
   // MENU
   'My Orders': 'Siparişlerim',
-  'Disputes': 'Anlaşmazlıklar',
+  'Disagreements': 'Anlaşmazlıklar',
   'Account Settings': 'Hesap Ayarları',
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
@@ -84,6 +85,8 @@ final Map<String, String> tr = {
   'Address Name Validate': 'Lütfen adres adını giriniz',
   'Address Validate': 'Lütfen adresi giriniz',
   'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
+  'Settings Page Route': 'Anasayfa - Ayarlar',
+  'Theme': 'Tema',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
@@ -169,10 +172,11 @@ final Map<String, String> tr = {
       "Ön bilgilendirme\nMADDE 5 – (1) Tüketici, mesafeli sözleşmenin kurulmasından ya da buna karşılık gelen herhangi \nbir teklifi kabul etmeden önce, aşağıdaki hususların tamamını içerecek şekilde satıcı veya \nsağlayıcı tarafından bilgilendirilmek zorundadır.\na) Sözleşme konusu mal veya hizmetin temel nitelikleri,\nb) Satıcı veya sağlayıcının adı veya unvanı, varsa MER SİS numarası,\nc) Tüketicinin satıcı veya sağlayıcı ile hızlı bir şekilde irtibat kurmasına imkan veren, satıcı \nveya sağlayıcının açık adresi, telefon numarası ve benzeri iletişim bilgileri ile varsa satıcı \nveya sağlayıcının adına ya da hesabına hareket edenin kimliği ve adresi,\nç) Satıcı veya sağlayıcının tüketicinin şikayetlerini iletmesi için (c) bendinde belirtilenden \nfarklı iletişim bilgileri var ise, bunlara ilişkin bilgi,\nd) Mal veya hizmetin tüm vergiler dahil toplam fiyatı, niteliği itibariyle önce den \nhesaplanamıyorsa fiyatın hesaplanma usul'ü, varsa tüm nakliye, teslim ve benzeri ek masraflar ile \nbunların önce den hesaplanamaması halinde ek masrafların ödenebileceği bilgisi,\ne) Sözleşmenin kurulması aşamasında uzaktan iletişim aracının kullanım bedelinin olağan ücret \ntarifesi üzerinden hesaplanamadığı durumlarda, tüketicilere yüklenen ilave maliyet,\nf) Ödeme, teslimat, ifaya ilişkin bilgiler ile varsa bunlara ilişkin taahhütler ve satıcı veya \nsağlayıcının şikayetlere ilişkin çözüm yöntemleri,\ng) Cayma hakkının olduğu durumlarda, bu hakkın kullanılma şartları, süresi, usul'ü ve satıcının \niade için öngördüğü taşıyıcıya ilişkin bilgiler,",
   'I have read and I accept': 'Okudum kabul ediyorum',
   'Confirm Basket': 'Sepeti Onayla',
+  'Confirm': 'Onayla',
+  'Empty Chart': 'Sepetinizde ürün bulunmamaktadır',
   // PROFILE PAGE
   'Follow': 'Takip Et',
-
-  //App Exception
+  // APP EXCEPTION
   'Bad Request': 'Geçersiz istek',
   'Unable to process': 'İşlenemiyor',
   'Api not responded in time': 'API zamanında yanıt vermedi',
