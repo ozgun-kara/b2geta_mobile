@@ -53,7 +53,7 @@ final Map<String, String> tr = {
   'Write something': 'Bir şeyler yaz',
   // MENU
   'My Orders': 'Siparişlerim',
-  'Disputes': 'Anlaşmazlıklar',
+  'Disagreements': 'Anlaşmazlıklar',
   'Account Settings': 'Hesap Ayarları',
   'My Addresses': 'Adreslerim',
   'Follow List': 'Takip Listesi',
@@ -85,6 +85,7 @@ final Map<String, String> tr = {
   'Address Validate': 'Lütfen adresi giriniz',
   'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
   'Settings Page Route': 'Anasayfa - Ayarlar',
+  'Theme': 'Tema',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
