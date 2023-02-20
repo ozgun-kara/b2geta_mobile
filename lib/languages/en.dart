@@ -84,6 +84,7 @@ final Map<String, String> en = {
   'Address Name Validate': 'Please enter your address name',
   'Address Validate': 'Please enter your address',
   'Postal Code Validate': 'Please enter your postal code',
+  'Settings Page Route': 'Homepage - Settings',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',

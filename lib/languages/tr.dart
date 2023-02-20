@@ -84,6 +84,7 @@ final Map<String, String> tr = {
   'Address Name Validate': 'Lütfen adres adını giriniz',
   'Address Validate': 'Lütfen adresi giriniz',
   'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
+  'Settings Page Route': 'Anasayfa - Ayarlar',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
