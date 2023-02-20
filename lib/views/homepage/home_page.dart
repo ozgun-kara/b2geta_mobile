@@ -650,8 +650,6 @@ class _HomePageState extends State<HomePage> {
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               "assets/images/dummy_images/post_image_1.png",
-                                              width: 40,
-                                              height: 40,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
