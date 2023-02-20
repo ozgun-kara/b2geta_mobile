@@ -163,7 +163,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
               ),
             ),
             const SizedBox(
-              height: 120,
+              height: 80,
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
@@ -255,7 +255,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 40),
             Container(
               width: deviceWidth - 32,
               // height: 480,
