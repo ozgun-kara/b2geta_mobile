@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class MemberAddressesServices {
-  // GET ALL
+  // GET ALL ADDRESSES
   Future<List<AddressModel>> getAllCall(
       {required Map<String, String> queryParameters}) async {
     List<AddressModel> addressList = [];
@@ -38,7 +38,7 @@ class MemberAddressesServices {
     }
   }
 
-  // GET ALL
+  // GET ADDRESS
   Future<bool> getCall({required String id}) async {
     final response = await http
         .get(Uri.parse('${Constants.apiUrl}/member/addresses/$id'), headers: {
@@ -73,7 +73,7 @@ class MemberAddressesServices {
     }
   }
 
-  // ADD AN ADDRESS
+  // ADD ADDRESS
   Future<bool> addAddressCall({
     required String name,
     required String country,
@@ -123,7 +123,7 @@ class MemberAddressesServices {
     }
   }
 
-  // UPDATE AN ADDRESS
+  // UPDATE ADDRESS
   Future<bool> updateAddressCall({
     required String id,
     required String name,
@@ -176,7 +176,7 @@ class MemberAddressesServices {
     }
   }
 
-  // DELETE AN ADDRESS
+  // DELETE ADDRESS
   Future<bool> deleteAddressCall({
     required String id,
   }) async {
