@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
+import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,26 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  List reelImage = [
+    "assets/images/dummy_images/reels_image_1.png",
+    "assets/images/dummy_images/reels_image_2.png",
+    "assets/images/dummy_images/reels_image_3.png",
+    "assets/images/dummy_images/reels_image_4.png",
+    "assets/images/dummy_images/reels_image_5.png",
+    "assets/images/dummy_images/reels_image_6.png",
+    "assets/images/dummy_images/reels_image_7.png",
+    "assets/images/dummy_images/reels_image_8.png",
+    "assets/images/dummy_images/reels_image_9.png",
+    "assets/images/dummy_images/reels_image_1.png",
+    "assets/images/dummy_images/reels_image_2.png",
+    "assets/images/dummy_images/reels_image_3.png",
+    "assets/images/dummy_images/reels_image_4.png",
+    "assets/images/dummy_images/reels_image_5.png",
+    "assets/images/dummy_images/reels_image_6.png",
+    "assets/images/dummy_images/reels_image_7.png",
+    "assets/images/dummy_images/reels_image_8.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -287,13 +308,32 @@ class _CompanyProfilPageState extends State<CompanyProfilPage> {
                     ),
                   )
                 : provider.currentTabIndex == 1
-                    ? SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          childCount: 1,
-                          (context, index) {
-                            return Container(height: deviceHeight);
-                          },
+                    ? SliverGrid(
+                        gridDelegate:
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: 128.0,
+                          mainAxisSpacing: 3.0,
+                          crossAxisSpacing: 3.0,
                         ),
+                        delegate: SliverChildBuilderDelegate(
+                            childCount: reelImage.length, (context, index) {
+                          return SizedBox(
+                            width: 128,
+                            height: 128,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ReelsPage(
+                                        imageUrl: reelImage[index],
+                                      ),
+                                    ));
+                              },
+                              child: Image.asset(reelImage[index]),
+                            ),
+                          );
+                        }),
                       )
                     : provider.currentTabIndex == 2
                         ? SliverList(

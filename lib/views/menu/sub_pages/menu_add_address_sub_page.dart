@@ -1049,7 +1049,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
-              insetPadding: const EdgeInsets.all(16),
+              insetPadding: const EdgeInsets.all(4),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
@@ -1125,7 +1125,7 @@ class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: AlertDialog(
-              insetPadding: const EdgeInsets.all(16),
+              insetPadding: const EdgeInsets.all(4),
               backgroundColor: Colors.transparent,
               content: Container(
                 width: deviceWidth,
