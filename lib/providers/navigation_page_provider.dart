@@ -21,7 +21,7 @@ class NavigationPageProvider with ChangeNotifier {
     // HomePage(),
     const MarketplacePage(),
     const BasketPage(),
-    const CompanyProfilPage()
+    const CompanyProfilePage()
   ];
 
   bool searchState = false;
