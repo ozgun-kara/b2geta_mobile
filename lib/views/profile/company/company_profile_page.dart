@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
+import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 import 'package:flutter/material.dart';
@@ -119,16 +120,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                         color: AppTheme.white1,
                                       ),
                                     ),
-                                    onPressed: ()  {
-
-
-
-
-
-
-
-
-                                    }),
+                                    onPressed: () {}),
                               ),
                             ),
                           ],
@@ -284,14 +276,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      childCount: 1,
-                      (context, index) {
-                        return Container(height: deviceHeight);
-                      },
-                    ),
-                  )
+                ? const CompanyPostsSubPage()
                 : provider.currentTabIndex == 1
                     ? const CompanyReelsSubPage()
                     : provider.currentTabIndex == 2
