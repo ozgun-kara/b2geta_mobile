@@ -104,6 +104,7 @@ class _HomePageState extends State<HomePage> {
     "assets/images/dummy_images/reels_image_7.png",
     "assets/images/dummy_images/reels_image_8.png",
   ];
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
