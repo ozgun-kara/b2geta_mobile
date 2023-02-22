@@ -1,15 +1,16 @@
-import 'package:b2geta_mobile/app_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:video_player/video_player.dart';
 
+import 'package:b2geta_mobile/app_theme.dart';
+
 class ReelsItemWidget extends StatefulWidget {
   const ReelsItemWidget({
     Key? key,
-    required this.url,
+    required this.reelsUrl,
   }) : super(key: key);
-  final String url;
+  final String reelsUrl;
   @override
   State<ReelsItemWidget> createState() => _ReelsItemWidgetState();
 }
@@ -23,7 +24,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
   @override
   void initState() {
     super.initState();
-    initializePlayer(widget.url);
+    initializePlayer(widget.reelsUrl);
   }
 
   void initializePlayer(String url) async {
@@ -74,17 +75,13 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     return Stack(
+      fit: StackFit.expand,
       children: [
         (_controller == null)
             ? Container(
                 width: deviceWidth,
                 height: deviceHeight,
                 color: Colors.black,
-                child: Center(
-                  child: CupertinoActivityIndicator(
-                    color: AppTheme.white1,
-                  ),
-                ),
               )
             : ((_controller!.value.isInitialized)
                 ? VideoPlayer(_controller!)
@@ -105,7 +102,6 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
             onPressed: () {
               if (_controller != null) {
                 _controller!.pause();
-                _controller!.dispose();
               }
               Navigator.pop(context);
             },

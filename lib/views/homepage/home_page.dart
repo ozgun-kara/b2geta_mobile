@@ -85,24 +85,10 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List reelImage = [
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
+  final List<String> urls = const [
+    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_20022023144330-1676900610.mp4",
+    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_19022023174338-1676825018.mp4",
+    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_15022023154654-1676472414.mp4",
   ];
 
   @override
@@ -497,8 +483,8 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 3.0,
                       crossAxisSpacing: 3.0,
                     ),
-                    delegate: SliverChildBuilderDelegate(
-                        childCount: reelImage.length, (context, index) {
+                    delegate: SliverChildBuilderDelegate(childCount: 3,
+                        (context, index) {
                       return SizedBox(
                         width: 128,
                         height: 128,
@@ -508,11 +494,14 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ReelsPage(
-                                    imageUrl: reelImage[index],
+                                    reelsUrl: urls,
+                                    videoUrlIndex: index,
                                   ),
                                 ));
                           },
-                          child: Image.asset(reelImage[index]),
+                          child: Container(
+                            color: Colors.amber,
+                          ),
                         ),
                       );
                     }),
