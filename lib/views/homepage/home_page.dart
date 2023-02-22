@@ -33,6 +33,7 @@ class _HomePageState extends State<HomePage> {
   List<FeedModel> stories1 = [];
   List<FeedModel> stories2 = [];
   List<FeedModel> meStories = [];
+  List<FeedModel> reelsList = [];
 
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
@@ -46,6 +47,7 @@ class _HomePageState extends State<HomePage> {
     getFeeds();
     getMeStories();
     getStories1();
+    getReels();
   }
 
   Future<void> _getFromGallery() async {
@@ -85,11 +87,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  final List<String> urls = const [
-    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_20022023144330-1676900610.mp4",
-    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_19022023174338-1676825018.mp4",
-    "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_15022023154654-1676472414.mp4",
-  ];
+  void getReels() async {
+    await _socialServices.getAllReelsCall(
+      queryParameters: {"offset": "0", "limit": "25", "type": "reels"},
+    ).then((feedList) {
+      reelsList = feedList;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -483,8 +488,8 @@ class _HomePageState extends State<HomePage> {
                       mainAxisSpacing: 3.0,
                       crossAxisSpacing: 3.0,
                     ),
-                    delegate: SliverChildBuilderDelegate(childCount: 3,
-                        (context, index) {
+                    delegate: SliverChildBuilderDelegate(
+                        childCount: reelsList.length, (context, index) {
                       return SizedBox(
                         width: 128,
                         height: 128,
@@ -494,7 +499,7 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ReelsPage(
-                                    reelsUrl: urls,
+                                    reelsList: reelsList,
                                     videoUrlIndex: index,
                                   ),
                                 ));
