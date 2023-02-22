@@ -47,6 +47,46 @@ class SocialServices {
     }
   }
 
+  //reels list
+  Future<List<FeedModel>> getAllReelsCall(
+      {required Map<String, String> queryParameters}) async {
+    List<FeedModel> feedList = [];
+
+    try {
+      final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/feeds/')
+            .replace(queryParameters: queryParameters),
+        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      );
+
+      if (response.statusCode == 200) {
+        var status = json.decode(response.body)["status"];
+        if (status == true) {
+          var dataList = json.decode(response.body)["data"]["feeds"];
+          int limit = jsonDecode(response.body)["data"]["limit"];
+          int total = jsonDecode(response.body)["data"]["total"];
+          var dataListLength = total > limit ? limit : total;
+
+          for (var i = 0; i < dataListLength; i++) {
+            feedList.add(FeedModel.fromJson(dataList[i]));
+          }
+
+          return feedList;
+        } else {
+          // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+          return feedList;
+        }
+      } else {
+        // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return feedList;
+      }
+    } catch (e) {
+      debugPrint("Hata !!! {$e.toString}");
+      return feedList;
+    }
+  }
+
   // Story LIST
   Future<List<FeedModel>> getAllStoryCall(
       {required Map<String, String> queryParameters,

@@ -212,6 +212,90 @@ class FeedModelImages {
   }
 }
 
+class FeedModelVideosMeta {
+/*
+{
+  "name": "matplablib.mp4",
+  "full_path": "matplablib.mp4",
+  "type": "video/mp4",
+  "error": 0,
+  "size": 2293433
+} 
+*/
+
+  String? name;
+  String? fullPath;
+  String? type;
+  int? error;
+  int? size;
+
+  FeedModelVideosMeta({
+    this.name,
+    this.fullPath,
+    this.type,
+    this.error,
+    this.size,
+  });
+  FeedModelVideosMeta.fromJson(Map<String, dynamic> json) {
+    name = json['name']?.toString();
+    fullPath = json['full_path']?.toString();
+    type = json['type']?.toString();
+    error = json['error']?.toInt();
+    size = json['size']?.toInt();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['name'] = name;
+    data['full_path'] = fullPath;
+    data['type'] = type;
+    data['error'] = error;
+    data['size'] = size;
+    return data;
+  }
+}
+
+class FeedModelVideos {
+/*
+{
+  "meta": {
+    "name": "matplablib.mp4",
+    "full_path": "matplablib.mp4",
+    "type": "video/mp4",
+    "error": 0,
+    "size": 2293433
+  },
+  "url": "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_20022023144330-1676900610.mp4",
+  "duration": 32
+} 
+*/
+
+  FeedModelVideosMeta? meta;
+  String? url;
+  int? duration;
+
+  FeedModelVideos({
+    this.meta,
+    this.url,
+    this.duration,
+  });
+  FeedModelVideos.fromJson(Map<String, dynamic> json) {
+    meta = (json['meta'] != null)
+        ? FeedModelVideosMeta.fromJson(json['meta'])
+        : null;
+    url = json['url']?.toString();
+    duration = json['duration']?.toInt();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    if (meta != null) {
+      data['meta'] = meta!.toJson();
+    }
+    data['url'] = url;
+    data['duration'] = duration;
+    return data;
+  }
+}
+
 class FeedModelUser {
   String? id;
   String? type;
@@ -255,7 +339,7 @@ class FeedModel {
   FeedModelUser? user;
   String? content;
   List<FeedModelImages?>? images;
-  String? videos;
+  List<FeedModelVideos?>? videos;
   FeedModelComments? comments;
   int? likes;
   bool? likeStatus;
@@ -286,7 +370,14 @@ class FeedModel {
       });
       images = arr0;
     }
-    videos = json['videos']?.toString();
+    if (json['videos'] != null) {
+      final v = json['videos'];
+      final arr0 = <FeedModelVideos>[];
+      v.forEach((v) {
+        arr0.add(FeedModelVideos.fromJson(v));
+      });
+      videos = arr0;
+    }
     comments = (json['comments'] != null)
         ? FeedModelComments.fromJson(json['comments'])
         : null;
@@ -310,7 +401,14 @@ class FeedModel {
       }
       data['images'] = arr0;
     }
-    data['videos'] = videos;
+    if (videos != null) {
+      final v = videos;
+      final arr0 = [];
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
+      data['videos'] = arr0;
+    }
     if (comments != null) {
       data['comments'] = comments!.toJson();
     }
