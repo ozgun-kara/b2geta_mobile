@@ -28,4 +28,10 @@ class HomePageProvider with ChangeNotifier {
     selectedImage = newImage;
     notifyListeners();
   }
+
+  void deleteSelectedImage() {
+    selectedImage = null;
+    notifyListeners();
+  }
+
 }
