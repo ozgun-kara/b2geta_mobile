@@ -103,13 +103,12 @@ final Map<String, String> en = {
   'Comment-4': 'See previous comments',
   'Answer': 'Answer',
   'Create Post': 'Create Post',
-  'Share something about your company': 'Share something about your company with your followers.',
+  'Share something about your company':
+      'Share something about your company with your followers.',
   'Add Photo/Video': 'Add Photo/Video',
   'Upload Reels Video': 'Upload Reels Video',
-
-
-
-
+  'Maximum File Size Info': 'The file size must be less than 50 mb',
+  'Select From Gallery': 'Select From Gallery',
 
   // MARKETPLACE PAGE
   'Results': 'Results',

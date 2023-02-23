@@ -244,7 +244,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                 SizedBox(
                                   width: 212,
                                   child: Text(
-                                    'Dosya boyutu 50mb altı olması gerekmektedir.',
+                                    'Maximum File Size Info'.tr,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontSize: 13,
@@ -268,7 +268,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                               ),
                               elevation: 0,
                               child: Text(
-                                'Galeriden Seç',
+                                'Select From Gallery'.tr,
                                 style: TextStyle(
                                     fontSize: 14,
                                     fontFamily: AppTheme.appFontFamily,
@@ -290,41 +290,39 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                               0, 0, 0, 14),
                                           child: ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                                BorderRadius.circular(0),
                                             child: Image.file(
                                               provider.selectedImage!,
-                                              width: 96,
-                                              height: 96,
+                                              width: 128,
+                                              height: 128,
                                               fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
                                         Positioned(
-                                          bottom: 0,
-                                          left: 32,
-                                          child: GestureDetector(
-                                            onTap: () async {},
-                                            child: Container(
-                                              width: 32,
-                                              height: 32,
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Color.fromRGBO(
-                                                        17, 17, 17, 0.04),
-                                                    offset: Offset(0, 8),
-                                                    blurRadius: 16,
-                                                    spreadRadius: 0,
+                                          top: 3,
+                                          right: 3,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(4)),
+                                            child: Material(
+                                              color: AppTheme.white1,
+                                              child: InkWell(
+                                                onTap: () {
+                                                  provider
+                                                      .deleteSelectedImage();
+                                                },
+                                                child: SizedBox(
+                                                  width: 24,
+                                                  height: 24,
+                                                  child: Center(
+                                                    child: Image.asset(
+                                                      'assets/icons/trash.png',
+                                                      width: 14,
+                                                      height: 16,
+                                                      color: AppTheme.blue2,
+                                                    ),
                                                   ),
-                                                ],
-                                              ),
-                                              child: Center(
-                                                child: Image.asset(
-                                                  'assets/icons/trash.png',
-                                                  width: 20,
-                                                  height: 20,
                                                 ),
                                               ),
                                             ),
