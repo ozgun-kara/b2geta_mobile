@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
   List<FeedModel> stories1 = [];
   List<FeedModel> stories2 = [];
   List<FeedModel> meStories = [];
+  List<FeedModel> reelsList = [];
 
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
@@ -47,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     getFeeds();
     getMeStories();
     getStories1();
+    getReels();
   }
 
   Future<void> _getFromGallery() async {
@@ -86,25 +88,14 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  List reelImage = [
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-  ];
+  void getReels() async {
+    await _socialServices.getAllReelsCall(
+      queryParameters: {"offset": "0", "limit": "25", "type": "reels"},
+    ).then((feedList) {
+      reelsList = feedList;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -520,7 +511,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisSpacing: 3.0,
                     ),
                     delegate: SliverChildBuilderDelegate(
-                        childCount: reelImage.length, (context, index) {
+                        childCount: reelsList.length, (context, index) {
                       return SizedBox(
                         width: 128,
                         height: 128,
@@ -530,11 +521,14 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ReelsPage(
-                                    imageUrl: reelImage[index],
+                                    reelsList: reelsList,
+                                    videoUrlIndex: index,
                                   ),
                                 ));
                           },
-                          child: Image.asset(reelImage[index]),
+                          child: Container(
+                            color: Colors.amber,
+                          ),
                         ),
                       );
                     }),
