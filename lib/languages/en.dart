@@ -109,6 +109,9 @@ final Map<String, String> en = {
   'Upload Reels Video': 'Upload Reels Video',
   'Maximum File Size Info': 'The file size must be less than 50 mb',
   'Select From Gallery': 'Select From Gallery',
+  'Add More': 'Add More',
+  'Upload': 'Upload',
+  'Change': 'Change',
 
   // MARKETPLACE PAGE
   'Results': 'Results',

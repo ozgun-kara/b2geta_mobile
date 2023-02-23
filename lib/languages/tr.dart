@@ -109,6 +109,9 @@ final Map<String, String> tr = {
   'Upload Reels Video': 'Reels Video Yükle',
   'Maximum File Size Info': 'Dosya boyutu 50 mb altı olması gerekmektedir',
   'Select From Gallery': 'Galeriden Seç',
+  'Add More': 'Daha Fazla Ekle',
+  'Upload': 'Yükle',
+  'Change': 'Değiştir',
 
   // MARKETPLACE PAGE
   'Results': 'Sonuçlar',
