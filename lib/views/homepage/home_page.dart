@@ -8,6 +8,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
+import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
@@ -467,7 +468,28 @@ class _HomePageState extends State<HomePage> {
                                   }
                                 },
                               ),
-                            ))
+                            )),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const UploadStepsSubPage(),
+                                    ));
+                              },
+                              child: Image.asset(
+                                "assets/icons/post_image_add.png",
+                                width: 20,
+                                height: 20,
+                                color: themeMode
+                                    ? AppTheme.white15
+                                    : AppTheme.white1,
+                              ),
+                            ),
                           ],
                         ),
                       ),
