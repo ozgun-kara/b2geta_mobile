@@ -63,6 +63,7 @@ dependencies:
   flutter_cache_manager: ^3.3.0
   video_player: ^2.5.1
   video_thumbnail: ^0.5.3
+  shimmer: ^2.0.0
   path_provider: ^2.0.13
 
 flutter_icons:
@@ -83,7 +84,6 @@ flutter_icons:
   macos:
     generate: true
     image_path: "assets/icons/app-icon.png"
-
 
 dev_dependencies:
   flutter_test:

@@ -16,6 +16,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +32,8 @@ class _HomePageState extends State<HomePage> {
   late double deviceHeight;
   late bool themeMode;
   bool isList = false;
+
+  late bool _loaded;
 
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
@@ -50,6 +53,15 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    _loaded = false;
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        setState(() {
+          _loaded = true;
+        });
+      },
+    );
     super.initState();
     getFeeds();
     getMeStories();
@@ -307,50 +319,55 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ));
                                             },
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              margin: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0XFF29B7D6),
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              child: meStories[0]
-                                                      .user!
-                                                      .photo!
-                                                      .isNotEmpty
-                                                  ? ClipOval(
-                                                      child: Image.network(
-                                                        width: 40,
-                                                        height: 40,
-                                                        meStories[0]
-                                                            .user!
-                                                            .photo!,
-                                                        errorBuilder: (context,
-                                                                error,
-                                                                stackTrace) =>
-                                                            Image.asset(
-                                                          "assets/images/dummy_images/post_profile.png",
-                                                          width: 40,
-                                                          height: 40,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : ClipOval(
-                                                      child: Image.asset(
-                                                        width: 40,
-                                                        height: 40,
-                                                        "assets/images/dummy_images/post_profile.png",
+                                            child: _loaded
+                                                ? getShimmerStoryItem
+                                                : Container(
+                                                    width: 50,
+                                                    height: 50,
+                                                    margin:
+                                                        const EdgeInsets.only(
+                                                      right: 10,
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      border: Border.all(
+                                                        color: const Color(
+                                                            0XFF29B7D6),
+                                                        width: 2,
                                                       ),
                                                     ),
-                                            ),
+                                                    child: meStories[0]
+                                                            .user!
+                                                            .photo!
+                                                            .isNotEmpty
+                                                        ? ClipOval(
+                                                            child:
+                                                                Image.network(
+                                                              width: 40,
+                                                              height: 40,
+                                                              meStories[0]
+                                                                  .user!
+                                                                  .photo!,
+                                                              errorBuilder: (context,
+                                                                      error,
+                                                                      stackTrace) =>
+                                                                  Image.asset(
+                                                                "assets/images/dummy_images/post_profile.png",
+                                                                width: 40,
+                                                                height: 40,
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        : ClipOval(
+                                                            child: Image.asset(
+                                                              width: 40,
+                                                              height: 40,
+                                                              "assets/images/dummy_images/post_profile.png",
+                                                            ),
+                                                          ),
+                                                  ),
                                           )
                                         : const SizedBox()
                                     : stories1.isNotEmpty
@@ -534,45 +551,47 @@ class _HomePageState extends State<HomePage> {
                     delegate: SliverChildBuilderDelegate(
                         childCount: reelsList.length, (context, index) {
                       return SizedBox(
-                          width: 128,
-                          height: 128,
-                          child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ReelsPage(
-                                        reelsList: reelsList,
-                                        videoUrlIndex: index,
+                        width: 128,
+                        height: 128,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ReelsPage(
+                                    reelsList: reelsList,
+                                    videoUrlIndex: index,
+                                  ),
+                                ));
+                          },
+                          child: reelsImageList.length == reelsList.length
+                              ? Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    Image.file(
+                                      File(reelsImageList[index]!),
+                                      width: 128,
+                                      height: 128,
+                                      fit: BoxFit.cover,
+                                    ),
+                                    const CircleAvatar(
+                                      radius: 10,
+                                      backgroundColor: Colors.black45,
+                                      child: Icon(
+                                        Icons.play_arrow,
+                                        size: 12,
+                                        color: Colors.white,
                                       ),
-                                    ));
-                              },
-                              child: reelsImageList.length == reelsList.length
-                                  ? Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        Image.file(
-                                          File(reelsImageList[index]!),
-                                          width: 128,
-                                          height: 128,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        const CircleAvatar(
-                                          radius: 10,
-                                          backgroundColor: Colors.black45,
-                                          child: Icon(
-                                            Icons.play_arrow,
-                                            size: 12,
-                                            color: Colors.white,
-                                          ),
-                                        )
-                                      ],
                                     )
-                                  : Center(
-                                      child: CupertinoActivityIndicator(
-                                        color: AppTheme.black1,
-                                      ),
-                                    )));
+                                  ],
+                                )
+                              : Center(
+                                  child: CupertinoActivityIndicator(
+                                    color: AppTheme.black1,
+                                  ),
+                                ),
+                        ),
+                      );
                     }),
                   )
                 : SliverList(
@@ -1314,4 +1333,20 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Shimmer get getShimmerStoryItem => Shimmer.fromColors(
+        baseColor: Colors.grey.shade300,
+        highlightColor: Colors.grey.shade100,
+        child: Container(
+          width: 50,
+          height: 50,
+          margin: const EdgeInsets.only(
+            right: 10,
+          ),
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.white,
+          ),
+        ),
+      );
 }
