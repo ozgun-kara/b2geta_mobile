@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field, deprecated_member_use
-
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
