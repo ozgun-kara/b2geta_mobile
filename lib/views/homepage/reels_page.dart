@@ -43,7 +43,7 @@ class _ReelsPageState extends State<ReelsPage> {
           return ReelsItemWidget(
               reelsUrl: widget.reelsList[index].videos!.isNotEmpty
                   ? widget.reelsList[index].videos![0]!.url!
-                  : "https://b2geta-vod.ercdn.net/videos/reels/2023/02/reels_20022023144330-1676900610.mp4");
+                  : "http://videoftp.b2geta.com/reels/2023/02/reels_11022023123709-1676119029.mp4");
         },
       ),
     ));

@@ -82,6 +82,11 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
                 width: deviceWidth,
                 height: deviceHeight,
                 color: Colors.black,
+                child: Center(
+                  child: CupertinoActivityIndicator(
+                    color: AppTheme.white1,
+                  ),
+                ),
               )
             : ((_controller!.value.isInitialized)
                 ? VideoPlayer(_controller!)
