@@ -1,9 +1,13 @@
+import 'dart:io';
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UploadStepsSubPage extends StatefulWidget {
   const UploadStepsSubPage({Key? key}) : super(key: key);
@@ -18,7 +22,20 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
   late double deviceHeight;
   late bool themeMode;
 
-  TextEditingController searchController = TextEditingController();
+  TextEditingController commentController = TextEditingController();
+
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      final imageTemp = File(image.path);
+      // setState(() => this.successImage = imageTemp);
+      Provider.of<HomePageProvider>(context, listen: false)
+          .updateSelectedImage(imageTemp);
+    } on PlatformException catch (e) {
+      print('Failed to pick image: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +99,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 13),
                         child: TextFormField(
-                          controller: searchController,
+                          controller: commentController,
                           style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -213,7 +230,110 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
               : provider.uploadStep == 1
                   ? SingleChildScrollView(
                       child: Column(
-                        children: [],
+                        children: [
+                          SizedBox(height: 100),
+                          Center(
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  "assets/icons/mdi_cloud-upload-outline.png",
+                                  width: 58,
+                                  height: 58,
+                                ),
+                                SizedBox(height: 8),
+                                SizedBox(
+                                  width: 212,
+                                  child: Text(
+                                    'Dosya boyutu 50mb altı olması gerekmektedir.',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: themeMode
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 176),
+                          MaterialButton(
+                              height: 47,
+                              color: AppTheme.blue2,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(9)),
+                              ),
+                              elevation: 0,
+                              child: Text(
+                                'Galeriden Seç',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                pickImage();
+                              }),
+                          SizedBox(height: 50),
+                          Visibility(
+                              visible:
+                                  provider.selectedImage != null ? true : false,
+                              child: provider.selectedImage != null
+                                  ? Stack(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 14),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.file(
+                                              provider.selectedImage!,
+                                              width: 96,
+                                              height: 96,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        Positioned(
+                                          bottom: 0,
+                                          left: 32,
+                                          child: GestureDetector(
+                                            onTap: () async {},
+                                            child: Container(
+                                              width: 32,
+                                              height: 32,
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Color.fromRGBO(
+                                                        17, 17, 17, 0.04),
+                                                    offset: Offset(0, 8),
+                                                    blurRadius: 16,
+                                                    spreadRadius: 0,
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Center(
+                                                child: Image.asset(
+                                                  'assets/icons/trash.png',
+                                                  width: 20,
+                                                  height: 20,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  : Text("No image selected")),
+                        ],
                       ),
                     )
                   : provider.uploadStep == 2
@@ -293,11 +413,14 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
         toolbarHeight: 58,
         backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
         elevation: 0,
+        leading: SizedBox(),
         centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
           child: Text(
-            'Add Photo/Video'.tr,
+            Provider.of<HomePageProvider>(context).uploadType == 'Post'
+                ? 'Add Photo/Video'.tr
+                : 'Upload Reels Video'.tr,
             style: TextStyle(
               fontSize: 14,
               height: 1,

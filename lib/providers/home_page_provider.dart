@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 
 class HomePageProvider with ChangeNotifier {
@@ -6,6 +7,7 @@ class HomePageProvider with ChangeNotifier {
 
   late String uploadType; // Post, Reels
   int uploadStep = 0; // 0,1,2,3
+  File? selectedImage;
 
   void updateTabIndex(int value) {
     _tabIndex = value;
@@ -19,6 +21,11 @@ class HomePageProvider with ChangeNotifier {
 
   void updateUploadStep(int value) {
     uploadStep = value;
+    notifyListeners();
+  }
+
+  void updateSelectedImage(File newImage) {
+    selectedImage = newImage;
     notifyListeners();
   }
 }
