@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class UploadStepsSubPage extends StatefulWidget {
   const UploadStepsSubPage({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
           title: Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
             child: Text(
-              "Gönderi Oluştur",
+              'Create Post'.tr,
               style: TextStyle(
                 fontSize: 14,
                 height: 1,
@@ -70,7 +71,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   ),
                   elevation: 0,
                   child: Text(
-                    "Paylaş",
+                    'Homepage Share-3'.tr,
                     style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
@@ -128,12 +129,12 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                     color: themeMode
                         ? AppTheme.black11
                         : AppTheme.white1), // WHILE WRITING
-                maxLines: 16,
+                maxLines: 14,
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.fromLTRB(16, 0, 16, 36),
                   filled: true,
                   fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
-                  hintText: "Firman hakkında takipçilerinle bir şeyler paylaş.",
+                  hintText: 'Share something about your company'.tr,
                   hintStyle: TextStyle(
                     fontSize: 15,
                     fontFamily: AppTheme.appFontFamily,
@@ -181,7 +182,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      "Fotoğraf/Video Ekle",
+                      'Add Photo/Video'.tr,
                       style: TextStyle(
                         fontSize: 14,
                         height: 1,
@@ -211,7 +212,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                     ),
                     SizedBox(width: 8),
                     Text(
-                      "Reels Video Yükle",
+                      'Upload Reels Video'.tr,
                       style: TextStyle(
                         fontSize: 14,
                         height: 1,
