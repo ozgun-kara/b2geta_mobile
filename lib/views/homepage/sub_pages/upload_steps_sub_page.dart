@@ -31,14 +31,14 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
       builder: (context, provider, child) {
         return Scaffold(
           backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black5,
-          appBar: provider.uploadState == 0
+          appBar: provider.uploadStep == 0
               ? firstAppBar(themeMode)
-              : provider.uploadState == 1
+              : provider.uploadStep == 1
                   ? secondAppBar(themeMode)
-                  : provider.uploadState == 2
+                  : provider.uploadStep == 2
                       ? thirdAppBar(themeMode)
                       : fourthAppBar(themeMode),
-          body: provider.uploadState == 0
+          body: provider.uploadStep == 0
               ? SingleChildScrollView(
                   child: Column(
                     children: [
@@ -165,7 +165,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                             ],
                           ),
                           onPressed: () {
-                            provider.updateUploadState(1);
+                            provider.updateUploadType('Post');
+                            provider.updateUploadStep(1);
                           }),
                       Container(
                           width: deviceWidth,
@@ -202,17 +203,20 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                               ),
                             ],
                           ),
-                          onPressed: () {}),
+                          onPressed: () {
+                            provider.updateUploadType('Reels');
+                            provider.updateUploadStep(1);
+                          }),
                     ],
                   ),
                 )
-              : provider.uploadState == 1
+              : provider.uploadStep == 1
                   ? SingleChildScrollView(
                       child: Column(
                         children: [],
                       ),
                     )
-                  : provider.uploadState == 2
+                  : provider.uploadStep == 2
                       ? SingleChildScrollView(
                           child: Column(
                             children: [],
@@ -315,7 +319,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
               ),
               onPressed: () {
                 Provider.of<HomePageProvider>(context, listen: false)
-                    .updateUploadState(0);
+                    .updateUploadStep(0);
               },
             ),
           ),
