@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class HomePageProvider with ChangeNotifier {
   int _tabIndex = 0;
@@ -7,7 +8,10 @@ class HomePageProvider with ChangeNotifier {
 
   late String uploadType; // Post, Reels
   int uploadStep = 0; // 0,1,2,3
-  File? selectedImage;
+
+  // File? selectedImage;
+
+  List<XFile>? imageFilesList;
 
   void updateTabIndex(int value) {
     _tabIndex = value;
@@ -24,17 +28,23 @@ class HomePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSelectedImage(File newImage) {
-    selectedImage = newImage;
+  // void updateSelectedImage(File newImage) {
+  //   selectedImage = newImage;
+  //   notifyListeners();
+  // }
+  //
+  // void deleteSelectedImage() {
+  //   selectedImage = null;
+  //   notifyListeners();
+  // }
+
+  void updateSelectedImageFilesList(List<XFile> imgFilesList) {
+    imageFilesList = imgFilesList;
     notifyListeners();
   }
 
-  void deleteSelectedImage() {
-    selectedImage = null;
-    notifyListeners();
-  }
-
-
-
-
+void deleteSelectedImage(XFile image) {
+  imageFilesList!.remove(image);
+  notifyListeners();
+}
 }
