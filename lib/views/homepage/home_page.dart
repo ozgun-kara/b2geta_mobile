@@ -33,8 +33,6 @@ class _HomePageState extends State<HomePage> {
   late bool themeMode;
   bool isList = false;
 
-  late bool _loaded;
-
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
   List<FeedModel> stories1 = [];
@@ -53,15 +51,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    _loaded = false;
-    Future.delayed(
-      const Duration(seconds: 2),
-      () {
-        setState(() {
-          _loaded = true;
-        });
-      },
-    );
     super.initState();
     getFeeds();
     getMeStories();
@@ -319,55 +308,50 @@ class _HomePageState extends State<HomePage> {
                                                 ),
                                               ));
                                             },
-                                            child: _loaded
-                                                ? getShimmerStoryItem
-                                                : Container(
-                                                    width: 50,
-                                                    height: 50,
-                                                    margin:
-                                                        const EdgeInsets.only(
-                                                      right: 10,
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      border: Border.all(
-                                                        color: const Color(
-                                                            0XFF29B7D6),
-                                                        width: 2,
+                                            child: Container(
+                                              width: 50,
+                                              height: 50,
+                                              margin: const EdgeInsets.only(
+                                                right: 10,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                  color:
+                                                      const Color(0XFF29B7D6),
+                                                  width: 2,
+                                                ),
+                                              ),
+                                              child: meStories[0]
+                                                      .user!
+                                                      .photo!
+                                                      .isNotEmpty
+                                                  ? ClipOval(
+                                                      child: Image.network(
+                                                        width: 40,
+                                                        height: 40,
+                                                        meStories[0]
+                                                            .user!
+                                                            .photo!,
+                                                        errorBuilder: (context,
+                                                                error,
+                                                                stackTrace) =>
+                                                            Image.asset(
+                                                          "assets/images/dummy_images/post_profile.png",
+                                                          width: 40,
+                                                          height: 40,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                    )
+                                                  : ClipOval(
+                                                      child: Image.asset(
+                                                        width: 40,
+                                                        height: 40,
+                                                        "assets/images/dummy_images/post_profile.png",
                                                       ),
                                                     ),
-                                                    child: meStories[0]
-                                                            .user!
-                                                            .photo!
-                                                            .isNotEmpty
-                                                        ? ClipOval(
-                                                            child:
-                                                                Image.network(
-                                                              width: 40,
-                                                              height: 40,
-                                                              meStories[0]
-                                                                  .user!
-                                                                  .photo!,
-                                                              errorBuilder: (context,
-                                                                      error,
-                                                                      stackTrace) =>
-                                                                  Image.asset(
-                                                                "assets/images/dummy_images/post_profile.png",
-                                                                width: 40,
-                                                                height: 40,
-                                                                fit: BoxFit
-                                                                    .cover,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : ClipOval(
-                                                            child: Image.asset(
-                                                              width: 40,
-                                                              height: 40,
-                                                              "assets/images/dummy_images/post_profile.png",
-                                                            ),
-                                                          ),
-                                                  ),
+                                            ),
                                           )
                                         : const SizedBox()
                                     : stories1.isNotEmpty
