@@ -53,6 +53,7 @@ dependencies:
   video_player: ^2.5.1
   video_thumbnail: ^0.5.3
   path_provider: ^2.0.13
+  shimmer: ^2.0.0
   image_picker: ^0.8.6+3
 
 
@@ -65,11 +66,8 @@ dependencies:
   intl_phone_number_input: ^0.7.1
   carousel_slider: ^4.1.1
   animated_toggle_switch: ^0.6.1
-  flutter_cache_manager: ^3.3.0
-  video_player: ^2.5.1
-  video_thumbnail: ^0.5.3
-  shimmer: ^2.0.0
-  path_provider: ^2.0.13
+
+
 
 
 flutter_icons:
