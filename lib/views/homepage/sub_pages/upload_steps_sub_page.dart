@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
@@ -27,29 +26,32 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
   TextEditingController commentController = TextEditingController();
 
-  Future pickImage() async {
-    try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image == null) return;
-      final imageTemp = File(image.path);
-      // setState(() => this.successImage = imageTemp);
-      Provider.of<HomePageProvider>(context, listen: false)
-          .updateSelectedImage(imageTemp);
-    } on PlatformException catch (e) {
-      print('Failed to pick image: $e');
-    }
-  }
+  // Future pickImage() async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //     if (image == null) return;
+  //     final imageTemp = File(image.path);
+  //     // setState(() => this.successImage = imageTemp);
+  //     Provider.of<HomePageProvider>(context, listen: false)
+  //         .updateSelectedImage(imageTemp);
+  //   } on PlatformException catch (e) {
+  //     print('Failed to pick image: $e');
+  //   }
+  // }
 
-  final ImagePicker imgpicker = ImagePicker();
-  List<XFile>? imagefiles;
+  // final ImagePicker imgPicker = ImagePicker();
+  // List<XFile>? imageFilesList;
 
   openImages() async {
     try {
-      var pickedfiles = await imgpicker.pickMultiImage();
+      var pickedFiles = await ImagePicker().pickMultiImage();
       //you can use ImageCourse.camera for Camera capture
-      if (pickedfiles != null) {
-        imagefiles = pickedfiles;
-        setState(() {});
+      if (pickedFiles != null) {
+        // imageFilesList = pickedFiles;
+        // setState(() {});
+
+        Provider.of<HomePageProvider>(context, listen: false)
+            .updateSelectedImageFilesList(pickedFiles);
       } else {
         print("No image is selected.");
       }
@@ -256,7 +258,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                 child: Column(
                                   children: [
                                     Container(
-                                        child: imagefiles == null
+                                        child: provider.imageFilesList == null
                                             ? Column(
                                                 children: [
                                                   SizedBox(height: 100),
@@ -297,35 +299,22 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                 ],
                                               )
                                             : Wrap(
-                                                children:
-                                                    imagefiles!.map((imageone) {
-                                                  // return Container(
-                                                  //     child: Card(
-                                                  //   child: Container(
-                                                  //     height: 100,
-                                                  //     width: 100,
-                                                  //     child: Image.file(
-                                                  //         File(imageone.path)),
-                                                  //   ),
-                                                  // ));
-
+                                                spacing: 3,
+                                                runSpacing: 3,
+                                                children: provider
+                                                    .imageFilesList!
+                                                    .map((image) {
                                                   return Stack(
                                                     children: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                0, 0, 0, 14),
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(0),
-                                                          child: Image.file(
-                                                            File(imageone.path),
-                                                            width: 128,
-                                                            height: 128,
-                                                            fit: BoxFit.cover,
-                                                          ),
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(0),
+                                                        child: Image.file(
+                                                          File(image.path),
+                                                          width: 128,
+                                                          height: 128,
+                                                          fit: BoxFit.cover,
                                                         ),
                                                       ),
                                                       Positioned(
@@ -344,11 +333,14 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               onTap: () {
                                                                 // provider.deleteSelectedImage();
 
-                                                                imagefiles!
-                                                                    .remove(
-                                                                        imageone);
+                                                                // provider
+                                                                //     .imageFilesList!
+                                                                //     .remove(
+                                                                //         imageone);
 
-                                                                setState(() {});
+                                                                provider
+                                                                    .deleteSelectedImage(
+                                                                        image);
                                                               },
                                                               child: SizedBox(
                                                                 width: 24,
@@ -373,7 +365,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                 }).toList(),
                                               )),
                                     Container(
-                                        child: provider.selectedImage == null
+                                        child: provider.imageFilesList == null
                                             ? MaterialButton(
                                                 height: 47,
                                                 color: AppTheme.blue2,
@@ -473,197 +465,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                               child: Center(
                                 child: Column(
                                   children: [
-                                    Container(
-                                      child: provider.selectedImage == null
-                                          ? Column(
-                                              children: [
-                                                SizedBox(height: 100),
-                                                Center(
-                                                  child: Column(
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/icons/mdi_cloud-upload-outline.png",
-                                                        width: 58,
-                                                        height: 58,
-                                                      ),
-                                                      SizedBox(height: 8),
-                                                      SizedBox(
-                                                        width: 212,
-                                                        child: Text(
-                                                          'Maximum File Size Info'
-                                                              .tr,
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .blue2
-                                                                  : AppTheme
-                                                                      .white1),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                SizedBox(height: 176),
-                                              ],
-                                            )
-                                          : Column(
-                                              children: [
-                                                Stack(
-                                                  children: [
-                                                    Padding(
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          0, 0, 0, 14),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(0),
-                                                        child: Image.file(
-                                                          provider
-                                                              .selectedImage!,
-                                                          width: 128,
-                                                          height: 128,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    Positioned(
-                                                      top: 3,
-                                                      right: 3,
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    4)),
-                                                        child: Material(
-                                                          color:
-                                                              AppTheme.white1,
-                                                          child: InkWell(
-                                                            onTap: () {
-                                                              provider
-                                                                  .deleteSelectedImage();
-                                                            },
-                                                            child: SizedBox(
-                                                              width: 24,
-                                                              height: 24,
-                                                              child: Center(
-                                                                child:
-                                                                    Image.asset(
-                                                                  'assets/icons/trash.png',
-                                                                  width: 14,
-                                                                  height: 16,
-                                                                  color: AppTheme
-                                                                      .blue2,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                )
-                                              ],
-                                            ),
-                                    ),
-                                    Container(
-                                        child: provider.selectedImage == null
-                                            ? MaterialButton(
-                                                height: 47,
-                                                color: AppTheme.blue2,
-                                                shape:
-                                                    const RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.all(
-                                                          Radius.circular(9)),
-                                                ),
-                                                elevation: 0,
-                                                child: Text(
-                                                  'Select From Gallery'.tr,
-                                                  style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      color: AppTheme.white1),
-                                                ),
-                                                onPressed: () {
-                                                  pickImage();
-                                                })
-                                            : Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        26, 114, 26, 26),
-                                                child: Row(
-                                                  children: [
-                                                    Expanded(
-                                                      child: MaterialButton(
-                                                          height: 47,
-                                                          color: AppTheme.blue2,
-                                                          shape:
-                                                              const RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            9)),
-                                                          ),
-                                                          elevation: 0,
-                                                          child: Text(
-                                                            'Change'.tr,
-                                                            style: TextStyle(
-                                                                fontSize: 14,
-                                                                fontFamily: AppTheme
-                                                                    .appFontFamily,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                color: AppTheme
-                                                                    .white1),
-                                                          ),
-                                                          onPressed: () {}),
-                                                    ),
-                                                    SizedBox(width: 8),
-                                                    Expanded(
-                                                      child: MaterialButton(
-                                                          height: 47,
-                                                          color:
-                                                              AppTheme.green1,
-                                                          shape:
-                                                              const RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            9)),
-                                                          ),
-                                                          elevation: 0,
-                                                          child: Text(
-                                                            'Upload'.tr,
-                                                            style: TextStyle(
-                                                                fontSize: 14,
-                                                                fontFamily: AppTheme
-                                                                    .appFontFamily,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w700,
-                                                                color: AppTheme
-                                                                    .white1),
-                                                          ),
-                                                          onPressed: () {}),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )),
                                     SizedBox(height: 50),
                                   ],
                                 ),
