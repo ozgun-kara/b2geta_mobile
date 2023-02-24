@@ -83,7 +83,6 @@ class OrderService {
       if (status == true) {
         var data = json.decode(response.body)["data"];
         var orderDetails = OrderDetailsModel.fromJson(data);
-        debugPrint("${orderDetails.orderDate}burda");
         return orderDetails;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
