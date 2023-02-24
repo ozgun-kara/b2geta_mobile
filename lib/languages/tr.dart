@@ -102,6 +102,17 @@ final Map<String, String> tr = {
   'Comment-3': 'Yorum yaz',
   'Comment-4': 'Önceki yorumlar gör',
   'Answer': 'Yanıtla',
+  'Create Post': 'Gönderi Oluştur',
+  'Share something about your company':
+      'Firman hakkında takipçilerinle bir şeyler paylaş.',
+  'Add Photo/Video': 'Fotoğraf/Video Ekle',
+  'Upload Reels Video': 'Reels Video Yükle',
+  'Maximum File Size Info': 'Dosya boyutu 50 mb altı olması gerekmektedir',
+  'Select From Gallery': 'Galeriden Seç',
+  'Add More': 'Daha Fazla Ekle',
+  'Upload': 'Yükle',
+  'Change': 'Değiştir',
+
   // MARKETPLACE PAGE
   'Results': 'Sonuçlar',
   'Minimum Order': 'adet min. sipariş',
