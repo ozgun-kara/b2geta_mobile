@@ -1110,10 +1110,10 @@ class _HomePageState extends State<HomePage> {
               child: TextField(
                 controller: _commentTextController,
                 style: TextStyle(
-                    fontSize: 11,
+                    fontSize: 12,
                     fontFamily: AppTheme.appFontFamily,
                     fontWeight: FontWeight.w600,
-                    color: AppTheme.white13),
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1),
                 decoration: InputDecoration(
                   contentPadding: const EdgeInsets.only(left: 14, top: 11),
                   filled: true,
