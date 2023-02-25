@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/message_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/messages/message_details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,6 +26,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
   final MessagesServices _messagesServices = MessagesServices();
   List<MessageModel> _messageList = [];
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -49,75 +51,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black4,
-      appBar: AppBar(
-          toolbarHeight: 68,
-          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/back.png',
-                width: 23,
-                height: 17,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                if (Navigator.canPop(context)) {
-                  Navigator.pop(context);
-                }
-              },
-            ),
-          ),
-          title: SizedBox(
-              width: 103.74,
-              height: 14.0,
-              child: themeMode
-                  ? Image.asset('assets/images/b2geta_logo_light.png')
-                  : Image.asset('assets/images/b2geta_logo_dark.png')),
-          actions: [
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/search.png',
-                width: 19,
-                height: 19,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                if (themeMode) {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setDarkMode();
-                } else {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setLightMode();
-                }
-              },
-            ),
-            const SizedBox(width: 4),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/bell.png',
-                width: 16.0,
-                height: 18.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-            const SizedBox(width: 4),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/message.png',
-                width: 19.0,
-                height: 16.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-          ]),
+      appBar: CustomAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,7 +116,7 @@ class _MessagesPageState extends State<MessagesPage> {
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Text(
-                'Chats'.tr + ' (1)',
+                '${'Chats'.tr} (1)',
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,

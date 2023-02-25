@@ -1,15 +1,9 @@
-import 'dart:io';
-
-import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
-import 'package:video_thumbnail/video_thumbnail.dart';
 
 class CompanyReelsSubPage extends StatefulWidget {
   const CompanyReelsSubPage({Key? key}) : super(key: key);
@@ -22,8 +16,6 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
   ScrollController scrollController = ScrollController();
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> reelsList = [];
-  List<String?> reelsImageList = [];
-  String? _thumbnailUrl;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -41,24 +33,24 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
       queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
     ).then((feedList) async {
       reelsList = feedList;
-      for (var element in reelsList) {
-        await generateThumbnail(
-                url: element.videos!.isNotEmpty
-                    ? element.videos![0]!.url!
-                    : 'http://videoftp.b2geta.com/reels/2023/02/reels_11022023123709-1676119029.mp4')
-            .then((value) => reelsImageList.add(value));
-      }
       setState(() {});
     });
   }
 
-  Future<String?> generateThumbnail({required String url}) async {
-    _thumbnailUrl = await VideoThumbnail.thumbnailFile(
-      video: url,
-      thumbnailPath: (await getTemporaryDirectory()).path,
-    );
-    return _thumbnailUrl;
-  }
+  List<String> reelsImageList = [
+    "assets/images/dummy_images/reels_image_1.png",
+    "assets/images/dummy_images/reels_image_2.png",
+    "assets/images/dummy_images/reels_image_3.png",
+    "assets/images/dummy_images/reels_image_4.png",
+    "assets/images/dummy_images/reels_image_5.png",
+    "assets/images/dummy_images/reels_image_6.png",
+    "assets/images/dummy_images/reels_image_7.png",
+    "assets/images/dummy_images/reels_image_8.png",
+    "assets/images/dummy_images/reels_image_9.png",
+    "assets/images/dummy_images/reels_image_1.png",
+    "assets/images/dummy_images/reels_image_2.png",
+    "assets/images/dummy_images/reels_image_3.png",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -89,32 +81,7 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
                     ),
                   ));
             },
-            child: reelsImageList.length == reelsList.length
-                ? Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Image.file(
-                        File(reelsImageList[index]!),
-                        width: 128,
-                        height: 128,
-                        fit: BoxFit.cover,
-                      ),
-                      const CircleAvatar(
-                        radius: 10,
-                        backgroundColor: Colors.black45,
-                        child: Icon(
-                          Icons.play_arrow,
-                          size: 12,
-                          color: Colors.white,
-                        ),
-                      )
-                    ],
-                  )
-                : Center(
-                    child: CupertinoActivityIndicator(
-                      color: AppTheme.black1,
-                    ),
-                  ),
+            child: Image.asset(reelsImageList[index]),
           ),
         );
       }),
