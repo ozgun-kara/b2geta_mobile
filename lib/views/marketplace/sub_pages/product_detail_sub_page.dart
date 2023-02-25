@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/utils.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -59,73 +60,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black7,
-      appBar: AppBar(
-          toolbarHeight: 68,
-          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/back.png',
-                width: 23,
-                height: 17,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: SizedBox(
-              width: 103.74,
-              height: 14.0,
-              child: themeMode
-                  ? Image.asset('assets/images/b2geta_logo_light.png')
-                  : Image.asset('assets/images/b2geta_logo_dark.png')),
-          actions: [
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/search.png',
-                width: 19,
-                height: 19,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                if (themeMode) {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setDarkMode();
-                } else {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setLightMode();
-                }
-              },
-            ),
-            const SizedBox(width: 4),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/bell.png',
-                width: 16.0,
-                height: 18.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-            const SizedBox(width: 4),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/message.png',
-                width: 19.0,
-                height: 16.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-          ]),
+      appBar: const CustomAppBar(),
       body: SingleChildScrollView(
         controller: scrollController,
         child: Padding(
@@ -259,7 +194,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlacePageProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(
+                                              context,
                                               listen: false)
                                           .updateProductImageIndex(0);
                                     }),
@@ -302,7 +238,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlacePageProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(
+                                              context,
                                               listen: false)
                                           .updateProductImageIndex(1);
                                     }),
@@ -345,7 +282,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlacePageProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(
+                                              context,
                                               listen: false)
                                           .updateProductImageIndex(2);
                                     }),
@@ -388,7 +326,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      Provider.of<MarketPlacePageProvider>(context,
+                                      Provider.of<MarketPlacePageProvider>(
+                                              context,
                                               listen: false)
                                           .updateProductImageIndex(3);
                                     }),
@@ -470,13 +409,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                             ),
                             const SizedBox(width: 8),
                             Text(
-                              '6' +
-                                  ' ' +
-                                  'Reviews'.tr +
-                                  '   -   ' +
-                                  '8' +
-                                  ' ' +
-                                  'Receivers'.tr,
+                              '6 ${'Reviews'.tr}   -   8 ${'Receivers'.tr}',
                               style: TextStyle(
                                 fontSize: 12,
                                 fontFamily: AppTheme.appFontFamily,
@@ -508,14 +441,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
-                                  color:
-                                      Provider.of<MarketPlacePageProvider>(context)
-                                                  .productCountIndex ==
-                                              0
-                                          ? AppTheme.blue2
-                                          : themeMode
-                                              ? AppTheme.white31
-                                              : AppTheme.black18,
+                                  color: Provider.of<MarketPlacePageProvider>(
+                                                  context)
+                                              .productCountIndex ==
+                                          0
+                                      ? AppTheme.blue2
+                                      : themeMode
+                                          ? AppTheme.white31
+                                          : AppTheme.black18,
                                   // padding: const EdgeInsets.all(7),
                                   child: Row(
                                     mainAxisAlignment:
@@ -523,7 +456,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "50 - 199 " + 'Piece-1'.tr,
+                                          "50 - 199 ${'Piece-1'.tr}",
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -557,7 +490,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlacePageProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(
+                                            context,
                                             listen: false)
                                         .updateProductCountIndex(0);
                                   }),
@@ -573,14 +507,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
-                                  color:
-                                      Provider.of<MarketPlacePageProvider>(context)
-                                                  .productCountIndex ==
-                                              1
-                                          ? AppTheme.blue2
-                                          : themeMode
-                                              ? AppTheme.white31
-                                              : AppTheme.black18,
+                                  color: Provider.of<MarketPlacePageProvider>(
+                                                  context)
+                                              .productCountIndex ==
+                                          1
+                                      ? AppTheme.blue2
+                                      : themeMode
+                                          ? AppTheme.white31
+                                          : AppTheme.black18,
                                   // padding: const EdgeInsets.all(7),
                                   child: Row(
                                     mainAxisAlignment:
@@ -588,7 +522,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "200 - 499 " + 'Piece-1'.tr,
+                                          "200 - 499 ${'Piece-1'.tr}",
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -623,7 +557,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlacePageProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(
+                                            context,
                                             listen: false)
                                         .updateProductCountIndex(1);
                                   }),
@@ -639,14 +574,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
-                                  color:
-                                      Provider.of<MarketPlacePageProvider>(context)
-                                                  .productCountIndex ==
-                                              2
-                                          ? AppTheme.blue2
-                                          : themeMode
-                                              ? AppTheme.white31
-                                              : AppTheme.black18,
+                                  color: Provider.of<MarketPlacePageProvider>(
+                                                  context)
+                                              .productCountIndex ==
+                                          2
+                                      ? AppTheme.blue2
+                                      : themeMode
+                                          ? AppTheme.white31
+                                          : AppTheme.black18,
                                   // padding: const EdgeInsets.all(7),
                                   child: Row(
                                     mainAxisAlignment:
@@ -654,7 +589,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "500 - 999 " + 'Piece-1'.tr,
+                                          "500 - 999 ${'Piece-1'.tr}",
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -689,7 +624,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlacePageProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(
+                                            context,
                                             listen: false)
                                         .updateProductCountIndex(2);
                                   }),
@@ -705,14 +641,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(4)),
                                   ),
-                                  color:
-                                      Provider.of<MarketPlacePageProvider>(context)
-                                                  .productCountIndex ==
-                                              3
-                                          ? AppTheme.blue2
-                                          : themeMode
-                                              ? AppTheme.white31
-                                              : AppTheme.black18,
+                                  color: Provider.of<MarketPlacePageProvider>(
+                                                  context)
+                                              .productCountIndex ==
+                                          3
+                                      ? AppTheme.blue2
+                                      : themeMode
+                                          ? AppTheme.white31
+                                          : AppTheme.black18,
                                   // padding: const EdgeInsets.all(7),
                                   child: Row(
                                     mainAxisAlignment:
@@ -720,7 +656,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          ">= 1000 " + 'Piece-1'.tr,
+                                          ">= 1000 ${'Piece-1'.tr}",
                                           style: TextStyle(
                                             fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
@@ -755,7 +691,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     ],
                                   ),
                                   onPressed: () {
-                                    Provider.of<MarketPlacePageProvider>(context,
+                                    Provider.of<MarketPlacePageProvider>(
+                                            context,
                                             listen: false)
                                         .updateProductCountIndex(3);
                                   }),
@@ -2084,9 +2021,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           child: Column(
                                             children: [
                                               Text(
-                                                'Customer Comments'.tr +
-                                                    ' ' +
-                                                    '(8)',
+                                                '${'Customer Comments'.tr} (8)',
                                                 style: TextStyle(
                                                     fontSize: 16,
                                                     fontFamily:
@@ -2282,8 +2217,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    '10' +
-                                                        ' ' +
+                                                    '10' ' ' +
                                                         'Minimum Order'.tr,
                                                     style: TextStyle(
                                                       fontSize: 10,
@@ -2567,7 +2501,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       children: [
                         Flexible(
                           child: Text(
-                            '1' + ' ' + 'Piece-1'.tr,
+                            '1' ' ' + 'Piece-1'.tr,
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 12,

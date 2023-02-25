@@ -327,15 +327,7 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 18.0,
               color: AppTheme.white15,
             ),
-            onPressed: () {
-              if (themeMode) {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setDarkMode();
-              } else {
-                Provider.of<ThemeProvider>(context, listen: false)
-                    .setLightMode();
-              }
-            },
+            onPressed: () {},
           ),
           IconButton(
             splashRadius: 24,
@@ -360,7 +352,7 @@ class _NavigationPageState extends State<NavigationPage> {
         child: IconButton(
           splashRadius: 24,
           icon: Image.asset(
-            'assets/icons/back-2.png',
+            'assets/icons/close.png',
             width: 14,
             height: 12,
             color: AppTheme.white15,

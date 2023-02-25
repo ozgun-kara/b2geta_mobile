@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/message_details_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
@@ -47,109 +48,47 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black7,
-      appBar: AppBar(
-          toolbarHeight: 68,
-          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/menu.png',
-                width: 23,
-                height: 17,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-          ),
-          title: SizedBox(
-              width: 103.74,
-              height: 14.0,
-              child: themeMode
-                  ? Image.asset('assets/images/b2geta_logo_light.png')
-                  : Image.asset('assets/images/b2geta_logo_dark.png')),
-          actions: [
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/search.png',
-                width: 19,
-                height: 19,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                if (themeMode) {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setDarkMode();
-                } else {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .setLightMode();
-                }
-              },
-            ),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/bell.png',
-                width: 16.0,
-                height: 18.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-            IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/message.png',
-                width: 19.0,
-                height: 16.0,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {},
-            ),
-          ]),
+      appBar: const CustomAppBar(),
       body: Column(
         children: [
-          Container(
-            width: deviceWidth,
-            height: 32,
-            decoration: BoxDecoration(
-              color: AppTheme.blue2,
-            ),
-            child: MaterialButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              elevation: 0,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 13),
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "assets/icons/back.png",
-                      width: 7,
-                      height: 5,
-                      color: const Color(0xFFC2C2C2),
-                    ),
-                    const SizedBox(
-                      width: 6.0,
-                    ),
-                    Text(
-                      'Back to Messages'.tr,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.white24,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
+          // Container(
+          //   width: deviceWidth,
+          //   height: 32,
+          //   decoration: BoxDecoration(
+          //     color: AppTheme.blue2,
+          //   ),
+          //   child: MaterialButton(
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     elevation: 0,
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(left: 13),
+          //       child: Row(
+          //         children: [
+          //           Image.asset(
+          //             "assets/icons/back.png",
+          //             width: 7,
+          //             height: 5,
+          //             color: const Color(0xFFC2C2C2),
+          //           ),
+          //           const SizedBox(
+          //             width: 6.0,
+          //           ),
+          //           Text(
+          //             'Back to Messages'.tr,
+          //             style: TextStyle(
+          //               fontSize: 11,
+          //               fontFamily: AppTheme.appFontFamily,
+          //               fontWeight: FontWeight.w600,
+          //               color: AppTheme.white24,
+          //             ),
+          //           )
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Container(
             width: deviceWidth,
             height: 63,
