@@ -11,6 +11,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
+import 'dart:math' as math;
 
 class UploadStepsSubPage extends StatefulWidget {
   const UploadStepsSubPage({Key? key}) : super(key: key);
@@ -149,51 +150,75 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 4),
                       Visibility(
                         visible: provider.imageFilesList!.isNotEmpty,
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
                           child: Wrap(
                             spacing: 9,
                             runSpacing: 9,
                             children: provider.imageFilesList!.map((image) {
                               return Stack(
+                                clipBehavior: Clip.none,
                                 children: [
                                   Image.file(
                                     File(image.path),
-                                    width: deviceWidth / 6 - 0,
-                                    height: deviceWidth / 6 - 0,
+                                    width: deviceWidth / 6,
+                                    height: deviceWidth / 6,
                                     fit: BoxFit.cover,
                                   ),
+                                  // Positioned(
+                                  //   top: 3,
+                                  //   right: 3,
+                                  //   child: ClipRRect(
+                                  //     borderRadius:
+                                  //         BorderRadius.all(Radius.circular(4)),
+                                  //     child: Material(
+                                  //       color: AppTheme.white1,
+                                  //       child: InkWell(
+                                  //         onTap: () {
+                                  //
+                                  //           provider.deleteSelectedImage(image);
+                                  //         },
+                                  //         child: SizedBox(
+                                  //           width: 24,
+                                  //           height: 24,
+                                  //           child: Center(
+                                  //             child: Image.asset(
+                                  //               'assets/icons/trash.png',
+                                  //               width: 14,
+                                  //               height: 16,
+                                  //               color: AppTheme.blue2,
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                   Positioned(
-                                    top: 3,
-                                    right: 3,
-                                    child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(4)),
+                                    top: -7.75,
+                                    right: -7.75,
+                                    child: ClipOval(
                                       child: Material(
-                                        color: AppTheme.white1,
+                                        color: AppTheme.red5,
                                         child: InkWell(
+                                          radius: 18,
                                           onTap: () {
-                                            // provider.deleteSelectedImage();
-
-                                            // provider
-                                            //     .imageFilesList!
-                                            //     .remove(
-                                            //         imageone);
-
                                             provider.deleteSelectedImage(image);
                                           },
-                                          child: SizedBox(
-                                            width: 24,
-                                            height: 24,
-                                            child: Center(
-                                              child: Image.asset(
-                                                'assets/icons/trash.png',
-                                                width: 14,
-                                                height: 16,
-                                                color: AppTheme.blue2,
+                                          child: Transform.rotate(
+                                            angle: math.pi / 4,
+                                            child: SizedBox(
+                                              width: 18,
+                                              height: 18,
+                                              child: Center(
+                                                child: Image.asset(
+                                                  'assets/icons/cross-2.png',
+                                                  width: 9.18,
+                                                  height: 9.18,
+                                                  // color: AppTheme.blue2,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -207,7 +232,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(height: 8),
                       Container(
                           width: deviceWidth,
                           height: 1,
@@ -518,7 +543,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 Timer(
                                                                     const Duration(
                                                                         milliseconds:
-                                                                            2000),
+                                                                            1500),
                                                                     () => provider
                                                                         .updateUploadStep(
                                                                             0));
