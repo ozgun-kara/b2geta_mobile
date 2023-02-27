@@ -116,6 +116,7 @@ final Map<String, String> en = {
   'Uploading-2': 'Uploading',
   'Uploading Message': 'If you close the application, the installation will be canceled',
   'Cancel': 'Cancel',
+  'Your post has been shared': 'Your post has been shared',
 
   // MARKETPLACE PAGE
   'Results': 'Results',

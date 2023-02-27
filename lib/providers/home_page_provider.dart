@@ -35,4 +35,9 @@ class HomePageProvider with ChangeNotifier {
     imageFilesList!.remove(image);
     notifyListeners();
   }
+
+  void clearSelectedImageFilesList() {
+    imageFilesList!.clear();
+    notifyListeners();
+  }
 }
