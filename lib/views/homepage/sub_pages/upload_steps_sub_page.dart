@@ -26,7 +26,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
   TextEditingController commentController = TextEditingController();
   final ImagePicker imagePicker = ImagePicker();
 
-
   void selectImages() async {
     final List<XFile> selectedImages = await imagePicker.pickMultiImage();
 
@@ -233,6 +232,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                               child: Center(
                                 child: Column(
                                   children: [
+                                    Container(
+                                        width: deviceWidth,
+                                        height: 1,
+                                        color:
+                                        themeMode ? AppTheme.white32 : AppTheme.black2),
                                     Container(
                                         child: provider.imageFilesList!.isEmpty
                                             ? Column(
@@ -442,7 +446,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     color: AppTheme
                                                                         .white1),
                                                               ),
-                                                              onPressed: () {}),
+                                                              onPressed: () {
+                                                                provider
+                                                                    .updateUploadStep(
+                                                                        2);
+                                                              }),
                                                         ),
                                                       ],
                                                     ),
@@ -466,7 +474,35 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   : provider.uploadStep == 2
                       ? SingleChildScrollView(
                           child: Column(
-                            children: [],
+                            children: [
+                              SizedBox(height: 100),
+                              Center(
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 112),
+                                      child: SizedBox(
+                                        // width: 148,
+                                        child: Text(
+                                          'Uploading Message'.tr,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 13,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w600,
+                                              color: themeMode
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white1),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 176),
+                            ],
                           ),
                         )
                       : SingleChildScrollView(
@@ -581,25 +617,12 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
         toolbarHeight: 58,
         backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
         elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/back-3.png',
-              width: 16,
-              height: 12,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+        leading: SizedBox(),
+        centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
           child: Text(
-            'Create Post'.tr,
+            'Uploading-1'.tr,
             style: TextStyle(
               fontSize: 14,
               height: 1,
@@ -611,23 +634,19 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(11, 11.5, 11, 11.5),
-            child: MaterialButton(
-                height: 35,
-                color: AppTheme.blue2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                ),
-                elevation: 0,
-                child: Text(
-                  'Homepage Share-3'.tr,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.white1),
-                ),
-                onPressed: () {}),
+            padding: const EdgeInsets.only(right: 4),
+            child: IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/cross.png',
+                width: 19,
+                height: 19,
+              ),
+              onPressed: () {
+                Provider.of<HomePageProvider>(context, listen: false)
+                    .updateUploadStep(0);
+              },
+            ),
           ),
         ]);
   }
