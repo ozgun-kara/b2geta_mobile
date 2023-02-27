@@ -21,6 +21,7 @@ class OrderService {
       var status = json.decode(response.body)["status"];
       if (status == true) {
         List data = json.decode(response.body)["data"];
+        debugPrint("DATA:  ${response.statusCode} ${data.toString()}");
         return data;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
