@@ -235,8 +235,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                     Container(
                                         width: deviceWidth,
                                         height: 1,
-                                        color:
-                                        themeMode ? AppTheme.white32 : AppTheme.black2),
+                                        color: themeMode
+                                            ? AppTheme.white32
+                                            : AppTheme.black2),
                                     Container(
                                         child: provider.imageFilesList!.isEmpty
                                             ? Column(
@@ -287,6 +288,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     9)),
                                                       ),
                                                       elevation: 0,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 22),
                                                       child: Text(
                                                         'Select From Gallery'
                                                             .tr,
@@ -300,8 +304,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 .white1),
                                                       ),
                                                       onPressed: () {
-                                                        // pickImages();
-
                                                         selectImages();
                                                       })
                                                 ],
@@ -316,17 +318,16 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                         .map((image) {
                                                       return Stack(
                                                         children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        0),
-                                                            child: Image.file(
-                                                              File(image.path),
-                                                              width: 128,
-                                                              height: 128,
-                                                              fit: BoxFit.cover,
-                                                            ),
+                                                          Image.file(
+                                                            File(image.path),
+                                                            width: deviceWidth /
+                                                                    3 -
+                                                                2,
+                                                            height:
+                                                                deviceWidth /
+                                                                        3 -
+                                                                    2,
+                                                            fit: BoxFit.cover,
                                                           ),
                                                           Positioned(
                                                             top: 3,
@@ -413,8 +414,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                         .white1),
                                                               ),
                                                               onPressed: () {
-                                                                // pickImages();
-
                                                                 selectImages();
                                                               }),
                                                         ),
@@ -475,7 +474,13 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       ? SingleChildScrollView(
                           child: Column(
                             children: [
-                              SizedBox(height: 100),
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: themeMode
+                                      ? AppTheme.white32
+                                      : AppTheme.black2),
+                              SizedBox(height: 50),
                               Center(
                                 child: Column(
                                   children: [
@@ -493,7 +498,31 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                   AppTheme.appFontFamily,
                                               fontWeight: FontWeight.w600,
                                               color: themeMode
-                                                  ? AppTheme.blue2
+                                                  ? AppTheme.blue3
+                                                  : AppTheme.white1),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 90),
+
+
+                                    
+
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 112),
+                                      child: SizedBox(
+                                        // width: 148,
+                                        child: Text(
+                                          'Uploading-2'.tr,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w400,
+                                              color: themeMode
+                                                  ? AppTheme.blue3
                                                   : AppTheme.white1),
                                         ),
                                       ),
@@ -501,7 +530,26 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 176),
+                              SizedBox(height: 69),
+                              MaterialButton(
+                                  height: 47,
+                                  color: AppTheme.blue2,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(9)),
+                                  ),
+                                  padding: EdgeInsets.symmetric(horizontal: 56),
+                                  elevation: 0,
+                                  child: Text(
+                                    'Cancel'.tr,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white1),
+                                  ),
+                                  onPressed: () {}),
+                              SizedBox(height: 36),
                             ],
                           ),
                         )
