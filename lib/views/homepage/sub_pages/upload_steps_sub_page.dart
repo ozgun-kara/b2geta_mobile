@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
@@ -149,6 +150,69 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                         ),
                       ),
                       SizedBox(height: 4),
+                      Visibility(
+                        visible: provider.imageFilesList!.isNotEmpty,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Wrap(
+                            spacing: 9,
+                            runSpacing: 9,
+                            children: provider.imageFilesList!.map((image) {
+                              return Stack(
+                                children: [
+                                  Image.file(
+                                    File(image.path),
+                                    width: deviceWidth / 6 - 0,
+                                    height: deviceWidth / 6 - 0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Positioned(
+                                    top: 3,
+                                    right: 3,
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(4)),
+                                      child: Material(
+                                        color: AppTheme.white1,
+                                        child: InkWell(
+                                          onTap: () {
+                                            // provider.deleteSelectedImage();
+
+                                            // provider
+                                            //     .imageFilesList!
+                                            //     .remove(
+                                            //         imageone);
+
+                                            provider.deleteSelectedImage(image);
+                                          },
+                                          child: SizedBox(
+                                            width: 24,
+                                            height: 24,
+                                            child: Center(
+                                              child: Image.asset(
+                                                'assets/icons/trash.png',
+                                                width: 14,
+                                                height: 16,
+                                                color: AppTheme.blue2,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Container(
+                          width: deviceWidth,
+                          height: 1,
+                          color:
+                              themeMode ? AppTheme.white32 : AppTheme.black2),
                       MaterialButton(
                           minWidth: deviceWidth,
                           elevation: 0,
@@ -450,6 +514,14 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 provider
                                                                     .updateUploadStep(
                                                                         2);
+
+                                                                Timer(
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            2000),
+                                                                    () => provider
+                                                                        .updateUploadStep(
+                                                                            0));
                                                               }),
                                                         ),
                                                       ],
