@@ -676,7 +676,60 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                         )
                       : SingleChildScrollView(
                           child: Column(
-                            children: [],
+                            children: [
+                              SizedBox(height: 143),
+                              Center(
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/check-2.png",
+                                      width: 75.83,
+                                      height: 75.83,
+                                    ),
+                                    SizedBox(height: 32),
+                                    SizedBox(
+                                      width: 212,
+                                      child: Text(
+                                        'Your post has been shared'.tr,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(height: 188),
+                              MaterialButton(
+                                  height: 47,
+                                  color: AppTheme.blue2,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(9)),
+                                  ),
+                                  elevation: 0,
+                                  padding: EdgeInsets.symmetric(horizontal: 60),
+                                  child: Text(
+                                    'Close'.tr,
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white1),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    provider.clearSelectedImageFilesList();
+                                    Provider.of<HomePageProvider>(context,
+                                            listen: false)
+                                        .updateUploadStep(0);
+                                  })
+                            ],
                           ),
                         ),
         );
@@ -735,7 +788,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       fontWeight: FontWeight.w700,
                       color: AppTheme.white1),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Provider.of<HomePageProvider>(context, listen: false)
+                      .updateUploadStep(3);
+                }),
           ),
         ]);
   }
@@ -806,57 +862,24 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
   PreferredSizeWidget fourthAppBar(themeMode) {
     return AppBar(
-        toolbarHeight: 58,
-        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/back-3.png',
-              width: 16,
-              height: 12,
-              color: AppTheme.white15,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+      toolbarHeight: 58,
+      backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+      elevation: 0,
+      leading: SizedBox(),
+      centerTitle: true,
+      title: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+        child: Text(
+          'Create Post'.tr,
+          style: TextStyle(
+            fontSize: 14,
+            height: 1,
+            fontFamily: AppTheme.appFontFamily,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.white15,
           ),
         ),
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Text(
-            'Create Post'.tr,
-            style: TextStyle(
-              fontSize: 14,
-              height: 1,
-              fontFamily: AppTheme.appFontFamily,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.white15,
-            ),
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(11, 11.5, 11, 11.5),
-            child: MaterialButton(
-                height: 35,
-                color: AppTheme.blue2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(7)),
-                ),
-                elevation: 0,
-                child: Text(
-                  'Homepage Share-3'.tr,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.white1),
-                ),
-                onPressed: () {}),
-          ),
-        ]);
+      ),
+    );
   }
 }
