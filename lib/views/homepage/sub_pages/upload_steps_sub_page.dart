@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
@@ -503,11 +504,30 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 90),
-
-
-                                    
-
+                                    SizedBox(height: 50),
+                                    CircularPercentIndicator(
+                                      radius: 90,
+                                      lineWidth: 13,
+                                      percent: 0.85,
+                                      animation: true,
+                                      backgroundColor: themeMode
+                                          ? AppTheme.white28
+                                          : AppTheme.black27,
+                                      progressColor: AppTheme.green10,
+                                      circularStrokeCap:
+                                          CircularStrokeCap.round,
+                                      center: Text(
+                                        "%85",
+                                        style: TextStyle(
+                                            fontSize: 40,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w700,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1),
+                                      ),
+                                    ),
+                                    SizedBox(height: 40),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 112),
@@ -548,7 +568,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         fontWeight: FontWeight.w700,
                                         color: AppTheme.white1),
                                   ),
-                                  onPressed: () {}),
+                                  onPressed: () {
+                                    Provider.of<HomePageProvider>(context,
+                                            listen: false)
+                                        .updateUploadStep(1);
+                                  }),
                               SizedBox(height: 36),
                             ],
                           ),
@@ -662,41 +686,25 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
   PreferredSizeWidget thirdAppBar(themeMode) {
     return AppBar(
-        toolbarHeight: 58,
-        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-        elevation: 0,
-        leading: SizedBox(),
-        centerTitle: true,
-        title: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Text(
-            'Uploading-1'.tr,
-            style: TextStyle(
-              fontSize: 14,
-              height: 1,
-              fontFamily: AppTheme.appFontFamily,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.white15,
-            ),
+      toolbarHeight: 58,
+      backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+      elevation: 0,
+      leading: SizedBox(),
+      centerTitle: true,
+      title: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+        child: Text(
+          'Uploading-1'.tr,
+          style: TextStyle(
+            fontSize: 14,
+            height: 1,
+            fontFamily: AppTheme.appFontFamily,
+            fontWeight: FontWeight.w600,
+            color: AppTheme.white15,
           ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 4),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/cross.png',
-                width: 19,
-                height: 19,
-              ),
-              onPressed: () {
-                Provider.of<HomePageProvider>(context, listen: false)
-                    .updateUploadStep(0);
-              },
-            ),
-          ),
-        ]);
+      ),
+    );
   }
 
   PreferredSizeWidget fourthAppBar(themeMode) {
