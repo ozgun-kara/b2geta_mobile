@@ -8,7 +8,6 @@ class HomePageProvider with ChangeNotifier {
 
   late String uploadType; // Post, Reels
   int uploadStep = 0; // 0,1,2,3
-
   List<XFile>? imageFilesList = [];
 
   void updateTabIndex(int value) {
@@ -27,7 +26,7 @@ class HomePageProvider with ChangeNotifier {
   }
 
   void updateSelectedImageFilesList(List<XFile> imgFilesList) {
-    imageFilesList = imgFilesList;
+    imageFilesList!.addAll(imgFilesList);
     notifyListeners();
   }
 

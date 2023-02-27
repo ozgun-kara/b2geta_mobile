@@ -24,18 +24,15 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
   late bool themeMode;
 
   TextEditingController commentController = TextEditingController();
+  final ImagePicker imagePicker = ImagePicker();
 
-  pickImages() async {
-    try {
-      var pickedFiles = await ImagePicker().pickMultiImage();
-      if (pickedFiles != null) {
-        Provider.of<HomePageProvider>(context, listen: false)
-            .updateSelectedImageFilesList(pickedFiles);
-      } else {
-        print("No image is selected.");
-      }
-    } catch (e) {
-      print("error while picking file.");
+
+  void selectImages() async {
+    final List<XFile> selectedImages = await imagePicker.pickMultiImage();
+
+    if (selectedImages.isNotEmpty) {
+      Provider.of<HomePageProvider>(context, listen: false)
+          .updateSelectedImageFilesList(selectedImages);
     }
   }
 
@@ -299,7 +296,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 .white1),
                                                       ),
                                                       onPressed: () {
-                                                        pickImages();
+                                                        // pickImages();
+
+                                                        selectImages();
                                                       })
                                                 ],
                                               )
@@ -379,7 +378,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                   Padding(
                                                     padding: const EdgeInsets
                                                             .fromLTRB(
-                                                        26, 114, 26, 26),
+                                                        26, 114, 26, 36),
                                                     child: Row(
                                                       children: [
                                                         Expanded(
@@ -409,7 +408,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     color: AppTheme
                                                                         .white1),
                                                               ),
-                                                              onPressed: () {}),
+                                                              onPressed: () {
+                                                                // pickImages();
+
+                                                                selectImages();
+                                                              }),
                                                         ),
                                                         SizedBox(width: 8),
                                                         Expanded(
