@@ -738,14 +738,24 @@ class _HomePageState extends State<HomePage> {
                                   children: [
                                     TextButton(
                                         onPressed: () {
-                                          if (feed.likeStatus!) {
-                                            _socialServices.feedUnLikeCall(
-                                                feedId: feed.id!);
-                                          } else {
-                                            _socialServices.feedLikeCall(
-                                                feedId: feed.id!);
+                                          if (feed.likeStatus! == true) {
+                                            _socialServices
+                                                .feedUnLikeCall(
+                                                    feedId: feed.id!)
+                                                .then((value) {
+                                              if (value) {
+                                                getFeeds();
+                                              }
+                                            });
+                                          } else if (feed.likeStatus == false) {
+                                            _socialServices
+                                                .feedLikeCall(feedId: feed.id!)
+                                                .then((value) {
+                                              if (value) {
+                                                getFeeds();
+                                              }
+                                            });
                                           }
-                                          getFeeds();
                                         },
                                         child: SizedBox(
                                           child: Row(
