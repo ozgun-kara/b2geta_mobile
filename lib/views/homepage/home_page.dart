@@ -429,10 +429,11 @@ class _HomePageState extends State<HomePage> {
                               child: TextField(
                                 controller: _postTextController,
                                 style: TextStyle(
-                                    fontSize: 11,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w600,
-                                    color: AppTheme.white13),
+                                  fontSize: 12,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w600,
+                                  color: AppTheme.white13,
+                                ),
                                 decoration: InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(16, 0, 16, 0),
@@ -440,12 +441,15 @@ class _HomePageState extends State<HomePage> {
                                   fillColor: themeMode
                                       ? AppTheme.white3
                                       : AppTheme.black7,
-                                  hintText: 'Homepage Share-1'.tr,
-                                  hintStyle: TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: AppTheme.white13),
+                                  labelText: 'Homepage Share-1'.tr,
+                                  labelStyle: TextStyle(
+                                    fontSize: 12,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.white13,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(41.0),
                                     borderSide: BorderSide(
