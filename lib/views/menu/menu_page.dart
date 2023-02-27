@@ -1,7 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
@@ -32,7 +31,32 @@ class _MenuPageState extends State<MenuPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: const CustomAppBar(),
+      appBar: AppBar(
+        toolbarHeight: 68,
+        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/back-2.png',
+              width: 23,
+              height: 17,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        title: SizedBox(
+            width: 103.74,
+            height: 14.0,
+            child: themeMode
+                ? Image.asset('assets/images/b2geta_logo_light.png')
+                : Image.asset('assets/images/b2geta_logo_dark.png')),
+      ),
       body: Column(
         children: [
           const SizedBox(height: 48),
