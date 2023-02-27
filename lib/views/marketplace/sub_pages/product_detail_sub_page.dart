@@ -2553,7 +2553,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   .then(
                                     (value) => showSnackbar(
                                         context: context,
-                                        message: "Ürün sepete ekledi."),
+                                        message: "Product cart added".tr),
                                   );
                             }),
                       ),
@@ -2569,18 +2569,10 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   BorderRadius.all(Radius.circular(7)),
                             ),
                             onPressed: () {
-                              Provider.of<NavigationPageProvider>(context,
-                                      listen: false)
-                                  .updateCurrentTabIndex(2);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const NavigationPage(),
-                                  ));
+                             
                             },
                             child: Text(
-                              'Go To Basket'.tr,
+                              'Ask seller'.tr,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,

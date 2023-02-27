@@ -1,15 +1,20 @@
-import 'package:b2geta_mobile/models/message_details_model.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/message_details_model.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 
 class MessageDetailsPage extends StatefulWidget {
-  const MessageDetailsPage({Key? key}) : super(key: key);
+  const MessageDetailsPage({
+    Key? key,
+    required this.toId,
+  }) : super(key: key);
+  final String toId;
   @override
   State<MessageDetailsPage> createState() => _MessageDetailsPageState();
 }
@@ -25,6 +30,8 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
   final MessagesServices _messagesServices = MessagesServices();
   List<MessageDetailsModel> _messagesList = [];
 
+  late int total;
+
   @override
   void initState() {
     super.initState();
@@ -32,12 +39,20 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
   }
 
   getMessageDetailsList() async {
+    int total = await getTotal();
     _messagesList =
         await _messagesServices.getMessageDetailCall(queryParameters: {
       "offset": "0",
-      "limit": "5",
+      "limit": total.toString(),
     });
     setState(() {});
+  }
+
+  Future<int> getTotal() async {
+    return await _messagesServices.getTotalMessageCall(queryParameters: {
+      "offset": "0",
+      "limit": "0",
+    });
   }
 
   @override
@@ -128,7 +143,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                       children: [
                         Text(
                           _messagesList.isNotEmpty
-                              ? _messagesList[0].toFullname!
+                              ? _messagesList[0].fromFullname!
                               : "",
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -208,15 +223,15 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 }),
                 groupHeaderBuilder: (message) => const SizedBox(),
                 itemBuilder: (context, message) => Align(
-                  alignment: message.toId == "97"
+                  alignment: message.toId == widget.toId
                       ? Alignment.centerRight
                       : Alignment.centerLeft,
                   child: Padding(
-                    padding: message.toId == "97"
+                    padding: message.toId == widget.toId
                         ? const EdgeInsets.only(left: 25.0)
                         : const EdgeInsets.only(right: 25.0),
                     child: Card(
-                      shape: message.toId == "97"
+                      shape: message.toId == widget.toId
                           ? const RoundedRectangleBorder(
                               borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(12.0),
@@ -229,7 +244,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                               bottomRight: Radius.circular(12.0),
                               topLeft: Radius.circular(12.0),
                             )),
-                      color: message.toId == "97"
+                      color: message.toId == widget.toId
                           ? themeMode
                               ? AppTheme.blue11
                               : AppTheme.green8
@@ -268,17 +283,6 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                 color: themeMode ? AppTheme.white1 : AppTheme.black7),
             child: TextFormField(
               controller: _messageController,
-              onFieldSubmitted: ((value) async {
-                await _messagesServices
-                    .sendMessageCall(
-                        toId: "97", message: _messageController.text.trim())
-                    .then((value) async {
-                  if (value) {
-                    _messageController.clear();
-                    getMessageDetailsList();
-                  }
-                });
-              }),
               minLines: 1,
               maxLines: 8,
               style: TextStyle(
@@ -324,7 +328,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                       onPressed: () async {
                         await _messagesServices
                             .sendMessageCall(
-                                toId: "97",
+                                toId: widget.toId,
                                 message: _messageController.text.trim())
                             .then((value) async {
                           if (value) {

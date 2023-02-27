@@ -194,4 +194,6 @@ final Map<String, String> en = {
   'UnAuthorized request': 'UnAuthorized request',
   'Error occurred': 'Error occurred',
   'No internet connection': 'No internet connection',
+  "Product cart added": "Product cart added",
+  "Ask seller":"Ask seller",
 };

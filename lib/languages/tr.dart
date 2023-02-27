@@ -194,4 +194,6 @@ final Map<String, String> tr = {
   'UnAuthorized request': 'Yetkisiz istek',
   'Error occurred': 'Hata Oluştu',
   'No internet connection': 'İnternet bağlantısı yok',
+  "Product cart added": "Ürün sepeti eklendi",
+  "Ask seller": "Satıcıya sor"
 };

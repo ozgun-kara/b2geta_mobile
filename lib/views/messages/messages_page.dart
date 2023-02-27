@@ -139,7 +139,9 @@ class _MessagesPageState extends State<MessagesPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => MessageDetailsPage(),
+                          builder: (context) => MessageDetailsPage(
+                            toId: message.fromId.toString(),
+                          ),
                         ));
                   },
                   child: Padding(
@@ -194,8 +196,8 @@ class _MessagesPageState extends State<MessagesPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                message.toFullname != null
-                                    ? message.toFullname!
+                                message.fromFullname != null
+                                    ? message.fromFullname!
                                     : "RAINBOW POLIKARBONAT",
                                 style: TextStyle(
                                   fontSize: 13,
