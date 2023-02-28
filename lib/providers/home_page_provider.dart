@@ -9,6 +9,8 @@ class HomePageProvider with ChangeNotifier {
   int uploadStep = 0; // 0,1,2,3
   List<XFile>? imageFilesList = [];
 
+  XFile? reelsFile;
+
   void updateTabIndex(int value) {
     _tabIndex = value;
     notifyListeners();
@@ -36,6 +38,11 @@ class HomePageProvider with ChangeNotifier {
 
   void clearSelectedImageFilesList() {
     imageFilesList!.clear();
+    notifyListeners();
+  }
+
+  void updateSelectedReelsFile(XFile reelsFile) {
+    reelsFile = reelsFile;
     notifyListeners();
   }
 }
