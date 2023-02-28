@@ -4,9 +4,9 @@ import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/homepage/more_stories_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
+import 'package:b2geta_mobile/views/homepage/story_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
@@ -295,10 +295,8 @@ class _HomePageState extends State<HomePage> {
                                             onTap: () {
                                               Navigator.of(context)
                                                   .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MoreStories(
-                                                  stories: meStories,
-                                                ),
+                                                builder: (context) => StoryPage(
+                                                    stories: meStories),
                                               ));
                                             },
                                             child: Container(
@@ -352,8 +350,7 @@ class _HomePageState extends State<HomePage> {
                                             onTap: () {
                                               Navigator.of(context)
                                                   .push(MaterialPageRoute(
-                                                builder: (context) =>
-                                                    MoreStories(
+                                                builder: (context) => StoryPage(
                                                   stories: stories1,
                                                 ),
                                               ));
