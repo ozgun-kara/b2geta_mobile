@@ -114,7 +114,8 @@ final Map<String, String> en = {
   'Change': 'Change',
   'Uploading-1': 'Uploading',
   'Uploading-2': 'Uploading',
-  'Uploading Message': 'If you close the application, the installation will be canceled',
+  'Uploading Message':
+      'If you close the application, the installation will be canceled',
   'Cancel': 'Cancel',
   'Your post has been shared': 'Your post has been shared',
 
@@ -200,5 +201,5 @@ final Map<String, String> en = {
   'Error occurred': 'Error occurred',
   'No internet connection': 'No internet connection',
   "Product cart added": "Product cart added",
-  "Ask seller":"Ask seller",
+  "Ask seller": "Ask seller",
 };
