@@ -39,14 +39,47 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
     }
   }
 
+  late VideoPlayerController videoPlayerController;
+  File? video;
+
   void selectReels() async {
+    debugPrint("1XXXXXXXXXXXX " +
+        Provider.of<HomePageProvider>(context, listen: false)
+            .reelsFile
+            .toString());
+
     final XFile? selectedReels =
         await imagePicker.pickVideo(source: ImageSource.gallery);
+
+    video = File(selectedReels!.path);
+    videoPlayerController = VideoPlayerController.file(video!)
+      ..initialize().then((value) => {});
 
     if (selectedReels != null) {
       Provider.of<HomePageProvider>(context, listen: false)
           .updateSelectedReelsFile(selectedReels);
     }
+
+    debugPrint("2XXXXXXXXXXXX " +
+        Provider.of<HomePageProvider>(context, listen: false)
+            .reelsFile
+            .toString());
+  }
+
+  final picker = ImagePicker();
+  File? _video;
+  VideoPlayerController? _videoPlayerController;
+
+  _pickVideo() async {
+    final XFile? pickedFile =
+        await imagePicker.pickVideo(source: ImageSource.gallery);
+
+    _video = File(pickedFile!.path);
+    _videoPlayerController = VideoPlayerController.file(_video!)
+      ..initialize().then((_) {
+        setState(() {});
+        _videoPlayerController?.play();
+      });
   }
 
   @override
@@ -582,7 +615,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                             ? AppTheme.white32
                                             : AppTheme.black2),
                                     Container(
-                                        child: provider.reelsFile == null
+                                        child: _video == null
                                             ? Column(
                                                 children: [
                                                   SizedBox(height: 100),
@@ -647,12 +680,25 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 .white1),
                                                       ),
                                                       onPressed: () {
-                                                        selectReels();
+                                                        // selectReels();
+
+                                                        _pickVideo();
                                                       })
                                                 ],
                                               )
                                             : Column(
                                                 children: [
+                                                  _videoPlayerController!
+                                                          .value.isInitialized
+                                                      ? AspectRatio(
+                                                          aspectRatio:
+                                                              _videoPlayerController!
+                                                                  .value
+                                                                  .aspectRatio,
+                                                          child: VideoPlayer(
+                                                              _videoPlayerController!),
+                                                        )
+                                                      : Container(),
                                                   Wrap(
                                                     spacing: 3,
                                                     runSpacing: 3,
