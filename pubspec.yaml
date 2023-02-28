@@ -56,7 +56,7 @@ dependencies:
   path_provider: ^2.0.13
   shimmer: ^2.0.0
   image_picker: ^0.8.6+3
-
+  collection: ^1.14.13
   percent_indicator: ^4.2.2
 
   custom_check_box: ^0.0.4
