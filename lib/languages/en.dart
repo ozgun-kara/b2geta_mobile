@@ -118,6 +118,8 @@ final Map<String, String> en = {
       'If you close the application, the installation will be canceled',
   'Cancel': 'Cancel',
   'Your post has been shared': 'Your post has been shared',
+  'Reels Video': 'Reels Video',
+  'Your reels has been shared': 'Your reels video has been uploaded and shared',
 
   // MARKETPLACE PAGE
   'Results': 'Results',
