@@ -51,6 +51,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
       videoPlayerController = VideoPlayerController.file(reelsVideo!)
         ..initialize().then((_) {
           setState(() {});
+          videoPlayerController.setLooping(true);
           videoPlayerController.play();
         });
     }
@@ -673,80 +674,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               videoPlayerController),
                                                         )
                                                       : Container(),
-                                                  Wrap(
-                                                    spacing: 3,
-                                                    runSpacing: 3,
-                                                    children: provider
-                                                        .imageFilesList!
-                                                        .map((image) {
-                                                      return Stack(
-                                                        children: [
-                                                          Image.file(
-                                                            File(image.path),
-                                                            width: deviceWidth /
-                                                                    3 -
-                                                                2,
-                                                            height:
-                                                                deviceWidth /
-                                                                        3 -
-                                                                    2,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                          Positioned(
-                                                            top: 3,
-                                                            right: 3,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              4)),
-                                                              child: Material(
-                                                                color: AppTheme
-                                                                    .white1,
-                                                                child: InkWell(
-                                                                  onTap: () {
-                                                                    // provider.deleteSelectedImage();
-
-                                                                    // provider
-                                                                    //     .imageFilesList!
-                                                                    //     .remove(
-                                                                    //         imageone);
-
-                                                                    provider
-                                                                        .deleteSelectedImage(
-                                                                            image);
-                                                                  },
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 24,
-                                                                    height: 24,
-                                                                    child:
-                                                                        Center(
-                                                                      child: Image
-                                                                          .asset(
-                                                                        'assets/icons/trash.png',
-                                                                        width:
-                                                                            14,
-                                                                        height:
-                                                                            16,
-                                                                        color: AppTheme
-                                                                            .blue2,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      );
-                                                    }).toList(),
-                                                  ),
                                                   Padding(
                                                     padding: const EdgeInsets
                                                             .fromLTRB(
-                                                        26, 114, 26, 36),
+                                                        26, 44, 26, 36),
                                                     child: Row(
                                                       children: [
                                                         Expanded(
@@ -763,7 +694,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               ),
                                                               elevation: 0,
                                                               child: Text(
-                                                                'Add More'.tr,
+                                                                'Change'.tr,
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         14,
@@ -777,7 +708,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                         .white1),
                                                               ),
                                                               onPressed: () {
-                                                                selectImages();
+                                                                selectReels();
                                                               }),
                                                         ),
                                                         SizedBox(width: 8),
@@ -819,7 +750,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                             1500),
                                                                     () => provider
                                                                         .updateUploadStep(
-                                                                            0));
+                                                                            3));
                                                               }),
                                                         ),
                                                       ],
@@ -960,7 +891,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                     SizedBox(
                                       width: 212,
                                       child: Text(
-                                        'Your post has been shared'.tr,
+                                        provider.uploadType == 'Post'
+                                            ? 'Your post has been shared'.tr
+                                            : 'Your reels has been shared'.tr,
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: 13,
@@ -995,6 +928,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                     provider.clearSelectedImageFilesList();
+                                    reelsVideo = null;
                                     Provider.of<HomePageProvider>(context,
                                             listen: false)
                                         .updateUploadStep(0);
@@ -1140,7 +1074,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
       title: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
         child: Text(
-          'Create Post'.tr,
+          Provider.of<HomePageProvider>(context).uploadType == 'Post'
+              ? 'Create Post'.tr
+              : 'Reels Video'.tr,
           style: TextStyle(
             fontSize: 14,
             height: 1,
