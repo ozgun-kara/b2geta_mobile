@@ -27,6 +27,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
   late bool themeMode;
 
   TextEditingController commentController = TextEditingController();
+
   final ImagePicker imagePicker = ImagePicker();
 
   void selectImages() async {
@@ -35,6 +36,16 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
     if (selectedImages.isNotEmpty) {
       Provider.of<HomePageProvider>(context, listen: false)
           .updateSelectedImageFilesList(selectedImages);
+    }
+  }
+
+  void selectReels() async {
+    final XFile? selectedReels =
+        await imagePicker.pickVideo(source: ImageSource.gallery);
+
+    if (selectedReels != null) {
+      Provider.of<HomePageProvider>(context, listen: false)
+          .updateSelectedReelsFile(selectedReels);
     }
   }
 
@@ -564,6 +575,238 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                               child: Center(
                                 child: Column(
                                   children: [
+                                    Container(
+                                        width: deviceWidth,
+                                        height: 1,
+                                        color: themeMode
+                                            ? AppTheme.white32
+                                            : AppTheme.black2),
+                                    Container(
+                                        child: provider.reelsFile == null
+                                            ? Column(
+                                                children: [
+                                                  SizedBox(height: 100),
+                                                  Center(
+                                                    child: Column(
+                                                      children: [
+                                                        Image.asset(
+                                                          "assets/icons/mdi_cloud-upload-outline.png",
+                                                          width: 58,
+                                                          height: 58,
+                                                        ),
+                                                        SizedBox(height: 8),
+                                                        SizedBox(
+                                                          width: 212,
+                                                          child: Text(
+                                                            'Maximum File Size Info'
+                                                                .tr,
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                fontSize: 13,
+                                                                fontFamily: AppTheme
+                                                                    .appFontFamily,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: themeMode
+                                                                    ? AppTheme
+                                                                        .blue2
+                                                                    : AppTheme
+                                                                        .white1),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  SizedBox(height: 176),
+                                                  MaterialButton(
+                                                      height: 47,
+                                                      color: AppTheme.blue2,
+                                                      shape:
+                                                          const RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    9)),
+                                                      ),
+                                                      elevation: 0,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 22),
+                                                      child: Text(
+                                                        'Select From Gallery'
+                                                            .tr,
+                                                        style: TextStyle(
+                                                            fontSize: 14,
+                                                            fontFamily: AppTheme
+                                                                .appFontFamily,
+                                                            fontWeight:
+                                                                FontWeight.w700,
+                                                            color: AppTheme
+                                                                .white1),
+                                                      ),
+                                                      onPressed: () {
+                                                        selectReels();
+                                                      })
+                                                ],
+                                              )
+                                            : Column(
+                                                children: [
+                                                  Wrap(
+                                                    spacing: 3,
+                                                    runSpacing: 3,
+                                                    children: provider
+                                                        .imageFilesList!
+                                                        .map((image) {
+                                                      return Stack(
+                                                        children: [
+                                                          Image.file(
+                                                            File(image.path),
+                                                            width: deviceWidth /
+                                                                    3 -
+                                                                2,
+                                                            height:
+                                                                deviceWidth /
+                                                                        3 -
+                                                                    2,
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          Positioned(
+                                                            top: 3,
+                                                            right: 3,
+                                                            child: ClipRRect(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .all(Radius
+                                                                          .circular(
+                                                                              4)),
+                                                              child: Material(
+                                                                color: AppTheme
+                                                                    .white1,
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    // provider.deleteSelectedImage();
+
+                                                                    // provider
+                                                                    //     .imageFilesList!
+                                                                    //     .remove(
+                                                                    //         imageone);
+
+                                                                    provider
+                                                                        .deleteSelectedImage(
+                                                                            image);
+                                                                  },
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 24,
+                                                                    height: 24,
+                                                                    child:
+                                                                        Center(
+                                                                      child: Image
+                                                                          .asset(
+                                                                        'assets/icons/trash.png',
+                                                                        width:
+                                                                            14,
+                                                                        height:
+                                                                            16,
+                                                                        color: AppTheme
+                                                                            .blue2,
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    }).toList(),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        26, 114, 26, 36),
+                                                    child: Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: MaterialButton(
+                                                              height: 47,
+                                                              color: AppTheme
+                                                                  .blue2,
+                                                              shape:
+                                                                  const RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            9)),
+                                                              ),
+                                                              elevation: 0,
+                                                              child: Text(
+                                                                'Add More'.tr,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    color: AppTheme
+                                                                        .white1),
+                                                              ),
+                                                              onPressed: () {
+                                                                selectImages();
+                                                              }),
+                                                        ),
+                                                        SizedBox(width: 8),
+                                                        Expanded(
+                                                          child: MaterialButton(
+                                                              height: 47,
+                                                              color: AppTheme
+                                                                  .green1,
+                                                              shape:
+                                                                  const RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            9)),
+                                                              ),
+                                                              elevation: 0,
+                                                              child: Text(
+                                                                'Upload'.tr,
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    color: AppTheme
+                                                                        .white1),
+                                                              ),
+                                                              onPressed: () {
+                                                                provider
+                                                                    .updateUploadStep(
+                                                                        2);
+
+                                                                Timer(
+                                                                    const Duration(
+                                                                        milliseconds:
+                                                                            1500),
+                                                                    () => provider
+                                                                        .updateUploadStep(
+                                                                            0));
+                                                              }),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              )),
                                     SizedBox(height: 50),
                                   ],
                                 ),
