@@ -89,12 +89,11 @@ class SocialServices {
 
   // Story LIST
   Future<List<FeedModel>> getAllStoryCall(
-      {required Map<String, String> queryParameters,
-      required String userId}) async {
+      {required Map<String, String> queryParameters}) async {
     List<FeedModel> feedList = [];
 
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/feeds/$userId')
+      Uri.parse('${Constants.apiUrl}/feeds')
           .replace(queryParameters: queryParameters),
       headers: {"Authorization": "Bearer ${Constants.userToken}"},
     );

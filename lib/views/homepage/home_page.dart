@@ -7,11 +7,12 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
+import 'package:collection/collection.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
@@ -30,8 +31,8 @@ class _HomePageState extends State<HomePage> {
 
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
-  List<FeedModel> stories1 = [];
-  List<FeedModel> stories2 = [];
+  List<FeedModel> stories = [];
+  Map<String?, List<FeedModel>> groupStories = {};
   List<FeedModel> meStories = [];
   List<FeedModel> reelsList = [];
 
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     getFeeds();
     getMeStories();
-    getStories1();
+    getStories();
     getReels();
   }
 
@@ -69,11 +70,12 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
-  void getStories1() async {
+  void getStories() async {
     await _socialServices.getAllStoryCall(
-        queryParameters: {"offset": "0", "limit": "9", "type": "story"},
-        userId: "408").then((feedList) {
-      stories1 = feedList;
+      queryParameters: {"offset": "0", "limit": "35", "type": "story"},
+    ).then((feedList) {
+      stories = feedList;
+      groupStories = groupStoryByUser(stories);
       setState(() {});
     });
   }
@@ -95,6 +97,14 @@ class _HomePageState extends State<HomePage> {
 
       setState(() {});
     });
+  }
+
+  Map<String?, List<FeedModel>> groupStoryByUser(List<FeedModel> stories) {
+    final groups = groupBy(stories, (FeedModel story) {
+      return story.user!.id;
+    });
+
+    return groups;
   }
 
   List<String> reelsImageList = [
@@ -257,151 +267,105 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Container(
                         height: 50,
+                        width: deviceWidth,
                         margin: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                         color: themeMode ? AppTheme.white1 : AppTheme.black5,
-                        child: ListView.builder(
-                          itemCount: 3,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return index == 0
-                                ? Padding(
-                                    padding: const EdgeInsets.only(left: 11.0),
-                                    child: Container(
-                                        width: 50,
-                                        height: 50,
-                                        margin: const EdgeInsets.only(
-                                          right: 10,
-                                        ),
-                                        child: GestureDetector(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 11.0),
+                              child: Container(
+                                  width: 50,
+                                  height: 50,
+                                  margin: const EdgeInsets.only(
+                                    right: 10,
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      _getFromGallery();
+                                    },
+                                    child: DottedBorder(
+                                      color: AppTheme.blue2,
+                                      borderType: BorderType.Circle,
+                                      dashPattern: const [6, 6],
+                                      child: Center(
+                                          child: Image.asset(
+                                        "assets/icons/add.png",
+                                        width: 14.0,
+                                        height: 14.0,
+                                      )),
+                                    ),
+                                  )),
+                            ),
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: groupStories.keys.length,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return (groupStories.isNotEmpty)
+                                      ? GestureDetector(
                                           onTap: () {
-                                            _getFromGallery();
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) => StoryPage(
+                                                stories: groupStories.values
+                                                    .toList()[index],
+                                              ),
+                                            ));
                                           },
-                                          child: DottedBorder(
-                                            color: AppTheme.blue2,
-                                            borderType: BorderType.Circle,
-                                            dashPattern: const [6, 6],
-                                            child: Center(
-                                                child: Image.asset(
-                                              "assets/icons/add.png",
-                                              width: 14.0,
-                                              height: 14.0,
-                                            )),
+                                          child: Container(
+                                            width: 50,
+                                            height: 50,
+                                            margin: const EdgeInsets.only(
+                                              right: 10,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color: const Color(0XFF29B7D6),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            child: (groupStories.values
+                                                        .toList()[index][0]
+                                                        .user!
+                                                        .photo!
+                                                        .length >
+                                                    3)
+                                                ? ClipOval(
+                                                    child: Image.network(
+                                                      width: 40,
+                                                      height: 40,
+                                                      fit: BoxFit.cover,
+                                                      groupStories.values
+                                                          .toList()[index][0]
+                                                          .user!
+                                                          .photo!,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        "assets/images/dummy_images/post_profile.png",
+                                                        width: 40,
+                                                        height: 40,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : ClipOval(
+                                                    child: Image.asset(
+                                                      width: 40,
+                                                      height: 40,
+                                                      "assets/images/dummy_images/post_profile.png",
+                                                    ),
+                                                  ),
                                           ),
-                                        )),
-                                  )
-                                : index == 1
-                                    ? meStories.isNotEmpty
-                                        ? GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (context) => StoryPage(
-                                                    stories: meStories),
-                                              ));
-                                            },
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              margin: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0XFF29B7D6),
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              child: meStories[0]
-                                                      .user!
-                                                      .photo!
-                                                      .isNotEmpty
-                                                  ? ClipOval(
-                                                      child: Image.network(
-                                                        width: 40,
-                                                        height: 40,
-                                                        meStories[0]
-                                                            .user!
-                                                            .photo!,
-                                                        errorBuilder: (context,
-                                                                error,
-                                                                stackTrace) =>
-                                                            Image.asset(
-                                                          "assets/images/dummy_images/post_profile.png",
-                                                          width: 40,
-                                                          height: 40,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : ClipOval(
-                                                      child: Image.asset(
-                                                        width: 40,
-                                                        height: 40,
-                                                        "assets/images/dummy_images/post_profile.png",
-                                                      ),
-                                                    ),
-                                            ),
-                                          )
-                                        : const SizedBox()
-                                    : stories1.isNotEmpty
-                                        ? GestureDetector(
-                                            onTap: () {
-                                              Navigator.of(context)
-                                                  .push(MaterialPageRoute(
-                                                builder: (context) => StoryPage(
-                                                  stories: stories1,
-                                                ),
-                                              ));
-                                            },
-                                            child: Container(
-                                              width: 50,
-                                              height: 50,
-                                              margin: const EdgeInsets.only(
-                                                right: 10,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                                border: Border.all(
-                                                  color:
-                                                      const Color(0XFF29B7D6),
-                                                  width: 2,
-                                                ),
-                                              ),
-                                              child: stories1[0]
-                                                      .user!
-                                                      .photo!
-                                                      .isNotEmpty
-                                                  ? ClipOval(
-                                                      child: Image.network(
-                                                        width: 40,
-                                                        height: 40,
-                                                        stories1[0]
-                                                            .user!
-                                                            .photo!,
-                                                        errorBuilder: (context,
-                                                                error,
-                                                                stackTrace) =>
-                                                            Image.asset(
-                                                          "assets/images/dummy_images/post_image_1.png",
-                                                          width: 40,
-                                                          height: 40,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                    )
-                                                  : ClipOval(
-                                                      child: Image.asset(
-                                                        width: 40,
-                                                        height: 40,
-                                                        "assets/images/dummy_images/post_profile.png",
-                                                      ),
-                                                    ),
-                                            ),
-                                          )
-                                        : const SizedBox();
-                          },
+                                        )
+                                      : const SizedBox();
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Padding(

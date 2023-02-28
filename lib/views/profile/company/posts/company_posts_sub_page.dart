@@ -65,9 +65,11 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
   }
 
   void getStories1() async {
-    await _socialServices.getAllStoryCall(
-        queryParameters: {"offset": "0", "limit": "9", "type": "story"},
-        userId: "408").then((feedList) {
+    await _socialServices.getAllStoryCall(queryParameters: {
+      "offset": "0",
+      "limit": "9",
+      "type": "story"
+    }).then((feedList) {
       stories1 = feedList;
       setState(() {});
     });

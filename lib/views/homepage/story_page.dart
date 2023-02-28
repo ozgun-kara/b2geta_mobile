@@ -77,10 +77,13 @@ class _StoryPageState extends State<StoryPage>
               itemCount: widget.stories.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final story = widget.stories[_currentIndex].images![0];
-                if (story != null) {
+                final storyUrl = widget
+                        .stories[_currentIndex].images!.isNotEmpty
+                    ? widget.stories[_currentIndex].images![0]!.url
+                    : "https://api.businessucces.com/uploads/posts/2023/01/13012023205120-1673639480.jpeg";
+                if (storyUrl != null) {
                   return CachedNetworkImage(
-                    imageUrl: story.url!,
+                    imageUrl: storyUrl,
                     fit: BoxFit.fitWidth,
                   );
                 }
@@ -185,7 +188,7 @@ class _StoryPageState extends State<StoryPage>
   void _loadStory({required FeedModel story, bool animateToPage = true}) {
     _animationController.stop();
     _animationController.reset();
-    final storyDetails = story.images![0];
+    final storyDetails = story.images;
 
     if (storyDetails != null) {
       _animationController.duration = const Duration(seconds: 3);
