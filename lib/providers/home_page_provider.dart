@@ -1,13 +1,11 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePageProvider with ChangeNotifier {
   int _tabIndex = 0;
   get tabIndex => _tabIndex;
 
-  late String uploadType; // Post, Reels
+  late String uploadType; // POST, REELS
   int uploadStep = 0; // 0,1,2,3
   List<XFile>? imageFilesList = [];
 

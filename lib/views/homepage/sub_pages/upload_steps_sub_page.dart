@@ -309,6 +309,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                             ],
                           ),
                           onPressed: () {
+                            provider.clearSelectedImageFilesList();
                             provider.updateUploadType('Reels');
                             provider.updateUploadStep(1);
                           }),
@@ -677,6 +678,12 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       : SingleChildScrollView(
                           child: Column(
                             children: [
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: themeMode
+                                      ? AppTheme.white32
+                                      : AppTheme.black2),
                               SizedBox(height: 143),
                               Center(
                                 child: Column(
@@ -697,7 +704,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w600,
                                             color: themeMode
-                                                ? AppTheme.blue2
+                                                ? AppTheme.blue3
                                                 : AppTheme.white1),
                                       ),
                                     ),
