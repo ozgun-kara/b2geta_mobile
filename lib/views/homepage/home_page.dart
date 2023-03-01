@@ -437,7 +437,8 @@ class _HomePageState extends State<HomePage> {
                                 onSubmitted: (value) async {
                                   if (_postTextController.text.isNotEmpty) {
                                     await _socialServices
-                                        .feedShareCall(
+                                        .shareCall(
+                                      type: 'feed',
                                       content: _postTextController.text.trim(),
                                     )
                                         .then((value) {

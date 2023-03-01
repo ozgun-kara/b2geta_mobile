@@ -47,7 +47,7 @@ class SocialServices {
     }
   }
 
-  //reels list
+  // REELS LIST
   Future<List<FeedModel>> getAllReelsCall(
       {required Map<String, String> queryParameters}) async {
     List<FeedModel> feedList = [];
@@ -87,7 +87,7 @@ class SocialServices {
     }
   }
 
-  // Story LIST
+  // STORY LIST
   Future<List<FeedModel>> getAllStoryCall(
       {required Map<String, String> queryParameters}) async {
     List<FeedModel> feedList = [];
@@ -121,7 +121,7 @@ class SocialServices {
     }
   }
 
-  // Me Story LIST
+  // ME STORY LIST
   Future<List<FeedModel>> getAllMeStoryCall(
       {required Map<String, String> queryParameters,
       required String userId}) async {
@@ -156,7 +156,7 @@ class SocialServices {
     }
   }
 
-// FEED LIKE
+  // FEED LIKE
   Future<bool> feedLikeCall({required String feedId}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/like/$feedId'),
@@ -198,16 +198,22 @@ class SocialServices {
     }
   }
 
-  // FEED SHARE
-  Future<bool> feedShareCall({
-    required String content,
-  }) async {
+  // SHARE (FEED / STORY / REELS)
+  Future<bool> shareCall(
+      {required String type,
+      required String content,
+      List<File>? images,
+      File? video,
+      List<File>? videos}) async {
     final response =
         await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
       "Authorization": "Bearer ${Constants.userToken}"
     }, body: {
-      "type": "feed",
+      "type": type,
       "content": content,
+      // "images": images,
+      // "video": video,
+      // "videos": videos
     });
 
     if (response.statusCode == 200) {
@@ -226,6 +232,24 @@ class SocialServices {
 
       return false;
     }
+  }
+
+  // SHARE (FEED / STORY / REELS) TEST
+  shareCallTest(String text, File file) async {
+    //create multipart request for POST or PATCH method
+    var request = http.MultipartRequest("POST", Uri.parse("<url>"));
+    //add text fields
+    request.fields["text_field"] = text;
+    //create multipart using filepath, string or bytes
+    var pic = await http.MultipartFile.fromPath("file_field", file.path);
+    //add multipart to request
+    request.files.add(pic);
+    var response = await request.send();
+
+    //Get the response from the server
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    print(responseString);
   }
 
   Future<bool> storeShareCall({
@@ -285,10 +309,4 @@ class SocialServices {
       return false;
     }
   }
-
-
-
-
-
-
 }
