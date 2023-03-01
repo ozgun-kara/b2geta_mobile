@@ -309,7 +309,8 @@ class _HomePageState extends State<HomePage> {
                                                 .push(MaterialPageRoute(
                                               builder: (context) => StoryPage(
                                                 stories: groupStories.values
-                                                    .toList()[index],
+                                                    .toList(),
+                                                index: index,
                                               ),
                                             ));
                                           },

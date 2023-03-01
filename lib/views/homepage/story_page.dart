@@ -1,14 +1,17 @@
-import 'package:b2geta_mobile/app_theme.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 
 class StoryPage extends StatefulWidget {
   const StoryPage({
     Key? key,
     required this.stories,
+    required this.index,
   }) : super(key: key);
-  final List<FeedModel> stories;
+  final List<List<FeedModel>> stories;
+  final int index;
 
   @override
   State<StoryPage> createState() => _StoryPageState();
@@ -18,31 +21,35 @@ class _StoryPageState extends State<StoryPage>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
   late AnimationController _animationController;
+  late int _storyListIndex;
   int _currentIndex = 0;
 
   @override
   void initState() {
     super.initState();
-
+    _storyListIndex = widget.index;
     _pageController = PageController();
     _animationController = AnimationController(vsync: this);
 
-    final FeedModel firstStory = widget.stories.first;
+    final FeedModel firstStory = widget.stories[_storyListIndex].first;
     _loadStory(story: firstStory, animateToPage: false);
-
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _animationController.stop();
         _animationController.reset();
         setState(() {
-          if (_currentIndex + 1 < widget.stories.length) {
+          if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
             _currentIndex += 1;
-            _loadStory(story: widget.stories[_currentIndex]);
+            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
           } else {
-            //nav.pop
-            Navigator.pop(context);
-            // _currentIndex = 0;
-            // _loadStory(story: widget.stories[_currentIndex]);
+            // nav.pop
+            if (_storyListIndex + 1 < widget.stories.length) {
+              _storyListIndex += 1;
+              _currentIndex = 0;
+              _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+            } else {
+              Navigator.pop(context);
+            }
           }
         });
       }
@@ -58,7 +65,7 @@ class _StoryPageState extends State<StoryPage>
 
   @override
   Widget build(BuildContext context) {
-    final FeedModel story = widget.stories[_currentIndex];
+    final FeedModel story = widget.stories[_storyListIndex][_currentIndex];
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
@@ -77,9 +84,8 @@ class _StoryPageState extends State<StoryPage>
               itemCount: widget.stories.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final storyUrl = widget
-                        .stories[_currentIndex].images!.isNotEmpty
-                    ? widget.stories[_currentIndex].images![0]!.url
+                final storyUrl = story.images!.isNotEmpty
+                    ? story.images![0]!.url
                     : "https://api.businessucces.com/uploads/posts/2023/01/13012023205120-1673639480.jpeg";
                 if (storyUrl != null) {
                   return CachedNetworkImage(
@@ -95,7 +101,7 @@ class _StoryPageState extends State<StoryPage>
               left: 10.0,
               right: 10.0,
               child: Row(
-                  children: widget.stories
+                  children: widget.stories[_storyListIndex]
                       .asMap()
                       .map((i, e) {
                         return MapEntry(
@@ -157,19 +163,34 @@ class _StoryPageState extends State<StoryPage>
       setState(() {
         if (_currentIndex - 1 >= 0) {
           _currentIndex -= 1;
-          _loadStory(story: widget.stories[_currentIndex]);
+          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+        } else {
+          if (_storyListIndex - 1 >= 0) {
+            _storyListIndex -= 1;
+            _currentIndex = widget.stories[_storyListIndex].length - 1;
+            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+          } else {
+            _storyListIndex = 0;
+            _currentIndex = 0;
+            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+          }
         }
       });
+      //right click
     } else if (dx > 2 * screenWidth / 3) {
       setState(() {
-        if (_currentIndex + 1 < widget.stories.length) {
+        if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
           _currentIndex += 1;
-          _loadStory(story: widget.stories[_currentIndex]);
+          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
         } else {
           //nav.pop
-          Navigator.pop(context);
-          // _currentIndex = 0;
-          // _loadStory(story: widget.stories[_currentIndex]);
+          if (_storyListIndex + 1 < widget.stories.length) {
+            _storyListIndex += 1;
+            _currentIndex = 0;
+            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+          } else {
+            Navigator.pop(context);
+          }
         }
       });
     }
