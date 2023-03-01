@@ -117,6 +117,8 @@ final Map<String, String> tr = {
   'Uploading Message': 'Uygulamayı kapatırsanız yükleme iptal olacaktır',
   'Cancel': 'İptal Et',
   'Your post has been shared': 'Gönderiniz paylaşıldı',
+  'Reels Video': 'Reels Video',
+  'Your reels has been shared': 'Reels videonuz yüklenip paylaşıldı',
 
   // MARKETPLACE PAGE
   'Results': 'Sonuçlar',
