@@ -78,7 +78,7 @@ final Map<String, String> tr = {
   'Edit': 'Düzenle',
   'Addresses Page Route': 'Anasayfa - Adreslerim',
   'Add an Address Page Route': 'Anasayfa - Adres Ekle',
-  'Address Name': 'Address Adı',
+  'Address Name': 'Adres Adı',
   'Search...': 'Ara...',
   'Edit an Address': 'Adresi Güncelle',
   'Go Back': 'Geri Git',
