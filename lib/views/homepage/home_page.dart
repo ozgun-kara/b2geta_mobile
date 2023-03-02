@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
   bool isList = false;
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
-  List<FeedModel> stories = [];
   Map<String?, List<FeedModel>> groupStories = {};
   List<FeedModel> meStories = [];
 
@@ -74,8 +73,7 @@ class _HomePageState extends State<HomePage> {
     await _socialServices.getAllStoryCall(
       queryParameters: {"offset": "0", "limit": "35", "type": "story"},
     ).then((feedList) {
-      stories = feedList;
-      groupStories = groupStoryByUser(stories);
+      groupStories = groupStoryByUser(feedList);
       setState(() {});
     });
   }
@@ -127,7 +125,7 @@ class _HomePageState extends State<HomePage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 166,
+              expandedHeight: 200,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -256,7 +254,7 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       Container(
-                        height: 50,
+                        height: 70,
                         width: deviceWidth,
                         margin: const EdgeInsets.only(top: 8.0, bottom: 11.0),
                         color: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -264,96 +262,192 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 11.0),
-                              child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  margin: const EdgeInsets.only(
-                                    right: 10,
-                                  ),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      _getFromGallery();
-                                    },
-                                    child: DottedBorder(
-                                      color: AppTheme.blue2,
-                                      borderType: BorderType.Circle,
-                                      dashPattern: const [6, 6],
-                                      child: Center(
-                                          child: Image.asset(
-                                        "assets/icons/add.png",
-                                        width: 14.0,
-                                        height: 14.0,
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: 50,
+                                      height: 50,
+                                      margin: const EdgeInsets.only(
+                                        right: 10,
+                                      ),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          _getFromGallery();
+                                        },
+                                        child: DottedBorder(
+                                          color: AppTheme.blue2,
+                                          borderType: BorderType.Circle,
+                                          dashPattern: const [6, 6],
+                                          child: Center(
+                                              child: Image.asset(
+                                            "assets/icons/add.png",
+                                            width: 14.0,
+                                            height: 14.0,
+                                          )),
+                                        ),
                                       )),
-                                    ),
-                                  )),
+                                ],
+                              ),
                             ),
-                            Expanded(
-                              child: ListView.builder(
-                                itemCount: groupStories.keys.length,
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return (groupStories.isNotEmpty)
-                                      ? GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) => StoryPage(
-                                                stories: groupStories.values
-                                                    .toList(),
-                                                index: index,
-                                              ),
-                                            ));
-                                          },
-                                          child: Container(
-                                            width: 50,
-                                            height: 50,
-                                            margin: const EdgeInsets.only(
-                                              right: 10,
+                            meStories.isNotEmpty
+                                ? Column(
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .push(MaterialPageRoute(
+                                            builder: (context) => StoryPage(
+                                              stories: [meStories],
+                                              index: 0,
                                             ),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: const Color(0XFF29B7D6),
-                                                width: 2,
-                                              ),
+                                          ));
+                                        },
+                                        child: Container(
+                                          width: 50,
+                                          height: 50,
+                                          margin: const EdgeInsets.only(
+                                            right: 10,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: const Color(0XFF29B7D6),
+                                              width: 2,
                                             ),
-                                            child: (groupStories.values
-                                                        .toList()[index][0]
-                                                        .user!
-                                                        .photo!
-                                                        .length >
-                                                    3)
-                                                ? ClipOval(
-                                                    child: Image.network(
-                                                      width: 40,
-                                                      height: 40,
-                                                      fit: BoxFit.cover,
-                                                      groupStories.values
-                                                          .toList()[index][0]
-                                                          .user!
-                                                          .photo!,
-                                                      errorBuilder: (context,
-                                                              error,
-                                                              stackTrace) =>
-                                                          Image.asset(
-                                                        "assets/images/dummy_images/post_profile.png",
-                                                        width: 40,
-                                                        height: 40,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  )
-                                                : ClipOval(
-                                                    child: Image.asset(
-                                                      width: 40,
-                                                      height: 40,
+                                          ),
+                                          child: (meStories[0]
+                                                      .user!
+                                                      .photo!
+                                                      .length >
+                                                  3)
+                                              ? ClipOval(
+                                                  child: Image.network(
+                                                    width: 50,
+                                                    height: 50,
+                                                    fit: BoxFit.cover,
+                                                    meStories[0].user!.photo!,
+                                                    errorBuilder: (context,
+                                                            error,
+                                                            stackTrace) =>
+                                                        Image.asset(
                                                       "assets/images/dummy_images/post_profile.png",
+                                                      width: 50,
+                                                      height: 50,
+                                                      fit: BoxFit.cover,
                                                     ),
                                                   ),
-                                          ),
-                                        )
-                                      : const SizedBox();
-                                },
+                                                )
+                                              : ClipOval(
+                                                  child: Image.asset(
+                                                    width: 50,
+                                                    height: 50,
+                                                    fit: BoxFit.cover,
+                                                    "assets/images/dummy_images/post_profile.png",
+                                                  ),
+                                                ),
+                                        ),
+                                      ),
+                                      const Text('Hikayen',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                          )),
+                                    ],
+                                  )
+                                : const SizedBox(),
+                            Expanded(
+                              child: SizedBox(
+                                child: ListView.builder(
+                                  itemCount: groupStories.keys.length,
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (context, index) {
+                                    return (groupStories.isNotEmpty)
+                                        ? GestureDetector(
+                                            onTap: () {
+                                              Navigator.of(context)
+                                                  .push(MaterialPageRoute(
+                                                builder: (context) => StoryPage(
+                                                  stories: groupStories.values
+                                                      .toList(),
+                                                  index: index,
+                                                ),
+                                              ));
+                                            },
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: 50,
+                                                  height: 50,
+                                                  margin: const EdgeInsets.only(
+                                                    right: 10,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    border: Border.all(
+                                                      color: const Color(
+                                                          0XFF29B7D6),
+                                                      width: 2,
+                                                    ),
+                                                  ),
+                                                  child: (groupStories.values
+                                                              .toList()[index]
+                                                                  [0]
+                                                              .user!
+                                                              .photo!
+                                                              .length >
+                                                          3)
+                                                      ? ClipOval(
+                                                          child: Image.network(
+                                                            width: 50,
+                                                            height: 50,
+                                                            fit: BoxFit.cover,
+                                                            groupStories.values
+                                                                .toList()[index]
+                                                                    [0]
+                                                                .user!
+                                                                .photo!,
+                                                            errorBuilder: (context,
+                                                                    error,
+                                                                    stackTrace) =>
+                                                                Image.asset(
+                                                              "assets/images/dummy_images/post_profile.png",
+                                                              width: 50,
+                                                              height: 50,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          ),
+                                                        )
+                                                      : ClipOval(
+                                                          child: Image.asset(
+                                                            width: 50,
+                                                            height: 50,
+                                                            fit: BoxFit.cover,
+                                                            "assets/images/dummy_images/post_profile.png",
+                                                          ),
+                                                        ),
+                                                ),
+                                                groupStories.values
+                                                        .toList()[index][0]
+                                                        .user!
+                                                        .username!
+                                                        .isNotEmpty
+                                                    ? Text(
+                                                        groupStories.values
+                                                            .toList()[index][0]
+                                                            .user!
+                                                            .username!,
+                                                        style: const TextStyle(
+                                                          fontSize: 11,
+                                                        ))
+                                                    : const Text("user",
+                                                        style: TextStyle(
+                                                          fontSize: 11,
+                                                        )),
+                                              ],
+                                            ),
+                                          )
+                                        : const SizedBox();
+                                  },
+                                ),
                               ),
                             ),
                           ],
