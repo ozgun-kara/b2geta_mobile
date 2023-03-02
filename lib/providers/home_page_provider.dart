@@ -1,7 +1,12 @@
+import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePageProvider with ChangeNotifier {
+  List<FeedModel> reelsList = [];
+
   int _tabIndex = 0;
   get tabIndex => _tabIndex;
 
@@ -9,7 +14,15 @@ class HomePageProvider with ChangeNotifier {
   int uploadStep = 0; // 0,1,2,3
   List<XFile>? imageFilesList = [];
 
-  XFile? reelsFile;
+  void getReels() async {
+    await locator<SocialServices>().getAllReelsCall(
+      queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
+    ).then((feedList) async {
+      reelsList = feedList;
+    });
+
+    notifyListeners();
+  }
 
   void updateTabIndex(int value) {
     _tabIndex = value;
@@ -38,11 +51,6 @@ class HomePageProvider with ChangeNotifier {
 
   void clearSelectedImageFilesList() {
     imageFilesList!.clear();
-    notifyListeners();
-  }
-
-  void updateSelectedReelsFile(XFile reelsFile) {
-    reelsFile = reelsFile;
     notifyListeners();
   }
 }

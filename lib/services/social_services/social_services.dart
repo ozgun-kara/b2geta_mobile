@@ -297,7 +297,6 @@ class SocialServices {
       String? content,
       List<File>? images,
       File? file}) async {
-
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
     request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
