@@ -298,14 +298,18 @@ class SocialServices {
       List<File>? images,
       File? file}) async {
     //create multipart request for POST or PATCH method
-    var request = http.MultipartRequest("POST", Uri.parse("<url>"));
+    // var request = http.MultipartRequest("POST", Uri.parse("<url>"));
+    var request =
+        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+
     //add text fields
     request.fields["type"] = type;
     request.fields["content"] = content ?? '';
     //create multipart using filepath, string or bytes
-    var pic = await http.MultipartFile.fromPath("file_field", file!.path);
+    var reels = await http.MultipartFile.fromPath("video", file!.path);
     //add multipart to request
-    request.files.add(pic);
+    request.files.add(reels);
     var response = await request.send();
     //Get the response from the server
     var responseData = await response.stream.toBytes();
