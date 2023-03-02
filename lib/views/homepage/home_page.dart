@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
+import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
 import 'package:collection/collection.dart';
@@ -38,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController _commentTextController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
-  File? _imageFile;
 
   @override
   void initState() {
@@ -51,13 +51,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _getFromGallery() async {
-    PickedFile? pickedFile = await _picker.getImage(
+    await _picker
+        .pickImage(
       source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      _imageFile = File(pickedFile.path);
-      setState(() {});
-    }
+    )
+        .then((pickedFile) {
+      if (pickedFile != null) {
+        var image = File(pickedFile.path);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => StoryAddPage(imageFile: image),
+            ));
+      }
+    });
   }
 
   void getFeeds() async {
@@ -80,7 +87,7 @@ class _HomePageState extends State<HomePage> {
 
   void getMeStories() async {
     await _socialServices.getAllMeStoryCall(
-        queryParameters: {"offset": "0", "limit": "1", "type": "story"},
+        queryParameters: {"offset": "0", "type": "story"},
         userId: "57").then((feedList) {
       meStories = feedList;
       setState(() {});

@@ -234,32 +234,24 @@ class SocialServices {
     }
   }
 
-  Future<bool> storeShareCall({
+  Future storeShareCall({
     required File image,
   }) async {
-    final response =
-        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}"
-    }, body: {
-      "type": "story",
-      "images": [image],
-    });
+    var request =
+        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
 
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        return true;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-        return false;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-      return false;
-    }
+    //add text fields
+    request.fields["type"] = 'story';
+    //create multipart using filepath, string or bytes
+    var story = await http.MultipartFile.fromPath('images[]', image.path);
+    //add multipart to request
+    request.files.add(story);
+    var response = await request.send();
+    //Get the response from the server
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    debugPrint("RESPONSE $responseString");
   }
 
   // SHARE FEED TEST
@@ -312,7 +304,7 @@ class SocialServices {
     //Get the response from the server
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
-    debugPrint("RESPONSE " + responseString);
+    debugPrint("RESPONSE $responseString");
   }
 
   // CREATE COMMENT
