@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -63,7 +64,18 @@ class _StoryAddPageState extends State<StoryAddPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () async {
-                  await _socialServices.storeShareCall(image: widget.imageFile);
+                  await _socialServices
+                      .shareStoryCall(image: widget.imageFile)
+                      .then((value) {
+                    if (value) {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NavigationPage(),
+                          ),
+                          (route) => false);
+                    }
+                  });
                 }),
           ),
         ],
