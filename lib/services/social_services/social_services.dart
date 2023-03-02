@@ -297,8 +297,7 @@ class SocialServices {
       String? content,
       List<File>? images,
       File? file}) async {
-    //create multipart request for POST or PATCH method
-    // var request = http.MultipartRequest("POST", Uri.parse("<url>"));
+
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
     request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});

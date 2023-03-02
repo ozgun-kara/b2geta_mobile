@@ -5,7 +5,7 @@ class HomePageProvider with ChangeNotifier {
   int _tabIndex = 0;
   get tabIndex => _tabIndex;
 
-  late String uploadType; // POST, REELS
+  late String uploadType = 'Post'; // POST, REELS
   int uploadStep = 0; // 0,1,2,3
   List<XFile>? imageFilesList = [];
 
