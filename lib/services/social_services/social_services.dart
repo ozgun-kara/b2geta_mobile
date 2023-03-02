@@ -164,9 +164,12 @@ class SocialServices {
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
+
       if (status == true) {
         return true;
       } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
         return false;
       }
     } else {
@@ -234,7 +237,7 @@ class SocialServices {
     }
   }
 
-  Future storeShareCall({
+  Future<bool> shareStoryCall({
     required File image,
   }) async {
     var request =
@@ -247,11 +250,25 @@ class SocialServices {
     var story = await http.MultipartFile.fromPath('images[]', image.path);
     //add multipart to request
     request.files.add(story);
-    var response = await request.send();
+    var streamedResponse = await request.send();
     //Get the response from the server
-    var responseData = await response.stream.toBytes();
-    var responseString = String.fromCharCodes(responseData);
-    debugPrint("RESPONSE $responseString");
+    var response = await http.Response.fromStream(streamedResponse);
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
   }
 
   // SHARE FEED TEST
