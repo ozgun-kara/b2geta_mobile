@@ -314,7 +314,7 @@ class SocialServices {
     //Get the response from the server
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
-    debugPrint(responseString);
+    debugPrint("RESPONSE " + responseString);
   }
 
   // CREATE COMMENT
