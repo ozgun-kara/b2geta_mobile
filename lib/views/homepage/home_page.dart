@@ -27,14 +27,13 @@ class _HomePageState extends State<HomePage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  bool isList = false;
 
+  bool isList = false;
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
   List<FeedModel> stories = [];
   Map<String?, List<FeedModel>> groupStories = {};
   List<FeedModel> meStories = [];
-  List<FeedModel> reelsList = [];
 
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
@@ -44,11 +43,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    super.initState();
     getFeeds();
     getMeStories();
     getStories();
-    getReels();
+    Provider.of<HomePageProvider>(context, listen: false).getReels();
+
+    super.initState();
   }
 
   Future<void> _getFromGallery() async {
@@ -85,16 +85,6 @@ class _HomePageState extends State<HomePage> {
         queryParameters: {"offset": "0", "limit": "1", "type": "story"},
         userId: "57").then((feedList) {
       meStories = feedList;
-      setState(() {});
-    });
-  }
-
-  void getReels() async {
-    await _socialServices.getAllReelsCall(
-      queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
-    ).then((feedList) async {
-      reelsList = feedList;
-
       setState(() {});
     });
   }
@@ -493,7 +483,8 @@ class _HomePageState extends State<HomePage> {
                       crossAxisSpacing: 3.0,
                     ),
                     delegate: SliverChildBuilderDelegate(
-                        childCount: reelsList.length, (context, index) {
+                        childCount: homePageProvider.reelsList.length,
+                        (context, index) {
                       return SizedBox(
                         width: 128,
                         height: 128,
@@ -503,7 +494,7 @@ class _HomePageState extends State<HomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => ReelsPage(
-                                    reelsList: reelsList,
+                                    reelsList: homePageProvider.reelsList,
                                     videoUrlIndex: index,
                                   ),
                                 ));
