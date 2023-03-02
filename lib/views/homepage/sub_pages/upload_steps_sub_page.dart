@@ -742,6 +742,16 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                         .white1),
                                                               ),
                                                               onPressed: () {
+                                                                locator<SocialServices>().shareReelsCallTest(
+                                                                    type:
+                                                                        'reels',
+                                                                    content:
+                                                                        'TEST-1',
+                                                                    file:
+                                                                        reelsVideo);
+
+                                                                // "user_id": "93",
+
                                                                 provider
                                                                     .updateUploadStep(
                                                                         2);
@@ -1001,18 +1011,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   debugPrint("comment: ${commentController.text}");
 
                   // locator<SocialServices>()
-                  //     .shareFeedCallTest(type: 'feed', content: 'TEST-123')
+                  //     .shareFeedCallTest(
+                  //         type: 'feed', content: commentController.text)
                   //     .then((value) => debugPrint("Operation Status: $value"));
-
-                  locator<SocialServices>().shareReelsCallTest(
-                      type: 'reels',
-                      content: 'TEST-1',
-                      file: File(
-                          Provider.of<HomePageProvider>(context, listen: false)
-                              .reelsFile!
-                              .path));
-
-                  // "user_id": "93",
                 }),
           ),
         ]);
