@@ -1046,8 +1046,15 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
                   debugPrint("comment: ${commentController.text}");
 
+                  // locator<SocialServices>()
+                  //     .shareFeedCallTest(type: 'feed', content: 'TEST-123')
+                  //     .then((value) => debugPrint("Operation Status: $value"));
+
                   locator<SocialServices>()
-                      .shareCallTest(type: 'feed', content: 'TESTT');
+                      .shareReelsCallTest(type: 'feed', content: 'TEST-123')
+                      .then((value) => debugPrint("Operation Status: $value"));
+
+                  // "user_id": "93",
                 }),
           ),
         ]);
