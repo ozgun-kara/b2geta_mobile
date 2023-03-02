@@ -262,8 +262,37 @@ class SocialServices {
     }
   }
 
-  // SHARE (FEED / STORY / REELS) TEST
-  shareCallTest(
+  // SHARE FEED TEST
+  Future<bool> shareFeedCallTest(
+      {required String type, required String content}) async {
+    final response =
+        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}"
+    }, body: {
+      "type": type,
+      "content": content,
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint(status.toString());
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
+
+  // SHARE REELS TEST
+  shareReelsCallTest(
       {required String type,
       String? content,
       List<File>? images,
