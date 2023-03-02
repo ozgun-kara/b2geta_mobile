@@ -1010,10 +1010,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
                   debugPrint("comment: ${commentController.text}");
 
-                  // locator<SocialServices>()
-                  //     .shareFeedCallTest(
-                  //         type: 'feed', content: commentController.text)
-                  //     .then((value) => debugPrint("Operation Status: $value"));
+                  locator<SocialServices>()
+                      .shareFeedCallTest(
+                          type: 'feed', content: commentController.text)
+                      .then((value) => debugPrint("Operation Status: $value"));
                 }),
           ),
         ]);
