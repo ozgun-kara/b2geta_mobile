@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -1041,6 +1043,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                 onPressed: () {
                   Provider.of<HomePageProvider>(context, listen: false)
                       .updateUploadStep(3);
+
+                  debugPrint("comment: ${commentController.text}");
+
+                  locator<SocialServices>()
+                      .shareCallTest(type: 'feed', content: 'TESTT');
                 }),
           ),
         ]);
