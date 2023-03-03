@@ -39,10 +39,8 @@ class _BasketPageState extends State<BasketPage> {
 
   Future<void> getAllBasket() async {
     await _basketServices.getAllCall().then((list) {
-      if (list.isNotEmpty) {
-        basketList = list;
-        setState(() {});
-      }
+      basketList = list;
+      setState(() {});
     });
   }
 
@@ -1240,10 +1238,16 @@ class _BasketPageState extends State<BasketPage> {
                             var basketQuantity = int.parse(basket.quantity!);
 
                             if (basketQuantity > 1) {
-                              BasketServices().updateProductInBasketCall(
-                                  productId: basket.productId!,
-                                  quantity:
-                                      "${int.parse(basket.quantity!) - 1}");
+                              _basketServices
+                                  .updateProductInBasketCall(
+                                      productId: basket.productId!,
+                                      quantity:
+                                          "${int.parse(basket.quantity!) - 1}")
+                                  .then((value) {
+                                if (value) {
+                                  getAllBasket();
+                                }
+                              });
                             }
 
                             setState(() {});
@@ -1285,11 +1289,16 @@ class _BasketPageState extends State<BasketPage> {
                             ),
                           ),
                           onPressed: () {
-                            BasketServices().updateProductInBasketCall(
-                                productId: basket.productId!,
-                                quantity: "${int.parse(basket.quantity!) + 1}");
-
-                            setState(() {});
+                            BasketServices()
+                                .updateProductInBasketCall(
+                                    productId: basket.productId!,
+                                    quantity:
+                                        "${int.parse(basket.quantity!) + 1}")
+                                .then((value) {
+                              if (value) {
+                                getAllBasket();
+                              }
+                            });
                           }),
                     ),
                   ],
@@ -1315,9 +1324,8 @@ class _BasketPageState extends State<BasketPage> {
                                     param1: basket.product!.id!)
                                 .then((bool value) {
                               if (value) {
-                                Navigator.pop(context);
                                 getAllBasket();
-                                setState(() {});
+                                Navigator.pop(context);
                               }
                             });
                           },
