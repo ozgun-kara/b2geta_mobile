@@ -24,6 +24,14 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late bool themeMode;
 
   @override
+  void initState() {
+    Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
+    Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
