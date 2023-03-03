@@ -12,7 +12,7 @@ class MemberServices {
   Future<String> registerCall({
     required String email,
     required String password,
-    required String companyName,
+    String? companyName,
     String? officialPerson,
     String? officialPhone,
     String? country,
@@ -23,7 +23,7 @@ class MemberServices {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       body: {
-        "type": "company",
+        "type": "personal",
         "email": email,
         "password": password,
         "company_name": companyName,
@@ -120,6 +120,12 @@ class MemberServices {
         debugPrint("TOKEN: $token");
         Constants.userToken = token;
         saveToken(token);
+
+        var userId = json.decode(response.body)["data"]["user_id"];
+        debugPrint("USER ID: $userId");
+        Constants.userId = userId;
+        saveUserId(userId);
+
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
@@ -147,7 +153,7 @@ class MemberServices {
 
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
-      debugPrint("burada");
+
       if (status == true) {
         deleteToken();
         return true;
@@ -155,12 +161,11 @@ class MemberServices {
         return false;
       }
     } else {
-      debugPrint("burada false");
-
       return false;
     }
   }
 
+  // TOKEN FUNCTIONS
   Future<void> saveToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('Token', token);
@@ -179,5 +184,26 @@ class MemberServices {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('Token', '');
     debugPrint("TOKEN HAS DELETED");
+  }
+
+  // THESE FUNCTIONS WILL BE DELETED WHEN THE "USER MODEL" IS READY
+  Future<void> saveUserId(String userId) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('UserId', userId);
+    debugPrint("USER ID HAS SAVED");
+    readUserId();
+  }
+
+  Future<String?> readUserId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    var userId = prefs.getString('UserId');
+    debugPrint("USER ID HAS FETCHED: $userId");
+    return userId;
+  }
+
+  Future<void> deleteUserId() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('UserId', '');
+    debugPrint("USER ID  HAS DELETED");
   }
 }
