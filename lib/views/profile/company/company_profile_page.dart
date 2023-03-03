@@ -97,30 +97,33 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                   color: AppTheme.white15),
                             ),
                             const SizedBox(height: 10),
-                            SizedBox(
-                              height: 22,
-                              child: ButtonTheme(
-                                minWidth: double.minPositive,
+                            Visibility(
+                              visible: false,
+                              child: SizedBox(
                                 height: 22,
-                                child: MaterialButton(
-                                    elevation: 0,
-                                    color: AppTheme.blue2,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(36)),
-                                    ),
-                                    padding:
-                                        const EdgeInsets.fromLTRB(13, 2, 13, 0),
-                                    child: Text(
-                                      'Follow'.tr,
-                                      style: TextStyle(
-                                        fontSize: 11,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppTheme.white1,
+                                child: ButtonTheme(
+                                  minWidth: double.minPositive,
+                                  height: 22,
+                                  child: MaterialButton(
+                                      elevation: 0,
+                                      color: AppTheme.blue2,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(36)),
                                       ),
-                                    ),
-                                    onPressed: () {}),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          13, 2, 13, 0),
+                                      child: Text(
+                                        'Follow'.tr,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w700,
+                                          color: AppTheme.white1,
+                                        ),
+                                      ),
+                                      onPressed: () {}),
+                                ),
                               ),
                             ),
                           ],
