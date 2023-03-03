@@ -8,20 +8,20 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class SettingsSubPage extends StatefulWidget {
-  const SettingsSubPage({Key? key}) : super(key: key);
+class MenuSettingsSubPage extends StatefulWidget {
+  const MenuSettingsSubPage({Key? key}) : super(key: key);
 
   @override
-  State<SettingsSubPage> createState() => _SettingsSubPageState();
+  State<MenuSettingsSubPage> createState() => _MenuSettingsSubPageState();
 }
 
-class _SettingsSubPageState extends State<SettingsSubPage> {
+class _MenuSettingsSubPageState extends State<MenuSettingsSubPage> {
   ScrollController scrollController = ScrollController();
   GetStorage box = GetStorage();
   final List<String> dropdownItems = [
     'English',
     'Turkish',
-    'Deutsche',
+    // 'Deutsche',
   ];
   String? dropdownSelectedValue;
 
@@ -304,10 +304,11 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                               box.write("language", "tr_TR");
                               var locale = const Locale('tr', 'TR');
                               Get.updateLocale(locale);
-                            } else if (value == "Deutsche") {
-                              var locale = const Locale('de', 'DE');
-                              Get.updateLocale(locale);
                             }
+                            // else if (value == "Deutsche") {
+                            //   var locale = const Locale('de', 'DE');
+                            //   Get.updateLocale(locale);
+                            // }
                           });
                         },
                         icon: Center(

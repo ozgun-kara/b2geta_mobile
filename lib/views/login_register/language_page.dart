@@ -20,7 +20,7 @@ class _LanguagePageState extends State<LanguagePage> {
   final List<String> dropdownItems = [
     'English',
     'Turkish',
-    'Deutsche',
+    // 'Deutsche',
   ];
   String? dropdownSelectedValue;
 
@@ -157,10 +157,11 @@ class _LanguagePageState extends State<LanguagePage> {
                             box.write("language", "tr_TR");
                             var locale = const Locale('tr', 'TR');
                             Get.updateLocale(locale);
-                          } else if (value == "Deutsche") {
-                            var locale = const Locale('de', 'DE');
-                            Get.updateLocale(locale);
                           }
+                          // else if (value == "Deutsche") {
+                          //   var locale = const Locale('de', 'DE');
+                          //   Get.updateLocale(locale);
+                          // }
                         });
                       },
                       icon: Center(
