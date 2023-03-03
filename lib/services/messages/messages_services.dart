@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 class MessagesServices {
   // GET MESSAGES
-  Future<List<MessageModel>> getMessagesCall({
+  Future<Map<String, dynamic>> getMessagesCall({
     required Map<String, String> queryParameters,
   }) async {
     final response = await http.get(
@@ -20,22 +20,30 @@ class MessagesServices {
     );
 
     List<MessageModel> messageList = [];
+    String total = "0";
+
+    Map<String, dynamic> result = {
+      "messageList": messageList,
+      "total": total,
+    };
 
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
       var messages = json.decode(response.body)["data"]["messages"];
+      var totalData = json.decode(response.body)["data"]["summary"]["total"];
       if (status == true) {
         for (var message in messages) {
           messageList.add(MessageModel.fromJson(message));
         }
-        return messageList;
+
+        return {"messageList": messageList, "total": totalData};
       } else {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return messageList;
+        return result;
       }
     } else {
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return messageList;
+      return result;
     }
   }
 
@@ -71,9 +79,10 @@ class MessagesServices {
   // GET MESSAGE DETAIL
   Future<List<MessageDetailsModel>> getMessageDetailCall({
     required Map<String, String> queryParameters,
+    required String messageId,
   }) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/messages/2')
+      Uri.parse('${Constants.apiUrl}/messages/$messageId')
           .replace(queryParameters: queryParameters),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -81,6 +90,7 @@ class MessagesServices {
       },
     );
     List<MessageDetailsModel> messageDetailList = [];
+
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
 
@@ -110,17 +120,15 @@ class MessagesServices {
     }
   }
 
-  Future<int> getTotalMessageCall({
-    required Map<String, String> queryParameters,
-  }) async {
+  Future<int> getTotalMessageCall({required String messageId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/messages/2')
-          .replace(queryParameters: queryParameters),
+      Uri.parse('${Constants.apiUrl}/messages/$messageId'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
       },
     );
+
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
 
