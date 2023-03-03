@@ -2,7 +2,6 @@ import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -2217,8 +2216,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    '10' ' ' +
-                                                        'Minimum Order'.tr,
+                                                    '10 ${'Minimum Order'.tr}',
                                                     style: TextStyle(
                                                       fontSize: 10,
                                                       fontFamily: AppTheme
@@ -2501,7 +2499,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       children: [
                         Flexible(
                           child: Text(
-                            '1' ' ' + 'Piece-1'.tr,
+                            '1 ${'Piece-1'.tr}',
                             overflow: TextOverflow.visible,
                             style: TextStyle(
                               fontSize: 12,
@@ -2569,10 +2567,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   BorderRadius.all(Radius.circular(7)),
                             ),
                             onPressed: () {
-                             
+                              context
+                                  .read<NavigationPageProvider>()
+                                  .updateCurrentTabIndex(2);
+                              Navigator.pop(context);
                             },
                             child: Text(
-                              'Ask seller'.tr,
+                              "Go To Basket".tr,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
