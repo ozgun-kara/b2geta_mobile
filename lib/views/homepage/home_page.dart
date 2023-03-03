@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   void getMeStories() async {
     await _socialServices.getAllMeStoryCall(
         queryParameters: {"offset": "0", "type": "story"},
-        userId: "57").then((feedList) {
+        userId: Constants.userId.toString()).then((feedList) {
       meStories = feedList;
       setState(() {});
     });

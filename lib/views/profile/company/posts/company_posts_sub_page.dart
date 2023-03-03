@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -78,7 +79,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
   void getMeStories() async {
     await _socialServices.getAllMeStoryCall(
         queryParameters: {"offset": "0", "limit": "1", "type": "story"},
-        userId: "57").then((feedList) {
+        userId: Constants.userId.toString()).then((feedList) {
       meStories = feedList;
       setState(() {});
     });
