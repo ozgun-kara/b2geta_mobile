@@ -121,15 +121,21 @@ class _StoryPageState extends State<StoryPage>
               child: Row(
                 children: [
                   (story.user!.photo != null && story.user!.photo!.isNotEmpty)
-                      ? Image.network(
-                          width: 30,
-                          height: 30,
-                          story.user!.photo!,
+                      ? ClipOval(
+                          child: Image.network(
+                            width: 30,
+                            height: 30,
+                            fit: BoxFit.cover,
+                            story.user!.photo!,
+                          ),
                         )
-                      : Image.asset(
-                          width: 30,
-                          height: 30,
-                          "assets/images/dummy_images/post_profile.png"),
+                      : ClipOval(
+                          child: Image.asset(
+                              width: 30,
+                              height: 30,
+                              fit: BoxFit.cover,
+                              "assets/images/dummy_images/post_profile.png"),
+                        ),
                   const SizedBox(
                     width: 5,
                   ),

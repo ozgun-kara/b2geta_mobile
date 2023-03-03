@@ -7,7 +7,6 @@ import 'package:b2geta_mobile/views/profile/company/products/company_products_su
 import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyProfilePage extends StatefulWidget {
   const CompanyProfilePage({Key? key}) : super(key: key);
@@ -105,35 +104,32 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                   color: AppTheme.white15),
                             ),
                             const SizedBox(height: 10),
-                            Visibility(
-                              visible: false,
-                              child: SizedBox(
-                                height: 22,
-                                child: ButtonTheme(
-                                  minWidth: double.minPositive,
-                                  height: 22,
-                                  child: MaterialButton(
-                                      elevation: 0,
-                                      color: AppTheme.blue2,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(36)),
-                                      ),
-                                      padding: const EdgeInsets.fromLTRB(
-                                          13, 2, 13, 0),
-                                      child: Text(
-                                        'Follow'.tr,
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppTheme.white1,
-                                        ),
-                                      ),
-                                      onPressed: () {}),
-                                ),
-                              ),
-                            ),
+                            // SizedBox(
+                            //   height: 22,
+                            //   child: ButtonTheme(
+                            //     minWidth: double.minPositive,
+                            //     height: 22,
+                            //     child: MaterialButton(
+                            //         elevation: 0,
+                            //         color: AppTheme.blue2,
+                            //         shape: const RoundedRectangleBorder(
+                            //           borderRadius:
+                            //               BorderRadius.all(Radius.circular(36)),
+                            //         ),
+                            //         padding:
+                            //             const EdgeInsets.fromLTRB(13, 2, 13, 0),
+                            //         child: Text(
+                            //           'Follow'.tr,
+                            //           style: TextStyle(
+                            //             fontSize: 11,
+                            //             fontFamily: AppTheme.appFontFamily,
+                            //             fontWeight: FontWeight.w700,
+                            //             color: AppTheme.white1,
+                            //           ),
+                            //         ),
+                            //         onPressed: () {}),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
