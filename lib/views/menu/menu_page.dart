@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_settings_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +164,7 @@ class _MenuPageState extends State<MenuPage> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const SettingsSubPage(),
+                      builder: (context) => const MenuSettingsSubPage(),
                     ));
               }),
           const SizedBox(height: 8),
