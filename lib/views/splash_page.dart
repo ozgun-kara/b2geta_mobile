@@ -47,6 +47,10 @@ class _SplashPageState extends State<SplashPage> {
       debugPrint("TOKEN AVAILABLE");
       Constants.userToken = token;
       debugPrint("TOKEN:${Constants.userToken}");
+
+      Constants.userId = prefs.getString("UserId");
+      debugPrint("USER ID:${Constants.userId}");
+
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
         return const NavigationPage();
