@@ -1,10 +1,12 @@
-import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/navigation_page.dart';
+
+import '../../messages/messages_page.dart';
 
 class ShoppingSummarySubPage extends StatefulWidget {
   const ShoppingSummarySubPage({
@@ -40,7 +42,78 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
       backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
           ? AppTheme.white2
           : AppTheme.black7,
-      appBar: const CustomAppBar(),
+      appBar: AppBar(
+        toolbarHeight: 68,
+        backgroundColor:
+            Provider.of<ThemeProvider>(context).themeMode == "light"
+                ? AppTheme.white1
+                : AppTheme.black5,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/back-2.png',
+              width: 23,
+              height: 17,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              context.read<NavigationPageProvider>().updateCurrentTabIndex(2);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const NavigationPage()));
+            },
+          ),
+        ),
+        title: SizedBox(
+            width: 103.74,
+            height: 14.0,
+            child: Provider.of<ThemeProvider>(context).themeMode == "light"
+                ? Image.asset('assets/images/b2geta_logo_light.png')
+                : Image.asset('assets/images/b2geta_logo_dark.png')),
+        actions: [
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/search.png',
+              width: 19,
+              height: 19,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {
+              Provider.of<NavigationPageProvider>(context, listen: false)
+                  .updateSearchState();
+            },
+          ),
+          IconButton(
+            splashRadius: 24,
+            icon: Image.asset(
+              'assets/icons/bell.png',
+              width: 16.0,
+              height: 18.0,
+              color: AppTheme.white15,
+            ),
+            onPressed: () {},
+          ),
+          IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/message.png',
+                width: 19.0,
+                height: 16.0,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const MessagesPage()));
+              }),
+        ],
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 63, 0, 84),
