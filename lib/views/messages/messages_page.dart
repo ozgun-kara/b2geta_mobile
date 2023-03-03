@@ -26,6 +26,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
   final MessagesServices _messagesServices = MessagesServices();
   List<MessageModel> _messageList = [];
+  String _total = "0";
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -35,11 +36,11 @@ class _MessagesPageState extends State<MessagesPage> {
   }
 
   getMessageList() async {
-    _messageList = await _messagesServices.getMessagesCall(queryParameters: {
-      "offset": "0",
-      "limit": "5",
+    await _messagesServices.getMessagesCall(queryParameters: {}).then((value) {
+      _messageList = value["messageList"];
+      _total = value["total"];
+      setState(() {});
     });
-    setState(() {});
   }
 
   @override
@@ -56,7 +57,7 @@ class _MessagesPageState extends State<MessagesPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            /* SizedBox(
               height: 14,
             ),
             Container(
@@ -110,13 +111,14 @@ class _MessagesPageState extends State<MessagesPage> {
                 ),
               ),
             ),
+           */
             SizedBox(
               height: 20,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 25.0),
               child: Text(
-                '${'Chats'.tr} (1)',
+                '${'Chats'.tr} ($_total)',
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
@@ -140,7 +142,9 @@ class _MessagesPageState extends State<MessagesPage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => MessageDetailsPage(
-                            toId: message.fromId.toString(),
+                            messageId: message.id!,
+                            toId: message.toId!,
+                            fromId: message.fromId!,
                           ),
                         ));
                   },
@@ -171,21 +175,23 @@ class _MessagesPageState extends State<MessagesPage> {
                       child: Row(
                         children: [
                           ClipOval(
-                            child: message.toAvatar!.isNotEmpty
+                            child: message.fromAvatar!.isNotEmpty
                                 ? Image.network(
                                     width: 40,
                                     height: 40,
-                                    message.toAvatar!,
+                                    fit: BoxFit.cover,
+                                    message.fromAvatar!,
                                     errorBuilder:
                                         (context, error, stackTrace) =>
                                             Image.asset(
-                                      "assets/images/dummy_images/post_profile.png",
+                                      "assets/images/dummy_images/user_profile.png",
                                     ),
                                   )
                                 : Image.asset(
-                                    "assets/images/dummy_images/post_profile.png",
-                                    width: 55,
-                                    height: 55,
+                                    "assets/images/dummy_images/user_profile.png",
+                                    width: 40,
+                                    height: 40,
+                                    fit: BoxFit.cover,
                                   ),
                           ),
                           SizedBox(
@@ -198,7 +204,7 @@ class _MessagesPageState extends State<MessagesPage> {
                               Text(
                                 message.fromFullname != null
                                     ? message.fromFullname!
-                                    : "RAINBOW POLIKARBONAT",
+                                    : "User Name",
                                 style: TextStyle(
                                   fontSize: 13,
                                   fontFamily: AppTheme.appFontFamily,
@@ -209,9 +215,6 @@ class _MessagesPageState extends State<MessagesPage> {
                                           ? AppTheme.black19
                                           : AppTheme.white1,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 6.0,
                               ),
                               Text(
                                 "İstanbul, Türkiye",
