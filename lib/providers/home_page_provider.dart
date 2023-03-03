@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class HomePageProvider with ChangeNotifier {
+  List<FeedModel> feeds = [];
   List<FeedModel> reelsList = [];
 
   int _tabIndex = 0;
@@ -13,6 +14,20 @@ class HomePageProvider with ChangeNotifier {
   late String uploadType = 'Post'; // POST, REELS
   int uploadStep = 0; // 0,1,2,3
   List<XFile>? imageFilesList = [];
+
+  void getFeeds() async {
+    await locator<SocialServices>().getAllFeedCall(
+        queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
+        userId: "93"
+
+        // userId: "57"
+
+        ).then((feedList) {
+      feeds = feedList;
+    });
+
+    notifyListeners();
+  }
 
   void getReels() async {
     await locator<SocialServices>().getAllReelsCall(
