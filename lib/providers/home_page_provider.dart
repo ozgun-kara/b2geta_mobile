@@ -1,4 +1,3 @@
-import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -18,8 +17,9 @@ class HomePageProvider with ChangeNotifier {
 
   void getFeeds() async {
     await locator<SocialServices>().getAllFeedCall(
-        queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
-        userId: '').then((feedList) {
+      queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
+      userId: '',
+    ).then((feedList) {
       feeds = feedList;
     });
 
