@@ -41,6 +41,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 ? searchAppBar(themeMode)
                 : defaultAppBar(themeMode),
             body: provider.pages[provider.currentTabIndex],
+            
             // body: IndexedStack(
             //   index: provider.currentTabIndex,
             //   children: provider.pages,
