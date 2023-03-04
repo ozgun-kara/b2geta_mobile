@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage> {
                                                               error,
                                                               stackTrace) =>
                                                           Image.asset(
-                                                        "assets/images/dummy_images/post_profile.png",
+                                                        "assets/images/dummy_images/user_profile.png",
                                                         width: 50,
                                                         height: 50,
                                                         fit: BoxFit.cover,
@@ -343,7 +343,7 @@ class _HomePageState extends State<HomePage> {
                                                       width: 50,
                                                       height: 50,
                                                       fit: BoxFit.cover,
-                                                      "assets/images/dummy_images/post_profile.png",
+                                                      "assets/images/dummy_images/user_profile.png",
                                                     ),
                                                   ),
                                           ),
@@ -414,7 +414,7 @@ class _HomePageState extends State<HomePage> {
                                                                       error,
                                                                       stackTrace) =>
                                                                   Image.asset(
-                                                                "assets/images/dummy_images/post_profile.png",
+                                                                "assets/images/dummy_images/user_profile.png",
                                                                 width: 50,
                                                                 height: 50,
                                                                 fit: BoxFit
@@ -427,7 +427,7 @@ class _HomePageState extends State<HomePage> {
                                                               width: 50,
                                                               height: 50,
                                                               fit: BoxFit.cover,
-                                                              "assets/images/dummy_images/post_profile.png",
+                                                              "assets/images/dummy_images/user_profile.png",
                                                             ),
                                                           ),
                                                   ),
@@ -446,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                                                               const TextStyle(
                                                             fontSize: 11,
                                                           ))
-                                                      : const Text("user",
+                                                      : const Text("User Name",
                                                           style: TextStyle(
                                                             fontSize: 11,
                                                           )),
@@ -472,7 +472,8 @@ class _HomePageState extends State<HomePage> {
                                   shape: BoxShape.circle,
                                   color: AppTheme.white1,
                                 ),
-                                child: Image.asset("assets/icons/profile.png"),
+                                child: Image.asset(
+                                    "assets/images/dummy_images/user_profile.png"),
                               ),
                               const SizedBox(
                                 width: 17.0,
@@ -481,6 +482,7 @@ class _HomePageState extends State<HomePage> {
                                   child: SizedBox(
                                 height: 40.0,
                                 child: TextField(
+                                  readOnly: true,
                                   controller: _postTextController,
                                   style: TextStyle(
                                     fontSize: 12,
@@ -490,13 +492,13 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   decoration: InputDecoration(
                                     contentPadding:
-                                        const EdgeInsets.fromLTRB(16, 0, 16, 0),
+                                        const EdgeInsets.fromLTRB(16, 0, 0, 0),
                                     filled: true,
                                     fillColor: themeMode
                                         ? AppTheme.white3
                                         : AppTheme.black7,
-                                    labelText: 'Homepage Share-1'.tr,
-                                    labelStyle: TextStyle(
+                                    hintText: 'Homepage Share-1'.tr,
+                                    hintStyle: TextStyle(
                                       fontSize: 12,
                                       fontFamily: AppTheme.appFontFamily,
                                       fontWeight: FontWeight.w600,
@@ -526,8 +528,16 @@ class _HomePageState extends State<HomePage> {
                                               : AppTheme.black7),
                                     ),
                                   ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const UploadStepsSubPage(),
+                                        ));
+                                  },
                                   onSubmitted: (value) async {
-                                    if (_postTextController.text.isNotEmpty) {
+                                    /*  if (_postTextController.text.isNotEmpty) {
                                       await _socialServices
                                           .shareCall(
                                         type: 'feed',
@@ -541,11 +551,11 @@ class _HomePageState extends State<HomePage> {
                                           homePageProvider.getFeeds();
                                         }
                                       });
-                                    }
+                                    } */
                                   },
                                 ),
                               )),
-                              const SizedBox(
+                              /*  const SizedBox(
                                 width: 10,
                               ),
                               InkWell(
@@ -565,7 +575,7 @@ class _HomePageState extends State<HomePage> {
                                       ? AppTheme.white15
                                       : AppTheme.white1,
                                 ),
-                              ),
+                              ), */
                             ],
                           ),
                         ),

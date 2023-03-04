@@ -142,7 +142,7 @@ class _MessagesTestPageState extends State<MessagesTestPage> {
                             "offset": '0',
                             "limit": '25',
                             "lastMessageId": '3'
-                          },
+                          }, messageId: '',
                         ).then((value) {
                           if (value == true) {
                             debugPrint(
