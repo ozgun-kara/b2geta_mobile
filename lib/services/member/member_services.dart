@@ -63,7 +63,7 @@ class MemberServices {
   }
 
   // VERIFY
-  Future<bool> verifyCall({
+  Future<String> verifyCall({
     required String email,
     required String verifyCode,
   }) async {
@@ -85,16 +85,18 @@ class MemberServices {
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
-        return true;
+        return '';
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return 'error';
       }
+    } else if (response.statusCode == 400) {
+      return 'VerificationCodeDoesNotMatch';
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.body}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+      return 'error';
     }
   }
 
