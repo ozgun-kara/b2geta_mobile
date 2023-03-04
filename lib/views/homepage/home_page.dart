@@ -656,7 +656,7 @@ class _HomePageState extends State<HomePage> {
                                                             error,
                                                             stackTrace) =>
                                                         Image.asset(
-                                                      "assets/images/dummy_images/post_profile.png",
+                                                      "assets/images/dummy_images/user_profile.png",
                                                       width: 40,
                                                       height: 40,
                                                       fit: BoxFit.cover,
@@ -667,7 +667,7 @@ class _HomePageState extends State<HomePage> {
                                                   child: Image.asset(
                                                     width: 40,
                                                     height: 40,
-                                                    "assets/images/dummy_images/post_profile.png",
+                                                    "assets/images/dummy_images/user_profile.png",
                                                   ),
                                                 ),
                                           const SizedBox(
@@ -755,7 +755,8 @@ class _HomePageState extends State<HomePage> {
                                               errorBuilder: (context, error,
                                                       stackTrace) =>
                                                   Image.asset(
-                                                "assets/images/dummy_images/post_image_1.png",
+                                                "assets/images/dummy_images/image_not_found.jpg",
+                                                width: deviceWidth,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -995,9 +996,10 @@ class _HomePageState extends State<HomePage> {
                                                   color: AppTheme.white15,
                                                 ),
                                                 children: [
-                                                  const TextSpan(
-                                                    text: '48',
-                                                    style: TextStyle(
+                                                  TextSpan(
+                                                    text: feed.comments!.total!
+                                                        .toString(),
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),
@@ -1162,14 +1164,22 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.only(right: 12.0, left: 12.0, bottom: 18.0),
           child: Row(
             children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.white1,
+              ClipOval(
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.white1,
+                  ),
+                  child: feed.user!.photo!.isNotEmpty
+                      ? Image.network(
+                          feed.user!.photo!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          "assets/images/dummy_images/user_profile.png"),
                 ),
-                child: Image.asset("assets/icons/profile.png"),
               ),
               const SizedBox(
                 width: 11.0,
@@ -1253,14 +1263,17 @@ class _HomePageState extends State<HomePage> {
         children: [
           Row(
             children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.white1,
+              ClipOval(
+                child: Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.white1,
+                  ),
+                  child: Image.asset(
+                      "assets/images/dummy_images/user_profile.png"),
                 ),
-                child: Image.asset("assets/icons/comment-profile.png"),
               ),
               const SizedBox(
                 width: 11.0,
