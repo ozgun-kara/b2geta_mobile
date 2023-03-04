@@ -90,7 +90,7 @@ final Map<String, String> en = {
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
-  'Homepage Share-1': 'Share something about your company with your followers.',
+  'Homepage Share-1': 'Share something about your company',
   'Homepage Share-2': 'shared the post',
   'Homepage Share-3': 'Share',
   'Homepage Share-4': 'Sharing',
