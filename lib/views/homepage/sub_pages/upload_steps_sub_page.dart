@@ -742,13 +742,22 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                         .white1),
                                                               ),
                                                               onPressed: () {
-                                                                locator<SocialServices>().shareReelsCallTest(
-                                                                    type:
-                                                                        'reels',
-                                                                    content:
-                                                                        'TEST-1',
-                                                                    file:
-                                                                        reelsVideo);
+                                                                locator<SocialServices>()
+                                                                    .shareReelsCallTest(
+                                                                        type:
+                                                                            'reels',
+                                                                        content:
+                                                                            'TEST-1',
+                                                                        file:
+                                                                            reelsVideo)
+                                                                    .then(
+                                                                        (value) {
+                                                                  Provider.of<HomePageProvider>(
+                                                                          context,
+                                                                          listen:
+                                                                              false)
+                                                                      .getReels();
+                                                                });
 
                                                                 // "user_id": "93",
 
@@ -1005,15 +1014,22 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () {
-                  Provider.of<HomePageProvider>(context, listen: false)
-                      .updateUploadStep(3);
-
                   debugPrint("comment: ${commentController.text}");
 
                   locator<SocialServices>()
                       .shareFeedCallTest(
                           type: 'feed', content: commentController.text)
-                      .then((value) => debugPrint("Operation Status: $value"));
+                      .then((value) {
+                    debugPrint("Operation Status: $value");
+
+                    Provider.of<HomePageProvider>(context, listen: false)
+                        .updateUploadStep(3);
+
+                    Provider.of<HomePageProvider>(context, listen: false)
+                        .getFeeds();
+                    Provider.of<HomePageProvider>(context, listen: false)
+                        .getReels();
+                  });
                 }),
           ),
         ]);
