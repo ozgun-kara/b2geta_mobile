@@ -31,6 +31,8 @@ final Map<String, String> tr = {
   'E-mail (confirm)': 'E-mail (tekrar)',
   'Password (confirm)': 'Şifre (tekrar)',
   'Company Name': 'Firma Adı',
+  'Name-2': 'Ad',
+  'Surname': 'Soyad',
   'Official Person': 'Yetkili Kişi',
   'Official Phone': 'Yetkili Telefon',
   'Country': 'Ülke',
@@ -39,6 +41,8 @@ final Map<String, String> tr = {
   'E-mail Validate-3': 'Email adresleri uyuşmuyor',
   'Password Validate-3': 'Şifreler uyuşmuyor',
   'Company Name Validate': 'Lütfen firma adını giriniz',
+  'Name Validate': 'Lütfen adını giriniz',
+  'Surname Validate': 'Lütfen soyadını giriniz',
   'Register Alert-1': 'Üyelik Başarılı',
   'Register Alert-2': 'Bilgilerinizi Kontrol Ediniz',
   // NAVIGATION PAGE
