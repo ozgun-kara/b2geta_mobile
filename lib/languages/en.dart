@@ -45,6 +45,12 @@ final Map<String, String> en = {
   'Surname Validate': 'Please enter a surname',
   'Register Alert-1': 'Registration Successful',
   'Register Alert-2': 'Check Your Information',
+  // VERIFY PAGE
+  'Membership Activation': 'Membership Activation',
+  'E-mail-2': 'E-mail',
+  'Enter the 4 digit code': 'Enter the 4 digit code',
+  'Activate': 'Activate',
+  'Verify Code Validate':'Please enter the verify code',
   // NAVIGATION PAGE
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',

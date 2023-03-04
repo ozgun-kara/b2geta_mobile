@@ -1,9 +1,17 @@
+import 'dart:async';
+import 'dart:ui';
+
+import 'package:b2geta_mobile/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+
+import '../../services/member/member_services.dart';
+import 'login_page.dart';
 
 class VerifyPage extends StatefulWidget {
   const VerifyPage({
@@ -20,6 +28,14 @@ class _VerifyPageState extends State<VerifyPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  final _verifyCodeController1 = TextEditingController();
+  final _verifyCodeController2 = TextEditingController();
+  final _verifyCodeController3 = TextEditingController();
+  final _verifyCodeController4 = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -56,7 +72,7 @@ class _VerifyPageState extends State<VerifyPage> {
               padding: const EdgeInsets.only(top: 65),
               // padding: EdgeInsets.only(top: 49),
               child: Text(
-                'Üyelik Aktifleştirme',
+                'Membership Activation'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: AppTheme.appFontFamily,
@@ -76,7 +92,7 @@ class _VerifyPageState extends State<VerifyPage> {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
           child: Form(
-            // key: formKey2,
+            key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -97,7 +113,7 @@ class _VerifyPageState extends State<VerifyPage> {
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.fromLTRB(10, 16, 25, 16),
                     filled: true,
-                    labelText: "Email",
+                    labelText: "E-mail-2".tr,
                     fillColor:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
                             ? AppTheme.white5
@@ -130,7 +146,7 @@ class _VerifyPageState extends State<VerifyPage> {
                   height: 50,
                 ),
                 Text(
-                  "4 haneli kodu giriniz",
+                  "Enter the 4 digit code".tr,
                   style: TextStyle(
                       fontSize: 16,
                       fontFamily: AppTheme.appFontFamily,
@@ -149,6 +165,13 @@ class _VerifyPageState extends State<VerifyPage> {
                       width: 50,
                       height: 50,
                       child: TextFormField(
+                        controller: _verifyCodeController1,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        textInputAction: TextInputAction.next,
+                        onChanged: (_) => FocusScope.of(context).nextFocus(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -201,7 +224,13 @@ class _VerifyPageState extends State<VerifyPage> {
                       width: 50,
                       height: 50,
                       child: TextFormField(
-                        initialValue: widget.email,
+                        controller: _verifyCodeController2,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        textInputAction: TextInputAction.next,
+                        onChanged: (_) => FocusScope.of(context).nextFocus(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -212,12 +241,11 @@ class _VerifyPageState extends State<VerifyPage> {
                                     ? AppTheme.black11
                                     : AppTheme.white1), // WHILE WRITING
                         maxLines: 1,
-                        readOnly: true,
-                        enabled: true,
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           contentPadding:
-                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                              const EdgeInsets.fromLTRB(4, 16, 4, 16),
                           filled: true,
                           fillColor:
                               Provider.of<ThemeProvider>(context).themeMode ==
@@ -255,7 +283,13 @@ class _VerifyPageState extends State<VerifyPage> {
                       width: 50,
                       height: 50,
                       child: TextFormField(
-                        initialValue: widget.email,
+                        controller: _verifyCodeController3,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        textInputAction: TextInputAction.next,
+                        onChanged: (_) => FocusScope.of(context).nextFocus(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -266,12 +300,11 @@ class _VerifyPageState extends State<VerifyPage> {
                                     ? AppTheme.black11
                                     : AppTheme.white1), // WHILE WRITING
                         maxLines: 1,
-                        readOnly: true,
-                        enabled: true,
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           contentPadding:
-                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                              const EdgeInsets.fromLTRB(4, 16, 4, 16),
                           filled: true,
                           fillColor:
                               Provider.of<ThemeProvider>(context).themeMode ==
@@ -309,7 +342,13 @@ class _VerifyPageState extends State<VerifyPage> {
                       width: 50,
                       height: 50,
                       child: TextFormField(
-                        initialValue: widget.email,
+                        controller: _verifyCodeController4,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(1),
+                        ],
+                        textInputAction: TextInputAction.next,
+                        onChanged: (_) => FocusScope.of(context).unfocus(),
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -320,12 +359,11 @@ class _VerifyPageState extends State<VerifyPage> {
                                     ? AppTheme.black11
                                     : AppTheme.white1), // WHILE WRITING
                         maxLines: 1,
-                        readOnly: true,
-                        enabled: true,
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration(
                           floatingLabelBehavior: FloatingLabelBehavior.never,
                           contentPadding:
-                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                              const EdgeInsets.fromLTRB(4, 16, 4, 16),
                           filled: true,
                           fillColor:
                               Provider.of<ThemeProvider>(context).themeMode ==
@@ -376,7 +414,7 @@ class _VerifyPageState extends State<VerifyPage> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
-                          'Etkinleştir'.tr,
+                          'Activate'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,
@@ -384,61 +422,36 @@ class _VerifyPageState extends State<VerifyPage> {
                               color: AppTheme.white1),
                         ),
                         onPressed: () {
-                          /*  if (formKey2.currentState!.validate()) {
-                            debugPrint("email: ${emailController1.text}");
-                            debugPrint("password: ${passwordController1.text}");
-                            debugPrint(
-                                "companyName: ${companyNameController.text}");
-                            debugPrint(
-                                "officialPerson: ${officialPersonController.text}");
-                            debugPrint(
-                                "officialPhone: ${officialPhoneController.text}");
-                            debugPrint("country: $countryCode");
-
+                          if (_verifyCodeController1.text.isNotEmpty &&
+                              _verifyCodeController2.text.isNotEmpty &&
+                              _verifyCodeController3.text.isNotEmpty &&
+                              _verifyCodeController4.text.isNotEmpty) {
+                            var verifyCode =
+                                _verifyCodeController1.text.toString() +
+                                    _verifyCodeController2.text.toString() +
+                                    _verifyCodeController3.text.toString() +
+                                    _verifyCodeController4.text.toString();
                             locator<MemberServices>()
-                                .registerCall(
-                              email: emailController1.text,
-                              password: passwordController1.text,
-                              companyName: companyNameController.text,
-                              officialPerson: officialPersonController.text,
-                              officialPhone: officialPhoneController.text,
-                              country: countryCode.toString(),
+                                .verifyCall(
+                              email: widget.email,
+                              verifyCode: verifyCode,
                             )
                                 .then((value) {
-                              if (value != "error") {
-                                debugPrint("REGISTRATION SUCCESSFUL");
-
-                                locator<MemberServices>()
-                                    .verifyCall(
-                                        email: emailController1.text,
-                                        verifyCode: value)
-                                    .then((value2) {
-                                  if (value2 == true) {
-                                    debugPrint("VERIFICATION SUCCESSFUL");
-
-                                    showAlertDialog(context);
-
-                                    Timer(
-                                        const Duration(milliseconds: 1500),
-                                        () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => LoginPage(
-                                                  email: emailController1.text,
-                                                  password:
-                                                      passwordController1.text),
-                                            )));
-                                  } else {
-                                    debugPrint("VERIFICATION FAILED");
-                                    showAlertDialog2(context);
-                                  }
-                                });
-                              } else {
-                                debugPrint("REGISTRATION FAILED");
-                                showAlertDialog2(context);
+                              if (value) {
+                                Timer(
+                                    const Duration(milliseconds: 1500),
+                                    () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => LoginPage(
+                                            email: widget.email,
+                                          ),
+                                        )));
                               }
                             });
-                          } */
+                          } else {
+                            operationFailedDialog(context);
+                          }
                         }),
                   ),
                 ),
@@ -447,6 +460,94 @@ class _VerifyPageState extends State<VerifyPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Verify Code Validate'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black16
+                                  : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

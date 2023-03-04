@@ -45,8 +45,14 @@ final Map<String, String> tr = {
   'Surname Validate': 'Lütfen soyadını giriniz',
   'Register Alert-1': 'Üyelik Başarılı',
   'Register Alert-2': 'Bilgilerinizi Kontrol Ediniz',
+  // VERIFY PAGE
+  'Membership Activation': 'Üyelik Etkinleştirme',
+  'E-mail-2': 'E-posta',
+  'Enter the 4 digit code': '4 haneli kodu girin',
+  'Activate': 'Etkinleştir',
+  'Verify Code Validate': 'Lütfen doğrulama kodunu giriniz',
   // NAVIGATION PAGE
-  'Homepage': 'Anasayfa',
+  'Homepage': 'Ana Sayfa',
   'Marketplace': 'Pazaryeri',
   'My Basket': 'Sepetim',
   'My Account': 'Hesabım',
