@@ -53,6 +53,8 @@ class MemberServices {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return "error";
       }
+    } else if (response.statusCode == 409) {
+      return "EmailAlreadyExists";
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
@@ -90,7 +92,7 @@ class MemberServices {
         return false;
       }
     } else {
-      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      debugPrint("API ERROR\nSTATUS CODE: ${response.body}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
     }

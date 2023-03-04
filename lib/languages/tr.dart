@@ -45,6 +45,8 @@ final Map<String, String> tr = {
   'Surname Validate': 'Lütfen soyadını giriniz',
   'Register Alert-1': 'Üyelik Başarılı',
   'Register Alert-2': 'Bilgilerinizi Kontrol Ediniz',
+  'Register Alert-3': 'Bu e-posta zaten var',
+  'Register Alert-4': 'Hata',
   // VERIFY PAGE
   'Membership Activation': 'Üyelik Etkinleştirme',
   'E-mail-2': 'E-posta',

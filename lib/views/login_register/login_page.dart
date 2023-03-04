@@ -92,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             },
 
+                            keyboardType: TextInputType.emailAddress,
                             controller: emailController1,
                             style: TextStyle(
                                 fontSize: 16,
