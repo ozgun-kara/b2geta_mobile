@@ -1,17 +1,13 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'dart:async';
-import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
+import 'package:b2geta_mobile/views/login_register/verify_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -28,6 +24,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController1 = TextEditingController();
   final passwordController2 = TextEditingController();
   final companyNameController = TextEditingController();
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
   final officialPersonController = TextEditingController();
   final officialPhoneController = TextEditingController();
   var countryCode;
@@ -1022,6 +1020,124 @@ class _RegisterPageState extends State<RegisterPage> {
                 TextFormField(
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
+                      return 'Name Validate'.tr;
+                    }
+                    return null;
+                  },
+                  controller: nameController,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w500,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black11
+                          : AppTheme.white1), // WHILE WRITING
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    filled: true,
+                    fillColor:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                    hintText: 'Name-2'.tr,
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black11
+                          : AppTheme.white14,
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        )),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        )),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 13),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Surname Validate'.tr;
+                    }
+                    return null;
+                  },
+                  controller: surnameController,
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w500,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black11
+                          : AppTheme.white1), // WHILE WRITING
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                    filled: true,
+                    fillColor:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white5
+                            : AppTheme.black7,
+                    hintText: 'Surname'.tr,
+                    hintStyle: TextStyle(
+                      fontSize: 14,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.black11
+                          : AppTheme.white14,
+                    ),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        )),
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        )),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue2
+                            : AppTheme.white1,
+                        width: 1,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 13),
+                TextFormField(
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'E-mail Validate-1'.tr;
                     }
                     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
@@ -1844,7 +1960,15 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: AppTheme.white1),
                         ),
                         onPressed: () {
-                          if (formKey2.currentState!.validate()) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VerifyPage(
+                                  email:
+                                      emailController1.text.trim().toString(),
+                                ),
+                              ));
+                          /*  if (formKey2.currentState!.validate()) {
                             debugPrint("email: ${emailController1.text}");
                             debugPrint("password: ${passwordController1.text}");
                             debugPrint(
@@ -1898,7 +2022,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 showAlertDialog2(context);
                               }
                             });
-                          }
+                          } */
                         }),
                   ),
                 ),

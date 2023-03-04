@@ -31,6 +31,8 @@ final Map<String, String> en = {
   'E-mail (confirm)': 'E-mail (confirm)',
   'Password (confirm)': 'Password (confirm)',
   'Company Name': 'Company Name',
+  'Name-2': 'Name',
+  'Surname': 'Surname',
   'Official Person': 'Official Person',
   'Official Phone': 'Official Phone',
   'Country': 'Country',
@@ -39,6 +41,8 @@ final Map<String, String> en = {
   'E-mail Validate-3': 'Unmatched email address',
   'Password Validate-3': 'Unmatched password',
   'Company Name Validate': 'Please enter a company name',
+  'Name Validate': 'Please enter a name',
+  'Surname Validate': 'Please enter a surname',
   'Register Alert-1': 'Registration Successful',
   'Register Alert-2': 'Check Your Information',
   // NAVIGATION PAGE
