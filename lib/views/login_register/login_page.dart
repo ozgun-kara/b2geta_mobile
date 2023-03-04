@@ -12,9 +12,8 @@ import 'package:flutter_switch/flutter_switch.dart';
 
 class LoginPage extends StatefulWidget {
   final String email;
-  final String password;
 
-  const LoginPage({super.key, required this.email, required this.password});
+  const LoginPage({super.key, required this.email});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -33,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     emailController1.text = widget.email;
-    passwordController1.text = widget.password;
     super.initState();
   }
 
@@ -183,38 +181,37 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                               suffixIcon: IconButton(
                                 splashRadius: 24,
-                                icon:
-                                    Provider.of<LoginRegisterPageProvider>(context)
-                                            .loginPasswordVisible
-                                        ? SizedBox(
-                                            child: Image.asset(
-                                                'assets/icons/eye-off-line.png',
-                                                width: 20,
-                                                height: 20,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.black11
-                                                        : AppTheme.white1),
-                                          )
-                                        : SizedBox(
-                                            child: Image.asset(
-                                                'assets/icons/eye-line.png',
-                                                width: 20,
-                                                height: 20,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.black11
-                                                        : AppTheme.white1),
-                                          ),
+                                icon: Provider.of<LoginRegisterPageProvider>(
+                                            context)
+                                        .loginPasswordVisible
+                                    ? SizedBox(
+                                        child: Image.asset(
+                                            'assets/icons/eye-off-line.png',
+                                            width: 20,
+                                            height: 20,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                      )
+                                    : SizedBox(
+                                        child: Image.asset(
+                                            'assets/icons/eye-line.png',
+                                            width: 20,
+                                            height: 20,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                      ),
                                 splashColor: Colors.transparent,
                                 onPressed: () async {
-                                  Provider.of<LoginRegisterPageProvider>(context,
+                                  Provider.of<LoginRegisterPageProvider>(
+                                          context,
                                           listen: false)
                                       .updateLoginPasswordVisible();
                                 },

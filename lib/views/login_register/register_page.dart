@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/verify_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -1960,69 +1962,25 @@ class _RegisterPageState extends State<RegisterPage> {
                               color: AppTheme.white1),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => VerifyPage(
-                                  email:
-                                      emailController1.text.trim().toString(),
-                                ),
-                              ));
-                          /*  if (formKey2.currentState!.validate()) {
-                            debugPrint("email: ${emailController1.text}");
-                            debugPrint("password: ${passwordController1.text}");
-                            debugPrint(
-                                "companyName: ${companyNameController.text}");
-                            debugPrint(
-                                "officialPerson: ${officialPersonController.text}");
-                            debugPrint(
-                                "officialPhone: ${officialPhoneController.text}");
-                            debugPrint("country: $countryCode");
-
+                          if (formKey2.currentState!.validate()) {
                             locator<MemberServices>()
                                 .registerCall(
-                              email: emailController1.text,
-                              password: passwordController1.text,
-                              companyName: companyNameController.text,
-                              officialPerson: officialPersonController.text,
-                              officialPhone: officialPhoneController.text,
-                              country: countryCode.toString(),
+                              name: nameController.text.trim(),
+                              surname: surnameController.text.trim(),
+                              email: emailController1.text.trim(),
+                              password: passwordController1.text.trim(),
                             )
                                 .then((value) {
                               if (value != "error") {
-                                debugPrint("REGISTRATION SUCCESSFUL");
-
-                                locator<MemberServices>()
-                                    .verifyCall(
-                                        email: emailController1.text,
-                                        verifyCode: value)
-                                    .then((value2) {
-                                  if (value2 == true) {
-                                    debugPrint("VERIFICATION SUCCESSFUL");
-
-                                    showAlertDialog(context);
-
-                                    Timer(
-                                        const Duration(milliseconds: 1500),
-                                        () => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => LoginPage(
-                                                  email: emailController1.text,
-                                                  password:
-                                                      passwordController1.text),
-                                            )));
-                                  } else {
-                                    debugPrint("VERIFICATION FAILED");
-                                    showAlertDialog2(context);
-                                  }
-                                });
-                              } else {
-                                debugPrint("REGISTRATION FAILED");
-                                showAlertDialog2(context);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => VerifyPage(
+                                          email: emailController1.text.trim()),
+                                    ));
                               }
                             });
-                          } */
+                          }
                         }),
                   ),
                 ),

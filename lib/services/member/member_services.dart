@@ -10,6 +10,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MemberServices {
   // REGISTER
   Future<String> registerCall({
+    required String name,
+    required String surname,
     required String email,
     required String password,
     String? companyName,
@@ -24,12 +26,10 @@ class MemberServices {
       },
       body: {
         "type": "personal",
+        "firstname": name,
+        "lastname": surname,
         "email": email,
         "password": password,
-        "company_name": companyName,
-        "firstname": officialPerson,
-        "phone_number": officialPhone,
-        "country": country
       },
     );
 
