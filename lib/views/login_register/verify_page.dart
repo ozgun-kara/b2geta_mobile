@@ -437,7 +437,14 @@ class _VerifyPageState extends State<VerifyPage> {
                               verifyCode: verifyCode,
                             )
                                 .then((value) {
-                              if (value) {
+                              if (value == 'error') {
+                                operationFailedDialog(
+                                    context, 'Verify Alert-1');
+                              } else if (value ==
+                                  'VerificationCodeDoesNotMatch') {
+                                operationFailedDialog(
+                                    context, 'Verify Alert-2');
+                              } else {
                                 Timer(
                                     const Duration(milliseconds: 1500),
                                     () => Navigator.push(
@@ -450,7 +457,8 @@ class _VerifyPageState extends State<VerifyPage> {
                               }
                             });
                           } else {
-                            operationFailedDialog(context);
+                            operationFailedDialog(
+                                context, 'Verify Code Validate');
                           }
                         }),
                   ),
@@ -463,7 +471,7 @@ class _VerifyPageState extends State<VerifyPage> {
     );
   }
 
-  void operationFailedDialog(BuildContext context) {
+  void operationFailedDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -490,7 +498,7 @@ class _VerifyPageState extends State<VerifyPage> {
                         const SizedBox(width: 40),
                         Expanded(
                           child: Text(
-                            'Verify Code Validate'.tr,
+                            message.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,

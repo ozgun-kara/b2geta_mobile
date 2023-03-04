@@ -53,6 +53,8 @@ final Map<String, String> en = {
   'Enter the 4 digit code': 'Enter the 4 digit code',
   'Activate': 'Activate',
   'Verify Code Validate': 'Please enter the verify code',
+  'Verify Alert-1': 'Error',
+  'Verify Alert-2': 'Verification Code Does Not Match',
   // NAVIGATION PAGE
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',

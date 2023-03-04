@@ -53,6 +53,8 @@ final Map<String, String> tr = {
   'Enter the 4 digit code': '4 haneli kodu girin',
   'Activate': 'Etkinleştir',
   'Verify Code Validate': 'Lütfen doğrulama kodunu giriniz',
+  'Verify Alert-1': 'Hata',
+  'Verify Alert-2': 'Doğrulama Kodu Eşleşmiyor',
   // NAVIGATION PAGE
   'Homepage': 'Ana Sayfa',
   'Marketplace': 'Pazaryeri',
