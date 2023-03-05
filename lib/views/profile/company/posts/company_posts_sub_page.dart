@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -43,6 +44,8 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
     });
     setState(() {});
   }
+
+  FocusNode commentFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +265,13 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                           )),
                       TextButton(
                           style: TextButton.styleFrom(),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (commentFocusNode.hasFocus) {
+                              commentFocusNode.unfocus();
+                            } else {
+                              commentFocusNode.requestFocus();
+                            }
+                          },
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -521,19 +530,22 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
         children: [
           ClipOval(
             child: Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppTheme.white1,
-              ),
-              child: feed.user!.photo!.isNotEmpty
-                  ? Image.network(
-                      feed.user!.photo!,
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppTheme.white1,
+                ),
+                child: Image.network(
+                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      "assets/images/dummy_images/user_profile.png",
                       fit: BoxFit.cover,
-                    )
-                  : Image.asset("assets/images/dummy_images/user_profile.png"),
-            ),
+                    );
+                  },
+                )),
           ),
           const SizedBox(
             width: 11.0,
@@ -542,6 +554,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
             child: SizedBox(
               height: 32.0,
               child: TextField(
+                focusNode: commentFocusNode,
                 controller: _commentTextController,
                 style: TextStyle(
                     fontSize: 11,
