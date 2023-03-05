@@ -1,6 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
@@ -23,6 +25,23 @@ class _NavigationPageState extends State<NavigationPage> {
   late double deviceWidth;
   late double deviceHeight;
 
+  final MemberServices _memberServices = MemberServices();
+
+  getProfile() async {
+    await _memberServices.getProfileCall().then((value) {
+      if (value != null) {
+        Provider.of<UserProvider>(context, listen: false)
+            .updateUserModel(value);
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProfile();
+  }
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -41,7 +60,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 ? searchAppBar(themeMode)
                 : defaultAppBar(themeMode),
             body: provider.pages[provider.currentTabIndex],
-            
+
             // body: IndexedStack(
             //   index: provider.currentTabIndex,
             //   children: provider.pages,
@@ -241,32 +260,41 @@ class _NavigationPageState extends State<NavigationPage> {
                                   ? AppTheme.white1
                                   : AppTheme.black5,
                           elevation: 0,
-                          child: FittedBox(
-                            fit: BoxFit.none,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  'assets/icons/profile.png',
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipOval(
+                                child: Image.network(
+                                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
                                   width: 24,
                                   height: 24,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return ClipOval(
+                                      child: Image.asset(
+                                        width: 24,
+                                        height: 24,
+                                        'assets/images/dummy_images/user_profile.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    );
+                                  },
                                 ),
-                                const SizedBox(height: 5),
-                                Text('My Account'.tr,
-                                    style: TextStyle(
-                                        fontSize: 9,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w600,
-                                        color: provider.currentTabIndex == 3
-                                            ? Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1
-                                            : AppTheme.white15)),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(height: 5),
+                              Text('My Account'.tr,
+                                  style: TextStyle(
+                                      fontSize: 9,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: provider.currentTabIndex == 3
+                                          ? Provider.of<ThemeProvider>(context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1
+                                          : AppTheme.white15)),
+                            ],
                           ),
                           onPressed: () {
                             provider.updateCurrentTabIndex(3);
