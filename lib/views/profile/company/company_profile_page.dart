@@ -1,6 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/user_model.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
@@ -23,12 +25,24 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late double deviceHeight;
   late bool themeMode;
 
+  final MemberServices _memberServices = MemberServices();
+  UserModel? user;
+
   @override
   void initState() {
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
-
+    getUser();
     super.initState();
+  }
+
+  Future<void> getUser() async {
+    await _memberServices.getProfileCall().then((value) {
+      if (value != null) {
+        user = value;
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -65,44 +79,64 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         padding: const EdgeInsets.fromLTRB(16, 25, 16, 24),
                         child: Column(
                           children: [
-                            Container(
-                              width: 55,
-                              height: 55,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                    width: 1, color: AppTheme.white21),
-                                image: const DecorationImage(
-                                  image: NetworkImage(
-                                    "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
-                                  ),
-                                  fit: BoxFit.cover,
+                            ClipOval(
+                              child: Container(
+                                width: 55,
+                                height: 55,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      width: 1, color: AppTheme.white21),
                                 ),
+                                child: (user != null)
+                                    ? user!.avatar != null
+                                        ? Image.network(
+                                            "https://api.businessucces.com/${user!.avatar}",
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            fit: BoxFit.cover,
+                                          )
+                                    : const SizedBox(),
                               ),
                             ),
                             const SizedBox(height: 18),
-                            Text(
-                              "İteme İnşaat ve Tesisat",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w700,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ),
-                            ),
-                            const SizedBox(height: 2),
-                            Text(
-                              "İstanbul, Türkiye",
-                              style: TextStyle(
-                                  fontSize: 12,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppTheme.white15),
-                            ),
+                            (user != null)
+                                ? Column(
+                                    children: [
+                                      (user!.firstname != null &&
+                                              user!.lastname != null)
+                                          ? Text(
+                                              "${user!.firstname!} ${user!.lastname}",
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color:
+                                                    Provider.of<ThemeProvider>(
+                                                                    context)
+                                                                .themeMode ==
+                                                            "light"
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white1,
+                                              ),
+                                            )
+                                          : const Text(""),
+                                      const SizedBox(height: 2),
+                                      Text(
+                                        "İstanbul, Türkiye",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15),
+                                      ),
+                                    ],
+                                  )
+                                : const SizedBox(),
+
                             const SizedBox(height: 10),
                             // SizedBox(
                             //   height: 22,
