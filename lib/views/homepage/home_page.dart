@@ -97,6 +97,8 @@ class _HomePageState extends State<HomePage> {
     "assets/images/dummy_images/reels_image_3.png",
   ];
 
+  FocusNode commentFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -399,6 +401,12 @@ class _HomePageState extends State<HomePage> {
                                   child: Image.network(
                                     'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
                                     fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                        "assets/images/dummy_images/user_profile.png",
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -794,7 +802,13 @@ class _HomePageState extends State<HomePage> {
                                           )),
                                       TextButton(
                                           style: TextButton.styleFrom(),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            if (commentFocusNode.hasFocus) {
+                                              commentFocusNode.unfocus();
+                                            } else {
+                                              commentFocusNode.requestFocus();
+                                            }
+                                          },
                                           child: Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -1115,6 +1129,7 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 32.0,
                   child: TextField(
+                    focusNode: commentFocusNode,
                     controller: _commentTextController,
                     style: TextStyle(
                         fontSize: 12,
