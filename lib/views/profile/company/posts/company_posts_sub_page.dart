@@ -2,12 +2,10 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:image_picker/image_picker.dart';
 
 class CompanyPostsSubPage extends StatefulWidget {
   const CompanyPostsSubPage({Key? key}) : super(key: key);
@@ -28,61 +26,22 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
 
   final SocialServices _socialServices = SocialServices();
   List<FeedModel> feeds = [];
-  List<FeedModel> stories1 = [];
-  List<FeedModel> stories2 = [];
-  List<FeedModel> meStories = [];
 
-  final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
-
-  final ImagePicker _picker = ImagePicker();
-  File? _imageFile;
 
   @override
   void initState() {
     super.initState();
     getFeeds();
-    getMeStories();
-    getStories1();
-  }
-
-  Future<void> _getFromGallery() async {
-    PickedFile? pickedFile = await _picker.getImage(
-      source: ImageSource.gallery,
-    );
-    if (pickedFile != null) {
-      _imageFile = File(pickedFile.path);
-      setState(() {});
-    }
   }
 
   void getFeeds() async {
     await _socialServices.getAllFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
-        userId: "57").then((feedList) {
+        userId: Constants.userId.toString()).then((feedList) {
       feeds = feedList;
     });
     setState(() {});
-  }
-
-  void getStories1() async {
-    await _socialServices.getAllStoryCall(queryParameters: {
-      "offset": "0",
-      "limit": "9",
-      "type": "story"
-    }).then((feedList) {
-      stories1 = feedList;
-      setState(() {});
-    });
-  }
-
-  void getMeStories() async {
-    await _socialServices.getAllMeStoryCall(
-        queryParameters: {"offset": "0", "limit": "1", "type": "story"},
-        userId: Constants.userId.toString()).then((feedList) {
-      meStories = feedList;
-      setState(() {});
-    });
   }
 
   @override
@@ -126,7 +85,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                                     errorBuilder:
                                         (context, error, stackTrace) =>
                                             Image.asset(
-                                      "assets/images/dummy_images/post_profile.png",
+                                      "assets/images/dummy_images/user_profile.png",
                                       width: 40,
                                       height: 40,
                                       fit: BoxFit.cover,
@@ -137,7 +96,8 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                                   child: Image.asset(
                                     width: 40,
                                     height: 40,
-                                    "assets/images/dummy_images/post_profile.png",
+                                    fit: BoxFit.cover,
+                                    "assets/images/dummy_images/user_profile.png",
                                   ),
                                 ),
                           const SizedBox(
@@ -215,7 +175,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) =>
                                   Image.asset(
-                                "assets/images/dummy_images/post_image_1.png",
+                                "assets/images/dummy_images/image_not_found",
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -419,9 +379,9 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                                   color: AppTheme.white15,
                                 ),
                                 children: [
-                                  const TextSpan(
-                                    text: '48',
-                                    style: TextStyle(
+                                  TextSpan(
+                                    text: feed.comments!.total!.toString(),
+                                    style: const TextStyle(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -559,14 +519,21 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
       padding: const EdgeInsets.only(right: 12.0, left: 12.0, bottom: 18.0),
       child: Row(
         children: [
-          Container(
-            width: 32,
-            height: 32,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppTheme.white1,
+          ClipOval(
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: AppTheme.white1,
+              ),
+              child: feed.user!.photo!.isNotEmpty
+                  ? Image.network(
+                      feed.user!.photo!,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset("assets/images/dummy_images/user_profile.png"),
             ),
-            child: Image.asset("assets/icons/profile.png"),
           ),
           const SizedBox(
             width: 11.0,
@@ -655,7 +622,8 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                   shape: BoxShape.circle,
                   color: AppTheme.white1,
                 ),
-                child: Image.asset("assets/icons/comment-profile.png"),
+                child:
+                    Image.asset("assets/images/dummy_images/user_profile.png"),
               ),
               const SizedBox(
                 width: 11.0,
