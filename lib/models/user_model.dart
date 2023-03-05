@@ -79,33 +79,9 @@ class UserModel {
     timezone = json['timezone']?.toString();
     createdAt = json['created_at']?.toString();
   }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['user_confirmed'] = userConfirmed;
-    data['firstname'] = firstname;
-    data['lastname'] = lastname;
-    data['phone'] = phone;
-    data['email'] = email;
-    data['avatar'] = avatar;
-    data['cover'] = cover;
-    data['citizenship_number'] = citizenshipNumber;
-    data['tax_office'] = taxOffice;
-    data['tax_number'] = taxNumber;
-    data['gender'] = gender;
-    data['want_email'] = wantEmail;
-    data['country'] = country;
-    data['city'] = city;
-    data['district'] = district;
-    data['town'] = town;
-    data['address'] = address;
-    data['about'] = about;
-    data['postal_code'] = postalCode;
-    data['language_code'] = languageCode;
-    data['country_code'] = countryCode;
-    data['timezone'] = timezone;
-    data['created_at'] = createdAt;
-    return data;
+
+  @override
+  String toString() {
+    return 'UserModel(id: $id,type: $type, userConfirmed: $userConfirmed, firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, avatar: $avatar, cover: $cover, citizenshipNumber: $citizenshipNumber, taxOffice: $taxOffice, taxNumber: $taxNumber, gender: $gender, wantEmail: $wantEmail, country: $country, city: $city, district: $district, town: $town, address: $address, about: $about, postalCode: $postalCode, languageCode: $languageCode, countryCode: $countryCode, timezone: $timezone, createdAt: $createdAt)';
   }
 }
