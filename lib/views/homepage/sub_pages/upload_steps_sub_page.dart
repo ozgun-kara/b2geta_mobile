@@ -4,14 +4,13 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter/foundation.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:math' as math;
 
@@ -90,20 +89,25 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                         padding: const EdgeInsets.fromLTRB(13, 14.5, 13, 14.5),
                         child: Row(
                           children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppTheme.white1,
+                            ClipOval(
+                              child: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppTheme.white1,
+                                ),
+                                child: Image.network(
+                                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
-                              child: Image.asset("assets/icons/profile.png"),
                             ),
-                            SizedBox(width: 13),
+                            const SizedBox(width: 13),
                             Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                "İteme İnşaat ve Tesisat",
+                                '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
                                 style: TextStyle(
                                   fontSize: 14,
                                   height: 1,
@@ -253,7 +257,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Container(
                           width: deviceWidth,
                           height: 1,
@@ -265,7 +269,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                           padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
                           child: Row(
                             children: [
-                              SizedBox(width: 16),
+                              const SizedBox(width: 16),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 4),
                                 child: Image.asset(
@@ -275,7 +279,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   color: AppTheme.blue2,
                                 ),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 'Add Photo/Video'.tr,
                                 style: TextStyle(
@@ -305,7 +309,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                           padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
                           child: Row(
                             children: [
-                              SizedBox(width: 16),
+                              const SizedBox(width: 16),
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 4),
                                 child: Image.asset(
@@ -314,7 +318,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                     height: 18,
                                     color: AppTheme.red5),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Text(
                                 'Upload Reels Video'.tr,
                                 style: TextStyle(
@@ -354,7 +358,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         child: provider.imageFilesList!.isEmpty
                                             ? Column(
                                                 children: [
-                                                  SizedBox(height: 100),
+                                                  const SizedBox(height: 100),
                                                   Center(
                                                     child: Column(
                                                       children: [
@@ -363,7 +367,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                           width: 58,
                                                           height: 58,
                                                         ),
-                                                        SizedBox(height: 8),
+                                                        const SizedBox(
+                                                            height: 8),
                                                         SizedBox(
                                                           width: 212,
                                                           child: Text(
@@ -388,7 +393,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                       ],
                                                     ),
                                                   ),
-                                                  SizedBox(height: 176),
+                                                  const SizedBox(height: 176),
                                                   MaterialButton(
                                                       height: 47,
                                                       color: AppTheme.blue2,
@@ -400,9 +405,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     9)),
                                                       ),
                                                       elevation: 0,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 22),
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 22),
                                                       child: Text(
                                                         'Select From Gallery'
                                                             .tr,
@@ -446,10 +451,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                             right: 3,
                                                             child: ClipRRect(
                                                               borderRadius:
-                                                                  BorderRadius
-                                                                      .all(Radius
-                                                                          .circular(
-                                                                              4)),
+                                                                  const BorderRadius
+                                                                          .all(
+                                                                      Radius.circular(
+                                                                          4)),
                                                               child: Material(
                                                                 color: AppTheme
                                                                     .white1,
@@ -529,7 +534,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 selectImages();
                                                               }),
                                                         ),
-                                                        SizedBox(width: 8),
+                                                        const SizedBox(
+                                                            width: 8),
                                                         Expanded(
                                                           child: MaterialButton(
                                                               height: 47,
@@ -576,7 +582,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                   )
                                                 ],
                                               )),
-                                    SizedBox(height: 50),
+                                    const SizedBox(height: 50),
                                   ],
                                 ),
                               ),
@@ -595,7 +601,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         child: reelsVideo == null
                                             ? Column(
                                                 children: [
-                                                  SizedBox(height: 100),
+                                                  const SizedBox(height: 100),
                                                   Center(
                                                     child: Column(
                                                       children: [
@@ -604,7 +610,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                           width: 58,
                                                           height: 58,
                                                         ),
-                                                        SizedBox(height: 8),
+                                                        const SizedBox(
+                                                            height: 8),
                                                         SizedBox(
                                                           width: 212,
                                                           child: Text(
@@ -629,7 +636,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                       ],
                                                     ),
                                                   ),
-                                                  SizedBox(height: 176),
+                                                  const SizedBox(height: 176),
                                                   MaterialButton(
                                                       height: 47,
                                                       color: AppTheme.blue2,
@@ -641,9 +648,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     9)),
                                                       ),
                                                       elevation: 0,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 22),
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 22),
                                                       child: Text(
                                                         'Select From Gallery'
                                                             .tr,
@@ -713,7 +720,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 selectReels();
                                                               }),
                                                         ),
-                                                        SizedBox(width: 8),
+                                                        const SizedBox(
+                                                            width: 8),
                                                         Expanded(
                                                           child: MaterialButton(
                                                               height: 47,
@@ -779,7 +787,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                   )
                                                 ],
                                               )),
-                                    SizedBox(height: 50),
+                                    const SizedBox(height: 50),
                                   ],
                                 ),
                               ),
@@ -794,7 +802,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   color: themeMode
                                       ? AppTheme.white32
                                       : AppTheme.black2),
-                              SizedBox(height: 50),
+                              const SizedBox(height: 50),
                               Center(
                                 child: Column(
                                   children: [
@@ -817,7 +825,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 50),
+                                    const SizedBox(height: 50),
                                     CircularPercentIndicator(
                                       radius: 90,
                                       lineWidth: 13,
@@ -840,7 +848,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                 : AppTheme.white1),
                                       ),
                                     ),
-                                    SizedBox(height: 40),
+                                    const SizedBox(height: 40),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 112),
@@ -863,7 +871,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 69),
+                              const SizedBox(height: 69),
                               MaterialButton(
                                   height: 47,
                                   color: AppTheme.blue2,
@@ -871,7 +879,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(9)),
                                   ),
-                                  padding: EdgeInsets.symmetric(horizontal: 56),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 56),
                                   elevation: 0,
                                   child: Text(
                                     'Cancel'.tr,
@@ -886,7 +895,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                             listen: false)
                                         .updateUploadStep(1);
                                   }),
-                              SizedBox(height: 36),
+                              const SizedBox(height: 36),
                             ],
                           ),
                         )
@@ -899,7 +908,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   color: themeMode
                                       ? AppTheme.white32
                                       : AppTheme.black2),
-                              SizedBox(height: 143),
+                              const SizedBox(height: 143),
                               Center(
                                 child: Column(
                                   children: [
@@ -908,7 +917,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                       width: 75.83,
                                       height: 75.83,
                                     ),
-                                    SizedBox(height: 32),
+                                    const SizedBox(height: 32),
                                     SizedBox(
                                       width: 212,
                                       child: Text(
@@ -928,7 +937,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 188),
+                              const SizedBox(height: 188),
                               MaterialButton(
                                   height: 47,
                                   color: AppTheme.blue2,
@@ -937,7 +946,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         BorderRadius.all(Radius.circular(9)),
                                   ),
                                   elevation: 0,
-                                  padding: EdgeInsets.symmetric(horizontal: 60),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 60),
                                   child: Text(
                                     'Close'.tr,
                                     style: TextStyle(
@@ -1040,7 +1050,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
         toolbarHeight: 58,
         backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
         elevation: 0,
-        leading: SizedBox(),
+        leading: const SizedBox(),
         centerTitle: true,
         title: Padding(
           padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -1081,7 +1091,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
       toolbarHeight: 58,
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
       elevation: 0,
-      leading: SizedBox(),
+      leading: const SizedBox(),
       centerTitle: true,
       title: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
@@ -1104,7 +1114,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
       toolbarHeight: 58,
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
       elevation: 0,
-      leading: SizedBox(),
+      leading: const SizedBox(),
       centerTitle: true,
       title: Padding(
         padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),

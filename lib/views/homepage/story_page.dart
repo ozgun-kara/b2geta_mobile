@@ -134,7 +134,7 @@ class _StoryPageState extends State<StoryPage>
                               width: 30,
                               height: 30,
                               fit: BoxFit.cover,
-                              "assets/images/dummy_images/post_profile.png"),
+                              "assets/images/dummy_images/user_profile.png"),
                         ),
                   const SizedBox(
                     width: 5,
@@ -142,7 +142,7 @@ class _StoryPageState extends State<StoryPage>
                   Text(
                     (story.user!.name != null && story.user!.name!.length > 2)
                         ? story.user!.name!
-                        : "SİLVERLİNE ENDÜSTRİ",
+                        : "User Name",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,

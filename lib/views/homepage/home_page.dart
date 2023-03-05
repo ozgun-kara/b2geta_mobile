@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
@@ -34,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   final SocialServices _socialServices = SocialServices();
 
   Map<String?, List<FeedModel>> groupStories = {};
-  List<FeedModel> meStories = [];
 
   final TextEditingController _postTextController = TextEditingController();
   final TextEditingController _commentTextController = TextEditingController();
@@ -44,10 +43,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     Provider.of<HomePageProvider>(context, listen: false).getFeeds();
-    getMeStories();
     getStories();
     Provider.of<HomePageProvider>(context, listen: false).getReels();
-
     super.initState();
   }
 
@@ -73,15 +70,6 @@ class _HomePageState extends State<HomePage> {
       queryParameters: {"offset": "0", "limit": "35", "type": "story"},
     ).then((feedList) {
       groupStories = groupStoryByUser(feedList);
-      setState(() {});
-    });
-  }
-
-  void getMeStories() async {
-    await _socialServices.getAllMeStoryCall(
-        queryParameters: {"offset": "0", "type": "story"},
-        userId: Constants.userId.toString()).then((feedList) {
-      meStories = feedList;
       setState(() {});
     });
   }
@@ -290,71 +278,6 @@ class _HomePageState extends State<HomePage> {
                                   ],
                                 ),
                               ),
-                              meStories.isNotEmpty
-                                  ? Column(
-                                      children: [
-                                        GestureDetector(
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) => StoryPage(
-                                                stories: [meStories],
-                                                index: 0,
-                                              ),
-                                            ));
-                                          },
-                                          child: Container(
-                                            width: 50,
-                                            height: 50,
-                                            margin: const EdgeInsets.only(
-                                              right: 10,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              shape: BoxShape.circle,
-                                              border: Border.all(
-                                                color: const Color(0XFF29B7D6),
-                                                width: 2,
-                                              ),
-                                            ),
-                                            child: (meStories[0]
-                                                        .user!
-                                                        .photo!
-                                                        .length >
-                                                    3)
-                                                ? ClipOval(
-                                                    child: Image.network(
-                                                      width: 50,
-                                                      height: 50,
-                                                      fit: BoxFit.cover,
-                                                      meStories[0].user!.photo!,
-                                                      errorBuilder: (context,
-                                                              error,
-                                                              stackTrace) =>
-                                                          Image.asset(
-                                                        "assets/images/dummy_images/user_profile.png",
-                                                        width: 50,
-                                                        height: 50,
-                                                        fit: BoxFit.cover,
-                                                      ),
-                                                    ),
-                                                  )
-                                                : ClipOval(
-                                                    child: Image.asset(
-                                                      width: 50,
-                                                      height: 50,
-                                                      fit: BoxFit.cover,
-                                                      "assets/images/dummy_images/user_profile.png",
-                                                    ),
-                                                  ),
-                                          ),
-                                        ),
-                                        const Text('Hikayen',
-                                            style: TextStyle(
-                                              fontSize: 11,
-                                            )),
-                                      ],
-                                    )
-                                  : const SizedBox(),
                               Expanded(
                                 child: SizedBox(
                                   child: ListView.builder(
@@ -465,15 +388,19 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.symmetric(horizontal: 13.0),
                           child: Row(
                             children: [
-                              Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppTheme.white1,
+                              ClipOval(
+                                child: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: AppTheme.white1,
+                                  ),
+                                  child: Image.network(
+                                    'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                                child: Image.asset(
-                                    "assets/images/dummy_images/user_profile.png"),
                               ),
                               const SizedBox(
                                 width: 17.0,
@@ -1166,20 +1093,20 @@ class _HomePageState extends State<HomePage> {
             children: [
               ClipOval(
                 child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppTheme.white1,
-                  ),
-                  child: feed.user!.photo!.isNotEmpty
-                      ? Image.network(
-                          feed.user!.photo!,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset(
-                          "assets/images/dummy_images/user_profile.png"),
-                ),
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppTheme.white1,
+                    ),
+                    child: Image.network(
+                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Image.asset(
+                            "assets/images/dummy_images/user_profile.png");
+                      },
+                    )),
               ),
               const SizedBox(
                 width: 11.0,
