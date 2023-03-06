@@ -1,0 +1,1 @@
+enum UserProfile { personal, company }

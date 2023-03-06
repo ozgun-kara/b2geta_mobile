@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
+import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
@@ -43,6 +44,9 @@ void main() async {
     ),
     ChangeNotifierProvider<CompanyProfilePageProvider>(
       create: (BuildContext context) => CompanyProfilePageProvider(),
+    ),
+    ChangeNotifierProvider<MyAccountPageProvider>(
+      create: (BuildContext context) => MyAccountPageProvider(),
     ),
     ChangeNotifierProvider<HomePageProvider>(
       create: (BuildContext context) => HomePageProvider(),

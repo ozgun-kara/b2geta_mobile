@@ -1,5 +1,7 @@
+// ignore_for_file: unrelated_type_equality_checks
+import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/user_model.dart';
-import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -12,18 +14,16 @@ import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page
 import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 
-class CompanyProfilePage extends StatefulWidget {
-  const CompanyProfilePage({
+class MyAccountPage extends StatefulWidget {
+  const MyAccountPage({
     Key? key,
-    required this.userId,
   }) : super(key: key);
-  final String userId;
 
   @override
-  State<CompanyProfilePage> createState() => _CompanyProfilePageState();
+  State<MyAccountPage> createState() => _MyAccountPageState();
 }
 
-class _CompanyProfilePageState extends State<CompanyProfilePage> {
+class _MyAccountPageState extends State<MyAccountPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -32,20 +32,17 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late bool themeMode;
   late UserModel user;
 
-  final MemberServices _memberServices = MemberServices();
-
   @override
   void initState() {
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
-    Provider.of<CompanyProfilePageProvider>(context, listen: false)
-        .getMyStories(widget.userId);
+    Provider.of<MyAccountPageProvider>(context, listen: false).getMyStories(
+        Provider.of<UserProvider>(context, listen: false)
+            .getUser
+            .id
+            .toString());
 
     super.initState();
-  }
-
-  getProfile() async {
-    await _memberServices.getProfileCall();
   }
 
   @override
@@ -54,11 +51,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
+    user = Provider.of<UserProvider>(context).getUser;
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      body: Consumer<CompanyProfilePageProvider>(
-        builder: (context, CompanyProfilePageProvider provider, child) {
+      body: Consumer<MyAccountPageProvider>(
+        builder: (context, MyAccountPageProvider provider, child) {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -114,7 +112,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                 color: AppTheme.white21),
                                           ),
                                           child: Image.network(
-                                            "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                            "https://api.businessucces.com/${user.avatar}",
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
@@ -138,7 +136,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                             width: 1, color: AppTheme.white21),
                                       ),
                                       child: Image.network(
-                                        "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                        "https://api.businessucces.com/${user.avatar}",
                                         fit: BoxFit.cover,
                                         errorBuilder:
                                             (context, error, stackTrace) {
@@ -151,11 +149,10 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                     ),
                                   ),
                             const SizedBox(height: 18),
-
                             Column(
                               children: [
                                 Text(
-                                  '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+                                  '${user.firstname} ${user.lastname}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
@@ -177,34 +174,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                 ),
                               ],
                             ),
-
                             const SizedBox(height: 10),
-                            // SizedBox(
-                            //   height: 22,
-                            //   child: ButtonTheme(
-                            //     minWidth: double.minPositive,
-                            //     height: 22,
-                            //     child: MaterialButton(
-                            //         elevation: 0,
-                            //         color: AppTheme.blue2,
-                            //         shape: const RoundedRectangleBorder(
-                            //           borderRadius:
-                            //               BorderRadius.all(Radius.circular(36)),
-                            //         ),
-                            //         padding:
-                            //             const EdgeInsets.fromLTRB(13, 2, 13, 0),
-                            //         child: Text(
-                            //           'Follow'.tr,
-                            //           style: TextStyle(
-                            //             fontSize: 11,
-                            //             fontFamily: AppTheme.appFontFamily,
-                            //             fontWeight: FontWeight.w700,
-                            //             color: AppTheme.white1,
-                            //           ),
-                            //         ),
-                            //         onPressed: () {}),
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
@@ -274,85 +244,91 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                             }),
                       ),
                     ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
+                    user.type == UserProfile.company
+                        ? Expanded(
+                            child: ButtonTheme(
+                              height: 49,
+                              child: MaterialButton(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  elevation: 0,
+                                  child: FittedBox(
+                                    fit: BoxFit.none,
+                                    child: Image.asset(
+                                        'assets/icons/shopping_car_arrow.png',
+                                        width: 21,
+                                        height: 21,
+                                        color: provider.currentTabIndex == 2
+                                            ? themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15),
+                                  ),
+                                  onPressed: () {
+                                    provider.updateCurrentTabIndex(2);
+                                  }),
                             ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset(
-                                  'assets/icons/shopping_car_arrow.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 2
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
+                          )
+                        : const SizedBox(),
+                    user.type == UserProfile.company
+                        ? Expanded(
+                            child: ButtonTheme(
+                              height: 49,
+                              child: MaterialButton(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  elevation: 0,
+                                  child: FittedBox(
+                                    fit: BoxFit.none,
+                                    child: Image.asset('assets/icons/star2.png',
+                                        width: 21,
+                                        height: 20,
+                                        color: provider.currentTabIndex == 3
+                                            ? themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15),
+                                  ),
+                                  onPressed: () {
+                                    provider.updateCurrentTabIndex(3);
+                                  }),
                             ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(2);
-                            }),
-                      ),
-                    ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
+                          )
+                        : const SizedBox(),
+                    user.type == UserProfile.company
+                        ? Expanded(
+                            child: ButtonTheme(
+                              height: 49,
+                              child: MaterialButton(
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  elevation: 0,
+                                  child: FittedBox(
+                                    fit: BoxFit.none,
+                                    child: Image.asset('assets/icons/info.png',
+                                        width: 21,
+                                        height: 21,
+                                        color: provider.currentTabIndex == 4
+                                            ? themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15),
+                                  ),
+                                  onPressed: () {
+                                    provider.updateCurrentTabIndex(4);
+                                  }),
                             ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset('assets/icons/star2.png',
-                                  width: 21,
-                                  height: 20,
-                                  color: provider.currentTabIndex == 3
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                            ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(3);
-                            }),
-                      ),
-                    ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset('assets/icons/info.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 4
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                            ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(4);
-                            }),
-                      ),
-                    ),
+                          )
+                        : const SizedBox(),
                   ],
                 ),
               ),
