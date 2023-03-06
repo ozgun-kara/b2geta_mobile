@@ -1,8 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
@@ -25,21 +25,11 @@ class _NavigationPageState extends State<NavigationPage> {
   late double deviceWidth;
   late double deviceHeight;
 
-  final MemberServices _memberServices = MemberServices();
-
-  getProfile() async {
-    await _memberServices.getProfileCall().then((value) {
-      if (value != null) {
-        Provider.of<UserProvider>(context, listen: false)
-            .updateUserModel(value);
-      }
-    });
-  }
-
   @override
   void initState() {
+    Provider.of<UserProvider>(context, listen: false).getProfile();
+    Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
     super.initState();
-    getProfile();
   }
 
   @override
@@ -47,7 +37,6 @@ class _NavigationPageState extends State<NavigationPage> {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
-
     var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Consumer<NavigationPageProvider>(
