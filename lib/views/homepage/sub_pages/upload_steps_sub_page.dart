@@ -100,6 +100,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                 child: Image.network(
                                   'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
                                   fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset(
+                                    "assets/images/dummy_images/user_profile.png",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),

@@ -1,38 +1,33 @@
-import 'package:b2geta_mobile/models/user_model.dart';
-import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
-import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 
-class CompanyProfilePage extends StatefulWidget {
-  const CompanyProfilePage({
+class PersonalProfilePage extends StatefulWidget {
+  const PersonalProfilePage({
     Key? key,
     required this.userId,
   }) : super(key: key);
   final String userId;
 
   @override
-  State<CompanyProfilePage> createState() => _CompanyProfilePageState();
+  State<PersonalProfilePage> createState() => _PersonalProfilePageState();
 }
 
-class _CompanyProfilePageState extends State<CompanyProfilePage> {
+class _PersonalProfilePageState extends State<PersonalProfilePage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  late UserModel user;
-
-  final MemberServices _memberServices = MemberServices();
 
   @override
   void initState() {
@@ -40,12 +35,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
     Provider.of<CompanyProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
-
     super.initState();
-  }
-
-  getProfile() async {
-    await _memberServices.getProfileCall();
   }
 
   @override
@@ -151,7 +141,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                     ),
                                   ),
                             const SizedBox(height: 18),
-
                             Column(
                               children: [
                                 Text(
@@ -177,34 +166,33 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                 ),
                               ],
                             ),
-
                             const SizedBox(height: 10),
-                            // SizedBox(
-                            //   height: 22,
-                            //   child: ButtonTheme(
-                            //     minWidth: double.minPositive,
-                            //     height: 22,
-                            //     child: MaterialButton(
-                            //         elevation: 0,
-                            //         color: AppTheme.blue2,
-                            //         shape: const RoundedRectangleBorder(
-                            //           borderRadius:
-                            //               BorderRadius.all(Radius.circular(36)),
-                            //         ),
-                            //         padding:
-                            //             const EdgeInsets.fromLTRB(13, 2, 13, 0),
-                            //         child: Text(
-                            //           'Follow'.tr,
-                            //           style: TextStyle(
-                            //             fontSize: 11,
-                            //             fontFamily: AppTheme.appFontFamily,
-                            //             fontWeight: FontWeight.w700,
-                            //             color: AppTheme.white1,
-                            //           ),
-                            //         ),
-                            //         onPressed: () {}),
-                            //   ),
-                            // ),
+                            SizedBox(
+                              height: 22,
+                              child: ButtonTheme(
+                                minWidth: double.minPositive,
+                                height: 22,
+                                child: MaterialButton(
+                                    elevation: 0,
+                                    color: AppTheme.blue2,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(36)),
+                                    ),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(13, 2, 13, 0),
+                                    child: Text(
+                                      'Follow'.tr,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white1,
+                                      ),
+                                    ),
+                                    onPressed: () {}),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -220,7 +208,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                 titlePadding: const EdgeInsets.all(0),
                 expandedTitleScale: 1,
                 title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
                       child: ButtonTheme(
@@ -274,105 +261,13 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                             }),
                       ),
                     ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset(
-                                  'assets/icons/shopping_car_arrow.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 2
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                            ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(2);
-                            }),
-                      ),
-                    ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset('assets/icons/star2.png',
-                                  width: 21,
-                                  height: 20,
-                                  color: provider.currentTabIndex == 3
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                            ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(3);
-                            }),
-                      ),
-                    ),
-                    Expanded(
-                      child: ButtonTheme(
-                        height: 49,
-                        child: MaterialButton(
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(12),
-                              ),
-                            ),
-                            elevation: 0,
-                            child: FittedBox(
-                              fit: BoxFit.none,
-                              child: Image.asset('assets/icons/info.png',
-                                  width: 21,
-                                  height: 21,
-                                  color: provider.currentTabIndex == 4
-                                      ? themeMode
-                                          ? AppTheme.blue2
-                                          : AppTheme.white1
-                                      : AppTheme.white15),
-                            ),
-                            onPressed: () {
-                              provider.updateCurrentTabIndex(4);
-                            }),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
             provider.currentTabIndex == 0
                 ? const CompanyPostsSubPage()
-                : provider.currentTabIndex == 1
-                    ? const CompanyReelsSubPage()
-                    : provider.currentTabIndex == 2
-                        ? const CompanyProductsSubPage()
-                        : provider.currentTabIndex == 3
-                            ? SliverList(
-                                delegate: SliverChildBuilderDelegate(
-                                  childCount: 1,
-                                  (context, index) {
-                                    return Container(height: deviceHeight);
-                                  },
-                                ),
-                              )
-                            : const CompanyInfoSubPage(),
+                : const CompanyReelsSubPage(),
             const SliverToBoxAdapter(
               child: SizedBox(
                 height: 80,

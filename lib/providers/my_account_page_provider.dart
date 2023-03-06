@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 
-class CompanyProfilePageProvider with ChangeNotifier {
+class MyAccountPageProvider with ChangeNotifier {
   int currentTabIndex = 4;
   List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
