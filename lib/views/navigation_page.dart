@@ -1,4 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
@@ -25,21 +27,20 @@ class _NavigationPageState extends State<NavigationPage> {
   late double deviceWidth;
   late double deviceHeight;
 
-  final MemberServices _memberServices = MemberServices();
+  @override
+  void initState() {
+    getProfile();
+    Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
+    super.initState();
+  }
 
   getProfile() async {
-    await _memberServices.getProfileCall().then((value) {
+    await locator<MemberServices>().getProfileCall().then((value) {
       if (value != null) {
         Provider.of<UserProvider>(context, listen: false)
             .updateUserModel(value);
       }
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getProfile();
   }
 
   @override
