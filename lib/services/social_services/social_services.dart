@@ -42,7 +42,7 @@ class SocialServices {
         return feedList;
       }
     } catch (e) {
-      debugPrint("Hata !!! {$e.toString}");
+      debugPrint("Error!!! {$e.toString}");
       return feedList;
     }
   }
@@ -82,7 +82,7 @@ class SocialServices {
         return feedList;
       }
     } catch (e) {
-      debugPrint("Hata !!! {$e.toString}");
+      debugPrint("Error !!! {$e.toString}");
       return feedList;
     }
   }

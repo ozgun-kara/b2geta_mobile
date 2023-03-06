@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 
 class CompanyProfilePageProvider with ChangeNotifier {
   int currentTabIndex = 4;
-  List<FeedModel> feeds = [];
+  List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
+  List<FeedModel> myStoriesList = [];
 
   void updateCurrentTabIndex(int value) {
     currentTabIndex = value;
@@ -18,7 +19,7 @@ class CompanyProfilePageProvider with ChangeNotifier {
     await locator<SocialServices>().getAllFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: Constants.userId!).then((feedList) {
-      feeds = feedList;
+      feedsList = feedList;
     });
 
     notifyListeners();
@@ -29,6 +30,16 @@ class CompanyProfilePageProvider with ChangeNotifier {
       queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
     ).then((feedList) async {
       reelsList = feedList;
+    });
+
+    notifyListeners();
+  }
+
+  void getMyStories() async {
+    await locator<SocialServices>().getAllMeStoryCall(
+        queryParameters: {"offset": "0", "type": "story"},
+        userId: Constants.userId.toString()).then((feedList) {
+      myStoriesList = feedList;
     });
 
     notifyListeners();

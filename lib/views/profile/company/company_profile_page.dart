@@ -1,10 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
 import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
@@ -28,25 +25,14 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late double deviceHeight;
   late bool themeMode;
 
-  final SocialServices _socialServices = SocialServices();
-  List<FeedModel> meStories = [];
-
   @override
   void initState() {
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
     Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
-    getMeStories();
+    Provider.of<CompanyProfilePageProvider>(context, listen: false)
+        .getMyStories();
 
     super.initState();
-  }
-
-  void getMeStories() async {
-    await _socialServices.getAllMeStoryCall(
-        queryParameters: {"offset": "0", "type": "story"},
-        userId: Constants.userId.toString()).then((feedList) {
-      meStories = feedList;
-      setState(() {});
-    });
   }
 
   @override
@@ -83,13 +69,13 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                         padding: const EdgeInsets.fromLTRB(16, 25, 16, 24),
                         child: Column(
                           children: [
-                            meStories.isNotEmpty
+                            provider.myStoriesList.isNotEmpty
                                 ? GestureDetector(
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) => StoryPage(
-                                          stories: [meStories],
+                                          stories: [provider.myStoriesList],
                                           index: 0,
                                         ),
                                       ));
@@ -97,9 +83,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                     child: Container(
                                       width: 55,
                                       height: 55,
-                                      margin: const EdgeInsets.only(
-                                        right: 10,
-                                      ),
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
