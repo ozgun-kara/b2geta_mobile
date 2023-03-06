@@ -1,5 +1,3 @@
-// ignore_for_file: equal_keys_in_map
-
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
@@ -26,20 +24,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
   late double deviceHeight;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
+    var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Scaffold(
-      backgroundColor: Provider.of<ThemeProvider>(context).themeMode == "light"
-          ? AppTheme.white2
-          : AppTheme.black12,
+      backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 0, 96),
@@ -50,9 +42,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               Container(
                 width: deviceWidth,
                 height: 32,
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black5,
+                color: themeMode ? AppTheme.white1 : AppTheme.black5,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 13),
                   child: Row(
@@ -87,11 +77,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
                             ),
                           ),
                           const TextSpan(
@@ -103,11 +90,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w700,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
                             ),
                           ),
                         ],
@@ -122,10 +106,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(13)),
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white4
-                                    : AppTheme.black15,
+                                themeMode ? AppTheme.white4 : AppTheme.black15,
                           ),
                           padding: const EdgeInsets.all(5),
                           child: Row(
@@ -142,38 +123,32 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(11)),
-                                      color: Provider.of<MarketPlacePageProvider>(
-                                                      context)
-                                                  .filterSwitch ==
-                                              false
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.white1
-                                              : AppTheme.black4
-                                          : Colors.transparent),
+                                      color:
+                                          Provider.of<MarketPlacePageProvider>(
+                                                          context)
+                                                      .filterSwitch ==
+                                                  false
+                                              ? themeMode
+                                                  ? AppTheme.white1
+                                                  : AppTheme.black4
+                                              : Colors.transparent),
                                   padding: const EdgeInsets.all(7),
                                   child: Center(
                                     child: Image.asset(
                                         'assets/icons/grid_1.png',
                                         width: 17.06,
                                         height: 17.06,
-                                        color: Provider.of<MarketPlacePageProvider>(
-                                                        context)
-                                                    .filterSwitch ==
-                                                false
-                                            ? Provider.of<ThemeProvider>(
+                                        color:
+                                            Provider.of<MarketPlacePageProvider>(
                                                             context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black8
-                                                : AppTheme.white17
-                                            : Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.white18
-                                                : AppTheme.black8),
+                                                        .filterSwitch ==
+                                                    false
+                                                ? themeMode
+                                                    ? AppTheme.black8
+                                                    : AppTheme.white17
+                                                : themeMode
+                                                    ? AppTheme.white18
+                                                    : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -190,38 +165,32 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(11)),
-                                      color: Provider.of<MarketPlacePageProvider>(
-                                                      context)
-                                                  .filterSwitch ==
-                                              true
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.white1
-                                              : AppTheme.black4
-                                          : Colors.transparent),
+                                      color:
+                                          Provider.of<MarketPlacePageProvider>(
+                                                          context)
+                                                      .filterSwitch ==
+                                                  true
+                                              ? themeMode
+                                                  ? AppTheme.white1
+                                                  : AppTheme.black4
+                                              : Colors.transparent),
                                   padding: const EdgeInsets.all(7),
                                   child: Center(
                                     child: Image.asset(
                                         'assets/icons/grid_2.png',
                                         width: 14.62,
                                         height: 13.38,
-                                        color: Provider.of<MarketPlacePageProvider>(
-                                                        context)
-                                                    .filterSwitch ==
-                                                true
-                                            ? Provider.of<ThemeProvider>(
+                                        color:
+                                            Provider.of<MarketPlacePageProvider>(
                                                             context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black8
-                                                : AppTheme.white17
-                                            : Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.white18
-                                                : AppTheme.black8),
+                                                        .filterSwitch ==
+                                                    true
+                                                ? themeMode
+                                                    ? AppTheme.black8
+                                                    : AppTheme.white17
+                                                : themeMode
+                                                    ? AppTheme.white18
+                                                    : AppTheme.black8),
                                   ),
                                 ),
                               ),
@@ -236,10 +205,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             width: 24,
                             height: 24,
                             color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue2
-                                    : AppTheme.white12,
+                                themeMode ? AppTheme.blue2 : AppTheme.white12,
                           ),
                           onPressed: () {},
                         ),
@@ -250,9 +216,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
               const SizedBox(height: 11),
               Visibility(
-                visible: Provider.of<MarketPlacePageProvider>(context).filterSwitch
-                    ? false
-                    : true,
+                visible:
+                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                        ? false
+                        : true,
                 child: FutureBuilder<List<String>>(
                   future: ProductsServices()
                       .productsListAndSearchCall(queryParameters: {
@@ -334,10 +301,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             fontSize: 12,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w500,
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
+                                            color: themeMode
                                                 ? AppTheme.blue3
                                                 : AppTheme.white11,
                                           ),
@@ -352,10 +316,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               fontFamily:
                                                   AppTheme.appFontFamily,
                                               fontWeight: FontWeight.w500,
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
+                                              color: themeMode
                                                   ? AppTheme.blue2
                                                   : AppTheme.white1,
                                             ),
@@ -365,10 +326,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
+                                              color: themeMode
                                                   ? AppTheme.blue2
                                                   : AppTheme.white1,
                                             ),
@@ -412,11 +370,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         height: deviceWidth + 115,
                         child: Center(
                             child: CupertinoActivityIndicator(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
+                          color: themeMode ? AppTheme.black1 : AppTheme.white1,
                           radius: 12,
                         )),
                       );
@@ -425,9 +379,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 ),
               ),
               Visibility(
-                visible: Provider.of<MarketPlacePageProvider>(context).filterSwitch
-                    ? true
-                    : false,
+                visible:
+                    Provider.of<MarketPlacePageProvider>(context).filterSwitch
+                        ? true
+                        : false,
                 child: FutureBuilder<List<String>>(
                   future: ProductsServices()
                       .productsListAndSearchCall(queryParameters: {
@@ -482,9 +437,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   decoration: BoxDecoration(
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(3)),
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
+                                    color: themeMode
                                         ? AppTheme.white1
                                         : AppTheme.black7,
                                     boxShadow: [
@@ -536,13 +489,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                 fontFamily:
                                                     AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white11,
+                                                color: themeMode
+                                                    ? AppTheme.blue3
+                                                    : AppTheme.white11,
                                               ),
                                             ),
                                           ),
@@ -555,13 +504,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                 fontFamily:
                                                     AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
+                                                color: themeMode
+                                                    ? AppTheme.blue2
+                                                    : AppTheme.white1,
                                               ),
                                             ),
                                             TextSpan(
@@ -569,13 +514,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
+                                                color: themeMode
+                                                    ? AppTheme.blue2
+                                                    : AppTheme.white1,
                                               ),
                                             )
                                           ])),
@@ -613,13 +554,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                   fontFamily:
                                                       AppTheme.appFontFamily,
                                                   fontWeight: FontWeight.w700,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue3
-                                                          : AppTheme.white11,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white11,
                                                 ),
                                               ),
                                               const SizedBox(width: 5),
@@ -684,10 +621,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                               .appFontFamily,
                                                           fontWeight:
                                                               FontWeight.w700,
-                                                          color: Provider.of<ThemeProvider>(
-                                                                          context)
-                                                                      .themeMode ==
-                                                                  "light"
+                                                          color: themeMode
                                                               ? AppTheme.blue2
                                                               : AppTheme.white1,
                                                         ),
@@ -806,11 +740,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         height: deviceWidth + 115,
                         child: Center(
                             child: CupertinoActivityIndicator(
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
+                          color: themeMode ? AppTheme.black1 : AppTheme.white1,
                           radius: 12,
                         )),
                       );
