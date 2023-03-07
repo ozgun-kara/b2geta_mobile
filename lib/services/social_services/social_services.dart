@@ -135,7 +135,7 @@ class SocialServices {
 
     try {
       final response = await http.get(
-        Uri.parse('${Constants.apiUrl}/feeds/userId')
+        Uri.parse('${Constants.apiUrl}/feeds/$userId')
             .replace(queryParameters: queryParameters),
         headers: {"Authorization": "Bearer ${Constants.userToken}"},
       );

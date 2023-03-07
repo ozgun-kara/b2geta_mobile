@@ -83,8 +83,8 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                         children: [
                           ClipOval(
                             child: Container(
-                              width: 55,
-                              height: 55,
+                              width: 40,
+                              height: 40,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
@@ -93,6 +93,8 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                               child: Image.network(
                                 "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
                                 fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
                                 errorBuilder: (context, error, stackTrace) {
                                   return Image.asset(
                                     "assets/images/dummy_images/user_profile.png",
