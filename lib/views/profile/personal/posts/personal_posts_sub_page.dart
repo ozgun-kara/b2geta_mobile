@@ -1,15 +1,21 @@
+import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:provider/provider.dart';
+
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class PersonalPostsSubPage extends StatefulWidget {
-  const PersonalPostsSubPage({Key? key}) : super(key: key);
+  const PersonalPostsSubPage({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
+  final String userId;
 
   @override
   State<PersonalPostsSubPage> createState() => _PersonalPostsSubPageState();
@@ -39,7 +45,7 @@ class _PersonalPostsSubPageState extends State<PersonalPostsSubPage> {
   void getFeeds() async {
     await _socialServices.getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
-        userId: Constants.userId.toString()).then((feedList) {
+        userId: widget.userId).then((feedList) {
       feeds = feedList;
     });
     setState(() {});

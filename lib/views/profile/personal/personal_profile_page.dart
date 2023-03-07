@@ -311,8 +311,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? const PersonalPostsSubPage()
-                : const PersonalReelsSubPage(),
+                ? PersonalPostsSubPage(userId: widget.userId)
+                : PersonalReelsSubPage(userId: widget.userId),
             const SliverToBoxAdapter(
               child: SizedBox(
                 height: 80,
