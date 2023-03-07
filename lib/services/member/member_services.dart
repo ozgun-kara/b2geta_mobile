@@ -203,7 +203,7 @@ class MemberServices {
   Future<PersonalProfileModel?> getPersonalProfileCall(
       {required String userId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/member/get/userId'),
+      Uri.parse('${Constants.apiUrl}/member/profile/$userId'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
@@ -232,7 +232,7 @@ class MemberServices {
   Future<CompanyProfileModel?> getCompanyProfileCall(
       {required String userId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/member/get/userId'),
+      Uri.parse('${Constants.apiUrl}/company/profile/$userId'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
