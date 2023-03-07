@@ -1,4 +1,3 @@
-import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -15,20 +14,20 @@ class CompanyProfilePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFeeds() async {
-    await locator<SocialServices>().getAllFeedCall(
+  void getFeeds(String userId) async {
+    await locator<SocialServices>().getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
-        userId: Constants.userId!).then((feedList) {
+        userId: userId).then((feedList) {
       feedsList = feedList;
     });
 
     notifyListeners();
   }
 
-  void getReels() async {
-    await locator<SocialServices>().getAllReelsCall(
-      queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
-    ).then((feedList) async {
+  void getReels(String userId) async {
+    await locator<SocialServices>().getReelsCall(
+        queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
+        userId: userId).then((feedList) async {
       reelsList = feedList;
     });
 

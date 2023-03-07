@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 
-class MyAccountPageProvider with ChangeNotifier {
+class PersonalProfilePageProvider with ChangeNotifier {
   int currentTabIndex = 4;
   List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
@@ -14,18 +14,20 @@ class MyAccountPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFeeds() async {
-    await locator<SocialServices>().getAllFeedCall(
-        queryParameters: {"offset": "0", "limit": "25", "type": "feed"},).then((feedList) {
+  void getFeeds(String userId) async {
+    await locator<SocialServices>().getFeedCall(
+        queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
+        userId: userId).then((feedList) {
       feedsList = feedList;
     });
 
     notifyListeners();
   }
 
-  void getReels() async {
-    await locator<SocialServices>().getAllReelsCall(
+  void getReels(String userId) async {
+    await locator<SocialServices>().getReelsCall(
       queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
+      userId: userId,
     ).then((feedList) async {
       reelsList = feedList;
     });

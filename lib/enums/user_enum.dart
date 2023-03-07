@@ -1,1 +1,1 @@
-enum UserProfile { personal, company }
+enum UserType { personal, company }

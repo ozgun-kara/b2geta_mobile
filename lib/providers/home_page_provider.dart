@@ -17,8 +17,7 @@ class HomePageProvider with ChangeNotifier {
 
   void getFeeds() async {
     await locator<SocialServices>().getAllFeedCall(
-      queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
-      userId: '',
+      queryParameters: {"offset": "0", "limit": "25", "type": "feed"}
     ).then((feedList) {
       feeds = feedList;
     });

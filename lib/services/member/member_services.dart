@@ -2,7 +2,9 @@
 
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/company_profile_model.dart';
 import 'package:b2geta_mobile/models/member/register_model.dart';
+import 'package:b2geta_mobile/models/personal_profile_model.dart';
 import 'package:b2geta_mobile/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -171,7 +173,6 @@ class MemberServices {
   }
 
   //GET PROFILE
-
   Future<UserModel?> getProfileCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/member/get'),
@@ -188,6 +189,64 @@ class MemberServices {
       if (status == true) {
         UserModel userModel = UserModel.fromJson(data);
         return userModel;
+      } else {
+        return null;
+      }
+    } else {
+      debugPrint(response.body);
+
+      return null;
+    }
+  }
+
+  //GET PERSONAL PROFILE
+  Future<PersonalProfileModel?> getPersonalProfileCall(
+      {required String userId}) async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/member/get/userId'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      var data = json.decode(response.body)["data"];
+
+      if (status == true) {
+        PersonalProfileModel personalModel =
+            PersonalProfileModel.fromJson(data);
+        return personalModel;
+      } else {
+        return null;
+      }
+    } else {
+      debugPrint(response.body);
+
+      return null;
+    }
+  }
+
+  //GET COMPANY PROFILE
+  Future<CompanyProfileModel?> getCompanyProfileCall(
+      {required String userId}) async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/member/get/userId'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      var data = json.decode(response.body)["data"];
+
+      if (status == true) {
+        CompanyProfileModel companyProfileModel =
+            CompanyProfileModel.fromJson(data);
+        return companyProfileModel;
       } else {
         return null;
       }
