@@ -1,10 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
-import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -101,7 +101,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Provider.of<CompanyProfilePageProvider>(
+                                      Provider.of<MyAccountPageProvider>(
                                               context,
                                               listen: false)
                                           .updateFilterSwitch(false);
@@ -113,7 +113,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(11)),
                                           color:
-                                              Provider.of<CompanyProfilePageProvider>(
+                                              Provider.of<MyAccountPageProvider>(
                                                               context)
                                                           .filterSwitch ==
                                                       false
@@ -131,7 +131,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                             width: 17.06,
                                             height: 17.06,
                                             color:
-                                                Provider.of<CompanyProfilePageProvider>(
+                                                Provider.of<MyAccountPageProvider>(
                                                                 context)
                                                             .filterSwitch ==
                                                         false
@@ -153,7 +153,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                   const SizedBox(width: 4),
                                   InkWell(
                                     onTap: () {
-                                      Provider.of<CompanyProfilePageProvider>(
+                                      Provider.of<MyAccountPageProvider>(
                                               context,
                                               listen: false)
                                           .updateFilterSwitch(true);
@@ -165,7 +165,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(11)),
                                           color:
-                                              Provider.of<CompanyProfilePageProvider>(
+                                              Provider.of<MyAccountPageProvider>(
                                                               context)
                                                           .filterSwitch ==
                                                       true
@@ -183,7 +183,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                             width: 14.62,
                                             height: 13.38,
                                             color:
-                                                Provider.of<CompanyProfilePageProvider>(
+                                                Provider.of<MyAccountPageProvider>(
                                                                 context)
                                                             .filterSwitch ==
                                                         true
@@ -227,7 +227,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                   ),
                   const SizedBox(height: 11),
                   Visibility(
-                    visible: Provider.of<CompanyProfilePageProvider>(context)
+                    visible: Provider.of<MyAccountPageProvider>(context)
                             .filterSwitch
                         ? false
                         : true,
@@ -393,7 +393,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                     ),
                   ),
                   Visibility(
-                    visible: Provider.of<CompanyProfilePageProvider>(context)
+                    visible: Provider.of<MyAccountPageProvider>(context)
                             .filterSwitch
                         ? true
                         : false,

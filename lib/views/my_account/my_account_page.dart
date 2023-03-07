@@ -2,17 +2,16 @@
 import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
+import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dart';
+import 'package:b2geta_mobile/views/my_account/posts/my_account_posts_sub_page.dart';
+import 'package:b2geta_mobile/views/my_account/products/my_account_products_sub_page.dart';
+import 'package:b2geta_mobile/views/my_account/reels/my_account_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
-import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({
@@ -34,8 +33,8 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   @override
   void initState() {
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
+    Provider.of<MyAccountPageProvider>(context, listen: false).getFeeds();
+    Provider.of<MyAccountPageProvider>(context, listen: false).getReels();
     Provider.of<MyAccountPageProvider>(context, listen: false).getMyStories(
         Provider.of<UserProvider>(context, listen: false)
             .getUser
@@ -244,7 +243,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             }),
                       ),
                     ),
-                    user.type == UserProfile.company
+                    user.type == UserType.company
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,
@@ -273,7 +272,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ),
                           )
                         : const SizedBox(),
-                    user.type == UserProfile.company
+                    user.type == UserType.company
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,
@@ -301,7 +300,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ),
                           )
                         : const SizedBox(),
-                    user.type == UserProfile.company
+                    user.type == UserType.company
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,
@@ -334,11 +333,11 @@ class _MyAccountPageState extends State<MyAccountPage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? const CompanyPostsSubPage()
+                ? const MyAccountPostsSubPage()
                 : provider.currentTabIndex == 1
-                    ? const CompanyReelsSubPage()
+                    ? const MyAccountReelsSubPage()
                     : provider.currentTabIndex == 2
-                        ? const CompanyProductsSubPage()
+                        ? const MyAccountProductsSubPage()
                         : provider.currentTabIndex == 3
                             ? SliverList(
                                 delegate: SliverChildBuilderDelegate(
@@ -348,7 +347,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                   },
                                 ),
                               )
-                            : const CompanyInfoSubPage(),
+                            : const MyAccountInfoSubPage(),
             const SliverToBoxAdapter(
               child: SizedBox(
                 height: 80,

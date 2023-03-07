@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/models/user_model.dart';
+import 'package:b2geta_mobile/models/company_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,22 +30,31 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  late UserModel user;
+  late CompanyProfileModel companyProfileModel;
 
   final MemberServices _memberServices = MemberServices();
 
   @override
   void initState() {
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
+    Provider.of<CompanyProfilePageProvider>(context, listen: false)
+        .getFeeds(widget.userId);
+    Provider.of<CompanyProfilePageProvider>(context, listen: false)
+        .getReels(widget.userId);
     Provider.of<CompanyProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
-
+    getProfile();
     super.initState();
   }
 
   getProfile() async {
-    await _memberServices.getProfileCall();
+    await _memberServices
+        .getCompanyProfileCall(userId: widget.userId)
+        .then((value) {
+      if (value != null) {
+        companyProfileModel = value;
+        setState(() {});
+      }
+    });
   }
 
   @override

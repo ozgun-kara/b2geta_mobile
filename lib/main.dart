@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
+import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
@@ -44,6 +45,9 @@ void main() async {
     ),
     ChangeNotifierProvider<CompanyProfilePageProvider>(
       create: (BuildContext context) => CompanyProfilePageProvider(),
+    ),
+    ChangeNotifierProvider<PersonalProfilePageProvider>(
+      create: (BuildContext context) => PersonalProfilePageProvider(),
     ),
     ChangeNotifierProvider<MyAccountPageProvider>(
       create: (BuildContext context) => MyAccountPageProvider(),

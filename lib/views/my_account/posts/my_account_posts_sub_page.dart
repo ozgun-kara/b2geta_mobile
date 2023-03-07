@@ -36,7 +36,7 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
   }
 
   void getFeeds() async {
-    await _socialServices.getAllFeedCall(
+    await _socialServices.getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: context
             .read<UserProvider>()

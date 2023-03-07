@@ -37,7 +37,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
   }
 
   void getFeeds() async {
-    await _socialServices.getAllFeedCall(
+    await _socialServices.getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: Constants.userId.toString()).then((feedList) {
       feeds = feedList;

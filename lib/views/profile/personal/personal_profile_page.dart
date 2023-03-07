@@ -1,9 +1,10 @@
+import 'package:b2geta_mobile/models/personal_profile_model.dart';
+import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
@@ -29,13 +30,30 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
   late double deviceHeight;
   late bool themeMode;
 
+  PersonalProfileModel? personalProfileModel;
+
+  final MemberServices _memberServices = MemberServices();
+
   @override
   void initState() {
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getFeeds();
-    Provider.of<CompanyProfilePageProvider>(context, listen: false).getReels();
-    Provider.of<CompanyProfilePageProvider>(context, listen: false)
+    Provider.of<PersonalProfilePageProvider>(context, listen: false)
+        .getFeeds(widget.userId);
+    Provider.of<PersonalProfilePageProvider>(context, listen: false)
+        .getReels(widget.userId);
+    Provider.of<PersonalProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
     super.initState();
+  }
+
+  getProfile() async {
+    await _memberServices
+        .getPersonalProfileCall(userId: widget.userId)
+        .then((value) {
+      if (value != null) {
+        personalProfileModel = value;
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -47,8 +65,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      body: Consumer<CompanyProfilePageProvider>(
-        builder: (context, CompanyProfilePageProvider provider, child) {
+      body: Consumer<PersonalProfilePageProvider>(
+        builder: (context, PersonalProfilePageProvider provider, child) {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -103,17 +121,28 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                                 width: 1,
                                                 color: AppTheme.white21),
                                           ),
-                                          child: Image.network(
-                                            "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Image.asset(
-                                                "assets/images/dummy_images/user_profile.png",
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          ),
+                                          child: personalProfileModel != null
+                                              ? personalProfileModel!
+                                                      .photo!.isNotEmpty
+                                                  ? Image.network(
+                                                      "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                                      fit: BoxFit.cover,
+                                                      errorBuilder: (context,
+                                                          error, stackTrace) {
+                                                        return Image.asset(
+                                                          "assets/images/dummy_images/user_profile.png",
+                                                          fit: BoxFit.cover,
+                                                        );
+                                                      },
+                                                    )
+                                                  : Image.asset(
+                                                      "assets/images/dummy_images/user_profile.png",
+                                                      fit: BoxFit.cover,
+                                                    )
+                                              : Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -127,24 +156,37 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                         border: Border.all(
                                             width: 1, color: AppTheme.white21),
                                       ),
-                                      child: Image.network(
-                                        "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      ),
+                                      child: personalProfileModel != null
+                                          ? personalProfileModel!
+                                                  .photo!.isNotEmpty
+                                              ? Image.network(
+                                                  "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Image.asset(
+                                                      "assets/images/dummy_images/user_profile.png",
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                )
+                                          : Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                             const SizedBox(height: 18),
                             Column(
                               children: [
                                 Text(
-                                  '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+                                  personalProfileModel != null
+                                      ? personalProfileModel!.name.toString()
+                                      : 'user name',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
