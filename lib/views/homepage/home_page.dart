@@ -1,5 +1,8 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -9,6 +12,7 @@ import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -581,20 +585,38 @@ class _HomePageState extends State<HomePage> {
                                       Row(
                                         children: [
                                           feed.user!.photo!.isNotEmpty
-                                              ? ClipOval(
-                                                  child: Image.network(
-                                                    width: 40,
-                                                    height: 40,
-                                                    fit: BoxFit.cover,
-                                                    feed.user!.photo!,
-                                                    errorBuilder: (context,
-                                                            error,
-                                                            stackTrace) =>
-                                                        Image.asset(
-                                                      "assets/images/dummy_images/user_profile.png",
+                                              ? GestureDetector(
+                                                  onTap: () {
+                                                    if (feed.user!.type ==
+                                                        UserType
+                                                            .personal.name) {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                PersonalProfilePage(
+                                                              userId: feed
+                                                                  .user!.id
+                                                                  .toString(),
+                                                            ),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child: ClipOval(
+                                                    child: Image.network(
                                                       width: 40,
                                                       height: 40,
                                                       fit: BoxFit.cover,
+                                                      feed.user!.photo!,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        "assets/images/dummy_images/user_profile.png",
+                                                        width: 40,
+                                                        height: 40,
+                                                        fit: BoxFit.cover,
+                                                      ),
                                                     ),
                                                   ),
                                                 )

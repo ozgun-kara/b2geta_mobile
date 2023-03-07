@@ -1,15 +1,15 @@
 import 'package:b2geta_mobile/models/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/profile/personal/posts/personal_posts_sub_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/reels/personal_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
-import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 
 class PersonalProfilePage extends StatefulWidget {
   const PersonalProfilePage({
@@ -42,6 +42,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
         .getReels(widget.userId);
     Provider.of<PersonalProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
+    getProfile();
     super.initState();
   }
 
@@ -65,6 +66,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
+      appBar: const CustomAppBar(),
       body: Consumer<PersonalProfilePageProvider>(
         builder: (context, PersonalProfilePageProvider provider, child) {
           return CustomScrollView(slivers: [
@@ -125,7 +127,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                               ? personalProfileModel!
                                                       .photo!.isNotEmpty
                                                   ? Image.network(
-                                                      "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                                      personalProfileModel!
+                                                          .photo!,
                                                       fit: BoxFit.cover,
                                                       errorBuilder: (context,
                                                           error, stackTrace) {
@@ -160,7 +163,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                           ? personalProfileModel!
                                                   .photo!.isNotEmpty
                                               ? Image.network(
-                                                  "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                                  personalProfileModel!.photo!,
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error,
                                                       stackTrace) {
@@ -308,8 +311,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? const CompanyPostsSubPage()
-                : const CompanyReelsSubPage(),
+                ? const PersonalPostsSubPage()
+                : const PersonalReelsSubPage(),
             const SliverToBoxAdapter(
               child: SizedBox(
                 height: 80,

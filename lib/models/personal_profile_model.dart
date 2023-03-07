@@ -70,60 +70,6 @@ class PersonalProfileModelSettings {
   }
 }
 
-class PersonalProfileModelDistrict {
-/*
-{
-  "id": "45",
-  "name": "Reef Al Fujairah City"
-} 
-*/
-
-  String? id;
-  String? name;
-
-  PersonalProfileModelDistrict({
-    this.id,
-    this.name,
-  });
-  PersonalProfileModelDistrict.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toString();
-    name = json['name']?.toString();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    return data;
-  }
-}
-
-class PersonalProfileModelCity {
-/*
-{
-  "id": "34",
-  "name": "Kunene Region"
-} 
-*/
-
-  String? id;
-  String? name;
-
-  PersonalProfileModelCity({
-    this.id,
-    this.name,
-  });
-  PersonalProfileModelCity.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toString();
-    name = json['name']?.toString();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['name'] = name;
-    return data;
-  }
-}
-
 class PersonalProfileModelCountryTimezones {
 /*
 {
@@ -218,13 +164,13 @@ class PersonalProfileModelCountry {
     currency = json['currency']?.toString();
     currencyName = json['currency_name']?.toString();
     currencySymbol = json['currency_symbol']?.toString();
-  if (json['timezones'] != null) {
-  final v = json['timezones'];
-  final arr0 = <PersonalProfileModelCountryTimezones>[];
-  v.forEach((v) {
-  arr0.add(PersonalProfileModelCountryTimezones.fromJson(v));
-  });
-    timezones = arr0;
+    if (json['timezones'] != null) {
+      final v = json['timezones'];
+      final arr0 = <PersonalProfileModelCountryTimezones>[];
+      v.forEach((v) {
+        arr0.add(PersonalProfileModelCountryTimezones.fromJson(v));
+      });
+      timezones = arr0;
     }
     flag = json['flag']?.toString();
   }
@@ -240,9 +186,9 @@ class PersonalProfileModelCountry {
     if (timezones != null) {
       final v = timezones;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['timezones'] = arr0;
     }
     data['flag'] = flag;
@@ -282,14 +228,6 @@ class PersonalProfileModel {
     ],
     "flag": "🇺🇸"
   },
-  "city": {
-    "id": "34",
-    "name": "Kunene Region"
-  },
-  "district": {
-    "id": "45",
-    "name": "Reef Al Fujairah City"
-  },
   "address": "",
   "postal_code": "",
   "about": "",
@@ -321,8 +259,6 @@ class PersonalProfileModel {
   String? taxNumber;
   String? gender;
   PersonalProfileModelCountry? country;
-  PersonalProfileModelCity? city;
-  PersonalProfileModelDistrict? district;
   String? address;
   String? postalCode;
   String? about;
@@ -342,8 +278,6 @@ class PersonalProfileModel {
     this.taxNumber,
     this.gender,
     this.country,
-    this.city,
-    this.district,
     this.address,
     this.postalCode,
     this.about,
@@ -362,21 +296,23 @@ class PersonalProfileModel {
     taxOffice = json['tax_office']?.toString();
     taxNumber = json['tax_number']?.toString();
     gender = json['gender']?.toString();
-    country = (json['country'] != null) ? PersonalProfileModelCountry.fromJson(json['country']) : null;
-    city = (json['city'] != null) ? PersonalProfileModelCity.fromJson(json['city']) : null;
-    district = (json['district'] != null) ? PersonalProfileModelDistrict.fromJson(json['district']) : null;
+    country = (json['country'] != null)
+        ? PersonalProfileModelCountry.fromJson(json['country'])
+        : null;
     address = json['address']?.toString();
     postalCode = json['postal_code']?.toString();
     about = json['about']?.toString();
-    settings = (json['settings'] != null) ? PersonalProfileModelSettings.fromJson(json['settings']) : null;
+    settings = (json['settings'] != null)
+        ? PersonalProfileModelSettings.fromJson(json['settings'])
+        : null;
     registrationDate = json['registration_date']?.toString();
-  if (json['companies'] != null) {
-  final v = json['companies'];
-  final arr0 = <PersonalProfileModelCompanies>[];
-  v.forEach((v) {
-  arr0.add(PersonalProfileModelCompanies.fromJson(v));
-  });
-    companies = arr0;
+    if (json['companies'] != null) {
+      final v = json['companies'];
+      final arr0 = <PersonalProfileModelCompanies>[];
+      v.forEach((v) {
+        arr0.add(PersonalProfileModelCompanies.fromJson(v));
+      });
+      companies = arr0;
     }
   }
   Map<String, dynamic> toJson() {
@@ -394,12 +330,6 @@ class PersonalProfileModel {
     if (country != null) {
       data['country'] = country!.toJson();
     }
-    if (city != null) {
-      data['city'] = city!.toJson();
-    }
-    if (district != null) {
-      data['district'] = district!.toJson();
-    }
     data['address'] = address;
     data['postal_code'] = postalCode;
     data['about'] = about;
@@ -410,9 +340,9 @@ class PersonalProfileModel {
     if (companies != null) {
       final v = companies;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['companies'] = arr0;
     }
     return data;
