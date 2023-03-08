@@ -756,13 +756,12 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               ),
                                                               onPressed: () {
                                                                 locator<SocialServices>()
-                                                                    .shareReelsCallTest(
-                                                                        type:
-                                                                            'reels',
+                                                                    .shareReelsCall(
                                                                         content:
-                                                                            'TEST-1',
-                                                                        file:
-                                                                            reelsVideo)
+                                                                            commentController
+                                                                                .text,
+                                                                        video:
+                                                                            reelsVideo!)
                                                                     .then(
                                                                         (value) {
                                                                   Provider.of<HomePageProvider>(
@@ -1032,8 +1031,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   debugPrint("comment: ${commentController.text}");
 
                   locator<SocialServices>()
-                      .shareFeedCallTest(
-                          type: 'feed', content: commentController.text)
+                      .shareFeedCall(
+                          content: commentController.text,
+                          images: Provider.of<HomePageProvider>(context,
+                                  listen: false)
+                              .imageFilesList)
                       .then((value) {
                     debugPrint("Operation Status: $value");
 
