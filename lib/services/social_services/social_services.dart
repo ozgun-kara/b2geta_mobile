@@ -388,25 +388,29 @@ class SocialServices {
     String? content,
     List<File>? images,
   }) async {
-    var request =
-        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
-
-    request.fields["type"] = 'feed';
-    request.fields["content"] = content ?? '';
+    // var request =
+    //     http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+    // request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    //
+    // request.fields["type"] = 'feed';
+    // request.fields["content"] = content ?? '';
 
     // var images = await http.MultipartFile.fromPath("images[]", images.path);
     // request.files.add(images);
 
-    var request2 = http.MultipartRequest(
-        'POST', Uri.parse('${Constants.apiUrl}/share'))
-      ..headers.addAll({"Authorization": "Bearer ${Constants.userToken}"})
-      ..fields["type"] = 'feed'
-      ..fields["content"] = content ?? ''
-      ..files.add(await http.MultipartFile.fromPath("images[]", images![0].path,
-          contentType: MediaType('image', 'jpeg')));
+    var request =
+        http.MultipartRequest('POST', Uri.parse('${Constants.apiUrl}/share'));
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    request.fields["type"] = 'feed';
+    request.fields["content"] = content ?? '';
 
-    var response = await request2.send();
+    if (images!.isNotEmpty) {
+      request.files.add(await http.MultipartFile.fromPath(
+          "images[]", images[0].path,
+          contentType: MediaType('image', 'jpeg')));
+    }
+
+    var response = await request.send();
 
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
