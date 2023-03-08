@@ -385,7 +385,7 @@ class SocialServices {
   // SHARE FEED
   shareFeedCall({
     String? content,
-    List<XFile>? images,
+    List<File>? images,
   }) async {
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));

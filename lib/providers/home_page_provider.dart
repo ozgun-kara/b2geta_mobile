@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -13,12 +14,14 @@ class HomePageProvider with ChangeNotifier {
 
   late String uploadType = 'Post'; // POST, REELS
   int uploadStep = 0; // 0,1,2,3
-  List<XFile>? imageFilesList = [];
+  List<File>? imageFilesList = [];
 
   void getFeeds() async {
-    await locator<SocialServices>().getAllFeedCall(
-      queryParameters: {"offset": "0", "limit": "25", "type": "feed"}
-    ).then((feedList) {
+    await locator<SocialServices>().getAllFeedCall(queryParameters: {
+      "offset": "0",
+      "limit": "25",
+      "type": "feed"
+    }).then((feedList) {
       feeds = feedList;
     });
 
@@ -50,12 +53,12 @@ class HomePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSelectedImageFilesList(List<XFile> imgFilesList) {
+  void updateSelectedImageFilesList(List<File> imgFilesList) {
     imageFilesList!.addAll(imgFilesList);
     notifyListeners();
   }
 
-  void deleteSelectedImage(XFile image) {
+  void deleteSelectedImage(File image) {
     imageFilesList!.remove(image);
     notifyListeners();
   }
