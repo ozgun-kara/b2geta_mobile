@@ -5,13 +5,14 @@ import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/login_register/lighting_text_page.dart';
+import 'package:b2geta_mobile/views/login_register/membership_agreement_page.dart';
 import 'package:b2geta_mobile/views/login_register/verify_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -39,6 +40,9 @@ class _RegisterPageState extends State<RegisterPage> {
   late double deviceHeight;
 
   final TextEditingController textEditingController = TextEditingController();
+
+  bool isCheck1 = false;
+  bool isCheck2 = false;
 
   @override
   void initState() {
@@ -1872,63 +1876,107 @@ class _RegisterPageState extends State<RegisterPage> {
                   // ),
                   const SizedBox(height: 23),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      FlutterSwitch(
-                        width: 42,
-                        height: 21,
-                        toggleSize: 17,
-                        padding: 2,
-                        borderRadius: 100,
-                        inactiveColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white7
-                                : AppTheme.black10,
-                        activeColor: AppTheme.green1,
-                        toggleColor:
-                            Provider.of<ThemeProvider>(context).themeMode ==
-                                    "light"
-                                ? AppTheme.white1
-                                : AppTheme.black4,
-
-                        value: Provider.of<LoginRegisterPageProvider>(context)
-                            .registerSwitch,
-
-                        // value: Provider.of<ThemeProvider>(context).themeMode ==
-                        //         "light"
-                        //     ? false
-                        //     : true,
-
-                        onToggle: (value) {
-                          // if (value == false) {
-                          //   Provider.of<ThemeProvider>(context, listen: false)
-                          //       .setLightMode();
-                          //   debugPrint('Light Theme Activated');
-                          // } else {
-                          //   Provider.of<ThemeProvider>(context, listen: false)
-                          //       .setDarkMode();
-                          //   debugPrint('Dark Theme Activated');
-                          // }
-
-                          Provider.of<LoginRegisterPageProvider>(context,
-                                  listen: false)
-                              .updateRegisterSwitch(value);
-                        },
+                      SizedBox(
+                        width: 16,
+                        height: 25,
+                        child: Checkbox(
+                            value: isCheck1,
+                            checkColor: AppTheme.blue2,
+                            activeColor: AppTheme.white5,
+                            side: BorderSide(
+                              color: AppTheme.white10,
+                              width: 1.0,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(3)),
+                            onChanged: (value) => setState(() {
+                                  isCheck1 = value!;
+                                })),
                       ),
-                      const SizedBox(width: 13),
+                      const SizedBox(width: 9),
                       Expanded(
                         child: Text(
-                          'User Agreement'.tr,
+                          'User Agreement-1'.tr,
                           style: TextStyle(
-                              fontSize: 12,
+                            fontSize: 13,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color: AppTheme.white15,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 27),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 16,
+                        height: 25,
+                        child: Checkbox(
+                            value: isCheck2,
+                            checkColor: AppTheme.blue2,
+                            activeColor: AppTheme.white5,
+                            side: BorderSide(
+                              color: AppTheme.white10,
+                              width: 1.0,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(3)),
+                            onChanged: (value) => setState(() {
+                                  isCheck2 = value!;
+                                })),
+                      ),
+                      const SizedBox(width: 9),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const LightingTextPage(),
+                                ));
+                          },
+                          child: Text(
+                            'User Agreement-2'.tr,
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              fontSize: 13,
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w400,
-                              color: AppTheme.white14),
+                              color: AppTheme.white15,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 30),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const MembershipAgreementPage(),
+                          ));
+                    },
+                    child: Text(
+                      'User Agreement-3'.tr,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: AppTheme.white15,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   ButtonTheme(
                     minWidth: deviceWidth,
                     height: 52,
@@ -1936,30 +1984,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       height: 52,
                       decoration: BoxDecoration(
                           color: AppTheme.green1,
-                          // boxShadow: [
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.outer,
-                          //     offset: Offset(0, -4),
-                          //     blurRadius: 16,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, -2),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-                          //   ),
-                          //   BoxShadow(
-                          //     blurStyle: BlurStyle.normal,
-                          //     offset: Offset(0, 1),
-                          //     blurRadius: 2,
-                          //     spreadRadius: 0,
-                          //     color: Color(0xFF000000).withOpacity(0.18),
-                          //   ),
-                          // ],
-
                           borderRadius:
                               const BorderRadius.all(Radius.circular(16))),
                       child: MaterialButton(

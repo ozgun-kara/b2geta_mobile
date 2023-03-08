@@ -37,7 +37,11 @@ final Map<String, String> tr = {
   'Official Phone': 'Yetkili Telefon',
   'Country': 'Ülke',
   "Country Dropdown": 'Ülke ara...',
-  'User Agreement': 'Kullanıcı sözleşmesini okudum onaylıyorum',
+  'User Agreement-1':
+      'Kampanyalardan haberdar olabilmem için kişisel verilerimin işlenmesini ve tarafıma elektronik ileti gönderilmesini kabul ediyorum.',
+  'User Agreement-2':
+      'Kişisel verilerimin işlenmesine yönelik aydınlatma metnini okudum ve anladım.',
+     'User Agreement-3':  'Üye Ol\'a basarak Üyelik Koşullarını kabul ediyorum.',
   'E-mail Validate-3': 'Email adresleri uyuşmuyor',
   'Password Validate-3': 'Şifreler uyuşmuyor',
   'Company Name Validate': 'Lütfen firma adını giriniz',

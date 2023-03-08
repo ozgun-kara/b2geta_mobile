@@ -37,7 +37,11 @@ final Map<String, String> en = {
   'Official Phone': 'Official Phone',
   'Country': 'Country',
   "Country Dropdown": 'Search country...',
-  'User Agreement': 'I have read and accept the user agreement',
+  'User Agreement-1':
+      'I accept the processing of my personal data and the sending of electronic messages so that I can be informed about the campaigns.',
+  'User Agreement-2':
+      'I have read and understood the clarification text for the processing of my personal data.',
+  'User Agreement-3': 'By clicking Sign Up I accept the Membership Terms.',
   'E-mail Validate-3': 'Unmatched email address',
   'Password Validate-3': 'Unmatched password',
   'Company Name Validate': 'Please enter a company name',
