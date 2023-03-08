@@ -381,25 +381,42 @@ class SocialServices {
     }
   }
 
+  // // SHARE REELS TEST
+  // shareReelsCallTest(
+  //     {required String type,
+  //     String? content,
+  //     List<File>? images,
+  //     File? file}) async {
+  //   var request =
+  //       http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+  //   request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+  //
+  //   //add text fields
+  //   request.fields["type"] = type;
+  //   request.fields["content"] = content ?? '';
+  //   //create multipart using filepath, string or bytes
+  //   var reels = await http.MultipartFile.fromPath("video", file!.path);
+  //   //add multipart to request
+  //   request.files.add(reels);
+  //   var response = await request.send();
+  //   //Get the response from the server
+  //   var responseData = await response.stream.toBytes();
+  //   var responseString = String.fromCharCodes(responseData);
+  //   debugPrint("RESPONSE $responseString");
+  // }
+
   // SHARE REELS TEST
-  shareReelsCallTest(
-      {required String type,
-      String? content,
-      List<File>? images,
-      File? file}) async {
+  shareReelsCallTest({String? content, required File video}) async {
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
 
-    //add text fields
-    request.fields["type"] = type;
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    request.fields["type"] = 'reels';
     request.fields["content"] = content ?? '';
-    //create multipart using filepath, string or bytes
-    var reels = await http.MultipartFile.fromPath("video", file!.path);
-    //add multipart to request
+    var reels = await http.MultipartFile.fromPath("video", video.path);
     request.files.add(reels);
     var response = await request.send();
-    //Get the response from the server
+
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     debugPrint("RESPONSE $responseString");
