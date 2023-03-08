@@ -34,7 +34,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
   late VideoPlayerController videoPlayerController;
 
   void selectImages() async {
-    final List<XFile> selectedImages = await imagePicker.pickMultiImage();
+    final List<XFile> pickedFiles = await imagePicker.pickMultiImage();
+
+    final List<File> selectedImages =
+        pickedFiles.map<File>((xfile) => File(xfile.path)).toList();
 
     if (selectedImages.isNotEmpty) {
       Provider.of<HomePageProvider>(context, listen: false)
