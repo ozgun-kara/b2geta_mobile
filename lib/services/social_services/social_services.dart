@@ -352,61 +352,59 @@ class SocialServices {
     }
   }
 
-  // SHARE FEED TEST
-  Future<bool> shareFeedCallTest(
-      {required String type, required String content}) async {
-    final response =
-        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}"
-    }, body: {
-      "type": type,
-      "content": content,
-    });
-
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-      debugPrint(status.toString());
-
-      if (status == true) {
-        return true;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-        return false;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-      return false;
-    }
-  }
-
-  // // SHARE REELS TEST
-  // shareReelsCallTest(
-  //     {required String type,
-  //     String? content,
-  //     List<File>? images,
-  //     File? file}) async {
-  //   var request =
-  //       http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
-  //   request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+  // // SHARE FEED TEST
+  // Future<bool> shareFeedCallTest(
+  //     {required String type, required String content}) async {
+  //   final response =
+  //       await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
+  //     "Authorization": "Bearer ${Constants.userToken}"
+  //   }, body: {
+  //     "type": type,
+  //     "content": content,
+  //   });
   //
-  //   //add text fields
-  //   request.fields["type"] = type;
-  //   request.fields["content"] = content ?? '';
-  //   //create multipart using filepath, string or bytes
-  //   var reels = await http.MultipartFile.fromPath("video", file!.path);
-  //   //add multipart to request
-  //   request.files.add(reels);
-  //   var response = await request.send();
-  //   //Get the response from the server
-  //   var responseData = await response.stream.toBytes();
-  //   var responseString = String.fromCharCodes(responseData);
-  //   debugPrint("RESPONSE $responseString");
+  //   if (response.statusCode == 200) {
+  //     var status = json.decode(response.body)["status"];
+  //     debugPrint(status.toString());
+  //
+  //     if (status == true) {
+  //       return true;
+  //     } else {
+  //       // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+  //
+  //       return false;
+  //     }
+  //   } else {
+  //     // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+  //
+  //     return false;
+  //   }
   // }
 
-  // SHARE REELS TEST
-  shareReelsCallTest({String? content, required File video}) async {
+  // SHARE FEED
+  shareFeedCall({
+    String? content,
+    List<File>? images,
+  }) async {
+    var request =
+        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+
+    //add text fields
+    request.fields["type"] = 'feed';
+    request.fields["content"] = content ?? '';
+
+    // var images = await http.MultipartFile.fromPath("images[]", images.path);
+    // request.files.add(images);
+
+    var response = await request.send();
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    debugPrint("RESPONSE $responseString");
+  }
+
+  // SHARE REELS
+  shareReelsCall({String? content, required File video}) async {
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
 
