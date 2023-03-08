@@ -160,6 +160,7 @@ class _VerifyPageState extends State<VerifyPage> {
                   height: 13,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       width: 50,
