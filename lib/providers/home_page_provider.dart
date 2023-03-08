@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 class HomePageProvider with ChangeNotifier {
   List<FeedModel> feeds = [];

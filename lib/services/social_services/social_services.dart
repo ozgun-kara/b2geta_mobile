@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:http_parser/http_parser.dart';
 
 class SocialServices {
   // FEED LIST
@@ -397,7 +398,16 @@ class SocialServices {
     // var images = await http.MultipartFile.fromPath("images[]", images.path);
     // request.files.add(images);
 
-    var response = await request.send();
+    var request2 = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/share'))
+      ..headers.addAll({"Authorization": "Bearer ${Constants.userToken}"})
+      ..fields["type"] = 'feed'
+      ..fields["content"] = content ?? ''
+      ..files.add(await http.MultipartFile.fromPath("images[]", images![0].path,
+          contentType: MediaType('image', 'jpeg')));
+
+    var response = await request2.send();
+
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     debugPrint("RESPONSE $responseString");
