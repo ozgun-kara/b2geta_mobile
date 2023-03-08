@@ -1031,7 +1031,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   debugPrint("comment: ${commentController.text}");
 
                   locator<SocialServices>()
-                      .shareFeedCall(content: commentController.text)
+                      .shareFeedCall(
+                          content: commentController.text,
+                          images: Provider.of<HomePageProvider>(context,
+                                  listen: false)
+                              .imageFilesList)
                       .then((value) {
                     debugPrint("Operation Status: $value");
 

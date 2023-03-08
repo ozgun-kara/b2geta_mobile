@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class SocialServices {
   // FEED LIST
@@ -384,13 +385,12 @@ class SocialServices {
   // SHARE FEED
   shareFeedCall({
     String? content,
-    List<File>? images,
+    List<XFile>? images,
   }) async {
     var request =
         http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
     request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
 
-    //add text fields
     request.fields["type"] = 'feed';
     request.fields["content"] = content ?? '';
 
