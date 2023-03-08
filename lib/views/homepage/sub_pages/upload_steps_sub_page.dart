@@ -757,12 +757,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               onPressed: () {
                                                                 locator<SocialServices>()
                                                                     .shareReelsCallTest(
-                                                                        type:
-                                                                            'reels',
                                                                         content:
-                                                                            'TEST-1',
-                                                                        file:
-                                                                            reelsVideo)
+                                                                            commentController
+                                                                                .text,
+                                                                        video:
+                                                                            reelsVideo!)
                                                                     .then(
                                                                         (value) {
                                                                   Provider.of<HomePageProvider>(
