@@ -72,7 +72,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 252,
+              expandedHeight: 250,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -256,7 +256,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                   children: [
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -282,7 +282,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(

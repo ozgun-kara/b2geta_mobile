@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/personal_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -336,7 +337,6 @@ class _NavigationPageState extends State<NavigationPage> {
         builder: (BuildContext bc) {
           return GestureDetector(
             onTapDown: (tapDetails) {
-              //closing bottom sheet on tapping on the left
               if (tapDetails.globalPosition.dx <
                   MediaQuery.of(context).size.width * 0.5) {
                 Navigator.pop(context);
@@ -344,9 +344,11 @@ class _NavigationPageState extends State<NavigationPage> {
             },
             child: Container(
                 height: deviceHeight * .5,
-                padding: EdgeInsets.only(left: deviceWidth * 0.6),
+                padding: EdgeInsets.only(left: deviceWidth * 0.5),
                 color: Colors.transparent,
                 child: Container(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 16.0),
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -357,19 +359,63 @@ class _NavigationPageState extends State<NavigationPage> {
                   child: ListView.builder(
                     itemCount: personalProfileModel.companies!.length,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                          title: Text(
-                        personalProfileModel.companies![index]!.name.toString(),
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.black11
-                                    : AppTheme.white1),
-                      ));
+                      var company = personalProfileModel.companies![index];
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CompanyProfilePage(
+                                    userId: company.id.toString()),
+                              ));
+                        },
+                        child: Column(
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                company!.logo!.isNotEmpty
+                                    ? Image.network(
+                                        width: 20,
+                                        height: 20,
+                                        company.logo.toString(),
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            width: 20,
+                                            height: 20,
+                                          );
+                                        },
+                                      )
+                                    : Image.asset(
+                                        width: 20,
+                                        height: 20,
+                                        'assets/images/dummy_images/user_profile.png'),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    company.name.toString(),
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider()
+                          ],
+                        ),
+                      );
                     },
                   ),
                 )),

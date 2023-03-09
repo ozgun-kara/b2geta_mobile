@@ -59,7 +59,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 252,
+              expandedHeight: 228,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -193,7 +193,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                   children: [
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -219,7 +219,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(

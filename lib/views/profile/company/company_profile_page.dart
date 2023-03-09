@@ -1,11 +1,12 @@
 import 'package:b2geta_mobile/models/company_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
 import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
@@ -30,7 +31,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  late CompanyProfileModel companyProfileModel;
+  CompanyProfileModel? companyProfileModel;
 
   final MemberServices _memberServices = MemberServices();
 
@@ -38,8 +39,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   void initState() {
     Provider.of<CompanyProfilePageProvider>(context, listen: false)
         .getFeeds(widget.userId);
-    Provider.of<CompanyProfilePageProvider>(context, listen: false)
-        .getReels(widget.userId);
     Provider.of<CompanyProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
     getProfile();
@@ -66,12 +65,13 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
+      appBar: const CustomAppBar(),
       body: Consumer<CompanyProfilePageProvider>(
         builder: (context, CompanyProfilePageProvider provider, child) {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 252,
+              expandedHeight: 250,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -122,17 +122,25 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                 width: 1,
                                                 color: AppTheme.white21),
                                           ),
-                                          child: Image.network(
-                                            "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Image.asset(
-                                                "assets/images/dummy_images/user_profile.png",
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          ),
+                                          child: (companyProfileModel != null &&
+                                                  companyProfileModel!
+                                                      .logo!.isNotEmpty)
+                                              ? Image.network(
+                                                  companyProfileModel!.logo
+                                                      .toString(),
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Image.asset(
+                                                      "assets/images/dummy_images/user_profile.png",
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -146,25 +154,35 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                         border: Border.all(
                                             width: 1, color: AppTheme.white21),
                                       ),
-                                      child: Image.network(
-                                        "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      ),
+                                      child: (companyProfileModel != null &&
+                                              companyProfileModel!
+                                                  .logo!.isNotEmpty)
+                                          ? Image.network(
+                                              companyProfileModel!.logo
+                                                  .toString(),
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            )
+                                          : Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                             const SizedBox(height: 18),
-
                             Column(
                               children: [
                                 Text(
-                                  '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+                                  (companyProfileModel != null &&
+                                          companyProfileModel!.name!.isNotEmpty)
+                                      ? companyProfileModel!.name!
+                                      : 'user name',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
@@ -186,34 +204,33 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                 ),
                               ],
                             ),
-
                             const SizedBox(height: 10),
-                            // SizedBox(
-                            //   height: 22,
-                            //   child: ButtonTheme(
-                            //     minWidth: double.minPositive,
-                            //     height: 22,
-                            //     child: MaterialButton(
-                            //         elevation: 0,
-                            //         color: AppTheme.blue2,
-                            //         shape: const RoundedRectangleBorder(
-                            //           borderRadius:
-                            //               BorderRadius.all(Radius.circular(36)),
-                            //         ),
-                            //         padding:
-                            //             const EdgeInsets.fromLTRB(13, 2, 13, 0),
-                            //         child: Text(
-                            //           'Follow'.tr,
-                            //           style: TextStyle(
-                            //             fontSize: 11,
-                            //             fontFamily: AppTheme.appFontFamily,
-                            //             fontWeight: FontWeight.w700,
-                            //             color: AppTheme.white1,
-                            //           ),
-                            //         ),
-                            //         onPressed: () {}),
-                            //   ),
-                            // ),
+                            SizedBox(
+                              height: 22,
+                              child: ButtonTheme(
+                                minWidth: double.minPositive,
+                                height: 22,
+                                child: MaterialButton(
+                                    elevation: 0,
+                                    color: AppTheme.blue2,
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(36)),
+                                    ),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(13, 2, 13, 0),
+                                    child: Text(
+                                      'Follow'.tr,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white1,
+                                      ),
+                                    ),
+                                    onPressed: () {}),
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -233,7 +250,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                   children: [
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -259,7 +276,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -285,7 +302,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -312,7 +329,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -338,7 +355,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                     ),
                     Expanded(
                       child: ButtonTheme(
-                        height: 49,
+                        height: 43,
                         child: MaterialButton(
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.all(
@@ -367,9 +384,11 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? const CompanyPostsSubPage()
+                ? CompanyPostsSubPage(
+                    userId: companyProfileModel!.id.toString())
                 : provider.currentTabIndex == 1
-                    ? const CompanyReelsSubPage()
+                    ? CompanyReelsSubPage(
+                        userId: companyProfileModel!.id.toString())
                     : provider.currentTabIndex == 2
                         ? const CompanyProductsSubPage()
                         : provider.currentTabIndex == 3
