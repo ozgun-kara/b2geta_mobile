@@ -1,3 +1,8 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -6,10 +11,6 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
-import 'package:provider/provider.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -30,6 +31,13 @@ class _NavigationPageState extends State<NavigationPage> {
     Provider.of<UserProvider>(context, listen: false).getProfile();
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
     super.initState();
+  }
+
+  Offset _tapPosition = Offset.zero;
+  void _getTapPosition(TapDownDetails tapDownDetails) {
+    final RenderBox renderBox = context.findRenderObject() as RenderBox;
+    _tapPosition = renderBox.globalToLocal(tapDownDetails.globalPosition);
+    debugPrint(_tapPosition.toString());
   }
 
   @override
@@ -234,9 +242,13 @@ class _NavigationPageState extends State<NavigationPage> {
                     ),
                   ),
                   Expanded(
-                    child: ButtonTheme(
-                      height: 60,
-                      child: MaterialButton(
+                    child: GestureDetector(
+                      onTapDown: (details) {
+                        _getTapPosition(details);
+                      },
+                      child: ButtonTheme(
+                        height: 60,
+                        child: MaterialButton(
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(16),
@@ -287,7 +299,24 @@ class _NavigationPageState extends State<NavigationPage> {
                           ),
                           onPressed: () {
                             provider.updateCurrentTabIndex(3);
-                          }),
+                          },
+                          onLongPress: () {
+                            showMenu(
+                                items: <PopupMenuEntry>[
+                                  PopupMenuItem(
+                                    //value: this._index,
+                                    child: Row(
+                                      children: const [Text("Context item 1")],
+                                    ),
+                                  )
+                                ],
+                                context: context,
+                                position: RelativeRect.fromRect(
+                                    const Rect.fromLTWH(342.2, 794.1, 10, 10),
+                                    const Rect.fromLTWH(0, 0, 10, 10)));
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ],
