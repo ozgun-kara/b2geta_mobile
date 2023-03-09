@@ -29,8 +29,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
   }
 
-
-
+  final MemberServices _memberServices = MemberServices();
 
   checkToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -52,10 +51,15 @@ class _SplashPageState extends State<SplashPage> {
       debugPrint("TOKEN AVAILABLE");
       Constants.userToken = token;
       debugPrint("TOKEN:${Constants.userToken}");
-
       Constants.userId = prefs.getString("UserId");
       debugPrint("USER ID:${Constants.userId}");
- 
+      await _memberServices.getProfileCall().then((value) {
+        if (value != null) {
+          Provider.of<UserProvider>(context, listen: false)
+              .updateUserModel(value);
+        }
+      });
+
       Navigator.of(context)
           .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
         return const NavigationPage();

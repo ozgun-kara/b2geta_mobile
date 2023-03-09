@@ -33,7 +33,6 @@ class _NavigationPageState extends State<NavigationPage> {
 
   @override
   void initState() {
-    Provider.of<UserProvider>(context, listen: false).getProfile();
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
     getPersonalProfile(Provider.of<UserProvider>(context, listen: false)
         .getUser
@@ -41,7 +40,6 @@ class _NavigationPageState extends State<NavigationPage> {
         .toString());
     super.initState();
   }
-
 
   getPersonalProfile(String userId) async {
     await _memberServices.getPersonalProfileCall(userId: userId).then((value) {
@@ -308,8 +306,6 @@ class _NavigationPageState extends State<NavigationPage> {
                           provider.updateCurrentTabIndex(3);
                         },
                         onLongPress: () {
-                          debugPrint(personalProfileModel.toString());
-
                           if (personalProfileModel != null &&
                               personalProfileModel!.companies!.isNotEmpty) {
                             _companyListModalBottomSheet(
@@ -330,21 +326,54 @@ class _NavigationPageState extends State<NavigationPage> {
       BuildContext context, PersonalProfileModel personalProfileModel) {
     showModalBottomSheet(
         context: context,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(15.0),
+          ),
+        ),
         builder: (BuildContext bc) {
-          return SizedBox(
-              height: 400,
-              child: ListView.separated(
-                itemCount: personalProfileModel.companies!.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                      title: Text(
-                    personalProfileModel.companies![index]!.name.toString(),
-                  ));
-                },
-                separatorBuilder: (context, index) {
-                  return const Divider();
-                },
-              ));
+          return GestureDetector(
+            onTapDown: (tapDetails) {
+              //closing bottom sheet on tapping on the left
+              if (tapDetails.globalPosition.dx <
+                  MediaQuery.of(context).size.width * 0.5) {
+                Navigator.pop(context);
+              }
+            },
+            child: Container(
+                height: deviceHeight * .5,
+                padding: EdgeInsets.only(left: deviceWidth * 0.6),
+                color: Colors.transparent,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(5.0),
+                      topRight: Radius.circular(5.0),
+                    ),
+                  ),
+                  child: ListView.builder(
+                    itemCount: personalProfileModel.companies!.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text(
+                        personalProfileModel.companies![index]!.name.toString(),
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black11
+                                    : AppTheme.white1),
+                      ));
+                    },
+                  ),
+                )),
+          );
         });
   }
 
