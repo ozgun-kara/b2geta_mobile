@@ -1,12 +1,17 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 
 class CompanyReelsSubPage extends StatefulWidget {
-  const CompanyReelsSubPage({Key? key}) : super(key: key);
+  const CompanyReelsSubPage({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
+  final String userId;
 
   @override
   State<CompanyReelsSubPage> createState() => _CompanyReelsSubPageState();
@@ -29,9 +34,9 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
   }
 
   void getReels() async {
-    await _socialServices.getAllReelsCall(
-      queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
-    ).then((feedList) async {
+    await _socialServices.getReelsCall(
+        queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
+        userId: widget.userId).then((feedList) async {
       reelsList = feedList;
       setState(() {});
     });
