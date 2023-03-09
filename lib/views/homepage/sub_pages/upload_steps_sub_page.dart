@@ -574,15 +574,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               onPressed: () {
                                                                 provider
                                                                     .updateUploadStep(
-                                                                        2);
-
-                                                                Timer(
-                                                                    const Duration(
-                                                                        milliseconds:
-                                                                            1500),
-                                                                    () => provider
-                                                                        .updateUploadStep(
-                                                                            0));
+                                                                        0);
                                                               }),
                                                         ),
                                                       ],
@@ -672,8 +664,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                 .white1),
                                                       ),
                                                       onPressed: () {
-                                                        // selectReels();
-
                                                         selectReels();
                                                       })
                                                 ],
@@ -758,6 +748,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                         .white1),
                                                               ),
                                                               onPressed: () {
+                                                                provider
+                                                                    .updateUploadStep(
+                                                                        2);
+
                                                                 locator<SocialServices>()
                                                                     .shareCall(
                                                                         type:
@@ -769,26 +763,16 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                             reelsVideo!)
                                                                     .then(
                                                                         (value) {
+                                                                  provider
+                                                                      .updateUploadStep(
+                                                                          3);
+
                                                                   Provider.of<HomePageProvider>(
                                                                           context,
                                                                           listen:
                                                                               false)
                                                                       .getReels();
                                                                 });
-
-                                                                // "user_id": "93",
-
-                                                                provider
-                                                                    .updateUploadStep(
-                                                                        2);
-
-                                                                Timer(
-                                                                    const Duration(
-                                                                        milliseconds:
-                                                                            1500),
-                                                                    () => provider
-                                                                        .updateUploadStep(
-                                                                            3));
                                                               }),
                                                         ),
                                                       ],
@@ -1035,6 +1019,13 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                 onPressed: () {
                   debugPrint("comment: ${commentController.text}");
 
+                  if (Provider.of<HomePageProvider>(context, listen: false)
+                      .imageFilesList!
+                      .isNotEmpty) {
+                    Provider.of<HomePageProvider>(context, listen: false)
+                        .updateUploadStep(2);
+                  }
+
                   locator<SocialServices>()
                       .shareCall(
                     type: 'feed',
@@ -1044,15 +1035,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                             .imageFilesList,
                   )
                       .then((value) {
-                    debugPrint("Operation Status: $value");
-
                     Provider.of<HomePageProvider>(context, listen: false)
                         .updateUploadStep(3);
 
                     Provider.of<HomePageProvider>(context, listen: false)
                         .getFeeds();
-                    Provider.of<HomePageProvider>(context, listen: false)
-                        .getReels();
                   });
                 }),
           ),
