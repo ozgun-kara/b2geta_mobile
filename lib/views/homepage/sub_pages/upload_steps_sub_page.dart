@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
@@ -822,7 +821,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                     CircularPercentIndicator(
                                       radius: 90,
                                       lineWidth: 13,
-                                      percent: 0.85,
+                                      // percent: 0.85,
+                                      percent: 1,
+                                      restartAnimation: true,
+                                      animationDuration: 3000,
                                       animation: true,
                                       backgroundColor: themeMode
                                           ? AppTheme.white28
@@ -830,16 +832,16 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                       progressColor: AppTheme.green10,
                                       circularStrokeCap:
                                           CircularStrokeCap.round,
-                                      center: Text(
-                                        "%85",
-                                        style: TextStyle(
-                                            fontSize: 40,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w700,
-                                            color: themeMode
-                                                ? AppTheme.blue3
-                                                : AppTheme.white1),
-                                      ),
+                                      // center: Text(
+                                      //   "%85",
+                                      //   style: TextStyle(
+                                      //       fontSize: 40,
+                                      //       fontFamily: AppTheme.appFontFamily,
+                                      //       fontWeight: FontWeight.w700,
+                                      //       color: themeMode
+                                      //           ? AppTheme.blue3
+                                      //           : AppTheme.white1),
+                                      // ),
                                     ),
                                     const SizedBox(height: 40),
                                     Padding(
