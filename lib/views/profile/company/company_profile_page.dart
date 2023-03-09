@@ -38,8 +38,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
   @override
   void initState() {
     Provider.of<CompanyProfilePageProvider>(context, listen: false)
-        .getFeeds(widget.userId);
-    Provider.of<CompanyProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
     getProfile();
     super.initState();

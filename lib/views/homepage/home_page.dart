@@ -2,11 +2,9 @@
 
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
-import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -14,7 +12,7 @@ import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_page.dart';
-import 'package:b2geta_mobile/views/navigation_page.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -593,19 +591,30 @@ class _HomePageState extends State<HomePage> {
                                                     if (feed.user!.type ==
                                                         UserType
                                                             .personal.name) {
-                                                      
-                                                        Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  PersonalProfilePage(
-                                                                userId: feed
-                                                                    .user!.id
-                                                                    .toString(),
-                                                              ),
-                                                            ));
-                                                      }
-                                                    
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                PersonalProfilePage(
+                                                              userId: feed
+                                                                  .user!.id
+                                                                  .toString(),
+                                                            ),
+                                                          ));
+                                                    } else if (feed
+                                                            .user!.type ==
+                                                        UserType.company.name) {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CompanyProfilePage(
+                                                              userId: feed
+                                                                  .user!.id
+                                                                  .toString(),
+                                                            ),
+                                                          ));
+                                                    }
                                                   },
                                                   child: ClipOval(
                                                     child: Image.network(
