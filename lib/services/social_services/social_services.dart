@@ -4,8 +4,6 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/feed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
-import 'package:http_parser/http_parser.dart';
 
 class SocialServices {
   // FEED LIST
@@ -287,160 +285,55 @@ class SocialServices {
   // SHARE (FEED / STORY / REELS)
   Future<bool> shareCall(
       {required String type,
-      required String content,
+      String? content,
       List<File>? images,
-      File? video,
-      List<File>? videos}) async {
-    final response =
-        await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}"
-    }, body: {
-      "type": type,
-      "content": content,
-      // "images": images,
-      // "video": video,
-      // "videos": videos
-    });
-
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-      debugPrint(status.toString());
-
-      if (status == true) {
-        return true;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-        return false;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-      return false;
-    }
-  }
-
-  Future<bool> shareStoryCall({
-    required File image,
-  }) async {
-    var request =
-        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
-
-    //add text fields
-    request.fields["type"] = 'story';
-    //create multipart using filepath, string or bytes
-    var story = await http.MultipartFile.fromPath('images[]', image.path);
-    //add multipart to request
-    request.files.add(story);
-    var streamedResponse = await request.send();
-    //Get the response from the server
-    var response = await http.Response.fromStream(streamedResponse);
-
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        return true;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-        return false;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-
-      return false;
-    }
-  }
-
-  // // SHARE FEED TEST
-  // Future<bool> shareFeedCallTest(
-  //     {required String type, required String content}) async {
-  //   final response =
-  //       await http.post(Uri.parse('${Constants.apiUrl}/share'), headers: {
-  //     "Authorization": "Bearer ${Constants.userToken}"
-  //   }, body: {
-  //     "type": type,
-  //     "content": content,
-  //   });
-  //
-  //   if (response.statusCode == 200) {
-  //     var status = json.decode(response.body)["status"];
-  //     debugPrint(status.toString());
-  //
-  //     if (status == true) {
-  //       return true;
-  //     } else {
-  //       // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-  //
-  //       return false;
-  //     }
-  //   } else {
-  //     // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-  //
-  //     return false;
-  //   }
-  // }
-
-  // SHARE FEED
-  shareFeedCall({
-    String? content,
-    List<File>? images,
-  }) async {
-    // var request =
-    //     http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
-    // request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
-    //
-    // request.fields["type"] = 'feed';
-    // request.fields["content"] = content ?? '';
-
-    // var images = await http.MultipartFile.fromPath("images[]", images.path);
-    // request.files.add(images);
-
+      File? video}) async {
     var request =
         http.MultipartRequest('POST', Uri.parse('${Constants.apiUrl}/share'));
     request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
-    request.fields["type"] = 'feed';
+    request.fields["type"] = type;
     request.fields["content"] = content ?? '';
 
-    if (images!.isNotEmpty) {
-      List<http.MultipartFile> files = [];
-      for (File file in images) {
-        var f = await http.MultipartFile.fromPath('images[]', file.path);
-        files.add(f);
+    // IMAGE CONTROL PART
+
+    if (images != null) {
+      if (images.isNotEmpty) {
+        List<http.MultipartFile> files = [];
+        for (File file in images) {
+          var f = await http.MultipartFile.fromPath('images[]', file.path);
+          files.add(f);
+        }
+        request.files.addAll(files);
       }
-      request.files.addAll(files);
     }
 
-    // if (images!.isNotEmpty) {
-    //   request.files.add(await http.MultipartFile.fromPath(
-    //       "images[]", images[0].path,
-    //       contentType: MediaType('image', 'jpeg')));
-    // }
+    // REELS CONTROL PART
+    if (video != null) {
+      var reels = await http.MultipartFile.fromPath("video", video.path);
+      request.files.add(reels);
+    }
 
     var response = await request.send();
 
     var responseData = await response.stream.toBytes();
     var responseString = String.fromCharCodes(responseData);
     debugPrint("RESPONSE $responseString");
-  }
 
-  // SHARE REELS
-  shareReelsCall({String? content, required File video}) async {
-    var request =
-        http.MultipartRequest("POST", Uri.parse('${Constants.apiUrl}/share'));
+    if (response.statusCode == 200) {
+      var status = json.decode(responseString)["status"];
 
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
-    request.fields["type"] = 'reels';
-    request.fields["content"] = content ?? '';
-    var reels = await http.MultipartFile.fromPath("video", video.path);
-    request.files.add(reels);
-    var response = await request.send();
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
 
-    var responseData = await response.stream.toBytes();
-    var responseString = String.fromCharCodes(responseData);
-    debugPrint("RESPONSE $responseString");
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
   }
 
   // CREATE COMMENT
