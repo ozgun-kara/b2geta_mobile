@@ -1,3 +1,5 @@
+import 'package:b2geta_mobile/models/personal_profile_model.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -26,18 +28,28 @@ class _NavigationPageState extends State<NavigationPage> {
   late double deviceWidth;
   late double deviceHeight;
 
+  final MemberServices _memberServices = MemberServices();
+  PersonalProfileModel? personalProfileModel;
+
   @override
   void initState() {
     Provider.of<UserProvider>(context, listen: false).getProfile();
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
+    getPersonalProfile(Provider.of<UserProvider>(context, listen: false)
+        .getUser
+        .id
+        .toString());
     super.initState();
   }
 
-  Offset _tapPosition = Offset.zero;
-  void _getTapPosition(TapDownDetails tapDownDetails) {
-    final RenderBox renderBox = context.findRenderObject() as RenderBox;
-    _tapPosition = renderBox.globalToLocal(tapDownDetails.globalPosition);
-    debugPrint(_tapPosition.toString());
+
+  getPersonalProfile(String userId) async {
+    await _memberServices.getPersonalProfileCall(userId: userId).then((value) {
+      if (value != null) {
+        personalProfileModel = value;
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -242,80 +254,68 @@ class _NavigationPageState extends State<NavigationPage> {
                     ),
                   ),
                   Expanded(
-                    child: GestureDetector(
-                      onTapDown: (details) {
-                        _getTapPosition(details);
-                      },
-                      child: ButtonTheme(
-                        height: 60,
-                        child: MaterialButton(
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(16),
-                              topRight: Radius.circular(16),
-                            ),
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
                           ),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white1
-                                  : AppTheme.black5,
-                          elevation: 0,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              ClipOval(
-                                child: Image.network(
-                                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                  width: 24,
-                                  height: 24,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return ClipOval(
-                                      child: Image.asset(
-                                        width: 24,
-                                        height: 24,
-                                        'assets/images/dummy_images/user_profile.png',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Text('My Account'.tr,
-                                  style: TextStyle(
-                                      fontSize: 9,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w600,
-                                      color: provider.currentTabIndex == 3
-                                          ? Provider.of<ThemeProvider>(context)
-                                                      .themeMode ==
-                                                  "light"
-                                              ? AppTheme.blue2
-                                              : AppTheme.white1
-                                          : AppTheme.white15)),
-                            ],
-                          ),
-                          onPressed: () {
-                            provider.updateCurrentTabIndex(3);
-                          },
-                          onLongPress: () {
-                            showMenu(
-                                items: <PopupMenuEntry>[
-                                  PopupMenuItem(
-                                    //value: this._index,
-                                    child: Row(
-                                      children: const [Text("Context item 1")],
-                                    ),
-                                  )
-                                ],
-                                context: context,
-                                position: RelativeRect.fromRect(
-                                    const Rect.fromLTWH(342.2, 794.1, 10, 10),
-                                    const Rect.fromLTWH(0, 0, 10, 10)));
-                          },
                         ),
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.white1
+                            : AppTheme.black5,
+                        elevation: 0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ClipOval(
+                              child: Image.network(
+                                'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                width: 24,
+                                height: 24,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return ClipOval(
+                                    child: Image.asset(
+                                      width: 24,
+                                      height: 24,
+                                      'assets/images/dummy_images/user_profile.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                            const SizedBox(height: 5),
+                            Text('My Account'.tr,
+                                style: TextStyle(
+                                    fontSize: 9,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w600,
+                                    color: provider.currentTabIndex == 3
+                                        ? Provider.of<ThemeProvider>(context)
+                                                    .themeMode ==
+                                                "light"
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15)),
+                          ],
+                        ),
+                        onPressed: () {
+                          provider.updateCurrentTabIndex(3);
+                        },
+                        onLongPress: () {
+                          debugPrint(personalProfileModel.toString());
+
+                          if (personalProfileModel != null &&
+                              personalProfileModel!.companies!.isNotEmpty) {
+                            _companyListModalBottomSheet(
+                                context, personalProfileModel!);
+                          }
+                        },
                       ),
                     ),
                   ),
@@ -324,6 +324,28 @@ class _NavigationPageState extends State<NavigationPage> {
             ));
       },
     );
+  }
+
+  void _companyListModalBottomSheet(
+      BuildContext context, PersonalProfileModel personalProfileModel) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return SizedBox(
+              height: 400,
+              child: ListView.separated(
+                itemCount: personalProfileModel.companies!.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                      title: Text(
+                    personalProfileModel.companies![index]!.name.toString(),
+                  ));
+                },
+                separatorBuilder: (context, index) {
+                  return const Divider();
+                },
+              ));
+        });
   }
 
   PreferredSizeWidget defaultAppBar(themeMode) {
