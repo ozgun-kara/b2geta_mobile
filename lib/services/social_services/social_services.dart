@@ -405,10 +405,19 @@ class SocialServices {
     request.fields["content"] = content ?? '';
 
     if (images!.isNotEmpty) {
-      request.files.add(await http.MultipartFile.fromPath(
-          "images[]", images[0].path,
-          contentType: MediaType('image', 'jpeg')));
+      List<http.MultipartFile> files = [];
+      for (File file in images) {
+        var f = await http.MultipartFile.fromPath('images[]', file.path);
+        files.add(f);
+      }
+      request.files.addAll(files);
     }
+
+    // if (images!.isNotEmpty) {
+    //   request.files.add(await http.MultipartFile.fromPath(
+    //       "images[]", images[0].path,
+    //       contentType: MediaType('image', 'jpeg')));
+    // }
 
     var response = await request.send();
 
