@@ -759,7 +759,9 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               ),
                                                               onPressed: () {
                                                                 locator<SocialServices>()
-                                                                    .shareReelsCall(
+                                                                    .shareCall(
+                                                                        type:
+                                                                            'reels',
                                                                         content:
                                                                             commentController
                                                                                 .text,
@@ -1034,11 +1036,13 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                   debugPrint("comment: ${commentController.text}");
 
                   locator<SocialServices>()
-                      .shareFeedCall(
-                          content: commentController.text,
-                          images: Provider.of<HomePageProvider>(context,
-                                  listen: false)
-                              .imageFilesList)
+                      .shareCall(
+                    type: 'feed',
+                    content: commentController.text,
+                    images:
+                        Provider.of<HomePageProvider>(context, listen: false)
+                            .imageFilesList,
+                  )
                       .then((value) {
                     debugPrint("Operation Status: $value");
 

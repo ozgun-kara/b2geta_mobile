@@ -64,9 +64,11 @@ class _StoryAddPageState extends State<StoryAddPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () async {
-                  await _socialServices
-                      .shareStoryCall(image: widget.imageFile)
-                      .then((value) {
+                  await _socialServices.shareCall(
+                      type: 'story',
+                      // images: widget.imageFile
+
+                      images: [widget.imageFile]).then((value) {
                     if (value) {
                       Navigator.pushAndRemoveUntil(
                           context,
