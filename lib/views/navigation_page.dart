@@ -361,13 +361,36 @@ class _NavigationPageState extends State<NavigationPage> {
                     itemBuilder: (context, index) {
                       var company = personalProfileModel.companies![index];
                       return GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          /*   await CompanyServices()
+                              .changeProfileAnotherCompanyCall(
+                                  userId: company.id.toString())
+                              .then((value) async {
+                            if (value) {
+                              await _memberServices
+                                  .getProfileCall()
+                                  .then((value) {
+                                if (value != null) {
+                                  Provider.of<UserProvider>(context,
+                                          listen: false)
+                                      .updateUserModel(value);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const NavigationPage()),
+                                  );
+                                }
+                              });
+                            }
+                          }); */
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
+                            context,
+                            MaterialPageRoute(
                                 builder: (context) => CompanyProfilePage(
-                                    userId: company.id.toString()),
-                              ));
+                                      userId: company.id.toString(),
+                                    )),
+                          );
                         },
                         child: Column(
                           children: [
