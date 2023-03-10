@@ -189,7 +189,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                         : const SizedBox(),
                   ),
                 ),
-                const SizedBox(
+                /*   const SizedBox(
                   width: 58.0,
                 ),
                 Material(
@@ -220,6 +220,7 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                     ),
                   ),
                 ),
+               */
               ],
             ),
           ),

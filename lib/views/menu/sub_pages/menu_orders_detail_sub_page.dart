@@ -51,7 +51,8 @@ class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-        appBar: const CustomAppBar(), body: _orderDetailsModel != null
+        appBar: const CustomAppBar(),
+        body: _orderDetailsModel != null
             ? SingleChildScrollView(
                 child: Column(
                   children: [
@@ -61,7 +62,7 @@ class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
                         color:
                             themeMode ? AppTheme.white32 : Colors.transparent),
                     const SizedBox(height: 8),
-                    Row(
+                    /*    Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
@@ -89,7 +90,7 @@ class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 8), */
                     Container(
                       decoration: BoxDecoration(
                         color: themeMode ? AppTheme.white1 : AppTheme.black7,
