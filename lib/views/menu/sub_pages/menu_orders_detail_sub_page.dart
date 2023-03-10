@@ -51,7 +51,8 @@ class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-        appBar: const CustomAppBar(), body: _orderDetailsModel != null
+        appBar: const CustomAppBar(),
+        body: _orderDetailsModel != null
             ? SingleChildScrollView(
                 child: Column(
                   children: [
