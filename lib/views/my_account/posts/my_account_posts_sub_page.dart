@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -173,48 +174,69 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                         height: 279,
                         child: Stack(
                           children: [
-                            Image.network(
-                              feed.images![0]!.url.toString(),
-                              width: deviceWidth,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Image.asset(
-                                "assets/images/dummy_images/image_not_found",
+                            InkWell(
+                              onTap: () {
+                                List<String> imgList = [];
+
+                                for (var i in feed.images!) {
+                                  imgList.add(i!.url.toString());
+                                }
+
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) => GalleryWidget(
+                                          urlImages: imgList,
+                                        )));
+                              },
+                              child: Image.network(
+                                feed.images![0]!.url.toString(),
+                                width: deviceWidth,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(
+                                  "assets/images/dummy_images/image_not_found.jpg",
+                                  width: deviceWidth,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                            Positioned(
-                              top: 231,
-                              right: 20,
-                              child: Container(
-                                width: 59,
-                                height: 37,
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF2F2F2F).withOpacity(.66),
-                                  borderRadius: BorderRadius.circular(13.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      "assets/icons/post_image_add.png",
-                                      width: 18,
-                                      height: 18,
+                            Visibility(
+                              visible: feed.images!.length > 1 ? true : false,
+                              child: Positioned(
+                                top: 231,
+                                right: 20,
+                                child: IgnorePointer(
+                                  child: Container(
+                                    width: 59,
+                                    height: 37,
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF2F2F2F)
+                                          .withOpacity(.66),
+                                      borderRadius: BorderRadius.circular(13.0),
                                     ),
-                                    const SizedBox(
-                                      width: 8,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/icons/post_image_add.png",
+                                          width: 18,
+                                          height: 18,
+                                        ),
+                                        const SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          (feed.images!.length - 1).toString(),
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w600,
+                                            color: AppTheme.white1,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    Text(
-                                      "8",
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w600,
-                                        color: AppTheme.white1,
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
                               ),
                             )
