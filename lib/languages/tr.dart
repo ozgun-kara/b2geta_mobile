@@ -7,6 +7,8 @@ final Map<String, String> tr = {
   'Operation Failed Dialog': 'İşlem Başarısız',
   'Remove Dialog': 'Silmek istediğinize emin misiniz?',
   'Confirm Basket Dialog': 'Siparişi onaylamak istediğinizde emin misiniz?',
+  'Alert': 'Uyarı!',
+  'Error': 'Hata!',
   // LOGIN PAGE
   'Member Login': 'Üye Girişi',
   'E-mail': 'E-mail',
@@ -41,7 +43,7 @@ final Map<String, String> tr = {
       'Kampanyalardan haberdar olabilmem için kişisel verilerimin işlenmesini ve tarafıma elektronik ileti gönderilmesini kabul ediyorum.',
   'User Agreement-2':
       'Kişisel verilerimin işlenmesine yönelik aydınlatma metnini okudum ve anladım.',
-     'User Agreement-3':  'Üye Ol\'a basarak Üyelik Koşullarını kabul ediyorum.',
+  'User Agreement-3': 'Üye Ol\'a basarak Üyelik Koşullarını kabul ediyorum.',
   'E-mail Validate-3': 'Email adresleri uyuşmuyor',
   'Password Validate-3': 'Şifreler uyuşmuyor',
   'Company Name Validate': 'Lütfen firma adını giriniz',

@@ -7,6 +7,8 @@ final Map<String, String> en = {
   'Operation Failed Dialog': 'Operation Failed',
   'Remove Dialog': 'Are you sure you want to remove?',
   'Confirm Basket Dialog': 'Are you sure you want to confirm the order?',
+  'Alert': 'Alert!',
+  'Error': 'Error!',
   // LOGIN PAGE
   'Member Login': 'Member Login',
   'E-mail': 'E-mail',
