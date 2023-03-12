@@ -85,10 +85,7 @@ class _MembershipAgreementPageState extends State<MembershipAgreementPage> {
                     TextSpan(
                       text: 'ÜYELİK SÖZLEŞMESİ \n',
                       style: TextStyle(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1,
+                        color: AppTheme.blue3,
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 15,
                         height: 1.8,
@@ -99,10 +96,7 @@ class _MembershipAgreementPageState extends State<MembershipAgreementPage> {
                       text:
                           '1.TARAFLAR İşbu Üyelik Sözleşmesi ("Sözleşme");  alan adlı internet sitesi ve mobil cihaz uygulamalarının sahibi olan ve Maslak Mahallesi, Saat Sokak (Spine Tower), No: 5, İç Kapı No: 19, Sarıyer/İstanbul adresinde bulunan DSM GRUP DANIŞMANLIK İLETİŞİM VE SATIŞ TİC. A.Ş. (“DSM”) ile;  alan adlı internet sitesi ve mobil uygulamasına (“Platform”) işbu Sözleşme’deki koşul ve şartları kabul ederek üye olan kullanıcı (“Üye”, “Üyeler”) arasında, Üye\'nin DSM\'nin sunduğu hizmetlerden yararlanmasına ilişkin koşul ve şartların belirlenmesi için akdedilmiştir.DSM ve Üye işbu Sözleşme\'de ayrı ayrı “Taraf” birlikte “Taraflar” olarak anılacaktır.\n1.TANIMLAR \nPazaryeri : \nDSM’nin 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun uyarınca "elektronik ticaret aracı hizmet sağlayıcı" ve 5651 sayılı İnternet Ortamında Yapılan Yayınların Düzenlenmesi ve Bu Yayınlar Yoluyla İşlenen Suçlarla Mücadele Edilmesi Hakkında Kanun uyarınca',
                       style: TextStyle(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1,
+                        color: AppTheme.blue3,
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 15,
                         height: 1.8,
