@@ -102,7 +102,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
                   )),
         Positioned(
           top: 22,
-          left: 21,
+          right: 21,
           child: IconButton(
             onPressed: () {
               if (_controller != null) {
@@ -123,7 +123,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
           child: Row(children: [
             ClipOval(
               child: Image.asset(
-                "assets/images/dummy_images/post_profile.png",
+                "assets/images/dummy_images/user_profile.png",
                 width: 43,
                 height: 43,
               ),
@@ -137,7 +137,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
                 SizedBox(
                   width: 189,
                   child: Text(
-                    "SİLVERLİNE ENDÜSTRİ VE TİCARET A. Ş",
+                    "User Name",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
@@ -163,6 +163,33 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
               ],
             ),
           ]),
+        ),
+        Positioned(
+          bottom: 15,
+          right: 10,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.favorite,
+                    color: Colors.grey,
+                  )),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.comment,
+                    color: Colors.grey,
+                  )),
+              IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.share,
+                    color: Colors.grey,
+                  ))
+            ],
+          ),
         ),
       ],
     );
