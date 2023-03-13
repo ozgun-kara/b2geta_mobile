@@ -426,6 +426,8 @@ class CompanyServices {
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
+        var accessToken = json.decode(response.body)["access_token"];
+        Constants.userToken = accessToken;
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");

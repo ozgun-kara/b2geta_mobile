@@ -62,7 +62,7 @@ class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
                         color:
                             themeMode ? AppTheme.white32 : Colors.transparent),
                     const SizedBox(height: 8),
-                    /*    Row(
+                   /*  Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 8),
