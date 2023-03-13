@@ -67,6 +67,11 @@ final Map<String, String> tr = {
   'My Basket': 'Sepetim',
   'My Account': 'Hesabım',
   'AppBar Search': 'Aranacak kelimeyi giriniz',
+  // NOTIFICATION PAGE
+  'Notifications': 'Bildirimler',
+  'Commented on your photo': 'fotoğrafınıza yorum yaptı',
+  'Your reels video is active': 'Reels videonuz aktif',
+  'Min': 'dk',
   // MESSAGE PAGE
   'Search Message': 'Mesaj ara',
   'Chats': 'Sohbetlerim',
