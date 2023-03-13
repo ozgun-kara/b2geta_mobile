@@ -13,6 +13,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_page.dart';
 import 'package:b2geta_mobile/views/menu/company/company_menu_page.dart';
+import 'package:b2geta_mobile/views/menu/company/sub_pages/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/notification_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -91,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         // home: LanguagePage(),
         // home: NotificationPage()
         // home: CompanyMenuPage()
-        );
+        // home: MyCompaniesSubPage()
+    );
   }
 }
