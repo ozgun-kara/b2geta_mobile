@@ -49,6 +49,10 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
     super.initState();
   }
 
+  List countryList = ['Türkiye', 'Hindistan', 'Amerika', 'Kore'];
+  List cityList = ['İstanbul', 'İzmir', 'Bursa', 'Manisa'];
+  List districtList = ['YunusEmre', 'Şehzadeler', 'Akhisar', 'Turgutlu'];
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -64,7 +68,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
           children: [
             const SizedBox(height: 27.5),
             Text(
-              'Firma Ekle'.tr,
+              'Add Company'.tr,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 18,
@@ -82,18 +86,18 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'Company Name Validate-2'.tr;
                         }
                         return null;
                       },
                       controller: companyNameController,
-                      hintText: 'Company Name'.tr,
+                      hintText: 'Company Name-2'.tr,
                     ),
                     const SizedBox(height: 13),
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'Tax Office Validate'.tr;
                         }
                         return null;
                       },
@@ -115,7 +119,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'Phone Number Validate'.tr;
                         }
                         return null;
                       },
@@ -127,12 +131,15 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'E-mail Validate-4'.tr;
+                        }
+                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                          return 'E-mail Validate-5'.tr;
                         }
                         return null;
                       },
                       controller: emailController,
-                      hintText: 'Email'.tr,
+                      hintText: 'E-mail-1'.tr,
                       keyboardType: TextInputType.emailAddress,
                     ),
                     const SizedBox(height: 13),
@@ -141,7 +148,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                         // alignment: AlignmentDirectional.center,
                         isExpanded: true,
                         hint: Text(
-                          'Country'.tr,
+                          'Country-1'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -153,11 +160,11 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                     : AppTheme.white14,
                           ),
                         ),
-                        items: []
+                        items: countryList
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item.name,
+                                  value: item,
                                   child: Text(
-                                    item.name ?? '',
+                                    item ?? '',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: AppTheme.appFontFamily,
@@ -183,9 +190,9 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                           if (countryIndex != -1) {
                             debugPrint('COUNTRY INDEX: $countryIndex');
                             debugPrint(
-                                'COUNTRY CODE: ${[][countryIndex].code}');
+                                'COUNTRY CODE: ${countryList[countryIndex].code}');
 
-                            countryCode = [][countryIndex].code;
+                            countryCode = countryList[countryIndex].code;
 
                             Provider.of<MenuPageProvider>(context,
                                     listen: false)
@@ -272,7 +279,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                 horizontal: 16,
                                 vertical: 12,
                               ),
-                              hintText: 'Search...'.tr,
+                              hintText: 'Search...-1'.tr,
                               hintStyle: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
@@ -330,7 +337,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                         // alignment: AlignmentDirectional.center,
                         isExpanded: true,
                         hint: Text(
-                          'City'.tr,
+                          'City-1'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -342,11 +349,11 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                     : AppTheme.white14,
                           ),
                         ),
-                        items: []
+                        items: cityList
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item.name,
+                                  value: item,
                                   child: Text(
-                                    item.name ?? '',
+                                    item ?? '',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: AppTheme.appFontFamily,
@@ -371,9 +378,9 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                               .indexWhere(((element) => element.name == value));
                           if (cityIndex != -1) {
                             debugPrint('CITY INDEX: $cityIndex');
-                            debugPrint('CITY ID: ${[][cityIndex].id}');
+                            debugPrint('CITY ID: ${cityList[cityIndex].id}');
 
-                            cityId = [][cityIndex].id;
+                            cityId = cityList[cityIndex].id;
 
                             Provider.of<MenuPageProvider>(context,
                                     listen: false)
@@ -458,7 +465,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                 horizontal: 16,
                                 vertical: 12,
                               ),
-                              hintText: 'Search...'.tr,
+                              hintText: 'Search...-1'.tr,
                               hintStyle: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
@@ -516,7 +523,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                         // alignment: AlignmentDirectional.center,
                         isExpanded: true,
                         hint: Text(
-                          'District'.tr,
+                          'District-1'.tr,
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -528,11 +535,11 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                     : AppTheme.white14,
                           ),
                         ),
-                        items: []
+                        items: districtList
                             .map((item) => DropdownMenuItem<String>(
-                                  value: item.name,
+                                  value: item,
                                   child: Text(
-                                    item.name ?? '',
+                                    item ?? '',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: AppTheme.appFontFamily,
@@ -557,9 +564,10 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                               .indexWhere(((element) => element.name == value));
                           if (districtIndex != -1) {
                             debugPrint('DISTRICT INDEX: $districtIndex');
-                            debugPrint('DISTRICT ID: ${[][districtIndex].id}');
+                            debugPrint(
+                                'DISTRICT ID: ${districtList[districtIndex].id}');
 
-                            districtId = [][districtIndex].id;
+                            districtId = districtList[districtIndex].id;
                           }
                         },
 
@@ -635,7 +643,7 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                                 horizontal: 16,
                                 vertical: 12,
                               ),
-                              hintText: 'Search...'.tr,
+                              hintText: 'Search...-1'.tr,
                               hintStyle: TextStyle(
                                 fontSize: 14,
                                 fontFamily: AppTheme.appFontFamily,
@@ -691,29 +699,29 @@ class _CompanyAddPageState extends State<CompanyAddPage> {
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'Address Validate-1'.tr;
                         }
                         return null;
                       },
                       controller: addressController,
-                      hintText: 'Address'.tr,
+                      hintText: 'Address-1'.tr,
                     ),
                     const SizedBox(height: 13),
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'Posta Code Validate-1'.tr;
                         }
                         return null;
                       },
                       controller: postalCodeController,
-                      hintText: 'Posta Code'.tr,
+                      hintText: 'Postal Code-1'.tr,
                     ),
                     const SizedBox(height: 13),
                     textFormField(
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
+                          return 'About Validate'.tr;
                         }
                         return null;
                       },
