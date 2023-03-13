@@ -73,6 +73,8 @@ final Map<String, String> en = {
   'Back to Messages': 'Back to messages',
   'Write something': 'Write something',
   // MENU
+  'My Companies': 'My Companies',
+  'My Products': 'My Products',
   'My Orders': 'My Orders',
   'Disagreements': 'Disagreements',
   'Account Settings': 'Account Settings',

@@ -73,6 +73,8 @@ final Map<String, String> tr = {
   'Back to Messages': 'Mesajlara geri dön',
   'Write something': 'Bir şeyler yaz',
   // MENU
+  'My Companies': 'Firmalarım',
+  'My Products': 'Ürünlerim',
   'My Orders': 'Siparişlerim',
   'Disagreements': 'Anlaşmazlıklar',
   'Account Settings': 'Hesap Ayarları',
