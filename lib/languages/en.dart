@@ -67,6 +67,11 @@ final Map<String, String> en = {
   'My Basket': 'My Basket',
   'My Account': 'My Account',
   'AppBar Search': 'Search',
+  // NOTIFICATION PAGE
+  'Notifications': 'Notifications',
+  'Commented on your photo': 'commented on your photo',
+  'Your reels video is active': 'Your reels video is active',
+  'Min': 'min',
   // MESSAGE PAGE
   'Search Message': 'Search message',
   'Chats': 'Chats',

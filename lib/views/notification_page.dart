@@ -60,8 +60,7 @@ class _NotificationPageState extends State<NotificationPage> {
             child: Row(
               children: [
                 Text(
-                  'Bildirimler',
-                  textAlign: TextAlign.center,
+                  'Notifications'.tr,
                   style: TextStyle(
                     fontFamily: AppTheme.appFontFamily,
                     fontSize: 18,
@@ -86,7 +85,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(width: 7),
                     Text(
-                      'Reels vidyonuz aktif.',
+                      'Your reels video is active'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -96,7 +95,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -134,7 +133,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
                     Text(
-                      'fotoğrafınıza yorum yaptı',
+                      'Commented on your photo'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -144,7 +143,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -182,7 +181,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
                     Text(
-                      'fotoğrafınıza yorum yaptı',
+                      'Commented on your photo'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -192,7 +191,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -230,7 +229,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
                     Text(
-                      'fotoğrafınıza yorum yaptı',
+                      'Commented on your photo'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -240,7 +239,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -278,7 +277,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       ),
                     ),
                     Text(
-                      'fotoğrafınıza yorum yaptı',
+                      'Commented on your photo'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -288,7 +287,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -308,7 +307,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(width: 7),
                     Text(
-                      'Reels vidyonuz aktif.',
+                      'Your reels video is active'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -318,7 +317,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -338,7 +337,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     SizedBox(width: 7),
                     Text(
-                      'Reels vidyonuz aktif.',
+                      'Your reels video is active'.tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 13,
@@ -348,7 +347,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                     Spacer(),
                     Text(
-                      '1 dk',
+                      '1 ' + "Min".tr,
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
