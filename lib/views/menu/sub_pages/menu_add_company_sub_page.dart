@@ -8,16 +8,17 @@ import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
-class CompanyAddPage extends StatefulWidget {
-  const CompanyAddPage({Key? key, required this.operation}) : super(key: key);
+class MenuAddCompanySubPage extends StatefulWidget {
+  const MenuAddCompanySubPage({Key? key, required this.operation})
+      : super(key: key);
 
   final String operation;
 
   @override
-  State<CompanyAddPage> createState() => _CompanyAddPageState();
+  State<MenuAddCompanySubPage> createState() => _MenuAddCompanySubPageState();
 }
 
-class _CompanyAddPageState extends State<CompanyAddPage> {
+class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
   ScrollController scrollController = ScrollController();
   GlobalKey<FormState> addressGlobalKey = GlobalKey<FormState>();
 

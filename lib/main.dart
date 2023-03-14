@@ -12,7 +12,7 @@ import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/login_register/language_page.dart';
-import 'package:b2geta_mobile/views/menu/company/sub_pages/my_companies_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/notification_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
@@ -86,12 +86,12 @@ class _MyAppState extends State<MyApp> {
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      home: const SplashPage(),
+      // home: const SplashPage(),
       // home: NavigationPage(),
       // home: RegisterPage(),
       // home: LanguagePage(),
       // home: NotificationPage()
-      // home: MenuPage(),
+      home: MenuPage(),
       // home: MyCompaniesSubPage()
     );
   }

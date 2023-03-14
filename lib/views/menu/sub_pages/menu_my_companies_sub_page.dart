@@ -1,19 +1,19 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/company/company_add_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/menu_add_company_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class MyCompaniesSubPage extends StatefulWidget {
-  const MyCompaniesSubPage({Key? key}) : super(key: key);
+class MenuMyCompaniesSubPage extends StatefulWidget {
+  const MenuMyCompaniesSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MyCompaniesSubPage> createState() => _MyCompaniesSubPageState();
+  State<MenuMyCompaniesSubPage> createState() => _MenuMyCompaniesSubPageState();
 }
 
-class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
+class _MenuMyCompaniesSubPageState extends State<MenuMyCompaniesSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -73,7 +73,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  CompanyAddPage(operation: 'Add'),
+                                  MenuAddCompanySubPage(operation: 'Add'),
                             ));
                       }),
                 ],
@@ -203,7 +203,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              CompanyAddPage(operation: 'Edit'),
+                                              MenuAddCompanySubPage(operation: 'Edit'),
                                         ));
                                   }),
                             ),
