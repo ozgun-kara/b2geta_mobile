@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/menu/company/sub_pages/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_settings_sub_page.dart';
@@ -57,142 +58,194 @@ class _MenuPageState extends State<MenuPage> {
                 ? Image.asset('assets/images/b2geta_logo_light.png')
                 : Image.asset('assets/images/b2geta_logo_dark.png')),
       ),
-      body: Column(
-        children: [
-          const SizedBox(height: 48),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'My Orders'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(height: 48),
+            Visibility(
+              visible: true,
+              child: Column(
+                children: [
+                  MaterialButton(
+                      minWidth: deviceWidth,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        'My Companies'.tr,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyCompaniesSubPage(),
+                            ));
+                      }),
+                  const SizedBox(height: 8),
+                ],
               ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MenuOrdersSubPage(),
-                    ));
-              }),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Disagreements'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                ),
+            ),
+            Visibility(
+              visible: true,
+              child: Column(
+                children: [
+                  MaterialButton(
+                      minWidth: deviceWidth,
+                      elevation: 0,
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      child: Text(
+                        'My Products'.tr,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      ),
+                      onPressed: () {}),
+                  const SizedBox(height: 8),
+                ],
               ),
-              onPressed: () {}),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Account Settings'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+            ),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'My Orders'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
-              onPressed: () {}),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'My Addresses'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MenuOrdersSubPage(),
+                      ));
+                }),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'Disagreements'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MenuAddressesSubPage(),
-                    ));
-              }),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Follow List'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                onPressed: () {}),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'Account Settings'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
-              onPressed: () {}),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Settings'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                onPressed: () {}),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'My Addresses'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MenuSettingsSubPage(),
-                    ));
-              }),
-          const SizedBox(height: 8),
-          MaterialButton(
-              minWidth: deviceWidth,
-              elevation: 0,
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: Text(
-                'Log Out'.tr,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontFamily: AppTheme.appFontFamily,
-                  fontWeight: FontWeight.w400,
-                  color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MenuAddressesSubPage(),
+                      ));
+                }),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'Follow List'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
-              onPressed: () {
-                MemberServices().logoutCall().then((value) {
-                  if (value) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SplashPage(),
-                        ));
-                  }
-                });
-              }),
-        ],
+                onPressed: () {}),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'Settings'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MenuSettingsSubPage(),
+                      ));
+                }),
+            const SizedBox(height: 8),
+            MaterialButton(
+                minWidth: deviceWidth,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Text(
+                  'Log Out'.tr,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
+                ),
+                onPressed: () {
+                  MemberServices().logoutCall().then((value) {
+                    if (value) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SplashPage(),
+                          ));
+                    }
+                  });
+                }),
+          ],
+        ),
       ),
     );
   }
