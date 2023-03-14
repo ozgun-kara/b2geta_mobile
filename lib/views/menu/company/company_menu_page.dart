@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/menu/company/sub_pages/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_settings_sub_page.dart';
@@ -73,7 +74,13 @@ class _CompanyMenuPageState extends State<CompanyMenuPage> {
                   color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                 ),
               ),
-              onPressed: () {}),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyCompaniesSubPage(),
+                    ));
+              }),
           const SizedBox(height: 8),
           MaterialButton(
               minWidth: deviceWidth,

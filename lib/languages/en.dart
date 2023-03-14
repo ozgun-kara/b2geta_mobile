@@ -114,6 +114,8 @@ final Map<String, String> en = {
   'Postal Code Validate': 'Please enter your postal code',
   'Settings Page Route': 'Homepage - Settings',
   'Theme': 'Theme',
+  'Role:': 'Role:',
+  'Admin':  'Admin',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
@@ -229,7 +231,7 @@ final Map<String, String> en = {
   'No internet connection': 'No internet connection',
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
-  //COMPANY ADD PAGE
+  // COMPANY ADD PAGE
   'Add Company': 'Add Company',
   'Company Name-2': 'Company Name',
   'Tax Office': 'Tax Office',
