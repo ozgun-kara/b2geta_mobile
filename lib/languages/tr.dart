@@ -114,6 +114,8 @@ final Map<String, String> tr = {
   'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
   'Settings Page Route': 'Anasayfa - Ayarlar',
   'Theme': 'Tema',
+  'Role:': 'Rol:',
+  'Admin':  'Admin',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
@@ -228,7 +230,7 @@ final Map<String, String> tr = {
   'No internet connection': 'İnternet bağlantısı yok',
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
-  //COMPANY ADD PAGE
+  // COMPANY ADD PAGE
   'Add Company': 'Firma Ekle',
   'Company Name-2': 'Firma Adı',
   'Tax Office': 'Vergi Dairesi',
