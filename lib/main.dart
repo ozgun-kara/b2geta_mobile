@@ -11,10 +11,7 @@ import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/login_register/language_page.dart';
-import 'package:b2geta_mobile/views/menu/menu_page.dart';
-import 'package:b2geta_mobile/views/notification_page.dart';
-import 'package:b2geta_mobile/views/splash_page.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_widgets_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -85,7 +82,7 @@ class _MyAppState extends State<MyApp> {
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      home: const SplashPage(),
+      home: const CustomWidgetsPage(),
       // home: NavigationPage(),
       // home: RegisterPage(),
       // home: LanguagePage(),

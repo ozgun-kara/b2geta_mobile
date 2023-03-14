@@ -2,12 +2,15 @@
 
 import 'dart:ui';
 
-import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_button.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_button.dart';
 
 class CustomWidgetsPage extends StatefulWidget {
   const CustomWidgetsPage({Key? key}) : super(key: key);
@@ -89,7 +92,15 @@ class _CustomWidgetsPageState extends State<CustomWidgetsPage> {
               onPressed: () {
                 operationFailedDialog(context, 'Hata Mesajı');
               },
-            )
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            CustomAvatar(
+              size: 50,
+              imageUrl:
+                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+            ),
           ],
         ),
       ),
@@ -331,3 +342,4 @@ class _CustomWidgetsPageState extends State<CustomWidgetsPage> {
     );
   }
 }
+
