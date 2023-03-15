@@ -45,7 +45,7 @@ class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
                   SizedBox(
                     width: 252,
                     child: Text(
-                      "Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.",
+                      'Company Added Message'.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 13,
@@ -78,7 +78,7 @@ class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => MenuMyCompaniesSubPage(),
+                        builder: (context) => const MenuMyCompaniesSubPage(),
                       ));
                 })
           ],

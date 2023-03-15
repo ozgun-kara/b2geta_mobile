@@ -231,6 +231,7 @@ final Map<String, String> tr = {
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
   // COMPANY ADD PAGE
+  'Add': 'Ekle',
   'Add Company': 'Firma Ekle',
   'Company Name-2': 'Firma Adı',
   'Tax Office': 'Vergi Dairesi',
@@ -253,4 +254,5 @@ final Map<String, String> tr = {
   'Address Validate-1': 'Lütfen adresi giriniz',
   'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
   'About Validate': 'Lütfen hakkında alanını giriniz',
+  'Company Added Message': 'Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
 };
