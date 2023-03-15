@@ -64,6 +64,284 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
       appBar: const CustomAppBar(),
+
+
+      // body: Consumer<MenuPageProvider>(
+      //   builder: (context, menuPageProvider, child) {
+      //     menuPageProvider.uploadStep == 0
+      //         ? SingleChildScrollView(
+      //       child: Column(
+      //         children: [
+      //           Container(
+      //               width: deviceWidth,
+      //               height: 1,
+      //               color:
+      //               themeMode ? AppTheme.white32 : AppTheme.black2),
+      //           Padding(
+      //             padding: const EdgeInsets.fromLTRB(13, 14.5, 13, 14.5),
+      //             child: Row(
+      //               children: [
+      //                 ClipOval(
+      //                   child: Container(
+      //                     width: 40,
+      //                     height: 40,
+      //                     decoration: BoxDecoration(
+      //                       shape: BoxShape.circle,
+      //                       color: AppTheme.white1,
+      //                     ),
+      //                     child: Image.network(
+      //                       'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+      //                       fit: BoxFit.cover,
+      //                       errorBuilder: (context, error, stackTrace) =>
+      //                           Image.asset(
+      //                             "assets/images/dummy_images/user_profile.png",
+      //                             fit: BoxFit.cover,
+      //                           ),
+      //                     ),
+      //                   ),
+      //                 ),
+      //                 const SizedBox(width: 13),
+      //                 Padding(
+      //                   padding: const EdgeInsets.only(top: 4),
+      //                   child: Text(
+      //                     '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+      //                     style: TextStyle(
+      //                       fontSize: 14,
+      //                       height: 1,
+      //                       fontFamily: AppTheme.appFontFamily,
+      //                       fontWeight: FontWeight.w700,
+      //                       color: themeMode
+      //                           ? AppTheme.blue3
+      //                           : AppTheme.white1,
+      //                     ),
+      //                   ),
+      //                 ),
+      //               ],
+      //             ),
+      //           ),
+      //           Padding(
+      //             padding: const EdgeInsets.symmetric(horizontal: 13),
+      //             child: TextFormField(
+      //               controller: commentController,
+      //               style: TextStyle(
+      //                   fontSize: 14,
+      //                   fontFamily: AppTheme.appFontFamily,
+      //                   fontWeight: FontWeight.w500,
+      //                   color: themeMode
+      //                       ? AppTheme.black11
+      //                       : AppTheme.white1), // WHILE WRITING
+      //               maxLines: 14,
+      //               decoration: InputDecoration(
+      //                 contentPadding:
+      //                 const EdgeInsets.fromLTRB(16, 0, 16, 36),
+      //                 filled: true,
+      //                 fillColor:
+      //                 themeMode ? AppTheme.white3 : AppTheme.black7,
+      //                 hintText: 'Share something about your company'.tr,
+      //                 hintStyle: TextStyle(
+      //                   fontSize: 15,
+      //                   fontFamily: AppTheme.appFontFamily,
+      //                   fontWeight: FontWeight.w400,
+      //                   color: AppTheme.white13,
+      //                 ),
+      //                 border: OutlineInputBorder(
+      //                     borderRadius: BorderRadius.circular(16),
+      //                     borderSide: BorderSide(
+      //                       color: themeMode
+      //                           ? AppTheme.white32
+      //                           : AppTheme.black14,
+      //                       width: 1,
+      //                     )),
+      //                 enabledBorder: OutlineInputBorder(
+      //                     borderRadius: BorderRadius.circular(16),
+      //                     borderSide: BorderSide(
+      //                       color: themeMode
+      //                           ? AppTheme.white32
+      //                           : AppTheme.black14,
+      //                       width: 1,
+      //                     )),
+      //                 focusedBorder: OutlineInputBorder(
+      //                   borderRadius: BorderRadius.circular(16),
+      //                   borderSide: BorderSide(
+      //                     color: themeMode
+      //                         ? AppTheme.blue2
+      //                         : AppTheme.white1,
+      //                     width: 1,
+      //                   ),
+      //                 ),
+      //               ),
+      //             ),
+      //           ),
+      //           Visibility(
+      //             visible: provider.imageFilesList!.isNotEmpty,
+      //             child: Padding(
+      //               padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
+      //               child: Wrap(
+      //                 spacing: 9,
+      //                 runSpacing: 9,
+      //                 children: provider.imageFilesList!.map((image) {
+      //                   return Stack(
+      //                     clipBehavior: Clip.none,
+      //                     children: [
+      //                       Image.file(
+      //                         File(image.path),
+      //                         width: deviceWidth / 6,
+      //                         height: deviceWidth / 6,
+      //                         fit: BoxFit.cover,
+      //                       ),
+      //                       // Positioned(
+      //                       //   top: 3,
+      //                       //   right: 3,
+      //                       //   child: ClipRRect(
+      //                       //     borderRadius:
+      //                       //         BorderRadius.all(Radius.circular(4)),
+      //                       //     child: Material(
+      //                       //       color: AppTheme.white1,
+      //                       //       child: InkWell(
+      //                       //         onTap: () {
+      //                       //
+      //                       //           provider.deleteSelectedImage(image);
+      //                       //         },
+      //                       //         child: SizedBox(
+      //                       //           width: 24,
+      //                       //           height: 24,
+      //                       //           child: Center(
+      //                       //             child: Image.asset(
+      //                       //               'assets/icons/trash.png',
+      //                       //               width: 14,
+      //                       //               height: 16,
+      //                       //               color: AppTheme.blue2,
+      //                       //             ),
+      //                       //           ),
+      //                       //         ),
+      //                       //       ),
+      //                       //     ),
+      //                       //   ),
+      //                       // ),
+      //                       Positioned(
+      //                         top: -7.75,
+      //                         right: -7.75,
+      //                         child: ClipOval(
+      //                           child: Material(
+      //                             color: AppTheme.red5,
+      //                             child: InkWell(
+      //                               radius: 18,
+      //                               onTap: () {
+      //                                 provider.deleteSelectedImage(image);
+      //                               },
+      //                               child: Transform.rotate(
+      //                                 angle: math.pi / 4,
+      //                                 child: SizedBox(
+      //                                   width: 18,
+      //                                   height: 18,
+      //                                   child: Center(
+      //                                     child: Image.asset(
+      //                                       'assets/icons/cross-2.png',
+      //                                       width: 9.18,
+      //                                       height: 9.18,
+      //                                       // color: AppTheme.blue2,
+      //                                     ),
+      //                                   ),
+      //                                 ),
+      //                               ),
+      //                             ),
+      //                           ),
+      //                         ),
+      //                       ),
+      //                     ],
+      //                   );
+      //                 }).toList(),
+      //               ),
+      //             ),
+      //           ),
+      //           const SizedBox(height: 8),
+      //           Container(
+      //               width: deviceWidth,
+      //               height: 1,
+      //               color:
+      //               themeMode ? AppTheme.white32 : AppTheme.black2),
+      //           MaterialButton(
+      //               minWidth: deviceWidth,
+      //               elevation: 0,
+      //               padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
+      //               child: Row(
+      //                 children: [
+      //                   const SizedBox(width: 16),
+      //                   Padding(
+      //                     padding: const EdgeInsets.only(bottom: 4),
+      //                     child: Image.asset(
+      //                       "assets/icons/post_image_add.png",
+      //                       width: 18,
+      //                       height: 18,
+      //                       color: AppTheme.blue2,
+      //                     ),
+      //                   ),
+      //                   const SizedBox(width: 8),
+      //                   Text(
+      //                     'Add Photo/Video'.tr,
+      //                     style: TextStyle(
+      //                       fontSize: 14,
+      //                       height: 1,
+      //                       fontFamily: AppTheme.appFontFamily,
+      //                       fontWeight: FontWeight.w600,
+      //                       color: themeMode
+      //                           ? AppTheme.blue3
+      //                           : AppTheme.white1,
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //               onPressed: () {
+      //                 provider.updateUploadType('Post');
+      //                 provider.updateUploadStep(1);
+      //               }),
+      //           Container(
+      //               width: deviceWidth,
+      //               height: 1,
+      //               color:
+      //               themeMode ? AppTheme.white32 : AppTheme.black2),
+      //           MaterialButton(
+      //               minWidth: deviceWidth,
+      //               elevation: 0,
+      //               padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
+      //               child: Row(
+      //                 children: [
+      //                   const SizedBox(width: 16),
+      //                   Padding(
+      //                     padding: const EdgeInsets.only(bottom: 4),
+      //                     child: Image.asset(
+      //                         "assets/icons/reels-upload.png",
+      //                         width: 18,
+      //                         height: 18,
+      //                         color: AppTheme.red5),
+      //                   ),
+      //                   const SizedBox(width: 8),
+      //                   Text(
+      //                     'Upload Reels Video'.tr,
+      //                     style: TextStyle(
+      //                       fontSize: 14,
+      //                       height: 1,
+      //                       fontFamily: AppTheme.appFontFamily,
+      //                       fontWeight: FontWeight.w600,
+      //                       color: themeMode
+      //                           ? AppTheme.blue3
+      //                           : AppTheme.white1,
+      //                     ),
+      //                   ),
+      //                 ],
+      //               ),
+      //               onPressed: () {
+      //                 provider.clearSelectedImageFilesList();
+      //                 provider.updateUploadType('Reels');
+      //                 provider.updateUploadStep(1);
+      //               }),
+      //         ],
+      //       ),
+      //     )
+      //   },
+      // )
+
+
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -740,9 +1018,7 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                           borderRadius: BorderRadius.all(Radius.circular(16)),
                         ),
                         child: Text(
-                          widget.operation == 'Add'
-                              ? 'Add an Company'.tr
-                              : 'Edit an Company'.tr,
+                          widget.operation == 'Add' ? 'Add'.tr : 'Edit'.tr,
                           style: TextStyle(
                               fontSize: 16,
                               fontFamily: AppTheme.appFontFamily,

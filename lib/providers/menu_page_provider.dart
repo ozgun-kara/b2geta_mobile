@@ -45,4 +45,8 @@ class MenuPageProvider with ChangeNotifier {
     selectedDistrict = value;
     notifyListeners();
   }
+
+
+// MY COMPANIES SUBPAGE
+
 }

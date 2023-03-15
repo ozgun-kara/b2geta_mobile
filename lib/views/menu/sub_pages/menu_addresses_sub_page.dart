@@ -35,7 +35,8 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black12,
-      appBar: const CustomAppBar(), body: SingleChildScrollView(
+      appBar: const CustomAppBar(),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 1),
