@@ -115,7 +115,7 @@ final Map<String, String> en = {
   'Settings Page Route': 'Homepage - Settings',
   'Theme': 'Theme',
   'Role:': 'Role:',
-  'Admin':  'Admin',
+  'Admin': 'Admin',
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
@@ -232,6 +232,7 @@ final Map<String, String> en = {
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
   // COMPANY ADD PAGE
+  'Add': 'Add',
   'Add Company': 'Add Company',
   'Company Name-2': 'Company Name',
   'Tax Office': 'Tax Office',
@@ -254,4 +255,5 @@ final Map<String, String> en = {
   'Address Validate-1': 'Please enter the address',
   'Postal Code Validate-1': 'Please enter the postal code',
   'About Validate': 'Please enter the about field',
+  'Company Added Message': 'Your company has been added.\nAfter approval, you can use your company profile.',
 };

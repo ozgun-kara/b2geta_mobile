@@ -763,10 +763,47 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        MenuCompanyAddedSubPage(),
+                                        const MenuCompanyAddedSubPage(),
                                   ));
+                            } else {
+                              Navigator.pop(context);
                             }
                           }),
+                      Visibility(
+                        visible: widget.operation == 'Edit' ? true : false,
+                        child: Column(
+                          children: [
+                            const SizedBox(height: 20),
+                            MaterialButton(
+                                minWidth: deviceWidth,
+                                height: 52,
+                                elevation: 0,
+                                color: AppTheme.red4,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                ),
+                                child: Text(
+                                  'Firmayı Sil'.tr,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppTheme.white1),
+                                ),
+                                onPressed: () {
+                                  if (widget.operation == 'Add') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              MenuCompanyAddedSubPage(),
+                                        ));
+                                  }
+                                }),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
