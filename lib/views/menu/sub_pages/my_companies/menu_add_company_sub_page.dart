@@ -64,975 +64,723 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
       appBar: const CustomAppBar(),
-
-
-      // body: Consumer<MenuPageProvider>(
-      //   builder: (context, menuPageProvider, child) {
-      //     menuPageProvider.uploadStep == 0
-      //         ? SingleChildScrollView(
-      //       child: Column(
-      //         children: [
-      //           Container(
-      //               width: deviceWidth,
-      //               height: 1,
-      //               color:
-      //               themeMode ? AppTheme.white32 : AppTheme.black2),
-      //           Padding(
-      //             padding: const EdgeInsets.fromLTRB(13, 14.5, 13, 14.5),
-      //             child: Row(
-      //               children: [
-      //                 ClipOval(
-      //                   child: Container(
-      //                     width: 40,
-      //                     height: 40,
-      //                     decoration: BoxDecoration(
-      //                       shape: BoxShape.circle,
-      //                       color: AppTheme.white1,
-      //                     ),
-      //                     child: Image.network(
-      //                       'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-      //                       fit: BoxFit.cover,
-      //                       errorBuilder: (context, error, stackTrace) =>
-      //                           Image.asset(
-      //                             "assets/images/dummy_images/user_profile.png",
-      //                             fit: BoxFit.cover,
-      //                           ),
-      //                     ),
-      //                   ),
-      //                 ),
-      //                 const SizedBox(width: 13),
-      //                 Padding(
-      //                   padding: const EdgeInsets.only(top: 4),
-      //                   child: Text(
-      //                     '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
-      //                     style: TextStyle(
-      //                       fontSize: 14,
-      //                       height: 1,
-      //                       fontFamily: AppTheme.appFontFamily,
-      //                       fontWeight: FontWeight.w700,
-      //                       color: themeMode
-      //                           ? AppTheme.blue3
-      //                           : AppTheme.white1,
-      //                     ),
-      //                   ),
-      //                 ),
-      //               ],
-      //             ),
-      //           ),
-      //           Padding(
-      //             padding: const EdgeInsets.symmetric(horizontal: 13),
-      //             child: TextFormField(
-      //               controller: commentController,
-      //               style: TextStyle(
-      //                   fontSize: 14,
-      //                   fontFamily: AppTheme.appFontFamily,
-      //                   fontWeight: FontWeight.w500,
-      //                   color: themeMode
-      //                       ? AppTheme.black11
-      //                       : AppTheme.white1), // WHILE WRITING
-      //               maxLines: 14,
-      //               decoration: InputDecoration(
-      //                 contentPadding:
-      //                 const EdgeInsets.fromLTRB(16, 0, 16, 36),
-      //                 filled: true,
-      //                 fillColor:
-      //                 themeMode ? AppTheme.white3 : AppTheme.black7,
-      //                 hintText: 'Share something about your company'.tr,
-      //                 hintStyle: TextStyle(
-      //                   fontSize: 15,
-      //                   fontFamily: AppTheme.appFontFamily,
-      //                   fontWeight: FontWeight.w400,
-      //                   color: AppTheme.white13,
-      //                 ),
-      //                 border: OutlineInputBorder(
-      //                     borderRadius: BorderRadius.circular(16),
-      //                     borderSide: BorderSide(
-      //                       color: themeMode
-      //                           ? AppTheme.white32
-      //                           : AppTheme.black14,
-      //                       width: 1,
-      //                     )),
-      //                 enabledBorder: OutlineInputBorder(
-      //                     borderRadius: BorderRadius.circular(16),
-      //                     borderSide: BorderSide(
-      //                       color: themeMode
-      //                           ? AppTheme.white32
-      //                           : AppTheme.black14,
-      //                       width: 1,
-      //                     )),
-      //                 focusedBorder: OutlineInputBorder(
-      //                   borderRadius: BorderRadius.circular(16),
-      //                   borderSide: BorderSide(
-      //                     color: themeMode
-      //                         ? AppTheme.blue2
-      //                         : AppTheme.white1,
-      //                     width: 1,
-      //                   ),
-      //                 ),
-      //               ),
-      //             ),
-      //           ),
-      //           Visibility(
-      //             visible: provider.imageFilesList!.isNotEmpty,
-      //             child: Padding(
-      //               padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-      //               child: Wrap(
-      //                 spacing: 9,
-      //                 runSpacing: 9,
-      //                 children: provider.imageFilesList!.map((image) {
-      //                   return Stack(
-      //                     clipBehavior: Clip.none,
-      //                     children: [
-      //                       Image.file(
-      //                         File(image.path),
-      //                         width: deviceWidth / 6,
-      //                         height: deviceWidth / 6,
-      //                         fit: BoxFit.cover,
-      //                       ),
-      //                       // Positioned(
-      //                       //   top: 3,
-      //                       //   right: 3,
-      //                       //   child: ClipRRect(
-      //                       //     borderRadius:
-      //                       //         BorderRadius.all(Radius.circular(4)),
-      //                       //     child: Material(
-      //                       //       color: AppTheme.white1,
-      //                       //       child: InkWell(
-      //                       //         onTap: () {
-      //                       //
-      //                       //           provider.deleteSelectedImage(image);
-      //                       //         },
-      //                       //         child: SizedBox(
-      //                       //           width: 24,
-      //                       //           height: 24,
-      //                       //           child: Center(
-      //                       //             child: Image.asset(
-      //                       //               'assets/icons/trash.png',
-      //                       //               width: 14,
-      //                       //               height: 16,
-      //                       //               color: AppTheme.blue2,
-      //                       //             ),
-      //                       //           ),
-      //                       //         ),
-      //                       //       ),
-      //                       //     ),
-      //                       //   ),
-      //                       // ),
-      //                       Positioned(
-      //                         top: -7.75,
-      //                         right: -7.75,
-      //                         child: ClipOval(
-      //                           child: Material(
-      //                             color: AppTheme.red5,
-      //                             child: InkWell(
-      //                               radius: 18,
-      //                               onTap: () {
-      //                                 provider.deleteSelectedImage(image);
-      //                               },
-      //                               child: Transform.rotate(
-      //                                 angle: math.pi / 4,
-      //                                 child: SizedBox(
-      //                                   width: 18,
-      //                                   height: 18,
-      //                                   child: Center(
-      //                                     child: Image.asset(
-      //                                       'assets/icons/cross-2.png',
-      //                                       width: 9.18,
-      //                                       height: 9.18,
-      //                                       // color: AppTheme.blue2,
-      //                                     ),
-      //                                   ),
-      //                                 ),
-      //                               ),
-      //                             ),
-      //                           ),
-      //                         ),
-      //                       ),
-      //                     ],
-      //                   );
-      //                 }).toList(),
-      //               ),
-      //             ),
-      //           ),
-      //           const SizedBox(height: 8),
-      //           Container(
-      //               width: deviceWidth,
-      //               height: 1,
-      //               color:
-      //               themeMode ? AppTheme.white32 : AppTheme.black2),
-      //           MaterialButton(
-      //               minWidth: deviceWidth,
-      //               elevation: 0,
-      //               padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
-      //               child: Row(
-      //                 children: [
-      //                   const SizedBox(width: 16),
-      //                   Padding(
-      //                     padding: const EdgeInsets.only(bottom: 4),
-      //                     child: Image.asset(
-      //                       "assets/icons/post_image_add.png",
-      //                       width: 18,
-      //                       height: 18,
-      //                       color: AppTheme.blue2,
-      //                     ),
-      //                   ),
-      //                   const SizedBox(width: 8),
-      //                   Text(
-      //                     'Add Photo/Video'.tr,
-      //                     style: TextStyle(
-      //                       fontSize: 14,
-      //                       height: 1,
-      //                       fontFamily: AppTheme.appFontFamily,
-      //                       fontWeight: FontWeight.w600,
-      //                       color: themeMode
-      //                           ? AppTheme.blue3
-      //                           : AppTheme.white1,
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //               onPressed: () {
-      //                 provider.updateUploadType('Post');
-      //                 provider.updateUploadStep(1);
-      //               }),
-      //           Container(
-      //               width: deviceWidth,
-      //               height: 1,
-      //               color:
-      //               themeMode ? AppTheme.white32 : AppTheme.black2),
-      //           MaterialButton(
-      //               minWidth: deviceWidth,
-      //               elevation: 0,
-      //               padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
-      //               child: Row(
-      //                 children: [
-      //                   const SizedBox(width: 16),
-      //                   Padding(
-      //                     padding: const EdgeInsets.only(bottom: 4),
-      //                     child: Image.asset(
-      //                         "assets/icons/reels-upload.png",
-      //                         width: 18,
-      //                         height: 18,
-      //                         color: AppTheme.red5),
-      //                   ),
-      //                   const SizedBox(width: 8),
-      //                   Text(
-      //                     'Upload Reels Video'.tr,
-      //                     style: TextStyle(
-      //                       fontSize: 14,
-      //                       height: 1,
-      //                       fontFamily: AppTheme.appFontFamily,
-      //                       fontWeight: FontWeight.w600,
-      //                       color: themeMode
-      //                           ? AppTheme.blue3
-      //                           : AppTheme.white1,
-      //                     ),
-      //                   ),
-      //                 ],
-      //               ),
-      //               onPressed: () {
-      //                 provider.clearSelectedImageFilesList();
-      //                 provider.updateUploadType('Reels');
-      //                 provider.updateUploadStep(1);
-      //               }),
-      //         ],
-      //       ),
-      //     )
-      //   },
-      // )
-
-
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(height: 27.5),
-            Text(
-              'Add Company'.tr,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                fontFamily: AppTheme.appFontFamily,
-                fontWeight: FontWeight.w600,
-                color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(30, 30, 30, 37),
-              child: Form(
-                key: addressGlobalKey,
-                child: Column(
-                  children: [
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Company Name Validate-2'.tr;
-                        }
-                        return null;
-                      },
-                      controller: companyNameController,
-                      hintText: 'Company Name-2'.tr,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Tax Office Validate'.tr;
-                        }
-                        return null;
-                      },
-                      controller: taxOfficeController,
-                      hintText: 'Tax Office'.tr,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Address Name Validate'.tr;
-                        }
-                        return null;
-                      },
-                      controller: taxNumberController,
-                      hintText: 'Tax Number'.tr,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Phone Number Validate'.tr;
-                        }
-                        return null;
-                      },
-                      controller: phoneNumberController,
-                      hintText: 'Phone Number'.tr,
-                      keyboardType: TextInputType.phone,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'E-mail Validate-4'.tr;
-                        }
-                        if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          return 'E-mail Validate-5'.tr;
-                        }
-                        return null;
-                      },
-                      controller: emailController,
-                      hintText: 'E-mail-1'.tr,
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                    const SizedBox(height: 13),
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                        // alignment: AlignmentDirectional.center,
-                        isExpanded: true,
-                        hint: Text(
-                          'Country-1'.tr,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                          ),
-                        ),
-                        items: countryList
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item ?? '',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      color: Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue3
-                                          : AppTheme.white1,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        value: Provider.of<MenuPageProvider>(context)
-                            .selectedCountry,
-
-                        onChanged: (value) {
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .updateSelectedCountry(value as String);
-
-                          var countryIndex = []
-                              .indexWhere(((element) => element.name == value));
-                          if (countryIndex != -1) {
-                            debugPrint('COUNTRY INDEX: $countryIndex');
-                            debugPrint(
-                                'COUNTRY CODE: ${countryList[countryIndex].code}');
-
-                            countryCode = countryList[countryIndex].code;
-
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .selectedCity = null;
-                            cityId = null;
-                            districtId = null;
-
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .fetchCityList(countryCode);
-                          }
-                        },
-
-                        icon: Center(
-                          child: Image.asset(
-                            'assets/icons/dropdown.png',
-                            width: 10,
-                            height: 6,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white15,
-                          ),
-                        ),
-                        iconSize: 24,
-                        // iconEnabledColor: Colors.yellow,
-                        // iconDisabledColor: Colors.grey,
-                        // icon: Container(),
-                        buttonHeight: 57,
-                        buttonWidth: deviceWidth,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 25, right: 17),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // border:
-                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // buttonElevation: 2,
-                        itemHeight: 40,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                        // dropdownMaxHeight: deviceHeight * 0.4,
-                        dropdownMaxHeight: 350,
-                        // dropdownWidth: deviceWidth,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 4,
-                        scrollbarAlwaysShow: true,
-                        // offset: const Offset(0, 180),
-
-                        searchController: countryController,
-                        searchInnerWidget: Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                          child: TextFormField(
-                            controller: countryController,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1,
-                            ), // WHILE WRITING
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              hintText: 'Search...-1'.tr,
-                              hintStyle: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                              ),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        searchMatchFn: (item, searchValue) {
-                          debugPrint("ITEM:${item.value}");
-
-                          return (item.value
-                              .toLowerCase()
-                              .contains(searchValue.toLowerCase()));
-                        },
-                        //This to clear the search value when you close the menu
-                        onMenuStateChange: (isOpen) {
-                          if (!isOpen) {
-                            countryController.clear();
-                          }
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 13),
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                        // alignment: AlignmentDirectional.center,
-                        isExpanded: true,
-                        hint: Text(
-                          'City-1'.tr,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                          ),
-                        ),
-                        items: cityList
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item ?? '',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      color: Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue3
-                                          : AppTheme.white1,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        value:
-                            Provider.of<MenuPageProvider>(context).selectedCity,
-
-                        onChanged: (value) {
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .updateSelectedCity(value as String);
-
-                          var cityIndex = []
-                              .indexWhere(((element) => element.name == value));
-                          if (cityIndex != -1) {
-                            debugPrint('CITY INDEX: $cityIndex');
-                            debugPrint('CITY ID: ${cityList[cityIndex].id}');
-
-                            cityId = cityList[cityIndex].id;
-
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .selectedDistrict = null;
-                            districtId = null;
-
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .fetchDistrictList(cityId);
-                          }
-                        },
-
-                        icon: Center(
-                          child: Image.asset(
-                            'assets/icons/dropdown.png',
-                            width: 10,
-                            height: 6,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white15,
-                          ),
-                        ),
-                        iconSize: 24,
-                        // iconEnabledColor: Colors.yellow,
-                        // iconDisabledColor: Colors.grey,
-                        // icon: Container(),
-                        buttonHeight: 57,
-                        buttonWidth: deviceWidth,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 25, right: 17),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // border:
-                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // buttonElevation: 2,
-                        itemHeight: 40,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                        // dropdownMaxHeight: deviceHeight * 0.4,
-                        dropdownMaxHeight: 350,
-                        // dropdownWidth: deviceWidth,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 4,
-                        scrollbarAlwaysShow: true,
-                        // offset: const Offset(0, 180),
-
-                        searchController: cityController,
-                        searchInnerWidget: Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                          child: TextFormField(
-                            controller: cityController,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1,
-                            ), // WHILE WRITING
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              hintText: 'Search...-1'.tr,
-                              hintStyle: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                              ),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        searchMatchFn: (item, searchValue) {
-                          debugPrint("ITEM:${item.value}");
-
-                          return (item.value
-                              .toLowerCase()
-                              .contains(searchValue.toLowerCase()));
-                        },
-                        //This to clear the search value when you close the menu
-                        onMenuStateChange: (isOpen) {
-                          if (!isOpen) {
-                            cityController.clear();
-                          }
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 13),
-                    DropdownButtonHideUnderline(
-                      child: DropdownButton2(
-                        // alignment: AlignmentDirectional.center,
-                        isExpanded: true,
-                        hint: Text(
-                          'District-1'.tr,
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                          ),
-                        ),
-                        items: districtList
-                            .map((item) => DropdownMenuItem<String>(
-                                  value: item,
-                                  child: Text(
-                                    item ?? '',
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      color: Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.blue3
-                                          : AppTheme.white1,
-                                    ),
-                                  ),
-                                ))
-                            .toList(),
-                        value: Provider.of<MenuPageProvider>(context)
-                            .selectedDistrict,
-
-                        onChanged: (value) {
-                          Provider.of<MenuPageProvider>(context, listen: false)
-                              .updateSelectedDistrict(value as String);
-
-                          var districtIndex = []
-                              .indexWhere(((element) => element.name == value));
-                          if (districtIndex != -1) {
-                            debugPrint('DISTRICT INDEX: $districtIndex');
-                            debugPrint(
-                                'DISTRICT ID: ${districtList[districtIndex].id}');
-
-                            districtId = districtList[districtIndex].id;
-                          }
-                        },
-
-                        icon: Center(
-                          child: Image.asset(
-                            'assets/icons/dropdown.png',
-                            width: 10,
-                            height: 6,
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white15,
-                          ),
-                        ),
-                        iconSize: 24,
-                        // iconEnabledColor: Colors.yellow,
-                        // iconDisabledColor: Colors.grey,
-                        // icon: Container(),
-                        buttonHeight: 57,
-                        buttonWidth: deviceWidth,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 25, right: 17),
-                        buttonDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          // border:
-                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // buttonElevation: 2,
-                        itemHeight: 40,
-                        itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-                        // dropdownMaxHeight: deviceHeight * 0.4,
-                        dropdownMaxHeight: 350,
-                        // dropdownWidth: deviceWidth,
-                        dropdownPadding: null,
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white39
-                                  : AppTheme.black18,
-                        ),
-                        // dropdownElevation: 8,
-                        scrollbarRadius: const Radius.circular(40),
-                        scrollbarThickness: 4,
-                        scrollbarAlwaysShow: true,
-                        // offset: const Offset(0, 180),
-
-                        searchController: districtController,
-                        searchInnerWidget: Padding(
-                          padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                          child: TextFormField(
-                            controller: districtController,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white1,
-                            ), // WHILE WRITING
-                            decoration: InputDecoration(
-                              isDense: true,
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              hintText: 'Search...-1'.tr,
-                              hintStyle: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white14,
-                              ),
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: AppTheme.white15,
-                                    width: 1,
-                                  )),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                  width: 1,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        searchMatchFn: (item, searchValue) {
-                          debugPrint("ITEM:${item.value}");
-
-                          return (item.value
-                              .toLowerCase()
-                              .contains(searchValue.toLowerCase()));
-                        },
-                        //This to clear the search value when you close the menu
-                        onMenuStateChange: (isOpen) {
-                          if (!isOpen) {
-                            districtController.clear();
-                          }
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Address Validate-1'.tr;
-                        }
-                        return null;
-                      },
-                      controller: addressController,
-                      hintText: 'Address-1'.tr,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'Posta Code Validate-1'.tr;
-                        }
-                        return null;
-                      },
-                      controller: postalCodeController,
-                      hintText: 'Postal Code-1'.tr,
-                    ),
-                    const SizedBox(height: 13),
-                    textFormField(
-                      validator: (value) {
-                        if (value == null || value.trim().isEmpty) {
-                          return 'About Validate'.tr;
-                        }
-                        return null;
-                      },
-                      controller: aboutController,
-                      hintText: 'About'.tr,
-                      maxLines: 5,
-                    ),
-                    const SizedBox(height: 28),
-                    MaterialButton(
-                        minWidth: deviceWidth,
-                        height: 52,
-                        elevation: 0,
-                        color: AppTheme.green1,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        child: Text(
-                          widget.operation == 'Add' ? 'Add'.tr : 'Edit'.tr,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.white1),
-                        ),
-                        onPressed: () {}),
-                  ],
+      body: Consumer<MenuPageProvider>(
+          builder: (context, menuPageProvider, child) {
+        if (menuPageProvider.operationType == 'Default') {
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                const SizedBox(height: 27.5),
+                Text(
+                  'Add Company'.tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w600,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(30, 30, 30, 37),
+                  child: Form(
+                    key: addressGlobalKey,
+                    child: Column(
+                      children: [
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Company Name Validate-2'.tr;
+                            }
+                            return null;
+                          },
+                          controller: companyNameController,
+                          hintText: 'Company Name-2'.tr,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Tax Office Validate'.tr;
+                            }
+                            return null;
+                          },
+                          controller: taxOfficeController,
+                          hintText: 'Tax Office'.tr,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Address Name Validate'.tr;
+                            }
+                            return null;
+                          },
+                          controller: taxNumberController,
+                          hintText: 'Tax Number'.tr,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Phone Number Validate'.tr;
+                            }
+                            return null;
+                          },
+                          controller: phoneNumberController,
+                          hintText: 'Phone Number'.tr,
+                          keyboardType: TextInputType.phone,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'E-mail Validate-4'.tr;
+                            }
+                            if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                              return 'E-mail Validate-5'.tr;
+                            }
+                            return null;
+                          },
+                          controller: emailController,
+                          hintText: 'E-mail-1'.tr,
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(height: 13),
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            // alignment: AlignmentDirectional.center,
+                            isExpanded: true,
+                            hint: Text(
+                              'Country-1'.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                              ),
+                            ),
+                            items: countryList
+                                .map((item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item ?? '',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w400,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue3
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            value: Provider.of<MenuPageProvider>(context)
+                                .selectedCountry,
+
+                            onChanged: (value) {
+                              Provider.of<MenuPageProvider>(context,
+                                      listen: false)
+                                  .updateSelectedCountry(value as String);
+
+                              var countryIndex = [].indexWhere(
+                                  ((element) => element.name == value));
+                              if (countryIndex != -1) {
+                                debugPrint('COUNTRY INDEX: $countryIndex');
+                                debugPrint(
+                                    'COUNTRY CODE: ${countryList[countryIndex].code}');
+
+                                countryCode = countryList[countryIndex].code;
+
+                                Provider.of<MenuPageProvider>(context,
+                                        listen: false)
+                                    .selectedCity = null;
+                                cityId = null;
+                                districtId = null;
+
+                                Provider.of<MenuPageProvider>(context,
+                                        listen: false)
+                                    .fetchCityList(countryCode);
+                              }
+                            },
+
+                            icon: Center(
+                              child: Image.asset(
+                                'assets/icons/dropdown.png',
+                                width: 10,
+                                height: 6,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                              ),
+                            ),
+                            iconSize: 24,
+                            // iconEnabledColor: Colors.yellow,
+                            // iconDisabledColor: Colors.grey,
+                            // icon: Container(),
+                            buttonHeight: 57,
+                            buttonWidth: deviceWidth,
+                            buttonPadding:
+                                const EdgeInsets.only(left: 25, right: 17),
+                            buttonDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border:
+                              //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // buttonElevation: 2,
+                            itemHeight: 40,
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 32),
+                            // dropdownMaxHeight: deviceHeight * 0.4,
+                            dropdownMaxHeight: 350,
+                            // dropdownWidth: deviceWidth,
+                            dropdownPadding: null,
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // dropdownElevation: 8,
+                            scrollbarRadius: const Radius.circular(40),
+                            scrollbarThickness: 4,
+                            scrollbarAlwaysShow: true,
+                            // offset: const Offset(0, 180),
+
+                            searchController: countryController,
+                            searchInnerWidget: Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                              child: TextFormField(
+                                controller: countryController,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                ), // WHILE WRITING
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  hintText: 'Search...-1'.tr,
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.blue3
+                                        : AppTheme.white14,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            searchMatchFn: (item, searchValue) {
+                              debugPrint("ITEM:${item.value}");
+
+                              return (item.value
+                                  .toLowerCase()
+                                  .contains(searchValue.toLowerCase()));
+                            },
+                            //This to clear the search value when you close the menu
+                            onMenuStateChange: (isOpen) {
+                              if (!isOpen) {
+                                countryController.clear();
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 13),
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            // alignment: AlignmentDirectional.center,
+                            isExpanded: true,
+                            hint: Text(
+                              'City-1'.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                              ),
+                            ),
+                            items: cityList
+                                .map((item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item ?? '',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w400,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue3
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            value: Provider.of<MenuPageProvider>(context)
+                                .selectedCity,
+
+                            onChanged: (value) {
+                              Provider.of<MenuPageProvider>(context,
+                                      listen: false)
+                                  .updateSelectedCity(value as String);
+
+                              var cityIndex = [].indexWhere(
+                                  ((element) => element.name == value));
+                              if (cityIndex != -1) {
+                                debugPrint('CITY INDEX: $cityIndex');
+                                debugPrint(
+                                    'CITY ID: ${cityList[cityIndex].id}');
+
+                                cityId = cityList[cityIndex].id;
+
+                                Provider.of<MenuPageProvider>(context,
+                                        listen: false)
+                                    .selectedDistrict = null;
+                                districtId = null;
+
+                                Provider.of<MenuPageProvider>(context,
+                                        listen: false)
+                                    .fetchDistrictList(cityId);
+                              }
+                            },
+
+                            icon: Center(
+                              child: Image.asset(
+                                'assets/icons/dropdown.png',
+                                width: 10,
+                                height: 6,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                              ),
+                            ),
+                            iconSize: 24,
+                            // iconEnabledColor: Colors.yellow,
+                            // iconDisabledColor: Colors.grey,
+                            // icon: Container(),
+                            buttonHeight: 57,
+                            buttonWidth: deviceWidth,
+                            buttonPadding:
+                                const EdgeInsets.only(left: 25, right: 17),
+                            buttonDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border:
+                              //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // buttonElevation: 2,
+                            itemHeight: 40,
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 32),
+                            // dropdownMaxHeight: deviceHeight * 0.4,
+                            dropdownMaxHeight: 350,
+                            // dropdownWidth: deviceWidth,
+                            dropdownPadding: null,
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // dropdownElevation: 8,
+                            scrollbarRadius: const Radius.circular(40),
+                            scrollbarThickness: 4,
+                            scrollbarAlwaysShow: true,
+                            // offset: const Offset(0, 180),
+
+                            searchController: cityController,
+                            searchInnerWidget: Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                              child: TextFormField(
+                                controller: cityController,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                ), // WHILE WRITING
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  hintText: 'Search...-1'.tr,
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.blue3
+                                        : AppTheme.white14,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            searchMatchFn: (item, searchValue) {
+                              debugPrint("ITEM:${item.value}");
+
+                              return (item.value
+                                  .toLowerCase()
+                                  .contains(searchValue.toLowerCase()));
+                            },
+                            //This to clear the search value when you close the menu
+                            onMenuStateChange: (isOpen) {
+                              if (!isOpen) {
+                                cityController.clear();
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 13),
+                        DropdownButtonHideUnderline(
+                          child: DropdownButton2(
+                            // alignment: AlignmentDirectional.center,
+                            isExpanded: true,
+                            hint: Text(
+                              'District-1'.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white14,
+                              ),
+                            ),
+                            items: districtList
+                                .map((item) => DropdownMenuItem<String>(
+                                      value: item,
+                                      child: Text(
+                                        item ?? '',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w400,
+                                          color: Provider.of<ThemeProvider>(
+                                                          context)
+                                                      .themeMode ==
+                                                  "light"
+                                              ? AppTheme.blue3
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                    ))
+                                .toList(),
+                            value: Provider.of<MenuPageProvider>(context)
+                                .selectedDistrict,
+
+                            onChanged: (value) {
+                              Provider.of<MenuPageProvider>(context,
+                                      listen: false)
+                                  .updateSelectedDistrict(value as String);
+
+                              var districtIndex = [].indexWhere(
+                                  ((element) => element.name == value));
+                              if (districtIndex != -1) {
+                                debugPrint('DISTRICT INDEX: $districtIndex');
+                                debugPrint(
+                                    'DISTRICT ID: ${districtList[districtIndex].id}');
+
+                                districtId = districtList[districtIndex].id;
+                              }
+                            },
+
+                            icon: Center(
+                              child: Image.asset(
+                                'assets/icons/dropdown.png',
+                                width: 10,
+                                height: 6,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white15,
+                              ),
+                            ),
+                            iconSize: 24,
+                            // iconEnabledColor: Colors.yellow,
+                            // iconDisabledColor: Colors.grey,
+                            // icon: Container(),
+                            buttonHeight: 57,
+                            buttonWidth: deviceWidth,
+                            buttonPadding:
+                                const EdgeInsets.only(left: 25, right: 17),
+                            buttonDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              // border:
+                              //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // buttonElevation: 2,
+                            itemHeight: 40,
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 32),
+                            // dropdownMaxHeight: deviceHeight * 0.4,
+                            dropdownMaxHeight: 350,
+                            // dropdownWidth: deviceWidth,
+                            dropdownPadding: null,
+                            dropdownDecoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14),
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.white39
+                                  : AppTheme.black18,
+                            ),
+                            // dropdownElevation: 8,
+                            scrollbarRadius: const Radius.circular(40),
+                            scrollbarThickness: 4,
+                            scrollbarAlwaysShow: true,
+                            // offset: const Offset(0, 180),
+
+                            searchController: districtController,
+                            searchInnerWidget: Padding(
+                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                              child: TextFormField(
+                                controller: districtController,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                ), // WHILE WRITING
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                    horizontal: 16,
+                                    vertical: 12,
+                                  ),
+                                  hintText: 'Search...-1'.tr,
+                                  hintStyle: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.blue3
+                                        : AppTheme.white14,
+                                  ),
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color: AppTheme.white15,
+                                        width: 1,
+                                      )),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            searchMatchFn: (item, searchValue) {
+                              debugPrint("ITEM:${item.value}");
+
+                              return (item.value
+                                  .toLowerCase()
+                                  .contains(searchValue.toLowerCase()));
+                            },
+                            //This to clear the search value when you close the menu
+                            onMenuStateChange: (isOpen) {
+                              if (!isOpen) {
+                                districtController.clear();
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Address Validate-1'.tr;
+                            }
+                            return null;
+                          },
+                          controller: addressController,
+                          hintText: 'Address-1'.tr,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'Posta Code Validate-1'.tr;
+                            }
+                            return null;
+                          },
+                          controller: postalCodeController,
+                          hintText: 'Postal Code-1'.tr,
+                        ),
+                        const SizedBox(height: 13),
+                        textFormField(
+                          validator: (value) {
+                            if (value == null || value.trim().isEmpty) {
+                              return 'About Validate'.tr;
+                            }
+                            return null;
+                          },
+                          controller: aboutController,
+                          hintText: 'About'.tr,
+                          maxLines: 5,
+                        ),
+                        const SizedBox(height: 28),
+                        MaterialButton(
+                            minWidth: deviceWidth,
+                            height: 52,
+                            elevation: 0,
+                            color: AppTheme.green1,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                            child: Text(
+                              widget.operation == 'Add' ? 'Add'.tr : 'Edit'.tr,
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: () {
+                              menuPageProvider.updateOperationType("Added");
+                            }),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          );
+        } else if (menuPageProvider.operationType == 'Added') {
+          return Container();
+        } else if (menuPageProvider.operationType == 'Delete') {
+          return Container();
+        } else if (menuPageProvider.operationType == 'Deleted') {
+          return Container();
+        } else {
+          return Container();
+        }
+      }),
     );
   }
 

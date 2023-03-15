@@ -46,7 +46,11 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  // MY COMPANIES SUBPAGE
+  String operationType = 'Default'; // ADDED, DELETE, DELETED
 
-// MY COMPANIES SUBPAGE
-
+  void updateOperationType(String value) {
+    operationType = value;
+    notifyListeners();
+  }
 }

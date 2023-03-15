@@ -85,12 +85,12 @@ class _MyAppState extends State<MyApp> {
       theme: Provider.of<ThemeProvider>(context).getTheme(),
       debugShowCheckedModeBanner: false,
       title: 'B2GETA',
-      // home: const SplashPage(),
+      home: const SplashPage(),
       // home: NavigationPage(),
       // home: RegisterPage(),
       // home: LanguagePage(),
       // home: NotificationPage()
-      home: MenuPage(),
+      // home: MenuPage(),
     );
   }
 }
