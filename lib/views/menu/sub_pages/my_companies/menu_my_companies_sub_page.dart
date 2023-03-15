@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/menu_add_company_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_add_company_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';

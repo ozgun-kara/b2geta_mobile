@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/menu_orders_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

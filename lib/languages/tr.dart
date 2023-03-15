@@ -115,7 +115,7 @@ final Map<String, String> tr = {
   'Settings Page Route': 'Anasayfa - Ayarlar',
   'Theme': 'Tema',
   'Role:': 'Rol:',
-  'Admin':  'Admin',
+  'Admin': 'Admin',
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
@@ -231,7 +231,9 @@ final Map<String, String> tr = {
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
   // COMPANY ADD PAGE
+  'Add': 'Ekle',
   'Add Company': 'Firma Ekle',
+  'Delete Company': 'Firmayı Sil',
   'Company Name-2': 'Firma Adı',
   'Tax Office': 'Vergi Dairesi',
   'Tax Number': 'Vergi Numarası',
@@ -253,4 +255,11 @@ final Map<String, String> tr = {
   'Address Validate-1': 'Lütfen adresi giriniz',
   'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
   'About Validate': 'Lütfen hakkında alanını giriniz',
+  'Company Added Message':
+      'Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
+  'Company Delete Message':
+      'Firmayı silerseniz tüm eklediğiniz firma ürünleri de silinecektir.\nOnaylıyor musunuz?',
+  'Yes I Accept': 'Evet Onaylıyorum',
+  'No I don\'t Approve': 'Hayır Onaylamıyorum',
+  'Company Deleted Message': 'Firmanız silindi',
 };
