@@ -45,12 +45,4 @@ class MenuPageProvider with ChangeNotifier {
     selectedDistrict = value;
     notifyListeners();
   }
-
-  // MY COMPANIES SUBPAGE
-  String operationType = 'Default'; // ADDED, DELETE, DELETED
-
-  void updateOperationType(String value) {
-    operationType = value;
-    notifyListeners();
-  }
 }
