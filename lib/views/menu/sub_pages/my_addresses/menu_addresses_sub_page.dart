@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/menu_add_address_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/menu_add_address_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
