@@ -1,10 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/menu_my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/menu_settings_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
