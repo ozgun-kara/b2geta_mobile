@@ -234,6 +234,7 @@ final Map<String, String> en = {
   // COMPANY ADD PAGE
   'Add': 'Add',
   'Add Company': 'Add Company',
+  'Delete Company': 'Delete Company',
   'Company Name-2': 'Company Name',
   'Tax Office': 'Tax Office',
   'Tax Number': 'Tax Number',
@@ -255,5 +256,11 @@ final Map<String, String> en = {
   'Address Validate-1': 'Please enter the address',
   'Postal Code Validate-1': 'Please enter the postal code',
   'About Validate': 'Please enter the about field',
-  'Company Added Message': 'Your company has been added.\nAfter approval, you can use your company profile.',
+  'Company Added Message':
+      'Your company has been added.\nAfter approval, you can use your company profile.',
+  'Company Delete Message':
+      'If you delete the company, all the company products you added will also be deleted.\nDo you approve?',
+  'Yes I Accept': 'Yes I Accept',
+  'No I don\'t Approve': 'No I don\'t Approve',
+  'Company Deleted Message': 'Your company has been deleted',
 };

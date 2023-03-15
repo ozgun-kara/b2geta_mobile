@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_company_added_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_company_delete_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -784,7 +785,7 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                                       BorderRadius.all(Radius.circular(16)),
                                 ),
                                 child: Text(
-                                  'Firmayı Sil'.tr,
+                                  'Delete Company'.tr,
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontFamily: AppTheme.appFontFamily,
@@ -792,14 +793,12 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                                       color: AppTheme.white1),
                                 ),
                                 onPressed: () {
-                                  if (widget.operation == 'Add') {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              MenuCompanyAddedSubPage(),
-                                        ));
-                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MenuCompanyDeleteSubPage(),
+                                      ));
                                 }),
                           ],
                         ),
