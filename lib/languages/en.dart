@@ -65,16 +65,13 @@ final Map<String, String> en = {
   'Verify Code Validate': 'Please enter the verify code',
   'Verify Alert-1': 'Error',
   'Verify Alert-2': 'Verification Code Does Not Match',
-
-  // FORGOT PASSWORD PAGE
+  //FORGOT PASSWORD PAGE
   'Forgot Password-1': 'Forgot Password',
   'Send': 'Send',
-
   // RESET PASSWORD PAGE
   'Reset Password': 'Reset Password',
   'Confirm Password': 'Confirm Password',
   'Save-1': 'Save',
-
   // NAVIGATION PAGE
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',
@@ -286,4 +283,43 @@ final Map<String, String> en = {
   'No internet connection': 'No internet connection',
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
+  // COMPANY ADD PAGE
+  'Add': 'Add',
+  'Add Company': 'Add Company',
+  'Delete Company': 'Delete Company',
+  'Company Name-2': 'Company Name',
+  'Tax Office': 'Tax Office',
+  'Tax Number': 'Tax Number',
+  'Phone Number': 'Phone Number',
+  'E-mail-1': 'E-mail',
+  'Country-1': 'Country',
+  'City-1': 'City',
+  'District-1': 'District',
+  'Address-1': 'Address',
+  'Postal Code-1': 'Postal Code',
+  'About': 'About',
+  'Search...-1': 'Search...',
+  'Company Name Validate-2': 'Please enter company name',
+  'Tax Office Validate': 'Please enter your tax office',
+  'Tax Number Validate': 'Lütfen vergi numaranızı giriniz',
+  'Phone Number Validate': 'Please enter your tax number',
+  'E-mail Validate-4': 'Please enter your e-mail address',
+  'E-mail Validate-5': 'Please enter a valid email address',
+  'Address Validate-1': 'Please enter the address',
+  'Postal Code Validate-1': 'Please enter the postal code',
+  'About Validate': 'Please enter the about field',
+  'Company Added Message':
+      'Your company has been added.\nAfter approval, you can use your company profile.',
+  'Company Delete Message':
+      'If you delete the company, all the company products you added will also be deleted.\nDo you approve?',
+  'Yes I Accept': 'Yes I Accept',
+  'No I don\'t Approve': 'No I don\'t Approve',
+  'Company Deleted Message': 'Your company has been deleted',
+  //MY PRODUCTS SUB PAGE
+  'My Products-1': 'My Products',
+  'Add Product': 'Add Product',
+  'Name-1': 'Product Name',
+  'Price': 'Price',
+  'Currency': 'Currency',
+  'Brand': 'Brand',
 };
