@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/general_models/city_model.dart';
 import 'package:b2geta_mobile/models/general_models/district_model.dart';
@@ -43,6 +45,24 @@ class MenuPageProvider with ChangeNotifier {
 
   void updateSelectedDistrict(String value) {
     selectedDistrict = value;
+    notifyListeners();
+  }
+
+  // MY PRODUCTS SUBPAGE
+  List<File>? imageFilesList = [];
+
+  void updateSelectedImageFilesList(List<File> imgFilesList) {
+    imageFilesList!.addAll(imgFilesList);
+    notifyListeners();
+  }
+
+  void deleteSelectedImage(File image) {
+    imageFilesList!.remove(image);
+    notifyListeners();
+  }
+
+  void clearSelectedImageFilesList() {
+    imageFilesList!.clear();
     notifyListeners();
   }
 }

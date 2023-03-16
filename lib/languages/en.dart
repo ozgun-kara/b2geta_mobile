@@ -2,6 +2,7 @@ final Map<String, String> en = {
   // LANGUAGE PAGE
   'Language Selection': 'Language Selection',
   'Save': 'Save',
+
   // DIALOGS
   'Validation Error Dialog': 'Please Fill In The Missing Fields',
   'Operation Failed Dialog': 'Operation Failed',
@@ -9,6 +10,7 @@ final Map<String, String> en = {
   'Confirm Basket Dialog': 'Are you sure you want to confirm the order?',
   'Alert': 'Alert!',
   'Error': 'Error!',
+
   // LOGIN PAGE
   'Member Login': 'Member Login',
   'E-mail': 'E-mail',
@@ -28,6 +30,7 @@ final Map<String, String> en = {
   'Password Validate-2': 'Password must be at least 8 characters in length',
   'Login Error': 'Invalid Email or Password',
   'Close': 'Close',
+
   // REGISTER PAGE
   'Create Account': 'Create Account',
   'E-mail (confirm)': 'E-mail (confirm)',
@@ -53,6 +56,7 @@ final Map<String, String> en = {
   'Register Alert-2': 'Check Your Information',
   'Register Alert-3': 'Email Already Exists',
   'Register Alert-4': 'Error',
+
   // VERIFY PAGE
   'Membership Activation': 'Membership Activation',
   'E-mail-2': 'E-mail',
@@ -64,7 +68,7 @@ final Map<String, String> en = {
   //FORGOT PASSWORD PAGE
   'Forgot Password-1': 'Forgot Password',
   'Send': 'Send',
-  //RESET PASSWORD PAGE
+  // RESET PASSWORD PAGE
   'Reset Password': 'Reset Password',
   'Confirm Password': 'Confirm Password',
   'Save-1': 'Save',
@@ -74,16 +78,19 @@ final Map<String, String> en = {
   'My Basket': 'My Basket',
   'My Account': 'My Account',
   'AppBar Search': 'Search',
+
   // NOTIFICATION PAGE
   'Notifications': 'Notifications',
   'Commented on your photo': 'commented on your photo',
   'Your reels video is active': 'Your reels video is active',
   'Min': 'min',
+
   // MESSAGE PAGE
   'Search Message': 'Search message',
   'Chats': 'Chats',
   'Back to Messages': 'Back to messages',
   'Write something': 'Write something',
+
   // MENU
   'My Companies': 'My Companies',
   'My Products': 'My Products',
@@ -123,6 +130,41 @@ final Map<String, String> en = {
   'Theme': 'Theme',
   'Role:': 'Role:',
   'Admin': 'Admin',
+  'Add': 'Add',
+  'Add Company': 'Add Company',
+  'Delete Company': 'Delete Company',
+  'Company Name-2': 'Company Name',
+  'Tax Office': 'Tax Office',
+  'Tax Number': 'Tax Number',
+  'Phone Number': 'Phone Number',
+  'E-mail-1': 'E-mail',
+  'Country-1': 'Country',
+  'City-1': 'City',
+  'District-1': 'District',
+  'Address-1': 'Address',
+  'Postal Code-1': 'Postal Code',
+  'About': 'About',
+  'Search...-1': 'Search...',
+  'Company Name Validate-2': 'Please enter company name',
+  'Tax Office Validate': 'Please enter your tax office',
+  'Tax Number Validate': 'Lütfen vergi numaranızı giriniz',
+  'Phone Number Validate': 'Please enter your tax number',
+  'E-mail Validate-4': 'Please enter your e-mail address',
+  'E-mail Validate-5': 'Please enter a valid email address',
+  'Address Validate-1': 'Please enter the address',
+  'Postal Code Validate-1': 'Please enter the postal code',
+  'About Validate': 'Please enter the about field',
+  'Company Added Message':
+      'Your company has been added.\nAfter approval, you can use your company profile.',
+  'Company Delete Message':
+      'If you delete the company, all the company products you added will also be deleted.\nDo you approve?',
+  'Yes I Accept': 'Yes I Accept',
+  'No I don\'t Approve': 'No I don\'t Approve',
+  'Company Deleted Message': 'Your company has been deleted',
+  'Product Added Message': 'The product has been added',
+  'Product List': 'Product List',
+  'Product Delete Message': 'Are you sure you want to delete the product?',
+
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
@@ -204,6 +246,7 @@ final Map<String, String> en = {
   'With photo': 'With photo',
   'Latest': 'Latest',
   'Show more': 'Show more',
+
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
   'Delivery Time-2': 'Delivery Time:',
@@ -227,8 +270,10 @@ final Map<String, String> en = {
   'Confirm Basket': 'Confirm Basket',
   'Confirm': 'Confirm',
   'Empty Chart': 'There are no items in your cart',
+
   // PROFILE PAGE
   'Follow': 'Follow',
+
   // APP EXCEPTION
   'Bad Request': 'Bad Request',
   'Unable to process': 'Unable to process',

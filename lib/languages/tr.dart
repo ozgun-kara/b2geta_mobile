@@ -2,6 +2,7 @@ final Map<String, String> tr = {
   // LANGUAGE PAGE
   'Language Selection': 'Dil Seçimi',
   'Save': 'Kaydet',
+
   // DIALOGS
   'Validation Error Dialog': 'Lütfen Eksik Alanları Doldurunuz',
   'Operation Failed Dialog': 'İşlem Başarısız',
@@ -9,6 +10,7 @@ final Map<String, String> tr = {
   'Confirm Basket Dialog': 'Siparişi onaylamak istediğinizde emin misiniz?',
   'Alert': 'Uyarı!',
   'Error': 'Hata!',
+
   // LOGIN PAGE
   'Member Login': 'Üye Girişi',
   'E-mail': 'E-mail',
@@ -28,6 +30,7 @@ final Map<String, String> tr = {
   'Password Validate-2': 'Şifre en az 8 karakter uzunluğunda olmalıdır',
   'Login Error': 'E-mail Veya Şifre Hatalı',
   'Close': 'Kapat',
+
   // REGISTER PAGE
   'Create Account': 'Hesap Oluştur',
   'E-mail (confirm)': 'E-mail (tekrar)',
@@ -53,6 +56,7 @@ final Map<String, String> tr = {
   'Register Alert-2': 'Bilgilerinizi Kontrol Ediniz',
   'Register Alert-3': 'Bu e-posta zaten var',
   'Register Alert-4': 'Hata',
+
   // VERIFY PAGE
   'Membership Activation': 'Üyelik Etkinleştirme',
   'E-mail-2': 'E-posta',
@@ -61,29 +65,35 @@ final Map<String, String> tr = {
   'Verify Code Validate': 'Lütfen doğrulama kodunu giriniz',
   'Verify Alert-1': 'Hata',
   'Verify Alert-2': 'Doğrulama Kodu Eşleşmiyor',
-  //FORGOT PASSWORD PAGE
+
+  // FORGOT PASSWORD PAGE
   'Forgot Password-1': 'Şifremi Unuttum',
   'Send': 'Gönder',
-  //RESET PASSWORD PAGE
+
+  // RESET PASSWORD PAGE
   'Reset Password': 'Şifreyi Yenile',
   'Confirm Password': 'Tekrar Şifre',
   'Save-1': 'Kaydet',
+
   // NAVIGATION PAGE
   'Homepage': 'Ana Sayfa',
   'Marketplace': 'Pazaryeri',
   'My Basket': 'Sepetim',
   'My Account': 'Hesabım',
   'AppBar Search': 'Aranacak kelimeyi giriniz',
+
   // NOTIFICATION PAGE
   'Notifications': 'Bildirimler',
   'Commented on your photo': 'fotoğrafınıza yorum yaptı',
   'Your reels video is active': 'Reels videonuz aktif',
   'Min': 'dk',
+
   // MESSAGE PAGE
   'Search Message': 'Mesaj ara',
   'Chats': 'Sohbetlerim',
   'Back to Messages': 'Mesajlara geri dön',
   'Write something': 'Bir şeyler yaz',
+
   // MENU
   'My Companies': 'Firmalarım',
   'My Products': 'Ürünlerim',
@@ -123,6 +133,41 @@ final Map<String, String> tr = {
   'Theme': 'Tema',
   'Role:': 'Rol:',
   'Admin': 'Admin',
+  'Add': 'Ekle',
+  'Add Company': 'Firma Ekle',
+  'Delete Company': 'Firmayı Sil',
+  'Company Name-2': 'Firma Adı',
+  'Tax Office': 'Vergi Dairesi',
+  'Tax Number': 'Vergi Numarası',
+  'Phone Number': 'Telefon Numarası',
+  'E-mail-1': 'E-mail',
+  'Country-1': 'Ülke',
+  'City-1': 'Şehir',
+  'District-1': 'İlçe',
+  'Address-1': 'Adres',
+  'Postal Code-1': 'Posta Kodu',
+  'About': 'Hakkında',
+  'Search...-1': 'Ara...',
+  'Company Name Validate-2': 'Lütfen firma adını giriniz',
+  'Tax Office Validate': 'Lütfen vergi dairenizi giriniz',
+  'Tax Number Validate': 'Lütfen vergi numaranızı giriniz',
+  'Phone Number Validate': 'Lütfen telefon numaranızı giriniz',
+  'E-mail Validate-4': 'Lütfen e-mail adresinizi giriniz',
+  'E-mail Validate-5': 'Lütfen geçerli bir email adresi giriniz',
+  'Address Validate-1': 'Lütfen adresi giriniz',
+  'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
+  'About Validate': 'Lütfen hakkında alanını giriniz',
+  'Company Added Message':
+      'Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
+  'Company Delete Message':
+      'Firmayı silerseniz tüm eklediğiniz firma ürünleri de silinecektir.\nOnaylıyor musunuz?',
+  'Yes I Accept': 'Evet Onaylıyorum',
+  'No I don\'t Approve': 'Hayır Onaylamıyorum',
+  'Company Deleted Message': 'Firmanız silindi',
+  'Product Added Message': 'Ürün Eklendi',
+  'Product List': 'Product List',
+  'Product Delete Message': 'Ürünü silmek istediğinizden emin misiniz?',
+
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
@@ -203,6 +248,7 @@ final Map<String, String> tr = {
   'With photo': 'Fotoğraflı',
   'Latest': 'En yeniler',
   'Show more': 'Daha fazla göster',
+
   // BASKET PAGE
   'Basket Page Route': 'Ana Sayfa - Sepetim',
   'Delivery Time-2': 'Teslimat Süresi:',
@@ -226,8 +272,10 @@ final Map<String, String> tr = {
   'Confirm Basket': 'Sepeti Onayla',
   'Confirm': 'Onayla',
   'Empty Chart': 'Sepetinizde ürün bulunmamaktadır',
+
   // PROFILE PAGE
   'Follow': 'Takip Et',
+
   // APP EXCEPTION
   'Bad Request': 'Geçersiz istek',
   'Unable to process': 'İşlenemiyor',
@@ -237,6 +285,7 @@ final Map<String, String> tr = {
   'No internet connection': 'İnternet bağlantısı yok',
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
+
   // COMPANY ADD PAGE
   'Add': 'Ekle',
   'Add Company': 'Firma Ekle',
