@@ -363,6 +363,9 @@ class _MenuSettingsSubPageState extends State<MenuSettingsSubPage> {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 80,
+            ),
           ],
         ),
       ),
