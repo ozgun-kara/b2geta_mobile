@@ -322,11 +322,20 @@ final Map<String, String> tr = {
   'Yes I Accept': 'Evet Onaylıyorum',
   'No I don\'t Approve': 'Hayır Onaylamıyorum',
   'Company Deleted Message': 'Firmanız silindi',
-  //MY PRODUCTS SUB PAGE
+  //MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',
-  'Add Product': 'Ürün Ekle',
+  'Add Product-1': 'Ürün Ekle',
   'Name-1': 'Ürün Adı',
+  'Categories': 'Kategoriler',
+  'Product Description': 'Ürün Açıklaması',
   'Price': 'Fiyat',
   'Currency': 'Para Birimi',
   'Brand': 'Marka',
+  'Product Summary': 'Ürün Özeti',
+  'Status': 'Durum',
+  'Continue':'Devam Et',
+  'Product Name Validate': 'Lütfen ürün adını giriniz',
+  'Product Description Validate': 'Lütfen ürün açıklamasını giriniz',
+  'Price Validate': 'Lütfen ürün fiyatını giriniz',
+  'Product Summary Validate': 'Lütfen ürün özetini giriniz',
 };
