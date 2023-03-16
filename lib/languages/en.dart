@@ -319,11 +319,20 @@ final Map<String, String> en = {
   'Yes I Accept': 'Yes I Accept',
   'No I don\'t Approve': 'No I don\'t Approve',
   'Company Deleted Message': 'Your company has been deleted',
-  //MY PRODUCTS SUB PAGE
+  //MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'My Products',
-  'Add Product': 'Add Product',
+  'Add Product-1': 'Add Product',
   'Name-1': 'Product Name',
+  'Categories': 'Categories',
+  'Product Description': 'Product Description',
   'Price': 'Price',
   'Currency': 'Currency',
   'Brand': 'Brand',
+  'Product Summary': 'Product Summary',
+  'Status': 'Status',
+  'Continue':'Continue',
+  'Product Name Validate': 'Please enter the product name',
+  'Product Description Validate': 'Please enter the product description',
+  'Price Validate': 'Please enter the price',
+  'Product Summary Validate': 'Please enter the product summary',
 };
