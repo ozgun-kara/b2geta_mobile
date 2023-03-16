@@ -3,20 +3,20 @@ import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/menu_orders_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/orders_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class MenuOrdersSubPage extends StatefulWidget {
-  const MenuOrdersSubPage({Key? key}) : super(key: key);
+class OrdersSubPage extends StatefulWidget {
+  const OrdersSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuOrdersSubPage> createState() => _MenuOrdersSubPageState();
+  State<OrdersSubPage> createState() => _OrdersSubPageState();
 }
 
-class _MenuOrdersSubPageState extends State<MenuOrdersSubPage> {
+class _OrdersSubPageState extends State<OrdersSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -386,7 +386,7 @@ class _MenuOrdersSubPageState extends State<MenuOrdersSubPage> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  MenuOrdersDetailSubPage(
+                                                  OrdersDetailSubPage(
                                                 orderId: items[index].id!,
                                               ),
                                             ));

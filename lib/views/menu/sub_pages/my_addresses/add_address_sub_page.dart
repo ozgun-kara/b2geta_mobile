@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
-class MenuAddAddressSubPage extends StatefulWidget {
-  const MenuAddAddressSubPage(
+class AddAddressSubPage extends StatefulWidget {
+  const AddAddressSubPage(
       {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
@@ -21,10 +21,10 @@ class MenuAddAddressSubPage extends StatefulWidget {
   final String operation;
 
   @override
-  State<MenuAddAddressSubPage> createState() => _MenuAddAddressSubPageState();
+  State<AddAddressSubPage> createState() => _AddAddressSubPageState();
 }
 
-class _MenuAddAddressSubPageState extends State<MenuAddAddressSubPage> {
+class _AddAddressSubPageState extends State<AddAddressSubPage> {
   ScrollController scrollController = ScrollController();
   GlobalKey<FormState> addressGlobalKey = GlobalKey<FormState>();
   final addressNameController = TextEditingController();

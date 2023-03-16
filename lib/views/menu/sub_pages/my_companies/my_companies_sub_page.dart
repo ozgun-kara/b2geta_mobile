@@ -1,19 +1,19 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_add_company_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class MenuMyCompaniesSubPage extends StatefulWidget {
-  const MenuMyCompaniesSubPage({Key? key}) : super(key: key);
+class MyCompaniesSubPage extends StatefulWidget {
+  const MyCompaniesSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuMyCompaniesSubPage> createState() => _MenuMyCompaniesSubPageState();
+  State<MyCompaniesSubPage> createState() => _MyCompaniesSubPageState();
 }
 
-class _MenuMyCompaniesSubPageState extends State<MenuMyCompaniesSubPage> {
+class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -73,7 +73,7 @@ class _MenuMyCompaniesSubPageState extends State<MenuMyCompaniesSubPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  MenuAddCompanySubPage(operation: 'Add'),
+                                  AddCompanySubPage(operation: 'Add'),
                             ));
                       }),
                 ],
@@ -203,7 +203,7 @@ class _MenuMyCompaniesSubPageState extends State<MenuMyCompaniesSubPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              MenuAddCompanySubPage(operation: 'Edit'),
+                                              AddCompanySubPage(operation: 'Edit'),
                                         ));
                                   }),
                             ),

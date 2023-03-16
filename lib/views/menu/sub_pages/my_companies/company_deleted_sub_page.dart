@@ -1,20 +1,20 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_my_companies_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class MenuCompanyAddedSubPage extends StatefulWidget {
-  const MenuCompanyAddedSubPage({Key? key}) : super(key: key);
+class CompanyDeletedSubPage extends StatefulWidget {
+  const CompanyDeletedSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuCompanyAddedSubPage> createState() =>
-      _MenuCompanyAddedSubPageState();
+  State<CompanyDeletedSubPage> createState() =>
+      _CompanyDeletedSubPageState();
 }
 
-class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
+class _CompanyDeletedSubPageState extends State<CompanyDeletedSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -45,7 +45,7 @@ class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
                   SizedBox(
                     width: 252,
                     child: Text(
-                      'Company Added Message'.tr,
+                      'Company Deleted Message'.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 13,
@@ -57,7 +57,7 @@ class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
                 ],
               ),
             ),
-            const SizedBox(height: 42),
+            const SizedBox(height: 74),
             MaterialButton(
                 height: 47,
                 color: AppTheme.blue2,
@@ -78,7 +78,7 @@ class _MenuCompanyAddedSubPageState extends State<MenuCompanyAddedSubPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const MenuMyCompaniesSubPage(),
+                        builder: (context) => const MyCompaniesSubPage(),
                       ));
                 })
           ],

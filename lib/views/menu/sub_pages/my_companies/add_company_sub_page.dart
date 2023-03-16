@@ -2,25 +2,25 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_company_added_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_company_delete_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
-class MenuAddCompanySubPage extends StatefulWidget {
-  const MenuAddCompanySubPage({Key? key, required this.operation})
+class AddCompanySubPage extends StatefulWidget {
+  const AddCompanySubPage({Key? key, required this.operation})
       : super(key: key);
 
   final String operation;
 
   @override
-  State<MenuAddCompanySubPage> createState() => _MenuAddCompanySubPageState();
+  State<AddCompanySubPage> createState() => _AddCompanySubPageState();
 }
 
-class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
+class _AddCompanySubPageState extends State<AddCompanySubPage> {
   ScrollController scrollController = ScrollController();
   GlobalKey<FormState> addressGlobalKey = GlobalKey<FormState>();
 
@@ -764,7 +764,7 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
-                                        const MenuCompanyAddedSubPage(),
+                                        const CompanyAddedSubPage(),
                                   ));
                             } else {
                               Navigator.pop(context);
@@ -797,7 +797,7 @@ class _MenuAddCompanySubPageState extends State<MenuAddCompanySubPage> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const MenuCompanyDeleteSubPage(),
+                                            const CompanyDeleteSubPage(),
                                       ));
                                 }),
                           ],

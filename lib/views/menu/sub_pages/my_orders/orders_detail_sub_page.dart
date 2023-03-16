@@ -4,12 +4,11 @@ import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class MenuOrdersDetailSubPage extends StatefulWidget {
-  const MenuOrdersDetailSubPage({
+class OrdersDetailSubPage extends StatefulWidget {
+  const OrdersDetailSubPage({
     Key? key,
     required this.orderId,
   }) : super(key: key);
@@ -17,11 +16,11 @@ class MenuOrdersDetailSubPage extends StatefulWidget {
   final String orderId;
 
   @override
-  State<MenuOrdersDetailSubPage> createState() =>
-      _MenuOrdersDetailSubPageState();
+  State<OrdersDetailSubPage> createState() =>
+      _OrdersDetailSubPageState();
 }
 
-class _MenuOrdersDetailSubPageState extends State<MenuOrdersDetailSubPage> {
+class _OrdersDetailSubPageState extends State<OrdersDetailSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
