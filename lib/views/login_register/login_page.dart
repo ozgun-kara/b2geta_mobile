@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/login_register/forgot_password_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
@@ -300,7 +301,13 @@ class _LoginPageState extends State<LoginPage> {
                                 const SizedBox(width: 32),
                                 Flexible(
                                   child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ForgotPasswordPage()));
+                                    },
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(6)),
                                     child: Text(
