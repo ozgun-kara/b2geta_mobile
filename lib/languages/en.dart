@@ -61,7 +61,7 @@ final Map<String, String> en = {
   'Verify Code Validate': 'Please enter the verify code',
   'Verify Alert-1': 'Error',
   'Verify Alert-2': 'Verification Code Does Not Match',
-    //FORGOT PASSWORD PAGE
+  //FORGOT PASSWORD PAGE
   'Forgot Password-1': 'Forgot Password',
   'Send': 'Send',
   //RESET PASSWORD PAGE
@@ -270,4 +270,11 @@ final Map<String, String> en = {
   'Yes I Accept': 'Yes I Accept',
   'No I don\'t Approve': 'No I don\'t Approve',
   'Company Deleted Message': 'Your company has been deleted',
+  //MY PRODUCTS SUB PAGE
+  'My Products-1': 'My Products',
+  'Add Product': 'Add Product',
+  'Name-1': 'Product Name',
+  'Price': 'Price',
+  'Currency': 'Currency',
+  'Brand': 'Brand',
 };

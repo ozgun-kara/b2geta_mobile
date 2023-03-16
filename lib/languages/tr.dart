@@ -269,4 +269,11 @@ final Map<String, String> tr = {
   'Yes I Accept': 'Evet Onaylıyorum',
   'No I don\'t Approve': 'Hayır Onaylamıyorum',
   'Company Deleted Message': 'Firmanız silindi',
+  //MY PRODUCTS SUB PAGE
+  'My Products-1': 'Ürünlerim',
+  'Add Product': 'Ürün Ekle',
+  'Name-1': 'Ürün Adı',
+  'Price': 'Fiyat',
+  'Currency': 'Para Birimi',
+  'Brand': 'Marka',
 };
