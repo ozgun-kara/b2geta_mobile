@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:path/path.dart' as path;
 
 class AddProductImageSubPage extends StatefulWidget {
   const AddProductImageSubPage({Key? key}) : super(key: key);
@@ -22,6 +22,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
   late double deviceHeight;
   late bool themeMode;
 
+  ScrollController scrollController = ScrollController();
   final ImagePicker imagePicker = ImagePicker();
 
   void selectImages() async {
@@ -110,22 +111,108 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                         selectImages();
                       }),
                   SizedBox(height: 21),
-                  Visibility(
-                      visible: true,
-                      child: Container(
-                        width: deviceWidth,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                            width: 1,
-                            color:
-                                themeMode ? AppTheme.white10 : AppTheme.black28,
-                          ),
-                          color:
-                              themeMode ? AppTheme.white5 : Colors.transparent,
+                  Consumer<MenuPageProvider>(
+                    builder: (context, menuPageProvider, child) {
+                      return Visibility(
+                        visible: menuPageProvider.imageFilesList!.isNotEmpty,
+                        child: ListView.separated(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(0),
+                          itemCount: menuPageProvider.imageFilesList!.length,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(height: 11);
+                          },
+                          itemBuilder: ((context, index) {
+                            var image = menuPageProvider.imageFilesList![index];
+
+                            String imageName =
+                                path.basename(image.path).substring(12);
+
+                            return Container(
+                              width: deviceWidth,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                border: Border.all(
+                                  width: 1,
+                                  color: themeMode
+                                      ? AppTheme.white10
+                                      : AppTheme.black28,
+                                ),
+                                color: themeMode
+                                    ? AppTheme.white5
+                                    : Colors.transparent,
+                              ),
+                              padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 60,
+                                    height: 60,
+                                    color: AppTheme.white10,
+                                    child: Center(
+                                      child: Image.file(
+                                        File(image.path),
+                                        width: 59,
+                                        height: 59,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          imageName,
+                                          style: TextStyle(
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontSize: 11,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        '126 KB'.tr,
+                                        style: TextStyle(
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontSize: 11,
+                                          fontWeight: FontWeight.w600,
+                                          color: AppTheme.white15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  IconButton(
+                                    splashRadius: 24,
+                                    icon: Image.asset(
+                                      'assets/icons/tabler_trash.png',
+                                      width: 24,
+                                      height: 24,
+                                      color: themeMode
+                                          ? AppTheme.blue2
+                                          : AppTheme.white15,
+                                    ),
+                                    onPressed: () {
+                                      menuPageProvider
+                                          .deleteSelectedImage(image);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                         ),
-                        padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
-                      )),
+                      );
+                    },
+                  ),
                   SizedBox(height: 28),
                   MaterialButton(
                       minWidth: deviceWidth,
