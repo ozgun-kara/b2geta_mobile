@@ -167,6 +167,10 @@ final Map<String, String> tr = {
   'Product Added Message': 'Ürün Eklendi',
   'Product List': 'Product List',
   'Product Delete Message': 'Ürünü silmek istediğinizden emin misiniz?',
+  'Add Product Image': 'Ürün Resmi Ekle',
+  'Add Product Image Info-1': 'Resim yüklemek için dosyalara göz atın',
+  'Add Product Image Info-2': 'Desteklenen Dosyalar JPG, JPEG, PNG',
+  'Add Product': 'Ürünü Ekle',
 
   // HOMEPAGE
   'Posts': 'Postlar',
