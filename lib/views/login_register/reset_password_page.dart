@@ -224,7 +224,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               const EdgeInsets.fromLTRB(25, 16, 25, 16),
                           filled: true,
                           fillColor: Colors.transparent,
-                          hintText: 'Password'.tr,
+                          hintText: 'Confirm Password'.tr,
                           hintStyle: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
