@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -37,6 +38,13 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
     }
   }
 
+  String formatBytes(int bytes, int decimals) {
+    if (bytes <= 0) return "0 B";
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var i = (log(bytes) / log(1024)).floor();
+    return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+  }
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -61,7 +69,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
               child: Column(
                 children: [
                   Text(
-                    'Ürün Resmi Ekle'.tr,
+                    'Add Product Image'.tr,
                     style: TextStyle(
                       fontFamily: AppTheme.appFontFamily,
                       fontSize: 18,
@@ -82,7 +90,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                       child: Column(
                         children: [
                           Text(
-                            'Browse files to upload file upload'.tr,
+                            'Add Product Image Info-1'.tr,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: AppTheme.appFontFamily,
@@ -98,7 +106,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                           ),
                           const SizedBox(height: 28),
                           Text(
-                            'Supported Files JPG, JPEG, PNG'.tr,
+                            'Add Product Image Info-2'.tr,
                             style: TextStyle(
                                 fontSize: 13,
                                 fontFamily: AppTheme.appFontFamily,
@@ -128,6 +136,10 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
 
                             String imageName =
                                 path.basename(image.path).substring(12);
+
+                            final file = File(image.path);
+                            String imageSize =
+                                formatBytes(file.lengthSync(), 2);
 
                             return Container(
                               width: deviceWidth,
@@ -177,9 +189,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 6),
                                       Text(
-                                        '126 KB'.tr,
+                                        imageSize,
                                         style: TextStyle(
                                           fontFamily: AppTheme.appFontFamily,
                                           fontSize: 11,
@@ -223,7 +234,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                         borderRadius: BorderRadius.all(Radius.circular(16)),
                       ),
                       child: Text(
-                        'Ürünü Ekle'.tr,
+                        'Add Product'.tr,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,

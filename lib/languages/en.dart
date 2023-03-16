@@ -164,6 +164,10 @@ final Map<String, String> en = {
   'Product Added Message': 'The product has been added',
   'Product List': 'Product List',
   'Product Delete Message': 'Are you sure you want to delete the product?',
+  'Add Product Image': 'Add Product Image',
+  'Add Product Image Info-1': 'Browse files to upload image',
+  'Add Product Image Info-2': 'Supported Files JPG, JPEG, PNG',
+  'Add Product': 'Add Product',
 
   // HOMEPAGE
   'Posts': 'Posts',
