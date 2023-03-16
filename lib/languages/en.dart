@@ -61,6 +61,13 @@ final Map<String, String> en = {
   'Verify Code Validate': 'Please enter the verify code',
   'Verify Alert-1': 'Error',
   'Verify Alert-2': 'Verification Code Does Not Match',
+    //FORGOT PASSWORD PAGE
+  'Forgot Password-1': 'Forgot Password',
+  'Send': 'Send',
+  //RESET PASSWORD PAGE
+  'Reset Password': 'Reset Password',
+  'Confirm Password': 'Confirm Password',
+  'Save-1': 'Save',
   // NAVIGATION PAGE
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',

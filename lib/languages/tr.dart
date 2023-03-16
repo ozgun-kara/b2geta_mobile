@@ -61,6 +61,13 @@ final Map<String, String> tr = {
   'Verify Code Validate': 'Lütfen doğrulama kodunu giriniz',
   'Verify Alert-1': 'Hata',
   'Verify Alert-2': 'Doğrulama Kodu Eşleşmiyor',
+  //FORGOT PASSWORD PAGE
+  'Forgot Password-1': 'Şifremi Unuttum',
+  'Send': 'Gönder',
+  //RESET PASSWORD PAGE
+  'Reset Password': 'Şifreyi Yenile',
+  'Confirm Password': 'Tekrar Şifre',
+  'Save-1': 'Kaydet',
   // NAVIGATION PAGE
   'Homepage': 'Ana Sayfa',
   'Marketplace': 'Pazaryeri',
