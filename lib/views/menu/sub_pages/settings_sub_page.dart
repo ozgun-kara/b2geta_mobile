@@ -8,14 +8,14 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class MenuSettingsSubPage extends StatefulWidget {
-  const MenuSettingsSubPage({Key? key}) : super(key: key);
+class SettingsSubPage extends StatefulWidget {
+  const SettingsSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuSettingsSubPage> createState() => _MenuSettingsSubPageState();
+  State<SettingsSubPage> createState() => _SettingsSubPageState();
 }
 
-class _MenuSettingsSubPageState extends State<MenuSettingsSubPage> {
+class _SettingsSubPageState extends State<SettingsSubPage> {
   ScrollController scrollController = ScrollController();
   GetStorage box = GetStorage();
   final List<String> dropdownItems = [

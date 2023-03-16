@@ -4,21 +4,21 @@ import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/menu_add_address_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
-class MenuAddressesSubPage extends StatefulWidget {
-  const MenuAddressesSubPage({Key? key}) : super(key: key);
+class AddressesSubPage extends StatefulWidget {
+  const AddressesSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuAddressesSubPage> createState() => _MenuAddressesSubPageState();
+  State<AddressesSubPage> createState() => _AddressesSubPageState();
 }
 
-class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
+class _AddressesSubPageState extends State<AddressesSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -356,7 +356,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              MenuAddAddressSubPage(
+                                                              AddAddressSubPage(
                                                                 passedObject:
                                                                     address,
                                                                 operation:
@@ -449,7 +449,7 @@ class _MenuAddressesSubPageState extends State<MenuAddressesSubPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MenuAddAddressSubPage(
+                              builder: (context) => const AddAddressSubPage(
                                     operation: 'Add',
                                   ))).then((_) => setState(() {}));
                     }),

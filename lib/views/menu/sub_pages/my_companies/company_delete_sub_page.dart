@@ -1,20 +1,20 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/menu_company_deleted_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_deleted_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class MenuCompanyDeleteSubPage extends StatefulWidget {
-  const MenuCompanyDeleteSubPage({Key? key}) : super(key: key);
+class CompanyDeleteSubPage extends StatefulWidget {
+  const CompanyDeleteSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MenuCompanyDeleteSubPage> createState() =>
-      _MenuCompanyDeleteSubPageState();
+  State<CompanyDeleteSubPage> createState() =>
+      _CompanyDeleteSubPageState();
 }
 
-class _MenuCompanyDeleteSubPageState extends State<MenuCompanyDeleteSubPage> {
+class _CompanyDeleteSubPageState extends State<CompanyDeleteSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -81,7 +81,7 @@ class _MenuCompanyDeleteSubPageState extends State<MenuCompanyDeleteSubPage> {
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              const MenuCompanyDeletedSubPage(),
+                              const CompanyDeletedSubPage(),
                         ));
                   }),
               const SizedBox(height: 20),
