@@ -432,24 +432,14 @@ class _CommentPageState extends State<CommentPage> {
                         shape: BoxShape.circle,
                         color: AppTheme.white1,
                       ),
-                      child: (Provider.of<UserProvider>(context)
-                                      .getUser
-                                      .avatar !=
-                                  null &&
-                              Provider.of<UserProvider>(context)
-                                  .getUser
-                                  .avatar!
-                                  .isNotEmpty)
-                          ? Image.network(
-                              'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    "assets/images/dummy_images/user_profile.png");
-                              },
-                            )
-                          : Image.asset(
-                              "assets/images/dummy_images/user_profile.png")),
+                      child: Image.network(
+                        'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                              "assets/images/dummy_images/user_profile.png");
+                        },
+                      )),
                 ),
                 const SizedBox(
                   width: 11.0,

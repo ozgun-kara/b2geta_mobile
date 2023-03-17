@@ -91,31 +91,18 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                                 border: Border.all(
                                     width: 1, color: AppTheme.white21),
                               ),
-                              child: (Provider.of<UserProvider>(context)
-                                              .getUser
-                                              .avatar !=
-                                          null &&
-                                      Provider.of<UserProvider>(context)
-                                          .getUser
-                                          .avatar!
-                                          .isNotEmpty)
-                                  ? Image.network(
-                                      "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                      fit: BoxFit.cover,
-                                      width: 40,
-                                      height: 40,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
-                                          fit: BoxFit.cover,
-                                        );
-                                      },
-                                    )
-                                  : Image.asset(
-                                      "assets/images/dummy_images/user_profile.png",
-                                      fit: BoxFit.cover,
-                                    ),
+                              child: Image.network(
+                                "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
+                                fit: BoxFit.cover,
+                                width: 40,
+                                height: 40,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                    "assets/images/dummy_images/user_profile.png",
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -566,33 +553,22 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
         children: [
           ClipOval(
             child: Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: AppTheme.white1,
-              ),
-              child:
-                  (Provider.of<UserProvider>(context).getUser.avatar != null &&
-                          Provider.of<UserProvider>(context)
-                              .getUser
-                              .avatar!
-                              .isNotEmpty)
-                      ? Image.network(
-                          'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              "assets/images/dummy_images/user_profile.png",
-                              fit: BoxFit.cover,
-                            );
-                          },
-                        )
-                      : Image.asset(
-                          "assets/images/dummy_images/user_profile.png",
-                          fit: BoxFit.cover,
-                        ),
-            ),
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppTheme.white1,
+                ),
+                child: Image.network(
+                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Image.asset(
+                      "assets/images/dummy_images/user_profile.png",
+                      fit: BoxFit.cover,
+                    );
+                  },
+                )),
           ),
           const SizedBox(
             width: 11.0,
