@@ -111,7 +111,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                 color: AppTheme.white21),
                                           ),
 <<<<<<< HEAD
-<<<<<<< HEAD
                                           child: (Provider.of<UserProvider>(
                                                               context)
                                                           .getUser
@@ -140,10 +139,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
 =======
                                           child: Image.network(
                                             "https://api.businessucces.com/${user.avatar}",
-=======
-                                          child: Image.network(
-                                            "https://api.businessucces.com/${Provider.of<UserProvider>(context).getUser.avatar}",
->>>>>>> parent of 3ff4c63 (Updated : Images)
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
@@ -153,10 +148,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                               );
                                             },
                                           ),
-<<<<<<< HEAD
 >>>>>>> parent of a63aa38 (Updated : Base Url)
-=======
->>>>>>> parent of 3ff4c63 (Updated : Images)
                                         ),
                                       ),
                                     ),
@@ -170,17 +162,29 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                         border: Border.all(
                                             width: 1, color: AppTheme.white21),
                                       ),
-                                      child: Image.network(
-                                        "https://api.businessucces.com/${user.avatar}",
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      ),
+                                      child: (Provider.of<UserProvider>(context)
+                                                      .getUser
+                                                      .avatar !=
+                                                  null &&
+                                              Provider.of<UserProvider>(context)
+                                                  .getUser
+                                                  .avatar!
+                                                  .isNotEmpty)
+                                          ? Image.network(
+                                              "https://api.businessucces.com/${user.avatar}",
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            )
+                                          : Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                             const SizedBox(height: 18),
