@@ -1,6 +1,6 @@
 // ignore_for_file: unrelated_type_equality_checks
 import 'package:b2geta_mobile/enums/user_enum.dart';
-import 'package:b2geta_mobile/models/user_model.dart';
+import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/posts/my_account_posts_sub_page.dart';

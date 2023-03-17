@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/message_model.dart';
+import 'package:b2geta_mobile/models/messages/message_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';

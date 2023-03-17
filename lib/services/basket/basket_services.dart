@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/basket_model.dart';
+import 'package:b2geta_mobile/models/basket/basket_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

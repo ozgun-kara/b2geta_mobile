@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/basket_model.dart';
+import 'package:b2geta_mobile/models/basket/basket_model.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:flutter/material.dart';
 
