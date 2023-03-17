@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/models/personal_profile_model.dart';
+import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';

@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 
 class StoryPage extends StatefulWidget {
   const StoryPage({

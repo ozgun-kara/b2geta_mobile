@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';

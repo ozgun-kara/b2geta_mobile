@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

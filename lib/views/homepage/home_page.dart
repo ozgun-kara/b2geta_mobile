@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/enums/user_enum.dart';
-import 'package:b2geta_mobile/models/feed_model.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
