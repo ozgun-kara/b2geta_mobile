@@ -402,16 +402,26 @@ class _HomePageState extends State<HomePage> {
                                     shape: BoxShape.circle,
                                     color: AppTheme.white1,
                                   ),
-                                  child: Image.network(
-                                    'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                        "assets/images/dummy_images/user_profile.png",
-                                        fit: BoxFit.cover,
-                                      );
-                                    },
-                                  ),
+                                  child:  (Provider.of<UserProvider>(context).getUser.avatar != null &&
+                          Provider.of<UserProvider>(context)
+                              .getUser
+                              .avatar!
+                              .isNotEmpty)
+                                      ? Image.network(
+                                          'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
+                                        )
+                                      : Image.asset(
+                                          "assets/images/dummy_images/user_profile.png",
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                               const SizedBox(
@@ -1172,20 +1182,30 @@ class _HomePageState extends State<HomePage> {
             children: [
               ClipOval(
                 child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppTheme.white1,
-                    ),
-                    child: Image.network(
-                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Image.asset(
-                            "assets/images/dummy_images/user_profile.png");
-                      },
-                    )),
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.white1,
+                  ),
+                  child:
+                       (Provider.of<UserProvider>(context).getUser.avatar != null &&
+                          Provider.of<UserProvider>(context)
+                              .getUser
+                              .avatar!
+                              .isNotEmpty)
+                          ? Image.network(
+                              'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                    fit: BoxFit.cover,
+                                    "assets/images/dummy_images/user_profile.png");
+                              },
+                            )
+                          : Image.asset(
+                              "assets/images/dummy_images/user_profile.png"),
+                ),
               ),
               const SizedBox(
                 width: 11.0,
