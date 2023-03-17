@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -68,7 +69,14 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                             fontWeight: FontWeight.w700,
                             color: AppTheme.white1),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const AddProductSubPage(operation: 'Add'),
+                            ));
+                      }),
                 ],
               ),
             ),
