@@ -111,7 +111,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                 color: AppTheme.white21),
                                           ),
                                           child: Image.network(
-                                            "https://api.businessucces.com/${user.avatar}",
+                                            "https://api.businessucces.com/${Provider.of<UserProvider>(context).getUser.avatar}",
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {

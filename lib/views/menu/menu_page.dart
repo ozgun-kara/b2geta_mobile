@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/orders_sub_page.dart';
@@ -83,7 +84,7 @@ class _MenuPageState extends State<MenuPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => MyCompaniesSubPage(),
+                              builder: (context) => const MyCompaniesSubPage(),
                             ));
                       }),
                   const SizedBox(height: 8),
@@ -107,7 +108,13 @@ class _MenuPageState extends State<MenuPage> {
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                         ),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyProductsSubPage(),
+                            ));
+                      }),
                   const SizedBox(height: 8),
                 ],
               ),
@@ -129,7 +136,7 @@ class _MenuPageState extends State<MenuPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => OrdersSubPage(),
+                        builder: (context) => const OrdersSubPage(),
                       ));
                 }),
             const SizedBox(height: 8),

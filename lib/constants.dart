@@ -1,7 +1,6 @@
 class Constants {
   const Constants._();
-  static String apiUrl = '';
-  //"https://api.businessucces.com/api"; // THIS VARIABLE WILL BE CHANGED WITH PROVIDER IN THE FUTURE
+  static String apiUrl = "https://api.businessucces.com/api"; // THIS VARIABLE WILL BE CHANGED WITH PROVIDER IN THE FUTURE
   static String? userToken;
   static String? userId;
 
