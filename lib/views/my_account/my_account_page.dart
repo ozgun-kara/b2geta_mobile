@@ -110,17 +110,31 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                 width: 1,
                                                 color: AppTheme.white21),
                                           ),
-                                          child: Image.network(
-                                            "https://api.businessucces.com/${Provider.of<UserProvider>(context).getUser.avatar}",
-                                            fit: BoxFit.cover,
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return Image.asset(
-                                                "assets/images/dummy_images/user_profile.png",
-                                                fit: BoxFit.cover,
-                                              );
-                                            },
-                                          ),
+                                          child: (Provider.of<UserProvider>(
+                                                              context)
+                                                          .getUser
+                                                          .avatar !=
+                                                      null &&
+                                                  Provider.of<UserProvider>(
+                                                          context)
+                                                      .getUser
+                                                      .avatar!
+                                                      .isNotEmpty)
+                                              ? Image.network(
+                                                  "https://api.businessucces.com/${Provider.of<UserProvider>(context).getUser.avatar}",
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                      stackTrace) {
+                                                    return Image.asset(
+                                                      "assets/images/dummy_images/user_profile.png",
+                                                      fit: BoxFit.cover,
+                                                    );
+                                                  },
+                                                )
+                                              : Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                ),
                                         ),
                                       ),
                                     ),
@@ -134,17 +148,29 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                         border: Border.all(
                                             width: 1, color: AppTheme.white21),
                                       ),
-                                      child: Image.network(
-                                        "https://api.businessucces.com/${user.avatar}",
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      ),
+                                      child: (Provider.of<UserProvider>(context)
+                                                      .getUser
+                                                      .avatar !=
+                                                  null &&
+                                              Provider.of<UserProvider>(context)
+                                                  .getUser
+                                                  .avatar!
+                                                  .isNotEmpty)
+                                          ? Image.network(
+                                              "https://api.businessucces.com/${user.avatar}",
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                  "assets/images/dummy_images/user_profile.png",
+                                                  fit: BoxFit.cover,
+                                                );
+                                              },
+                                            )
+                                          : Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                             const SizedBox(height: 18),
