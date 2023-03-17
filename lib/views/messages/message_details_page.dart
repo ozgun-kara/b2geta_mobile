@@ -124,12 +124,12 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
               children: [
                 _messagesList.isNotEmpty
                     ? ClipOval(
-                        child: _messagesList[0].fromAvatar!.isNotEmpty
+                        child: _messagesList[0].toAvatar!.isNotEmpty
                             ? Image.network(
                                 width: 43,
                                 height: 43,
                                 fit: BoxFit.cover,
-                                _messagesList[0].fromAvatar!,
+                                _messagesList[0].toAvatar!,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Image.asset(
                                   "assets/images/dummy_images/user_profile.png",
@@ -157,8 +157,8 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _messagesList[0].fromFullname!.isNotEmpty
-                                    ? _messagesList[0].fromFullname!
+                                _messagesList[0].toFullname!.isNotEmpty
+                                    ? _messagesList[0].toFullname!
                                     : "User Name",
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(

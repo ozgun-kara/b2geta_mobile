@@ -175,12 +175,12 @@ class _MessagesPageState extends State<MessagesPage> {
                       child: Row(
                         children: [
                           ClipOval(
-                            child: message.fromAvatar!.isNotEmpty
+                            child: message.toAvatar!.isNotEmpty
                                 ? Image.network(
                                     width: 40,
                                     height: 40,
                                     fit: BoxFit.cover,
-                                    message.fromAvatar!,
+                                    message.toAvatar!,
                                     errorBuilder:
                                         (context, error, stackTrace) =>
                                             Image.asset(
@@ -202,8 +202,8 @@ class _MessagesPageState extends State<MessagesPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                message.fromFullname != null
-                                    ? message.fromFullname!
+                                message.toFullname != null
+                                    ? message.toFullname!
                                     : "User Name",
                                 style: TextStyle(
                                   fontSize: 13,
