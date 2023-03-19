@@ -1,4 +1,5 @@
-import 'package:b2geta_mobile/views/login_register/reset_password_page.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/login_register/password_verify_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +17,14 @@ class ForgotPasswordPage extends StatefulWidget {
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController emailController1 = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  final MemberServices _memberServices = MemberServices();
 
   @override
   void initState() {
@@ -109,7 +112,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         },
 
                         keyboardType: TextInputType.emailAddress,
-                        controller: emailController1,
+                        controller: emailController,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -186,12 +189,22 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     ),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ResetPasswordPage(),
-                                            ));
+                                        if (emailController.text.isNotEmpty) {
+                                          _memberServices
+                                              .forgotPassword(
+                                                  email: emailController.text)
+                                              .then((value) {
+                                            if (value) {
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return PasswordVerifyPage(
+                                                    email:
+                                                        emailController.text);
+                                              }));
+                                            }
+                                          });
+                                        }
                                       }
                                     }),
                               ),

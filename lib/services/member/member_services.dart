@@ -257,6 +257,98 @@ class MemberServices {
     }
   }
 
+  //FORGOT PASSWORD
+  Future<bool> forgotPassword({required String email}) async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/member/forgot'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: {
+        'username': email,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  // VERIFY
+  Future<String> passwordVerifyCall({
+    required String email,
+    required String verifyCode,
+  }) async {
+    final response = await http.post(
+      Uri.parse('${Constants.apiUrl}/member/forgot/verify'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: {
+        "username": email,
+        "code": verifyCode,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return '';
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return 'error';
+      }
+    } else if (response.statusCode == 400) {
+      debugPrint(response.body);
+      return 'VerificationCodeDoesNotMatch';
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.body}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return 'error';
+    }
+  }
+
+  // LOGOUT
+  Future<bool> updatePasswordCall(
+      {required String email,
+      required String password,
+      required String verifyCode}) async {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/member/forgot/update'), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    }, body: {
+      'username': email,
+      'code': verifyCode,
+      'password': password,
+      'new_password': password,
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   // TOKEN FUNCTIONS
   Future<void> saveToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();

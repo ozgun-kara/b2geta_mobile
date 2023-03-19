@@ -1,16 +1,22 @@
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
+import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({
-    super.key,
-  });
-
+    Key? key,
+    required this.email,
+    required this.verifyCode,
+  }) : super(key: key);
+  final String email;
+  final String verifyCode;
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
@@ -323,14 +329,31 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                     ),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const LoginPage(
-                                                email: '',
-                                              ),
-                                            ));
+                                        if (passwordController1.text ==
+                                            passwordController2.text) {
+                                          locator<MemberServices>()
+                                              .updatePasswordCall(
+                                            email: widget.email,
+                                            verifyCode: widget.verifyCode,
+                                            password: passwordController1.text,
+                                          )
+                                              .then((value) {
+                                            if (value) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        LoginPage(
+                                                      email: widget.email,
+                                                    ),
+                                                  ));
+                                            } else {
+                                              showAlertDialog(context);
+                                            }
+                                          });
+                                        } else {
+                                          showAlertDialog(context);
+                                        }
                                       }
                                     }),
                               ),
