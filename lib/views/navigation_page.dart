@@ -1,11 +1,11 @@
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/notification_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -86,9 +86,7 @@ class _NavigationPageState extends State<NavigationPage> {
                 //     blurRadius: 48,
                 //   ),
                 // ],
-                color: Provider.of<ThemeProvider>(context).themeMode == "light"
-                    ? AppTheme.white1
-                    : AppTheme.black5,
+                color: themeMode ? AppTheme.white1 : AppTheme.black5,
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -118,9 +116,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                     width: 23,
                                     height: 22,
                                     color: provider.currentTabIndex == 0
-                                        ? Provider.of<ThemeProvider>(context)
-                                                    .themeMode ==
-                                                "light"
+                                        ? themeMode
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
@@ -131,10 +127,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                         fontFamily: AppTheme.appFontFamily,
                                         fontWeight: FontWeight.w600,
                                         color: provider.currentTabIndex == 0
-                                            ? Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
+                                            ? themeMode
                                                 ? AppTheme.blue2
                                                 : AppTheme.white1
                                             : AppTheme.white15)),
@@ -156,11 +149,7 @@ class _NavigationPageState extends State<NavigationPage> {
                               topRight: Radius.circular(16),
                             ),
                           ),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white1
-                                  : AppTheme.black5,
+                          color: themeMode ? AppTheme.white1 : AppTheme.black5,
                           elevation: 0,
                           child: FittedBox(
                             fit: BoxFit.none,
@@ -171,9 +160,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                     width: 22,
                                     height: 21,
                                     color: provider.currentTabIndex == 1
-                                        ? Provider.of<ThemeProvider>(context)
-                                                    .themeMode ==
-                                                "light"
+                                        ? themeMode
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
@@ -184,10 +171,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                         fontFamily: AppTheme.appFontFamily,
                                         fontWeight: FontWeight.w600,
                                         color: provider.currentTabIndex == 1
-                                            ? Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
+                                            ? themeMode
                                                 ? AppTheme.blue2
                                                 : AppTheme.white1
                                             : AppTheme.white15)),
@@ -209,11 +193,7 @@ class _NavigationPageState extends State<NavigationPage> {
                               topRight: Radius.circular(16),
                             ),
                           ),
-                          color:
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      "light"
-                                  ? AppTheme.white1
-                                  : AppTheme.black5,
+                          color: themeMode ? AppTheme.white1 : AppTheme.black5,
                           elevation: 0,
                           child: FittedBox(
                             fit: BoxFit.none,
@@ -224,9 +204,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                     width: 21,
                                     height: 21,
                                     color: provider.currentTabIndex == 2
-                                        ? Provider.of<ThemeProvider>(context)
-                                                    .themeMode ==
-                                                "light"
+                                        ? themeMode
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15),
@@ -237,10 +215,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                         fontFamily: AppTheme.appFontFamily,
                                         fontWeight: FontWeight.w600,
                                         color: provider.currentTabIndex == 2
-                                            ? Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
+                                            ? themeMode
                                                 ? AppTheme.blue2
                                                 : AppTheme.white1
                                             : AppTheme.white15)),
@@ -262,10 +237,7 @@ class _NavigationPageState extends State<NavigationPage> {
                             topRight: Radius.circular(16),
                           ),
                         ),
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.white1
-                            : AppTheme.black5,
+                        color: themeMode ? AppTheme.white1 : AppTheme.black5,
                         elevation: 0,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -314,9 +286,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                     fontFamily: AppTheme.appFontFamily,
                                     fontWeight: FontWeight.w600,
                                     color: provider.currentTabIndex == 3
-                                        ? Provider.of<ThemeProvider>(context)
-                                                    .themeMode ==
-                                                "light"
+                                        ? themeMode
                                             ? AppTheme.blue2
                                             : AppTheme.white1
                                         : AppTheme.white15)),
@@ -517,7 +487,7 @@ class _NavigationPageState extends State<NavigationPage> {
               height: 18.0,
               color: AppTheme.white15,
             ),
-            onPressed: () {},
+            onPressed: navigateToNotificationPage,
           ),
           IconButton(
             splashRadius: 24,
@@ -620,6 +590,11 @@ class _NavigationPageState extends State<NavigationPage> {
   void navigateToBasketPage() {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => const BasketPage()));
+  }
+
+  void navigateToNotificationPage() {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const NotificationPage()));
   }
 
   void navigateToMessagePage() {
