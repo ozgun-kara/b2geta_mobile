@@ -64,13 +64,15 @@ final Map<String, String> en = {
   'Verify Code Validate': 'Please enter the verify code',
   'Verify Alert-1': 'Error',
   'Verify Alert-2': 'Verification Code Does Not Match',
-  //FORGOT PASSWORD PAGE
+
+  // FORGOT PASSWORD PAGE
   'Forgot Password-1': 'Forgot Password',
   'Send': 'Send',
+
   // RESET PASSWORD PAGE
   'Reset Password': 'Reset Password',
   'Confirm Password': 'Confirm Password',
-  'Save-1': 'Save',
+
   // NAVIGATION PAGE
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',
@@ -284,6 +286,7 @@ final Map<String, String> en = {
   'No internet connection': 'No internet connection',
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
+
   // COMPANY ADD PAGE
   'Add': 'Add',
   'Add Company': 'Add Company',
@@ -311,7 +314,7 @@ final Map<String, String> en = {
   'No I don\'t Approve': 'No I don\'t Approve',
   'Company Deleted Message': 'Your company has been deleted',
 
-  //MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
+  // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'My Products',
   'Add Product-1': 'Add Product',
   'Product Name': 'Product Name',
@@ -322,7 +325,7 @@ final Map<String, String> en = {
   'Brand': 'Brand',
   'Product Summary': 'Product Summary',
   'Status': 'Status',
-  'Continue':'Continue',
+  'Continue': 'Continue',
   'Product Name Validate': 'Please enter the product name',
   'Product Description Validate': 'Please enter the product description',
   'Price Validate': 'Please enter the price',

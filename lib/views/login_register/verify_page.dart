@@ -1,17 +1,14 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-
-import '../../services/member/member_services.dart';
-import 'login_page.dart';
 
 class VerifyPage extends StatefulWidget {
   const VerifyPage({
