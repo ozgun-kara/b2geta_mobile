@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
@@ -6,6 +7,7 @@ import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_su
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
@@ -155,7 +157,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           return null;
                         },
                         controller: emailController,
-                        hintText: 'E-mail-1'.tr,
+                        hintText: 'E-mail'.tr,
                         keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 13),
@@ -729,18 +731,66 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           return null;
                         },
                         controller: addressController,
-                        hintText: 'Address-1'.tr,
+                        hintText: 'Address'.tr,
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      TextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Posta Code Validate-1'.tr;
+                            return 'Postal Code Validate'.tr;
                           }
                           return null;
                         },
                         controller: postalCodeController,
-                        hintText: 'Postal Code-1'.tr,
+                        keyboardType: TextInputType.number,
+                        maxLength: 10,
+                        inputFormatters: [
+                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
+                        ],
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color: themeMode
+                                ? AppTheme.blue3
+                                : AppTheme.white1), // WHILE WRITING
+                        maxLines: 1,
+                        decoration: InputDecoration(
+                          counterText: "",
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                          filled: true,
+                          fillColor:
+                              themeMode ? AppTheme.white39 : AppTheme.black18,
+                          hintText: 'Postal Code'.tr,
+                          hintStyle: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color:
+                                themeMode ? AppTheme.blue3 : AppTheme.white14,
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              )),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              )),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color:
+                                  themeMode ? AppTheme.blue2 : AppTheme.white1,
+                              width: 1,
+                            ),
+                          ),
+                        ),
                       ),
                       const SizedBox(height: 13),
                       textFormField(
@@ -772,6 +822,35 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                 color: AppTheme.white1),
                           ),
                           onPressed: () {
+                            if (companyGlobalKey.currentState!.validate()) {
+                              if (countryCode.toString() != 'null' &&
+                                  cityId.toString() != 'null' &&
+                                  districtId.toString() != 'null') {
+                                debugPrint(
+                                    "\nCompany Name: ${companyNameController.text}");
+                                debugPrint(
+                                    "\nTax Office: ${taxOfficeController.text}");
+                                debugPrint(
+                                    "\nTax Number: ${taxNumberController.text}");
+                                debugPrint(
+                                    "\nPhone Number: ${phoneNumberController.text}");
+                                debugPrint("\nE-mail: ${emailController.text}");
+                                debugPrint("Country Code: $countryCode");
+                                debugPrint("City Id: $cityId");
+                                debugPrint("District Id: $districtId");
+                                debugPrint(
+                                    "Address: ${addressController.text}");
+                                debugPrint(
+                                    "Postal Code: ${postalCodeController.text}");
+                                debugPrint("About: ${aboutController.text}");
+
+                                if (widget.operation == 'Add') {
+                                } else {}
+                              } else {
+                                validationErrorDialog(context);
+                              }
+                            }
+
                             if (widget.operation == 'Add') {
                               Navigator.push(
                                   context,

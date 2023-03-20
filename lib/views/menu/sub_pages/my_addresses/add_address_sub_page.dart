@@ -807,6 +807,7 @@ class _AddAddressSubPageState extends State<AddAddressSubPage> {
                       },
                       controller: postalCodeController,
                       keyboardType: TextInputType.number,
+                      maxLength: 10,
                       inputFormatters: [
                         FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
                       ],
@@ -819,6 +820,7 @@ class _AddAddressSubPageState extends State<AddAddressSubPage> {
                               : AppTheme.white1), // WHILE WRITING
                       maxLines: 1,
                       decoration: InputDecoration(
+                        counterText: "",
                         contentPadding:
                             const EdgeInsets.fromLTRB(25, 16, 25, 16),
                         filled: true,
