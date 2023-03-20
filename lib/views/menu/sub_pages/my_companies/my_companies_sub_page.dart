@@ -1,5 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,13 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  @override
+  void initState() {
+    CompanyServices().listMyCompaniesCall();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +212,8 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              AddCompanySubPage(operation: 'Edit'),
+                                              AddCompanySubPage(
+                                                  operation: 'Edit'),
                                         ));
                                   }),
                             ),

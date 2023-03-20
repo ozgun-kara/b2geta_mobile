@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
@@ -827,14 +828,14 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                   cityId.toString() != 'null' &&
                                   districtId.toString() != 'null') {
                                 debugPrint(
-                                    "\nCompany Name: ${companyNameController.text}");
+                                    "Company Name: ${companyNameController.text}");
                                 debugPrint(
-                                    "\nTax Office: ${taxOfficeController.text}");
+                                    "Tax Office: ${taxOfficeController.text}");
                                 debugPrint(
-                                    "\nTax Number: ${taxNumberController.text}");
+                                    "Tax Number: ${taxNumberController.text}");
                                 debugPrint(
-                                    "\nPhone Number: ${phoneNumberController.text}");
-                                debugPrint("\nE-mail: ${emailController.text}");
+                                    "Phone Number: ${phoneNumberController.text}");
+                                debugPrint("E-mail: ${emailController.text}");
                                 debugPrint("Country Code: $countryCode");
                                 debugPrint("City Id: $cityId");
                                 debugPrint("District Id: $districtId");
@@ -845,22 +846,57 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                 debugPrint("About: ${aboutController.text}");
 
                                 if (widget.operation == 'Add') {
+                                  locator<CompanyServices>()
+                                      .addCompanyCall(
+                                    companyName: companyNameController.text,
+                                    taxOffice: taxOfficeController.text,
+                                    taxNumber: taxNumberController.text,
+                                    phoneNumber: phoneNumberController.text,
+                                    email: emailController.text,
+                                    wantEmail: '1',
+                                    country: countryCode,
+                                    city: cityId,
+                                    district: districtId,
+                                    address: addressController.text,
+                                    postalCode: postalCodeController.text,
+                                    about: aboutController.text,
+                                    languageCode: 'tr',
+                                    countryCode: countryCode,
+                                    timezone: '3',
+                                  )
+                                      .then((value) {
+                                    if (value == true) {
+                                      debugPrint(
+                                          "COMPANY HAS SUCCESSFULLY ADDED");
+
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CompanyAddedSubPage(),
+                                          ));
+                                    } else {
+                                      debugPrint("COMPANY HAS NOT ADDED");
+                                      operationFailedDialog(context);
+                                    }
+                                  });
                                 } else {}
                               } else {
                                 validationErrorDialog(context);
                               }
                             }
 
-                            if (widget.operation == 'Add') {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CompanyAddedSubPage(),
-                                  ));
-                            } else {
-                              Navigator.pop(context);
-                            }
+                            // if (widget.operation == 'Add') {
+                            //
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             const CompanyAddedSubPage(),
+                            //       ));
+                            // } else {
+                            //   Navigator.pop(context);
+                            // }
                           }),
                       Visibility(
                         visible: widget.operation == 'Edit' ? true : false,
