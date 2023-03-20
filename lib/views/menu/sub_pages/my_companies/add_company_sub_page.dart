@@ -91,7 +91,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
             children: [
               const SizedBox(height: 27.5),
               Text(
-                'Add Company'.tr,
+                widget.operation == 'Add'
+                    ? 'Add Company'.tr
+                    : 'Edit Company'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,

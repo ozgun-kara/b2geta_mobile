@@ -134,6 +134,7 @@ final Map<String, String> tr = {
   'Admin': 'Admin',
   'Add': 'Ekle',
   'Add Company': 'Firma Ekle',
+  'Edit Company': 'Firmayı Düzenle',
   'Delete Company': 'Firmayı Sil',
   'Tax Office': 'Vergi Dairesi',
   'Tax Number': 'Vergi Numarası',
@@ -281,33 +282,6 @@ final Map<String, String> tr = {
   'No internet connection': 'İnternet bağlantısı yok',
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
-
-  // COMPANY ADD PAGE
-  'Add': 'Ekle',
-  'Add Company': 'Firma Ekle',
-  'Delete Company': 'Firmayı Sil',
-  'Company Name-2': 'Firma Adı',
-  'Tax Office': 'Vergi Dairesi',
-  'Tax Number': 'Vergi Numarası',
-  'Phone Number': 'Telefon Numarası',
-  'About': 'Hakkında',
-  'Search...-1': 'Ara...',
-  'Company Name Validate-2': 'Lütfen firma adını giriniz',
-  'Tax Office Validate': 'Lütfen vergi dairenizi giriniz',
-  'Tax Number Validate': 'Lütfen vergi numaranızı giriniz',
-  'Phone Number Validate': 'Lütfen telefon numaranızı giriniz',
-  'E-mail Validate-4': 'Lütfen e-mail adresinizi giriniz',
-  'E-mail Validate-5': 'Lütfen geçerli bir email adresi giriniz',
-  'Address Validate-1': 'Lütfen adresi giriniz',
-  'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
-  'About Validate': 'Lütfen hakkında alanını giriniz',
-  'Company Added Message':
-      'Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
-  'Company Delete Message':
-      'Firmayı silerseniz tüm eklediğiniz firma ürünleri de silinecektir.\nOnaylıyor musunuz?',
-  'Yes I Accept': 'Evet Onaylıyorum',
-  'No I don\'t Approve': 'Hayır Onaylamıyorum',
-  'Company Deleted Message': 'Firmanız silindi',
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',

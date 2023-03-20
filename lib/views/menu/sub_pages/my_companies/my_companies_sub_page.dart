@@ -280,6 +280,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                       controller: scrollController,
                       shrinkWrap: true,
                       itemCount: companiesList!.length,
+                      padding: const EdgeInsets.only(bottom: 32),
                       separatorBuilder: (BuildContext context, int index) {
                         return Container(
                           width: deviceWidth,
@@ -415,7 +416,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      AddCompanySubPage(
+                                                      const AddCompanySubPage(
                                                           operation: 'Edit'),
                                                 ));
                                           }),
