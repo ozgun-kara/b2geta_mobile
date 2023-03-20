@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -320,7 +319,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                           BorderRadius.all(Radius.circular(16)),
                                     ),
                                     child: Text(
-                                      'Save-1'.tr,
+                                      'Save'.tr,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontFamily: AppTheme.appFontFamily,

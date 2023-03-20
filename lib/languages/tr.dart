@@ -73,7 +73,6 @@ final Map<String, String> tr = {
   // RESET PASSWORD PAGE
   'Reset Password': 'Şifreyi Yenile',
   'Confirm Password': 'Tekrar Şifre',
-  'Save-1': 'Kaydet',
 
   // NAVIGATION PAGE
   'Homepage': 'Ana Sayfa',
@@ -309,7 +308,8 @@ final Map<String, String> tr = {
   'Yes I Accept': 'Evet Onaylıyorum',
   'No I don\'t Approve': 'Hayır Onaylamıyorum',
   'Company Deleted Message': 'Firmanız silindi',
-  //MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
+
+  // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',
   'Add Product-1': 'Ürün Ekle',
   'Product Name': 'Ürün Adı',
