@@ -22,18 +22,16 @@ class AddCompanySubPage extends StatefulWidget {
 
 class _AddCompanySubPageState extends State<AddCompanySubPage> {
   ScrollController scrollController = ScrollController();
-  GlobalKey<FormState> addressGlobalKey = GlobalKey<FormState>();
+  GlobalKey<FormState> companyGlobalKey = GlobalKey<FormState>();
 
   final companyNameController = TextEditingController();
   final taxOfficeController = TextEditingController();
   final taxNumberController = TextEditingController();
   final phoneNumberController = TextEditingController();
   final emailController = TextEditingController();
-
   final countryController = TextEditingController();
   final cityController = TextEditingController();
   final districtController = TextEditingController();
-
   final addressController = TextEditingController();
   final postalCodeController = TextEditingController();
   final aboutController = TextEditingController();
@@ -49,12 +47,20 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
   @override
   void initState() {
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCity = null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+        null;
+
+    Provider.of<MenuPageProvider>(context, listen: false).countryList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).cityList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).districtList.clear();
+
+    Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+
     super.initState();
   }
-
-  List countryList = ['Türkiye', 'Hindistan', 'Amerika', 'Kore'];
-  List cityList = ['İstanbul', 'İzmir', 'Bursa', 'Manisa'];
-  List districtList = ['YunusEmre', 'Şehzadeler', 'Akhisar', 'Turgutlu'];
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +68,13 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
+
+    var countryList =
+        Provider.of<MenuPageProvider>(context, listen: false).countryList;
+    var cityList =
+        Provider.of<MenuPageProvider>(context, listen: false).cityList;
+    var districtList =
+        Provider.of<MenuPageProvider>(context, listen: false).districtList;
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
@@ -83,7 +96,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 30, 30, 37),
                 child: Form(
-                  key: addressGlobalKey,
+                  key: companyGlobalKey,
                   child: Column(
                     children: [
                       textFormField(
@@ -94,7 +107,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           return null;
                         },
                         controller: companyNameController,
-                        hintText: 'Company Name-2'.tr,
+                        hintText: 'Company Name'.tr,
                       ),
                       const SizedBox(height: 13),
                       textFormField(
@@ -151,7 +164,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           // alignment: AlignmentDirectional.center,
                           isExpanded: true,
                           hint: Text(
-                            'Country-1'.tr,
+                            'Country'.tr,
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -165,9 +178,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           ),
                           items: countryList
                               .map((item) => DropdownMenuItem<String>(
-                                    value: item,
+                                    value: item.name,
                                     child: Text(
-                                      item ?? '',
+                                      item.name ?? '',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -190,7 +203,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                     listen: false)
                                 .updateSelectedCountry(value as String);
 
-                            var countryIndex = [].indexWhere(
+                            var countryIndex = countryList.indexWhere(
                                 ((element) => element.name == value));
                             if (countryIndex != -1) {
                               debugPrint('COUNTRY INDEX: $countryIndex');
@@ -285,7 +298,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                   horizontal: 16,
                                   vertical: 12,
                                 ),
-                                hintText: 'Search...-1'.tr,
+                                hintText: 'Search...'.tr,
                                 hintStyle: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
@@ -343,7 +356,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           // alignment: AlignmentDirectional.center,
                           isExpanded: true,
                           hint: Text(
-                            'City-1'.tr,
+                            'City'.tr,
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -357,9 +370,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           ),
                           items: cityList
                               .map((item) => DropdownMenuItem<String>(
-                                    value: item,
+                                    value: item.name,
                                     child: Text(
-                                      item ?? '',
+                                      item.name ?? '',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -382,7 +395,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                     listen: false)
                                 .updateSelectedCity(value as String);
 
-                            var cityIndex = [].indexWhere(
+                            var cityIndex = cityList.indexWhere(
                                 ((element) => element.name == value));
                             if (cityIndex != -1) {
                               debugPrint('CITY INDEX: $cityIndex');
@@ -474,7 +487,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                   horizontal: 16,
                                   vertical: 12,
                                 ),
-                                hintText: 'Search...-1'.tr,
+                                hintText: 'Search...'.tr,
                                 hintStyle: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
@@ -532,7 +545,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           // alignment: AlignmentDirectional.center,
                           isExpanded: true,
                           hint: Text(
-                            'District-1'.tr,
+                            'District'.tr,
                             style: TextStyle(
                               fontSize: 14,
                               fontFamily: AppTheme.appFontFamily,
@@ -546,9 +559,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                           ),
                           items: districtList
                               .map((item) => DropdownMenuItem<String>(
-                                    value: item,
+                                    value: item.name,
                                     child: Text(
-                                      item ?? '',
+                                      item.name ?? '',
                                       style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -571,7 +584,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                     listen: false)
                                 .updateSelectedDistrict(value as String);
 
-                            var districtIndex = [].indexWhere(
+                            var districtIndex = districtList.indexWhere(
                                 ((element) => element.name == value));
                             if (districtIndex != -1) {
                               debugPrint('DISTRICT INDEX: $districtIndex');
@@ -655,7 +668,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                   horizontal: 16,
                                   vertical: 12,
                                 ),
-                                hintText: 'Search...-1'.tr,
+                                hintText: 'Search...'.tr,
                                 hintStyle: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
