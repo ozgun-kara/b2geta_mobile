@@ -104,7 +104,7 @@ class MemberServices {
   }
 
   // LOGIN
-  Future<bool> loginCall(
+  Future<String> loginCall(
       {required String email, required String password}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/member/login'),
@@ -113,6 +113,7 @@ class MemberServices {
       },
       body: {"username": email, "password": password},
     );
+    var responseText = json.decode(response.body)["responseText"];
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
@@ -133,18 +134,22 @@ class MemberServices {
         Constants.userId = userId;
         saveUserId(userId);
 
-        return true;
+        return '';
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
 
-        return false;
+        return 'error';
       }
+    } else if (responseText == 'UserAccessNotFound') {
+      return 'UserAccessNotFound';
+    } else if (responseText == 'UnVerifiedAccount') {
+      return 'UnVerifiedAccount';
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
-      return false;
+      return 'error';
     }
   }
 
@@ -318,6 +323,31 @@ class MemberServices {
       debugPrint("API ERROR\nSTATUS CODE: ${response.body}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return 'error';
+    }
+  }
+
+  // Re Send
+  Future<bool> reSendCall({required String email}) async {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/member/resend'), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer ${Constants.userToken}",
+    }, body: {
+      'email': email,
+    });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      debugPrint(response.body);
+
+      return false;
     }
   }
 

@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/forgot_password_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
+import 'package:b2geta_mobile/views/login_register/verify_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -334,30 +337,6 @@ class _LoginPageState extends State<LoginPage> {
                                     height: 52,
                                     decoration: BoxDecoration(
                                         color: AppTheme.blue2,
-                                        // boxShadow: [
-                                        //   BoxShadow(
-                                        //     blurStyle: BlurStyle.outer,
-                                        //     offset: Offset(0, -4),
-                                        //     blurRadius: 16,
-                                        //     spreadRadius: 0,
-                                        //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-                                        //   ),
-                                        //   BoxShadow(
-                                        //     blurStyle: BlurStyle.normal,
-                                        //     offset: Offset(0, -2),
-                                        //     blurRadius: 2,
-                                        //     spreadRadius: 0,
-                                        //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-                                        //   ),
-                                        //   BoxShadow(
-                                        //     blurStyle: BlurStyle.normal,
-                                        //     offset: Offset(0, 1),
-                                        //     blurRadius: 2,
-                                        //     spreadRadius: 0,
-                                        //     color: Color(0xFF000000).withOpacity(0.18),
-                                        //   ),
-                                        // ],
-
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(16))),
                                     child: MaterialButton(
@@ -391,7 +370,7 @@ class _LoginPageState extends State<LoginPage> {
                                                         passwordController1.text
                                                             .trim())
                                                 .then((value) {
-                                              if (value == true) {
+                                              if (value.isEmpty) {
                                                 getProfile();
                                                 return Navigator.push(
                                                     context,
@@ -399,6 +378,27 @@ class _LoginPageState extends State<LoginPage> {
                                                       builder: (context) =>
                                                           const NavigationPage(),
                                                     ));
+                                              } else if (value ==
+                                                  'UserAccessNotFound') {
+                                                operationFailedDialog(context,
+                                                    'Kullanıcı bulunamadı.');
+                                              } else if (value ==
+                                                  'UnVerifiedAccount') {
+                                                _memberServices
+                                                    .reSendCall(
+                                                        email: emailController1
+                                                            .text)
+                                                    .then((value) {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            VerifyPage(
+                                                                email:
+                                                                    emailController1
+                                                                        .text),
+                                                      ));
+                                                });
                                               } else {
                                                 showAlertDialog(context);
                                               }
@@ -608,30 +608,6 @@ class _LoginPageState extends State<LoginPage> {
                     height: 36,
                     decoration: BoxDecoration(
                         color: AppTheme.green1,
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     blurStyle: BlurStyle.outer,
-                        //     offset: Offset(0, -4),
-                        //     blurRadius: 16,
-                        //     spreadRadius: 0,
-                        //     color: Color(0xFF0E0E0F).withOpacity(0.17),
-                        //   ),
-                        //   BoxShadow(
-                        //     blurStyle: BlurStyle.normal,
-                        //     offset: Offset(0, -2),
-                        //     blurRadius: 2,
-                        //     spreadRadius: 0,
-                        //     color: Color(0xFFFFFFFF).withOpacity(0.25),
-                        //   ),
-                        //   BoxShadow(
-                        //     blurStyle: BlurStyle.normal,
-                        //     offset: Offset(0, 1),
-                        //     blurRadius: 2,
-                        //     spreadRadius: 0,
-                        //     color: Color(0xFF000000).withOpacity(0.18),
-                        //   ),
-                        // ],
-
                         borderRadius:
                             const BorderRadius.all(Radius.circular(16))),
                     child: MaterialButton(
@@ -653,6 +629,94 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationFailedDialog(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white1
+                            : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            message.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black16
+                                  : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.black16
+                                  : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         );
