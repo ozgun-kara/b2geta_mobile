@@ -133,6 +133,7 @@ final Map<String, String> en = {
   'Admin': 'Admin',
   'Add': 'Add',
   'Add Company': 'Add Company',
+  'Edit Company': 'Edit Company',
   'Delete Company': 'Delete Company',
   'Tax Office': 'Tax Office',
   'Tax Number': 'Tax Number',
@@ -286,33 +287,6 @@ final Map<String, String> en = {
   'No internet connection': 'No internet connection',
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
-
-  // COMPANY ADD PAGE
-  'Add': 'Add',
-  'Add Company': 'Add Company',
-  'Delete Company': 'Delete Company',
-  'Company Name-2': 'Company Name',
-  'Tax Office': 'Tax Office',
-  'Tax Number': 'Tax Number',
-  'Phone Number': 'Phone Number',
-  'About': 'About',
-  'Search...-1': 'Search...',
-  'Company Name Validate-2': 'Please enter company name',
-  'Tax Office Validate': 'Please enter your tax office',
-  'Tax Number Validate': 'Lütfen vergi numaranızı giriniz',
-  'Phone Number Validate': 'Please enter your tax number',
-  'E-mail Validate-4': 'Please enter your e-mail address',
-  'E-mail Validate-5': 'Please enter a valid email address',
-  'Address Validate-1': 'Please enter the address',
-  'Postal Code Validate-1': 'Please enter the postal code',
-  'About Validate': 'Please enter the about field',
-  'Company Added Message':
-      'Your company has been added.\nAfter approval, you can use your company profile.',
-  'Company Delete Message':
-      'If you delete the company, all the company products you added will also be deleted.\nDo you approve?',
-  'Yes I Accept': 'Yes I Accept',
-  'No I don\'t Approve': 'No I don\'t Approve',
-  'Company Deleted Message': 'Your company has been deleted',
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'My Products',
