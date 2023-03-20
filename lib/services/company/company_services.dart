@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/company/company_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -213,6 +214,38 @@ class CompanyServices {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
+    }
+  }
+
+  // LIST MY COMPANIES
+  Future<List<CompanyModel>> listMyCompaniesCall2() async {
+    List<CompanyModel> companiesList = [];
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/company/list'),
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // debugPrint("RESPONSE DATA: ${response.body}");
+
+      var status = json.decode(response.body)["status"];
+      var dataList = json.decode(response.body)["data"];
+      if (status == true) {
+        for (var address in dataList) {
+          companiesList.add(CompanyModel.fromMap(address));
+        }
+
+        return companiesList;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return companiesList;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return companiesList;
     }
   }
 
