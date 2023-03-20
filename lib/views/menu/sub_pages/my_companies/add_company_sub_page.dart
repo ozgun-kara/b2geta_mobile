@@ -1,5 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/company/company_model.dart';
+import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -14,9 +16,11 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
 class AddCompanySubPage extends StatefulWidget {
-  const AddCompanySubPage({Key? key, required this.operation})
+  const AddCompanySubPage(
+      {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
+  final CompanyModel? passedObject;
   final String operation;
 
   @override
@@ -869,12 +873,13 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       debugPrint(
                                           "COMPANY HAS SUCCESSFULLY ADDED");
 
-                                      Navigator.push(
+                                      Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
                                                 const CompanyAddedSubPage(),
-                                          ));
+                                          ),
+                                          (route) => route.isFirst);
                                     } else {
                                       debugPrint("COMPANY HAS NOT ADDED");
                                       operationFailedDialog(context);
@@ -885,18 +890,6 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                 validationErrorDialog(context);
                               }
                             }
-
-                            // if (widget.operation == 'Add') {
-                            //
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //         builder: (context) =>
-                            //             const CompanyAddedSubPage(),
-                            //       ));
-                            // } else {
-                            //   Navigator.pop(context);
-                            // }
                           }),
                       Visibility(
                         visible: widget.operation == 'Edit' ? true : false,
