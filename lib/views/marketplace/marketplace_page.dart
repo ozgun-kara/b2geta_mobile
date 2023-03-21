@@ -187,7 +187,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                     true
                                                 ? themeMode
                                                     ? AppTheme.black8
-                                                    : AppTheme.white17
+                                                    : AppTheme.white1
+
+
+
+
+
+
+                                                     
                                                 : themeMode
                                                     ? AppTheme.white18
                                                     : AppTheme.black8),
@@ -233,7 +240,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     "sort_method": 'asc',
                     "stock": '1',
                     "offset": '0',
-                    "limit": '10',
+                    "limit": '15pşşşşşşşşşşşşşşdddddddddddddddddddddddddq "1Íİİİİİİ',
                   }),
                   builder: (context, data) {
                     if (data.hasData) {

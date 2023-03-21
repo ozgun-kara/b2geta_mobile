@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/products/product_details_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -59,14 +60,8 @@ class ProductsServices {
 
       if (status == true) {
         var dataList = json.decode(response.body)["data"]['products'];
-        var totalData =
-            json.decode(response.body)["data"]['pagination']["total_data"];
-        var limit = int.parse(queryParameters["limit"] ?? "0");
-        totalData = int.parse(totalData);
 
-        var dataCount = totalData > limit ? limit : totalData;
-
-        for (var i = 0; i < dataCount; i++) {
+        for (var i = 0; i < dataList.length; i++) {
           productList.add(ProductModel.fromJson(dataList[i]));
         }
 
@@ -82,7 +77,7 @@ class ProductsServices {
   }
 
   // GET PRODUCTS
-  Future<bool> getProductsCall(
+  Future<ProductDetailsModel?> getProductsCall(
       {required String productId,
       required Map<String, String> queryParameters}) async {
     final response = await http.get(
@@ -102,7 +97,10 @@ class ProductsServices {
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
-        return true;
+        var data = json.decode(response.body)["data"];
+        ProductDetailsModel productDetailsModel =
+            ProductDetailsModel.fromJson(data);
+        return productDetailsModel;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
@@ -110,12 +108,12 @@ class ProductsServices {
         debugPrint(
             "responseText: ${json.decode(response.body)["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return null;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+      return null;
     }
   }
 }
