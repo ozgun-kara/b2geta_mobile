@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
+import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
@@ -220,9 +220,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     Provider.of<MarketPlacePageProvider>(context).filterSwitch
                         ? false
                         : true,
-                child: FutureBuilder<List<String>>(
+                child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCall(queryParameters: {
+                      .productsListAndSearchCall2(queryParameters: {
                     "cid[]": '1',
                     "cid[]": '2',
                     "keyword": 'etek',
@@ -237,12 +237,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
-                      var productIdList = data.data;
-                      if (productIdList!.isNotEmpty) {
+                      var productList = data.data;
+                      if (productList!.isNotEmpty) {
                         return GridView.builder(
                           controller: scrollController,
                           shrinkWrap: true,
-                          itemCount: productIdList.length,
+                          itemCount: productList.length,
                           padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
@@ -252,7 +252,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             mainAxisExtent: 304,
                           ),
                           itemBuilder: ((context, index) {
-                            var productList = productListPageDummyData[index];
+                            var product = productList[index];
 
                             return InkWell(
                               onTap: () {
@@ -260,12 +260,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ProductDetailSubPage(
-                                        productId: productIdList[index],
-                                        productName:
-                                            productList["title"].toString(),
-                                        imageUrl:
-                                            productList["imgUrl"].toString(),
-                                        price: productList["price"].toString()),
+                                      productId: product.id!,
+                                      productName: product.name!.tr!,
+                                      imageUrl: product.images!.isNotEmpty
+                                          ? product.images![0]!
+                                          : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                      price: product.price.toString(),
+                                    ),
                                   ),
                                 );
                               },
@@ -285,7 +286,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         ),
                                       ),
                                       child: Image.network(
-                                        productList["imgUrl"].toString(),
+                                        product.images!.isNotEmpty
+                                            ? product.images![0]!
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -295,8 +298,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          productList["title"].toString(),
-                                          maxLines: 2,
+                                          product.name!.tr!,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontFamily: AppTheme.appFontFamily,
@@ -310,7 +314,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         RichText(
                                             text: TextSpan(children: [
                                           TextSpan(
-                                            text: "${productList["price"]} ",
+                                            text:
+                                                "${product.price.toString()} ",
                                             style: TextStyle(
                                               fontSize: 16,
                                               fontFamily:
@@ -334,7 +339,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         ])),
                                         const SizedBox(height: 2),
                                         Text(
-                                          "10" + " " + 'Minimum Order'.tr,
+                                          "10 ${'Minimum Order'.tr}",
                                           style: TextStyle(
                                             fontSize: 12,
                                             fontFamily: AppTheme.appFontFamily,
@@ -383,9 +388,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     Provider.of<MarketPlacePageProvider>(context).filterSwitch
                         ? true
                         : false,
-                child: FutureBuilder<List<String>>(
+                child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCall(queryParameters: {
+                      .productsListAndSearchCall2(queryParameters: {
                     "cid[]": '1',
                     "cid[]": '2',
                     "keyword": 'etek',
@@ -400,19 +405,19 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
-                      var productIdList = data.data;
+                      var productList = data.data;
 
-                      if (productIdList!.isNotEmpty) {
+                      if (productList!.isNotEmpty) {
                         return ListView.separated(
                           controller: scrollController,
                           shrinkWrap: true,
-                          padding: EdgeInsets.all(0),
-                          itemCount: productIdList.length,
+                          padding: const EdgeInsets.all(0),
+                          itemCount: productList.length,
                           separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(height: 8);
+                            return const SizedBox(height: 8);
                           },
                           itemBuilder: ((context, index) {
-                            var productList = productListPageDummyData[index];
+                            var product = productList[index];
 
                             return Padding(
                               padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
@@ -421,15 +426,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProductDetailSubPage(
-                                              productId: productIdList[index],
-                                              productName: productList["title"]
-                                                  .toString(),
-                                              imageUrl: productList["imgUrl"]
-                                                  .toString(),
-                                              price: productList["price"]
-                                                  .toString()),
+                                      builder: (context) => ProductDetailSubPage(
+                                          productId: product.id!,
+                                          productName: product.name!.tr!,
+                                          imageUrl: product.images!.isNotEmpty
+                                              ? product.images![0].toString()
+                                              : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                          price: product.price.toString()),
                                     ),
                                   );
                                 },
@@ -465,9 +468,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           ),
                                         ),
                                         child: Image.network(
-                                          productListPageDummyData[index]
-                                                  ["imgUrl"]
-                                              .toString(),
+                                          product.images!.isNotEmpty
+                                              ? product.images![0].toString()
+                                              : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -476,14 +479,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          //? bu kısım sorulacak.
                                           SizedBox(
                                             width: deviceWidth -
                                                 (24 + 16 + 126 + 10),
-                                            height: 35,
                                             child: Text(
-                                              productList["title"].toString(),
-                                              maxLines: 2,
+                                              product.name!.tr.toString(),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -495,10 +497,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               ),
                                             ),
                                           ),
+                                          const SizedBox(
+                                            height: 8,
+                                          ),
                                           RichText(
                                               text: TextSpan(children: [
                                             TextSpan(
-                                              text: "${productList["price"]} ",
+                                              text: "${product.price} ",
                                               style: TextStyle(
                                                 fontSize: 16,
                                                 fontFamily:
@@ -518,20 +523,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                     ? AppTheme.blue2
                                                     : AppTheme.white1,
                                               ),
-                                            )
-                                          ])),
-
-                                          Text(
-                                            "10" + " " + 'Minimum Order'.tr,
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppTheme.white15,
                                             ),
+                                          ])),
+                                          const SizedBox(
+                                            height: 4,
                                           ),
-                                          const SizedBox(height: 8),
                                           Text(
                                             "İstanbul, Türkiye",
                                             style: TextStyle(
@@ -542,7 +538,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                               color: AppTheme.white15,
                                             ),
                                           ),
-                                          const SizedBox(height: 1),
+                                          const SizedBox(
+                                            height: 4,
+                                          ),
                                           Row(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -577,7 +575,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                   height: 15),
                                             ],
                                           ),
-                                          const SizedBox(height: 2),
+                                          const SizedBox(height: 8),
                                           SizedBox(
                                             height: 24,
                                             child: ButtonTheme(

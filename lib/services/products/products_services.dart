@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,6 +30,44 @@ class ProductsServices {
 
         for (var i = 0; i < dataCount; i++) {
           productList.add(dataList[i]["id"]);
+        }
+
+        return productList;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return productList;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return productList;
+    }
+  }
+
+  // PRODUCTS LIST AND SEARCH
+  Future<List<ProductModel>> productsListAndSearchCall2(
+      {required Map<String, String> queryParameters}) async {
+    List<ProductModel> productList = [];
+
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/products')
+          .replace(queryParameters: queryParameters),
+      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        var dataList = json.decode(response.body)["data"]['products'];
+        var totalData =
+            json.decode(response.body)["data"]['pagination']["total_data"];
+        var limit = int.parse(queryParameters["limit"] ?? "0");
+        totalData = int.parse(totalData);
+
+        var dataCount = totalData > limit ? limit : totalData;
+
+        for (var i = 0; i < dataCount; i++) {
+          productList.add(ProductModel.fromJson(dataList[i]));
         }
 
         return productList;
