@@ -132,6 +132,7 @@ final Map<String, String> tr = {
   'Theme': 'Tema',
   'Role:': 'Rol:',
   'Admin': 'Admin',
+  'Employee': 'Çalışan',
   'Add': 'Ekle',
   'Add Company': 'Firma Ekle',
   'Edit Company': 'Firmayı Düzenle',

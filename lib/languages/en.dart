@@ -131,6 +131,7 @@ final Map<String, String> en = {
   'Theme': 'Theme',
   'Role:': 'Role:',
   'Admin': 'Admin',
+  'Employee': 'Employee',
   'Add': 'Add',
   'Add Company': 'Add Company',
   'Edit Company': 'Edit Company',
