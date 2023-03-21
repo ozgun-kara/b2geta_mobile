@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/company/company_model.dart';
+import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -30,8 +31,6 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
 
   @override
   void initState() {
-    CompanyServices().listMyCompaniesCall();
-
     super.initState();
   }
 
@@ -270,7 +269,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
             SizedBox(
               width: deviceWidth,
               height: deviceHeight - 215,
-              child: FutureBuilder<List<CompanyModel>>(
+              child: FutureBuilder<List<CompanyModel2>>(
                 future: locator<CompanyServices>().listMyCompaniesCall2(),
                 builder: (context, data) {
                   if (data.hasData) {
@@ -340,7 +339,9 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                   color: AppTheme.white15),
                                             ),
                                             Text(
-                                              'Admin'.tr,
+                                              company.role == 'admin'
+                                                  ? 'Admin'.tr
+                                                  : 'Employee'.tr,
                                               style: TextStyle(
                                                 fontFamily:
                                                     AppTheme.appFontFamily,
@@ -368,7 +369,9 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                   color: AppTheme.white15),
                                             ),
                                             Text(
-                                              'Approved'.tr,
+                                              company.isApproved == 'yes'
+                                                  ? 'Approved'.tr
+                                                  : 'Evaluating'.tr,
                                               style: TextStyle(
                                                 fontFamily:
                                                     AppTheme.appFontFamily,
