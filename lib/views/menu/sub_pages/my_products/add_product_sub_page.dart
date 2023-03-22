@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -44,6 +45,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
   @override
   void initState() {
+    CategoriesServices()
+        .categoriesCall(queryParameters: {"parent_id": '707'}, language: 'en');
     super.initState();
   }
 
@@ -284,7 +287,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           return null;
                         },
                         controller: productNameController,
-                        hintText: 'Name-1'.tr,
+                        hintText: 'Product Name'.tr,
                       ),
                       const SizedBox(height: 13),
                       textFormField(

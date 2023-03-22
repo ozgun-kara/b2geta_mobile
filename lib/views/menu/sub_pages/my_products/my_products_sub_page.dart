@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
   late double deviceHeight;
   late bool themeMode;
   ScrollController controller = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
