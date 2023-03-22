@@ -338,6 +338,37 @@ class SocialServices {
     }
   }
 
+  //GET COMMENTS
+  Future<List<FeedModelCommentsComments>> getCommentsCall(
+      {required String feedId}) async {
+    List<FeedModelCommentsComments> feedCommentList = [];
+
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/comments/$feedId'),
+      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+    );
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      debugPrint(feedId.toString());
+
+      if (status == true) {
+        var dataList = json.decode(response.body)["data"]["comments"];
+        for (var i = 0; i < dataList.length; i++) {
+          feedCommentList.add(FeedModelCommentsComments.fromJson(dataList[i]));
+        }
+
+        return feedCommentList;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return feedCommentList;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return feedCommentList;
+    }
+  }
+
   // CREATE COMMENT
   Future<bool> createCommentCall({
     required String content,
