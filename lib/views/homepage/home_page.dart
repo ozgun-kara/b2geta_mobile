@@ -891,7 +891,14 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const CommentPage(),
+                                                      CommentPage(
+                                                          feedId: feed.id!,
+                                                          user: feed.user!,
+                                                          content:
+                                                              feed.content!,
+                                                          comments: feed
+                                                              .comments!
+                                                              .comments),
                                                 ));
                                           },
                                           child: Row(
@@ -1267,21 +1274,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                     ),
-                    onSubmitted: (value) async {
-                      if (_commentTextController.text.isNotEmpty) {
-                        await _socialServices
-                            .createCommentCall(
-                          feedId: feed.id!,
-                          content: _commentTextController.text.trim(),
-                        )
-                            .then((value) {
-                          if (value) {
-                            _commentTextController.clear();
-                            homePageProvider.getFeeds();
-                          }
-                        });
-                      }
-                    },
+                    onSubmitted: (value) async {},
                   ),
                 ),
               ),

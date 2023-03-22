@@ -1,14 +1,26 @@
-import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/social/feed_model.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+
 class CommentPage extends StatefulWidget {
-  const CommentPage({Key? key}) : super(key: key);
+  const CommentPage({
+    Key? key,
+    required this.feedId,
+    required this.user,
+    required this.content,
+    required this.comments,
+  }) : super(key: key);
+  final String feedId;
+  final FeedModelUser user;
+  final String content;
+  final List<FeedModelCommentsComments?>? comments;
 
   @override
   State<CommentPage> createState() => _CommentPageState();
@@ -20,224 +32,14 @@ class _CommentPageState extends State<CommentPage> {
   late double deviceHeight;
   late bool themeMode;
 
-  List<FeedModelCommentsComments?>? comments = [
-    FeedModelCommentsComments.fromJson({
-      "id": "51",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-09 21:29:18",
-      "content": "görüşlerinizi iletin"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "57",
-        "type": "personal",
-        "username": "user_57",
-        "name": "Mehmet Can",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-10 21:29:18",
-      "content": "Daha iyi olabilirdi"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "53",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-11 21:29:18",
-      "content": "Çok beğendim"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "93",
-        "type": "personal",
-        "username": "user_93",
-        "name": "Ali Yunus",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-12 21:29:18",
-      "content": "İdare eder"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "51",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-09 21:29:18",
-      "content": "görüşlerinizi iletin"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "57",
-        "type": "personal",
-        "username": "user_57",
-        "name": "Mehmet Can",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-10 21:29:18",
-      "content": "Daha iyi olabilirdi"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "53",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-11 21:29:18",
-      "content": "Çok beğendim"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "93",
-        "type": "personal",
-        "username": "user_93",
-        "name": "Ali Yunus",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-12 21:29:18",
-      "content": "İdare eder"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "51",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-09 21:29:18",
-      "content": "görüşlerinizi iletin"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "57",
-        "type": "personal",
-        "username": "user_57",
-        "name": "Mehmet Can",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-10 21:29:18",
-      "content": "Daha iyi olabilirdi"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "53",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-11 21:29:18",
-      "content": "Çok beğendim"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "93",
-        "type": "personal",
-        "username": "user_93",
-        "name": "Ali Yunus",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-12 21:29:18",
-      "content": "İdare eder"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "51",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-09 21:29:18",
-      "content": "görüşlerinizi iletin"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "57",
-        "type": "personal",
-        "username": "user_57",
-        "name": "Mehmet Can",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-10 21:29:18",
-      "content": "Daha iyi olabilirdi"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "53",
-      "user": {
-        "id": "408",
-        "type": "personal",
-        "username": "user_408",
-        "name": "User 408",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-11 21:29:18",
-      "content": "Çok beğendim"
-    }),
-    FeedModelCommentsComments.fromJson({
-      "id": "52",
-      "user": {
-        "id": "93",
-        "type": "personal",
-        "username": "user_93",
-        "name": "Ali Yunus",
-        "photo": "assets/images/dummy_images/user_profile.png",
-        "cover": ""
-      },
-      "create_date": "2023-01-12 21:29:18",
-      "content": "İdare eder"
-    }),
-  ];
+  final SocialServices _socialServices = SocialServices();
+  final TextEditingController _commentTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
-    //Provider.of<ThemeProvider>(context, listen: false).setDarkMode();
-    //Provider.of<ThemeProvider>(context, listen: false).setLightMode();
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black18,
@@ -247,13 +49,72 @@ class _CommentPageState extends State<CommentPage> {
           SizedBox(
             height: deviceTopPadding,
           ),
+          Container(
+            width: deviceWidth,
+            padding: const EdgeInsets.only(left: 12),
+            child: Row(
+              children: [
+                ClipOval(
+                  child: Container(
+                    width: 32,
+                    height: 32,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppTheme.white1,
+                    ),
+                    child: widget.user.photo!.isNotEmpty
+                        ? Image.network(
+                            widget.user.photo.toString(),
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Image.asset(
+                                  fit: BoxFit.cover,
+                                  "assets/images/dummy_images/user_profile.png");
+                            },
+                          )
+                        : Image.asset(
+                            "assets/images/dummy_images/user_profile.png"),
+                  ),
+                ),
+                const SizedBox(
+                  width: 11.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.user.name.toString(),
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w700,
+                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      widget.content,
+                      style: TextStyle(
+                        fontSize: 12,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
           const Divider(),
           Expanded(
-            child: comments != null
+            child: widget.comments != null
                 ? ListView.builder(
-                    itemCount: comments!.length,
+                    itemCount: widget.comments!.length,
                     itemBuilder: (BuildContext context, int index) {
-                      var comment = comments![index];
+                      var comment = widget.comments![index];
                       return Container(
                         width: deviceWidth,
                         padding: const EdgeInsets.only(left: 12, bottom: 24.0),
@@ -269,8 +130,10 @@ class _CommentPageState extends State<CommentPage> {
                                       shape: BoxShape.circle,
                                       color: AppTheme.white1,
                                     ),
-                                    child: Image.asset(
-                                        comment!.user!.photo.toString()),
+                                    child: Image.network(
+                                      comment!.user!.photo.toString(),
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 const SizedBox(
@@ -457,55 +320,71 @@ class _CommentPageState extends State<CommentPage> {
                 Expanded(
                   child: SizedBox(
                     height: 32.0,
-                    child: TextField(
-                        style: TextStyle(
+                    child: TextFormField(
+                      style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w600,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1),
+                      decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                            onPressed: () async {
+                              if (_commentTextController.text.isNotEmpty) {
+                                await _socialServices
+                                    .createCommentCall(
+                                  feedId: widget.feedId,
+                                  content: _commentTextController.text.trim(),
+                                )
+                                    .then((value) {
+                                  if (value) {
+                                    _commentTextController.clear();
+                                    setState(() {});
+                                  }
+                                });
+                              }
+                            },
+                            icon: const Icon(Icons.send)),
+                        contentPadding:
+                            const EdgeInsets.only(left: 14, top: 11),
+                        filled: true,
+                        fillColor: themeMode
+                            ? const Color(0XFFFAFBFE)
+                            : AppTheme.black7,
+                        hintText: 'Comment-3'.tr,
+                        hintStyle: TextStyle(
                             fontSize: 12,
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w600,
                             color:
                                 themeMode ? AppTheme.blue3 : AppTheme.white1),
-                        decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.only(left: 14, top: 11),
-                          filled: true,
-                          fillColor: themeMode
-                              ? const Color(0XFFFAFBFE)
-                              : AppTheme.black7,
-                          hintText: 'Comment-3'.tr,
-                          hintStyle: TextStyle(
-                              fontSize: 12,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w600,
-                              color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.white1),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(41.0),
-                            borderSide: BorderSide(
-                              color: themeMode
-                                  ? const Color(0xFFE2E7F8)
-                                  : const Color(0xFF65688A),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(41.0),
-                            borderSide: BorderSide(
-                              color: themeMode
-                                  ? const Color(0xFFE2E7F8)
-                                  : const Color(0xFF65688A),
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(41.0),
-                            borderSide: BorderSide(
-                              color: themeMode
-                                  ? const Color(0xFFE2E7F8)
-                                  : const Color(0xFF65688A),
-                            ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(41.0),
+                          borderSide: BorderSide(
+                            color: themeMode
+                                ? const Color(0xFFE2E7F8)
+                                : const Color(0xFF65688A),
                           ),
                         ),
-                        onSubmitted: (value) async {}),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(41.0),
+                          borderSide: BorderSide(
+                            color: themeMode
+                                ? const Color(0xFFE2E7F8)
+                                : const Color(0xFF65688A),
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(41.0),
+                          borderSide: BorderSide(
+                            color: themeMode
+                                ? const Color(0xFFE2E7F8)
+                                : const Color(0xFF65688A),
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                )
               ],
             ),
           ),
