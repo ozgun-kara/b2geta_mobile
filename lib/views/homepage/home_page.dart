@@ -41,7 +41,6 @@ class _HomePageState extends State<HomePage> {
   Map<String?, List<FeedModel>> groupStories = {};
 
   final TextEditingController _postTextController = TextEditingController();
-  final TextEditingController _commentTextController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -101,8 +100,6 @@ class _HomePageState extends State<HomePage> {
     "assets/images/dummy_images/reels_image_2.png",
     "assets/images/dummy_images/reels_image_3.png",
   ];
-
-  FocusNode commentFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -882,23 +879,15 @@ class _HomePageState extends State<HomePage> {
                                       TextButton(
                                           style: TextButton.styleFrom(),
                                           onPressed: () {
-                                            /*  if (commentFocusNode.hasFocus) {
-                                              commentFocusNode.unfocus();
-                                            } else {
-                                              commentFocusNode.requestFocus();
-                                            } */
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
                                                       CommentPage(
-                                                          feedId: feed.id!,
-                                                          user: feed.user!,
-                                                          content:
-                                                              feed.content!,
-                                                          comments: feed
-                                                              .comments!
-                                                              .comments),
+                                                    feedId: feed.id!,
+                                                    user: feed.user!,
+                                                    content: feed.content!,
+                                                  ),
                                                 ));
                                           },
                                           child: Row(
@@ -1020,31 +1009,47 @@ class _HomePageState extends State<HomePage> {
                                           const SizedBox(
                                             width: 10,
                                           ),
-                                          RichText(
-                                            text: TextSpan(
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  color: AppTheme.white15,
-                                                ),
-                                                children: [
-                                                  TextSpan(
-                                                    text: feed.comments!.total!
-                                                        .toString(),
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
+                                          GestureDetector(
+                                            child: RichText(
+                                              text: TextSpan(
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    color: AppTheme.white15,
                                                   ),
-                                                  TextSpan(
-                                                    text: ' ${'Comment-2'.tr}',
-                                                    style: const TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w400,
+                                                  children: [
+                                                    TextSpan(
+                                                      text: feed
+                                                          .comments!.total!
+                                                          .toString(),
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                     ),
-                                                  ),
-                                                ]),
+                                                    TextSpan(
+                                                      text:
+                                                          ' ${'Comment-2'.tr}',
+                                                      style: const TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                      ),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        CommentPage(
+                                                      feedId: feed.id!,
+                                                      user: feed.user!,
+                                                      content: feed.content!,
+                                                    ),
+                                                  ));
+                                            },
                                           ),
                                           const SizedBox(
                                             width: 10,
@@ -1094,86 +1099,6 @@ class _HomePageState extends State<HomePage> {
                                     ],
                                   ),
                                 ),
-                                feed.comments!.comments!.isEmpty
-                                    ? _writeComment(feed: feed)
-                                    : feed.comments!.comments!.length <= 1
-                                        ? Column(
-                                            children: [
-                                              _comment(feed: feed, index: 0),
-                                              _writeComment(feed: feed),
-                                            ],
-                                          )
-                                        : Column(
-                                            children: [
-                                              GestureDetector(
-                                                onTap: () {
-                                                  isList = !isList;
-
-                                                  setState(() {});
-                                                },
-                                                child: Container(
-                                                  width: deviceWidth,
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 14,
-                                                          top: 11,
-                                                          bottom: 15),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Image.asset(
-                                                        "assets/icons/read-more.png",
-                                                        width: 14.58,
-                                                        height: 16.58,
-                                                        color: const Color(
-                                                          0xFFB3BDCB,
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        width: 9.42,
-                                                      ),
-                                                      Text(
-                                                        'Comment-4'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          color: themeMode
-                                                              ? AppTheme.blue2
-                                                              : AppTheme.white1,
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              _comment(feed: feed, index: 0),
-                                              isList
-                                                  ? SizedBox(
-                                                      height: 250,
-                                                      child: ListView.builder(
-                                                          itemCount: feed
-                                                              .comments!
-                                                              .comments!
-                                                              .length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            if (index != 0) {
-                                                              return _comment(
-                                                                  feed: feed,
-                                                                  index: index);
-                                                            }
-                                                            return const SizedBox();
-                                                          }),
-                                                    )
-                                                  : const SizedBox(),
-                                              _writeComment(feed: feed),
-                                            ],
-                                          ),
                               ],
                             ),
                           );
@@ -1188,247 +1113,6 @@ class _HomePageState extends State<HomePage> {
             ]);
           },
         ));
-  }
-
-  Widget _writeComment({required FeedModel feed}) {
-    return Consumer<HomePageProvider>(
-      builder: (context, HomePageProvider homePageProvider, child) {
-        return Padding(
-          padding: const EdgeInsets.only(right: 12.0, left: 12.0, bottom: 18.0),
-          child: Row(
-            children: [
-              ClipOval(
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppTheme.white1,
-                  ),
-                  child: (Provider.of<UserProvider>(context).getUser.avatar !=
-                              null &&
-                          Provider.of<UserProvider>(context)
-                              .getUser
-                              .avatar!
-                              .isNotEmpty)
-                      ? Image.network(
-                          'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                                fit: BoxFit.cover,
-                                "assets/images/dummy_images/user_profile.png");
-                          },
-                        )
-                      : Image.asset(
-                          "assets/images/dummy_images/user_profile.png"),
-                ),
-              ),
-              const SizedBox(
-                width: 11.0,
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 32.0,
-                  child: TextField(
-                    focusNode: commentFocusNode,
-                    controller: _commentTextController,
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w600,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1),
-                    decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(left: 14, top: 11),
-                      filled: true,
-                      fillColor:
-                          themeMode ? const Color(0XFFFAFBFE) : AppTheme.black7,
-                      hintText: 'Comment-3'.tr,
-                      hintStyle: TextStyle(
-                          fontSize: 12,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w600,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(41.0),
-                        borderSide: BorderSide(
-                          color: themeMode
-                              ? const Color(0xFFE2E7F8)
-                              : const Color(0xFF65688A),
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(41.0),
-                        borderSide: BorderSide(
-                          color: themeMode
-                              ? const Color(0xFFE2E7F8)
-                              : const Color(0xFF65688A),
-                        ),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(41.0),
-                        borderSide: BorderSide(
-                          color: themeMode
-                              ? const Color(0xFFE2E7F8)
-                              : const Color(0xFF65688A),
-                        ),
-                      ),
-                    ),
-                    onSubmitted: (value) async {},
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _comment({required FeedModel feed, required int index}) {
-    return Container(
-      width: deviceWidth,
-      padding: const EdgeInsets.only(left: 12, bottom: 24.0),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ClipOval(
-                child: Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppTheme.white1,
-                  ),
-                  child: Image.asset(
-                      "assets/images/dummy_images/user_profile.png"),
-                ),
-              ),
-              const SizedBox(
-                width: 11.0,
-              ),
-              Expanded(
-                child: Container(
-                  padding: const EdgeInsets.only(
-                    left: 13,
-                    top: 13,
-                    bottom: 9,
-                  ),
-                  margin: const EdgeInsets.only(right: 13),
-                  decoration: BoxDecoration(
-                    color: themeMode
-                        ? const Color(0xFFF4FBFC)
-                        : const Color(0xFF575B7D),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Say Reklamcılık",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w700,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 6.0,
-                      ),
-                      Text(
-                        feed.comments!.comments![index]!.content!,
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w400,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(
-            height: 9.0,
-          ),
-          Container(
-            width: deviceWidth,
-            padding: const EdgeInsets.only(left: 71, right: 23),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Like-1'.tr,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white15,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      'Answer'.tr,
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white15,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Text(
-                      "4s",
-                      style: TextStyle(
-                        fontSize: 11,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white15,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.asset(
-                      "assets/icons/like.png",
-                      width: 11,
-                      height: 10,
-                    ),
-                    const SizedBox(
-                      width: 4,
-                    ),
-                    Text(
-                      "1.741",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: AppTheme.white15,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Shimmer get getShimmerStoryItem => Shimmer.fromColors(

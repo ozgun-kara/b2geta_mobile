@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -15,12 +14,10 @@ class CommentPage extends StatefulWidget {
     required this.feedId,
     required this.user,
     required this.content,
-    required this.comments,
   }) : super(key: key);
   final String feedId;
   final FeedModelUser user;
   final String content;
-  final List<FeedModelCommentsComments?>? comments;
 
   @override
   State<CommentPage> createState() => _CommentPageState();
@@ -32,8 +29,24 @@ class _CommentPageState extends State<CommentPage> {
   late double deviceHeight;
   late bool themeMode;
 
+  List<FeedModelCommentsComments> comments = [];
   final SocialServices _socialServices = SocialServices();
   final TextEditingController _commentTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getComments();
+  }
+
+  Future<void> getComments() async {
+    await _socialServices.getCommentsCall(feedId: widget.feedId).then((value) {
+      if (value.isNotEmpty) {
+        comments = value;
+        setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,11 +123,11 @@ class _CommentPageState extends State<CommentPage> {
           ),
           const Divider(),
           Expanded(
-            child: widget.comments != null
+            child: comments.isNotEmpty
                 ? ListView.builder(
-                    itemCount: widget.comments!.length,
+                    itemCount: comments.length,
                     itemBuilder: (BuildContext context, int index) {
-                      var comment = widget.comments![index];
+                      var comment = comments[index];
                       return Container(
                         width: deviceWidth,
                         padding: const EdgeInsets.only(left: 12, bottom: 24.0),
@@ -131,7 +144,7 @@ class _CommentPageState extends State<CommentPage> {
                                       color: AppTheme.white1,
                                     ),
                                     child: Image.network(
-                                      comment!.user!.photo.toString(),
+                                      comment.user!.photo!,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -320,30 +333,14 @@ class _CommentPageState extends State<CommentPage> {
                 Expanded(
                   child: SizedBox(
                     height: 32.0,
-                    child: TextFormField(
+                    child: TextField(
+                      controller: _commentTextController,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: AppTheme.appFontFamily,
                           fontWeight: FontWeight.w600,
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1),
                       decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                            onPressed: () async {
-                              if (_commentTextController.text.isNotEmpty) {
-                                await _socialServices
-                                    .createCommentCall(
-                                  feedId: widget.feedId,
-                                  content: _commentTextController.text.trim(),
-                                )
-                                    .then((value) {
-                                  if (value) {
-                                    _commentTextController.clear();
-                                    setState(() {});
-                                  }
-                                });
-                              }
-                            },
-                            icon: const Icon(Icons.send)),
                         contentPadding:
                             const EdgeInsets.only(left: 14, top: 11),
                         filled: true,
@@ -382,6 +379,21 @@ class _CommentPageState extends State<CommentPage> {
                           ),
                         ),
                       ),
+                      onSubmitted: (value) async {
+                        if (_commentTextController.text.isNotEmpty) {
+                          await _socialServices
+                              .createCommentCall(
+                            feedId: widget.feedId,
+                            content: _commentTextController.text.trim(),
+                          )
+                              .then((value) {
+                            if (value) {
+                              _commentTextController.clear();
+                              getComments();
+                            }
+                          });
+                        }
+                      },
                     ),
                   ),
                 )
