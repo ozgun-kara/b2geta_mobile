@@ -2625,7 +2625,15 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                 ),
               ),
             )
-          : const CupertinoActivityIndicator(),
+          : SizedBox(
+              child: Center(
+                  child: CupertinoActivityIndicator(
+                color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                    ? AppTheme.black1
+                    : AppTheme.white1,
+                radius: 12,
+              )),
+            ),
       bottomNavigationBar: product != null
           ? AnimatedBuilder(
               animation: scrollController,
