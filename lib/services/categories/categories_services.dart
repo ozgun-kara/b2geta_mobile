@@ -1,11 +1,12 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CategoriesServices {
   // CATEGORIES
-  Future<bool> categoriesCall(
+  Future<List<CategoryModel>> categoriesCall(
       {required Map<String, String> queryParameters,
       required String language}) async {
     final response = await http.get(
@@ -16,29 +17,35 @@ class CategoriesServices {
       },
     );
 
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<CategoryModel> categoryList = [];
+
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE BODY: $responseBody");
       // debugPrint("RESPONSE DATA: ${response.body}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
-
+      var dataList = json.decode(response.body)["data"];
       if (status == true) {
-        return true;
+        for (var address in dataList) {
+          categoryList.add(CategoryModel.fromJson(address));
+        }
+
+        return categoryList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return categoryList;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+
+      return categoryList;
     }
   }
 
