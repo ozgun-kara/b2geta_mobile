@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/homepage/comment_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
@@ -402,11 +403,14 @@ class _HomePageState extends State<HomePage> {
                                     shape: BoxShape.circle,
                                     color: AppTheme.white1,
                                   ),
-                                  child:  (Provider.of<UserProvider>(context).getUser.avatar != null &&
-                          Provider.of<UserProvider>(context)
-                              .getUser
-                              .avatar!
-                              .isNotEmpty)
+                                  child: (Provider.of<UserProvider>(context)
+                                                  .getUser
+                                                  .avatar !=
+                                              null &&
+                                          Provider.of<UserProvider>(context)
+                                              .getUser
+                                              .avatar!
+                                              .isNotEmpty)
                                       ? Image.network(
                                           'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
                                           fit: BoxFit.cover,
@@ -878,11 +882,17 @@ class _HomePageState extends State<HomePage> {
                                       TextButton(
                                           style: TextButton.styleFrom(),
                                           onPressed: () {
-                                            if (commentFocusNode.hasFocus) {
+                                            /*  if (commentFocusNode.hasFocus) {
                                               commentFocusNode.unfocus();
                                             } else {
                                               commentFocusNode.requestFocus();
-                                            }
+                                            } */
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const CommentPage(),
+                                                ));
                                           },
                                           child: Row(
                                             crossAxisAlignment:
@@ -1188,23 +1198,23 @@ class _HomePageState extends State<HomePage> {
                     shape: BoxShape.circle,
                     color: AppTheme.white1,
                   ),
-                  child:
-                       (Provider.of<UserProvider>(context).getUser.avatar != null &&
+                  child: (Provider.of<UserProvider>(context).getUser.avatar !=
+                              null &&
                           Provider.of<UserProvider>(context)
                               .getUser
                               .avatar!
                               .isNotEmpty)
-                          ? Image.network(
-                              'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Image.asset(
-                                    fit: BoxFit.cover,
-                                    "assets/images/dummy_images/user_profile.png");
-                              },
-                            )
-                          : Image.asset(
-                              "assets/images/dummy_images/user_profile.png"),
+                      ? Image.network(
+                          'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                                fit: BoxFit.cover,
+                                "assets/images/dummy_images/user_profile.png");
+                          },
+                        )
+                      : Image.asset(
+                          "assets/images/dummy_images/user_profile.png"),
                 ),
               ),
               const SizedBox(
