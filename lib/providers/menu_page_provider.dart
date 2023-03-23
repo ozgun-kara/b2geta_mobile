@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
+import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/city_model.dart';
 import 'package:b2geta_mobile/models/general/district_model.dart';
 import 'package:b2geta_mobile/services/categories/categories_services.dart';
@@ -51,10 +52,11 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   // MY PRODUCTS SUBPAGE
-
   GetStorage box = GetStorage();
   List<CategoryModel> categoryList = [];
   String? selectedCategory;
+  List<BrandModel> brandList = [];
+  String? selectedBrand;
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
@@ -66,6 +68,16 @@ class MenuPageProvider with ChangeNotifier {
 
   void updateSelectedCategory(String value) {
     selectedCategory = value;
+    notifyListeners();
+  }
+
+  fetchBrandList() async {
+    brandList = await locator<GeneralService>().brandsCall();
+    notifyListeners();
+  }
+
+  void updateSelectedBrand(String value) {
+    selectedBrand = value;
     notifyListeners();
   }
 
