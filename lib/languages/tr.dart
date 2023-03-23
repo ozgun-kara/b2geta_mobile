@@ -290,6 +290,8 @@ final Map<String, String> tr = {
   'Product Name': 'Ürün Adı',
   'Categories': 'Kategoriler',
   'Product Description': 'Ürün Açıklaması',
+  'Passive': 'Pasif',
+  'Active': 'Aktif',
   'Price': 'Fiyat',
   'Currency': 'Para Birimi',
   'Brand': 'Marka',

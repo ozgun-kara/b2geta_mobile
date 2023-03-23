@@ -295,6 +295,8 @@ final Map<String, String> en = {
   'Product Name': 'Product Name',
   'Categories': 'Categories',
   'Product Description': 'Product Description',
+  'Passive': 'Passive',
+  'Active': 'Active',
   'Price': 'Price',
   'Currency': 'Currency',
   'Brand': 'Brand',

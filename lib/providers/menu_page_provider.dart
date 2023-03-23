@@ -9,6 +9,7 @@ import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class MenuPageProvider with ChangeNotifier {
   // MY ADDRESSES SUBPAGE
@@ -57,6 +58,11 @@ class MenuPageProvider with ChangeNotifier {
   String? selectedCategory;
   List<BrandModel> brandList = [];
   String? selectedBrand;
+  List<String> statusList = [
+    'Passive'.tr,
+    'Active'.tr,
+  ];
+  String? selectedStatus;
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
@@ -78,6 +84,11 @@ class MenuPageProvider with ChangeNotifier {
 
   void updateSelectedBrand(String value) {
     selectedBrand = value;
+    notifyListeners();
+  }
+
+  void updateSelectedStatus(String value) {
+    selectedStatus = value;
     notifyListeners();
   }
 
