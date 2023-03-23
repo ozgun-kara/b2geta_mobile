@@ -46,6 +46,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
         null;
     Provider.of<MenuPageProvider>(context, listen: false).selectedBrand = null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedStatus = null;
 
     Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
@@ -66,6 +67,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         Provider.of<MenuPageProvider>(context, listen: false).categoryList;
     var brandList =
         Provider.of<MenuPageProvider>(context, listen: false).brandList;
+    var statusList =
+        Provider.of<MenuPageProvider>(context, listen: false).statusList;
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
@@ -142,10 +145,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   'CATEGORY ID: ${categoryList[categoryIndex].id}');
 
                               categoryId = categoryList[categoryIndex].id;
-
-                              Provider.of<MenuPageProvider>(context,
-                                      listen: false)
-                                  .selectedCategory = null;
                             }
                           },
 
@@ -352,10 +351,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   'BRAND ID: ${brandList[brandIndex].id}');
 
                               brandId = brandList[brandIndex].id;
-
-                              Provider.of<MenuPageProvider>(context,
-                                      listen: false)
-                                  .selectedBrand = null;
                             }
                           },
 
@@ -512,6 +507,104 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                         keyboardType: TextInputType.phone,
                       ),
                       const SizedBox(height: 13),
+                      DropdownButtonHideUnderline(
+                        child: DropdownButton2(
+                          // alignment: AlignmentDirectional.center,
+                          isExpanded: true,
+                          hint: Text(
+                            'Status'.tr,
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w400,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white14,
+                            ),
+                          ),
+
+                          items: statusList
+                              .map((item) => DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                      ),
+                                    ),
+                                  ))
+                              .toList(),
+                          value: Provider.of<MenuPageProvider>(context)
+                              .selectedStatus,
+                          onChanged: (value) {
+                            Provider.of<MenuPageProvider>(context,
+                                    listen: false)
+                                .updateSelectedStatus(value as String);
+                          },
+                          icon: Center(
+                            child: Image.asset(
+                              'assets/icons/dropdown.png',
+                              width: 10,
+                              height: 6,
+                              color: Provider.of<ThemeProvider>(context)
+                                          .themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white15,
+                            ),
+                          ),
+                          iconSize: 24,
+                          // iconEnabledColor: Colors.yellow,
+                          // iconDisabledColor: Colors.grey,
+                          // icon: Container(),
+                          buttonHeight: 57,
+                          buttonWidth: deviceWidth,
+                          buttonPadding:
+                              const EdgeInsets.only(left: 25, right: 17),
+                          buttonDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            // border:
+                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                          ),
+                          // buttonElevation: 2,
+                          itemHeight: 40,
+                          itemPadding:
+                              const EdgeInsets.symmetric(horizontal: 32),
+                          // dropdownMaxHeight: deviceHeight * 0.4,
+                          dropdownMaxHeight: 350,
+                          // dropdownWidth: deviceWidth,
+                          dropdownPadding: null,
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(14),
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                          ),
+                          // dropdownElevation: 8,
+                          scrollbarRadius: const Radius.circular(40),
+                          scrollbarThickness: 4,
+                          scrollbarAlwaysShow: true,
+                          // offset: const Offset(0, 180),
+                        ),
+                      ),
                       const SizedBox(height: 28),
                       MaterialButton(
                           minWidth: deviceWidth,
@@ -539,9 +632,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     builder: (context) =>
                                         const AddProductImageSubPage(),
                                   ));
-                            } else {
-                              Navigator.pop(context);
-                            }
+                            } else {}
                           }),
                     ],
                   ),
