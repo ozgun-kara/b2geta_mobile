@@ -41,6 +41,7 @@ class _ReelsPageState extends State<ReelsPage> {
         itemCount: widget.reelsList.length,
         itemBuilder: (context, index) {
           return ReelsItemWidget(
+              reelsModel: widget.reelsList[index],
               reelsUrl: widget.reelsList[index].videos!.isNotEmpty
                   ? widget.reelsList[index].videos![0]!.url!
                   : "http://videoftp.b2geta.com/reels/2023/02/reels_11022023123709-1676119029.mp4");
