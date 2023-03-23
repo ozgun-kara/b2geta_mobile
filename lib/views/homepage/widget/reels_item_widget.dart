@@ -1,15 +1,20 @@
+import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/views/homepage/comment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 
 class ReelsItemWidget extends StatefulWidget {
   const ReelsItemWidget({
     Key? key,
+    required this.reelsModel,
     required this.reelsUrl,
   }) : super(key: key);
+  final FeedModel reelsModel;
   final String reelsUrl;
   @override
   State<ReelsItemWidget> createState() => _ReelsItemWidgetState();
@@ -21,9 +26,13 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
 
   VideoPlayerController? _controller;
 
+  final SocialServices _socialServices = SocialServices();
+  late bool isLike;
+
   @override
   void initState() {
     super.initState();
+    isLike = widget.reelsModel.likeStatus!;
     initializePlayer(widget.reelsUrl);
   }
 
@@ -119,13 +128,31 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
         ),
         Positioned(
           bottom: 15,
-          left: 21,
+          left: 12,
           child: Row(children: [
             ClipOval(
-              child: Image.asset(
-                "assets/images/dummy_images/user_profile.png",
+              child: Container(
                 width: 43,
                 height: 43,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: AppTheme.white1,
+                ),
+                child: widget.reelsModel.user!.photo!.isNotEmpty
+                    ? Image.network(
+                        widget.reelsModel.user!.photo!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            "assets/images/dummy_images/user_profile.png",
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        "assets/images/dummy_images/user_profile.png",
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
             const SizedBox(
@@ -137,7 +164,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
                 SizedBox(
                   width: 189,
                   child: Text(
-                    "User Name",
+                    widget.reelsModel.user!.name ?? "User Name",
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 13,
@@ -171,13 +198,44 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
+                  onPressed: () async {
+                    if (isLike == true) {
+                      await _socialServices
+                          .feedUnLikeCall(feedId: widget.reelsModel.id!)
+                          .then((value) {
+                        if (value) {
+                          setState(() {
+                            isLike = false;
+                          });
+                        }
+                      });
+                    } else if (isLike == false) {
+                      await _socialServices
+                          .feedLikeCall(feedId: widget.reelsModel.id!)
+                          .then((value) {
+                        if (value) {
+                          setState(() {
+                            isLike = true;
+                          });
+                        }
+                      });
+                    }
+                  },
+                  icon: Icon(
                     Icons.favorite,
-                    color: Colors.grey,
+                    color: isLike ? Colors.red : Colors.grey,
                   )),
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CommentPage(
+                              feedId: widget.reelsModel.id!,
+                              user: widget.reelsModel.user!,
+                              content: widget.reelsModel.content!),
+                        ));
+                  },
                   icon: const Icon(
                     Icons.comment,
                     color: Colors.grey,
