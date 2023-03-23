@@ -63,6 +63,12 @@ class MenuPageProvider with ChangeNotifier {
     'Active'.tr,
   ];
   String? selectedStatus;
+  List<String> currencyList = [
+    'EUR',
+    'TRY',
+    'USD',
+  ];
+  String? selectedCurrency;
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
@@ -89,6 +95,11 @@ class MenuPageProvider with ChangeNotifier {
 
   void updateSelectedStatus(String value) {
     selectedStatus = value;
+    notifyListeners();
+  }
+
+  void updateSelectedCurrency(String value) {
+    selectedCurrency = value;
     notifyListeners();
   }
 
