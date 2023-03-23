@@ -51,9 +51,20 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
     Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).currencyList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).statusList.clear();
 
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
+    Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
+      'EUR',
+      'TRY',
+      'USD',
+    ];
+    Provider.of<MenuPageProvider>(context, listen: false).statusList = [
+      'Passive'.tr,
+      'Active'.tr,
+    ];
     super.initState();
   }
 
