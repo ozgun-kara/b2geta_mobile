@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -41,10 +43,8 @@ class _CommentPageState extends State<CommentPage> {
 
   Future<void> getComments() async {
     await _socialServices.getCommentsCall(feedId: widget.feedId).then((value) {
-      if (value.isNotEmpty) {
-        comments = value;
-        setState(() {});
-      }
+      comments = value;
+      setState(() {});
     });
   }
 
@@ -128,164 +128,199 @@ class _CommentPageState extends State<CommentPage> {
                     itemCount: comments.length,
                     itemBuilder: (BuildContext context, int index) {
                       var comment = comments[index];
-                      return Container(
-                        width: deviceWidth,
-                        padding: const EdgeInsets.only(left: 12, bottom: 24.0),
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                ClipOval(
-                                  child: Container(
-                                    width: 32,
-                                    height: 32,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: AppTheme.white1,
-                                    ),
-                                    child: Image.network(
-                                      comment.user!.photo!,
-                                      fit: BoxFit.cover,
+                      return Dismissible(
+                        key: UniqueKey(),
+                        background: Container(
+                          padding: const EdgeInsets.only(left: 12, bottom: 24),
+                          alignment: Alignment.centerLeft,
+                          child: const Icon(Icons.delete),
+                        ),
+                        secondaryBackground: Container(
+                          padding: const EdgeInsets.only(right: 12, bottom: 24),
+                          alignment: Alignment.centerRight,
+                          child: const Icon(Icons.delete),
+                        ),
+                        confirmDismiss: (direction) async {
+                          return await alertDialog(
+                              message: 'Silmek istediğinizden emin misiniz?',
+                              confirmButtonColor: Colors.green,
+                              confirmButtonText: 'Evet',
+                              cancelButtonColor: Colors.red,
+                              cancelButtonText: 'Hayır',
+                              onPressed: () async {
+                                await _socialServices
+                                    .deleteCommentCall(commentId: comment.id!)
+                                    .then((value) {
+                                  if (value) {
+                                    Navigator.pop(context);
+                                    getComments();
+                                  }
+                                });
+                              });
+                        },
+                        child: Container(
+                          width: deviceWidth,
+                          padding:
+                              const EdgeInsets.only(left: 12, bottom: 24.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  ClipOval(
+                                    child: Container(
+                                      width: 32,
+                                      height: 32,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: AppTheme.white1,
+                                      ),
+                                      child: Image.network(
+                                        comment.user!.photo!,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  width: 11.0,
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                      left: 13,
-                                      top: 13,
-                                      bottom: 9,
+                                  const SizedBox(
+                                    width: 11.0,
+                                  ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.only(
+                                        left: 13,
+                                        top: 13,
+                                        bottom: 9,
+                                      ),
+                                      margin: const EdgeInsets.only(right: 13),
+                                      decoration: BoxDecoration(
+                                        color: themeMode
+                                            ? const Color(0xFFF4FBFC)
+                                            : const Color(0xFF575B7D),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            comment.user!.name.toString(),
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w700,
+                                              color: themeMode
+                                                  ? AppTheme.blue3
+                                                  : AppTheme.white1,
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 6.0,
+                                          ),
+                                          Text(
+                                            comment.content!,
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w400,
+                                              color: themeMode
+                                                  ? AppTheme.blue3
+                                                  : AppTheme.white1,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                    margin: const EdgeInsets.only(right: 13),
-                                    decoration: BoxDecoration(
-                                      color: themeMode
-                                          ? const Color(0xFFF4FBFC)
-                                          : const Color(0xFF575B7D),
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    child: Column(
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 9.0,
+                              ),
+                              Container(
+                                width: deviceWidth,
+                                padding:
+                                    const EdgeInsets.only(left: 71, right: 23),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          comment.user!.name.toString(),
+                                          'Like-1'.tr,
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w700,
                                             color: themeMode
                                                 ? AppTheme.blue3
-                                                : AppTheme.white1,
+                                                : AppTheme.white15,
                                           ),
                                         ),
                                         const SizedBox(
-                                          height: 6.0,
+                                          width: 10.0,
                                         ),
                                         Text(
-                                          comment.content!,
+                                          'Answer'.tr,
                                           style: TextStyle(
-                                            fontSize: 12,
+                                            fontSize: 11,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w700,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white15,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          "4s",
+                                          style: TextStyle(
+                                            fontSize: 11,
                                             fontFamily: AppTheme.appFontFamily,
                                             fontWeight: FontWeight.w400,
                                             color: themeMode
                                                 ? AppTheme.blue3
-                                                : AppTheme.white1,
+                                                : AppTheme.white15,
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Image.asset(
+                                          "assets/icons/like.png",
+                                          width: 11,
+                                          height: 10,
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          "1.741",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppTheme.white15,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 9.0,
-                            ),
-                            Container(
-                              width: deviceWidth,
-                              padding:
-                                  const EdgeInsets.only(left: 71, right: 23),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Like-1'.tr,
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w700,
-                                          color: themeMode
-                                              ? AppTheme.blue3
-                                              : AppTheme.white15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Text(
-                                        'Answer'.tr,
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w700,
-                                          color: themeMode
-                                              ? AppTheme.blue3
-                                              : AppTheme.white15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 10.0,
-                                      ),
-                                      Text(
-                                        "4s",
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w400,
-                                          color: themeMode
-                                              ? AppTheme.blue3
-                                              : AppTheme.white15,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Image.asset(
-                                        "assets/icons/like.png",
-                                        width: 11,
-                                        height: 10,
-                                      ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        "1.741",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w700,
-                                          color: AppTheme.white15,
-                                        ),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -402,6 +437,144 @@ class _CommentPageState extends State<CommentPage> {
           ),
         ],
       ),
+    );
+  }
+
+  alertDialog(
+      {required String message,
+      required String confirmButtonText,
+      required confirmButtonColor,
+      required String cancelButtonText,
+      required cancelButtonColor,
+      required VoidCallback onPressed}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog(
+            insetPadding: const EdgeInsets.all(4),
+            backgroundColor: Colors.transparent,
+            content: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white1
+                          : AppTheme.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.warning_rounded,
+                        color: Colors.amber,
+                      ),
+                      const SizedBox(
+                        width: 6.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          'Alert'.tr,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black25
+                                    : AppTheme.white1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  Row(
+                    children: [
+                      const SizedBox(width: 40),
+                      Expanded(
+                        child: Text(
+                          message,
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w500,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black25
+                                    : AppTheme.white1,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ButtonTheme(
+                        height: 32,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color: cancelButtonColor,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                            child: Text(
+                              cancelButtonText,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            ),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            }),
+                      ),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      ButtonTheme(
+                        height: 32,
+                        child: MaterialButton(
+                            elevation: 0,
+                            color: confirmButtonColor,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(16)),
+                            ),
+                            onPressed: () {
+                              onPressed();
+                            },
+                            child: Text(
+                              confirmButtonText,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppTheme.white1),
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

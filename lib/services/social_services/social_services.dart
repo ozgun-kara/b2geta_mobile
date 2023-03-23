@@ -349,7 +349,6 @@ class SocialServices {
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
-      debugPrint(feedId.toString());
 
       if (status == true) {
         var dataList = json.decode(response.body)["data"]["comments"];
@@ -390,6 +389,31 @@ class SocialServices {
       } else {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
 
+        return false;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return false;
+    }
+  }
+
+  // DELETE COMMENT
+  Future<bool> deleteCommentCall({
+    required String commentId,
+  }) async {
+    final response = await http.delete(
+        Uri.parse('${Constants.apiUrl}/comment/$commentId'),
+        headers: {"Authorization": "Bearer ${Constants.userToken}"});
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        
         return false;
       }
     } else {
