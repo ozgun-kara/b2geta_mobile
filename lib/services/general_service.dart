@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/city_model.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
 import 'package:b2geta_mobile/models/general/district_model.dart';
@@ -139,7 +140,7 @@ class GeneralService {
   }
 
   // BRANDS
-  Future<bool> brandsCall() async {
+  Future<List<BrandModel>> brandsCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/brands'),
       headers: {
@@ -147,29 +148,34 @@ class GeneralService {
       },
     );
 
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<BrandModel> brandList = [];
+
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      // debugPrint("RESPONSE DATA: ${response.body}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+      debugPrint("RESPONSE BODY: $responseBody");
 
-      var status = json.decode(response.body)["status"];
+      var status = responseBody["status"];
 
       if (status == true) {
-        return true;
+        var data = responseBody["data"];
+        for (var element in data) {
+          brandList.add(BrandModel.fromJson(element));
+        }
+        return brandList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return brandList;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+
+      return brandList;
     }
   }
 
@@ -220,13 +226,12 @@ class GeneralService {
     required String city,
   }) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/town').replace(queryParameters: {
-        'city': city,
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      }
-    );
+        Uri.parse('${Constants.apiUrl}/town').replace(queryParameters: {
+          'city': city,
+        }),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        });
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
     List<DistrictModel> districtList = [];
