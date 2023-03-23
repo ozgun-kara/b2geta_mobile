@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
+import 'package:get_storage/get_storage.dart';
 
 class MenuPageProvider with ChangeNotifier {
   // MY ADDRESSES SUBPAGE
@@ -51,13 +52,15 @@ class MenuPageProvider with ChangeNotifier {
 
   // MY PRODUCTS SUBPAGE
 
+  GetStorage box = GetStorage();
   List<CategoryModel> categoryList = [];
   String? selectedCategory;
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
-    categoryList = await locator<CategoriesServices>()
-        .categoriesCall(queryParameters: {"parent_id": '707'}, language: 'en');
+    categoryList = await locator<CategoriesServices>().categoriesCall(
+        queryParameters: {"parent_id": '707'},
+        language: box.read("language") == "tr_TR" ? 'tr' : 'en');
     notifyListeners();
   }
 

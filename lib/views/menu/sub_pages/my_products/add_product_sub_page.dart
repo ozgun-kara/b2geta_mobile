@@ -1,8 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
