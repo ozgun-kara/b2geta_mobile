@@ -1,8 +1,9 @@
 import 'dart:io';
-
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/city_model.dart';
 import 'package:b2geta_mobile/models/general/district_model.dart';
+import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
@@ -49,7 +50,21 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   // MY PRODUCTS SUBPAGE
+
+  List<CategoryModel> categoryList = [];
+  String? selectedCategory;
   List<File>? imageFilesList = [];
+
+  fetchCategoryList() async {
+    categoryList = await locator<CategoriesServices>()
+        .categoriesCall(queryParameters: {"parent_id": '707'}, language: 'en');
+    notifyListeners();
+  }
+
+  void updateSelectedCategory(String value) {
+    selectedCategory = value;
+    notifyListeners();
+  }
 
   void updateSelectedImageFilesList(List<File> imgFilesList) {
     imageFilesList!.addAll(imgFilesList);
