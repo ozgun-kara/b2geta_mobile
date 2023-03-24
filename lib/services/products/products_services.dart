@@ -120,7 +120,6 @@ class ProductsServices {
   // ADD PRODUCT
   Future<bool> addProductCall(
       {required String accountId,
-      required String userId,
       required String categoryId,
       required String productName,
       required String productDescription,
@@ -130,12 +129,12 @@ class ProductsServices {
       required String currency,
       required String status}) async {
     final response = await http
-        .post(Uri.parse('${Constants.apiUrl}/products/create'), headers: {
+        .put(Uri.parse('${Constants.apiUrl}/products/create'), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
     }, body: {
       "account_id": accountId,
-      "user_id": userId,
+      "user_id": Constants.userId,
       "category_id[]": categoryId,
       "product_name[tr]": productName,
       "product_description[tr]": productDescription,
