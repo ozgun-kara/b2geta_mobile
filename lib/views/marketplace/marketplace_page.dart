@@ -233,8 +233,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     "sort_method": 'asc',
                     "stock": '1',
                     "offset": '0',
-                    "limit":
-                        '15pşşşşşşşşşşşşşşdddddddddddddddddddddddddq "1Íİİİİİİ',
+                    "limit": '15',
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
