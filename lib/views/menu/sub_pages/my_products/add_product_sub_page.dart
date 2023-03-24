@@ -77,13 +77,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     var categoryList =
-        Provider.of<MenuPageProvider>(context, listen: false).categoryList;
+        Provider.of<MenuPageProvider>(context, listen: true).categoryList;
     var brandList =
-        Provider.of<MenuPageProvider>(context, listen: false).brandList;
+        Provider.of<MenuPageProvider>(context, listen: true).brandList;
     var currencyList =
-        Provider.of<MenuPageProvider>(context, listen: false).currencyList;
+        Provider.of<MenuPageProvider>(context, listen: true).currencyList;
     var statusList =
-        Provider.of<MenuPageProvider>(context, listen: false).statusList;
+        Provider.of<MenuPageProvider>(context, listen: true).statusList;
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
@@ -102,143 +102,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(30, 30, 30, 37),
-                child: Form(
-                  key: productGlobalKey,
-                  child: Column(
-                    children: [
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          // alignment: AlignmentDirectional.center,
-                          isExpanded: true,
-                          hint: Text(
-                            'Categories'.tr,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
-                          ),
-                          items: categoryList
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item.categoryName,
-                                    child: Text(
-                                      item.categoryName ?? '',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.blue3
-                                                : AppTheme.white1,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          value: Provider.of<MenuPageProvider>(context)
-                              .selectedCategory,
-
-                          onChanged: (value) {
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .updateSelectedCategory(value as String);
-
-                            var categoryIndex = categoryList.indexWhere(
-                                ((element) => element.categoryName == value));
-                            if (categoryIndex != -1) {
-                              debugPrint('CATEGORY INDEX: $categoryIndex');
-                              debugPrint(
-                                  'CATEGORY ID: ${categoryList[categoryIndex].id}');
-
-                              categoryId = categoryList[categoryIndex].id;
-                            }
-                          },
-
-                          icon: Center(
-                            child: Image.asset(
-                              'assets/icons/dropdown.png',
-                              width: 10,
-                              height: 6,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
-                            ),
-                          ),
-                          iconSize: 24,
-                          // iconEnabledColor: Colors.yellow,
-                          // iconDisabledColor: Colors.grey,
-                          // icon: Container(),
-                          buttonHeight: 57,
-                          buttonWidth: deviceWidth,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 25, right: 17),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // border:
-                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
-                          ),
-                          // buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 32),
-                          // dropdownMaxHeight: deviceHeight * 0.4,
-                          dropdownMaxHeight: 350,
-                          // dropdownWidth: deviceWidth,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
-                          ),
-                          // dropdownElevation: 8,
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 4,
-                          scrollbarAlwaysShow: true,
-                          // offset: const Offset(0, 180),
-
-                          searchController: categoriesController,
-                          searchInnerWidget: Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                            child: TextFormField(
-                              controller: categoriesController,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ), // WHILE WRITING
-                              decoration: InputDecoration(
-                                isDense: true,
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 12,
-                                ),
-                                hintText: 'Search...'.tr,
-                                hintStyle: TextStyle(
+              Consumer<MenuPageProvider>(
+                builder: (context, menuPageProvider, child) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(30, 30, 30, 37),
+                    child: Form(
+                      key: productGlobalKey,
+                      child: Column(
+                        children: [
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              // alignment: AlignmentDirectional.center,
+                              isExpanded: true,
+                              hint: Text(
+                                'Categories'.tr,
+                                style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w400,
@@ -248,203 +126,204 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       ? AppTheme.blue3
                                       : AppTheme.white14,
                                 ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: AppTheme.white15,
-                                      width: 1,
-                                    )),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: AppTheme.white15,
-                                      width: 1,
-                                    )),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
+                              ),
+                              items: categoryList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item.categoryName,
+                                        child: Text(
+                                          item.categoryName ?? '',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              value: menuPageProvider.selectedCategory,
+
+                              onChanged: (value) {
+                                menuPageProvider
+                                    .updateSelectedCategory(value as String);
+
+                                var categoryIndex = categoryList.indexWhere(
+                                    ((element) =>
+                                        element.categoryName == value));
+                                if (categoryIndex != -1) {
+                                  debugPrint('CATEGORY INDEX: $categoryIndex');
+                                  debugPrint(
+                                      'CATEGORY ID: ${categoryList[categoryIndex].id}');
+
+                                  categoryId = categoryList[categoryIndex].id;
+                                }
+                              },
+
+                              icon: Center(
+                                child: Image.asset(
+                                  'assets/icons/dropdown.png',
+                                  width: 10,
+                                  height: 6,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white15,
+                                ),
+                              ),
+                              iconSize: 24,
+                              // iconEnabledColor: Colors.yellow,
+                              // iconDisabledColor: Colors.grey,
+                              // icon: Container(),
+                              buttonHeight: 57,
+                              buttonWidth: deviceWidth,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 25, right: 17),
+                              buttonDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // border:
+                                //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // buttonElevation: 2,
+                              itemHeight: 40,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              // dropdownMaxHeight: deviceHeight * 0.4,
+                              dropdownMaxHeight: 350,
+                              // dropdownWidth: deviceWidth,
+                              dropdownPadding: null,
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // dropdownElevation: 8,
+                              scrollbarRadius: const Radius.circular(40),
+                              scrollbarThickness: 4,
+                              scrollbarAlwaysShow: true,
+                              // offset: const Offset(0, 180),
+
+                              searchController: categoriesController,
+                              searchInnerWidget: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                                child: TextFormField(
+                                  controller: categoriesController,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
                                         ? AppTheme.blue3
                                         : AppTheme.white1,
-                                    width: 1,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          searchMatchFn: (item, searchValue) {
-                            debugPrint("ITEM:${item.value}");
-
-                            return (item.value
-                                .toLowerCase()
-                                .contains(searchValue.toLowerCase()));
-                          },
-                          //This to clear the search value when you close the menu
-                          onMenuStateChange: (isOpen) {
-                            if (!isOpen) {
-                              categoriesController.clear();
-                            }
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 13,
-                      ),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Product Name Validate'.tr;
-                          }
-                          return null;
-                        },
-                        controller: productNameController,
-                        hintText: 'Product Name'.tr,
-                      ),
-                      const SizedBox(height: 13),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Product Description Validate'.tr;
-                          }
-                          return null;
-                        },
-                        controller: productDescriptionController,
-                        hintText: 'Product Description'.tr,
-                      ),
-                      const SizedBox(height: 13),
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          // alignment: AlignmentDirectional.center,
-                          isExpanded: true,
-                          hint: Text(
-                            'Brand'.tr,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
-                          ),
-                          items: brandList
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item.name,
-                                    child: Text(
-                                      item.name ?? '',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
+                                  ), // WHILE WRITING
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
+                                    hintText: 'Search...'.tr,
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white14,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: AppTheme.white15,
+                                          width: 1,
+                                        )),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: AppTheme.white15,
+                                          width: 1,
+                                        )),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
                                         color:
                                             Provider.of<ThemeProvider>(context)
                                                         .themeMode ==
                                                     "light"
                                                 ? AppTheme.blue3
                                                 : AppTheme.white1,
+                                        width: 1,
                                       ),
                                     ),
-                                  ))
-                              .toList(),
-                          value: Provider.of<MenuPageProvider>(context)
-                              .selectedBrand,
+                                  ),
+                                ),
+                              ),
+                              searchMatchFn: (item, searchValue) {
+                                debugPrint("ITEM:${item.value}");
 
-                          onChanged: (value) {
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .updateSelectedBrand(value as String);
-
-                            var brandIndex = brandList.indexWhere(
-                                ((element) => element.name == value));
-                            if (brandIndex != -1) {
-                              debugPrint('BRAND INDEX: $brandIndex');
-                              debugPrint(
-                                  'BRAND ID: ${brandList[brandIndex].id}');
-
-                              brandId = brandList[brandIndex].id;
-                            }
-                          },
-
-                          icon: Center(
-                            child: Image.asset(
-                              'assets/icons/dropdown.png',
-                              width: 10,
-                              height: 6,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
+                                return (item.value
+                                    .toLowerCase()
+                                    .contains(searchValue.toLowerCase()));
+                              },
+                              //This to clear the search value when you close the menu
+                              onMenuStateChange: (isOpen) {
+                                if (!isOpen) {
+                                  categoriesController.clear();
+                                }
+                              },
                             ),
                           ),
-                          iconSize: 24,
-                          // iconEnabledColor: Colors.yellow,
-                          // iconDisabledColor: Colors.grey,
-                          // icon: Container(),
-                          buttonHeight: 57,
-                          buttonWidth: deviceWidth,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 25, right: 17),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // border:
-                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
+                          const SizedBox(
+                            height: 13,
                           ),
-                          // buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 32),
-                          // dropdownMaxHeight: deviceHeight * 0.4,
-                          dropdownMaxHeight: 350,
-                          // dropdownWidth: deviceWidth,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
+                          textFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Product Name Validate'.tr;
+                              }
+                              return null;
+                            },
+                            controller: productNameController,
+                            hintText: 'Product Name'.tr,
                           ),
-                          // dropdownElevation: 8,
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 4,
-                          scrollbarAlwaysShow: true,
-                          // offset: const Offset(0, 180),
-
-                          searchController: brandController,
-                          searchInnerWidget: Padding(
-                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
-                            child: TextFormField(
-                              controller: brandController,
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ), // WHILE WRITING
-                              decoration: InputDecoration(
-                                isDense: true,
-                                contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 12,
-                                ),
-                                hintText: 'Search...'.tr,
-                                hintStyle: TextStyle(
+                          const SizedBox(height: 13),
+                          textFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Product Description Validate'.tr;
+                              }
+                              return null;
+                            },
+                            controller: productDescriptionController,
+                            hintText: 'Product Description'.tr,
+                          ),
+                          const SizedBox(height: 13),
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              // alignment: AlignmentDirectional.center,
+                              isExpanded: true,
+                              hint: Text(
+                                'Brand'.tr,
+                                style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w400,
@@ -454,323 +333,439 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       ? AppTheme.blue3
                                       : AppTheme.white14,
                                 ),
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: AppTheme.white15,
-                                      width: 1,
-                                    )),
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                    borderSide: BorderSide(
-                                      color: AppTheme.white15,
-                                      width: 1,
-                                    )),
-                                focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
+                              ),
+                              items: brandList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item.name,
+                                        child: Text(
+                                          item.name ?? '',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              value: menuPageProvider.selectedBrand,
+
+                              onChanged: (value) {
+                                menuPageProvider
+                                    .updateSelectedBrand(value as String);
+
+                                var brandIndex = brandList.indexWhere(
+                                    ((element) => element.name == value));
+                                if (brandIndex != -1) {
+                                  debugPrint('BRAND INDEX: $brandIndex');
+                                  debugPrint(
+                                      'BRAND ID: ${brandList[brandIndex].id}');
+
+                                  brandId = brandList[brandIndex].id;
+                                }
+                              },
+
+                              icon: Center(
+                                child: Image.asset(
+                                  'assets/icons/dropdown.png',
+                                  width: 10,
+                                  height: 6,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white15,
+                                ),
+                              ),
+                              iconSize: 24,
+                              // iconEnabledColor: Colors.yellow,
+                              // iconDisabledColor: Colors.grey,
+                              // icon: Container(),
+                              buttonHeight: 57,
+                              buttonWidth: deviceWidth,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 25, right: 17),
+                              buttonDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // border:
+                                //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // buttonElevation: 2,
+                              itemHeight: 40,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              // dropdownMaxHeight: deviceHeight * 0.4,
+                              dropdownMaxHeight: 350,
+                              // dropdownWidth: deviceWidth,
+                              dropdownPadding: null,
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // dropdownElevation: 8,
+                              scrollbarRadius: const Radius.circular(40),
+                              scrollbarThickness: 4,
+                              scrollbarAlwaysShow: true,
+                              // offset: const Offset(0, 180),
+
+                              searchController: brandController,
+                              searchInnerWidget: Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                                child: TextFormField(
+                                  controller: brandController,
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
                                     color: Provider.of<ThemeProvider>(context)
                                                 .themeMode ==
                                             "light"
                                         ? AppTheme.blue3
                                         : AppTheme.white1,
-                                    width: 1,
+                                  ), // WHILE WRITING
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: const EdgeInsets.symmetric(
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
+                                    hintText: 'Search...'.tr,
+                                    hintStyle: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.blue3
+                                          : AppTheme.white14,
+                                    ),
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: AppTheme.white15,
+                                          width: 1,
+                                        )),
+                                    enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(10),
+                                        borderSide: BorderSide(
+                                          color: AppTheme.white15,
+                                          width: 1,
+                                        )),
+                                    focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                        width: 1,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
+                              searchMatchFn: (item, searchValue) {
+                                debugPrint("ITEM:${item.value}");
+
+                                return (item.value
+                                    .toLowerCase()
+                                    .contains(searchValue.toLowerCase()));
+                              },
+                              //This to clear the search value when you close the menu
+                              onMenuStateChange: (isOpen) {
+                                if (!isOpen) {
+                                  brandController.clear();
+                                }
+                              },
                             ),
                           ),
-                          searchMatchFn: (item, searchValue) {
-                            debugPrint("ITEM:${item.value}");
-
-                            return (item.value
-                                .toLowerCase()
-                                .contains(searchValue.toLowerCase()));
-                          },
-                          //This to clear the search value when you close the menu
-                          onMenuStateChange: (isOpen) {
-                            if (!isOpen) {
-                              brandController.clear();
-                            }
-                          },
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 13,
-                      ),
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          // alignment: AlignmentDirectional.center,
-                          isExpanded: true,
-                          hint: Text(
-                            'Currency'.tr,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
-                            ),
+                          const SizedBox(
+                            height: 13,
                           ),
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              // alignment: AlignmentDirectional.center,
+                              isExpanded: true,
+                              hint: Text(
+                                'Currency'.tr,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white14,
+                                ),
+                              ),
 
-                          items: currencyList
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
+                              items: currencyList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
                                                         .themeMode ==
                                                     "light"
                                                 ? AppTheme.blue3
                                                 : AppTheme.white1,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          value: Provider.of<MenuPageProvider>(context)
-                              .selectedCurrency,
-                          onChanged: (value) {
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .updateSelectedCurrency(value as String);
-                          },
-                          icon: Center(
-                            child: Image.asset(
-                              'assets/icons/dropdown.png',
-                              width: 10,
-                              height: 6,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
-                            ),
-                          ),
-                          iconSize: 24,
-                          // iconEnabledColor: Colors.yellow,
-                          // iconDisabledColor: Colors.grey,
-                          // icon: Container(),
-                          buttonHeight: 57,
-                          buttonWidth: deviceWidth,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 25, right: 17),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // border:
-                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              value: menuPageProvider.selectedCurrency,
+                              onChanged: (value) {
+                                menuPageProvider
+                                    .updateSelectedCurrency(value as String);
+                              },
+                              icon: Center(
+                                child: Image.asset(
+                                  'assets/icons/dropdown.png',
+                                  width: 10,
+                                  height: 6,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white15,
+                                ),
+                              ),
+                              iconSize: 24,
+                              // iconEnabledColor: Colors.yellow,
+                              // iconDisabledColor: Colors.grey,
+                              // icon: Container(),
+                              buttonHeight: 57,
+                              buttonWidth: deviceWidth,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 25, right: 17),
+                              buttonDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // border:
+                                //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
 
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
                                         "light"
                                     ? AppTheme.white39
                                     : AppTheme.black18,
-                          ),
-                          // buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 32),
-                          // dropdownMaxHeight: deviceHeight * 0.4,
-                          dropdownMaxHeight: 350,
-                          // dropdownWidth: deviceWidth,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
+                              ),
+                              // buttonElevation: 2,
+                              itemHeight: 40,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              // dropdownMaxHeight: deviceHeight * 0.4,
+                              dropdownMaxHeight: 350,
+                              // dropdownWidth: deviceWidth,
+                              dropdownPadding: null,
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
                                         "light"
                                     ? AppTheme.white39
                                     : AppTheme.black18,
-                          ),
-                          // dropdownElevation: 8,
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 4,
-                          scrollbarAlwaysShow: true,
-                          // offset: const Offset(0, 180),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 13,
-                      ),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Price Validate'.tr;
-                          }
-                          return null;
-                        },
-                        controller: priceController,
-                        hintText: 'Price'.tr,
-                        keyboardType: TextInputType.number,
-                      ),
-                      const SizedBox(height: 13),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Product Summary Validate'.tr;
-                          }
-                          return null;
-                        },
-                        controller: productSummaryController,
-                        hintText: 'Product Summary'.tr,
-                        keyboardType: TextInputType.phone,
-                      ),
-                      const SizedBox(height: 13),
-                      DropdownButtonHideUnderline(
-                        child: DropdownButton2(
-                          // alignment: AlignmentDirectional.center,
-                          isExpanded: true,
-                          hint: Text(
-                            'Status'.tr,
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white14,
+                              ),
+                              // dropdownElevation: 8,
+                              scrollbarRadius: const Radius.circular(40),
+                              scrollbarThickness: 4,
+                              scrollbarAlwaysShow: true,
+                              // offset: const Offset(0, 180),
                             ),
                           ),
+                          const SizedBox(
+                            height: 13,
+                          ),
+                          textFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Price Validate'.tr;
+                              }
+                              return null;
+                            },
+                            controller: priceController,
+                            hintText: 'Price'.tr,
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(height: 13),
+                          textFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Product Summary Validate'.tr;
+                              }
+                              return null;
+                            },
+                            controller: productSummaryController,
+                            hintText: 'Product Summary'.tr,
+                            keyboardType: TextInputType.phone,
+                          ),
+                          const SizedBox(height: 13),
+                          DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              // alignment: AlignmentDirectional.center,
+                              isExpanded: true,
+                              hint: Text(
+                                'Status'.tr,
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white14,
+                                ),
+                              ),
 
-                          items: statusList
-                              .map((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
+                              items: statusList
+                                  .map((item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
                                                         .themeMode ==
                                                     "light"
                                                 ? AppTheme.blue3
                                                 : AppTheme.white1,
-                                      ),
-                                    ),
-                                  ))
-                              .toList(),
-                          value: Provider.of<MenuPageProvider>(context)
-                              .selectedStatus,
-                          onChanged: (value) {
-                            Provider.of<MenuPageProvider>(context,
-                                    listen: false)
-                                .updateSelectedStatus(value as String);
-                          },
-                          icon: Center(
-                            child: Image.asset(
-                              'assets/icons/dropdown.png',
-                              width: 10,
-                              height: 6,
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.blue3
-                                  : AppTheme.white15,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                              value: menuPageProvider.selectedStatus,
+                              onChanged: (value) {
+                                menuPageProvider
+                                    .updateSelectedStatus(value as String);
+                              },
+                              icon: Center(
+                                child: Image.asset(
+                                  'assets/icons/dropdown.png',
+                                  width: 10,
+                                  height: 6,
+                                  color: Provider.of<ThemeProvider>(context)
+                                              .themeMode ==
+                                          "light"
+                                      ? AppTheme.blue3
+                                      : AppTheme.white15,
+                                ),
+                              ),
+                              iconSize: 24,
+                              // iconEnabledColor: Colors.yellow,
+                              // iconDisabledColor: Colors.grey,
+                              // icon: Container(),
+                              buttonHeight: 57,
+                              buttonWidth: deviceWidth,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 25, right: 17),
+                              buttonDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                // border:
+                                //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // buttonElevation: 2,
+                              itemHeight: 40,
+                              itemPadding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              // dropdownMaxHeight: deviceHeight * 0.4,
+                              dropdownMaxHeight: 350,
+                              // dropdownWidth: deviceWidth,
+                              dropdownPadding: null,
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(14),
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.white39
+                                    : AppTheme.black18,
+                              ),
+                              // dropdownElevation: 8,
+                              scrollbarRadius: const Radius.circular(40),
+                              scrollbarThickness: 4,
+                              scrollbarAlwaysShow: true,
+                              // offset: const Offset(0, 180),
                             ),
                           ),
-                          iconSize: 24,
-                          // iconEnabledColor: Colors.yellow,
-                          // iconDisabledColor: Colors.grey,
-                          // icon: Container(),
-                          buttonHeight: 57,
-                          buttonWidth: deviceWidth,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 25, right: 17),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            // border:
-                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                          const SizedBox(height: 28),
+                          MaterialButton(
+                              minWidth: deviceWidth,
+                              height: 52,
+                              elevation: 0,
+                              color: AppTheme.green1,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                widget.operation == 'Add'
+                                    ? 'Continue'.tr
+                                    : 'Edit'.tr,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                if (productGlobalKey.currentState!.validate()) {
+                                  if (categoryId.toString() != 'null' &&
+                                      brandId.toString() != 'null' &&
+                                      menuPageProvider.selectedCurrency
+                                              .toString() !=
+                                          'null' &&
+                                      menuPageProvider.selectedStatus
+                                              .toString() !=
+                                          'null') {
+                                    if (widget.operation == 'Add') {
+                                      ProductDetailsModel product =
+                                          ProductDetailsModel(
+                                        accountId: '56',
+                                        userId: '57',
+                                        productName: productNameController.text,
+                                        productDescription:
+                                            productDescriptionController.text,
+                                        productSummary:
+                                            productSummaryController.text,
+                                      );
 
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
-                          ),
-                          // buttonElevation: 2,
-                          itemHeight: 40,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 32),
-                          // dropdownMaxHeight: deviceHeight * 0.4,
-                          dropdownMaxHeight: 350,
-                          // dropdownWidth: deviceWidth,
-                          dropdownPadding: null,
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color:
-                                Provider.of<ThemeProvider>(context).themeMode ==
-                                        "light"
-                                    ? AppTheme.white39
-                                    : AppTheme.black18,
-                          ),
-                          // dropdownElevation: 8,
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 4,
-                          scrollbarAlwaysShow: true,
-                          // offset: const Offset(0, 180),
-                        ),
-                      ),
-                      const SizedBox(height: 28),
-                      MaterialButton(
-                          minWidth: deviceWidth,
-                          height: 52,
-                          elevation: 0,
-                          color: AppTheme.green1,
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(16)),
-                          ),
-                          child: Text(
-                            widget.operation == 'Add'
-                                ? 'Continue'.tr
-                                : 'Edit'.tr,
-                            style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w700,
-                                color: AppTheme.white1),
-                          ),
-                          onPressed: () {
-                            if (productGlobalKey.currentState!.validate()) {
-                              if (categoryId.toString() != 'null' &&
-                                  brandId.toString() != 'null' &&
-                                  Provider.of<MenuPageProvider>(context,
-                                              listen: false)
-                                          .selectedCurrency
-                                          .toString() !=
-                                      'null' &&
-                                  Provider.of<MenuPageProvider>(context,
-                                              listen: false)
-                                          .selectedStatus
-                                          .toString() !=
-                                      'null') {
-                                if (widget.operation == 'Add') {
-                                  ProductDetailsModel product =
-                                      ProductDetailsModel(
-                                    accountId: '56',
-                                    userId: '57',
-                                    productName: productNameController.text,
-                                    productDescription:
-                                        productDescriptionController.text,
-                                    productSummary:
-                                        productSummaryController.text,
-                                  );
-
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            AddProductImageSubPage(
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => AddProductImageSubPage(
                                                 accountId: '',
                                                 categoryId: categoryId,
                                                 productName:
@@ -783,31 +778,26 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         .text,
                                                 brand: brandId,
                                                 price: priceController.text,
-                                                currency: Provider.of<
-                                                            MenuPageProvider>(
-                                                        context,
-                                                        listen: false)
+                                                currency: menuPageProvider
                                                     .selectedCurrency
                                                     .toString(),
-                                                status:
-                                                    Provider.of<MenuPageProvider>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                                .selectedStatus ==
-                                                            'Active'.tr
-                                                        ? '1'
-                                                        : '0'),
-                                      ));
-                                } else {}
-                              } else {
-                                validationErrorDialog(context);
-                              }
-                            }
-                          }),
-                    ],
-                  ),
-                ),
+                                                status: menuPageProvider
+                                                            .selectedStatus ==
+                                                        'Active'.tr
+                                                    ? '1'
+                                                    : '0'),
+                                          ));
+                                    } else {}
+                                  } else {
+                                    validationErrorDialog(context);
+                                  }
+                                }
+                              }),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),

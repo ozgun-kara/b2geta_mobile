@@ -74,11 +74,12 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
                         builder: (context) => const MyProductsSubPage(),
-                      ));
+                      ),
+                      (route) => route.isFirst);
                 }),
           ],
         ));
