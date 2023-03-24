@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -73,7 +73,13 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
                       fontWeight: FontWeight.w700,
                       color: AppTheme.white1),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyProductsSubPage(),
+                      ));
+                }),
           ],
         ));
   }
