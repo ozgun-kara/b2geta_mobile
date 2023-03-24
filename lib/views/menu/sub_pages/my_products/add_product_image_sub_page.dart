@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/products/product_details_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
@@ -11,7 +12,10 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path/path.dart' as path;
 
 class AddProductImageSubPage extends StatefulWidget {
-  const AddProductImageSubPage({Key? key}) : super(key: key);
+  const AddProductImageSubPage({Key? key, required this.passedObject})
+      : super(key: key);
+
+  final ProductDetailsModel? passedObject;
 
   @override
   State<AddProductImageSubPage> createState() => _AddProductImageSubPageState();
