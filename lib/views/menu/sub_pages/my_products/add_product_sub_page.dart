@@ -62,8 +62,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       'USD',
     ];
     Provider.of<MenuPageProvider>(context, listen: false).statusList = [
-      'Passive'.tr,
       'Active'.tr,
+      'Passive'.tr
     ];
     super.initState();
   }
@@ -740,14 +740,31 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                 color: AppTheme.white1),
                           ),
                           onPressed: () {
-                            if (widget.operation == 'Add') {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AddProductImageSubPage(),
-                                  ));
-                            } else {}
+                            if (productGlobalKey.currentState!.validate()) {
+                              if (categoryId.toString() != 'null' &&
+                                  brandId.toString() != 'null' &&
+                                  Provider.of<MenuPageProvider>(context,
+                                              listen: false)
+                                          .selectedCurrency
+                                          .toString() !=
+                                      'null' &&
+                                  Provider.of<MenuPageProvider>(context,
+                                              listen: false)
+                                          .selectedStatus
+                                          .toString() !=
+                                      'null') {
+                                if (widget.operation == 'Add') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            AddProductImageSubPage(),
+                                      ));
+                                } else {}
+                              } else {
+                                validationErrorDialog(context);
+                              }
+                            }
                           }),
                     ],
                   ),
