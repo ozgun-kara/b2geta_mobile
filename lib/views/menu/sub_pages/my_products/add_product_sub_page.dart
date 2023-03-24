@@ -771,7 +771,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             AddProductImageSubPage(
-                                          accountId: '56',
+                                          accountId: '',
                                           categoryId: categoryId,
                                           productName:
                                               productNameController.text,
@@ -781,8 +781,17 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               productSummaryController.text,
                                           brand: brandId,
                                           price: priceController.text,
-                                          currency: currencyController.text,
-                                          status: statusController.text,
+                                          currency:
+                                              Provider.of<MenuPageProvider>(
+                                                      context,
+                                                      listen: false)
+                                                  .selectedCurrency
+                                                  .toString(),
+                                          status: Provider.of<MenuPageProvider>(
+                                                  context,
+                                                  listen: false)
+                                              .selectedStatus
+                                              .toString(),
                                         ),
                                       ));
                                 } else {}
