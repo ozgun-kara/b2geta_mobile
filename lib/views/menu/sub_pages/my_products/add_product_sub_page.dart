@@ -771,7 +771,19 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             AddProductImageSubPage(
-                                                passedObject: product),
+                                          accountId: '56',
+                                          categoryId: categoryId,
+                                          productName:
+                                              productNameController.text,
+                                          productDescription:
+                                              productDescriptionController.text,
+                                          productSummary:
+                                              productSummaryController.text,
+                                          brand: brandId,
+                                          price: priceController.text,
+                                          currency: currencyController.text,
+                                          status: statusController.text,
+                                        ),
                                       ));
                                 } else {}
                               } else {

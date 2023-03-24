@@ -1,9 +1,11 @@
 import 'dart:io';
 import 'dart:math';
+import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/products/product_details_model.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,10 +14,28 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:path/path.dart' as path;
 
 class AddProductImageSubPage extends StatefulWidget {
-  const AddProductImageSubPage({Key? key, required this.passedObject})
-      : super(key: key);
+  const AddProductImageSubPage({
+    Key? key,
+    required this.accountId,
+    required this.categoryId,
+    required this.productName,
+    required this.productDescription,
+    required this.productSummary,
+    required this.brand,
+    required this.price,
+    required this.currency,
+    required this.status,
+  }) : super(key: key);
 
-  final ProductDetailsModel? passedObject;
+  final String accountId;
+  final String categoryId;
+  final String productName;
+  final String productDescription;
+  final String productSummary;
+  final String brand;
+  final String price;
+  final String currency;
+  final String status;
 
   @override
   State<AddProductImageSubPage> createState() => _AddProductImageSubPageState();
@@ -245,7 +265,29 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                             fontWeight: FontWeight.w700,
                             color: AppTheme.white1),
                       ),
-                      onPressed: () {}),
+                      onPressed: () {
+                        locator<ProductsServices>()
+                            .addProductCall(
+                          accountId: widget.accountId,
+                          categoryId: widget.categoryId,
+                          productName: widget.productName,
+                          productDescription: widget.productDescription,
+                          productSummary: widget.productSummary,
+                          brand: widget.brand,
+                          price: widget.price,
+                          currency: widget.currency,
+                          status: widget.status,
+                        )
+                            .then((value) {
+                          if (value == true) {
+                            debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
+                            Navigator.pop(context);
+                          } else {
+                            debugPrint("PRODUCT HAS NOT ADDED");
+                            operationFailedDialog(context);
+                          }
+                        });
+                      }),
                 ],
               ),
             ),
@@ -253,6 +295,82 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }
