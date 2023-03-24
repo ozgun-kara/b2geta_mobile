@@ -188,13 +188,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                 ? themeMode
                                                     ? AppTheme.black8
                                                     : AppTheme.white1
-
-
-
-
-
-
-                                                     
                                                 : themeMode
                                                     ? AppTheme.white18
                                                     : AppTheme.black8),
@@ -240,7 +233,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     "sort_method": 'asc',
                     "stock": '1',
                     "offset": '0',
-                    "limit": '15pşşşşşşşşşşşşşşdddddddddddddddddddddddddq "1Íİİİİİİ',
+                    "limit":
+                        '15pşşşşşşşşşşşşşşdddddddddddddddddddddddddq "1Íİİİİİİ',
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
@@ -305,7 +299,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Text(
-                                          product.name!.tr!,
+                                          product.name!.tr.toString(),
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
