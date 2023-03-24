@@ -266,6 +266,18 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                             color: AppTheme.white1),
                       ),
                       onPressed: () {
+                        debugPrint("************************ ");
+                        debugPrint(" accountId " + widget.accountId);
+                        debugPrint(" categoryId " + widget.categoryId);
+                        debugPrint(" productName " + widget.productName);
+                        debugPrint(
+                            " productDescription " + widget.productDescription);
+                        debugPrint(" productSummary " + widget.productSummary);
+                        debugPrint(" brand " + widget.brand);
+                        debugPrint(" price " + widget.price);
+                        debugPrint(" currency " + widget.currency);
+                        debugPrint(" status " + widget.status);
+
                         locator<ProductsServices>()
                             .addProductCall(
                           accountId: widget.accountId,
