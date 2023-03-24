@@ -229,7 +229,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : true,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCall2(queryParameters: {
+                      .productsListAndSearchCallTest(queryParameters: {
                     "cid[]": '1',
                     "cid[]": '2',
                     "keyword": 'etek',
@@ -397,7 +397,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : false,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCall2(queryParameters: {
+                      .productsListAndSearchCallTest(queryParameters: {
                     "cid[]": '1',
                     "cid[]": '2',
                     "keyword": 'etek',

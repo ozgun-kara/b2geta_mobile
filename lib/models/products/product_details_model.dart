@@ -20,7 +20,7 @@ class ProductDetailsModel {
   "images": [
     "https://api.businessucces.com/uploads/products/2023/03/21032023115627-1679396187.jpg"
   ]
-} 
+}
 */
 
   String? id;
@@ -61,21 +61,21 @@ class ProductDetailsModel {
     price = json['price']?.toString();
     currency = json['currency']?.toString();
     status = json['status']?.toString();
-  if (json['categories'] != null) {
-  final v = json['categories'];
-  final arr0 = <String>[];
-  v.forEach((v) {
-  arr0.add(v.toString());
-  });
-    categories = arr0;
+    if (json['categories'] != null) {
+      final v = json['categories'];
+      final arr0 = <String>[];
+      v.forEach((v) {
+        arr0.add(v.toString());
+      });
+      categories = arr0;
     }
-  if (json['images'] != null) {
-  final v = json['images'];
-  final arr0 = <String>[];
-  v.forEach((v) {
-  arr0.add(v.toString());
-  });
-    images = arr0;
+    if (json['images'] != null) {
+      final v = json['images'];
+      final arr0 = <String>[];
+      v.forEach((v) {
+        arr0.add(v.toString());
+      });
+      images = arr0;
     }
   }
   Map<String, dynamic> toJson() {
@@ -93,17 +93,17 @@ class ProductDetailsModel {
     if (categories != null) {
       final v = categories;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v);
-  });
+      v!.forEach((v) {
+        arr0.add(v);
+      });
       data['categories'] = arr0;
     }
     if (images != null) {
       final v = images;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v);
-  });
+      v!.forEach((v) {
+        arr0.add(v);
+      });
       data['images'] = arr0;
     }
     return data;
