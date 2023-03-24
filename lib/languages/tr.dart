@@ -159,7 +159,7 @@ final Map<String, String> tr = {
   'No I don\'t Approve': 'Hayır Onaylamıyorum',
   'Company Deleted Message': 'Firmanız silindi',
   'Product Added Message': 'Ürün Eklendi',
-  'Product List': 'Product List',
+  'Product List': 'Ürün Listesi',
   'Product Delete Message': 'Ürünü silmek istediğinizden emin misiniz?',
   'Add Product Image': 'Ürün Resmi Ekle',
   'Add Product Image Info-1': 'Resim yüklemek için dosyalara göz atın',
