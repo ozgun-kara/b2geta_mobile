@@ -44,8 +44,8 @@ class ProductsServices {
     }
   }
 
-  // PRODUCTS LIST AND SEARCH
-  Future<List<ProductModel>> productsListAndSearchCall2(
+  // PRODUCTS LIST AND SEARCH (TEST)
+  Future<List<ProductModel>> productsListAndSearchCallTest(
       {required Map<String, String> queryParameters}) async {
     List<ProductModel> productList = [];
 
@@ -114,6 +114,63 @@ class ProductsServices {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return null;
+    }
+  }
+
+  // ADD PRODUCT
+  Future<bool> addProductCall(
+      {required String accountId,
+      required String userId,
+      required String categoryId,
+      required String productName,
+      required String productDescription,
+      required String productSummary,
+      required String brand,
+      required String price,
+      required String currency,
+      required String status}) async {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/products/create'), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer ${Constants.userToken}",
+    }, body: {
+      "account_id": accountId,
+      "user_id": userId,
+      "category_id[]": categoryId,
+      "product_name[tr]": productName,
+      "product_description[tr]": productDescription,
+      "product_summary[tr]": productSummary,
+      "brand": brand,
+      "price": price,
+      "currency": currency,
+      "status": status,
+    });
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
+      return false;
     }
   }
 }
