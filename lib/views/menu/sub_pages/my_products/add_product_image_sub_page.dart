@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/product_added_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -249,57 +250,71 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                     },
                   ),
                   SizedBox(height: 28),
-                  MaterialButton(
-                      minWidth: deviceWidth,
-                      height: 52,
-                      elevation: 0,
-                      color: AppTheme.green1,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(16)),
-                      ),
-                      child: Text(
-                        'Add Product'.tr,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w700,
-                            color: AppTheme.white1),
-                      ),
-                      onPressed: () {
-                        debugPrint("************************ ");
-                        debugPrint(" accountId " + widget.accountId);
-                        debugPrint(" categoryId " + widget.categoryId);
-                        debugPrint(" productName " + widget.productName);
-                        debugPrint(
-                            " productDescription " + widget.productDescription);
-                        debugPrint(" productSummary " + widget.productSummary);
-                        debugPrint(" brand " + widget.brand);
-                        debugPrint(" price " + widget.price);
-                        debugPrint(" currency " + widget.currency);
-                        debugPrint(" status " + widget.status);
+                  Consumer<MenuPageProvider>(
+                    builder: (context, menuPageProvider, child) {
+                      return MaterialButton(
+                          minWidth: deviceWidth,
+                          height: 52,
+                          elevation: 0,
+                          color: AppTheme.green1,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Add Product'.tr,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            debugPrint("************************");
+                            debugPrint("accountId: ${widget.accountId}");
+                            debugPrint("categoryId: ${widget.categoryId}");
+                            debugPrint("productName: ${widget.productName}");
+                            debugPrint(
+                                "productDescription: ${widget.productDescription}");
+                            debugPrint(
+                                "productSummary: ${widget.productSummary}");
+                            debugPrint("brand: ${widget.brand}");
+                            debugPrint("price: ${widget.price}");
+                            debugPrint("currency: ${widget.currency}");
+                            debugPrint("status: ${widget.status}");
 
-                        locator<ProductsServices>()
-                            .addProductCall(
-                          accountId: widget.accountId,
-                          categoryId: widget.categoryId,
-                          productName: widget.productName,
-                          productDescription: widget.productDescription,
-                          productSummary: widget.productSummary,
-                          brand: widget.brand,
-                          price: widget.price,
-                          currency: widget.currency,
-                          status: widget.status,
-                        )
-                            .then((value) {
-                          if (value == true) {
-                            debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
-                            Navigator.pop(context);
-                          } else {
-                            debugPrint("PRODUCT HAS NOT ADDED");
-                            operationFailedDialog(context);
-                          }
-                        });
-                      }),
+                            locator<ProductsServices>()
+                                .addProductCall(
+                              accountId: widget.accountId,
+                              categoryId: widget.categoryId,
+                              productName: widget.productName,
+                              productDescription: widget.productDescription,
+                              productSummary: widget.productSummary,
+                              brand: widget.brand,
+                              price: widget.price,
+                              currency: widget.currency,
+                              status: widget.status,
+                            )
+                                .then((value) {
+                              if (value == true) {
+                                debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
+
+                                menuPageProvider.clearSelectedImageFilesList();
+
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProductAddedSubPage(),
+                                    ),
+                                    (route) => route.isFirst);
+                              } else {
+                                debugPrint("PRODUCT HAS NOT ADDED");
+                                operationFailedDialog(context);
+                              }
+                            });
+                          });
+                    },
+                  ),
                 ],
               ),
             ),

@@ -771,28 +771,33 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             AddProductImageSubPage(
-                                          accountId: '',
-                                          categoryId: categoryId,
-                                          productName:
-                                              productNameController.text,
-                                          productDescription:
-                                              productDescriptionController.text,
-                                          productSummary:
-                                              productSummaryController.text,
-                                          brand: brandId,
-                                          price: priceController.text,
-                                          currency:
-                                              Provider.of<MenuPageProvider>(
-                                                      context,
-                                                      listen: false)
-                                                  .selectedCurrency
-                                                  .toString(),
-                                          status: Provider.of<MenuPageProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .selectedStatus
-                                              .toString(),
-                                        ),
+                                                accountId: '',
+                                                categoryId: categoryId,
+                                                productName:
+                                                    productNameController.text,
+                                                productDescription:
+                                                    productDescriptionController
+                                                        .text,
+                                                productSummary:
+                                                    productSummaryController
+                                                        .text,
+                                                brand: brandId,
+                                                price: priceController.text,
+                                                currency: Provider.of<
+                                                            MenuPageProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .selectedCurrency
+                                                    .toString(),
+                                                status:
+                                                    Provider.of<MenuPageProvider>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .selectedStatus ==
+                                                            'Active'.tr
+                                                        ? '1'
+                                                        : '0'),
                                       ));
                                 } else {}
                               } else {
