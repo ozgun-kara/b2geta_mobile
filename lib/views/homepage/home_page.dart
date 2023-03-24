@@ -644,11 +644,42 @@ class _HomePageState extends State<HomePage> {
                                                     ),
                                                   ),
                                                 )
-                                              : ClipOval(
-                                                  child: Image.asset(
-                                                    width: 40,
-                                                    height: 40,
-                                                    "assets/images/dummy_images/user_profile.png",
+                                              : GestureDetector(
+                                                  onTap: () {
+                                                    if (feed.user!.type ==
+                                                        UserType
+                                                            .personal.name) {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                PersonalProfilePage(
+                                                              userId: feed
+                                                                  .user!.id
+                                                                  .toString(),
+                                                            ),
+                                                          ));
+                                                    } else if (feed
+                                                            .user!.type ==
+                                                        UserType.company.name) {
+                                                      Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                CompanyProfilePage(
+                                                              userId: feed
+                                                                  .user!.id
+                                                                  .toString(),
+                                                            ),
+                                                          ));
+                                                    }
+                                                  },
+                                                  child: ClipOval(
+                                                    child: Image.asset(
+                                                      width: 40,
+                                                      height: 40,
+                                                      "assets/images/dummy_images/user_profile.png",
+                                                    ),
                                                   ),
                                                 ),
                                           const SizedBox(
