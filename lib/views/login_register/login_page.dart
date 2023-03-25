@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   final MemberServices _memberServices = MemberServices();
 
   getProfile() async {
-    await _memberServices.getProfileCall().then((value) {
+    await _memberServices.getProfileCall().then((value) async {
       if (value != null) {
         Provider.of<UserProvider>(context, listen: false)
             .updateUserModel(value);
@@ -371,13 +371,17 @@ class _LoginPageState extends State<LoginPage> {
                                                             .trim())
                                                 .then((value) {
                                               if (value.isEmpty) {
-                                                getProfile();
-                                                return Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const NavigationPage(),
-                                                    ));
+                                                return Navigator
+                                                    .pushAndRemoveUntil(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const NavigationPage(),
+                                                  ),
+                                                  (route) => false,
+                                                ).then((value) {
+                                                  getProfile();
+                                                });
                                               } else if (value ==
                                                   'UserAccessNotFound') {
                                                 operationFailedDialog(context,
