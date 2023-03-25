@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -129,7 +130,13 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                                 width: 43,
                                 height: 43,
                                 fit: BoxFit.cover,
-                                _messagesList[0].toAvatar!,
+                                _messagesList[0].toId !=
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .getUser
+                                            .id
+                                    ? _messagesList[0].toAvatar!
+                                    : _messagesList[0].fromAvatar!,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Image.asset(
                                   "assets/images/dummy_images/user_profile.png",
@@ -157,8 +164,14 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                _messagesList[0].toFullname!.isNotEmpty
-                                    ? _messagesList[0].toFullname!
+                                _messagesList[0].toFullname != null
+                                    ? _messagesList[0].toId !=
+                                            Provider.of<UserProvider>(context,
+                                                    listen: false)
+                                                .getUser
+                                                .id
+                                        ? _messagesList[0].toFullname!
+                                        : _messagesList[0].fromFullname!
                                     : "User Name",
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -230,70 +243,78 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                     decoration: BoxDecoration(
                         color: themeMode ? AppTheme.white1 : AppTheme.black7),
                     child: GroupedListView<MessageDetailsModel, DateTime>(
-                      reverse: true,
-                      order: GroupedListOrder.DESC,
-                      useStickyGroupSeparators: true,
-                      floatingHeader: true,
-                      padding: const EdgeInsets.all(8.0),
-                      elements: _messagesList,
-                      groupBy: ((message) {
-                        var dateTime = DateTime.parse(message.createDate!);
-                        return dateTime;
-                      }),
-                      groupHeaderBuilder: (message) => const SizedBox(),
-                      itemBuilder: (context, message) => Align(
-                        alignment: message.fromId == widget.fromId
-                            ? Alignment.centerRight
-                            : Alignment.centerLeft,
-                        child: Padding(
-                          padding: message.fromId == widget.fromId
-                              ? const EdgeInsets.only(left: 25.0)
-                              : const EdgeInsets.only(right: 25.0),
-                          child: Card(
-                            shape: message.fromId == widget.fromId
-                                ? const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(12.0),
-                                    bottomLeft: Radius.circular(12.0),
-                                    topRight: Radius.circular(12.0),
-                                  ))
-                                : const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(12.0),
-                                    bottomRight: Radius.circular(12.0),
-                                    topLeft: Radius.circular(12.0),
-                                  )),
-                            color: message.fromId == widget.fromId
-                                ? themeMode
-                                    ? AppTheme.blue11
-                                    : AppTheme.green8
-                                : themeMode
-                                    ? AppTheme.white34
-                                    : AppTheme.black25,
+                        reverse: true,
+                        order: GroupedListOrder.DESC,
+                        useStickyGroupSeparators: true,
+                        floatingHeader: true,
+                        padding: const EdgeInsets.all(8.0),
+                        elements: _messagesList,
+                        groupBy: ((message) {
+                          var dateTime = DateTime.parse(message.createDate!);
+                          return dateTime;
+                        }),
+                        groupHeaderBuilder: (message) => const SizedBox(),
+                        itemBuilder: (context, message) {
+                          var fromId = _messagesList[0].toId !=
+                                  Provider.of<UserProvider>(context,
+                                          listen: false)
+                                      .getUser
+                                      .id
+                              ? _messagesList[0].fromId
+                              : _messagesList[0].toId;
+                          return Align(
+                            alignment: message.fromId == fromId
+                                ? Alignment.centerRight
+                                : Alignment.centerLeft,
                             child: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 18,
-                                right: 20,
-                                top: 14,
-                                bottom: 13,
-                              ),
-                              child: Text(
-                                message.message ?? "",
-                                style: TextStyle(
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                  height: 1,
-                                  color: themeMode
-                                      ? AppTheme.black19
-                                      : AppTheme.white1,
+                              padding: message.fromId == fromId
+                                  ? const EdgeInsets.only(left: 25.0)
+                                  : const EdgeInsets.only(right: 25.0),
+                              child: Card(
+                                shape: message.fromId == fromId
+                                    ? const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(12.0),
+                                        bottomLeft: Radius.circular(12.0),
+                                        topRight: Radius.circular(12.0),
+                                      ))
+                                    : const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(12.0),
+                                        bottomRight: Radius.circular(12.0),
+                                        topLeft: Radius.circular(12.0),
+                                      )),
+                                color: message.fromId == fromId
+                                    ? themeMode
+                                        ? AppTheme.blue11
+                                        : AppTheme.green8
+                                    : themeMode
+                                        ? AppTheme.white34
+                                        : AppTheme.black25,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                    left: 18,
+                                    right: 20,
+                                    top: 14,
+                                    bottom: 13,
+                                  ),
+                                  child: Text(
+                                    message.message ?? "",
+                                    style: TextStyle(
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1,
+                                      color: themeMode
+                                          ? AppTheme.black19
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
+                          );
+                        }),
                   )
                 : const CupertinoActivityIndicator(),
           ),
@@ -349,7 +370,13 @@ class _MessageDetailsPageState extends State<MessageDetailsPage> {
                       onPressed: () async {
                         await _messagesServices
                             .sendMessageCall(
-                                toId: widget.toId.toString(),
+                                toId: _messagesList[0].toId !=
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .getUser
+                                            .id
+                                    ? widget.toId.toString()
+                                    : widget.fromId.toString(),
                                 message: _messageController.text.trim())
                             .then((value) async {
                           if (value) {

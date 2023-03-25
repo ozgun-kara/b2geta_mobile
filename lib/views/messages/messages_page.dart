@@ -2,6 +2,7 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/messages/message_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/messages/message_details_page.dart';
@@ -136,6 +137,7 @@ class _MessagesPageState extends State<MessagesPage> {
               itemCount: _messageList.length,
               itemBuilder: (BuildContext context, int index) {
                 var message = _messageList[index];
+
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -180,7 +182,13 @@ class _MessagesPageState extends State<MessagesPage> {
                                     width: 40,
                                     height: 40,
                                     fit: BoxFit.cover,
-                                    message.toAvatar!,
+                                    message.toId !=
+                                            Provider.of<UserProvider>(context,
+                                                    listen: false)
+                                                .getUser
+                                                .id
+                                        ? message.toAvatar!
+                                        : message.fromAvatar!,
                                     errorBuilder:
                                         (context, error, stackTrace) =>
                                             Image.asset(
@@ -203,7 +211,13 @@ class _MessagesPageState extends State<MessagesPage> {
                             children: [
                               Text(
                                 message.toFullname != null
-                                    ? message.toFullname!
+                                    ? message.toId !=
+                                            Provider.of<UserProvider>(context,
+                                                    listen: false)
+                                                .getUser
+                                                .id
+                                        ? message.toFullname!
+                                        : message.fromFullname!
                                     : "User Name",
                                 style: TextStyle(
                                   fontSize: 13,
