@@ -217,7 +217,8 @@ class _HomePageState extends State<HomePage> {
                                         width: 7,
                                       ),
                                       Text(
-                                        'Reels'.tr,
+                                        // 'Reels'.tr,
+                                        'Play'.tr,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: AppTheme.appFontFamily,
