@@ -621,7 +621,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             },
                             controller: productSummaryController,
                             hintText: 'Product Summary'.tr,
-                            keyboardType: TextInputType.phone,
+                            keyboardType: TextInputType.text,
                           ),
                           const SizedBox(height: 13),
                           DropdownButtonHideUnderline(
