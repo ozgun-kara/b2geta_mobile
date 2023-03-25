@@ -169,6 +169,7 @@ final Map<String, String> tr = {
   // HOMEPAGE
   'Posts': 'Postlar',
   'Reels': 'Reels',
+  'Play': 'Play',
   'Homepage Share-1': 'Firman hakkında bir şeyler paylaş',
   'Homepage Share-2': 'gönderi paylaştı.',
   'Homepage Share-3': 'Paylaş',

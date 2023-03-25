@@ -173,6 +173,7 @@ final Map<String, String> en = {
   // HOMEPAGE
   'Posts': 'Posts',
   'Reels': 'Reels',
+  'Play': 'Play',
   'Homepage Share-1': 'Share something about your company',
   'Homepage Share-2': 'shared the post',
   'Homepage Share-3': 'Share',
