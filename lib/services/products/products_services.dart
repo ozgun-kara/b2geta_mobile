@@ -172,4 +172,30 @@ class ProductsServices {
       return false;
     }
   }
+
+  // DELETE PRODUCT
+  Future<bool> deleteProductCall({
+    required String productId,
+  }) async {
+    final response = await http.delete(
+      Uri.parse('${Constants.apiUrl}/products/delete/$productId'),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "Bearer ${Constants.userToken}",
+      },
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+
+      return false;
+    }
+  }
 }
