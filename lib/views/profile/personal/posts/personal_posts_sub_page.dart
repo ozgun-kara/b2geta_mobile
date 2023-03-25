@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/homepage/comment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -453,6 +454,112 @@ class _PersonalPostsSubPageState extends State<PersonalPostsSubPage> {
                     ],
                   ),
                 ),
+                const SizedBox(
+                  height: 5,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  child: Row(
+                    children: [
+                      ClipOval(
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppTheme.white1,
+                          ),
+                          child: (Provider.of<UserProvider>(context)
+                                          .getUser
+                                          .avatar !=
+                                      null &&
+                                  Provider.of<UserProvider>(context)
+                                      .getUser
+                                      .avatar!
+                                      .isNotEmpty)
+                              ? Image.network(
+                                  'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      "assets/images/dummy_images/user_profile.png",
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset(
+                                  "assets/images/dummy_images/user_profile.png",
+                                  fit: BoxFit.cover,
+                                ),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 11.0,
+                      ),
+                      Expanded(
+                          child: SizedBox(
+                        height: 32.0,
+                        child: TextField(
+                          readOnly: true,
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w600,
+                            color: AppTheme.blue3,
+                          ),
+                          decoration: InputDecoration(
+                            contentPadding:
+                                const EdgeInsets.fromLTRB(16, 0, 0, 0),
+                            filled: true,
+                            fillColor:
+                                themeMode ? AppTheme.white3 : AppTheme.black7,
+                            hintText: 'Comment-3'.tr,
+                            hintStyle: TextStyle(
+                              fontSize: 12,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w600,
+                              color: AppTheme.blue3,
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(41.0),
+                              borderSide: BorderSide(
+                                  color: themeMode
+                                      ? AppTheme.white10
+                                      : AppTheme.black7),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(41.0),
+                              borderSide: BorderSide(
+                                  color: themeMode
+                                      ? AppTheme.white10
+                                      : AppTheme.black7),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(41.0),
+                              borderSide: BorderSide(
+                                  color: themeMode
+                                      ? AppTheme.white10
+                                      : AppTheme.black7),
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CommentPage(
+                                    feedId: feed.id!,
+                                    user: feed.user!,
+                                    content: feed.content!,
+                                  ),
+                                ));
+                          },
+                        ),
+                      )),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 18.0),
               ],
             ),
           );
