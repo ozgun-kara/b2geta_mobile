@@ -371,17 +371,14 @@ class _LoginPageState extends State<LoginPage> {
                                                             .trim())
                                                 .then((value) {
                                               if (value.isEmpty) {
-                                                return Navigator
-                                                    .pushAndRemoveUntil(
+                                                getProfile();
+                                                return Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         const NavigationPage(),
                                                   ),
-                                                  (route) => false,
-                                                ).then((value) {
-                                                  getProfile();
-                                                });
+                                                );
                                               } else if (value ==
                                                   'UserAccessNotFound') {
                                                 operationFailedDialog(context,
