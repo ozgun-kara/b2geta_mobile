@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/company/company_detail_model.dart';
 import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -412,14 +413,29 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                 fontWeight: FontWeight.w700,
                                                 color: AppTheme.white1),
                                           ),
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const AddCompanySubPage(
-                                                          operation: 'Edit'),
-                                                ));
+                                          onPressed: () async {
+                                            await locator<CompanyServices>()
+                                                .profileGetCall(
+                                                    companyId: company.id!)
+                                                .then((value) {
+                                              if (value != null) {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          AddCompanySubPage(
+                                                              passedObject:
+                                                                  value,
+                                                              operation:
+                                                                  'Edit'),
+                                                    ));
+                                              } else {
+                                                debugPrint(
+                                                    "COMPANY DETAIL HAS NOT FETCHED");
+
+                                                operationFailedDialog(context);
+                                              }
+                                            });
                                           }),
                                     ),
                                     SizedBox(width: 9),
