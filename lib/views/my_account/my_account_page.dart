@@ -1,5 +1,4 @@
 // ignore_for_file: unrelated_type_equality_checks
-import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dart';
@@ -51,7 +50,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     user = Provider.of<UserProvider>(context).getUser;
-
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
       body: Consumer<MyAccountPageProvider>(
@@ -146,7 +144,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                            width: 1, color: AppTheme.white21),
+                                            width: 0, color: AppTheme.white21),
                                       ),
                                       child: (Provider.of<UserProvider>(context)
                                                       .getUser
@@ -177,7 +175,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             Column(
                               children: [
                                 Text(
-                                  '${user.firstname} ${user.lastname}',
+                                  '${user.firstname ?? ''} ${user.lastname ?? ''}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
@@ -269,7 +267,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             }),
                       ),
                     ),
-                    user.type == UserType.company
+                    Provider.of<UserProvider>(context).getUser.type == 'company'
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,
@@ -298,7 +296,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ),
                           )
                         : const SizedBox(),
-                    user.type == UserType.company
+                    Provider.of<UserProvider>(context).getUser.type == 'company'
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,
@@ -326,7 +324,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             ),
                           )
                         : const SizedBox(),
-                    user.type == UserType.company
+                    Provider.of<UserProvider>(context).getUser.type == 'company'
                         ? Expanded(
                             child: ButtonTheme(
                               height: 49,

@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
+import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/notification_page.dart';
-import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -14,6 +17,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigationPage extends StatefulWidget {
   const NavigationPage({Key? key}) : super(key: key);
@@ -300,6 +304,12 @@ class _NavigationPageState extends State<NavigationPage> {
                               personalProfileModel!.companies!.isNotEmpty) {
                             _companyListModalBottomSheet(
                                 context, personalProfileModel!);
+                          } else if (Provider.of<UserProvider>(context,
+                                      listen: false)
+                                  .getUser
+                                  .id !=
+                              Constants.userId) {
+                            _userModalBottomSheet(context);
                           }
                         },
                       ),
@@ -351,35 +361,35 @@ class _NavigationPageState extends State<NavigationPage> {
                       var company = personalProfileModel.companies![index];
                       return GestureDetector(
                         onTap: () async {
-                          /*   await CompanyServices()
+                          await CompanyServices()
                               .changeProfileAnotherCompanyCall(
                                   userId: company.id.toString())
                               .then((value) async {
                             if (value) {
                               await _memberServices
                                   .getProfileCall()
-                                  .then((value) {
+                                  .then((value) async {
                                 if (value != null) {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  Constants.userToken = value.token;
+                                  Constants.userId = value.id;
+
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateUserModel(value);
-                                  Navigator.push(
+                                  Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            const NavigationPage()),
+                                      builder: (context) =>
+                                          const NavigationPage(),
+                                    ),
+                                    (route) => false,
                                   );
                                 }
                               });
                             }
-                          }); */
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CompanyProfilePage(
-                                      userId: company.id.toString(),
-                                    )),
-                          );
+                          });
                         },
                         child: Column(
                           children: [
@@ -387,29 +397,33 @@ class _NavigationPageState extends State<NavigationPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 company!.logo!.isNotEmpty
-                                    ? Image.network(
-                                        width: 20,
-                                        height: 20,
-                                        company.logo.toString(),
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
+                                    ? ClipOval(
+                                        child: Image.network(
+                                          width: 20,
+                                          height: 20,
+                                          company.logo.toString(),
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              width: 20,
+                                              height: 20,
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset(
                                             width: 20,
                                             height: 20,
-                                          );
-                                        },
-                                      )
-                                    : Image.asset(
-                                        width: 20,
-                                        height: 20,
-                                        'assets/images/dummy_images/user_profile.png'),
+                                            'assets/images/dummy_images/user_profile.png'),
+                                      ),
                                 const SizedBox(
                                   width: 10,
                                 ),
                                 Expanded(
                                   child: Text(
-                                    company.name.toString(),
+                                    company.name ?? '',
                                     style: TextStyle(
                                         fontSize: 14,
                                         fontFamily: AppTheme.appFontFamily,
@@ -431,6 +445,93 @@ class _NavigationPageState extends State<NavigationPage> {
                     },
                   ),
                 )),
+          );
+        });
+  }
+
+  void _userModalBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        backgroundColor: Colors.transparent,
+        isScrollControlled: true,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(15.0),
+          ),
+        ),
+        builder: (BuildContext bc) {
+          return GestureDetector(
+            onTapDown: (tapDetails) {
+              if (tapDetails.globalPosition.dx <
+                  MediaQuery.of(context).size.width * 0.5) {
+                Navigator.pop(context);
+              }
+            },
+            child: Container(
+                padding: EdgeInsets.only(left: deviceWidth * 0.5),
+                color: Colors.transparent,
+                child: Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 16.0),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(5.0),
+                        topRight: Radius.circular(5.0),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Provider.of<UserProvider>(context, listen: false)
+                                        .getUser
+                                        .avatar !=
+                                    null
+                                ? ClipOval(
+                                    child: Image.network(
+                                      width: 20,
+                                      height: 20,
+                                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
+                                        return Image.asset(
+                                          "assets/images/dummy_images/user_profile.png",
+                                          width: 20,
+                                          height: 20,
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : ClipOval(
+                                    child: Image.asset(
+                                        width: 20,
+                                        height: 20,
+                                        'assets/images/dummy_images/user_profile.png'),
+                                  ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Expanded(
+                              child: Text(
+                                "${Provider.of<UserProvider>(context).getUser.firstname} ${Provider.of<UserProvider>(context).getUser.lastname}",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: Provider.of<ThemeProvider>(context)
+                                                .themeMode ==
+                                            "light"
+                                        ? AppTheme.black11
+                                        : AppTheme.white1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ))),
           );
         });
   }

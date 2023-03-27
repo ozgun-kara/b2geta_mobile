@@ -90,7 +90,7 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                    width: 1, color: AppTheme.white21),
+                                    width: 0, color: AppTheme.white21),
                               ),
                               child: (Provider.of<UserProvider>(context)
                                               .getUser
