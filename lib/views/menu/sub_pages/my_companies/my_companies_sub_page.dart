@@ -268,7 +268,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
               width: deviceWidth,
               height: deviceHeight - 215,
               child: FutureBuilder<List<CompanyModel2>>(
-                future: locator<CompanyServices>().listMyCompaniesCall2(),
+                future: locator<CompanyServices>().listMyCompaniesCall(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var companiesList = data.data;
