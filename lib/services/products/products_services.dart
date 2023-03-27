@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/products/product_details_model.dart';
+import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -77,7 +77,7 @@ class ProductsServices {
   }
 
   // GET PRODUCT (PRODUCT DETAIL)
-  Future<ProductDetailsModel?> getProductCall(
+  getProductCall(
       {required String productId,
       required Map<String, String> queryParameters}) async {
     final response = await http.get(
@@ -98,8 +98,8 @@ class ProductsServices {
 
       if (status == true) {
         var data = json.decode(response.body)["data"];
-        ProductDetailsModel productDetailsModel =
-            ProductDetailsModel.fromJson(data);
+        ProductDetailModel productDetailsModel =
+            ProductDetailModel.fromJson(data);
         return productDetailsModel;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
