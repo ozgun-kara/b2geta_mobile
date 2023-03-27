@@ -1,9 +1,12 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,9 +14,11 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
 class AddProductSubPage extends StatefulWidget {
-  const AddProductSubPage({Key? key, required this.operation})
+  const AddProductSubPage(
+      {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
+  final ProductDetailModel? passedObject;
   final String operation;
 
   @override
@@ -26,7 +31,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
   final productNameController = TextEditingController();
   final productDescriptionController = TextEditingController();
-  final priceController = TextEditingController();
+  final productPriceController = TextEditingController();
   final productSummaryController = TextEditingController();
   final categoriesController = TextEditingController();
   final brandController = TextEditingController();
@@ -57,15 +62,37 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
-    Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
-      'EUR',
-      'TRY',
-      'USD',
-    ];
-    Provider.of<MenuPageProvider>(context, listen: false).statusList = [
-      'Active'.tr,
-      'Passive'.tr
-    ];
+
+    if (widget.operation == 'Add') {
+      Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
+        'EUR',
+        'TRY',
+        'USD',
+      ];
+      Provider.of<MenuPageProvider>(context, listen: false).statusList = [
+        'Active'.tr,
+        'Passive'.tr
+      ];
+    }
+
+    if (widget.operation == 'Edit') {
+      productNameController.text = widget.passedObject!.productName.toString();
+      productDescriptionController.text =
+          widget.passedObject!.productDescription.toString();
+      productPriceController.text = widget.passedObject!.price.toString();
+      productSummaryController.text =
+          widget.passedObject!.productSummary.toString();
+
+      brandId = widget.passedObject!.brand!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedBrand =
+          widget.passedObject!.brand!.name;
+
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCurrency =
+          widget.passedObject!.currency;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedStatus =
+          widget.passedObject!.status;
+    }
+
     super.initState();
   }
 
@@ -607,7 +634,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               }
                               return null;
                             },
-                            controller: priceController,
+                            controller: productPriceController,
                             hintText: 'Price'.tr,
                             keyboardType: TextInputType.number,
                           ),
@@ -777,7 +804,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     productSummaryController
                                                         .text,
                                                 brand: brandId,
-                                                price: priceController.text,
+                                                price:
+                                                    productPriceController.text,
                                                 currency: menuPageProvider
                                                     .selectedCurrency
                                                     .toString(),
@@ -787,7 +815,50 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     ? '1'
                                                     : '0'),
                                           ));
-                                    } else {}
+                                    } else {
+                                      locator<ProductsServices>()
+                                          .updateProductCall(
+                                              productId:
+                                                  widget.passedObject!.id!,
+                                              categoryId: widget
+                                                  .passedObject!.categories
+                                                  .toString(),
+                                              productName: widget
+                                                  .passedObject!.productName
+                                                  .toString(),
+                                              productDescription: widget
+                                                  .passedObject!
+                                                  .productDescription!,
+                                              productSummary: widget
+                                                  .passedObject!
+                                                  .productSummary!,
+                                              brand: widget
+                                                  .passedObject!.brand!.id
+                                                  .toString(),
+                                              price:
+                                                  widget.passedObject!.price!,
+                                              currency: widget
+                                                  .passedObject!.currency!,
+                                              status:
+                                                  widget.passedObject!.status!)
+                                          .then((value) {
+                                        if (value == true) {
+                                          debugPrint(
+                                              "PRODUCT HAS SUCCESSFULLY UPDATED");
+
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const MyProductsSubPage(),
+                                              ),
+                                              (route) => route.isFirst);
+                                        } else {
+                                          debugPrint("PRODUCT HAS NOT UPDATED");
+                                          operationFailedDialog(context);
+                                        }
+                                      });
+                                    }
                                   } else {
                                     validationErrorDialog(context);
                                   }

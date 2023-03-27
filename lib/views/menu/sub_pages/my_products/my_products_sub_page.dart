@@ -227,8 +227,8 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             AddProductSubPage(
-                                                                // passedObject:
-                                                                //     value,
+                                                                passedObject:
+                                                                    value,
                                                                 operation:
                                                                     'Edit'),
                                                       ));
