@@ -152,7 +152,8 @@ final Map<String, String> tr = {
   'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
   'About Validate': 'Lütfen hakkında alanını giriniz',
   'Company Added Message':
-      'Firmanız Eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
+      'Firmanız eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
+  'Company Updated Message': 'Firman bilgileriniz güncellendi',
   'Company Delete Message':
       'Firmayı silerseniz tüm eklediğiniz firma ürünleri de silinecektir.\nOnaylıyor musunuz?',
   'Yes I Accept': 'Evet Onaylıyorum',

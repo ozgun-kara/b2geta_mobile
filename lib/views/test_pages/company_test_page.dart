@@ -111,7 +111,7 @@ class _CompanyTestPageState extends State<CompanyTestPage> {
                       onPressed: () {
                         CompanyServices()
                             .updateCompanyCall(
-                                id: 346,
+                                id: '346',
                                 companyName: 'ABC Firma LTD updated',
                                 taxOffice: 'Beşiktaş',
                                 taxNumber: '1234567890',

@@ -65,6 +65,35 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
 
+    if (widget.operation == 'Edit') {
+      companyNameController.text = widget.passedObject!.name.toString();
+      taxOfficeController.text = widget.passedObject!.taxOffice.toString();
+      taxNumberController.text = widget.passedObject!.taxNumber.toString();
+      phoneNumberController.text = widget.passedObject!.phone.toString();
+      emailController.text = widget.passedObject!.email.toString();
+
+      countryCode = widget.passedObject!.country!.code;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
+          widget.passedObject!.country!.name;
+
+      cityId = widget.passedObject!.city!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCity =
+          widget.passedObject!.city!.name;
+
+      districtId = widget.passedObject!.district!.id;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedDistrict =
+          widget.passedObject!.district!.name;
+
+      addressController.text = widget.passedObject!.address.toString();
+      postalCodeController.text = widget.passedObject!.postalCode.toString();
+      aboutController.text = widget.passedObject!.about.toString();
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchCityList(countryCode);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchDistrictList(cityId);
+    }
+
     super.initState();
   }
 
@@ -878,7 +907,8 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                const CompanyAddedSubPage(),
+                                                const CompanyAddedSubPage(
+                                                    operation: 'Add'),
                                           ),
                                           (route) => route.isFirst);
                                     } else {
@@ -886,7 +916,47 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       operationFailedDialog(context);
                                     }
                                   });
-                                } else {}
+                                } else {
+                                  locator<CompanyServices>()
+                                      .updateCompanyCall(
+                                          id: widget.passedObject!.id
+                                              .toString(),
+                                          companyName:
+                                              companyNameController.text,
+                                          taxOffice: taxOfficeController.text,
+                                          taxNumber: taxNumberController.text,
+                                          phoneNumber:
+                                              phoneNumberController.text,
+                                          email: emailController.text,
+                                          wantEmail: '1',
+                                          country: countryCode,
+                                          city: cityId,
+                                          district: districtId,
+                                          address: addressController.text,
+                                          postalCode: postalCodeController.text,
+                                          about: aboutController.text,
+                                          languageCode: 'tr',
+                                          countryCode: countryCode,
+                                          timezone: '3')
+                                      .then((value) {
+                                    if (value == true) {
+                                      debugPrint(
+                                          "COMPANY HAS SUCCESSFULLY UPDATED");
+
+                                      Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const CompanyAddedSubPage(
+                                                    operation: 'Edit'),
+                                          ),
+                                          (route) => route.isFirst);
+                                    } else {
+                                      debugPrint("COMPANY HAS NOT UPDATED");
+                                      operationFailedDialog(context);
+                                    }
+                                  });
+                                }
                               } else {
                                 validationErrorDialog(context);
                               }

@@ -155,7 +155,7 @@ class CompanyServices {
 
   // UPDATE COMPANY
   Future<bool> updateCompanyCall({
-    required int id,
+    required String id,
     required String companyName,
     required String taxOffice,
     required String taxNumber,

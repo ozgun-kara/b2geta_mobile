@@ -7,11 +7,13 @@ import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyAddedSubPage extends StatefulWidget {
-  const CompanyAddedSubPage({Key? key}) : super(key: key);
+  const CompanyAddedSubPage({Key? key, required this.operation})
+      : super(key: key);
+
+  final String operation;
 
   @override
-  State<CompanyAddedSubPage> createState() =>
-      _CompanyAddedSubPageState();
+  State<CompanyAddedSubPage> createState() => _CompanyAddedSubPageState();
 }
 
 class _CompanyAddedSubPageState extends State<CompanyAddedSubPage> {
@@ -45,7 +47,9 @@ class _CompanyAddedSubPageState extends State<CompanyAddedSubPage> {
                   SizedBox(
                     width: 252,
                     child: Text(
-                      'Company Added Message'.tr,
+                      widget.operation == 'Add'
+                          ? 'Company Added Message'.tr
+                          : 'Company Updated Message'.tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontSize: 13,
