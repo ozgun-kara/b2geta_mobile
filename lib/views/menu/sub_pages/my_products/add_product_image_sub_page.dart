@@ -268,7 +268,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             debugPrint("************************");
                             debugPrint("accountId: ${widget.accountId}");
                             debugPrint("categoryId: ${widget.categoryId}");

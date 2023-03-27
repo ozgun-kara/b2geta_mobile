@@ -173,6 +173,62 @@ class ProductsServices {
     }
   }
 
+  // UPDATE PRODUCT
+  Future<bool> updateProductCall(
+      {required String productId,
+      required String categoryId,
+      required String productName,
+      required String productDescription,
+      required String productSummary,
+      required String brand,
+      required String price,
+      required String currency,
+      required String status}) async {
+    final response = await http.post(
+        Uri.parse('${Constants.apiUrl}/products/update/$productId'),
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Authorization": "Bearer ${Constants.userToken}",
+        },
+        body: {
+          "category_id[]": categoryId,
+          "product_name[tr]": productName,
+          "product_description[tr]": productDescription,
+          "product_summary[tr]": productSummary,
+          "brand": brand,
+          "price": price,
+          "currency": currency,
+          "status": status,
+        });
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      // debugPrint("RESPONSE DATA: ${response.body}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
+      return false;
+    }
+  }
+
   // DELETE PRODUCT
   Future<bool> deleteProductCall({
     required String productId,
