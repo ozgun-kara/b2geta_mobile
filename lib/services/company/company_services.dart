@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/company/company_detail_model.dart';
-import 'package:b2geta_mobile/models/company/company_model.dart';
 import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

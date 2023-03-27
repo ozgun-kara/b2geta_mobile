@@ -55,7 +55,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   }
 
   Future<void> getProduct() async {
-    await _productsServices.getProductsCall(
+    await _productsServices.getProductCall(
         productId: widget.productId, queryParameters: {}).then((value) {
       if (value != null) {
         setState(() {

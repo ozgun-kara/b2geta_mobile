@@ -76,8 +76,8 @@ class ProductsServices {
     }
   }
 
-  // GET PRODUCTS
-  Future<ProductDetailsModel?> getProductsCall(
+  // GET PRODUCT (PRODUCT DETAIL)
+  Future<ProductDetailsModel?> getProductCall(
       {required String productId,
       required Map<String, String> queryParameters}) async {
     final response = await http.get(
@@ -194,7 +194,6 @@ class ProductsServices {
         return false;
       }
     } else {
-
       return false;
     }
   }
