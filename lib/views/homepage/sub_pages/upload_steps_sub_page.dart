@@ -69,462 +69,368 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
 
     return Consumer<HomePageProvider>(
       builder: (context, provider, child) {
-        return Scaffold(
-          backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black5,
-          appBar: provider.uploadStep == 0
-              ? firstAppBar(themeMode)
-              : provider.uploadStep == 1
-                  ? secondAppBar(themeMode)
-                  : provider.uploadStep == 2
-                      ? thirdAppBar(themeMode)
-                      : fourthAppBar(themeMode),
-          body: provider.uploadStep == 0
-              ? SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      Container(
-                          width: deviceWidth,
-                          height: 1,
-                          color:
-                              themeMode ? AppTheme.white32 : AppTheme.black2),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(13, 14.5, 13, 14.5),
-                        child: Row(
-                          children: [
-                            ClipOval(
-                              child: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: AppTheme.white1,
-                                ),
-                                child: (Provider.of<UserProvider>(context)
-                                                .getUser
-                                                .avatar !=
-                                            null &&
-                                        Provider.of<UserProvider>(context)
-                                            .getUser
-                                            .avatar!
-                                            .isNotEmpty)
-                                    ? Image.network(
-                                        'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                        fit: BoxFit.cover,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
-                                          fit: BoxFit.cover,
-                                        ),
-                                      )
-                                    : Image.asset(
-                                        "assets/images/dummy_images/user_profile.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                              ),
-                            ),
-                            const SizedBox(width: 13),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 4),
-                              child: Text(
-                                '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  height: 1,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w700,
-                                  color: themeMode
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 13),
-                        child: TextFormField(
-                          controller: commentController,
-                          style: TextStyle(
-                              fontSize: 14,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w500,
+        return WillPopScope(
+            onWillPop: () async {
+              provider.clearSelectedImageFilesList();
+              return true;
+            },
+            child: Scaffold(
+              backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black5,
+              appBar: provider.uploadStep == 0
+                  ? firstAppBar(themeMode)
+                  : provider.uploadStep == 1
+                      ? secondAppBar(themeMode)
+                      : provider.uploadStep == 2
+                          ? thirdAppBar(themeMode)
+                          : fourthAppBar(themeMode),
+              body: provider.uploadStep == 0
+                  ? SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Container(
+                              width: deviceWidth,
+                              height: 1,
                               color: themeMode
-                                  ? AppTheme.black11
-                                  : AppTheme.white1), // WHILE WRITING
-                          maxLines: 14,
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.fromLTRB(16, 0, 16, 36),
-                            filled: true,
-                            fillColor:
-                                themeMode ? AppTheme.white3 : AppTheme.black7,
-                            hintText: 'Share something about your company'.tr,
-                            hintStyle: TextStyle(
-                              fontSize: 15,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w400,
-                              color: AppTheme.white13,
+                                  ? AppTheme.white32
+                                  : AppTheme.black2),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(13, 14.5, 13, 14.5),
+                            child: Row(
+                              children: [
+                                ClipOval(
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppTheme.white1,
+                                    ),
+                                    child: (Provider.of<UserProvider>(context)
+                                                    .getUser
+                                                    .avatar !=
+                                                null &&
+                                            Provider.of<UserProvider>(context)
+                                                .getUser
+                                                .avatar!
+                                                .isNotEmpty)
+                                        ? Image.network(
+                                            'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          )
+                                        : Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
+                                ),
+                                const SizedBox(width: 13),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 4),
+                                  child: Text(
+                                    '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      height: 1,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w700,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
-                                borderSide: BorderSide(
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 13),
+                            child: TextFormField(
+                              controller: commentController,
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
                                   color: themeMode
-                                      ? AppTheme.white32
-                                      : AppTheme.black14,
-                                  width: 1,
-                                )),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(16),
-                                borderSide: BorderSide(
-                                  color: themeMode
-                                      ? AppTheme.white32
-                                      : AppTheme.black14,
-                                  width: 1,
-                                )),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16),
-                              borderSide: BorderSide(
-                                color: themeMode
-                                    ? AppTheme.blue2
-                                    : AppTheme.white1,
-                                width: 1,
+                                      ? AppTheme.black11
+                                      : AppTheme.white1), // WHILE WRITING
+                              maxLines: 14,
+                              decoration: InputDecoration(
+                                contentPadding:
+                                    const EdgeInsets.fromLTRB(16, 0, 16, 36),
+                                filled: true,
+                                fillColor: themeMode
+                                    ? AppTheme.white3
+                                    : AppTheme.black7,
+                                hintText:
+                                    'Share something about your company'.tr,
+                                hintStyle: TextStyle(
+                                  fontSize: 15,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppTheme.white13,
+                                ),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: BorderSide(
+                                      color: themeMode
+                                          ? AppTheme.white32
+                                          : AppTheme.black14,
+                                      width: 1,
+                                    )),
+                                enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: BorderSide(
+                                      color: themeMode
+                                          ? AppTheme.white32
+                                          : AppTheme.black14,
+                                      width: 1,
+                                    )),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                  borderSide: BorderSide(
+                                    color: themeMode
+                                        ? AppTheme.blue2
+                                        : AppTheme.white1,
+                                    width: 1,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: provider.imageFilesList!.isNotEmpty,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
-                          child: Wrap(
-                            spacing: 9,
-                            runSpacing: 9,
-                            children: provider.imageFilesList!.map((image) {
-                              return Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  Image.file(
-                                    File(image.path),
-                                    width: deviceWidth / 6,
-                                    height: deviceWidth / 6,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  // Positioned(
-                                  //   top: 3,
-                                  //   right: 3,
-                                  //   child: ClipRRect(
-                                  //     borderRadius:
-                                  //         BorderRadius.all(Radius.circular(4)),
-                                  //     child: Material(
-                                  //       color: AppTheme.white1,
-                                  //       child: InkWell(
-                                  //         onTap: () {
-                                  //
-                                  //           provider.deleteSelectedImage(image);
-                                  //         },
-                                  //         child: SizedBox(
-                                  //           width: 24,
-                                  //           height: 24,
-                                  //           child: Center(
-                                  //             child: Image.asset(
-                                  //               'assets/icons/trash.png',
-                                  //               width: 14,
-                                  //               height: 16,
-                                  //               color: AppTheme.blue2,
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ),
-                                  // ),
-                                  Positioned(
-                                    top: -7.75,
-                                    right: -7.75,
-                                    child: ClipOval(
-                                      child: Material(
-                                        color: AppTheme.red5,
-                                        child: InkWell(
-                                          radius: 18,
-                                          onTap: () {
-                                            provider.deleteSelectedImage(image);
-                                          },
-                                          child: Transform.rotate(
-                                            angle: math.pi / 4,
-                                            child: SizedBox(
-                                              width: 18,
-                                              height: 18,
-                                              child: Center(
-                                                child: Image.asset(
-                                                  'assets/icons/cross-2.png',
-                                                  width: 9.18,
-                                                  height: 9.18,
-                                                  // color: AppTheme.blue2,
+                          Visibility(
+                            visible: provider.imageFilesList!.isNotEmpty,
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 12, 0, 8),
+                              child: Wrap(
+                                spacing: 9,
+                                runSpacing: 9,
+                                children: provider.imageFilesList!.map((image) {
+                                  return Stack(
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      Image.file(
+                                        File(image.path),
+                                        width: deviceWidth / 6,
+                                        height: deviceWidth / 6,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      // Positioned(
+                                      //   top: 3,
+                                      //   right: 3,
+                                      //   child: ClipRRect(
+                                      //     borderRadius:
+                                      //         BorderRadius.all(Radius.circular(4)),
+                                      //     child: Material(
+                                      //       color: AppTheme.white1,
+                                      //       child: InkWell(
+                                      //         onTap: () {
+                                      //
+                                      //           provider.deleteSelectedImage(image);
+                                      //         },
+                                      //         child: SizedBox(
+                                      //           width: 24,
+                                      //           height: 24,
+                                      //           child: Center(
+                                      //             child: Image.asset(
+                                      //               'assets/icons/trash.png',
+                                      //               width: 14,
+                                      //               height: 16,
+                                      //               color: AppTheme.blue2,
+                                      //             ),
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                      Positioned(
+                                        top: -7.75,
+                                        right: -7.75,
+                                        child: ClipOval(
+                                          child: Material(
+                                            color: AppTheme.red5,
+                                            child: InkWell(
+                                              radius: 18,
+                                              onTap: () {
+                                                provider
+                                                    .deleteSelectedImage(image);
+                                              },
+                                              child: Transform.rotate(
+                                                angle: math.pi / 4,
+                                                child: SizedBox(
+                                                  width: 18,
+                                                  height: 18,
+                                                  child: Center(
+                                                    child: Image.asset(
+                                                      'assets/icons/cross-2.png',
+                                                      width: 9.18,
+                                                      height: 9.18,
+                                                      // color: AppTheme.blue2,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
+                                    ],
+                                  );
+                                }).toList(),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                              width: deviceWidth,
+                              height: 1,
+                              color: themeMode
+                                  ? AppTheme.white32
+                                  : AppTheme.black2),
+                          MaterialButton(
+                              minWidth: deviceWidth,
+                              elevation: 0,
+                              padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 16),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: Image.asset(
+                                      "assets/icons/post_image_add.png",
+                                      width: 18,
+                                      height: 18,
+                                      color: AppTheme.blue2,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Add Photo/Video'.tr,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      height: 1,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
                                     ),
                                   ),
                                 ],
-                              );
-                            }).toList(),
-                          ),
-                        ),
+                              ),
+                              onPressed: () {
+                                provider.updateUploadType('Post');
+                                provider.updateUploadStep(1);
+                              }),
+                          Container(
+                              width: deviceWidth,
+                              height: 1,
+                              color: themeMode
+                                  ? AppTheme.white32
+                                  : AppTheme.black2),
+                          MaterialButton(
+                              minWidth: deviceWidth,
+                              elevation: 0,
+                              padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
+                              child: Row(
+                                children: [
+                                  const SizedBox(width: 16),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 4),
+                                    child: Image.asset(
+                                        "assets/icons/reels-upload.png",
+                                        width: 18,
+                                        height: 18,
+                                        color: AppTheme.red5),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Upload Reels Video'.tr,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      height: 1,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                provider.clearSelectedImageFilesList();
+                                provider.updateUploadType('Reels');
+                                provider.updateUploadStep(1);
+                              }),
+                        ],
                       ),
-                      const SizedBox(height: 8),
-                      Container(
-                          width: deviceWidth,
-                          height: 1,
-                          color:
-                              themeMode ? AppTheme.white32 : AppTheme.black2),
-                      MaterialButton(
-                          minWidth: deviceWidth,
-                          elevation: 0,
-                          padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
-                          child: Row(
-                            children: [
-                              const SizedBox(width: 16),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Image.asset(
-                                  "assets/icons/post_image_add.png",
-                                  width: 18,
-                                  height: 18,
-                                  color: AppTheme.blue2,
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Add Photo/Video'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  height: 1,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: themeMode
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {
-                            provider.updateUploadType('Post');
-                            provider.updateUploadStep(1);
-                          }),
-                      Container(
-                          width: deviceWidth,
-                          height: 1,
-                          color:
-                              themeMode ? AppTheme.white32 : AppTheme.black2),
-                      MaterialButton(
-                          minWidth: deviceWidth,
-                          elevation: 0,
-                          padding: const EdgeInsets.fromLTRB(0, 16, 0, 12),
-                          child: Row(
-                            children: [
-                              const SizedBox(width: 16),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 4),
-                                child: Image.asset(
-                                    "assets/icons/reels-upload.png",
-                                    width: 18,
-                                    height: 18,
-                                    color: AppTheme.red5),
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Upload Reels Video'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  height: 1,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: themeMode
-                                      ? AppTheme.blue3
-                                      : AppTheme.white1,
-                                ),
-                              ),
-                            ],
-                          ),
-                          onPressed: () {
-                            provider.clearSelectedImageFilesList();
-                            provider.updateUploadType('Reels');
-                            provider.updateUploadStep(1);
-                          }),
-                    ],
-                  ),
-                )
-              : provider.uploadStep == 1
-                  ? Container(
-                      child: provider.uploadType == 'Post'
-                          ? SingleChildScrollView(
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        width: deviceWidth,
-                                        height: 1,
-                                        color: themeMode
-                                            ? AppTheme.white32
-                                            : AppTheme.black2),
-                                    Container(
-                                        child: provider.imageFilesList!.isEmpty
-                                            ? Column(
-                                                children: [
-                                                  const SizedBox(height: 100),
-                                                  Center(
-                                                    child: Column(
-                                                      children: [
-                                                        Image.asset(
-                                                          "assets/icons/mdi_cloud-upload-outline.png",
-                                                          width: 58,
-                                                          height: 58,
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 8),
-                                                        SizedBox(
-                                                          width: 212,
-                                                          child: Text(
-                                                            'Maximum File Size Info'
-                                                                .tr,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style: TextStyle(
-                                                                fontSize: 13,
-                                                                fontFamily: AppTheme
-                                                                    .appFontFamily,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                color: themeMode
-                                                                    ? AppTheme
-                                                                        .blue2
-                                                                    : AppTheme
-                                                                        .white1),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 176),
-                                                  MaterialButton(
-                                                      height: 47,
-                                                      color: AppTheme.blue2,
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    9)),
-                                                      ),
-                                                      elevation: 0,
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 22),
-                                                      child: Text(
-                                                        'Select From Gallery'
-                                                            .tr,
-                                                        style: TextStyle(
-                                                            fontSize: 14,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: AppTheme
-                                                                .white1),
-                                                      ),
-                                                      onPressed: () {
-                                                        selectImages();
-                                                      })
-                                                ],
-                                              )
-                                            : Column(
-                                                children: [
-                                                  Wrap(
-                                                    spacing: 3,
-                                                    runSpacing: 3,
-                                                    children: provider
-                                                        .imageFilesList!
-                                                        .map((image) {
-                                                      return Stack(
+                    )
+                  : provider.uploadStep == 1
+                      ? Container(
+                          child: provider.uploadType == 'Post'
+                              ? SingleChildScrollView(
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            width: deviceWidth,
+                                            height: 1,
+                                            color: themeMode
+                                                ? AppTheme.white32
+                                                : AppTheme.black2),
+                                        Container(
+                                            child:
+                                                provider.imageFilesList!.isEmpty
+                                                    ? Column(
                                                         children: [
-                                                          Image.file(
-                                                            File(image.path),
-                                                            width: deviceWidth /
-                                                                    3 -
-                                                                2,
-                                                            height:
-                                                                deviceWidth /
-                                                                        3 -
-                                                                    2,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                          Positioned(
-                                                            top: 3,
-                                                            right: 3,
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  const BorderRadius
-                                                                          .all(
-                                                                      Radius.circular(
-                                                                          4)),
-                                                              child: Material(
-                                                                color: AppTheme
-                                                                    .white1,
-                                                                child: InkWell(
-                                                                  onTap: () {
-                                                                    // provider.deleteSelectedImage();
-
-                                                                    // provider
-                                                                    //     .imageFilesList!
-                                                                    //     .remove(
-                                                                    //         imageone);
-
-                                                                    provider
-                                                                        .deleteSelectedImage(
-                                                                            image);
-                                                                  },
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 24,
-                                                                    height: 24,
-                                                                    child:
-                                                                        Center(
-                                                                      child: Image
-                                                                          .asset(
-                                                                        'assets/icons/trash.png',
-                                                                        width:
-                                                                            14,
-                                                                        height:
-                                                                            16,
-                                                                        color: AppTheme
-                                                                            .blue2,
-                                                                      ),
-                                                                    ),
+                                                          const SizedBox(
+                                                              height: 100),
+                                                          Center(
+                                                            child: Column(
+                                                              children: [
+                                                                Image.asset(
+                                                                  "assets/icons/mdi_cloud-upload-outline.png",
+                                                                  width: 58,
+                                                                  height: 58,
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 8),
+                                                                SizedBox(
+                                                                  width: 212,
+                                                                  child: Text(
+                                                                    'Maximum File Size Info'
+                                                                        .tr,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .center,
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            13,
+                                                                        fontFamily:
+                                                                            AppTheme
+                                                                                .appFontFamily,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .w600,
+                                                                        color: themeMode
+                                                                            ? AppTheme.blue2
+                                                                            : AppTheme.white1),
                                                                   ),
                                                                 ),
-                                                              ),
+                                                              ],
                                                             ),
                                                           ),
-                                                        ],
-                                                      );
-                                                    }).toList(),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .fromLTRB(
-                                                        26, 114, 26, 36),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: MaterialButton(
+                                                          const SizedBox(
+                                                              height: 176),
+                                                          MaterialButton(
                                                               height: 47,
                                                               color: AppTheme
                                                                   .blue2,
@@ -536,8 +442,13 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                             9)),
                                                               ),
                                                               elevation: 0,
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      22),
                                                               child: Text(
-                                                                'Add More'.tr,
+                                                                'Select From Gallery'
+                                                                    .tr,
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         14,
@@ -552,430 +463,533 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                               ),
                                                               onPressed: () {
                                                                 selectImages();
-                                                              }),
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 8),
-                                                        Expanded(
-                                                          child: MaterialButton(
-                                                              height: 47,
-                                                              color: AppTheme
-                                                                  .green1,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            9)),
-                                                              ),
-                                                              elevation: 0,
+                                                              })
+                                                        ],
+                                                      )
+                                                    : Column(
+                                                        children: [
+                                                          Wrap(
+                                                            spacing: 3,
+                                                            runSpacing: 3,
+                                                            children: provider
+                                                                .imageFilesList!
+                                                                .map((image) {
+                                                              return Stack(
+                                                                children: [
+                                                                  Image.file(
+                                                                    File(image
+                                                                        .path),
+                                                                    width: deviceWidth /
+                                                                            3 -
+                                                                        2,
+                                                                    height:
+                                                                        deviceWidth /
+                                                                                3 -
+                                                                            2,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  ),
+                                                                  Positioned(
+                                                                    top: 3,
+                                                                    right: 3,
+                                                                    child:
+                                                                        ClipRRect(
+                                                                      borderRadius: const BorderRadius
+                                                                              .all(
+                                                                          Radius.circular(
+                                                                              4)),
+                                                                      child:
+                                                                          Material(
+                                                                        color: AppTheme
+                                                                            .white1,
+                                                                        child:
+                                                                            InkWell(
+                                                                          onTap:
+                                                                              () {
+                                                                            // provider.deleteSelectedImage();
+
+                                                                            // provider
+                                                                            //     .imageFilesList!
+                                                                            //     .remove(
+                                                                            //         imageone);
+
+                                                                            provider.deleteSelectedImage(image);
+                                                                          },
+                                                                          child:
+                                                                              SizedBox(
+                                                                            width:
+                                                                                24,
+                                                                            height:
+                                                                                24,
+                                                                            child:
+                                                                                Center(
+                                                                              child: Image.asset(
+                                                                                'assets/icons/trash.png',
+                                                                                width: 14,
+                                                                                height: 16,
+                                                                                color: AppTheme.blue2,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            }).toList(),
+                                                          ),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    26,
+                                                                    114,
+                                                                    26,
+                                                                    36),
+                                                            child: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: MaterialButton(
+                                                                      height: 47,
+                                                                      color: AppTheme.blue2,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(9)),
+                                                                      ),
+                                                                      elevation: 0,
+                                                                      child: Text(
+                                                                        'Add More'
+                                                                            .tr,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontFamily:
+                                                                                AppTheme.appFontFamily,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            color: AppTheme.white1),
+                                                                      ),
+                                                                      onPressed: () {
+                                                                        selectImages();
+                                                                      }),
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 8),
+                                                                Expanded(
+                                                                  child: MaterialButton(
+                                                                      height: 47,
+                                                                      color: AppTheme.green1,
+                                                                      shape: const RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(9)),
+                                                                      ),
+                                                                      elevation: 0,
+                                                                      child: Text(
+                                                                        'Upload'
+                                                                            .tr,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontFamily:
+                                                                                AppTheme.appFontFamily,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            color: AppTheme.white1),
+                                                                      ),
+                                                                      onPressed: () {
+                                                                        provider
+                                                                            .updateUploadStep(0);
+                                                                      }),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ],
+                                                      )),
+                                        const SizedBox(height: 50),
+                                      ],
+                                    ),
+                                  ),
+                                )
+                              : SingleChildScrollView(
+                                  child: Center(
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                            width: deviceWidth,
+                                            height: 1,
+                                            color: themeMode
+                                                ? AppTheme.white32
+                                                : AppTheme.black2),
+                                        Container(
+                                            child: reelsVideo == null
+                                                ? Column(
+                                                    children: [
+                                                      const SizedBox(
+                                                          height: 100),
+                                                      Center(
+                                                        child: Column(
+                                                          children: [
+                                                            Image.asset(
+                                                              "assets/icons/mdi_cloud-upload-outline.png",
+                                                              width: 58,
+                                                              height: 58,
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 8),
+                                                            SizedBox(
+                                                              width: 212,
                                                               child: Text(
-                                                                'Upload'.tr,
+                                                                'Maximum File Size Info'
+                                                                    .tr,
+                                                                textAlign:
+                                                                    TextAlign
+                                                                        .center,
                                                                 style: TextStyle(
                                                                     fontSize:
-                                                                        14,
+                                                                        13,
                                                                     fontFamily:
                                                                         AppTheme
                                                                             .appFontFamily,
                                                                     fontWeight:
                                                                         FontWeight
-                                                                            .w700,
-                                                                    color: AppTheme
-                                                                        .white1),
+                                                                            .w600,
+                                                                    color: themeMode
+                                                                        ? AppTheme
+                                                                            .blue2
+                                                                        : AppTheme
+                                                                            .white1),
                                                               ),
-                                                              onPressed: () {
-                                                                provider
-                                                                    .updateUploadStep(
-                                                                        0);
-                                                              }),
+                                                            ),
+                                                          ],
                                                         ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              )),
-                                    const SizedBox(height: 50),
-                                  ],
-                                ),
-                              ),
-                            )
-                          : SingleChildScrollView(
-                              child: Center(
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        width: deviceWidth,
-                                        height: 1,
-                                        color: themeMode
-                                            ? AppTheme.white32
-                                            : AppTheme.black2),
-                                    Container(
-                                        child: reelsVideo == null
-                                            ? Column(
-                                                children: [
-                                                  const SizedBox(height: 100),
-                                                  Center(
-                                                    child: Column(
-                                                      children: [
-                                                        Image.asset(
-                                                          "assets/icons/mdi_cloud-upload-outline.png",
-                                                          width: 58,
-                                                          height: 58,
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 8),
-                                                        SizedBox(
-                                                          width: 212,
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 176),
+                                                      MaterialButton(
+                                                          height: 47,
+                                                          color: AppTheme.blue2,
+                                                          shape:
+                                                              const RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .all(Radius
+                                                                        .circular(
+                                                                            9)),
+                                                          ),
+                                                          elevation: 0,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      22),
                                                           child: Text(
-                                                            'Maximum File Size Info'
+                                                            'Select From Gallery'
                                                                 .tr,
-                                                            textAlign: TextAlign
-                                                                .center,
                                                             style: TextStyle(
-                                                                fontSize: 13,
+                                                                fontSize: 14,
                                                                 fontFamily: AppTheme
                                                                     .appFontFamily,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w600,
-                                                                color: themeMode
-                                                                    ? AppTheme
-                                                                        .blue2
-                                                                    : AppTheme
-                                                                        .white1),
+                                                                        .w700,
+                                                                color: AppTheme
+                                                                    .white1),
                                                           ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  const SizedBox(height: 176),
-                                                  MaterialButton(
-                                                      height: 47,
-                                                      color: AppTheme.blue2,
-                                                      shape:
-                                                          const RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    9)),
-                                                      ),
-                                                      elevation: 0,
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 22),
-                                                      child: Text(
-                                                        'Select From Gallery'
-                                                            .tr,
-                                                        style: TextStyle(
-                                                            fontSize: 14,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                            color: AppTheme
-                                                                .white1),
-                                                      ),
-                                                      onPressed: () {
-                                                        selectReels();
-                                                      })
-                                                ],
-                                              )
-                                            : Column(
-                                                children: [
-                                                  videoPlayerController
-                                                          .value.isInitialized
-                                                      ? AspectRatio(
-                                                          aspectRatio:
-                                                              videoPlayerController
-                                                                  .value
-                                                                  .aspectRatio,
-                                                          child: VideoPlayer(
-                                                              videoPlayerController),
-                                                        )
-                                                      : Container(),
-                                                  Padding(
-                                                    padding: const EdgeInsets
-                                                            .fromLTRB(
-                                                        26, 44, 26, 36),
-                                                    child: Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: MaterialButton(
-                                                              height: 47,
-                                                              color: AppTheme
-                                                                  .blue2,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            9)),
-                                                              ),
-                                                              elevation: 0,
-                                                              child: Text(
-                                                                'Change'.tr,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        AppTheme
-                                                                            .appFontFamily,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    color: AppTheme
-                                                                        .white1),
-                                                              ),
-                                                              onPressed: () {
-                                                                selectReels();
-                                                              }),
-                                                        ),
-                                                        const SizedBox(
-                                                            width: 8),
-                                                        Expanded(
-                                                          child: MaterialButton(
-                                                              height: 47,
-                                                              color: AppTheme
-                                                                  .green1,
-                                                              shape:
-                                                                  const RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            9)),
-                                                              ),
-                                                              elevation: 0,
-                                                              child: Text(
-                                                                'Upload'.tr,
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        AppTheme
-                                                                            .appFontFamily,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    color: AppTheme
-                                                                        .white1),
-                                                              ),
-                                                              onPressed: () {
-                                                                provider
-                                                                    .updateUploadStep(
-                                                                        2);
-
-                                                                locator<SocialServices>()
-                                                                    .shareCall(
-                                                                        type:
-                                                                            'reels',
-                                                                        content:
-                                                                            commentController
-                                                                                .text,
-                                                                        video:
-                                                                            reelsVideo!)
-                                                                    .then(
-                                                                        (value) {
-                                                                  provider
-                                                                      .updateUploadStep(
-                                                                          3);
-
-                                                                  Provider.of<HomePageProvider>(
-                                                                          context,
-                                                                          listen:
-                                                                              false)
-                                                                      .getReels();
-                                                                });
-                                                              }),
-                                                        ),
-                                                      ],
-                                                    ),
+                                                          onPressed: () {
+                                                            selectReels();
+                                                          })
+                                                    ],
                                                   )
-                                                ],
-                                              )),
-                                    const SizedBox(height: 50),
-                                  ],
-                                ),
-                              ),
-                            ))
-                  : provider.uploadStep == 2
-                      ? SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                  width: deviceWidth,
-                                  height: 1,
-                                  color: themeMode
-                                      ? AppTheme.white32
-                                      : AppTheme.black2),
-                              const SizedBox(height: 50),
-                              Center(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 112),
-                                      child: SizedBox(
-                                        // width: 148,
-                                        child: Text(
-                                          'Uploading Message'.tr,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w600,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white1),
-                                        ),
-                                      ),
+                                                : Column(
+                                                    children: [
+                                                      videoPlayerController
+                                                              .value
+                                                              .isInitialized
+                                                          ? AspectRatio(
+                                                              aspectRatio:
+                                                                  videoPlayerController
+                                                                      .value
+                                                                      .aspectRatio,
+                                                              child: VideoPlayer(
+                                                                  videoPlayerController),
+                                                            )
+                                                          : Container(),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .fromLTRB(
+                                                                26, 44, 26, 36),
+                                                        child: Row(
+                                                          children: [
+                                                            Expanded(
+                                                              child:
+                                                                  MaterialButton(
+                                                                      height:
+                                                                          47,
+                                                                      color: AppTheme
+                                                                          .blue2,
+                                                                      shape:
+                                                                          const RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(9)),
+                                                                      ),
+                                                                      elevation:
+                                                                          0,
+                                                                      child:
+                                                                          Text(
+                                                                        'Change'
+                                                                            .tr,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontFamily:
+                                                                                AppTheme.appFontFamily,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            color: AppTheme.white1),
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        selectReels();
+                                                                      }),
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 8),
+                                                            Expanded(
+                                                              child:
+                                                                  MaterialButton(
+                                                                      height:
+                                                                          47,
+                                                                      color: AppTheme
+                                                                          .green1,
+                                                                      shape:
+                                                                          const RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.all(Radius.circular(9)),
+                                                                      ),
+                                                                      elevation:
+                                                                          0,
+                                                                      child:
+                                                                          Text(
+                                                                        'Upload'
+                                                                            .tr,
+                                                                        style: TextStyle(
+                                                                            fontSize:
+                                                                                14,
+                                                                            fontFamily:
+                                                                                AppTheme.appFontFamily,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            color: AppTheme.white1),
+                                                                      ),
+                                                                      onPressed:
+                                                                          () {
+                                                                        provider
+                                                                            .updateUploadStep(2);
+
+                                                                        locator<SocialServices>()
+                                                                            .shareCall(
+                                                                                type: 'reels',
+                                                                                content: commentController.text,
+                                                                                video: reelsVideo!)
+                                                                            .then((value) {
+                                                                          provider
+                                                                              .updateUploadStep(3);
+
+                                                                          Provider.of<HomePageProvider>(context, listen: false)
+                                                                              .getReels();
+                                                                        });
+                                                                      }),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      )
+                                                    ],
+                                                  )),
+                                        const SizedBox(height: 50),
+                                      ],
                                     ),
-                                    const SizedBox(height: 50),
-                                    CircularPercentIndicator(
-                                      radius: 90,
-                                      lineWidth: 13,
-                                      // percent: 0.85,
-                                      percent: 1,
-                                      restartAnimation: true,
-                                      animationDuration: 3000,
-                                      animation: true,
-                                      backgroundColor: themeMode
-                                          ? AppTheme.white28
-                                          : AppTheme.black27,
-                                      progressColor: AppTheme.green10,
-                                      circularStrokeCap:
-                                          CircularStrokeCap.round,
-                                      // center: Text(
-                                      //   "%85",
-                                      //   style: TextStyle(
-                                      //       fontSize: 40,
-                                      //       fontFamily: AppTheme.appFontFamily,
-                                      //       fontWeight: FontWeight.w700,
-                                      //       color: themeMode
-                                      //           ? AppTheme.blue3
-                                      //           : AppTheme.white1),
-                                      // ),
-                                    ),
-                                    const SizedBox(height: 40),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 112),
-                                      child: SizedBox(
-                                        // width: 148,
-                                        child: Text(
-                                          'Uploading-2'.tr,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white1),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(height: 69),
-                              MaterialButton(
-                                  height: 47,
-                                  color: AppTheme.blue2,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(9)),
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 56),
-                                  elevation: 0,
-                                  child: Text(
-                                    'Cancel'.tr,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppTheme.white1),
-                                  ),
-                                  onPressed: () {
-                                    Provider.of<HomePageProvider>(context,
-                                            listen: false)
-                                        .updateUploadStep(1);
-                                  }),
-                              const SizedBox(height: 36),
-                            ],
-                          ),
-                        )
-                      : SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                  width: deviceWidth,
-                                  height: 1,
-                                  color: themeMode
-                                      ? AppTheme.white32
-                                      : AppTheme.black2),
-                              const SizedBox(height: 143),
-                              Center(
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      "assets/icons/check-2.png",
-                                      width: 75.83,
-                                      height: 75.83,
+                                ))
+                      : provider.uploadStep == 2
+                          ? SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: deviceWidth,
+                                      height: 1,
+                                      color: themeMode
+                                          ? AppTheme.white32
+                                          : AppTheme.black2),
+                                  const SizedBox(height: 50),
+                                  Center(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 112),
+                                          child: SizedBox(
+                                            // width: 148,
+                                            child: Text(
+                                              'Uploading Message'.tr,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1),
+                                            ),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 50),
+                                        CircularPercentIndicator(
+                                          radius: 90,
+                                          lineWidth: 13,
+                                          // percent: 0.85,
+                                          percent: 1,
+                                          restartAnimation: true,
+                                          animationDuration: 3000,
+                                          animation: true,
+                                          backgroundColor: themeMode
+                                              ? AppTheme.white28
+                                              : AppTheme.black27,
+                                          progressColor: AppTheme.green10,
+                                          circularStrokeCap:
+                                              CircularStrokeCap.round,
+                                          // center: Text(
+                                          //   "%85",
+                                          //   style: TextStyle(
+                                          //       fontSize: 40,
+                                          //       fontFamily: AppTheme.appFontFamily,
+                                          //       fontWeight: FontWeight.w700,
+                                          //       color: themeMode
+                                          //           ? AppTheme.blue3
+                                          //           : AppTheme.white1),
+                                          // ),
+                                        ),
+                                        const SizedBox(height: 40),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 112),
+                                          child: SizedBox(
+                                            // width: 148,
+                                            child: Text(
+                                              'Uploading-2'.tr,
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    const SizedBox(height: 32),
-                                    SizedBox(
-                                      width: 212,
+                                  ),
+                                  const SizedBox(height: 69),
+                                  MaterialButton(
+                                      height: 47,
+                                      color: AppTheme.blue2,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(9)),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 56),
+                                      elevation: 0,
                                       child: Text(
-                                        provider.uploadType == 'Post'
-                                            ? 'Your post has been shared'.tr
-                                            : 'Your reels has been shared'.tr,
-                                        textAlign: TextAlign.center,
+                                        'Cancel'.tr,
                                         style: TextStyle(
-                                            fontSize: 13,
+                                            fontSize: 14,
                                             fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w600,
-                                            color: themeMode
-                                                ? AppTheme.blue3
-                                                : AppTheme.white1),
+                                            fontWeight: FontWeight.w700,
+                                            color: AppTheme.white1),
                                       ),
-                                    ),
-                                  ],
-                                ),
+                                      onPressed: () {
+                                        Provider.of<HomePageProvider>(context,
+                                                listen: false)
+                                            .updateUploadStep(1);
+                                      }),
+                                  const SizedBox(height: 36),
+                                ],
                               ),
-                              const SizedBox(height: 188),
-                              MaterialButton(
-                                  height: 47,
-                                  color: AppTheme.blue2,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(9)),
+                            )
+                          : SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  Container(
+                                      width: deviceWidth,
+                                      height: 1,
+                                      color: themeMode
+                                          ? AppTheme.white32
+                                          : AppTheme.black2),
+                                  const SizedBox(height: 143),
+                                  Center(
+                                    child: Column(
+                                      children: [
+                                        Image.asset(
+                                          "assets/icons/check-2.png",
+                                          width: 75.83,
+                                          height: 75.83,
+                                        ),
+                                        const SizedBox(height: 32),
+                                        SizedBox(
+                                          width: 212,
+                                          child: Text(
+                                            provider.uploadType == 'Post'
+                                                ? 'Your post has been shared'.tr
+                                                : 'Your reels has been shared'
+                                                    .tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color: themeMode
+                                                    ? AppTheme.blue3
+                                                    : AppTheme.white1),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  elevation: 0,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 60),
-                                  child: Text(
-                                    'Close'.tr,
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w700,
-                                        color: AppTheme.white1),
-                                  ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    provider.clearSelectedImageFilesList();
-                                    reelsVideo = null;
-                                    Provider.of<HomePageProvider>(context,
-                                            listen: false)
-                                        .updateUploadStep(0);
-                                  })
-                            ],
-                          ),
-                        ),
-        );
+                                  const SizedBox(height: 188),
+                                  MaterialButton(
+                                      height: 47,
+                                      color: AppTheme.blue2,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(9)),
+                                      ),
+                                      elevation: 0,
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 60),
+                                      child: Text(
+                                        'Close'.tr,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w700,
+                                            color: AppTheme.white1),
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                        provider.clearSelectedImageFilesList();
+                                        reelsVideo = null;
+                                        Provider.of<HomePageProvider>(context,
+                                                listen: false)
+                                            .updateUploadStep(0);
+                                      })
+                                ],
+                              ),
+                            ),
+            ));
       },
     );
   }
@@ -996,6 +1010,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
               color: AppTheme.white15,
             ),
             onPressed: () {
+              Provider.of<HomePageProvider>(context, listen: false)
+                  .clearSelectedImageFilesList();
               Navigator.pop(context);
             },
           ),
