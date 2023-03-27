@@ -193,6 +193,7 @@ class MemberServices {
 
       if (status == true) {
         UserModel userModel = UserModel.fromJson(data);
+        userModel.token = json.decode(response.body)["access_token"];
         return userModel;
       } else {
         return null;

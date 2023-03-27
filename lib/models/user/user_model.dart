@@ -1,5 +1,6 @@
 class UserModel {
   String? id;
+  String? token;
   String? type;
   String? userConfirmed;
   String? firstname;
@@ -26,6 +27,7 @@ class UserModel {
 
   UserModel({
     this.id,
+    this.token,
     this.type,
     this.userConfirmed,
     this.firstname,
