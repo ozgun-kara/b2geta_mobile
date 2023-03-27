@@ -157,6 +157,7 @@ final Map<String, String> en = {
   'About Validate': 'Please enter the about field',
   'Company Added Message':
       'Your company has been added.\nAfter approval, you can use your company profile.',
+  'Company Updated Message': 'Your company has been updated',
   'Company Delete Message':
       'If you delete the company, all the company products you added will also be deleted.\nDo you approve?',
   'Yes I Accept': 'Yes I Accept',
