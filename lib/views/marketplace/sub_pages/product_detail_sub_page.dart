@@ -1,4 +1,4 @@
-import 'package:b2geta_mobile/models/products/product_details_model.dart';
+import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
@@ -46,7 +46,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   late bool themeMode;
 
   final ProductsServices _productsServices = ProductsServices();
-  ProductDetailsModel? product;
+  ProductDetailModel? product;
 
   @override
   void initState() {

@@ -1,9 +1,11 @@
 import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -214,7 +216,31 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                                 height: 24,
                                               ),
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () async {
+                                              await locator<ProductsServices>()
+                                                  .getProductCall(
+                                                      productId: product.id!,
+                                                      queryParameters: {}).then((value) {
+                                                if (value != null) {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            AddProductSubPage(
+                                                                // passedObject:
+                                                                //     value,
+                                                                operation:
+                                                                    'Edit'),
+                                                      ));
+                                                } else {
+                                                  debugPrint(
+                                                      "PRODUCT DETAIL HAS NOT FETCHED");
+
+                                                  operationFailedDialog(
+                                                      context);
+                                                }
+                                              });
+                                            },
                                           ),
                                         ),
                                       ],
@@ -527,6 +553,82 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                     ],
                   ),
                 ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationFailedDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/products/product_details_model.dart';
+import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
@@ -751,8 +751,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               .toString() !=
                                           'null') {
                                     if (widget.operation == 'Add') {
-                                      ProductDetailsModel product =
-                                          ProductDetailsModel(
+                                      ProductDetailModel product =
+                                          ProductDetailModel(
                                         accountId: '56',
                                         userId: '57',
                                         productName: productNameController.text,
