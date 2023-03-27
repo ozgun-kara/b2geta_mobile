@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/company/company_model.dart';
+import 'package:b2geta_mobile/models/company/company_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -19,7 +19,7 @@ class AddCompanySubPage extends StatefulWidget {
       {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
-  final CompanyModel? passedObject;
+  final CompanyDetailModel? passedObject;
   final String operation;
 
   @override
