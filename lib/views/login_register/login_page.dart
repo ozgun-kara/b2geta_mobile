@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/forgot_password_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
@@ -41,15 +39,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   final MemberServices _memberServices = MemberServices();
-
-  getProfile() async {
-    await _memberServices.getProfileCall().then((value) async {
-      if (value != null) {
-        Provider.of<UserProvider>(context, listen: false)
-            .updateUserModel(value);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -369,15 +358,16 @@ class _LoginPageState extends State<LoginPage> {
                                                     password:
                                                         passwordController1.text
                                                             .trim())
-                                                .then((value) {
+                                                .then((value) async {
                                               if (value.isEmpty) {
-                                                getProfile();
-                                                return Navigator.push(
+                                                return Navigator
+                                                    .pushAndRemoveUntil(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         const NavigationPage(),
                                                   ),
+                                                  (route) => false,
                                                 );
                                               } else if (value ==
                                                   'UserAccessNotFound') {
