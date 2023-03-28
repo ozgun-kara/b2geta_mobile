@@ -39,11 +39,21 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   void initState() {
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
+    getProfile();
     getPersonalProfile(Provider.of<UserProvider>(context, listen: false)
         .getUser
         .id
         .toString());
     super.initState();
+  }
+
+  getProfile() async {
+    await _memberServices.getProfileCall().then((value) async {
+      if (value != null) {
+        Provider.of<UserProvider>(context, listen: false)
+            .updateUserModel(value);
+      }
+    });
   }
 
   getPersonalProfile(String userId) async {
