@@ -475,12 +475,12 @@ class CompanyServices {
 
       if (status == true) {
         String accessToken = json.decode(response.body)["access_token"];
-        String userId = json.decode(response.body)["data"]["user_id"];
+        String userId = json.decode(response.body)["data"]["user_id"].toString();
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
 
         prefs.setString("P-Token", Constants.userToken.toString());
-        prefs.setString("P-ID", Constants.userToken.toString());
+        prefs.setString("P-ID", Constants.userId.toString());
 
         prefs.setString('Token', accessToken);
         prefs.setString('UserId', userId);

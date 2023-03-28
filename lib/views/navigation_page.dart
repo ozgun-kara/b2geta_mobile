@@ -474,6 +474,7 @@ class _NavigationPageState extends State<NavigationPage> {
               }
             },
             child: Container(
+                height: deviceHeight * .090,
                 padding: EdgeInsets.only(left: deviceWidth * 0.5),
                 color: Colors.transparent,
                 child: Container(
@@ -491,7 +492,7 @@ class _NavigationPageState extends State<NavigationPage> {
                         SharedPreferences prefs =
                             await SharedPreferences.getInstance();
                         var PID = prefs.getString('P-ID');
-                        var PTOKEN = prefs.getString('P-TOKEN');
+                        var PTOKEN = prefs.getString('P-Token');
 
                         prefs.setString("Token", PTOKEN ?? '');
                         prefs.setString("UserId", PID ?? '');
@@ -501,7 +502,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
                         await _memberServices.getProfileCall().then((value) {
                           if (value != null) {
-                            Provider.of<UserProvider>(context)
+                            Provider.of<UserProvider>(context, listen: false)
                                 .updateUserModel(value);
                             Navigator.pushAndRemoveUntil(
                                 context,
@@ -513,7 +514,6 @@ class _NavigationPageState extends State<NavigationPage> {
                         });
                       },
                       child: Column(
-                        mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -559,6 +559,7 @@ class _NavigationPageState extends State<NavigationPage> {
                               ),
                             ],
                           ),
+                          const Divider(),
                         ],
                       ),
                     ))),

@@ -228,7 +228,7 @@ class MemberServices {
         return null;
       }
     } else {
-      debugPrint("${response.body}access${Constants.userToken}");
+      debugPrint("${response.body} ${Constants.userToken} id $userId");
 
       return null;
     }
