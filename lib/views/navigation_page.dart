@@ -299,17 +299,27 @@ class _NavigationPageState extends State<NavigationPage> {
                         onPressed: () {
                           provider.updateCurrentTabIndex(3);
                         },
-                        onLongPress: () {
+                        onLongPress: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          var PID = prefs.getString('P-ID');
+
                           if (personalProfileModel != null &&
                               personalProfileModel!.companies!.isNotEmpty) {
                             _companyListModalBottomSheet(
                                 context, personalProfileModel!);
-                          } else if (Provider.of<UserProvider>(context,
-                                      listen: false)
-                                  .getUser
-                                  .id !=
-                              Constants.userId) {
-                            _userModalBottomSheet(context);
+                          } else if (PID != null &&
+                              Provider.of<UserProvider>(context, listen: false)
+                                      .getUser
+                                      .id !=
+                                  PID) {
+                            _memberServices
+                                .getPersonalProfileCall(userId: PID)
+                                .then((value) {
+                              if (value != null) {
+                                _userModalBottomSheet(context, value);
+                              }
+                            });
                           }
                         },
                       ),
@@ -370,11 +380,6 @@ class _NavigationPageState extends State<NavigationPage> {
                                   .getProfileCall()
                                   .then((value) async {
                                 if (value != null) {
-                                  SharedPreferences prefs =
-                                      await SharedPreferences.getInstance();
-                                  Constants.userToken = value.token;
-                                  Constants.userId = value.id;
-
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateUserModel(value);
@@ -449,7 +454,8 @@ class _NavigationPageState extends State<NavigationPage> {
         });
   }
 
-  void _userModalBottomSheet(BuildContext context) {
+  void _userModalBottomSheet(
+      BuildContext context, PersonalProfileModel personalProfileModel) {
     showModalBottomSheet(
         context: context,
         backgroundColor: Colors.transparent,
@@ -480,57 +486,81 @@ class _NavigationPageState extends State<NavigationPage> {
                         topRight: Radius.circular(5.0),
                       ),
                     ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Provider.of<UserProvider>(context, listen: false)
-                                        .getUser
-                                        .avatar !=
-                                    null
-                                ? ClipOval(
-                                    child: Image.network(
-                                      width: 20,
-                                      height: 20,
-                                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
-                                          width: 20,
-                                          height: 20,
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : ClipOval(
-                                    child: Image.asset(
+                    child: GestureDetector(
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
+                        var PID = prefs.getString('P-ID');
+                        var PTOKEN = prefs.getString('P-TOKEN');
+
+                        prefs.setString("Token", PTOKEN ?? '');
+                        prefs.setString("UserId", PID ?? '');
+
+                        Constants.userToken = PTOKEN;
+                        Constants.userId = PID;
+
+                        await _memberServices.getProfileCall().then((value) {
+                          if (value != null) {
+                            Provider.of<UserProvider>(context)
+                                .updateUserModel(value);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const NavigationPage(),
+                                ),
+                                (route) => false);
+                          }
+                        });
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              personalProfileModel.photo != null
+                                  ? ClipOval(
+                                      child: Image.network(
                                         width: 20,
                                         height: 20,
-                                        'assets/images/dummy_images/user_profile.png'),
-                                  ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Expanded(
-                              child: Text(
-                                "${Provider.of<UserProvider>(context).getUser.firstname} ${Provider.of<UserProvider>(context).getUser.lastname}",
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w500,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
-                                        ? AppTheme.black11
-                                        : AppTheme.white1),
+                                        personalProfileModel.photo!,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            width: 20,
+                                            height: 20,
+                                          );
+                                        },
+                                      ),
+                                    )
+                                  : ClipOval(
+                                      child: Image.asset(
+                                          width: 20,
+                                          height: 20,
+                                          'assets/images/dummy_images/user_profile.png'),
+                                    ),
+                              const SizedBox(
+                                width: 10,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              Expanded(
+                                child: Text(
+                                  personalProfileModel.name ?? '',
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w500,
+                                      color: Provider.of<ThemeProvider>(context)
+                                                  .themeMode ==
+                                              "light"
+                                          ? AppTheme.black11
+                                          : AppTheme.white1),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ))),
           );
         });

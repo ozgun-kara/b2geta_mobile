@@ -228,7 +228,7 @@ class MemberServices {
         return null;
       }
     } else {
-      debugPrint(response.body);
+      debugPrint("${response.body}access${Constants.userToken}");
 
       return null;
     }
@@ -327,7 +327,7 @@ class MemberServices {
     }
   }
 
-  // Re Send
+  // RESEND
   Future<bool> reSendCall({required String email}) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/member/resend'), headers: {
@@ -352,7 +352,7 @@ class MemberServices {
     }
   }
 
-  // LOGOUT
+  // UPDATE PASSWORD
   Future<bool> updatePasswordCall(
       {required String email,
       required String password,

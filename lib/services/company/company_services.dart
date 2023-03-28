@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/models/company/company_detail_model.dart';
 import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyServices {
   // LIST MY COMPANIES
@@ -473,8 +474,20 @@ class CompanyServices {
       var status = json.decode(response.body)["status"];
 
       if (status == true) {
-        var accessToken = json.decode(response.body)["access_token"];
+        String accessToken = json.decode(response.body)["access_token"];
+        String userId = json.decode(response.body)["data"]["user_id"];
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString("P-Token", Constants.userToken.toString());
+        prefs.setString("P-ID", Constants.userToken.toString());
+
+        prefs.setString('Token', accessToken);
+        prefs.setString('UserId', userId);
+
         Constants.userToken = accessToken;
+        Constants.userId = userId;
+
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
