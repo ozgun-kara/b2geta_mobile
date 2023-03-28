@@ -65,7 +65,8 @@ class _MenuPageState extends State<MenuPage> {
           children: [
             const SizedBox(height: 48),
             Visibility(
-              visible: true,
+              visible:
+                  Provider.of<UserProvider>(context).getUser.type != 'company',
               child: Column(
                 children: [
                   MaterialButton(
