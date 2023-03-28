@@ -3,10 +3,13 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,7 +67,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                       color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                     ),
                   ),
-                  SizedBox(height: 21),
+                  const SizedBox(height: 21),
                   MaterialButton(
                       minWidth: deviceWidth,
                       height: 52,
@@ -86,7 +89,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  AddCompanySubPage(operation: 'Add'),
+                                  const AddCompanySubPage(operation: 'Add'),
                             ));
                       }),
                 ],
@@ -320,7 +323,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                             : AppTheme.white1,
                                       ),
                                     ),
-                                    SizedBox(height: 8),
+                                    const SizedBox(height: 8),
                                     Row(
                                       children: [
                                         Column(
@@ -352,7 +355,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                             ),
                                           ],
                                         ),
-                                        SizedBox(width: 48),
+                                        const SizedBox(width: 48),
                                         Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -387,7 +390,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                   ],
                                 ),
                               ),
-                              SizedBox(height: 26),
+                              const SizedBox(height: 26),
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
@@ -437,7 +440,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                             });
                                           }),
                                     ),
-                                    SizedBox(width: 9),
+                                    const SizedBox(width: 9),
                                     Expanded(
                                       child: MaterialButton(
                                           minWidth: deviceWidth,
@@ -449,8 +452,9 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                             side: BorderSide(
                                                 width: 1,
                                                 color: AppTheme.green1),
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(9)),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.circular(9)),
                                           ),
                                           child: Text(
                                             'Choose'.tr,
@@ -461,7 +465,32 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                 fontWeight: FontWeight.w700,
                                                 color: AppTheme.green1),
                                           ),
-                                          onPressed: () {}),
+                                          onPressed: () async {
+                                             await CompanyServices()
+                              .changeProfileAnotherCompanyCall(
+                                  userId: company.id.toString())
+                              .then((value) async {
+                            if (value) {
+                              await MemberServices()
+                                  .getProfileCall()
+                                  .then((value) async {
+                                if (value != null) {
+                                  Provider.of<UserProvider>(context,
+                                          listen: false)
+                                      .updateUserModel(value);
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const NavigationPage(),
+                                    ),
+                                    (route) => false,
+                                  );
+                                }
+                              });
+                            }
+                          });
+                                          }),
                                     ),
                                   ],
                                 ),
