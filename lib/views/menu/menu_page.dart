@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
@@ -92,7 +93,8 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
             Visibility(
-              visible: true,
+              visible:
+                  Provider.of<UserProvider>(context).getUser.type == 'company',
               child: Column(
                 children: [
                   MaterialButton(
