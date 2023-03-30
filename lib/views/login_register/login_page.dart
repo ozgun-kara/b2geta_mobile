@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
@@ -35,9 +37,9 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    emailController1.text = widget.email;
-    getLocalData();
     super.initState();
+    getLocalData();
+    emailController1.text = widget.email;
   }
 
   final MemberServices _memberServices = MemberServices();
@@ -46,6 +48,9 @@ class _LoginPageState extends State<LoginPage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     emailController1.text = prefs.getString('Email') ?? '';
     passwordController1.text = prefs.getString('Password') ?? '';
+    var lSwitch = prefs.getBool("Switch");
+    Provider.of<LoginRegisterPageProvider>(context, listen: false)
+        .updateLoginSwitch(lSwitch ?? false);
   }
 
   @override
@@ -291,22 +296,27 @@ class _LoginPageState extends State<LoginPage> {
                                               : AppTheme.black4,
                                           value: provider.loginSwitch,
                                           onToggle: (value) async {
+                                            SharedPreferences prefs =
+                                                await SharedPreferences
+                                                    .getInstance();
                                             if (emailController1
                                                     .text.isNotEmpty &&
                                                 passwordController1
                                                     .text.isNotEmpty) {
                                               provider.updateLoginSwitch(value);
-                                              SharedPreferences prefs =
-                                                  await SharedPreferences
-                                                      .getInstance();
+
                                               if (value) {
                                                 prefs.setString("Email",
                                                     emailController1.text);
                                                 prefs.setString("Password",
                                                     passwordController1.text);
+
+                                                prefs.setBool("Switch", true);
                                               } else if (!value) {
                                                 prefs.setString("Email", '');
                                                 prefs.setString("Password", '');
+
+                                                prefs.setBool("Switch", false);
                                               }
                                             }
                                           },
@@ -400,10 +410,17 @@ class _LoginPageState extends State<LoginPage> {
                                                     'Kullanıcı bulunamadı.');
                                               } else if (value ==
                                                   'UnVerifiedAccount') {
+                                                SharedPreferences prefs =
+                                                    await SharedPreferences
+                                                        .getInstance();
+                                                var rToken =
+                                                    prefs.get("R-Token") ?? '';
+
                                                 _memberServices
                                                     .reSendCall(
                                                         email: emailController1
-                                                            .text)
+                                                            .text,
+                                                        rToken: rToken)
                                                     .then((value) {
                                                   Navigator.push(
                                                       context,

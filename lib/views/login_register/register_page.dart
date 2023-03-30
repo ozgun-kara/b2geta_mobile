@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
@@ -10,6 +12,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -2005,7 +2008,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 email: emailController1.text.trim(),
                                 password: passwordController1.text.trim(),
                               )
-                                  .then((value) {
+                                  .then((value) async {
                                 if (value == "EmailAlreadyExists") {
                                   operationFailedDialog(
                                       context, 'Register Alert-3');
@@ -2013,6 +2016,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   operationFailedDialog(
                                       context, 'Register Alert-4');
                                 } else {
+                                  SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  prefs.setString("R-Token", value);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
