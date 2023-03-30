@@ -44,13 +44,11 @@ class MemberServices {
 
       if (status == true) {
         var data = json.decode(response.body)["data"];
+        var accessToken = json.decode(response.body)["access_token"];
 
         var result = RegisterModel.fromJson(data);
 
-        debugPrint("userId: ${result.userId}");
-        debugPrint("verifyCode: ${result.verifyCode}");
-
-        return result.verifyCode.toString();
+        return accessToken;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
@@ -328,11 +326,11 @@ class MemberServices {
   }
 
   // RESEND
-  Future<bool> reSendCall({required String email}) async {
+  Future<bool> reSendCall({required String email, required rToken}) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/member/resend'), headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": "Bearer ${Constants.userToken}",
+      "Authorization": "Bearer $rToken",
     }, body: {
       'email': email,
     });
