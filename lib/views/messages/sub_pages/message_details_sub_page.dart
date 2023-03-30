@@ -9,7 +9,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/messages/message_details_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 
 class MessageDetailsSubPage extends StatefulWidget {
   const MessageDetailsSubPage({

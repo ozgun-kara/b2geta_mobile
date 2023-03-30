@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
