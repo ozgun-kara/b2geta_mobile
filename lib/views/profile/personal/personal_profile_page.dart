@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
 import 'package:b2geta_mobile/views/profile/personal/posts/personal_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/reels/personal_reels_sub_page.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/homepage/story_page.dart';
+import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
 
 class PersonalProfilePage extends StatefulWidget {
   const PersonalProfilePage({
@@ -97,7 +97,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) => StoryPage(
+                                        builder: (context) => StorySubPage(
                                           stories: [provider.myStoriesList],
                                           index: 0,
                                         ),

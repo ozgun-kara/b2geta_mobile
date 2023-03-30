@@ -2,7 +2,7 @@
 
 import 'dart:ui';
 
-import 'package:b2geta_mobile/views/custom_widgets/custom_avatar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/custom_widgets/custom_button.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_button.dart';
 
 class CustomWidgetsPage extends StatefulWidget {
   const CustomWidgetsPage({Key? key}) : super(key: key);

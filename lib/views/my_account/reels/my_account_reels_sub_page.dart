@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/views/homepage/reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/reels_page.dart';
 
 class MyAccountReelsSubPage extends StatefulWidget {
   const MyAccountReelsSubPage({Key? key}) : super(key: key);

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/homepage/reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/reels_page.dart';
 
 class CompanyReelsSubPage extends StatefulWidget {
   const CompanyReelsSubPage({

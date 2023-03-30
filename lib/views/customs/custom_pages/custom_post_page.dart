@@ -1,3 +1,5 @@
+import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -8,21 +10,20 @@ import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/homepage/comment_page.dart';
 
-class CustomPostSubPage extends StatefulWidget {
-  const CustomPostSubPage({
+
+class CustomPostPage extends StatefulWidget {
+  const CustomPostPage({
     Key? key,
     required this.userId,
   }) : super(key: key);
   final String userId;
 
   @override
-  State<CustomPostSubPage> createState() => _CustomPostSubPageState();
+  State<CustomPostPage> createState() => _CustomPostPageState();
 }
 
-class _CustomPostSubPageState extends State<CustomPostSubPage> {
+class _CustomPostPageState extends State<CustomPostPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;

@@ -6,12 +6,12 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/homepage/comment_page.dart';
-import 'package:b2geta_mobile/views/homepage/reels_page.dart';
-import 'package:b2geta_mobile/views/homepage/story_add_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/reels_page.dart';
+import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
-import 'package:b2geta_mobile/views/homepage/story_page.dart';
+import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:collection/collection.dart';
@@ -63,7 +63,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => StoryAddPage(imageFile: image),
+              builder: (context) => StoryAddSubPage(imageFile: image),
             ));
       }
     });
@@ -295,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                                                 Navigator.of(context)
                                                     .push(MaterialPageRoute(
                                                   builder: (context) =>
-                                                      StoryPage(
+                                                      StorySubPage(
                                                     stories: groupStories.values
                                                         .toList(),
                                                     index: index,

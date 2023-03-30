@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/homepage/story_page.dart';
+import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({
@@ -82,7 +82,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                     onTap: () {
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
-                                        builder: (context) => StoryPage(
+                                        builder: (context) => StorySubPage(
                                           stories: [provider.myStoriesList],
                                           index: 0,
                                         ),

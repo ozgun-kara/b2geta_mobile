@@ -5,18 +5,18 @@ import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class StoryAddPage extends StatefulWidget {
-  const StoryAddPage({
+class StoryAddSubPage extends StatefulWidget {
+  const StoryAddSubPage({
     Key? key,
     required this.imageFile,
   }) : super(key: key);
   final File imageFile;
 
   @override
-  State<StoryAddPage> createState() => _StoryAddPageState();
+  State<StoryAddSubPage> createState() => _StoryAddSubPageState();
 }
 
-class _StoryAddPageState extends State<StoryAddPage> {
+class _StoryAddSubPageState extends State<StoryAddSubPage> {
   final SocialServices _socialServices = SocialServices();
 
   @override
