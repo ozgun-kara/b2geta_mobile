@@ -5,9 +5,6 @@ import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 
 class SocialProvider with ChangeNotifier {
-  int currentTabIndex = 0;
-  String userId = '';
-
   List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
   List<FeedModel> myStoriesList = [];
@@ -18,10 +15,7 @@ class SocialProvider with ChangeNotifier {
     getMyStories();
   }
 
-  void updateCurrentTabIndex(int value) {
-    currentTabIndex = value;
-    notifyListeners();
-  }
+  String userId = '';
 
   void updateUserId(String value) {
     userId = value;
@@ -55,13 +49,6 @@ class SocialProvider with ChangeNotifier {
       myStoriesList = feedList;
     });
 
-    notifyListeners();
-  }
-
-  bool filterSwitch = true;
-
-  void updateFilterSwitch(bool value) {
-    filterSwitch = value;
     notifyListeners();
   }
 }

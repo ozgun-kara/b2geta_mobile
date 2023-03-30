@@ -1,15 +1,14 @@
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 
 class CustomPostPage extends StatefulWidget {
   const CustomPostPage({
@@ -24,25 +23,17 @@ class CustomPostPage extends StatefulWidget {
 
 class _CustomPostPageState extends State<CustomPostPage> {
   ScrollController scrollController = ScrollController();
+  final SocialServices _socialServices = SocialServices();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  final SocialServices _socialServices = SocialServices();
-
-  bool isList = false;
-
-  List<FeedModel> feeds = [];
-
-  final TextEditingController _commentTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
   }
-
-  FocusNode commentFocusNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +56,7 @@ class _CustomPostPageState extends State<CustomPostPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 8.0,
-                    ),
+                    const SizedBox(height: 8.0),
                     Container(
                       width: deviceWidth,
                       height: 40,
@@ -77,42 +66,31 @@ class _CustomPostPageState extends State<CustomPostPage> {
                         children: [
                           Row(
                             children: [
-                              ClipOval(
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        width: 1, color: AppTheme.white21),
-                                  ),
-                                  child: (Provider.of<UserProvider>(context)
-                                                  .getUser
-                                                  .avatar !=
-                                              null &&
-                                          Provider.of<UserProvider>(context)
-                                              .getUser
-                                              .avatar!
-                                              .isNotEmpty)
-                                      ? Image.network(
-                                          "https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}",
-                                          fit: BoxFit.cover,
+                              feed.user!.photo!.isNotEmpty
+                                  ? ClipOval(
+                                      child: Image.network(
+                                        width: 40,
+                                        height: 40,
+                                        fit: BoxFit.cover,
+                                        feed.user!.photo!,
+                                        errorBuilder:
+                                            (context, error, stackTrace) =>
+                                                Image.asset(
+                                          "assets/images/dummy_images/user_profile.png",
                                           width: 40,
                                           height: 40,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                              "assets/images/dummy_images/user_profile.png",
-                                              fit: BoxFit.cover,
-                                            );
-                                          },
-                                        )
-                                      : Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
                                           fit: BoxFit.cover,
                                         ),
-                                ),
-                              ),
+                                      ),
+                                    )
+                                  : ClipOval(
+                                      child: Image.asset(
+                                        width: 40,
+                                        height: 40,
+                                        fit: BoxFit.cover,
+                                        "assets/images/dummy_images/user_profile.png",
+                                      ),
+                                    ),
                               const SizedBox(
                                 width: 10.0,
                               ),
@@ -163,7 +141,7 @@ class _CustomPostPageState extends State<CustomPostPage> {
                       child: Text(
                         feed.content!.length > 1
                             ? feed.content.toString()
-                            : "TEST POST",
+                            : "Content Text",
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
@@ -490,9 +468,7 @@ class _CustomPostPageState extends State<CustomPostPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 5,
-                    ),
+                    const SizedBox(height: 5),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Row(
