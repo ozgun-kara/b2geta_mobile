@@ -13,7 +13,7 @@ import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_first_tab_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_second_tab_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -128,7 +128,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                         InkWell(
                           onTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => GalleryWidget(
+                                builder: (_) => CustomGalleryWidget(
                                       urlImages: imgList,
                                     )));
                           },

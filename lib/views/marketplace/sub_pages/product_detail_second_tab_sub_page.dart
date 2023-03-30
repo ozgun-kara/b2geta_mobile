@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -135,7 +135,8 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlacePageProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context,
+                              listen: false)
                           .updateRatingCheckBox(1);
                     },
                   ),
@@ -221,7 +222,8 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlacePageProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context,
+                              listen: false)
                           .updateRatingCheckBox(2);
                     },
                   ),
@@ -307,7 +309,8 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlacePageProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context,
+                              listen: false)
                           .updateRatingCheckBox(3);
                     },
                   ),
@@ -393,7 +396,8 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlacePageProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context,
+                              listen: false)
                           .updateRatingCheckBox(4);
                     },
                   ),
@@ -479,7 +483,8 @@ class _ProductDetailSecondTabSubPageState
                           : Container(),
                     ),
                     onTap: () {
-                      Provider.of<MarketPlacePageProvider>(context, listen: false)
+                      Provider.of<MarketPlacePageProvider>(context,
+                              listen: false)
                           .updateRatingCheckBox(5);
                     },
                   ),
@@ -564,12 +569,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.white1
@@ -583,12 +590,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             0
                                         ? AppTheme.blue2
@@ -597,7 +606,8 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlacePageProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context,
+                                listen: false)
                             .updateProductCommentsTab(0);
                       }),
                   GestureDetector(
@@ -612,12 +622,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.white1
@@ -631,12 +643,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             1
                                         ? AppTheme.blue2
@@ -645,7 +659,8 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlacePageProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context,
+                                listen: false)
                             .updateProductCommentsTab(1);
                       }),
                   GestureDetector(
@@ -660,12 +675,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue3
                                         : AppTheme.white15
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.white1
@@ -679,12 +696,14 @@ class _ProductDetailSecondTabSubPageState
                                 color: Provider.of<ThemeProvider>(context)
                                             .themeMode ==
                                         "light"
-                                    ? Provider.of<MarketPlacePageProvider>(context)
+                                    ? Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue2
                                         : Colors.transparent
-                                    : Provider.of<MarketPlacePageProvider>(context)
+                                    : Provider.of<MarketPlacePageProvider>(
+                                                    context)
                                                 .productCommentsTab ==
                                             2
                                         ? AppTheme.blue2
@@ -693,7 +712,8 @@ class _ProductDetailSecondTabSubPageState
                         ],
                       ),
                       onTap: () {
-                        Provider.of<MarketPlacePageProvider>(context, listen: false)
+                        Provider.of<MarketPlacePageProvider>(context,
+                                listen: false)
                             .updateProductCommentsTab(2);
                       }),
                 ],
@@ -704,7 +724,8 @@ class _ProductDetailSecondTabSubPageState
                 color: Provider.of<ThemeProvider>(context).themeMode == "light"
                     ? AppTheme.white25
                     : AppTheme.black21),
-            Provider.of<MarketPlacePageProvider>(context).productCommentsTab == 0
+            Provider.of<MarketPlacePageProvider>(context).productCommentsTab ==
+                    0
                 ? FutureBuilder(
                     future: DummyService().getCustomerCommentsList(),
                     builder: (context, data) {
@@ -901,7 +922,7 @@ class _ProductDetailSecondTabSubPageState
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            GalleryWidget(
+                                                            CustomGalleryWidget(
                                                               urlImages:
                                                                   items[index]
                                                                       .images,
@@ -925,7 +946,7 @@ class _ProductDetailSecondTabSubPageState
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            GalleryWidget(
+                                                            CustomGalleryWidget(
                                                               urlImages:
                                                                   items[index]
                                                                       .images,

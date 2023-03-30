@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class GalleryWidget extends StatefulWidget {
+class CustomGalleryWidget extends StatefulWidget {
   final List<String> urlImages;
 
-  const GalleryWidget({super.key, required this.urlImages});
+  const CustomGalleryWidget({super.key, required this.urlImages});
 
   @override
-  State<GalleryWidget> createState() => _GalleryWidgetState();
+  State<CustomGalleryWidget> createState() => _CustomGalleryWidgetState();
 }
 
-class _GalleryWidgetState extends State<GalleryWidget> {
+class _CustomGalleryWidgetState extends State<CustomGalleryWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

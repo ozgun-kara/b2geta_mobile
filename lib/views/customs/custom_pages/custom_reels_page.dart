@@ -1,9 +1,9 @@
 import 'package:b2geta_mobile/models/social/feed_model.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/reels_item_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_item_widget.dart';
 import 'package:flutter/material.dart';
 
-class ReelsPage extends StatefulWidget {
-  const ReelsPage({
+class CustomReelsPage extends StatefulWidget {
+  const CustomReelsPage({
     Key? key,
     required this.reelsList,
     required this.videoUrlIndex,
@@ -12,10 +12,10 @@ class ReelsPage extends StatefulWidget {
   final int videoUrlIndex;
 
   @override
-  State<ReelsPage> createState() => _ReelsPageState();
+  State<CustomReelsPage> createState() => _CustomReelsPageState();
 }
 
-class _ReelsPageState extends State<ReelsPage> {
+class _CustomReelsPageState extends State<CustomReelsPage> {
   late double deviceWidth;
   late double deviceHeight;
 
@@ -40,7 +40,7 @@ class _ReelsPageState extends State<ReelsPage> {
         scrollDirection: Axis.vertical,
         itemCount: widget.reelsList.length,
         itemBuilder: (context, index) {
-          return ReelsItemWidget(
+          return CustomReelsItemWidget(
               reelsModel: widget.reelsList[index],
               reelsUrl: widget.reelsList[index].videos!.isNotEmpty
                   ? widget.reelsList[index].videos![0]!.url!
