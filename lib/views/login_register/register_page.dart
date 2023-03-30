@@ -4,9 +4,9 @@ import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/login_register/lighting_text_page.dart';
-import 'package:b2geta_mobile/views/login_register/membership_agreement_page.dart';
-import 'package:b2geta_mobile/views/login_register/verify_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/lighting_text_sub_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/membership_agreement_sub_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/verify_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -1938,7 +1938,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const LightingTextPage(),
+                                      const LightingTextSubPage(),
                                 ));
                           },
                           child: Text(
@@ -1962,7 +1962,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const MembershipAgreementPage(),
+                                const MembershipAgreementSubPage(),
                           ));
                     },
                     child: Text(
@@ -2022,7 +2022,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => VerifyPage(
+                                        builder: (context) => VerifySubPage(
                                             email:
                                                 emailController1.text.trim()),
                                       ));

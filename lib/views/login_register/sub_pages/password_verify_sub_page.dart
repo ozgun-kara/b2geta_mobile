@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/login_register/reset_password_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/reset_password_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -10,18 +10,18 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class PasswordVerifyPage extends StatefulWidget {
-  const PasswordVerifyPage({
+class PasswordVerifySubPage extends StatefulWidget {
+  const PasswordVerifySubPage({
     Key? key,
     required this.email,
   }) : super(key: key);
   final String email;
 
   @override
-  State<PasswordVerifyPage> createState() => _PasswordVerifyPageState();
+  State<PasswordVerifySubPage> createState() => _PasswordVerifySubPageState();
 }
 
-class _PasswordVerifyPageState extends State<PasswordVerifyPage> {
+class _PasswordVerifySubPageState extends State<PasswordVerifySubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -451,7 +451,7 @@ class _PasswordVerifyPageState extends State<PasswordVerifyPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              ResetPasswordPage(
+                                              ResetPasswordSubPage(
                                                   email: widget.email,
                                                   verifyCode: verifyCode),
                                         )));

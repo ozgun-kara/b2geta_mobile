@@ -1,34 +1,30 @@
-import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/password_verify_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/login_register/login_page.dart';
 
-class ResetPasswordPage extends StatefulWidget {
-  const ResetPasswordPage({
-    Key? key,
-    required this.email,
-    required this.verifyCode,
-  }) : super(key: key);
-  final String email;
-  final String verifyCode;
+class ForgotPasswordSubPage extends StatefulWidget {
+  const ForgotPasswordSubPage({
+    super.key,
+  });
+
   @override
-  State<ResetPasswordPage> createState() => _ResetPasswordPageState();
+  State<ForgotPasswordSubPage> createState() => _ForgotPasswordSubPageState();
 }
 
-class _ResetPasswordPageState extends State<ResetPasswordPage> {
+class _ForgotPasswordSubPageState extends State<ForgotPasswordSubPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  TextEditingController passwordController1 = TextEditingController();
-  TextEditingController passwordController2 = TextEditingController();
+  TextEditingController emailController = TextEditingController();
 
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  final MemberServices _memberServices = MemberServices();
 
   @override
   void initState() {
@@ -72,7 +68,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 padding: const EdgeInsets.only(top: 65),
                 // padding: EdgeInsets.only(top: 49),
                 child: Text(
-                  'Reset Password'.tr,
+                  'Forgot Password-1'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTheme.appFontFamily,
@@ -107,14 +103,16 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       TextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
-                            return 'Password Validate-1'.tr;
+                            return 'E-mail Validate-1'.tr;
                           }
-                          if (value.trim().length < 8) {
-                            return 'Password Validate-2'.tr;
+                          if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                            return 'E-mail Validate-2'.tr;
                           }
                           return null;
                         },
-                        controller: passwordController1,
+
+                        keyboardType: TextInputType.emailAddress,
+                        controller: emailController,
                         style: TextStyle(
                             fontSize: 16,
                             fontFamily: AppTheme.appFontFamily,
@@ -123,155 +121,18 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 ? AppTheme.black11
                                 : AppTheme.white1), // WHILE WRITING
                         maxLines: 1,
-                        obscureText:
-                            !Provider.of<LoginRegisterPageProvider>(context)
-                                .loginPasswordVisible,
                         decoration: InputDecoration(
                           contentPadding:
                               const EdgeInsets.fromLTRB(25, 16, 25, 16),
                           filled: true,
                           fillColor: Colors.transparent,
-                          hintText: 'Password'.tr,
+                          hintText: 'E-mail'.tr,
                           hintStyle: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w400,
                             color:
                                 themeMode ? AppTheme.black11 : AppTheme.white14,
-                          ),
-                          suffixIcon: IconButton(
-                            splashRadius: 24,
-                            icon: Provider.of<LoginRegisterPageProvider>(
-                                        context)
-                                    .loginPasswordVisible
-                                ? SizedBox(
-                                    child: Image.asset(
-                                        'assets/icons/eye-off-line.png',
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white1),
-                                  )
-                                : SizedBox(
-                                    child: Image.asset(
-                                        'assets/icons/eye-line.png',
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white1),
-                                  ),
-                            splashColor: Colors.transparent,
-                            onPressed: () async {
-                              Provider.of<LoginRegisterPageProvider>(context,
-                                      listen: false)
-                                  .updateLoginPasswordVisible();
-                            },
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: themeMode
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
-                                width: 1,
-                              )),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(
-                                color: themeMode
-                                    ? AppTheme.white10
-                                    : AppTheme.black14,
-                                width: 1,
-                              )),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white1,
-                              width: 1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 13),
-                      TextFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Password Validate-1'.tr;
-                          }
-                          if (value.trim().length < 8) {
-                            return 'Password Validate-2'.tr;
-                          }
-                          return null;
-                        },
-                        controller: passwordController2,
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: themeMode
-                                ? AppTheme.black11
-                                : AppTheme.white1), // WHILE WRITING
-                        maxLines: 1,
-                        obscureText:
-                            !Provider.of<LoginRegisterPageProvider>(context)
-                                .loginPasswordVisible,
-                        decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          hintText: 'Confirm Password'.tr,
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                themeMode ? AppTheme.black11 : AppTheme.white14,
-                          ),
-                          suffixIcon: IconButton(
-                            splashRadius: 24,
-                            icon: Provider.of<LoginRegisterPageProvider>(
-                                        context)
-                                    .loginPasswordVisible
-                                ? SizedBox(
-                                    child: Image.asset(
-                                        'assets/icons/eye-off-line.png',
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white1),
-                                  )
-                                : SizedBox(
-                                    child: Image.asset(
-                                        'assets/icons/eye-line.png',
-                                        width: 20,
-                                        height: 20,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white1),
-                                  ),
-                            splashColor: Colors.transparent,
-                            onPressed: () async {
-                              Provider.of<LoginRegisterPageProvider>(context,
-                                      listen: false)
-                                  .updateLoginPasswordVisible();
-                            },
                           ),
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -319,7 +180,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                           BorderRadius.all(Radius.circular(16)),
                                     ),
                                     child: Text(
-                                      'Save'.tr,
+                                      'Send'.tr,
                                       style: TextStyle(
                                           fontSize: 16,
                                           fontFamily: AppTheme.appFontFamily,
@@ -328,30 +189,21 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                     ),
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
-                                        if (passwordController1.text ==
-                                            passwordController2.text) {
-                                          locator<MemberServices>()
-                                              .updatePasswordCall(
-                                            email: widget.email,
-                                            verifyCode: widget.verifyCode,
-                                            password: passwordController1.text,
-                                          )
+                                        if (emailController.text.isNotEmpty) {
+                                          _memberServices
+                                              .forgotPassword(
+                                                  email: emailController.text)
                                               .then((value) {
                                             if (value) {
-                                              Navigator.push(
-                                                  context,
+                                              Navigator.push(context,
                                                   MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LoginPage(
-                                                      email: widget.email,
-                                                    ),
-                                                  ));
-                                            } else {
-                                              showAlertDialog(context);
+                                                      builder: (context) {
+                                                return PasswordVerifySubPage(
+                                                    email:
+                                                        emailController.text);
+                                              }));
                                             }
                                           });
-                                        } else {
-                                          showAlertDialog(context);
                                         }
                                       }
                                     }),

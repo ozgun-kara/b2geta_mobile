@@ -4,9 +4,9 @@ import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/login_register/forgot_password_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/forgot_password_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
-import 'package:b2geta_mobile/views/login_register/verify_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/verify_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -333,7 +333,7 @@ class _LoginPageState extends State<LoginPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const ForgotPasswordPage()));
+                                                  const ForgotPasswordSubPage()));
                                     },
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(6)),
@@ -426,7 +426,7 @@ class _LoginPageState extends State<LoginPage> {
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
-                                                            VerifyPage(
+                                                            VerifySubPage(
                                                                 email:
                                                                     emailController1
                                                                         .text),
