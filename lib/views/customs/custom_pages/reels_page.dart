@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/models/social/feed_model.dart';
-import 'package:b2geta_mobile/views/homepage/widget/reels_item_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/reels_item_widget.dart';
 import 'package:flutter/material.dart';
 
 class ReelsPage extends StatefulWidget {

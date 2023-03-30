@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
-import 'package:b2geta_mobile/views/custom_widgets/gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

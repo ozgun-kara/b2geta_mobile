@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 
-class StoryPage extends StatefulWidget {
-  const StoryPage({
+class StorySubPage extends StatefulWidget {
+  const StorySubPage({
     Key? key,
     required this.stories,
     required this.index,
@@ -14,10 +14,10 @@ class StoryPage extends StatefulWidget {
   final int index;
 
   @override
-  State<StoryPage> createState() => _StoryPageState();
+  State<StorySubPage> createState() => _StorySubPageState();
 }
 
-class _StoryPageState extends State<StoryPage>
+class _StorySubPageState extends State<StorySubPage>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
   late AnimationController _animationController;
