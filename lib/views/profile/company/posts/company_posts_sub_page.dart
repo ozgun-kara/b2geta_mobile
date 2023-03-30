@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -274,7 +274,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CommentPage(
+                                  builder: (context) => CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,
@@ -547,7 +547,7 @@ class _CompanyPostsSubPageState extends State<CompanyPostsSubPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CommentPage(
+                                  builder: (context) => CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,

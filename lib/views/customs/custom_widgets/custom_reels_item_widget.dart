@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -8,8 +8,8 @@ import 'package:video_player/video_player.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 
-class ReelsItemWidget extends StatefulWidget {
-  const ReelsItemWidget({
+class CustomReelsItemWidget extends StatefulWidget {
+  const CustomReelsItemWidget({
     Key? key,
     required this.reelsModel,
     required this.reelsUrl,
@@ -17,10 +17,10 @@ class ReelsItemWidget extends StatefulWidget {
   final FeedModel reelsModel;
   final String reelsUrl;
   @override
-  State<ReelsItemWidget> createState() => _ReelsItemWidgetState();
+  State<CustomReelsItemWidget> createState() => _CustomReelsItemWidgetState();
 }
 
-class _ReelsItemWidgetState extends State<ReelsItemWidget> {
+class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
   late double deviceWidth;
   late double deviceHeight;
 
@@ -230,7 +230,7 @@ class _ReelsItemWidgetState extends State<ReelsItemWidget> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CommentPage(
+                          builder: (context) => CustomCommentPage(
                               feedId: widget.reelsModel.id!,
                               user: widget.reelsModel.user!,
                               content: widget.reelsModel.content!),

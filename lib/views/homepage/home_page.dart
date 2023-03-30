@@ -6,9 +6,9 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
@@ -558,7 +558,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => ReelsPage(
+                                    builder: (context) => CustomReelsPage(
                                       reelsList: homePageProvider.reelsList,
                                       videoUrlIndex: index,
                                     ),
@@ -773,7 +773,7 @@ class _HomePageState extends State<HomePage> {
                                                 Navigator.of(context).push(
                                                     MaterialPageRoute(
                                                         builder: (_) =>
-                                                            GalleryWidget(
+                                                            CustomGalleryWidget(
                                                               urlImages:
                                                                   imgList,
                                                             )));
@@ -915,7 +915,7 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      CommentPage(
+                                                      CustomCommentPage(
                                                     feedId: feed.id!,
                                                     user: feed.user!,
                                                     content: feed.content!,
@@ -1075,7 +1075,7 @@ class _HomePageState extends State<HomePage> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        CommentPage(
+                                                        CustomCommentPage(
                                                       feedId: feed.id!,
                                                       user: feed.user!,
                                                       content: feed.content!,
@@ -1236,7 +1236,7 @@ class _HomePageState extends State<HomePage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      CommentPage(
+                                                      CustomCommentPage(
                                                     feedId: feed.id!,
                                                     user: feed.user!,
                                                     content: feed.content!,

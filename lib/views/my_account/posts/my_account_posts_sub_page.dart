@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/gallery_widget.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/comment_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -197,7 +197,7 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                                 }
 
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => GalleryWidget(
+                                    builder: (_) => CustomGalleryWidget(
                                           urlImages: imgList,
                                         )));
                               },
@@ -306,7 +306,7 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CommentPage(
+                                  builder: (context) => CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,
@@ -579,7 +579,7 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CommentPage(
+                                  builder: (context) => CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,

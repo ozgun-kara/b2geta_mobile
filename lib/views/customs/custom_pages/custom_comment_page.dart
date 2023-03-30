@@ -10,8 +10,8 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
 
-class CommentPage extends StatefulWidget {
-  const CommentPage({
+class CustomCommentPage extends StatefulWidget {
+  const CustomCommentPage({
     Key? key,
     required this.feedId,
     required this.user,
@@ -22,10 +22,10 @@ class CommentPage extends StatefulWidget {
   final String content;
 
   @override
-  State<CommentPage> createState() => _CommentPageState();
+  State<CustomCommentPage> createState() => _CustomCommentPageState();
 }
 
-class _CommentPageState extends State<CommentPage> {
+class _CustomCommentPageState extends State<CustomCommentPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
