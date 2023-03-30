@@ -382,8 +382,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CompanyPostsSubPage(
-                    userId: companyProfileModel!.id.toString())
+                ? CompanyPostsSubPage(userId: widget.userId)
                 : provider.currentTabIndex == 1
                     ? CompanyReelsSubPage(
                         userId: companyProfileModel!.id.toString())
