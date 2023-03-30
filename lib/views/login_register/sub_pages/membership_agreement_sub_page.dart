@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class LightingTextPage extends StatefulWidget {
-  const LightingTextPage({Key? key}) : super(key: key);
+class MembershipAgreementSubPage extends StatefulWidget {
+  const MembershipAgreementSubPage({Key? key}) : super(key: key);
 
   @override
-  State<LightingTextPage> createState() => _LightingTextPageState();
+  State<MembershipAgreementSubPage> createState() =>
+      _MembershipAgreementSubPageState();
 }
 
-class _LightingTextPageState extends State<LightingTextPage> {
+class _MembershipAgreementSubPageState
+    extends State<MembershipAgreementSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -53,7 +55,7 @@ class _LightingTextPageState extends State<LightingTextPage> {
                 padding: const EdgeInsets.only(top: 65),
                 // padding: EdgeInsets.only(top: 49),
                 child: Text(
-                  'Aydınlatma Metni'.tr,
+                  'Üyelik Sözleşmesi'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTheme.appFontFamily,
@@ -82,7 +84,7 @@ class _LightingTextPageState extends State<LightingTextPage> {
                   child: RichText(
                       text: TextSpan(children: [
                     TextSpan(
-                      text: 'AYDINLATMA METNİ \n',
+                      text: 'ÜYELİK SÖZLEŞMESİ \n',
                       style: TextStyle(
                         color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"

@@ -10,18 +10,18 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class VerifyPage extends StatefulWidget {
-  const VerifyPage({
+class VerifySubPage extends StatefulWidget {
+  const VerifySubPage({
     Key? key,
     required this.email,
   }) : super(key: key);
   final String email;
 
   @override
-  State<VerifyPage> createState() => _VerifyPageState();
+  State<VerifySubPage> createState() => _VerifySubPageState();
 }
 
-class _VerifyPageState extends State<VerifyPage> {
+class _VerifySubPageState extends State<VerifySubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;

@@ -11,8 +11,8 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
 
-class MessageDetailsPage extends StatefulWidget {
-  const MessageDetailsPage({
+class MessageDetailsSubPage extends StatefulWidget {
+  const MessageDetailsSubPage({
     Key? key,
     required this.messageId,
     required this.toId,
@@ -22,10 +22,10 @@ class MessageDetailsPage extends StatefulWidget {
   final String toId;
   final String fromId;
   @override
-  State<MessageDetailsPage> createState() => _MessageDetailsPageState();
+  State<MessageDetailsSubPage> createState() => _MessageDetailsSubPageState();
 }
 
-class _MessageDetailsPageState extends State<MessageDetailsPage> {
+class _MessageDetailsSubPageState extends State<MessageDetailsSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
