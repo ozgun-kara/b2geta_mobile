@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   final String email;
@@ -35,10 +36,17 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     emailController1.text = widget.email;
+    getLocalData();
     super.initState();
   }
 
   final MemberServices _memberServices = MemberServices();
+
+  getLocalData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    emailController1.text = prefs.getString('Email') ?? '';
+    passwordController1.text = prefs.getString('Password') ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -282,8 +290,25 @@ class _LoginPageState extends State<LoginPage> {
                                               ? AppTheme.white1
                                               : AppTheme.black4,
                                           value: provider.loginSwitch,
-                                          onToggle: (value) {
-                                            provider.updateLoginSwitch(value);
+                                          onToggle: (value) async {
+                                            if (emailController1
+                                                    .text.isNotEmpty &&
+                                                passwordController1
+                                                    .text.isNotEmpty) {
+                                              provider.updateLoginSwitch(value);
+                                              SharedPreferences prefs =
+                                                  await SharedPreferences
+                                                      .getInstance();
+                                              if (value) {
+                                                prefs.setString("Email",
+                                                    emailController1.text);
+                                                prefs.setString("Password",
+                                                    passwordController1.text);
+                                              } else if (!value) {
+                                                prefs.setString("Email", '');
+                                                prefs.setString("Password", '');
+                                              }
+                                            }
                                           },
                                         );
                                       },
