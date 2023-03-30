@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/material.dart';

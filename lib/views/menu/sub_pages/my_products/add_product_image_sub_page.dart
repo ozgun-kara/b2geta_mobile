@@ -6,7 +6,7 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_appbar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/product_added_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -102,7 +102,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                       color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                     ),
                   ),
-                  SizedBox(height: 41),
+                  const SizedBox(height: 41),
                   MaterialButton(
                       minWidth: deviceWidth,
                       height: 52,
@@ -111,7 +111,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                       shape: const RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-                      padding: EdgeInsets.fromLTRB(56, 43, 56, 38),
+                      padding: const EdgeInsets.fromLTRB(56, 43, 56, 38),
                       child: Column(
                         children: [
                           Text(
@@ -143,7 +143,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                       onPressed: () {
                         selectImages();
                       }),
-                  SizedBox(height: 21),
+                  const SizedBox(height: 21),
                   Consumer<MenuPageProvider>(
                     builder: (context, menuPageProvider, child) {
                       return Visibility(
@@ -154,7 +154,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                           padding: const EdgeInsets.all(0),
                           itemCount: menuPageProvider.imageFilesList!.length,
                           separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(height: 11);
+                            return const SizedBox(height: 11);
                           },
                           itemBuilder: ((context, index) {
                             var image = menuPageProvider.imageFilesList![index];
@@ -180,7 +180,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                     ? AppTheme.white5
                                     : Colors.transparent,
                               ),
-                              padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                              padding:
+                                  const EdgeInsets.fromLTRB(12, 12, 12, 12),
                               child: Row(
                                 children: [
                                   Container(
@@ -196,7 +197,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 20),
+                                  const SizedBox(width: 20),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -225,7 +226,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                       ),
                                     ],
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   IconButton(
                                     splashRadius: 24,
                                     icon: Image.asset(
@@ -249,7 +250,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                       );
                     },
                   ),
-                  SizedBox(height: 28),
+                  const SizedBox(height: 28),
                   Consumer<MenuPageProvider>(
                     builder: (context, menuPageProvider, child) {
                       return MaterialButton(
