@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -52,9 +53,10 @@ class _CustomReelsPageState extends State<CustomReelsPage> {
           ),
           delegate: SliverChildBuilderDelegate(
               childCount: socialProvider.reelsList.length, (context, index) {
-            return SizedBox(
+            return Container(
               width: 128,
               height: 128,
+              color: themeMode ? AppTheme.white4 : AppTheme.black3,
               child: InkWell(
                 onTap: () {
                   Navigator.push(
