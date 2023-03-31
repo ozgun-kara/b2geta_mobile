@@ -1,8 +1,13 @@
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
@@ -129,67 +134,94 @@ class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
         Positioned(
           bottom: 15,
           left: 12,
-          child: Row(children: [
-            ClipOval(
-              child: Container(
-                width: 43,
-                height: 43,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.white1,
+          child: GestureDetector(
+            onTap: () {
+              if (Provider.of<UserProvider>(context, listen: false)
+                      .getUser
+                      .id ==
+                  (widget.reelsModel.user!.id ?? '')) {
+                context.read<NavigationPageProvider>().updateCurrentTabIndex(3);
+                Navigator.pop(context);
+              } else {
+                Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) =>
+                          widget.reelsModel.user!.type != 'company'
+                              ? PersonalProfilePage(
+                                  userId: widget.reelsModel.user!.id ?? '')
+                              : CompanyProfilePage(
+                                  userId: widget.reelsModel.user!.id ?? ''),
+                      transitionDuration: const Duration(milliseconds: 0),
+                      reverseTransitionDuration:
+                          const Duration(milliseconds: 0),
+                      transitionsBuilder: (_, a, __, c) =>
+                          FadeTransition(opacity: a, child: c),
+                    ));
+              }
+            },
+            child: Row(children: [
+              ClipOval(
+                child: Container(
+                  width: 43,
+                  height: 43,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppTheme.white1,
+                  ),
+                  child: widget.reelsModel.user!.photo!.isNotEmpty
+                      ? Image.network(
+                          widget.reelsModel.user!.photo!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              "assets/images/dummy_images/user_profile.png",
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          "assets/images/dummy_images/user_profile.png",
+                          fit: BoxFit.cover,
+                        ),
                 ),
-                child: widget.reelsModel.user!.photo!.isNotEmpty
-                    ? Image.network(
-                        widget.reelsModel.user!.photo!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Image.asset(
-                            "assets/images/dummy_images/user_profile.png",
-                            fit: BoxFit.cover,
-                          );
-                        },
-                      )
-                    : Image.asset(
-                        "assets/images/dummy_images/user_profile.png",
-                        fit: BoxFit.cover,
-                      ),
               ),
-            ),
-            const SizedBox(
-              width: 7,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 189,
-                  child: Text(
-                    widget.reelsModel.user!.name ?? "User Name",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.white1,
+              const SizedBox(
+                width: 7,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 189,
+                    child: Text(
+                      widget.reelsModel.user!.name ?? "User Name",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.white1,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
-                Text(
-                  "İstanbul, Türkiye",
-                  style: TextStyle(
-                    height: 1,
-                    fontSize: 12,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w400,
-                    color: AppTheme.white15,
+                  const SizedBox(
+                    height: 6,
                   ),
-                ),
-              ],
-            ),
-          ]),
+                  Text(
+                    "İstanbul, Türkiye",
+                    style: TextStyle(
+                      height: 1,
+                      fontSize: 12,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: AppTheme.white15,
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+          ),
         ),
         Positioned(
           bottom: 15,

@@ -1,3 +1,6 @@
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -69,62 +72,92 @@ class _CustomPostPageState extends State<CustomPostPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              feed.user!.photo!.isNotEmpty
-                                  ? ClipOval(
-                                      child: Image.network(
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.cover,
-                                        feed.user!.photo!,
-                                        errorBuilder:
-                                            (context, error, stackTrace) =>
-                                                Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
+                          GestureDetector(
+                            onTap: () {
+                              if (Provider.of<UserProvider>(context,
+                                          listen: false)
+                                      .getUser
+                                      .id ==
+                                  (feed.user!.id ?? '')) {
+                                context
+                                    .read<NavigationPageProvider>()
+                                    .updateCurrentTabIndex(3);
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          feed.type != 'company'
+                                              ? PersonalProfilePage(
+                                                  userId: feed.user!.id ?? '')
+                                              : CompanyProfilePage(
+                                                  userId: feed.user!.id ?? ''),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ));
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                feed.user!.photo!.isNotEmpty
+                                    ? ClipOval(
+                                        child: Image.network(
                                           width: 40,
                                           height: 40,
                                           fit: BoxFit.cover,
+                                          feed.user!.photo!,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            width: 40,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset(
+                                          width: 40,
+                                          height: 40,
+                                          fit: BoxFit.cover,
+                                          "assets/images/dummy_images/user_profile.png",
                                         ),
                                       ),
-                                    )
-                                  : ClipOval(
-                                      child: Image.asset(
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.cover,
-                                        "assets/images/dummy_images/user_profile.png",
+                                const SizedBox(
+                                  width: 10.0,
+                                ),
+                                RichText(
+                                  text: TextSpan(
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
                                       ),
-                                    ),
-                              const SizedBox(
-                                width: 10.0,
-                              ),
-                              RichText(
-                                text: TextSpan(
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: AppTheme.appFontFamily,
-                                    ),
-                                    children: [
-                                      TextSpan(
-                                        text: feed.user!.name ?? "Name",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w800,
-                                          color: themeMode
-                                              ? AppTheme.blue3
-                                              : AppTheme.white1,
+                                      children: [
+                                        TextSpan(
+                                          text: feed.user!.name ?? "Name",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w800,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1,
+                                          ),
                                         ),
-                                      ),
-                                      TextSpan(
-                                        text: ' ${'Homepage Share-2'.tr}',
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          color: AppTheme.white15,
+                                        TextSpan(
+                                          text: ' ${'Homepage Share-2'.tr}',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
                                         ),
-                                      ),
-                                    ]),
-                              ),
-                            ],
+                                      ]),
+                                ),
+                              ],
+                            ),
                           ),
                           IconButton(
                             onPressed: () {},
@@ -495,37 +528,44 @@ class _CustomPostPageState extends State<CustomPostPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: Row(
                         children: [
-                          ClipOval(
-                            child: Container(
-                              width: 32,
-                              height: 32,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppTheme.white1,
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<NavigationPageProvider>()
+                                  .updateCurrentTabIndex(3);
+                            },
+                            child: ClipOval(
+                              child: Container(
+                                width: 32,
+                                height: 32,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: AppTheme.white1,
+                                ),
+                                child: (Provider.of<UserProvider>(context)
+                                                .getUser
+                                                .avatar !=
+                                            null &&
+                                        Provider.of<UserProvider>(context)
+                                            .getUser
+                                            .avatar!
+                                            .isNotEmpty)
+                                    ? Image.network(
+                                        'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                        fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            fit: BoxFit.cover,
+                                          );
+                                        },
+                                      )
+                                    : Image.asset(
+                                        "assets/images/dummy_images/user_profile.png",
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
-                              child: (Provider.of<UserProvider>(context)
-                                              .getUser
-                                              .avatar !=
-                                          null &&
-                                      Provider.of<UserProvider>(context)
-                                          .getUser
-                                          .avatar!
-                                          .isNotEmpty)
-                                  ? Image.network(
-                                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
-                                          fit: BoxFit.cover,
-                                        );
-                                      },
-                                    )
-                                  : Image.asset(
-                                      "assets/images/dummy_images/user_profile.png",
-                                      fit: BoxFit.cover,
-                                    ),
                             ),
                           ),
                           const SizedBox(

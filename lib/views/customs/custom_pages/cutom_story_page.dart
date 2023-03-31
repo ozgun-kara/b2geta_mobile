@@ -1,10 +1,16 @@
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
+import 'package:provider/provider.dart';
 
-class StorySubPage extends StatefulWidget {
-  const StorySubPage({
+import '../../../providers/navigation_page_provider.dart';
+
+class CustomStoryPage extends StatefulWidget {
+  const CustomStoryPage({
     Key? key,
     required this.stories,
     required this.index,
@@ -13,10 +19,10 @@ class StorySubPage extends StatefulWidget {
   final int index;
 
   @override
-  State<StorySubPage> createState() => _StorySubPageState();
+  State<CustomStoryPage> createState() => _CustomStoryPageState();
 }
 
-class _StorySubPageState extends State<StorySubPage>
+class _CustomStoryPageState extends State<CustomStoryPage>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
   late AnimationController _animationController;
@@ -117,40 +123,69 @@ class _StorySubPageState extends State<StorySubPage>
               top: 55.0,
               left: 10.0,
               right: 10.0,
-              child: Row(
-                children: [
-                  (story.user!.photo != null && story.user!.photo!.isNotEmpty)
-                      ? ClipOval(
-                          child: Image.network(
-                            width: 30,
-                            height: 30,
-                            fit: BoxFit.cover,
-                            story.user!.photo!,
-                          ),
-                        )
-                      : ClipOval(
-                          child: Image.asset(
+              child: GestureDetector(
+                onTap: () {
+                  if (Provider.of<UserProvider>(context, listen: false)
+                          .getUser
+                          .id ==
+                      (story.user!.id ?? '')) {
+                    context
+                        .read<NavigationPageProvider>()
+                        .updateCurrentTabIndex(3);
+                    Navigator.pop(context);
+                  } else {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) =>
+                              story.user!.type != 'company'
+                                  ? PersonalProfilePage(
+                                      userId: story.user!.id ?? '')
+                                  : CompanyProfilePage(
+                                      userId: story.user!.id ?? ''),
+                          transitionDuration: const Duration(milliseconds: 0),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 0),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
+                        ));
+                  }
+                },
+                child: Row(
+                  children: [
+                    (story.user!.photo != null && story.user!.photo!.isNotEmpty)
+                        ? ClipOval(
+                            child: Image.network(
                               width: 30,
                               height: 30,
                               fit: BoxFit.cover,
-                              "assets/images/dummy_images/user_profile.png"),
-                        ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Text(
-                    (story.user!.name != null && story.user!.name!.length > 2)
-                        ? story.user!.name!
-                        : "User Name",
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 13,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w600,
-                      color: AppTheme.white1,
+                              story.user!.photo!,
+                            ),
+                          )
+                        : ClipOval(
+                            child: Image.asset(
+                                width: 30,
+                                height: 30,
+                                fit: BoxFit.cover,
+                                "assets/images/dummy_images/user_profile.png"),
+                          ),
+                    const SizedBox(
+                      width: 5,
                     ),
-                  ),
-                ],
+                    Text(
+                      (story.user!.name != null && story.user!.name!.length > 2)
+                          ? story.user!.name!
+                          : "User Name",
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: AppTheme.white1,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           ],

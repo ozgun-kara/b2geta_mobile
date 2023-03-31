@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/cutom_story_page.dart';
 
 class PersonalProfilePage extends StatefulWidget {
   const PersonalProfilePage({
@@ -99,7 +99,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
-                                                StorySubPage(
+                                                CustomStoryPage(
                                               stories: [provider.myStoriesList],
                                               index: 0,
                                             ),

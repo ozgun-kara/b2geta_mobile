@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/cutom_story_page.dart';
 import 'package:b2geta_mobile/views/profile/company/info/company_info_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/products/company_products_sub_page.dart';
 
@@ -96,7 +96,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
-                                                StorySubPage(
+                                                CustomStoryPage(
                                               stories: [provider.myStoriesList],
                                               index: 0,
                                             ),
