@@ -60,10 +60,15 @@ class _HomePageState extends State<HomePage> {
         .then((pickedFile) {
       if (pickedFile != null) {
         var image = File(pickedFile.path);
+
         Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) => StoryAddSubPage(imageFile: image),
+            PageRouteBuilder(
+              pageBuilder: (_, __, ___) => StoryAddSubPage(imageFile: image),
+              transitionDuration: const Duration(milliseconds: 0),
+              reverseTransitionDuration: const Duration(milliseconds: 0),
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
             ));
       }
     });
@@ -292,15 +297,29 @@ class _HomePageState extends State<HomePage> {
                                       return (groupStories.isNotEmpty)
                                           ? GestureDetector(
                                               onTap: () {
-                                                Navigator.of(context)
-                                                    .push(MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      StorySubPage(
-                                                    stories: groupStories.values
-                                                        .toList(),
-                                                    index: index,
-                                                  ),
-                                                ));
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder:
+                                                          (_, __, ___) =>
+                                                              StorySubPage(
+                                                        stories: groupStories
+                                                            .values
+                                                            .toList(),
+                                                        index: index,
+                                                      ),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
                                               },
                                               child: Column(
                                                 children: [
@@ -482,9 +501,16 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () {
                                     Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
                                               const UploadStepsSubPage(),
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
                                         ));
                                   },
                                   onSubmitted: (value) async {
@@ -557,11 +583,18 @@ class _HomePageState extends State<HomePage> {
                             onTap: () {
                               Navigator.push(
                                   context,
-                                  MaterialPageRoute(
-                                    builder: (context) => CustomReelsPage(
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        CustomReelsPage(
                                       reelsList: homePageProvider.reelsList,
                                       videoUrlIndex: index,
                                     ),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    reverseTransitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    transitionsBuilder: (_, a, __, c) =>
+                                        FadeTransition(opacity: a, child: c),
                                   ));
                             },
                             child: Image.asset(reelsImageList[index]),
@@ -604,26 +637,54 @@ class _HomePageState extends State<HomePage> {
                                                             .personal.name) {
                                                       Navigator.push(
                                                           context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
                                                                 PersonalProfilePage(
                                                               userId: feed
                                                                   .user!.id
                                                                   .toString(),
                                                             ),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                           ));
                                                     } else if (feed
                                                             .user!.type ==
                                                         UserType.company.name) {
                                                       Navigator.push(
                                                           context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
                                                                 CompanyProfilePage(
                                                               userId: feed
                                                                   .user!.id
                                                                   .toString(),
                                                             ),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                           ));
                                                     }
                                                   },
@@ -652,26 +713,54 @@ class _HomePageState extends State<HomePage> {
                                                             .personal.name) {
                                                       Navigator.push(
                                                           context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
                                                                 PersonalProfilePage(
                                                               userId: feed
                                                                   .user!.id
                                                                   .toString(),
                                                             ),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                           ));
                                                     } else if (feed
                                                             .user!.type ==
                                                         UserType.company.name) {
                                                       Navigator.push(
                                                           context,
-                                                          MaterialPageRoute(
-                                                            builder: (context) =>
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
                                                                 CompanyProfilePage(
                                                               userId: feed
                                                                   .user!.id
                                                                   .toString(),
                                                             ),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                           ));
                                                     }
                                                   },
@@ -770,13 +859,26 @@ class _HomePageState extends State<HomePage> {
                                                       .add(i!.url.toString());
                                                 }
 
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            CustomGalleryWidget(
-                                                              urlImages:
-                                                                  imgList,
-                                                            )));
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          CustomGalleryWidget(
+                                                        urlImages: imgList,
+                                                      ),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
                                               },
                                               child: Image.network(
                                                 feed.images![0]!.url.toString(),
@@ -913,13 +1015,24 @@ class _HomePageState extends State<HomePage> {
                                           onPressed: () {
                                             Navigator.push(
                                                 context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
                                                       CustomCommentPage(
                                                     feedId: feed.id!,
                                                     user: feed.user!,
                                                     content: feed.content!,
                                                   ),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
                                                 ));
                                           },
                                           child: Row(
@@ -1073,13 +1186,24 @@ class _HomePageState extends State<HomePage> {
                                             onTap: () {
                                               Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
                                                         CustomCommentPage(
                                                       feedId: feed.id!,
                                                       user: feed.user!,
                                                       content: feed.content!,
                                                     ),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
                                                   ));
                                             },
                                           ),
@@ -1234,13 +1358,24 @@ class _HomePageState extends State<HomePage> {
                                           onTap: () {
                                             Navigator.push(
                                                 context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
                                                       CustomCommentPage(
                                                     feedId: feed.id!,
                                                     user: feed.user!,
                                                     content: feed.content!,
                                                   ),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
                                                 ));
                                           },
                                         ),

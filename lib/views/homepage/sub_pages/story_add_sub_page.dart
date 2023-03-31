@@ -72,8 +72,13 @@ class _StoryAddSubPageState extends State<StoryAddSubPage> {
                     if (value) {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const NavigationPage(),
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => const NavigationPage(),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
                           ),
                           (route) => false);
                     }
