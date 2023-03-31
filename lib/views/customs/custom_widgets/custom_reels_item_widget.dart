@@ -229,11 +229,16 @@ class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
                   onPressed: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => CustomCommentPage(
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => CustomCommentPage(
                               feedId: widget.reelsModel.id!,
                               user: widget.reelsModel.user!,
                               content: widget.reelsModel.content!),
+                          transitionDuration: const Duration(milliseconds: 0),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 0),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
                         ));
                   },
                   icon: const Icon(

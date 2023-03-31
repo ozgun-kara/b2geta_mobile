@@ -1,12 +1,8 @@
-// ignore_for_file: unrelated_type_equality_checks
-
 import 'dart:ui';
-
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
@@ -342,4 +338,3 @@ class _CustomWidgetsPageState extends State<CustomWidgetsPage> {
     );
   }
 }
-

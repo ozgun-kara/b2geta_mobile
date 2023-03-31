@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -169,11 +168,21 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                       imgList.add(i!.url.toString());
                                     }
 
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                            builder: (_) => CustomGalleryWidget(
-                                                  urlImages: imgList,
-                                                )));
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              CustomGalleryWidget(
+                                            urlImages: imgList,
+                                          ),
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
+                                        ));
                                   },
                                   child: Image.network(
                                     feed.images![0]!.url.toString(),
@@ -287,12 +296,19 @@ class _CustomPostPageState extends State<CustomPostPage> {
                               onPressed: () {
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CustomCommentPage(
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          CustomCommentPage(
                                         feedId: feed.id!,
                                         user: feed.user!,
                                         content: feed.content!,
                                       ),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
                                     ));
                               },
                               child: Row(
@@ -561,12 +577,19 @@ class _CustomPostPageState extends State<CustomPostPage> {
                               onTap: () {
                                 Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => CustomCommentPage(
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          CustomCommentPage(
                                         feedId: feed.id!,
                                         user: feed.user!,
                                         content: feed.content!,
                                       ),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
                                     ));
                               },
                             ),

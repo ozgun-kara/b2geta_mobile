@@ -1,6 +1,5 @@
+import 'package:b2geta_mobile/app_theme.dart';
 import 'package:flutter/material.dart';
-
-import '../../../app_theme.dart';
 
 class CustomAvatar extends StatelessWidget {
   const CustomAvatar({
