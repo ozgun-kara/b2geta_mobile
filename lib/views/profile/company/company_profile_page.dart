@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -391,7 +392,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CompanyPostsSubPage(userId: widget.userId)
+                ? CustomPostPage(userId: widget.userId)
                 : provider.currentTabIndex == 1
                     ? CompanyReelsSubPage(
                         userId: companyProfileModel!.id.toString())
