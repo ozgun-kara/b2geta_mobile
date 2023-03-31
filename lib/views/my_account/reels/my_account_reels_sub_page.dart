@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
 class MyAccountReelsSubPage extends StatefulWidget {
   const MyAccountReelsSubPage({Key? key}) : super(key: key);
@@ -80,7 +80,7 @@ class _MyAccountReelsSubPageState extends State<MyAccountReelsSubPage> {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => CustomReelsPage(
+                    pageBuilder: (_, __, ___) => CustomReelsPageViewWidget(
                       reelsList: reelsList,
                       videoUrlIndex: index,
                     ),
@@ -90,7 +90,13 @@ class _MyAccountReelsSubPageState extends State<MyAccountReelsSubPage> {
                         FadeTransition(opacity: a, child: c),
                   ));
             },
-            child: Image.asset(reelsImageList[index]),
+            child: Center(
+              child: Image.asset(
+                width: 50,
+                height: 50,
+                "assets/images/play.png",
+              ),
+            ),
           ),
         );
       }),

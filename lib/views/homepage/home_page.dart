@@ -1,20 +1,15 @@
 import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/enums/user_enum.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
-import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
-import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +70,6 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-
   void getStories() async {
     await _socialServices.getAllStoryCall(
       queryParameters: {"offset": "0", "limit": "35", "type": "story"},
@@ -116,7 +110,7 @@ class _HomePageState extends State<HomePage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
     return Scaffold(
-        backgroundColor: themeMode ? AppTheme.white33 : AppTheme.black24,
+        backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
         body: Consumer<HomePageProvider>(
           builder: (context, HomePageProvider homePageProvider, child) {
             var tabIndex = homePageProvider.tabIndex;
@@ -568,42 +562,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               tabIndex == 1
-                  ? SliverGrid(
-                      gridDelegate:
-                          const SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: 128.0,
-                        mainAxisSpacing: 3.0,
-                        crossAxisSpacing: 3.0,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                          childCount: homePageProvider.reelsList.length,
-                          (context, index) {
-                        return SizedBox(
-                          width: 128,
-                          height: 128,
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        CustomReelsPage(
-                                      reelsList: homePageProvider.reelsList,
-                                      videoUrlIndex: index,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: Image.asset(reelsImageList[index]),
-                          ),
-                        );
-                      }),
-                    )
+                  ? const CustomReelsPage(userId: '')
                   : const CustomPostPage(userId: ''),
               const SliverToBoxAdapter(
                 child: SizedBox(

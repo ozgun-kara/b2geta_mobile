@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
 class PersonalReelsSubPage extends StatefulWidget {
   const PersonalReelsSubPage({
@@ -79,7 +79,7 @@ class _PersonalReelsSubPageState extends State<PersonalReelsSubPage> {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => CustomReelsPage(
+                    pageBuilder: (_, __, ___) => CustomReelsPageViewWidget(
                       reelsList: reelsList,
                       videoUrlIndex: index,
                     ),
