@@ -87,9 +87,15 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
                                   const AddCompanySubPage(operation: 'Add'),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
                             ));
                       }),
                 ],
@@ -423,13 +429,25 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                               if (value != null) {
                                                 Navigator.push(
                                                     context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          AddCompanySubPage(
-                                                              passedObject:
-                                                                  value,
-                                                              operation:
-                                                                  'Edit'),
+                                                    PageRouteBuilder(
+                                                      pageBuilder:
+                                                          (_, __, ___) =>
+                                                              AddCompanySubPage(
+                                                                  passedObject:
+                                                                      value,
+                                                                  operation:
+                                                                      'Edit'),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
                                                     ));
                                               } else {
                                                 debugPrint(
@@ -466,30 +484,48 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                 color: AppTheme.green1),
                                           ),
                                           onPressed: () async {
-                                             await CompanyServices()
-                              .changeProfileAnotherCompanyCall(
-                                  userId: company.id.toString())
-                              .then((value) async {
-                            if (value) {
-                              await MemberServices()
-                                  .getProfileCall()
-                                  .then((value) async {
-                                if (value != null) {
-                                  Provider.of<UserProvider>(context,
-                                          listen: false)
-                                      .updateUserModel(value);
-                                  Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NavigationPage(),
-                                    ),
-                                    (route) => false,
-                                  );
-                                }
-                              });
-                            }
-                          });
+                                            await CompanyServices()
+                                                .changeProfileAnotherCompanyCall(
+                                                    userId:
+                                                        company.id.toString())
+                                                .then((value) async {
+                                              if (value) {
+                                                await MemberServices()
+                                                    .getProfileCall()
+                                                    .then((value) async {
+                                                  if (value != null) {
+                                                    Provider.of<UserProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .updateUserModel(value);
+
+                                                    Navigator
+                                                        .pushAndRemoveUntil(
+                                                      context,
+                                                      PageRouteBuilder(
+                                                        pageBuilder: (_, __,
+                                                                ___) =>
+                                                            const NavigationPage(),
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        reverseTransitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        transitionsBuilder:
+                                                            (_, a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                      ),
+                                                      (route) => false,
+                                                    );
+                                                  }
+                                                });
+                                              }
+                                            });
                                           }),
                                     ),
                                   ],

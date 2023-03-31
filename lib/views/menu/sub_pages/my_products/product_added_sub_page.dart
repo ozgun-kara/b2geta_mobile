@@ -76,8 +76,13 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyProductsSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const MyProductsSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ),
                       (route) => route.isFirst);
                 }),

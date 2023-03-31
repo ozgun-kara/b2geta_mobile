@@ -95,9 +95,15 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) =>
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
                                   const AddProductSubPage(operation: 'Add'),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
                             ));
                       }),
                 ],
@@ -224,13 +230,28 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                                 if (value != null) {
                                                   Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            AddProductSubPage(
-                                                                passedObject:
-                                                                    value,
-                                                                operation:
-                                                                    'Edit'),
+                                                      PageRouteBuilder(
+                                                        pageBuilder:
+                                                            (_, __,
+                                                                    ___) =>
+                                                                AddProductSubPage(
+                                                                    passedObject:
+                                                                        value,
+                                                                    operation:
+                                                                        'Edit'),
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        reverseTransitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        transitionsBuilder:
+                                                            (_, a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                       ));
                                                 } else {
                                                   debugPrint(

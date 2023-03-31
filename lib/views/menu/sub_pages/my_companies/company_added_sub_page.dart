@@ -81,8 +81,13 @@ class _CompanyAddedSubPageState extends State<CompanyAddedSubPage> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyCompaniesSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const MyCompaniesSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ));
                 })
           ],

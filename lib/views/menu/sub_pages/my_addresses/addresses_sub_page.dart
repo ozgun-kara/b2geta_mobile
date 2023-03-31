@@ -353,16 +353,31 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                                                 ),
                                                 onPressed: () {
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              AddAddressSubPage(
-                                                                passedObject:
-                                                                    address,
-                                                                operation:
-                                                                    'Edit',
-                                                              ))).then(
-                                                      (_) => setState(() {}));
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
+                                                                AddAddressSubPage(
+                                                              passedObject:
+                                                                  address,
+                                                              operation: 'Edit',
+                                                            ),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                          ))
+                                                      .then((_) =>
+                                                          setState(() {}));
                                                 }),
                                           ),
                                         ),
@@ -448,10 +463,17 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                     onPressed: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => const AddAddressSubPage(
-                                    operation: 'Add',
-                                  ))).then((_) => setState(() {}));
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
+                                const AddAddressSubPage(
+                              operation: 'Add',
+                            ),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          )).then((_) => setState(() {}));
                     }),
               ),
             ),

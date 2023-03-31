@@ -791,29 +791,39 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) => AddProductImageSubPage(
-                                                accountId: '',
-                                                categoryId: categoryId,
-                                                productName:
-                                                    productNameController.text,
-                                                productDescription:
-                                                    productDescriptionController
-                                                        .text,
-                                                productSummary:
-                                                    productSummaryController
-                                                        .text,
-                                                brand: brandId,
-                                                price:
-                                                    productPriceController.text,
-                                                currency: menuPageProvider
-                                                    .selectedCurrency
-                                                    .toString(),
-                                                status: menuPageProvider
-                                                            .selectedStatus ==
-                                                        'Active'.tr
-                                                    ? '1'
-                                                    : '0'),
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                AddProductImageSubPage(
+                                                    accountId: '',
+                                                    categoryId: categoryId,
+                                                    productName:
+                                                        productNameController
+                                                            .text,
+                                                    productDescription:
+                                                        productDescriptionController
+                                                            .text,
+                                                    productSummary:
+                                                        productSummaryController
+                                                            .text,
+                                                    brand: brandId,
+                                                    price:
+                                                        productPriceController
+                                                            .text,
+                                                    currency: menuPageProvider
+                                                        .selectedCurrency
+                                                        .toString(),
+                                                    status: menuPageProvider
+                                                                .selectedStatus ==
+                                                            'Active'.tr
+                                                        ? '1'
+                                                        : '0'),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
                                           ));
                                     } else {
                                       locator<ProductsServices>()
@@ -848,9 +858,19 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                                           Navigator.pushAndRemoveUntil(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
                                                     const MyProductsSubPage(),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                transitionsBuilder: (_, a, __,
+                                                        c) =>
+                                                    FadeTransition(
+                                                        opacity: a, child: c),
                                               ),
                                               (route) => route.isFirst);
                                         } else {

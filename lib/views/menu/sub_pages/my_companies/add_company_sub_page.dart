@@ -905,10 +905,17 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
                                       Navigator.pushAndRemoveUntil(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
                                                 const CompanyAddedSubPage(
                                                     operation: 'Add'),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
                                           ),
                                           (route) => route.isFirst);
                                     } else {
@@ -945,10 +952,17 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
                                       Navigator.pushAndRemoveUntil(
                                           context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
                                                 const CompanyAddedSubPage(
                                                     operation: 'Edit'),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
                                           ),
                                           (route) => route.isFirst);
                                     } else {
@@ -987,9 +1001,16 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                 onPressed: () {
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
                                             const CompanyDeleteSubPage(),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
                                       ));
                                 }),
                           ],
