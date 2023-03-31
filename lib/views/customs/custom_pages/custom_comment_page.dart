@@ -1,4 +1,7 @@
 import 'dart:ui';
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -66,56 +69,84 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
             padding: const EdgeInsets.only(left: 12),
             child: Row(
               children: [
-                ClipOval(
-                  child: Container(
-                    width: 32,
-                    height: 32,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: AppTheme.white1,
-                    ),
-                    child: widget.user.photo!.isNotEmpty
-                        ? Image.network(
-                            widget.user.photo.toString(),
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Image.asset(
+                GestureDetector(
+                  onTap: () {
+                    if (Provider.of<UserProvider>(context, listen: false)
+                            .getUser
+                            .id ==
+                        (widget.user.id ?? '')) {
+                      context
+                          .read<NavigationPageProvider>()
+                          .updateCurrentTabIndex(3);
+                      Navigator.pop(context);
+                    } else {
+                      Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
+                                widget.user.type != 'company'
+                                    ? PersonalProfilePage(
+                                        userId: widget.user.id ?? '')
+                                    : CompanyProfilePage(
+                                        userId: widget.user.id ?? ''),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ));
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      ClipOval(
+                        child: Container(
+                          width: 32,
+                          height: 32,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: AppTheme.white1,
+                          ),
+                          child: widget.user.photo!.isNotEmpty
+                              ? Image.network(
+                                  widget.user.photo.toString(),
                                   fit: BoxFit.cover,
-                                  "assets/images/dummy_images/user_profile.png");
-                            },
-                          )
-                        : Image.asset(
-                            "assets/images/dummy_images/user_profile.png"),
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset(
+                                        fit: BoxFit.cover,
+                                        "assets/images/dummy_images/user_profile.png");
+                                  },
+                                )
+                              : Image.asset(
+                                  "assets/images/dummy_images/user_profile.png"),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 11.0,
+                      ),
+                      Text(
+                        widget.user.name.toString(),
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w700,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
-                  width: 11.0,
+                  width: 12,
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.user.name.toString(),
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Text(
-                      widget.content,
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w400,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                  ],
+                Text(
+                  widget.content,
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontFamily: AppTheme.appFontFamily,
+                    fontWeight: FontWeight.w400,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                  ),
                 ),
               ],
             ),
