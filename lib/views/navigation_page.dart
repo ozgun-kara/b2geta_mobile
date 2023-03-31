@@ -591,7 +591,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   PreferredSizeWidget defaultAppBar(themeMode) {
     return AppBar(
-        toolbarHeight: 68,
+        toolbarHeight: 56,
         backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
         elevation: 0,
         leading: Padding(
@@ -662,7 +662,7 @@ class _NavigationPageState extends State<NavigationPage> {
 
   PreferredSizeWidget searchAppBar(themeMode) {
     return AppBar(
-      toolbarHeight: 68,
+      toolbarHeight: 56,
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
       elevation: 0,
       leading: Padding(
