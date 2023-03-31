@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 
 class CustomButton extends StatelessWidget {

@@ -35,31 +35,31 @@ class _MenuPageState extends State<MenuPage> {
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
       appBar: AppBar(
-        toolbarHeight: 68,
-        backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: IconButton(
-            splashRadius: 24,
-            icon: Image.asset(
-              'assets/icons/back-2.png',
-              width: 23,
-              height: 17,
-              color: AppTheme.white15,
+          toolbarHeight: 56,
+          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: IconButton(
+              splashRadius: 24,
+              icon: Image.asset(
+                'assets/icons/back-2.png',
+                width: 23,
+                height: 17,
+                color: AppTheme.white15,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
           ),
-        ),
-        title: SizedBox(
-            width: 103.74,
-            height: 14.0,
-            child: themeMode
-                ? Image.asset('assets/images/b2geta_logo_light.png')
-                : Image.asset('assets/images/b2geta_logo_dark.png')),
-      ),
+          title: SizedBox(
+              width: 103.74,
+              height: 14.0,
+              child: themeMode
+                  ? Image.asset('assets/images/b2geta_logo_light.png')
+                  : Image.asset('assets/images/b2geta_logo_dark.png')),
+          actions: []),
       body: SingleChildScrollView(
         child: Column(
           children: [
