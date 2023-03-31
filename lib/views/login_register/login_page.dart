@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
@@ -331,9 +329,17 @@ class _LoginPageState extends State<LoginPage> {
                                     onTap: () {
                                       Navigator.push(
                                           context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const ForgotPasswordSubPage()));
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                const ForgotPasswordSubPage(),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     borderRadius: const BorderRadius.all(
                                         Radius.circular(6)),
@@ -397,13 +403,26 @@ class _LoginPageState extends State<LoginPage> {
                                               if (value.isEmpty) {
                                                 return Navigator
                                                     .pushAndRemoveUntil(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const NavigationPage(),
-                                                  ),
-                                                  (route) => false,
-                                                );
+                                                        context,
+                                                        PageRouteBuilder(
+                                                          pageBuilder: (_, __,
+                                                                  ___) =>
+                                                              const NavigationPage(),
+                                                          transitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          reverseTransitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          transitionsBuilder: (_,
+                                                                  a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                        ),
+                                                        (route) => false);
                                               } else if (value ==
                                                   'UserAccessNotFound') {
                                                 operationFailedDialog(context,
@@ -424,12 +443,26 @@ class _LoginPageState extends State<LoginPage> {
                                                     .then((value) {
                                                   Navigator.push(
                                                       context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
+                                                      PageRouteBuilder(
+                                                        pageBuilder: (_, __,
+                                                                ___) =>
                                                             VerifySubPage(
                                                                 email:
                                                                     emailController1
                                                                         .text),
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        reverseTransitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        transitionsBuilder:
+                                                            (_, a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
                                                       ));
                                                 });
                                               } else {
@@ -494,9 +527,19 @@ class _LoginPageState extends State<LoginPage> {
                                         onPressed: () {
                                           Navigator.push(
                                               context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
                                                     const RegisterPage(),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                transitionsBuilder: (_, a, __,
+                                                        c) =>
+                                                    FadeTransition(
+                                                        opacity: a, child: c),
                                               ));
                                         }),
                                   ),

@@ -249,10 +249,16 @@ class _LanguagePageState extends State<LanguagePage> {
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => const LoginPage(
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) => const LoginPage(
                                     email: "",
                                   ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
                                 ));
                           }),
                     ),
