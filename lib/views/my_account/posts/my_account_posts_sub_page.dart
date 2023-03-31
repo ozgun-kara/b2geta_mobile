@@ -196,10 +196,20 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                                   imgList.add(i!.url.toString());
                                 }
 
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => CustomGalleryWidget(
-                                          urlImages: imgList,
-                                        )));
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          CustomGalleryWidget(
+                                        urlImages: imgList,
+                                      ),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ));
                               },
                               child: Image.network(
                                 feed.images![0]!.url.toString(),
@@ -305,12 +315,19 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                           onPressed: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => CustomCommentPage(
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,
                                   ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
                                 ));
                           },
                           child: Row(
@@ -578,12 +595,19 @@ class _MyAccountPostsSubPageState extends State<MyAccountPostsSubPage> {
                           onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => CustomCommentPage(
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CustomCommentPage(
                                     feedId: feed.id!,
                                     user: feed.user!,
                                     content: feed.content!,
                                   ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
                                 ));
                           },
                         ),

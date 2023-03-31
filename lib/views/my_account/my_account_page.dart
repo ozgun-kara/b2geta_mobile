@@ -1,4 +1,3 @@
-// ignore_for_file: unrelated_type_equality_checks
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
@@ -80,13 +79,22 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             provider.myStoriesList.isNotEmpty
                                 ? GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => StorySubPage(
-                                          stories: [provider.myStoriesList],
-                                          index: 0,
-                                        ),
-                                      ));
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                StorySubPage(
+                                              stories: [provider.myStoriesList],
+                                              index: 0,
+                                            ),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     child: Container(
                                       width: 55,

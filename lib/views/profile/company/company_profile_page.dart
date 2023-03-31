@@ -92,13 +92,22 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                             provider.myStoriesList.isNotEmpty
                                 ? GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => StorySubPage(
-                                          stories: [provider.myStoriesList],
-                                          index: 0,
-                                        ),
-                                      ));
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                StorySubPage(
+                                              stories: [provider.myStoriesList],
+                                              index: 0,
+                                            ),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     child: Container(
                                       width: 55,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -79,11 +78,15 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
             onTap: () {
               Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => CustomReelsPage(
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => CustomReelsPage(
                       reelsList: reelsList,
                       videoUrlIndex: index,
                     ),
+                    transitionDuration: const Duration(milliseconds: 0),
+                    reverseTransitionDuration: const Duration(milliseconds: 0),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
                   ));
             },
             child: Image.asset(reelsImageList[index]),

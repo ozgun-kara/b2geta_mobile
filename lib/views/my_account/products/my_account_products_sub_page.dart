@@ -13,7 +13,8 @@ class MyAccountProductsSubPage extends StatefulWidget {
   const MyAccountProductsSubPage({Key? key}) : super(key: key);
 
   @override
-  State<MyAccountProductsSubPage> createState() => _MyAccountProductsSubPageState();
+  State<MyAccountProductsSubPage> createState() =>
+      _MyAccountProductsSubPageState();
 }
 
 class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
@@ -227,10 +228,10 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                   ),
                   const SizedBox(height: 11),
                   Visibility(
-                    visible: Provider.of<MyAccountPageProvider>(context)
-                            .filterSwitch
-                        ? false
-                        : true,
+                    visible:
+                        Provider.of<MyAccountPageProvider>(context).filterSwitch
+                            ? false
+                            : true,
                     child: FutureBuilder<List<String>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
@@ -267,19 +268,26 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProductDetailSubPage(
-                                              productId: productIdList[index],
-                                              productName: productList["title"]
-                                                  .toString(),
-                                              imageUrl: productList["imgUrl"]
-                                                  .toString(),
-                                              price: productList["price"]
-                                                  .toString()),
-                                    ),
-                                  );
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            ProductDetailSubPage(
+                                                productId: productIdList[index],
+                                                productName:
+                                                    productList["title"]
+                                                        .toString(),
+                                                imageUrl: productList["imgUrl"]
+                                                    .toString(),
+                                                price: productList["price"]
+                                                    .toString()),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ));
                                 },
                                 child: Container(
                                   decoration: const BoxDecoration(
@@ -393,10 +401,10 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                     ),
                   ),
                   Visibility(
-                    visible: Provider.of<MyAccountPageProvider>(context)
-                            .filterSwitch
-                        ? true
-                        : false,
+                    visible:
+                        Provider.of<MyAccountPageProvider>(context).filterSwitch
+                            ? true
+                            : false,
                     child: FutureBuilder<List<String>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
@@ -430,22 +438,28 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProductDetailSubPage(
-                                                  productId:
-                                                      productIdList[index],
-                                                  productName:
-                                                      productList["title"]
-                                                          .toString(),
-                                                  imageUrl:
-                                                      productList["imgUrl"]
-                                                          .toString(),
-                                                  price: productList["price"]
-                                                      .toString()),
-                                        ),
-                                      );
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                                    productId:
+                                                        productIdList[index],
+                                                    productName:
+                                                        productList["title"]
+                                                            .toString(),
+                                                    imageUrl:
+                                                        productList["imgUrl"]
+                                                            .toString(),
+                                                    price: productList["price"]
+                                                        .toString()),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(
