@@ -31,7 +31,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   @override
   void initState() {
-    Provider.of<MyAccountPageProvider>(context, listen: false).getFeeds();
     Provider.of<MyAccountPageProvider>(context, listen: false).getReels();
     Provider.of<MyAccountPageProvider>(context, listen: false).getMyStories(
         Provider.of<UserProvider>(context, listen: false)
