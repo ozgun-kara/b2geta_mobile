@@ -1,12 +1,10 @@
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/views/messages/messages_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-
-import '../../messages/messages_page.dart';
 
 class ShoppingSummarySubPage extends StatefulWidget {
   const ShoppingSummarySubPage({
@@ -61,10 +59,16 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
             ),
             onPressed: () {
               context.read<NavigationPageProvider>().updateCurrentTabIndex(2);
+
               Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const NavigationPage()));
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const NavigationPage(),
+                    transitionDuration: const Duration(milliseconds: 0),
+                    reverseTransitionDuration: const Duration(milliseconds: 0),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ));
             },
           ),
         ),
@@ -109,8 +113,14 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
               onPressed: () {
                 Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => const MessagesPage()));
+                    PageRouteBuilder(
+                      pageBuilder: (_, __, ___) => const MessagesPage(),
+                      transitionDuration: const Duration(milliseconds: 0),
+                      reverseTransitionDuration:
+                          const Duration(milliseconds: 0),
+                      transitionsBuilder: (_, a, __, c) =>
+                          FadeTransition(opacity: a, child: c),
+                    ));
               }),
         ],
       ),

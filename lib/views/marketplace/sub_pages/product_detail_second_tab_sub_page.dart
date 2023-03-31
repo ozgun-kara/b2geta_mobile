@@ -919,14 +919,27 @@ class _ProductDetailSecondTabSubPageState
                                           children: [
                                             InkWell(
                                               onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            CustomGalleryWidget(
-                                                              urlImages:
-                                                                  items[index]
-                                                                      .images,
-                                                            )));
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          CustomGalleryWidget(
+                                                        urlImages:
+                                                            items[index].images,
+                                                      ),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
                                               },
                                               child: Container(
                                                 width: deviceWidth * 0.5 - 36,
@@ -943,14 +956,27 @@ class _ProductDetailSecondTabSubPageState
                                             const SizedBox(width: 18),
                                             InkWell(
                                               onTap: () {
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            CustomGalleryWidget(
-                                                              urlImages:
-                                                                  items[index]
-                                                                      .images,
-                                                            )));
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          CustomGalleryWidget(
+                                                        urlImages:
+                                                            items[index].images,
+                                                      ),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
                                               },
                                               child: Container(
                                                 width: deviceWidth * 0.5 - 36,
