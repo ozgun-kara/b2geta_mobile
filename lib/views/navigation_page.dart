@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/notification/notification_page.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -391,14 +390,21 @@ class _NavigationPageState extends State<NavigationPage> {
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .updateUserModel(value);
+
                                   Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const NavigationPage(),
-                                    ),
-                                    (route) => false,
-                                  );
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            const NavigationPage(),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ),
+                                      (route) => false);
                                 }
                               });
                             }
@@ -512,10 +518,18 @@ class _NavigationPageState extends State<NavigationPage> {
                           if (value != null) {
                             Provider.of<UserProvider>(context, listen: false)
                                 .updateUserModel(value);
+
                             Navigator.pushAndRemoveUntil(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => const NavigationPage(),
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      const NavigationPage(),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
                                 ),
                                 (route) => false);
                           }
@@ -593,8 +607,12 @@ class _NavigationPageState extends State<NavigationPage> {
             onPressed: () {
               Navigator.push(
                   context,
-                  CupertinoPageRoute(
-                    builder: (context) => const MenuPage(),
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => const MenuPage(),
+                    transitionDuration: const Duration(milliseconds: 0),
+                    reverseTransitionDuration: const Duration(milliseconds: 0),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
                   ));
             },
           ),
@@ -729,16 +747,37 @@ class _NavigationPageState extends State<NavigationPage> {
 
   void navigateToBasketPage() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const BasketPage()));
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const BasketPage(),
+          transitionDuration: const Duration(milliseconds: 0),
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionsBuilder: (_, a, __, c) =>
+              FadeTransition(opacity: a, child: c),
+        ));
   }
 
   void navigateToNotificationPage() {
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) => const NotificationPage()));
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const NotificationPage(),
+          transitionDuration: const Duration(milliseconds: 0),
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionsBuilder: (_, a, __, c) =>
+              FadeTransition(opacity: a, child: c),
+        ));
   }
 
   void navigateToMessagePage() {
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MessagesPage()));
+        context,
+        PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const MessagesPage(),
+          transitionDuration: const Duration(milliseconds: 0),
+          reverseTransitionDuration: const Duration(milliseconds: 0),
+          transitionsBuilder: (_, a, __, c) =>
+              FadeTransition(opacity: a, child: c),
+        ));
   }
 }

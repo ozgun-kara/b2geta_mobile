@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:async';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
@@ -37,16 +35,28 @@ class _SplashPageState extends State<SplashPage> {
 
     if (token == null) {
       debugPrint("TOKEN NOT AVAILABLE");
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return const LanguagePage();
-      }));
+
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => const LanguagePage(),
+            transitionDuration: const Duration(milliseconds: 0),
+            reverseTransitionDuration: const Duration(milliseconds: 0),
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          ));
     } else if (token.isEmpty) {
       debugPrint("TOKEN NOT AVAILABLE");
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return const LanguagePage();
-      }));
+
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => const LanguagePage(),
+            transitionDuration: const Duration(milliseconds: 0),
+            reverseTransitionDuration: const Duration(milliseconds: 0),
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          ));
     } else {
       debugPrint("TOKEN AVAILABLE");
       Constants.userToken = token;
@@ -60,10 +70,15 @@ class _SplashPageState extends State<SplashPage> {
         }
       });
 
-      Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (BuildContext context) {
-        return const NavigationPage();
-      }));
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (_, __, ___) => const NavigationPage(),
+            transitionDuration: const Duration(milliseconds: 0),
+            reverseTransitionDuration: const Duration(milliseconds: 0),
+            transitionsBuilder: (_, a, __, c) =>
+                FadeTransition(opacity: a, child: c),
+          ));
     }
   }
 
