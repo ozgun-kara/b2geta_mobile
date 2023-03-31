@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
+import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -9,7 +10,7 @@ import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
-import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/cutom_story_page.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -298,7 +299,7 @@ class _HomePageState extends State<HomePage> {
                                                     PageRouteBuilder(
                                                       pageBuilder:
                                                           (_, __, ___) =>
-                                                              StorySubPage(
+                                                              CustomStoryPage(
                                                         stories: groupStories
                                                             .values
                                                             .toList(),
@@ -408,37 +409,44 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.symmetric(horizontal: 13.0),
                           child: Row(
                             children: [
-                              ClipOval(
-                                child: Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: AppTheme.white1,
+                              GestureDetector(
+                                onTap: () {
+                                  context
+                                      .read<NavigationPageProvider>()
+                                      .updateCurrentTabIndex(3);
+                                },
+                                child: ClipOval(
+                                  child: Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: AppTheme.white1,
+                                    ),
+                                    child: (Provider.of<UserProvider>(context)
+                                                    .getUser
+                                                    .avatar !=
+                                                null &&
+                                            Provider.of<UserProvider>(context)
+                                                .getUser
+                                                .avatar!
+                                                .isNotEmpty)
+                                        ? Image.network(
+                                            'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                            fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return Image.asset(
+                                                "assets/images/dummy_images/user_profile.png",
+                                                fit: BoxFit.cover,
+                                              );
+                                            },
+                                          )
+                                        : Image.asset(
+                                            "assets/images/dummy_images/user_profile.png",
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
-                                  child: (Provider.of<UserProvider>(context)
-                                                  .getUser
-                                                  .avatar !=
-                                              null &&
-                                          Provider.of<UserProvider>(context)
-                                              .getUser
-                                              .avatar!
-                                              .isNotEmpty)
-                                      ? Image.network(
-                                          'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                              "assets/images/dummy_images/user_profile.png",
-                                              fit: BoxFit.cover,
-                                            );
-                                          },
-                                        )
-                                      : Image.asset(
-                                          "assets/images/dummy_images/user_profile.png",
-                                          fit: BoxFit.cover,
-                                        ),
                                 ),
                               ),
                               const SizedBox(

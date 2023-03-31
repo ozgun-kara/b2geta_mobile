@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/homepage/sub_pages/story_sub_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/cutom_story_page.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({
@@ -42,7 +42,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
@@ -82,7 +81,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
-                                                StorySubPage(
+                                                CustomStoryPage(
                                               stories: [provider.myStoriesList],
                                               index: 0,
                                             ),
