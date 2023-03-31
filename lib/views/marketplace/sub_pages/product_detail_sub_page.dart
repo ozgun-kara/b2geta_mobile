@@ -127,10 +127,20 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => CustomGalleryWidget(
-                                      urlImages: imgList,
-                                    )));
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      CustomGalleryWidget(
+                                    urlImages: imgList,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
                           },
                           child: Stack(
                             children: [

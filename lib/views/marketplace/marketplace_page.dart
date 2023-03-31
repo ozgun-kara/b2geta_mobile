@@ -257,18 +257,24 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             return InkWell(
                               onTap: () {
                                 Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductDetailSubPage(
-                                      productId: product.id!,
-                                      productName: product.name!.tr!,
-                                      imageUrl: product.images!.isNotEmpty
-                                          ? product.images![0]!
-                                          : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                      price: product.price.toString(),
-                                    ),
-                                  ),
-                                );
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          ProductDetailSubPage(
+                                        productId: product.id!,
+                                        productName: product.name!.tr!,
+                                        imageUrl: product.images!.isNotEmpty
+                                            ? product.images![0]!
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                        price: product.price.toString(),
+                                      ),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ));
                               },
                               child: Container(
                                 decoration: const BoxDecoration(
@@ -424,17 +430,27 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               child: InkWell(
                                 onTap: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ProductDetailSubPage(
-                                          productId: product.id!,
-                                          productName: product.name!.tr!,
-                                          imageUrl: product.images!.isNotEmpty
-                                              ? product.images![0].toString()
-                                              : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                          price: product.price.toString()),
-                                    ),
-                                  );
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            ProductDetailSubPage(
+                                                productId: product.id!,
+                                                productName: product.name!.tr!,
+                                                imageUrl: product
+                                                        .images!.isNotEmpty
+                                                    ? product.images![0]
+                                                        .toString()
+                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                price:
+                                                    product.price.toString()),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ));
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(
