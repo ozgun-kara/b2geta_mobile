@@ -1,9 +1,9 @@
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/products/my_account_products_sub_page.dart';
-import 'package:b2geta_mobile/views/my_account/reels/my_account_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -31,7 +31,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   @override
   void initState() {
-    Provider.of<MyAccountPageProvider>(context, listen: false).getReels();
     Provider.of<MyAccountPageProvider>(context, listen: false).getMyStories(
         Provider.of<UserProvider>(context, listen: false)
             .getUser
@@ -43,6 +42,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
@@ -369,7 +369,12 @@ class _MyAccountPageState extends State<MyAccountPage> {
                         .toString(),
                   )
                 : provider.currentTabIndex == 1
-                    ? const MyAccountReelsSubPage()
+                    ? CustomReelsPage(
+                        userId: Provider.of<UserProvider>(context)
+                            .getUser
+                            .id
+                            .toString(),
+                      )
                     : provider.currentTabIndex == 2
                         ? const MyAccountProductsSubPage()
                         : provider.currentTabIndex == 3

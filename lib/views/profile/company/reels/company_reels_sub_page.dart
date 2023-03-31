@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
 class CompanyReelsSubPage extends StatefulWidget {
   const CompanyReelsSubPage({
@@ -79,7 +79,7 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
               Navigator.push(
                   context,
                   PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => CustomReelsPage(
+                    pageBuilder: (_, __, ___) => CustomReelsPageViewWidget(
                       reelsList: reelsList,
                       videoUrlIndex: index,
                     ),
@@ -89,7 +89,7 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
                         FadeTransition(opacity: a, child: c),
                   ));
             },
-            child: Image.asset(reelsImageList[index]),
+            child: Image.asset("assets/images/play.png"),
           ),
         );
       }),
