@@ -1936,9 +1936,15 @@ class _RegisterPageState extends State<RegisterPage> {
                           onTap: () {
                             Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
                                       const LightingTextSubPage(),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
                                 ));
                           },
                           child: Text(
@@ -1960,9 +1966,14 @@ class _RegisterPageState extends State<RegisterPage> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) =>
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
                                 const MembershipAgreementSubPage(),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
                           ));
                     },
                     child: Text(
@@ -2019,12 +2030,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                   SharedPreferences prefs =
                                       await SharedPreferences.getInstance();
                                   prefs.setString("R-Token", value);
+
                                   Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => VerifySubPage(
-                                            email:
-                                                emailController1.text.trim()),
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            VerifySubPage(
+                                                email: emailController1.text
+                                                    .trim()),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
                                       ));
                                 }
                               });

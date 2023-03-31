@@ -447,10 +447,18 @@ class _VerifySubPageState extends State<VerifySubPage> {
                                     const Duration(milliseconds: 1500),
                                     () => Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) => LoginPage(
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              LoginPage(
                                             email: widget.email,
                                           ),
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
                                         )));
                               }
                             });

@@ -340,11 +340,22 @@ class _ResetPasswordSubPageState extends State<ResetPasswordSubPage> {
                                             if (value) {
                                               Navigator.push(
                                                   context,
-                                                  MaterialPageRoute(
-                                                    builder: (context) =>
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
                                                         LoginPage(
                                                       email: widget.email,
                                                     ),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
                                                   ));
                                             } else {
                                               showAlertDialog(context);

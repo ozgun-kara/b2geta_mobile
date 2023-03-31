@@ -195,13 +195,26 @@ class _ForgotPasswordSubPageState extends State<ForgotPasswordSubPage> {
                                                   email: emailController.text)
                                               .then((value) {
                                             if (value) {
-                                              Navigator.push(context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) {
-                                                return PasswordVerifySubPage(
-                                                    email:
-                                                        emailController.text);
-                                              }));
+                                              Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
+                                                        PasswordVerifySubPage(
+                                                            email:
+                                                                emailController
+                                                                    .text),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
+                                                  ));
                                             }
                                           });
                                         }

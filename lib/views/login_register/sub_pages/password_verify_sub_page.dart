@@ -449,11 +449,18 @@ class _PasswordVerifySubPageState extends State<PasswordVerifySubPage> {
                                     const Duration(milliseconds: 1500),
                                     () => Navigator.push(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
                                               ResetPasswordSubPage(
                                                   email: widget.email,
                                                   verifyCode: verifyCode),
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
                                         )));
                               }
                             });
