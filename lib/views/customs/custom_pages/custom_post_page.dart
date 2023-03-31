@@ -554,30 +554,26 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                   fontSize: 12,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w600,
-                                  color: AppTheme.blue3,
+                                  color: themeMode
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
                                 ),
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(41.0),
-                                  borderSide: BorderSide(
-                                      color: themeMode
-                                          ? AppTheme.white10
-                                          : AppTheme.black7),
+                                  borderSide:
+                                      BorderSide(color: AppTheme.white15),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(41.0),
-                                  borderSide: BorderSide(
-                                      color: themeMode
-                                          ? AppTheme.white10
-                                          : AppTheme.black7),
+                                  borderSide:
+                                      BorderSide(color: AppTheme.white15),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(41.0),
-                                  borderSide: BorderSide(
-                                      color: themeMode
-                                          ? AppTheme.white10
-                                          : AppTheme.black7),
+                                  borderSide:
+                                      BorderSide(color: AppTheme.white15),
                                 ),
                               ),
                               onTap: () {
