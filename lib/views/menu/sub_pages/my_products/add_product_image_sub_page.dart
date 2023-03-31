@@ -303,9 +303,15 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
 
                                 Navigator.pushAndRemoveUntil(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
                                           const ProductAddedSubPage(),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
                                     ),
                                     (route) => route.isFirst);
                               } else {

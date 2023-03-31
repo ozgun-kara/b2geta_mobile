@@ -525,13 +525,28 @@ class _BasketPageState extends State<BasketPage> {
                                             ),
                                             onPressed: () {
                                               Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          const AddAddressSubPage(
-                                                            operation: 'Add',
-                                                          ))).then(
-                                                  (_) => setState(() {}));
+                                                      context,
+                                                      PageRouteBuilder(
+                                                        pageBuilder: (_, __,
+                                                                ___) =>
+                                                            AddAddressSubPage(
+                                                                operation:
+                                                                    'Add'),
+                                                        transitionDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        reverseTransitionDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        transitionsBuilder:
+                                                            (_, a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                      ))
+                                                  .then((_) => setState(() {}));
                                             }),
                                       ),
                                     ),
@@ -681,14 +696,29 @@ class _BasketPageState extends State<BasketPage> {
                                                       debugPrint(
                                                           "${value}veri");
 
-                                                      Navigator.of(context)
-                                                          .push(
-                                                              MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            ShoppingSummarySubPage(
-                                                                companyInfoList:
-                                                                    value),
-                                                      ));
+                                                      Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
+                                                                ShoppingSummarySubPage(
+                                                                    companyInfoList:
+                                                                        value),
+                                                            transitionDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                          ));
+
                                                       BasketServices()
                                                           .emptyBasketCall();
                                                     }
@@ -709,13 +739,29 @@ class _BasketPageState extends State<BasketPage> {
                                                   if (value != null) {
                                                     debugPrint("${value}veri");
 
-                                                    Navigator.of(context)
-                                                        .push(MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ShoppingSummarySubPage(
-                                                              companyInfoList:
-                                                                  value),
-                                                    ));
+                                                    Navigator.push(
+                                                        context,
+                                                        PageRouteBuilder(
+                                                          pageBuilder: (_, __,
+                                                                  ___) =>
+                                                              ShoppingSummarySubPage(
+                                                                  companyInfoList:
+                                                                      value),
+                                                          transitionDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          reverseTransitionDuration:
+                                                              Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          transitionsBuilder: (_,
+                                                                  a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                        ));
+
                                                     BasketServices()
                                                         .emptyBasketCall();
                                                   }

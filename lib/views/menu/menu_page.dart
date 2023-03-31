@@ -85,8 +85,15 @@ class _MenuPageState extends State<MenuPage> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyCompaniesSubPage(),
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const MyCompaniesSubPage(),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
                             ));
                       }),
                   const SizedBox(height: 8),
@@ -114,8 +121,15 @@ class _MenuPageState extends State<MenuPage> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const MyProductsSubPage(),
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const MyProductsSubPage(),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
                             ));
                       }),
                   const SizedBox(height: 8),
@@ -138,8 +152,13 @@ class _MenuPageState extends State<MenuPage> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const OrdersSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const OrdersSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ));
                 }),
             const SizedBox(height: 8),
@@ -189,8 +208,13 @@ class _MenuPageState extends State<MenuPage> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const AddressesSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const AddressesSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ));
                 }),
             const SizedBox(height: 8),
@@ -225,8 +249,13 @@ class _MenuPageState extends State<MenuPage> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingsSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const SettingsSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ));
                 }),
             const SizedBox(height: 8),
@@ -248,8 +277,13 @@ class _MenuPageState extends State<MenuPage> {
                     if (value) {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                            builder: (context) => const SplashPage(),
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => const SplashPage(),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
                           ));
                     }
                   });

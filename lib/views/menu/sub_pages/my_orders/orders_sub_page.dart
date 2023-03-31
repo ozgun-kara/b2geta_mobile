@@ -33,7 +33,8 @@ class _OrdersSubPageState extends State<OrdersSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: const CustomAppBar(), body: SingleChildScrollView(
+      appBar: const CustomAppBar(),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
@@ -384,11 +385,21 @@ class _OrdersSubPageState extends State<OrdersSubPage> {
                                       onPressed: () {
                                         Navigator.push(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
+                                            PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) =>
                                                   OrdersDetailSubPage(
                                                 orderId: items[index].id!,
                                               ),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              reverseTransitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              transitionsBuilder:
+                                                  (_, a, __, c) =>
+                                                      FadeTransition(
+                                                          opacity: a, child: c),
                                             ));
                                       },
                                       elevation: 0,

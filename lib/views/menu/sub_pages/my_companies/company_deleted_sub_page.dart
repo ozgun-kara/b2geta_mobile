@@ -10,8 +10,7 @@ class CompanyDeletedSubPage extends StatefulWidget {
   const CompanyDeletedSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyDeletedSubPage> createState() =>
-      _CompanyDeletedSubPageState();
+  State<CompanyDeletedSubPage> createState() => _CompanyDeletedSubPageState();
 }
 
 class _CompanyDeletedSubPageState extends State<CompanyDeletedSubPage> {
@@ -77,8 +76,13 @@ class _CompanyDeletedSubPageState extends State<CompanyDeletedSubPage> {
                 onPressed: () {
                   Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const MyCompaniesSubPage(),
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => const MyCompaniesSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
                       ));
                 })
           ],
