@@ -267,19 +267,26 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                               return InkWell(
                                 onTap: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ProductDetailSubPage(
-                                              productId: productIdList[index],
-                                              productName: productList["title"]
-                                                  .toString(),
-                                              imageUrl: productList["imgUrl"]
-                                                  .toString(),
-                                              price: productList["price"]
-                                                  .toString()),
-                                    ),
-                                  );
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            ProductDetailSubPage(
+                                                productId: productIdList[index],
+                                                productName:
+                                                    productList["title"]
+                                                        .toString(),
+                                                imageUrl: productList["imgUrl"]
+                                                    .toString(),
+                                                price: productList["price"]
+                                                    .toString()),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ));
                                 },
                                 child: Container(
                                   decoration: const BoxDecoration(
@@ -430,22 +437,28 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProductDetailSubPage(
-                                                  productId:
-                                                      productIdList[index],
-                                                  productName:
-                                                      productList["title"]
-                                                          .toString(),
-                                                  imageUrl:
-                                                      productList["imgUrl"]
-                                                          .toString(),
-                                                  price: productList["price"]
-                                                      .toString()),
-                                        ),
-                                      );
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                                    productId:
+                                                        productIdList[index],
+                                                    productName:
+                                                        productList["title"]
+                                                            .toString(),
+                                                    imageUrl:
+                                                        productList["imgUrl"]
+                                                            .toString(),
+                                                    price: productList["price"]
+                                                        .toString()),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     child: Container(
                                       decoration: BoxDecoration(

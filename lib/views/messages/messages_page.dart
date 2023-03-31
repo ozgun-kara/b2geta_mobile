@@ -1,4 +1,3 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/messages/message_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -142,12 +141,17 @@ class _MessagesPageState extends State<MessagesPage> {
                   onTap: () {
                     Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => MessageDetailsSubPage(
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => MessageDetailsSubPage(
                             messageId: message.id!,
                             toId: message.toId!,
                             fromId: message.fromId!,
                           ),
+                          transitionDuration: const Duration(milliseconds: 0),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 0),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
                         ));
                   },
                   child: Padding(

@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
-import 'package:b2geta_mobile/views/profile/personal/posts/personal_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/reels/personal_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -96,13 +95,22 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                             provider.myStoriesList.isNotEmpty
                                 ? GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) => StorySubPage(
-                                          stories: [provider.myStoriesList],
-                                          index: 0,
-                                        ),
-                                      ));
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                StorySubPage(
+                                              stories: [provider.myStoriesList],
+                                              index: 0,
+                                            ),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
                                     },
                                     child: Container(
                                       width: 55,
@@ -312,7 +320,9 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CustomPostPage(userId: widget.userId,)
+                ? CustomPostPage(
+                    userId: widget.userId,
+                  )
                 : PersonalReelsSubPage(userId: widget.userId),
             const SliverToBoxAdapter(
               child: SizedBox(
