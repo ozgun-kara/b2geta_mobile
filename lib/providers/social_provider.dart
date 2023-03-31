@@ -9,20 +9,7 @@ class SocialProvider with ChangeNotifier {
   List<FeedModel> reelsList = [];
   List<FeedModel> myStoriesList = [];
 
-  SocialProvider() {
-    getFeeds();
-    getReels();
-    getMyStories();
-  }
-
-  String userId = '';
-
-  void updateUserId(String value) {
-    userId = value;
-    notifyListeners();
-  }
-
-  void getFeeds() async {
+  void getFeeds({required String userId}) async {
     await locator<SocialServices>().getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: userId).then((feedList) {
@@ -32,7 +19,7 @@ class SocialProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getReels() async {
+  void getReels({required String userId}) async {
     await locator<SocialServices>().getReelsCall(
         queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
         userId: userId).then((feedList) async {
@@ -42,7 +29,7 @@ class SocialProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getMyStories() async {
+  void getMyStories({required String userId}) async {
     await locator<SocialServices>().getAllMeStoryCall(
         queryParameters: {"offset": "0", "type": "story"},
         userId: userId).then((feedList) {

@@ -188,9 +188,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
                                     fontWeight: FontWeight.w700,
-                                    color: Provider.of<ThemeProvider>(context)
-                                                .themeMode ==
-                                            "light"
+                                    color: themeMode
                                         ? AppTheme.blue3
                                         : AppTheme.white1,
                                   ),

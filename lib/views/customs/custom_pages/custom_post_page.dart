@@ -32,6 +32,12 @@ class _CustomPostPageState extends State<CustomPostPage> {
   @override
   void initState() {
     super.initState();
+    getPostsData();
+  }
+
+  getPostsData() {
+    Provider.of<SocialProvider>(context, listen: false)
+        .getFeeds(userId: widget.userId);
   }
 
   @override
