@@ -76,6 +76,36 @@ class ProductsServices {
     }
   }
 
+  Future<List<ProductModel>> productsListAndSearchCallTest2(
+      {required Map<String, String> queryParameters}) async {
+    List<ProductModel> productList = [];
+
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/products')
+          .replace(queryParameters: queryParameters),
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        var dataList = json.decode(response.body)["data"]['products'];
+
+        for (var i = 0; i < dataList.length; i++) {
+          productList.add(ProductModel.fromJson(dataList[i]));
+        }
+
+        return productList;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return productList;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return productList;
+    }
+  }
+
   // GET PRODUCT (PRODUCT DETAIL)
   getProductCall(
       {required String productId,

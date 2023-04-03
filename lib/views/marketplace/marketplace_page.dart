@@ -222,7 +222,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : true,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCallTest(queryParameters: {
+                      .productsListAndSearchCallTest2(queryParameters: {
                     "limit": '1000000',
                   }),
                   builder: (context, data) {
@@ -386,18 +386,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : false,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .productsListAndSearchCallTest(queryParameters: {
-                    "cid[]": '1',
-                    "cid[]": '2',
-                    "keyword": 'etek',
-                    "f[1]": '5656',
-                    "price[min]": '5',
-                    "price[max]": '15',
-                    "sort": 'price_up',
-                    "sort_method": 'asc',
-                    "stock": '1',
-                    "offset": '0',
-                    "limit": '10',
+                      .productsListAndSearchCallTest2(queryParameters: {
+                    "limit": '10000000',
                   }),
                   builder: (context, data) {
                     if (data.hasData) {
