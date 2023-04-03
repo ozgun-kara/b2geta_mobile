@@ -265,7 +265,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                           .avatar!
                                           .isNotEmpty)
                                   ? Image.network(
-                                      'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                      '${context.watch<UserProvider>().getUser.avatar}',
                                       width: 24,
                                       height: 24,
                                       fit: BoxFit.cover,

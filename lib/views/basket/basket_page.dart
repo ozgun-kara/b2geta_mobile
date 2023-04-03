@@ -40,7 +40,7 @@ class _BasketPageState extends State<BasketPage> {
 
   Future<void> getAllAddress() async {
     await MemberAddressesServices().getAllCall(
-        queryParameters: {"offset": "2", "limit": "10"}).then((value) {
+        queryParameters: {"offset": "2", "limit": "1000000"}).then((value) {
       setState(() {
         addressList = value;
       });
@@ -529,15 +529,15 @@ class _BasketPageState extends State<BasketPage> {
                                                       PageRouteBuilder(
                                                         pageBuilder: (_, __,
                                                                 ___) =>
-                                                            AddAddressSubPage(
+                                                            const AddAddressSubPage(
                                                                 operation:
                                                                     'Add'),
                                                         transitionDuration:
-                                                            Duration(
+                                                            const Duration(
                                                                 milliseconds:
                                                                     0),
                                                         reverseTransitionDuration:
-                                                            Duration(
+                                                            const Duration(
                                                                 milliseconds:
                                                                     0),
                                                         transitionsBuilder:
@@ -705,11 +705,11 @@ class _BasketPageState extends State<BasketPage> {
                                                                     companyInfoList:
                                                                         value),
                                                             transitionDuration:
-                                                                Duration(
+                                                                const Duration(
                                                                     milliseconds:
                                                                         0),
                                                             reverseTransitionDuration:
-                                                                Duration(
+                                                                const Duration(
                                                                     milliseconds:
                                                                         0),
                                                             transitionsBuilder: (_,
@@ -748,11 +748,11 @@ class _BasketPageState extends State<BasketPage> {
                                                                   companyInfoList:
                                                                       value),
                                                           transitionDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       0),
                                                           reverseTransitionDuration:
-                                                              Duration(
+                                                              const Duration(
                                                                   milliseconds:
                                                                       0),
                                                           transitionsBuilder: (_,
