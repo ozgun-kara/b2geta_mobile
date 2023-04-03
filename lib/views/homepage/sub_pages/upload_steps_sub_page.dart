@@ -115,7 +115,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                 .avatar!
                                                 .isNotEmpty)
                                         ? Image.network(
-                                            'https://api.businessucces.com/${context.watch<UserProvider>().getUser.avatar}',
+                                            '${context.watch<UserProvider>().getUser.avatar}',
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) =>

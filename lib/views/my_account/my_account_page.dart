@@ -125,7 +125,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                       .avatar!
                                                       .isNotEmpty)
                                               ? Image.network(
-                                                  "https://api.businessucces.com/${Provider.of<UserProvider>(context).getUser.avatar}",
+                                                  "${Provider.of<UserProvider>(context).getUser.avatar}",
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error,
                                                       stackTrace) {
@@ -161,7 +161,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                   .avatar!
                                                   .isNotEmpty)
                                           ? Image.network(
-                                              "https://api.businessucces.com/${user.avatar}",
+                                              "${user.avatar}",
                                               fit: BoxFit.cover,
                                               errorBuilder:
                                                   (context, error, stackTrace) {
