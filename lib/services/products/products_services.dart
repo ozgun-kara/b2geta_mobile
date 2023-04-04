@@ -46,32 +46,41 @@ class ProductsServices {
 
   // PRODUCTS LIST AND SEARCH (TEST)
   Future<List<ProductModel>> productsListAndSearchCallTest(
-      {required Map<String, String> queryParameters}) async {
+      {required Map<String, String> queryParameters,
+      required String language}) async {
+    final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/products')
+            .replace(queryParameters: queryParameters),
+        headers: Constants.headers);
+
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
     List<ProductModel> productList = [];
 
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/products')
-          .replace(queryParameters: queryParameters),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
-    );
-
     if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE BODY: $responseBody");
+
+      var status = responseBody["status"];
+      var dataList = responseBody["data"]['products'];
 
       if (status == true) {
-        var dataList = json.decode(response.body)["data"]['products'];
-
-        for (var i = 0; i < dataList.length; i++) {
-          productList.add(ProductModel.fromJson(dataList[i]));
+        for (var product in dataList) {
+          productList.add(ProductModel.fromJson(product));
         }
 
         return productList;
       } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return productList;
       }
     } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
       return productList;
     }
   }
