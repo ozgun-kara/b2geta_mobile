@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -36,21 +38,11 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   void initState() {
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
-    getProfile();
     getPersonalProfile(Provider.of<UserProvider>(context, listen: false)
         .getUser
         .id
         .toString());
     super.initState();
-  }
-
-  getProfile() async {
-    await _memberServices.getProfileCall().then((value) async {
-      if (value != null) {
-        Provider.of<UserProvider>(context, listen: false)
-            .updateUserModel(value);
-      }
-    });
   }
 
   getPersonalProfile(String userId) async {

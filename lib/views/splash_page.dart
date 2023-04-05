@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
