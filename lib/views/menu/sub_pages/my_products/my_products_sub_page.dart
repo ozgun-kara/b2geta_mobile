@@ -34,9 +34,8 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
   }
 
   Future<void> getProducts() async {
-    await _productsServices.productsListAndSearchCallTest(
-        queryParameters: {"limit": "50"},
-        language: 'tr').then((value) {
+    await _productsServices.productsListAndSearchCall(
+        queryParameters: {"limit": "50"}, language: 'tr').then((value) {
       setState(() {
         products = value;
       });

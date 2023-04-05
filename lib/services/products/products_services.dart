@@ -48,45 +48,7 @@ class ProductsServices {
   }
 
   // PRODUCTS LIST AND SEARCH
-  Future<List<String>> productsListAndSearchCall(
-      {required Map<String, String> queryParameters}) async {
-    List<String> productList = [];
-
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/products')
-          .replace(queryParameters: queryParameters),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
-    );
-
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        var dataList = json.decode(response.body)["data"]['products'];
-        var totalData =
-            json.decode(response.body)["data"]['pagination']["total_data"];
-        var limit = int.parse(queryParameters["limit"] ?? "0");
-        totalData = int.parse(totalData);
-
-        var dataCount = totalData > limit ? limit : totalData;
-
-        for (var i = 0; i < dataCount; i++) {
-          productList.add(dataList[i]["id"]);
-        }
-
-        return productList;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return productList;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return productList;
-    }
-  }
-
-  // PRODUCTS LIST AND SEARCH (TEST)
-  Future<List<ProductModel>> productsListAndSearchCallTest(
+  Future<List<ProductModel>> productsListAndSearchCall(
       {required Map<String, String> queryParameters,
       required String language}) async {
     final response = await http.get(
@@ -111,6 +73,20 @@ class ProductsServices {
         }
 
         return productList;
+
+        // var dataList = json.decode(response.body)["data"]['products'];
+        // var totalData =
+        // json.decode(response.body)["data"]['pagination']["total_data"];
+        // var limit = int.parse(queryParameters["limit"] ?? "0");
+        // totalData = int.parse(totalData);
+        //
+        // var dataCount = totalData > limit ? limit : totalData;
+        //
+        // for (var i = 0; i < dataCount; i++) {
+        //   productList.add(dataList[i]["id"]);
+        // }
+        //
+        // return productList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint("responseCode: ${responseBody["responseCode"]}");

@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -232,7 +233,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         Provider.of<MyAccountPageProvider>(context).filterSwitch
                             ? false
                             : true,
-                    child: FutureBuilder<List<String>>(
+                    child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
                         "cid[]": '1',
@@ -246,7 +247,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }),
+                      }, language: 'tr'),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;
@@ -272,7 +273,8 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                       PageRouteBuilder(
                                         pageBuilder: (_, __, ___) =>
                                             ProductDetailSubPage(
-                                                productId: productIdList[index],
+                                                productId: productIdList[index]
+                                                    .toString(),
                                                 productName:
                                                     productList["title"]
                                                         .toString(),
@@ -405,7 +407,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         Provider.of<MyAccountPageProvider>(context).filterSwitch
                             ? true
                             : false,
-                    child: FutureBuilder<List<String>>(
+                    child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
                         "cid[]": '1',
@@ -419,7 +421,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }),
+                      }, language: 'tr'),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;
@@ -443,7 +445,8 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
                                                     productId:
-                                                        productIdList[index],
+                                                        productIdList[index]
+                                                            .toString(),
                                                     productName:
                                                         productList["title"]
                                                             .toString(),
