@@ -141,12 +141,8 @@ class GeneralService {
 
   // BRANDS
   Future<List<BrandModel>> brandsCall() async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/brands'),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    );
+    final response = await http.get(Uri.parse('${Constants.apiUrl}/brands'),
+        headers: Constants.headers);
 
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -159,7 +155,7 @@ class GeneralService {
       var status = responseBody["status"];
 
       if (status == true) {
-        var data = responseBody["data"];
+        var data = responseBody["data"]["data"];
         for (var element in data) {
           brandList.add(BrandModel.fromJson(element));
         }
