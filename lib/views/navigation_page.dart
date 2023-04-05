@@ -351,10 +351,10 @@ class _NavigationPageState extends State<NavigationPage> {
               }
             },
             child: Container(
-                height: deviceHeight * .5,
                 padding: EdgeInsets.only(left: deviceWidth * 0.5),
                 color: Colors.transparent,
                 child: Container(
+                  height: deviceHeight * .2,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 8.0, vertical: 16.0),
                   decoration: const BoxDecoration(
