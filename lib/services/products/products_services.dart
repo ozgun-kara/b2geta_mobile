@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
@@ -153,48 +154,51 @@ class ProductsServices {
       required String brand,
       required String price,
       required String currency,
-      required String status}) async {
-    final response = await http
-        .put(Uri.parse('${Constants.apiUrl}/products/create'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": "Bearer ${Constants.userToken}",
-    }, body: {
-      "account_id": accountId,
-      "user_id": Constants.userId,
-      "category_id[]": categoryId,
-      "product_name[tr]": productName,
-      "product_description[tr]": productDescription,
-      "product_summary[tr]": productSummary,
-      "brand": brand,
-      "price": price,
-      "currency": currency,
-      "status": status,
-    });
+      required String status,
+      required List<File> images}) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/products/create'));
+    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    request.fields["account_id"] = accountId;
+    request.fields["user_id"] = Constants.userId!;
+    request.fields["category_id[]"] = categoryId;
+    request.fields["product_name[tr]"] = productName;
+    request.fields["product_description[tr]"] = productDescription;
+    request.fields["product_summary[tr]"] = productSummary;
+    request.fields["brand"] = brand;
+    request.fields["price"] = price;
+    request.fields["currency"] = currency;
+    request.fields["status"] = status;
+
+    List<http.MultipartFile> files = [];
+    for (File file in images) {
+      var f = await http.MultipartFile.fromPath('images[]', file.path);
+      files.add(f);
+    }
+    request.files.addAll(files);
+
+    var response = await request.send();
+
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    debugPrint("RESPONSE $responseString");
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      // debugPrint("RESPONSE DATA: ${response.body}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
-
-      var status = json.decode(response.body)["status"];
+      var status = json.decode(responseString)["status"];
 
       if (status == true) {
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
+            "responseCode: ${json.decode(responseString)["responseCode"]}");
         debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+            "responseText: ${json.decode(responseString)["responseText"]}");
         return false;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      debugPrint("responseCode: ${json.decode(response.body)["responseCode"]}");
-      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
       return false;
     }
   }

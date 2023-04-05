@@ -269,56 +269,63 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                 fontWeight: FontWeight.w700,
                                 color: AppTheme.white1),
                           ),
-                          onPressed: () async {
-                            debugPrint("************************");
-                            debugPrint("accountId: ${widget.accountId}");
-                            debugPrint("categoryId: ${widget.categoryId}");
-                            debugPrint("productName: ${widget.productName}");
-                            debugPrint(
-                                "productDescription: ${widget.productDescription}");
-                            debugPrint(
-                                "productSummary: ${widget.productSummary}");
-                            debugPrint("brand: ${widget.brand}");
-                            debugPrint("price: ${widget.price}");
-                            debugPrint("currency: ${widget.currency}");
-                            debugPrint("status: ${widget.status}");
+                          onPressed: () {
+                            if (menuPageProvider.imageFilesList!.isNotEmpty) {
+                              debugPrint("************************");
+                              debugPrint("accountId: ${widget.accountId}");
+                              debugPrint("categoryId: ${widget.categoryId}");
+                              debugPrint("productName: ${widget.productName}");
+                              debugPrint(
+                                  "productDescription: ${widget.productDescription}");
+                              debugPrint(
+                                  "productSummary: ${widget.productSummary}");
+                              debugPrint("brand: ${widget.brand}");
+                              debugPrint("price: ${widget.price}");
+                              debugPrint("currency: ${widget.currency}");
+                              debugPrint("status: ${widget.status}");
 
-                            locator<ProductsServices>()
-                                .addProductCall(
-                              accountId: widget.accountId,
-                              categoryId: widget.categoryId,
-                              productName: widget.productName,
-                              productDescription: widget.productDescription,
-                              productSummary: widget.productSummary,
-                              brand: widget.brand,
-                              price: widget.price,
-                              currency: widget.currency,
-                              status: widget.status,
-                            )
-                                .then((value) {
-                              if (value == true) {
-                                debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
+                              locator<ProductsServices>()
+                                  .addProductCall(
+                                      accountId: widget.accountId,
+                                      categoryId: widget.categoryId,
+                                      productName: widget.productName,
+                                      productDescription:
+                                          widget.productDescription,
+                                      productSummary: widget.productSummary,
+                                      brand: widget.brand,
+                                      price: widget.price,
+                                      currency: widget.currency,
+                                      status: widget.status,
+                                      images: menuPageProvider.imageFilesList!)
+                                  .then((value) {
+                                if (value == true) {
+                                  debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
 
-                                menuPageProvider.clearSelectedImageFilesList();
+                                  menuPageProvider
+                                      .clearSelectedImageFilesList();
 
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) =>
-                                          const ProductAddedSubPage(),
-                                      transitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      reverseTransitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      transitionsBuilder: (_, a, __, c) =>
-                                          FadeTransition(opacity: a, child: c),
-                                    ),
-                                    (route) => route.isFirst);
-                              } else {
-                                debugPrint("PRODUCT HAS NOT ADDED");
-                                operationFailedDialog(context);
-                              }
-                            });
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            const ProductAddedSubPage(),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ),
+                                      (route) => route.isFirst);
+                                } else {
+                                  debugPrint("PRODUCT HAS NOT ADDED");
+                                  operationFailedDialog(context);
+                                }
+                              });
+                            } else {
+                              validationErrorDialog(context);
+                            }
                           });
                     },
                   ),
@@ -329,6 +336,82 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void validationErrorDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Validation Error Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                          elevation: 0,
+                          color:
+                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(16)),
+                          ),
+                          child: Text(
+                            'Close'.tr,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w700,
+                                color: AppTheme.white1),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          }),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
