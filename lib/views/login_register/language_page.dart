@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -153,11 +154,16 @@ class _LanguagePageState extends State<LanguagePage> {
                             box.write("language", "en_US");
                             var locale = const Locale('en', 'US');
                             Get.updateLocale(locale);
+                            Constants.language = 'en';
                           } else if (value == "Turkish") {
                             box.write("language", "tr_TR");
                             var locale = const Locale('tr', 'TR');
                             Get.updateLocale(locale);
+                            Constants.language = 'tr';
                           }
+
+                          debugPrint("LANGUAGE:${Constants.language}");
+
                           // else if (value == "Deutsche") {
                           //   var locale = const Locale('de', 'DE');
                           //   Get.updateLocale(locale);

@@ -7,13 +7,12 @@ import 'package:http/http.dart' as http;
 class CategoriesServices {
   // CATEGORIES
   Future<List<CategoryModel>> categoriesCall(
-      {required Map<String, String> queryParameters,
-      required String language}) async {
+      {required Map<String, String> queryParameters}) async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/categories')
           .replace(queryParameters: queryParameters),
       headers: {
-        "Accept-Language": language,
+        "Accept-Language": Constants.language!,
       },
     );
 

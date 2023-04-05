@@ -10,6 +10,7 @@ import 'package:b2geta_mobile/views/login_register/language_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -32,7 +33,9 @@ class _SplashPageState extends State<SplashPage> {
   final MemberServices _memberServices = MemberServices();
 
   checkToken() async {
+    GetStorage box = GetStorage();
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     String? token = prefs.getString("Token");
 
     if (token == null) {
@@ -65,6 +68,9 @@ class _SplashPageState extends State<SplashPage> {
       debugPrint("TOKEN:${Constants.userToken}");
       Constants.userId = prefs.getString("UserId");
       debugPrint("USER ID:${Constants.userId}");
+      Constants.language = box.read("language") == "tr_TR" ? 'tr' : 'en';
+      debugPrint("LANGUAGE:${Constants.language}");
+
       await _memberServices.getProfileCall().then((value) {
         if (value != null) {
           Provider.of<UserProvider>(context, listen: false)

@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -300,11 +301,16 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                               box.write("language", "en_US");
                               var locale = const Locale('en', 'US');
                               Get.updateLocale(locale);
+                              Constants.language = 'en';
                             } else if (value == "Turkish") {
                               box.write("language", "tr_TR");
                               var locale = const Locale('tr', 'TR');
                               Get.updateLocale(locale);
+                              Constants.language = 'tr';
                             }
+
+                            debugPrint("LANGUAGE:${Constants.language}");
+
                             // else if (value == "Deutsche") {
                             //   var locale = const Locale('de', 'DE');
                             //   Get.updateLocale(locale);
