@@ -1,6 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/sub_pages/forgot_password_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
@@ -401,6 +404,16 @@ class _LoginPageState extends State<LoginPage> {
                                                             .trim())
                                                 .then((value) async {
                                               if (value.isEmpty) {
+                                                await _memberServices
+                                                    .getProfileCall()
+                                                    .then((value) async {
+                                                  if (value != null) {
+                                                    Provider.of<UserProvider>(
+                                                            context,
+                                                            listen: false)
+                                                        .updateUserModel(value);
+                                                  }
+                                                });
                                                 return Navigator
                                                     .pushAndRemoveUntil(
                                                         context,
