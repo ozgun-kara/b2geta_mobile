@@ -6,6 +6,47 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class ProductsServices {
+  // PRODUCTS LIST AND SEARCH (ALL PRODUCT FOR MARKETPLACE PAGE ETC.)
+  Future<List<ProductModel>> allProductsListAndSearchCall(
+      {required Map<String, String> queryParameters}) async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/products')
+          .replace(queryParameters: queryParameters),
+    );
+
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<ProductModel> productList = [];
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE BODY: $responseBody");
+
+      var status = responseBody["status"];
+
+      if (status == true) {
+        var dataList = responseBody["data"]['products'];
+
+        for (var product in dataList) {
+          productList.add(ProductModel.fromJson(product));
+        }
+
+        return productList;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return productList;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return productList;
+    }
+  }
+
   // PRODUCTS LIST AND SEARCH
   Future<List<String>> productsListAndSearchCall(
       {required Map<String, String> queryParameters}) async {
@@ -81,36 +122,6 @@ class ProductsServices {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
-      return productList;
-    }
-  }
-
-  Future<List<ProductModel>> productsListAndSearchCallTest2(
-      {required Map<String, String> queryParameters}) async {
-    List<ProductModel> productList = [];
-
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/products')
-          .replace(queryParameters: queryParameters),
-    );
-
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        var dataList = json.decode(response.body)["data"]['products'];
-
-        for (var i = 0; i < dataList.length; i++) {
-          productList.add(ProductModel.fromJson(dataList[i]));
-        }
-
-        return productList;
-      } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return productList;
-      }
-    } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return productList;
     }
   }
