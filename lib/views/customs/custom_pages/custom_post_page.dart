@@ -177,9 +177,7 @@ class _CustomPostPageState extends State<CustomPostPage> {
                         right: 36,
                       ),
                       child: Text(
-                        feed.content!.length > 1
-                            ? feed.content.toString()
-                            : "Content Text",
+                        feed.content!.length > 1 ? feed.content.toString() : "",
                         style: TextStyle(
                           fontSize: 14,
                           fontFamily: AppTheme.appFontFamily,
