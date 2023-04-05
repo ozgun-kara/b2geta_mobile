@@ -246,7 +246,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }, language: 'tr'),
+                      }),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;
@@ -420,7 +420,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }, language: 'tr'),
+                      }),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;

@@ -247,7 +247,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }, language: 'tr'),
+                      }),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;
@@ -421,7 +421,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                         "stock": '1',
                         "offset": '0',
                         "limit": '10',
-                      }, language: 'tr'),
+                      }),
                       builder: (context, data) {
                         if (data.hasData) {
                           var productIdList = data.data;

@@ -49,12 +49,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     children: [
                       Expanded(
                         child: Text(
-                          "Mobilya ve Dekorasyon   -   Ofis Mobilyaları",
+                          'Marketplace Page Route'.tr,
                           style: TextStyle(
                             fontSize: 12,
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w500,
-                            color: AppTheme.white15,
+                            color: AppTheme.white24,
                           ),
                         ),
                       ),

@@ -205,6 +205,7 @@ final Map<String, String> en = {
   'Your post has been shared': 'Your post has been shared',
 
   // MARKETPLACE PAGE
+  'Marketplace Page Route': 'Homepage - Marketplace',
   'Results': 'Results',
   'Minimum Order': 'min. order',
   'Contact to Supplier': 'Contact to Supplier',
