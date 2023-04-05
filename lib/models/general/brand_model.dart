@@ -4,26 +4,31 @@
 class BrandModel {
 /*
 {
-  "id": "1",
-  "name": "My Band"
+  "id": "2",
+  "name": "Our Brand",
+  "status": "private"
 }
 */
 
   String? id;
   String? name;
+  String? status;
 
   BrandModel({
     this.id,
     this.name,
+    this.status,
   });
   BrandModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
     name = json['name']?.toString();
+    status = json['status']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['status'] = status;
     return data;
   }
 }
