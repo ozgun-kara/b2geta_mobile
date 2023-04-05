@@ -67,7 +67,9 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
           Container(
             width: deviceWidth,
             padding: const EdgeInsets.only(left: 12),
-            child: Row(
+            child: Wrap(
+              spacing: 32,
+              runSpacing: 4,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -124,13 +126,15 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                       const SizedBox(
                         width: 11.0,
                       ),
-                      Text(
-                        widget.user.name.toString(),
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w700,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                      Center(
+                        child: Text(
+                          widget.user.name.toString(),
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
                         ),
                       ),
                     ],
@@ -397,7 +401,7 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                 ),
                 Expanded(
                   child: SizedBox(
-                    height: 32.0,
+                    // height: 32.0,
                     child: TextField(
                       controller: _commentTextController,
                       style: TextStyle(
@@ -407,7 +411,7 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                           color: themeMode ? AppTheme.blue3 : AppTheme.white1),
                       decoration: InputDecoration(
                         contentPadding:
-                            const EdgeInsets.only(left: 14, top: 11),
+                            const EdgeInsets.fromLTRB(20, 17, 20, 17),
                         filled: true,
                         fillColor: themeMode
                             ? const Color(0XFFFAFBFE)
