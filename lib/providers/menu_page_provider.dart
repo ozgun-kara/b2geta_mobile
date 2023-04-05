@@ -52,7 +52,6 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   // MY PRODUCTS SUBPAGE
-  GetStorage box = GetStorage();
   List<CategoryModel> categoryList = [];
   String? selectedCategory;
   List<BrandModel> brandList = [];
@@ -64,9 +63,8 @@ class MenuPageProvider with ChangeNotifier {
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
-    categoryList = await locator<CategoriesServices>().categoriesCall(
-        queryParameters: {"parent_id": '707'},
-        language: box.read("language") == "tr_TR" ? 'tr' : 'en');
+    categoryList = await locator<CategoriesServices>()
+        .categoriesCall(queryParameters: {"parent_id": '707'});
     notifyListeners();
   }
 
