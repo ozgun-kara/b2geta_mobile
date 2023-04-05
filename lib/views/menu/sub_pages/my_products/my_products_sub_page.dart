@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -53,7 +52,6 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
       appBar: const CustomAppBar(),
       body: SingleChildScrollView(
-        controller: controller,
         child: Column(
           children: [
             Container(
@@ -373,71 +371,73 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                       const SizedBox(
                         height: 27,
                       ),
-                      Text(
-                        '1–10 of 24',
-                        style: TextStyle(
-                          fontFamily: AppTheme.appFontFamily,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MaterialButton(
-                              minWidth: 0,
-                              height: 39,
-                              color: AppTheme.white42,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                              ),
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 19, vertical: 13),
-                              child: Image.asset(
-                                'assets/icons/back-3.png',
-                                color: themeMode
-                                    ? AppTheme.white1
-                                    : AppTheme.black29,
-                                height: 13,
-                                width: 27,
-                              ),
-                              onPressed: () {}),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          MaterialButton(
-                              minWidth: 0,
-                              height: 39,
-                              color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.blue2,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
-                              ),
-                              elevation: 0,
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 19, vertical: 13),
-                              child: Image.asset(
-                                'assets/icons/arrow_next.png',
-                                color: AppTheme.white1,
-                                height: 13,
-                                width: 27,
-                              ),
-                              onPressed: () {}),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 37,
-                      ),
                     ],
                   )
                 : const SizedBox(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 120,
+        child: Column(
+          children: [
+            Text(
+              '1–10 of 24',
+              style: TextStyle(
+                fontFamily: AppTheme.appFontFamily,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+              ),
+            ),
+            const SizedBox(
+              height: 14,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MaterialButton(
+                    minWidth: 0,
+                    height: 39,
+                    color: AppTheme.white42,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 19, vertical: 13),
+                    child: Image.asset(
+                      'assets/icons/back-3.png',
+                      color: themeMode ? AppTheme.white1 : AppTheme.black29,
+                      height: 13,
+                      width: 27,
+                    ),
+                    onPressed: () {}),
+                const SizedBox(
+                  width: 10,
+                ),
+                MaterialButton(
+                    minWidth: 0,
+                    height: 39,
+                    color: themeMode ? AppTheme.blue3 : AppTheme.blue2,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 19, vertical: 13),
+                    child: Image.asset(
+                      'assets/icons/arrow_next.png',
+                      color: AppTheme.white1,
+                      height: 13,
+                      width: 27,
+                    ),
+                    onPressed: () {}),
+              ],
+            ),
+            const SizedBox(
+              height: 37,
+            ),
           ],
         ),
       ),
