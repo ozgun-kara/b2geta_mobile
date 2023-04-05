@@ -200,6 +200,7 @@ final Map<String, String> tr = {
   'Your post has been shared': 'Gönderiniz paylaşıldı',
 
   // MARKETPLACE PAGE
+  'Marketplace Page Route': 'Ana Sayfa - Pazaryeri',
   'Results': 'Sonuçlar',
   'Minimum Order': 'adet min. sipariş',
   'Contact to Supplier': 'Tedarikçiye Ulaşın',

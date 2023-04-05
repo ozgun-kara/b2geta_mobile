@@ -10,10 +10,8 @@ class ProductsServices {
   // PRODUCTS LIST AND SEARCH (ALL PRODUCT FOR MARKETPLACE PAGE ETC.)
   Future<List<ProductModel>> allProductsListAndSearchCall(
       {required Map<String, String> queryParameters}) async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/products')
-          .replace(queryParameters: queryParameters),
-    );
+    final response = await http.get(Uri.parse('${Constants.apiUrl}/products')
+        .replace(queryParameters: queryParameters));
 
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -50,8 +48,7 @@ class ProductsServices {
 
   // PRODUCTS LIST AND SEARCH
   Future<List<ProductModel>> productsListAndSearchCall(
-      {required Map<String, String> queryParameters,
-      required String language}) async {
+      {required Map<String, String> queryParameters}) async {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/products')
             .replace(queryParameters: queryParameters),
@@ -158,13 +155,14 @@ class ProductsServices {
       required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/create'));
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    request.headers.addAll(Constants.headers);
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
     request.fields["category_id[]"] = categoryId;
-    request.fields["product_name[tr]"] = productName;
-    request.fields["product_description[tr]"] = productDescription;
-    request.fields["product_summary[tr]"] = productSummary;
+    request.fields["product_name[${Constants.language}]"] = productName;
+    request.fields["product_description[${Constants.language}]"] =
+        productDescription;
+    request.fields["product_summary[${Constants.language}]"] = productSummary;
     request.fields["brand"] = brand;
     request.fields["price"] = price;
     request.fields["currency"] = currency;
@@ -264,21 +262,11 @@ class ProductsServices {
     required String productId,
   }) async {
     final response = await http.delete(
-      Uri.parse('${Constants.apiUrl}/products/delete/$productId'),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
-    );
+        Uri.parse('${Constants.apiUrl}/products/delete/$productId'),
+        headers: Constants.headers);
 
     if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        return true;
-      } else {
-        return false;
-      }
+      return true;
     } else {
       return false;
     }

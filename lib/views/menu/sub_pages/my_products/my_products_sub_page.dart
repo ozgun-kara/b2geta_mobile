@@ -34,7 +34,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
 
   Future<void> getProducts() async {
     await _productsServices.productsListAndSearchCall(
-        queryParameters: {"limit": "50"}, language: 'tr').then((value) {
+        queryParameters: {"limit": "50"}).then((value) {
       setState(() {
         products = value;
       });
@@ -185,6 +185,9 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                                 ),
                                               ),
                                               onPressed: () async {
+                                                debugPrint(
+                                                    "PRODUCT ID: ${product.id}");
+
                                                 return await alertDialog(
                                                     message:
                                                         'Silmek istediğinizden emin misiniz?',
