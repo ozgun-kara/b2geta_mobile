@@ -87,7 +87,7 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                     context,
                                     PageRouteBuilder(
                                       pageBuilder: (_, __, ___) =>
-                                          feed.type != 'company'
+                                          feed.user!.type != 'company'
                                               ? PersonalProfilePage(
                                                   userId: feed.user!.id ?? '')
                                               : CompanyProfilePage(
