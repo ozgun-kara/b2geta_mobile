@@ -157,7 +157,9 @@ class GeneralService {
       if (status == true) {
         var data = responseBody["data"]["data"];
         for (var element in data) {
-          brandList.add(BrandModel.fromJson(element));
+          if (BrandModel.fromJson(element).status == 'open') {
+            brandList.add(BrandModel.fromJson(element));
+          }
         }
         return brandList;
       } else {
