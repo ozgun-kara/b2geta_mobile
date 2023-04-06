@@ -304,6 +304,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                   menuPageProvider
                                       .clearSelectedImageFilesList();
 
+                                  var count = 0;
+
                                   Navigator.pushAndRemoveUntil(
                                       context,
                                       PageRouteBuilder(
@@ -316,8 +318,9 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                         transitionsBuilder: (_, a, __, c) =>
                                             FadeTransition(
                                                 opacity: a, child: c),
-                                      ),
-                                      (route) => route.isFirst);
+                                      ), (route) {
+                                    return count++ == 2;
+                                  }).then((_) => setState(() {}));
                                 } else {
                                   debugPrint("PRODUCT HAS NOT ADDED");
                                   operationFailedDialog(context);

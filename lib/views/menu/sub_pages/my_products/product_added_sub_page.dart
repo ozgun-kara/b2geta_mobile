@@ -74,7 +74,7 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
+                  Navigator.push(
                       context,
                       PageRouteBuilder(
                         pageBuilder: (_, __, ___) => const MyProductsSubPage(),
@@ -83,8 +83,7 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
                             const Duration(milliseconds: 0),
                         transitionsBuilder: (_, a, __, c) =>
                             FadeTransition(opacity: a, child: c),
-                      ),
-                      (route) => route.isFirst);
+                      ));
                 }),
           ],
         ));

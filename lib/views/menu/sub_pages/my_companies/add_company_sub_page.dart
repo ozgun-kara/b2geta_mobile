@@ -903,6 +903,8 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       debugPrint(
                                           "COMPANY HAS SUCCESSFULLY ADDED");
 
+                                      var count = 0;
+
                                       Navigator.pushAndRemoveUntil(
                                           context,
                                           PageRouteBuilder(
@@ -916,8 +918,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
-                                          ),
-                                          (route) => route.isFirst);
+                                          ), (route) {
+                                        return count++ == 2;
+                                      });
                                     } else {
                                       debugPrint("COMPANY HAS NOT ADDED");
                                       operationFailedDialog(context);
