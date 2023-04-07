@@ -1,8 +1,12 @@
+import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -401,7 +405,246 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                 delegate: SliverChildBuilderDelegate(
                                   childCount: 1,
                                   (context, index) {
-                                    return Container(height: deviceHeight);
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16.0),
+                                      child: SizedBox(
+                                        height: deviceHeight,
+                                        child:
+                                            FutureBuilder<List<ProductModel>>(
+                                          future: ProductsServices()
+                                              .productsListAndSearchCall(
+                                                  queryParameters: {
+                                                "limit": '1000000',
+                                              }),
+                                          builder: (context, data) {
+                                            if (data.hasData) {
+                                              var productList = data.data;
+                                              if (productList!.isNotEmpty) {
+                                                return GridView.builder(
+                                                  controller: scrollController,
+                                                  shrinkWrap: true,
+                                                  itemCount: productList.length,
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          14, 0, 14, 0),
+                                                  gridDelegate:
+                                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                                    crossAxisCount: 2,
+                                                    crossAxisSpacing: 10,
+                                                    mainAxisSpacing: 21,
+                                                    mainAxisExtent: 304,
+                                                  ),
+                                                  itemBuilder:
+                                                      ((context, index) {
+                                                    var product =
+                                                        productList[index];
+
+                                                    return InkWell(
+                                                      onTap: () {
+                                                        Navigator.push(
+                                                            context,
+                                                            PageRouteBuilder(
+                                                              pageBuilder: (_,
+                                                                      __,
+                                                                      ___) =>
+                                                                  ProductDetailSubPage(
+                                                                productId:
+                                                                    product.id!,
+                                                                productName:
+                                                                    product
+                                                                        .name!
+                                                                        .tr!,
+                                                                imageUrl: product
+                                                                        .images!
+                                                                        .isNotEmpty
+                                                                    ? product
+                                                                        .images![0]!
+                                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                                price: product
+                                                                    .price
+                                                                    .toString(),
+                                                              ),
+                                                              transitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              reverseTransitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              transitionsBuilder: (_,
+                                                                      a,
+                                                                      __,
+                                                                      c) =>
+                                                                  FadeTransition(
+                                                                      opacity:
+                                                                          a,
+                                                                      child: c),
+                                                            ));
+                                                      },
+                                                      child: Container(
+                                                        decoration:
+                                                            const BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent),
+                                                        child: Column(
+                                                          children: [
+                                                            Container(
+                                                              // width: 126,
+                                                              // height: 145,
+                                                              width:
+                                                                  deviceWidth,
+                                                              height: 206,
+                                                              decoration:
+                                                                  const BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .all(
+                                                                  Radius
+                                                                      .circular(
+                                                                          9),
+                                                                ),
+                                                              ),
+                                                              child:
+                                                                  Image.network(
+                                                                product.images!
+                                                                        .isNotEmpty
+                                                                    ? product
+                                                                        .images![0]!
+                                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                                height: 11),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                  product
+                                                                      .name!.tr
+                                                                      .toString(),
+                                                                  maxLines: 1,
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: themeMode
+                                                                        ? AppTheme
+                                                                            .blue3
+                                                                        : AppTheme
+                                                                            .white11,
+                                                                  ),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height: 2),
+                                                                RichText(
+                                                                    text: TextSpan(
+                                                                        children: [
+                                                                      TextSpan(
+                                                                        text:
+                                                                            "${product.price.toString()} ",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontFamily:
+                                                                              AppTheme.appFontFamily,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          color: themeMode
+                                                                              ? AppTheme.blue2
+                                                                              : AppTheme.white1,
+                                                                        ),
+                                                                      ),
+                                                                      TextSpan(
+                                                                        text:
+                                                                            "₺",
+                                                                        style:
+                                                                            TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          fontWeight:
+                                                                              FontWeight.w500,
+                                                                          color: themeMode
+                                                                              ? AppTheme.blue2
+                                                                              : AppTheme.white1,
+                                                                        ),
+                                                                      )
+                                                                    ])),
+                                                                const SizedBox(
+                                                                    height: 2),
+                                                                Text(
+                                                                  "10 ${'Minimum Order'.tr}",
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    color: AppTheme
+                                                                        .white15,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }),
+                                                );
+                                              } else {
+                                                return SizedBox(
+                                                  width: deviceWidth,
+                                                  height: deviceHeight - 200,
+                                                  child: Center(
+                                                      child: Text(
+                                                    "Ürün bulunmamaktadır.",
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  )),
+                                                );
+                                              }
+                                            } else {
+                                              return SizedBox(
+                                                height: deviceWidth + 115,
+                                                child: Center(
+                                                    child:
+                                                        CupertinoActivityIndicator(
+                                                  color: themeMode
+                                                      ? AppTheme.black1
+                                                      : AppTheme.white1,
+                                                  radius: 12,
+                                                )),
+                                              );
+                                            }
+                                          },
+                                        ),
+                                      ),
+                                    );
                                   },
                                 ),
                               )

@@ -1,11 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/dummy_data/product_list_page_dummy.dart';
-import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -14,7 +13,8 @@ class CompanyProductsSubPage extends StatefulWidget {
   const CompanyProductsSubPage({Key? key}) : super(key: key);
 
   @override
-  State<CompanyProductsSubPage> createState() => _CompanyProductsSubPageState();
+  State<CompanyProductsSubPage> createState() =>
+      _CompanyProductsSubPageState();
 }
 
 class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
@@ -57,9 +57,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w500,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
+                                  color: themeMode
                                       ? AppTheme.blue3
                                       : AppTheme.white1,
                                 ),
@@ -73,9 +71,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
                                   fontWeight: FontWeight.w700,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
+                                  color: themeMode
                                       ? AppTheme.blue3
                                       : AppTheme.white1,
                                 ),
@@ -91,9 +87,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                               decoration: BoxDecoration(
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(13)),
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
+                                color: themeMode
                                     ? AppTheme.white4
                                     : AppTheme.black15,
                               ),
@@ -102,7 +96,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                 children: [
                                   InkWell(
                                     onTap: () {
-                                      Provider.of<CompanyProfilePageProvider>(
+                                      Provider.of<MarketPlacePageProvider>(
                                               context,
                                               listen: false)
                                           .updateFilterSwitch(false);
@@ -114,14 +108,11 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(11)),
                                           color:
-                                              Provider.of<CompanyProfilePageProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .filterSwitch ==
                                                       false
-                                                  ? Provider.of<ThemeProvider>(
-                                                                  context)
-                                                              .themeMode ==
-                                                          "light"
+                                                  ? themeMode
                                                       ? AppTheme.white1
                                                       : AppTheme.black4
                                                   : Colors.transparent),
@@ -132,20 +123,14 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                             width: 17.06,
                                             height: 17.06,
                                             color:
-                                                Provider.of<CompanyProfilePageProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .filterSwitch ==
                                                         false
-                                                    ? Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
+                                                    ? themeMode
                                                         ? AppTheme.black8
                                                         : AppTheme.white17
-                                                    : Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
+                                                    : themeMode
                                                         ? AppTheme.white18
                                                         : AppTheme.black8),
                                       ),
@@ -154,7 +139,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                   const SizedBox(width: 4),
                                   InkWell(
                                     onTap: () {
-                                      Provider.of<CompanyProfilePageProvider>(
+                                      Provider.of<MarketPlacePageProvider>(
                                               context,
                                               listen: false)
                                           .updateFilterSwitch(true);
@@ -166,14 +151,11 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           borderRadius: const BorderRadius.all(
                                               Radius.circular(11)),
                                           color:
-                                              Provider.of<CompanyProfilePageProvider>(
+                                              Provider.of<MarketPlacePageProvider>(
                                                               context)
                                                           .filterSwitch ==
                                                       true
-                                                  ? Provider.of<ThemeProvider>(
-                                                                  context)
-                                                              .themeMode ==
-                                                          "light"
+                                                  ? themeMode
                                                       ? AppTheme.white1
                                                       : AppTheme.black4
                                                   : Colors.transparent),
@@ -184,20 +166,14 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                             width: 14.62,
                                             height: 13.38,
                                             color:
-                                                Provider.of<CompanyProfilePageProvider>(
+                                                Provider.of<MarketPlacePageProvider>(
                                                                 context)
                                                             .filterSwitch ==
                                                         true
-                                                    ? Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
+                                                    ? themeMode
                                                         ? AppTheme.black8
-                                                        : AppTheme.white17
-                                                    : Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
+                                                        : AppTheme.white1
+                                                    : themeMode
                                                         ? AppTheme.white18
                                                         : AppTheme.black8),
                                       ),
@@ -213,9 +189,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                 'assets/icons/filter.png',
                                 width: 24,
                                 height: 24,
-                                color: Provider.of<ThemeProvider>(context)
-                                            .themeMode ==
-                                        "light"
+                                color: themeMode
                                     ? AppTheme.blue2
                                     : AppTheme.white12,
                               ),
@@ -228,172 +202,166 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                   ),
                   const SizedBox(height: 11),
                   Visibility(
-                    visible: Provider.of<CompanyProfilePageProvider>(context)
+                    visible: Provider.of<MarketPlacePageProvider>(context)
                             .filterSwitch
                         ? false
                         : true,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
-                        "cid[]": '1',
-                        "cid[]": '2',
-                        "keyword": 'etek',
-                        "f[1]": '5656',
-                        "price[min]": '5',
-                        "price[max]": '15',
-                        "sort": 'price_up',
-                        "sort_method": 'asc',
-                        "stock": '1',
-                        "offset": '0',
-                        "limit": '10',
+                        "limit": '1000000',
                       }),
                       builder: (context, data) {
                         if (data.hasData) {
-                          var productIdList = data.data;
-                          return GridView.builder(
-                            controller: scrollController,
-                            shrinkWrap: true,
-                            itemCount: productIdList!.length,
-                            padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 21,
-                              mainAxisExtent: 304,
-                            ),
-                            itemBuilder: ((context, index) {
-                              var productList = productListPageDummyData[index];
+                          var productList = data.data;
+                          if (productList!.isNotEmpty) {
+                            return GridView.builder(
+                              controller: scrollController,
+                              shrinkWrap: true,
+                              itemCount: productList.length,
+                              padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 21,
+                                mainAxisExtent: 304,
+                              ),
+                              itemBuilder: ((context, index) {
+                                var product = productList[index];
 
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            ProductDetailSubPage(
-                                                productId: productIdList[index]
-                                                    .toString(),
-                                                productName:
-                                                    productList["title"]
-                                                        .toString(),
-                                                imageUrl: productList["imgUrl"]
-                                                    .toString(),
-                                                price: productList["price"]
-                                                    .toString()),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
-                                      ));
-                                },
-                                child: Container(
-                                  decoration: const BoxDecoration(
-                                      color: Colors.transparent),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        // width: 126,
-                                        // height: 145,
-                                        width: deviceWidth,
-                                        height: 206,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(9),
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              ProductDetailSubPage(
+                                            productId: product.id!,
+                                            productName: product.name!.tr!,
+                                            imageUrl: product.images!.isNotEmpty
+                                                ? product.images![0]!
+                                                : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                            price: product.price.toString(),
                                           ),
-                                        ),
-                                        child: Image.network(
-                                          productList["imgUrl"].toString(),
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 11),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            productList["title"].toString(),
-                                            maxLines: 2,
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white11,
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
+                                        ));
+                                  },
+                                  child: Container(
+                                    decoration: const BoxDecoration(
+                                        color: Colors.transparent),
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          // width: 126,
+                                          // height: 145,
+                                          width: deviceWidth,
+                                          height: 206,
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(9),
                                             ),
                                           ),
-                                          const SizedBox(height: 2),
-                                          RichText(
-                                              text: TextSpan(children: [
-                                            TextSpan(
-                                              text: "${productList["price"]} ",
+                                          child: Image.network(
+                                            product.images!.isNotEmpty
+                                                ? product.images![0]!
+                                                : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 11),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              product.name!.tr.toString(),
+                                              maxLines: 1,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 12,
                                                 fontFamily:
                                                     AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
+                                                color: themeMode
+                                                    ? AppTheme.blue3
+                                                    : AppTheme.white11,
                                               ),
                                             ),
-                                            TextSpan(
-                                              text: "₺",
+                                            const SizedBox(height: 2),
+                                            RichText(
+                                                text: TextSpan(children: [
+                                              TextSpan(
+                                                text:
+                                                    "${product.price.toString()} ",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: themeMode
+                                                      ? AppTheme.blue2
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: "₺",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: themeMode
+                                                      ? AppTheme.blue2
+                                                      : AppTheme.white1,
+                                                ),
+                                              )
+                                            ])),
+                                            const SizedBox(height: 2),
+                                            Text(
+                                              "10 ${'Minimum Order'.tr}",
                                               style: TextStyle(
-                                                fontSize: 16,
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
+                                                color: AppTheme.white15,
                                               ),
-                                            )
-                                          ])),
-                                          const SizedBox(height: 2),
-                                          Text(
-                                            "10" + " " + 'Minimum Order'.tr,
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppTheme.white15,
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                          ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                );
+                              }),
+                            );
+                          } else {
+                            return SizedBox(
+                              width: deviceWidth,
+                              height: deviceHeight - 200,
+                              child: Center(
+                                  child: Text(
+                                "Ürün bulunmamaktadır.",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              );
-                            }),
-                          );
+                              )),
+                            );
+                          }
                         } else {
                           return SizedBox(
                             height: deviceWidth + 115,
                             child: Center(
                                 child: CupertinoActivityIndicator(
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
+                              color:
+                                  themeMode ? AppTheme.black1 : AppTheme.white1,
                               radius: 12,
                             )),
                           );
@@ -402,40 +370,35 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                     ),
                   ),
                   Visibility(
-                    visible: Provider.of<CompanyProfilePageProvider>(context)
+                    visible: Provider.of<MarketPlacePageProvider>(context)
                             .filterSwitch
                         ? true
                         : false,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
-                        "cid[]": '1',
-                        "cid[]": '2',
-                        "keyword": 'etek',
-                        "f[1]": '5656',
-                        "price[min]": '5',
-                        "price[max]": '15',
-                        "sort": 'price_up',
-                        "sort_method": 'asc',
-                        "stock": '1',
-                        "offset": '0',
-                        "limit": '10',
+                        "limit": '10000000',
                       }),
                       builder: (context, data) {
                         if (data.hasData) {
-                          var productIdList = data.data;
+                          var productList = data.data;
 
-                          return ListView.builder(
+                          if (productList!.isNotEmpty) {
+                            return ListView.separated(
                               controller: scrollController,
                               shrinkWrap: true,
-                              itemCount: productIdList!.length,
+                              padding: const EdgeInsets.all(0),
+                              itemCount: productList.length,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(height: 8);
+                              },
                               itemBuilder: ((context, index) {
-                                var productList =
-                                    productListPageDummyData[index];
+                                var product = productList[index];
 
                                 return Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(12, 0, 12, 8),
+                                      const EdgeInsets.fromLTRB(12, 0, 12, 0),
                                   child: InkWell(
                                     onTap: () {
                                       Navigator.push(
@@ -443,16 +406,15 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                    productId:
-                                                        productIdList[index]
-                                                            .toString(),
+                                                    productId: product.id!,
                                                     productName:
-                                                        productList["title"]
-                                                            .toString(),
-                                                    imageUrl:
-                                                        productList["imgUrl"]
-                                                            .toString(),
-                                                    price: productList["price"]
+                                                        product.name!.tr!,
+                                                    imageUrl: product
+                                                            .images!.isNotEmpty
+                                                        ? product.images![0]
+                                                            .toString()
+                                                        : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                    price: product.price
                                                         .toString()),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
@@ -467,12 +429,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                       decoration: BoxDecoration(
                                         borderRadius: const BorderRadius.all(
                                             Radius.circular(3)),
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.white1
-                                                : AppTheme.black7,
+                                        color: themeMode
+                                            ? AppTheme.white1
+                                            : AppTheme.black7,
                                         boxShadow: [
                                           BoxShadow(
                                             blurStyle: BlurStyle.normal,
@@ -498,9 +457,10 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                               ),
                                             ),
                                             child: Image.network(
-                                              productListPageDummyData[index]
-                                                      ["imgUrl"]
-                                                  .toString(),
+                                              product.images!.isNotEmpty
+                                                  ? product.images![0]
+                                                      .toString()
+                                                  : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -509,47 +469,40 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              //? bu kısım sorulacak.
                                               SizedBox(
                                                 width: deviceWidth -
                                                     (24 + 16 + 126 + 10),
-                                                height: 35,
                                                 child: Text(
-                                                  productList["title"]
-                                                      .toString(),
-                                                  maxLines: 2,
+                                                  product.name!.tr.toString(),
+                                                  maxLines: 1,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: TextStyle(
                                                     fontSize: 11,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w500,
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white11,
+                                                    color: themeMode
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white11,
                                                   ),
                                                 ),
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
                                               ),
                                               RichText(
                                                   text: TextSpan(children: [
                                                 TextSpan(
-                                                  text:
-                                                      "${productList["price"]} ",
+                                                  text: "${product.price} ",
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w500,
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue2
-                                                            : AppTheme.white1,
+                                                    color: themeMode
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white1,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -557,28 +510,15 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue2
-                                                            : AppTheme.white1,
+                                                    color: themeMode
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white1,
                                                   ),
-                                                )
-                                              ])),
-
-                                              Text(
-                                                "10" + " " + 'Minimum Order'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: AppTheme.white15,
                                                 ),
+                                              ])),
+                                              const SizedBox(
+                                                height: 4,
                                               ),
-                                              const SizedBox(height: 8),
                                               Text(
                                                 "İstanbul, Türkiye",
                                                 style: TextStyle(
@@ -589,7 +529,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                   color: AppTheme.white15,
                                                 ),
                                               ),
-                                              const SizedBox(height: 1),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
                                               Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -602,10 +544,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                           .appFontFamily,
                                                       fontWeight:
                                                           FontWeight.w700,
-                                                      color: Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
+                                                      color: themeMode
                                                           ? AppTheme.blue3
                                                           : AppTheme.white11,
                                                     ),
@@ -629,7 +568,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                       height: 15),
                                                 ],
                                               ),
-                                              const SizedBox(height: 2),
+                                              const SizedBox(height: 8),
                                               SizedBox(
                                                 height: 24,
                                                 child: ButtonTheme(
@@ -677,10 +616,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w700,
-                                                              color: Provider.of<ThemeProvider>(
-                                                                              context)
-                                                                          .themeMode ==
-                                                                      "light"
+                                                              color: themeMode
                                                                   ? AppTheme
                                                                       .blue2
                                                                   : AppTheme
@@ -699,7 +635,23 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                     ),
                                   ),
                                 );
-                              }));
+                              }),
+                            );
+                          } else {
+                            return SizedBox(
+                              width: deviceWidth,
+                              height: deviceHeight - 200,
+                              child: Center(
+                                  child: Text(
+                                "Ürün bulunmamaktadır.",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )),
+                            );
+                          }
                         } else {
                           // return ListView.builder(
                           //   controller: scrollController,
@@ -785,11 +737,8 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                             height: deviceWidth + 115,
                             child: Center(
                                 child: CupertinoActivityIndicator(
-                              color: Provider.of<ThemeProvider>(context)
-                                          .themeMode ==
-                                      "light"
-                                  ? AppTheme.black1
-                                  : AppTheme.white1,
+                              color:
+                                  themeMode ? AppTheme.black1 : AppTheme.white1,
                               radius: 12,
                             )),
                           );
