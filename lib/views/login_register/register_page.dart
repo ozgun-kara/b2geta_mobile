@@ -31,6 +31,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final companyNameController = TextEditingController();
   final nameController = TextEditingController();
   final surnameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
   final officialPersonController = TextEditingController();
   final officialPhoneController = TextEditingController();
   var countryCode;
@@ -1115,6 +1116,69 @@ class _RegisterPageState extends State<RegisterPage> {
                               ? AppTheme.white5
                               : AppTheme.black7,
                       hintText: 'Surname'.tr,
+                      hintStyle: TextStyle(
+                        fontSize: 14,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.black11
+                            : AppTheme.white14,
+                      ),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          )),
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          )),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue2
+                                  : AppTheme.white1,
+                          width: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 13),
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Phone Number Validate'.tr;
+                      }
+                      return null;
+                    },
+                    controller: phoneNumberController,
+
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.black11
+                            : AppTheme.white1), // WHILE WRITING
+                    maxLines: 1,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                      filled: true,
+                      fillColor:
+                          Provider.of<ThemeProvider>(context).themeMode ==
+                                  "light"
+                              ? AppTheme.white5
+                              : AppTheme.black7,
+                      hintText: 'Phone Number'.tr,
                       hintStyle: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
