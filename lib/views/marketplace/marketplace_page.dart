@@ -222,7 +222,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : true,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .allProductsListAndSearchCall(queryParameters: {
+                      .productsListAndSearchCall(queryParameters: {
                     "limit": '1000000',
                   }),
                   builder: (context, data) {
@@ -386,7 +386,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         : false,
                 child: FutureBuilder<List<ProductModel>>(
                   future: ProductsServices()
-                      .allProductsListAndSearchCall(queryParameters: {
+                      .productsListAndSearchCall(queryParameters: {
                     "limit": '10000000',
                   }),
                   builder: (context, data) {
