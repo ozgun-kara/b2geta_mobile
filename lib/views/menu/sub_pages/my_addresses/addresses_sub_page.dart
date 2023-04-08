@@ -80,7 +80,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
               height: deviceHeight - 215,
               child: FutureBuilder<List<AddressModel>>(
                 future: locator<MemberAddressesServices>().getAllCall(
-                    queryParameters: {"offset": "2", "limit": "10"}),
+                    queryParameters: {"offset": "0", "limit": "10000000"}),
                 builder: (context, data) {
                   if (data.hasData) {
                     var addressList = data.data;
@@ -155,7 +155,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Expanded(
                                           flex: 2,
                                           child: Column(
@@ -187,7 +187,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Expanded(
                                           flex: 2,
                                           child: Column(
@@ -259,7 +259,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Expanded(
                                           flex: 2,
                                           child: Column(
@@ -291,7 +291,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
                                             ],
                                           ),
                                         ),
-                                        Spacer(),
+                                        const Spacer(),
                                         Expanded(
                                           flex: 2,
                                           child: Column(

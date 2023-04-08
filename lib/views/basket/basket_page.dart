@@ -40,7 +40,7 @@ class _BasketPageState extends State<BasketPage> {
 
   Future<void> getAllAddress() async {
     await MemberAddressesServices().getAllCall(
-        queryParameters: {"offset": "2", "limit": "1000000"}).then((value) {
+        queryParameters: {"offset": "0", "limit": "1000000"}).then((value) {
       setState(() {
         addressList = value;
       });
@@ -452,6 +452,72 @@ class _BasketPageState extends State<BasketPage> {
                                                   );
                                                 }),
                                               )),
+                                          const SizedBox(
+                                            height: 22,
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 9),
+                                            child: SizedBox(
+                                              height: 47,
+                                              child: MaterialButton(
+                                                  height: 47,
+                                                  minWidth: deviceWidth,
+                                                  shape: RoundedRectangleBorder(
+                                                    side: BorderSide(
+                                                        width: 1,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white1),
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                            Radius.circular(5)),
+                                                  ),
+                                                  elevation: 0,
+                                                  child: Text(
+                                                    'Add an Address'.tr,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white1),
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                            context,
+                                                            PageRouteBuilder(
+                                                              pageBuilder: (_,
+                                                                      __,
+                                                                      ___) =>
+                                                                  const AddAddressSubPage(
+                                                                      operation:
+                                                                          'Add'),
+                                                              transitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              reverseTransitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              transitionsBuilder: (_,
+                                                                      a,
+                                                                      __,
+                                                                      c) =>
+                                                                  FadeTransition(
+                                                                      opacity:
+                                                                          a,
+                                                                      child: c),
+                                                            ))
+                                                        .then((_) =>
+                                                            setState(() {}));
+                                                  }),
+                                            ),
+                                          ),
                                           const SizedBox(
                                             height: 22,
                                           ),
