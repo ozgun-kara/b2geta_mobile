@@ -38,7 +38,7 @@ final Map<String, String> tr = {
   'Company Name': 'Firma Adı',
   'Name-2': 'Ad',
   'Surname': 'Soyad',
-  'Phone Number':'Telefon Numarası',
+  'Phone Number': 'Telefon',
   'Official Person': 'Yetkili Kişi',
   'Official Phone': 'Yetkili Telefon',
   'Country': 'Ülke',
