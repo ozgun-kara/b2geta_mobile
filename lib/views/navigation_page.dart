@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/notification/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -344,19 +345,18 @@ class _NavigationPageState extends State<NavigationPage> {
         ),
         builder: (BuildContext bc) {
           return GestureDetector(
-            onTapDown: (tapDetails) {
-              if (tapDetails.globalPosition.dx <
-                  MediaQuery.of(context).size.width * 0.5) {
-                Navigator.pop(context);
-              }
-            },
+            // onTapDown: (tapDetails) {
+            //   if (tapDetails.globalPosition.dx <
+            //       MediaQuery.of(context).size.width) {
+            //     Navigator.pop(context);
+            //   }
+            // },
             child: Container(
-                padding: EdgeInsets.only(left: deviceWidth * 0.5),
                 color: Colors.transparent,
                 child: Container(
-                  height: deviceHeight * .2,
+                  height: deviceHeight * .3,
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 16.0),
+                      horizontal: 24.0, vertical: 16.0),
                   decoration: BoxDecoration(
                     color:
                         Provider.of<ThemeProvider>(context).themeMode == 'light'
@@ -367,96 +367,127 @@ class _NavigationPageState extends State<NavigationPage> {
                       topRight: Radius.circular(5.0),
                     ),
                   ),
-                  child: ListView.builder(
-                    itemCount: personalProfileModel.companies!.length,
-                    itemBuilder: (context, index) {
-                      var company = personalProfileModel.companies![index];
-                      return GestureDetector(
-                        onTap: () async {
-                          await CompanyServices()
-                              .changeProfileAnotherCompanyCall(
-                                  userId: company.id.toString())
-                              .then((value) async {
-                            if (value) {
-                              await _memberServices
-                                  .getProfileCall()
-                                  .then((value) async {
-                                if (value != null) {
-                                  Provider.of<UserProvider>(context,
-                                          listen: false)
-                                      .updateUserModel(value);
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: personalProfileModel.companies!.length,
+                          itemBuilder: (context, index) {
+                            var company =
+                                personalProfileModel.companies![index];
+                            return GestureDetector(
+                              onTap: () async {
+                                debugPrint("basti");
+                                await CompanyServices()
+                                    .changeProfileAnotherCompanyCall(
+                                        userId: company.id.toString())
+                                    .then((value) async {
+                                  if (value) {
+                                    await _memberServices
+                                        .getProfileCall()
+                                        .then((value) async {
+                                      if (value != null) {
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .updateUserModel(value);
 
-                                  Navigator.pushAndRemoveUntil(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            const NavigationPage(),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
+                                        Navigator.pushAndRemoveUntil(
+                                            context,
+                                            PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) =>
+                                                  const NavigationPage(),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              reverseTransitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              transitionsBuilder:
+                                                  (_, a, __, c) =>
+                                                      FadeTransition(
+                                                          opacity: a, child: c),
+                                            ),
+                                            (route) => false);
+                                      }
+                                    });
+                                  }
+                                });
+                              },
+                              child: Column(
+                                children: [
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      company!.logo!.isNotEmpty
+                                          ? ClipOval(
+                                              child: Image.network(
+                                                width: 20,
+                                                height: 20,
+                                                company.logo.toString(),
+                                                errorBuilder: (context, error,
+                                                    stackTrace) {
+                                                  return Image.asset(
+                                                    "assets/images/dummy_images/user_profile.png",
+                                                    width: 20,
+                                                    height: 20,
+                                                  );
+                                                },
+                                              ),
+                                            )
+                                          : ClipOval(
+                                              child: Image.asset(
+                                                  width: 20,
+                                                  height: 20,
+                                                  'assets/images/dummy_images/user_profile.png'),
+                                            ),
+                                      const SizedBox(
+                                        width: 10,
                                       ),
-                                      (route) => false);
-                                }
-                              });
-                            }
-                          });
-                        },
-                        child: Column(
-                          children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                company!.logo!.isNotEmpty
-                                    ? ClipOval(
-                                        child: Image.network(
-                                          width: 20,
-                                          height: 20,
-                                          company.logo.toString(),
-                                          errorBuilder:
-                                              (context, error, stackTrace) {
-                                            return Image.asset(
-                                              "assets/images/dummy_images/user_profile.png",
-                                              width: 20,
-                                              height: 20,
-                                            );
-                                          },
+                                      Expanded(
+                                        child: Text(
+                                          company.name ?? '',
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w500,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.black11
+                                                  : AppTheme.white1),
                                         ),
-                                      )
-                                    : ClipOval(
-                                        child: Image.asset(
-                                            width: 20,
-                                            height: 20,
-                                            'assets/images/dummy_images/user_profile.png'),
                                       ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    company.name ?? '',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w500,
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black11
-                                                : AppTheme.white1),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            const Divider()
-                          ],
+                                  const SizedBox(
+                                    height: 16.0,
+                                  )
+                                ],
+                              ),
+                            );
+                          },
                         ),
-                      );
-                    },
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      const AddCompanySubPage(operation: 'Add'),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: const Text('Firma Ekle'))
+                    ],
                   ),
                 )),
           );
@@ -476,19 +507,18 @@ class _NavigationPageState extends State<NavigationPage> {
         ),
         builder: (BuildContext bc) {
           return GestureDetector(
-            onTapDown: (tapDetails) {
-              if (tapDetails.globalPosition.dx <
-                  MediaQuery.of(context).size.width * 0.5) {
-                Navigator.pop(context);
-              }
-            },
+            // onTapDown: (tapDetails) {
+            //   if (tapDetails.globalPosition.dx <
+            //       MediaQuery.of(context).size.width) {
+            //     Navigator.pop(context);
+            //   }
+            // },
             child: Container(
                 height: deviceHeight * .090,
-                padding: EdgeInsets.only(left: deviceWidth * 0.5),
                 color: Colors.transparent,
                 child: Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 16.0),
+                        horizontal: 24.0, vertical: 16.0),
                     decoration: BoxDecoration(
                       color: Provider.of<ThemeProvider>(context).themeMode ==
                               'light'
@@ -579,7 +609,9 @@ class _NavigationPageState extends State<NavigationPage> {
                               ),
                             ],
                           ),
-                          const Divider(),
+                          const SizedBox(
+                            height: 16.0,
+                          )
                         ],
                       ),
                     ))),
