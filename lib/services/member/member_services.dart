@@ -15,6 +15,7 @@ class MemberServices {
   Future<String> registerCall({
     required String name,
     required String surname,
+    required String phoneNumber,
     required String email,
     required String password,
     String? companyName,
@@ -33,6 +34,7 @@ class MemberServices {
         "lastname": surname,
         "email": email,
         "password": password,
+        "phone_number": phoneNumber,
       },
     );
 
@@ -396,6 +398,8 @@ class MemberServices {
   Future<void> deleteToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('Token', '');
+    prefs.setString('P-Token', '');
+    prefs.setString('P-ID', '');
     debugPrint("TOKEN HAS DELETED");
   }
 
