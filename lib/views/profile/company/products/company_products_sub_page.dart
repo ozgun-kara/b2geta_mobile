@@ -1,20 +1,24 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
-import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
 class CompanyProductsSubPage extends StatefulWidget {
-  const CompanyProductsSubPage({Key? key}) : super(key: key);
+  const CompanyProductsSubPage({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
+  final String userId;
 
   @override
-  State<CompanyProductsSubPage> createState() =>
-      _CompanyProductsSubPageState();
+  State<CompanyProductsSubPage> createState() => _CompanyProductsSubPageState();
 }
 
 class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
@@ -210,6 +214,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
                         "limit": '1000000',
+                        'account_id': widget.userId,
                       }),
                       builder: (context, data) {
                         if (data.hasData) {
@@ -378,6 +383,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                       future: ProductsServices()
                           .productsListAndSearchCall(queryParameters: {
                         "limit": '10000000',
+                        'account_id': widget.userId,
                       }),
                       builder: (context, data) {
                         if (data.hasData) {

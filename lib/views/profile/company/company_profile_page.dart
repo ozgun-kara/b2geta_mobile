@@ -399,7 +399,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                 : provider.currentTabIndex == 1
                     ? CustomReelsPage(userId: widget.userId)
                     : provider.currentTabIndex == 2
-                        ? const CompanyProductsSubPage()
+                        ? CompanyProductsSubPage(
+                            userId: widget.userId,
+                          )
                         : provider.currentTabIndex == 3
                             ? SliverList(
                                 delegate: SliverChildBuilderDelegate(
@@ -416,6 +418,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                               .productsListAndSearchCall(
                                                   queryParameters: {
                                                 "limit": '1000000',
+                                                'account_id': widget.userId,
                                               }),
                                           builder: (context, data) {
                                             if (data.hasData) {
