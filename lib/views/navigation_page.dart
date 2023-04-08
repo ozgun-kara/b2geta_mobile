@@ -357,9 +357,12 @@ class _NavigationPageState extends State<NavigationPage> {
                   height: deviceHeight * .2,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 8.0, vertical: 16.0),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == 'light'
+                            ? AppTheme.white2
+                            : AppTheme.black12,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(5.0),
                       topRight: Radius.circular(5.0),
                     ),
@@ -486,9 +489,12 @@ class _NavigationPageState extends State<NavigationPage> {
                 child: Container(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 8.0, vertical: 16.0),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              'light'
+                          ? AppTheme.white2
+                          : AppTheme.black12,
+                      borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(5.0),
                         topRight: Radius.circular(5.0),
                       ),

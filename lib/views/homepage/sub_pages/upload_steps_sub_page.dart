@@ -134,7 +134,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 4),
                                   child: Text(
-                                    '${context.watch<UserProvider>().getUser.firstname} ${context.watch<UserProvider>().getUser.lastname}',
+                                    '${context.watch<UserProvider>().getUser.firstname ?? ''} ${context.watch<UserProvider>().getUser.lastname ?? ''}',
                                     style: TextStyle(
                                       fontSize: 14,
                                       height: 1,
