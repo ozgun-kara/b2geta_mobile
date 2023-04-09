@@ -1,9 +1,12 @@
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
+import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -48,6 +51,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   final ProductsServices _productsServices = ProductsServices();
   ProductDetailModel? product;
 
+  final MemberServices _memberServices = MemberServices();
+  CompanyProfileModel? companyProfileModel;
+
   @override
   void initState() {
     super.initState();
@@ -65,20 +71,29 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
     });
   }
 
+  getProfile() async {
+    if (product != null) {
+      await _memberServices
+          .getCompanyProfileCall(userId: product!.accountId!)
+          .then((value) {
+        if (value != null) {
+          companyProfileModel = value;
+          setState(() {});
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     List<String> imgList = [
       widget.imageUrl,
-      "https://s4.gifyu.com/images/product_2.png",
-      "https://s9.gifyu.com/images/product189633b2e73d1e24.md.png",
-      "https://s9.gifyu.com/images/p3d5d47e58ec160062.jpg",
-      "https://s9.gifyu.com/images/p204c8b4628e774f40.jpg"
     ];
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-
+    getProfile();
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black7,
       appBar: const CustomAppBar(),
@@ -149,10 +164,12 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                 height: 352,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(imgList[
-                                        Provider.of<MarketPlacePageProvider>(
-                                                context)
-                                            .productImageIndex]),
+                                    image: NetworkImage(imgList[0]
+
+                                        // Provider.of<MarketPlacePageProvider>(
+                                        //         context)
+                                        //     .productImageIndex]
+                                        ),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -232,135 +249,135 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                 .updateProductImageIndex(0);
                                           }),
                                     ),
-                                    SizedBox(
-                                      width: 41,
-                                      height: 41,
-                                      child: MaterialButton(
-                                          minWidth: 41,
-                                          height: 41,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        1
-                                                    ? 2
-                                                    : 1,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        1
-                                                    ? AppTheme.blue9
-                                                    : AppTheme.white21),
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.none,
-                                            child: Container(
-                                              width: 39,
-                                              height: 39,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image:
-                                                      NetworkImage(imgList[1]),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Provider.of<MarketPlacePageProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .updateProductImageIndex(1);
-                                          }),
-                                    ),
-                                    SizedBox(
-                                      width: 41,
-                                      height: 41,
-                                      child: MaterialButton(
-                                          minWidth: 41,
-                                          height: 41,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        2
-                                                    ? 2
-                                                    : 1,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        2
-                                                    ? AppTheme.blue9
-                                                    : AppTheme.white21),
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.none,
-                                            child: Container(
-                                              width: 39,
-                                              height: 39,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image:
-                                                      NetworkImage(imgList[2]),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Provider.of<MarketPlacePageProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .updateProductImageIndex(2);
-                                          }),
-                                    ),
-                                    SizedBox(
-                                      width: 41,
-                                      height: 41,
-                                      child: MaterialButton(
-                                          minWidth: 41,
-                                          height: 41,
-                                          elevation: 0,
-                                          shape: RoundedRectangleBorder(
-                                            side: BorderSide(
-                                                width: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        3
-                                                    ? 2
-                                                    : 1,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productImageIndex ==
-                                                        3
-                                                    ? AppTheme.blue9
-                                                    : AppTheme.white21),
-                                          ),
-                                          child: FittedBox(
-                                            fit: BoxFit.none,
-                                            child: Container(
-                                              width: 39,
-                                              height: 39,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image:
-                                                      NetworkImage(imgList[3]),
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Provider.of<MarketPlacePageProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .updateProductImageIndex(3);
-                                          }),
-                                    ),
+                                    //   SizedBox(
+                                    //     width: 41,
+                                    //     height: 41,
+                                    //     child: MaterialButton(
+                                    //         minWidth: 41,
+                                    //         height: 41,
+                                    //         elevation: 0,
+                                    //         shape: RoundedRectangleBorder(
+                                    //           side: BorderSide(
+                                    //               width: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       1
+                                    //                   ? 2
+                                    //                   : 1,
+                                    //               color: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       1
+                                    //                   ? AppTheme.blue9
+                                    //                   : AppTheme.white21),
+                                    //         ),
+                                    //         child: FittedBox(
+                                    //           fit: BoxFit.none,
+                                    //           child: Container(
+                                    //             width: 39,
+                                    //             height: 39,
+                                    //             decoration: BoxDecoration(
+                                    //               image: DecorationImage(
+                                    //                 image:
+                                    //                     NetworkImage(imgList[0]),
+                                    //                 fit: BoxFit.cover,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //         onPressed: () {
+                                    //           // Provider.of<MarketPlacePageProvider>(
+                                    //           //         context,
+                                    //           //         listen: false)
+                                    //           //     .updateProductImageIndex(1);
+                                    //         }),
+                                    //   ),
+                                    //   SizedBox(
+                                    //     width: 41,
+                                    //     height: 41,
+                                    //     child: MaterialButton(
+                                    //         minWidth: 41,
+                                    //         height: 41,
+                                    //         elevation: 0,
+                                    //         shape: RoundedRectangleBorder(
+                                    //           side: BorderSide(
+                                    //               width: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       2
+                                    //                   ? 2
+                                    //                   : 1,
+                                    //               color: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       2
+                                    //                   ? AppTheme.blue9
+                                    //                   : AppTheme.white21),
+                                    //         ),
+                                    //         child: FittedBox(
+                                    //           fit: BoxFit.none,
+                                    //           child: Container(
+                                    //             width: 39,
+                                    //             height: 39,
+                                    //             decoration: BoxDecoration(
+                                    //               image: DecorationImage(
+                                    //                 image:
+                                    //                     NetworkImage(imgList[0]),
+                                    //                 fit: BoxFit.cover,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //         onPressed: () {
+                                    //           // Provider.of<MarketPlacePageProvider>(
+                                    //           //         context,
+                                    //           //         listen: false)
+                                    //           //     .updateProductImageIndex(2);
+                                    //         }),
+                                    //   ),
+                                    //   SizedBox(
+                                    //     width: 41,
+                                    //     height: 41,
+                                    //     child: MaterialButton(
+                                    //         minWidth: 41,
+                                    //         height: 41,
+                                    //         elevation: 0,
+                                    //         shape: RoundedRectangleBorder(
+                                    //           side: BorderSide(
+                                    //               width: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       3
+                                    //                   ? 2
+                                    //                   : 1,
+                                    //               color: Provider.of<MarketPlacePageProvider>(
+                                    //                               context)
+                                    //                           .productImageIndex ==
+                                    //                       3
+                                    //                   ? AppTheme.blue9
+                                    //                   : AppTheme.white21),
+                                    //         ),
+                                    //         child: FittedBox(
+                                    //           fit: BoxFit.none,
+                                    //           child: Container(
+                                    //             width: 39,
+                                    //             height: 39,
+                                    //             decoration: BoxDecoration(
+                                    //               image: DecorationImage(
+                                    //                 image:
+                                    //                     NetworkImage(imgList[0]),
+                                    //                 fit: BoxFit.cover,
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ),
+                                    //         onPressed: () {
+                                    //           // Provider.of<MarketPlacePageProvider>(
+                                    //           //         context,
+                                    //           //         listen: false)
+                                    //           //     .updateProductImageIndex(3);
+                                    //         }),
+                                    //   ),
                                   ],
                                 ),
                               ), // PRODUCT IMAGES
@@ -1514,7 +1531,11 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                   MainAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  "İteme İnşaat ve Tesisat",
+                                                  companyProfileModel != null
+                                                      ? companyProfileModel!
+                                                              .name ??
+                                                          ""
+                                                      : "İteme İnşaat ve Tesisat",
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily:
@@ -1921,7 +1942,31 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                             : AppTheme.white1,
                                                       ),
                                                     ),
-                                                    onPressed: () {}),
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
+                                                                CompanyProfilePage(
+                                                                    userId:
+                                                                        product!.userId ??
+                                                                            ''),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                          ));
+                                                    }),
                                               ),
                                               ButtonTheme(
                                                 minWidth: 117,
@@ -1986,7 +2031,31 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         ),
                                                       ],
                                                     ),
-                                                    onPressed: () {}),
+                                                    onPressed: () {
+                                                      Navigator.push(
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
+                                                                    ___) =>
+                                                                CompanyProfilePage(
+                                                                    userId:
+                                                                        product!.userId ??
+                                                                            ''),
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
+                                                                FadeTransition(
+                                                                    opacity: a,
+                                                                    child: c),
+                                                          ));
+                                                    }),
                                               ),
                                             ],
                                           ),
@@ -2003,9 +2072,12 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           border: Border.all(
                                               width: 1,
                                               color: AppTheme.white21),
-                                          image: const DecorationImage(
+                                          image: DecorationImage(
                                             image: NetworkImage(
-                                              "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
+                                              (companyProfileModel != null)
+                                                  ? companyProfileModel!.logo ??
+                                                      "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
+                                                  : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                             ),
                                             fit: BoxFit.cover,
                                           ),

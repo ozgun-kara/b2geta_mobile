@@ -486,7 +486,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                       FadeTransition(opacity: a, child: c),
                                 ));
                           },
-                          child: const Text('Firma Ekle'))
+                          child:  Text('Add Company'.tr))
                     ],
                   ),
                 )),
