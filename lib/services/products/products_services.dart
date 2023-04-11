@@ -19,7 +19,7 @@ class ProductsServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-     // debugPrint("RESPONSE BODY: $responseBody");
+      // debugPrint("RESPONSE BODY: $responseBody");
 
       var status = responseBody["status"];
 
@@ -105,16 +105,12 @@ class ProductsServices {
       {required String productId,
       required Map<String, String> queryParameters}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/products/$productId')
-          .replace(queryParameters: queryParameters),
-      headers: {
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
-    );
+        Uri.parse('${Constants.apiUrl}/products/$productId')
+            .replace(queryParameters: queryParameters),
+        headers: Constants.headers);
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      // debugPrint("RESPONSE DATA: ${response.body}");
       debugPrint(
           "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
