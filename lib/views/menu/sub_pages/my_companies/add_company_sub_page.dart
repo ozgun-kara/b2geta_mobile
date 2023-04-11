@@ -980,7 +980,8 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                             }
                           }),
                       Visibility(
-                        visible: widget.operation == 'Edit' ? true : false,
+                        // visible: widget.operation == 'Edit' ? true : false,
+                        visible: false,
                         child: Column(
                           children: [
                             const SizedBox(height: 20),

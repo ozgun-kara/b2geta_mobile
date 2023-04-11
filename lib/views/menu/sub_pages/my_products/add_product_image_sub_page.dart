@@ -284,6 +284,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                               debugPrint("currency: ${widget.currency}");
                               debugPrint("status: ${widget.status}");
 
+                              loadingScreen(context);
+
                               locator<ProductsServices>()
                                   .addProductCall(
                                       accountId: widget.accountId,
@@ -339,6 +341,21 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
           ],
         ),
       ),
+    );
+  }
+
+  void loadingScreen(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              child: CircularProgressIndicator(
+                color: AppTheme.blue6,
+              )),
+        );
+      },
     );
   }
 
