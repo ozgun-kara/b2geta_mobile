@@ -63,8 +63,10 @@ class MenuPageProvider with ChangeNotifier {
   List<File>? imageFilesList = [];
 
   fetchCategoryList() async {
-    categoryList = await locator<CategoriesServices>()
-        .categoriesCall(queryParameters: {"parent_id": '707'});
+    categoryList =
+        await locator<CategoriesServices>().categoriesCall(queryParameters: {
+      // "parent_id": "862"
+    });
     notifyListeners();
   }
 
