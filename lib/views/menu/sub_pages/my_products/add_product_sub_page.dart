@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -79,6 +80,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       productPriceController.text = widget.passedObject!.price.toString();
       productSummaryController.text =
           widget.passedObject!.productSummary.toString();
+
+      categoryId = widget.passedObject!.categories!.first!.categoryId;
+      Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
+          widget.passedObject!.categories!.first!.categoryName;
 
       brandId = widget.passedObject!.brand!.id;
       Provider.of<MenuPageProvider>(context, listen: false).selectedBrand =
