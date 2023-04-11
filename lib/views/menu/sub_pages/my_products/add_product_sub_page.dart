@@ -35,7 +35,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final productSummaryController = TextEditingController();
   final categoriesController = TextEditingController();
   final brandController = TextEditingController();
-  final currencyController = TextEditingController();
   final statusController = TextEditingController();
 
   var categoryId;
@@ -63,17 +62,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
 
-    if (widget.operation == 'Add') {
-      Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
-        'EUR',
-        'TRY',
-        'USD',
-      ];
-      Provider.of<MenuPageProvider>(context, listen: false).statusList = [
-        'Active'.tr,
-        'Passive'.tr
-      ];
-    }
+    Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
+      'EUR',
+      'TRY',
+      'USD',
+    ];
+    Provider.of<MenuPageProvider>(context, listen: false).statusList = [
+      'Active'.tr,
+      'Passive'.tr
+    ];
 
     if (widget.operation == 'Edit') {
       productNameController.text = widget.passedObject!.productName.toString();
@@ -89,8 +86,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
       Provider.of<MenuPageProvider>(context, listen: false).selectedCurrency =
           widget.passedObject!.currency;
+
       Provider.of<MenuPageProvider>(context, listen: false).selectedStatus =
-          widget.passedObject!.status;
+          widget.passedObject!.status == '1' ? 'Active'.tr : 'Passive'.tr;
     }
 
     super.initState();
