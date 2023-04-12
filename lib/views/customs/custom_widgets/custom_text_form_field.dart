@@ -10,6 +10,7 @@ class CustomTextFormField extends StatefulWidget {
       required this.controller,
       required this.hintText,
       this.keyboardType,
+      this.minLines,
       this.maxLines})
       : super(key: key);
 
@@ -17,6 +18,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final TextInputType? keyboardType;
+  final int? minLines;
   final int? maxLines;
 
   @override
@@ -41,7 +43,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         Align(
           alignment: Alignment.centerLeft,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               widget.hintText,
               style: TextStyle(
@@ -57,9 +59,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           validator: widget.validator,
           controller: widget.controller,
           keyboardType: widget.keyboardType ?? TextInputType.text,
+          minLines: widget.minLines ?? 1,
           maxLines: widget.maxLines ?? 1,
           style: TextStyle(
               fontSize: 14,
+              height: 1.5,
               fontFamily: AppTheme.appFontFamily,
               fontWeight: FontWeight.w500,
               color: themeMode
