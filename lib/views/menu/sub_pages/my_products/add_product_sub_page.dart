@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -325,7 +326,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           const SizedBox(
                             height: 13,
                           ),
-                          textFormField(
+                          CustomTextFormField(
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
                                 return 'Product Name Validate'.tr;
@@ -1070,7 +1071,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
         filled: true,
         fillColor: themeMode ? AppTheme.white39 : AppTheme.black18,
-        hintText: hintText,
+        hintText: "",
         hintStyle: TextStyle(
           fontSize: 14,
           fontFamily: AppTheme.appFontFamily,
