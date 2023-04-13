@@ -428,27 +428,30 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                 .then((value) {
                                               if (value != null) {
                                                 Navigator.push(
-                                                    context,
-                                                    PageRouteBuilder(
-                                                      pageBuilder:
-                                                          (_, __, ___) =>
+                                                        context,
+                                                        PageRouteBuilder(
+                                                          pageBuilder: (_, __, ___) =>
                                                               AddCompanySubPage(
                                                                   passedObject:
                                                                       value,
                                                                   operation:
                                                                       'Edit'),
-                                                      transitionDuration:
-                                                          const Duration(
-                                                              milliseconds: 0),
-                                                      reverseTransitionDuration:
-                                                          const Duration(
-                                                              milliseconds: 0),
-                                                      transitionsBuilder:
-                                                          (_, a, __, c) =>
+                                                          transitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          reverseTransitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          transitionsBuilder: (_,
+                                                                  a, __, c) =>
                                                               FadeTransition(
                                                                   opacity: a,
                                                                   child: c),
-                                                    ));
+                                                        ))
+                                                    .then(
+                                                        (_) => setState(() {}));
                                               } else {
                                                 debugPrint(
                                                     "COMPANY DETAIL HAS NOT FETCHED");
