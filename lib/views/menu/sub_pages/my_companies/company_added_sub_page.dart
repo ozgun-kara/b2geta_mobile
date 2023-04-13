@@ -1,7 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -29,60 +27,93 @@ class _CompanyAddedSubPageState extends State<CompanyAddedSubPage> {
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    return Scaffold(
-        backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
-        appBar: const CustomAppBar(),
-        body: Column(
-          children: [
-            const SizedBox(height: 178),
-            Center(
-              child: Column(
-                children: [
-                  Image.asset(
-                    "assets/icons/check-2.png",
-                    width: 75.83,
-                    height: 75.83,
+    return WillPopScope(
+        onWillPop: () async {
+          int count = 0;
+          Navigator.of(context).popUntil((_) => count++ >= 2);
+          return true;
+        },
+        child: Scaffold(
+            backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
+            appBar: AppBar(
+              toolbarHeight: 68,
+              backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
+              elevation: 0,
+              leading: Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: IconButton(
+                  splashRadius: 24,
+                  icon: Image.asset(
+                    'assets/icons/back-2.png',
+                    width: 23,
+                    height: 17,
+                    color: AppTheme.white15,
                   ),
-                  const SizedBox(height: 32),
-                  SizedBox(
-                    width: 252,
-                    child: Text(
-                      widget.operation == 'Add'
-                          ? 'Company Added Message'.tr
-                          : 'Company Updated Message'.tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w600,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1),
-                    ),
-                  ),
-                ],
+                  onPressed: () {
+                    int count = 0;
+                    Navigator.of(context).popUntil((_) => count++ >= 2);
+                  },
+                ),
               ),
+              title: SizedBox(
+                  width: 103.74,
+                  height: 14.0,
+                  child: themeMode
+                      ? Image.asset('assets/images/b2geta_logo_light.png')
+                      : Image.asset('assets/images/b2geta_logo_dark.png')),
             ),
-            const SizedBox(height: 42),
-            MaterialButton(
-                height: 47,
-                color: AppTheme.blue2,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(9)),
+            body: Column(
+              children: [
+                const SizedBox(height: 178),
+                Center(
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        "assets/icons/check-2.png",
+                        width: 75.83,
+                        height: 75.83,
+                      ),
+                      const SizedBox(height: 32),
+                      SizedBox(
+                        width: 252,
+                        child: Text(
+                          widget.operation == 'Add'
+                              ? 'Company Added Message'.tr
+                              : 'Company Updated Message'.tr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(horizontal: 43),
-                child: Text(
-                  'My Companies'.tr,
-                  style: TextStyle(
-                      fontSize: 14,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w700,
-                      color: AppTheme.white1),
-                ),
-                onPressed: () {
-                  int count = 0;
-                  Navigator.of(context).popUntil((_) => count++ >= 2);
-                })
-          ],
-        ));
+                const SizedBox(height: 42),
+                MaterialButton(
+                    height: 47,
+                    color: AppTheme.blue2,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(9)),
+                    ),
+                    elevation: 0,
+                    padding: const EdgeInsets.symmetric(horizontal: 43),
+                    child: Text(
+                      'My Companies'.tr,
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w700,
+                          color: AppTheme.white1),
+                    ),
+                    onPressed: () {
+                      int count = 0;
+                      Navigator.of(context).popUntil((_) => count++ >= 2);
+                    })
+              ],
+            )));
   }
 }
