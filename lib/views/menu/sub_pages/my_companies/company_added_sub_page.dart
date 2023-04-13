@@ -79,16 +79,8 @@ class _CompanyAddedSubPageState extends State<CompanyAddedSubPage> {
                       color: AppTheme.white1),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const MyCompaniesSubPage(),
-                        transitionDuration: const Duration(milliseconds: 0),
-                        reverseTransitionDuration:
-                            const Duration(milliseconds: 0),
-                        transitionsBuilder: (_, a, __, c) =>
-                            FadeTransition(opacity: a, child: c),
-                      ));
+                  int count = 0;
+                  Navigator.of(context).popUntil((_) => count++ >= 2);
                 })
           ],
         ));

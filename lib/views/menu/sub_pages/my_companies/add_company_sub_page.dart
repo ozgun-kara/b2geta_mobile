@@ -903,9 +903,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       debugPrint(
                                           "COMPANY HAS SUCCESSFULLY ADDED");
 
-                                      var count = 0;
-
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
@@ -918,9 +916,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
-                                          ), (route) {
-                                        return count++ == 2;
-                                      });
+                                          ));
                                     } else {
                                       debugPrint("COMPANY HAS NOT ADDED");
                                       operationFailedDialog(context);
@@ -953,7 +949,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       debugPrint(
                                           "COMPANY HAS SUCCESSFULLY UPDATED");
 
-                                      Navigator.pushAndRemoveUntil(
+                                      Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
@@ -966,8 +962,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
-                                          ),
-                                          (route) => route.isFirst);
+                                          ));
                                     } else {
                                       debugPrint("COMPANY HAS NOT UPDATED");
                                       operationFailedDialog(context);

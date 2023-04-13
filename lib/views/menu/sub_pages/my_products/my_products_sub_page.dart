@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -22,24 +23,6 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  ScrollController controller = ScrollController();
-  final ProductsServices _productsServices = ProductsServices();
-  List<ProductModel> products = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getProducts();
-  }
-
-  Future<void> getProducts() async {
-    await _productsServices.productsListAndSearchCall(
-        queryParameters: {"limit": "50"}).then((value) {
-      setState(() {
-        products = value;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,266 +101,261 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                 ),
               ],
             ),
-            products.isNotEmpty
-                ? Column(
-                    children: [
-                      ListView.separated(
-                        reverse: true,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: products.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var product = products[index];
-                          return Container(
-                            color:
-                                themeMode ? AppTheme.white1 : AppTheme.black24,
-                            padding: const EdgeInsets.only(
-                                left: 21, right: 17.88, top: 18, bottom: 24),
-                            child: Column(
+            FutureBuilder<List<ProductModel>>(
+              future: locator<ProductsServices>()
+                  .productsListAndSearchCall(queryParameters: {"limit": "50"}),
+              builder: (context, data) {
+                if (data.hasData) {
+                  var productList = data.data;
+
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: productList!.length,
+                    separatorBuilder: (context, index) {
+                      return Container(
+                        width: deviceWidth,
+                        height: 2,
+                        color: themeMode ? AppTheme.white21 : AppTheme.black28,
+                      );
+                    },
+                    itemBuilder: ((context, index) {
+                      var product = productList[index];
+
+                      return Container(
+                        color: themeMode ? AppTheme.white1 : AppTheme.black24,
+                        padding: const EdgeInsets.only(
+                            left: 21, right: 17.88, top: 18, bottom: 24),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Product Name'.tr,
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppTheme.white15),
+                                    Text(
+                                      'Product Name'.tr,
+                                      style: TextStyle(
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.white15),
+                                    ),
+                                    SizedBox(
+                                      width: deviceWidth - 140,
+                                      child: Text(
+                                        product.name!.tr ?? 'Product Name',
+                                        style: TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                          color: themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1,
                                         ),
-                                        SizedBox(
-                                          width: deviceWidth - 140,
-                                          child: Text(
-                                            product.name!.tr ?? 'Product Name',
-                                            style: TextStyle(
-                                              overflow: TextOverflow.ellipsis,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w600,
-                                              color: themeMode
-                                                  ? AppTheme.blue2
-                                                  : AppTheme.white1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Material(
+                                      color: Colors.transparent,
+                                      child: IconButton(
+                                          splashRadius: 24,
+                                          icon: Center(
+                                            child: Image.asset(
+                                              'assets/icons/delete.png',
+                                              width: 18,
+                                              height: 18,
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Material(
-                                          color: Colors.transparent,
-                                          child: IconButton(
-                                              splashRadius: 24,
-                                              icon: Center(
-                                                child: Image.asset(
-                                                  'assets/icons/delete.png',
-                                                  width: 18,
-                                                  height: 18,
-                                                ),
-                                              ),
-                                              onPressed: () async {
-                                                debugPrint(
-                                                    "PRODUCT ID: ${product.id}");
+                                          onPressed: () async {
+                                            debugPrint(
+                                                "PRODUCT ID: ${product.id}");
 
-                                                return await alertDialog(
-                                                    message:
-                                                        'Silmek istediğinizden emin misiniz?',
-                                                    confirmButtonColor:
-                                                        Colors.green,
-                                                    confirmButtonText: 'Evet',
-                                                    cancelButtonColor:
-                                                        Colors.red,
-                                                    cancelButtonText: 'Hayır',
-                                                    onPressed: () async {
-                                                      await _productsServices
-                                                          .deleteProductCall(
-                                                              productId:
-                                                                  product.id!)
-                                                          .then((value) {
-                                                        if (value) {
-                                                          Navigator.pop(
-                                                              context);
-                                                          getProducts();
-                                                        }
-                                                      });
-                                                    });
-                                              }),
+                                            return await alertDialog(
+                                                message:
+                                                    'Silmek istediğinizden emin misiniz?',
+                                                confirmButtonColor:
+                                                    Colors.green,
+                                                confirmButtonText: 'Evet',
+                                                cancelButtonColor: Colors.red,
+                                                cancelButtonText: 'Hayır',
+                                                onPressed: () async {
+                                                  await locator<
+                                                          ProductsServices>()
+                                                      .deleteProductCall(
+                                                          productId:
+                                                              product.id!)
+                                                      .then((value) {
+                                                    if (value) {
+                                                      Navigator.pop(context);
+                                                      setState(() {});
+                                                    }
+                                                  });
+                                                });
+                                          }),
+                                    ),
+                                    Material(
+                                      color: Colors.transparent,
+                                      child: IconButton(
+                                        splashRadius: 24,
+                                        icon: Center(
+                                          child: Image.asset(
+                                            'assets/icons/material-symbols_edit-note.png',
+                                            width: 24,
+                                            height: 24,
+                                          ),
                                         ),
-                                        Material(
-                                          color: Colors.transparent,
-                                          child: IconButton(
-                                            splashRadius: 24,
-                                            icon: Center(
-                                              child: Image.asset(
-                                                'assets/icons/material-symbols_edit-note.png',
-                                                width: 24,
-                                                height: 24,
-                                              ),
-                                            ),
-                                            onPressed: () async {
-                                              await locator<ProductsServices>()
-                                                  .getProductCall(
-                                                      productId: product.id!,
-                                                      queryParameters: {}).then((value) {
-                                                if (value != null) {
-                                                  Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                            pageBuilder: (_, __,
+                                        onPressed: () async {
+                                          await locator<ProductsServices>()
+                                              .getProductCall(
+                                                  productId: product.id!,
+                                                  queryParameters: {}).then((value) {
+                                            if (value != null) {
+                                              Navigator.push(
+                                                      context,
+                                                      PageRouteBuilder(
+                                                        pageBuilder:
+                                                            (_, __,
                                                                     ___) =>
                                                                 AddProductSubPage(
                                                                     passedObject:
                                                                         value,
                                                                     operation:
                                                                         'Edit'),
-                                                            transitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            reverseTransitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            transitionsBuilder: (_,
-                                                                    a, __, c) =>
+                                                        transitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        reverseTransitionDuration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    0),
+                                                        transitionsBuilder:
+                                                            (_, a, __, c) =>
                                                                 FadeTransition(
                                                                     opacity: a,
                                                                     child: c),
-                                                          ))
-                                                      .then((_) =>
-                                                          setState(() {}));
-                                                } else {
-                                                  debugPrint(
-                                                      "PRODUCT DETAIL HAS NOT FETCHED");
+                                                      ))
+                                                  .then((_) => setState(() {}));
+                                            } else {
+                                              debugPrint(
+                                                  "PRODUCT DETAIL HAS NOT FETCHED");
 
-                                                  operationFailedDialog(
-                                                      context);
-                                                }
-                                              });
-                                            },
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                Row(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Price'.tr,
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
-                                              color: AppTheme.white15),
-                                        ),
-                                        Text(
-                                          product.price ?? '',
-                                          style: TextStyle(
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w600,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white1),
-                                        ),
-                                      ],
+                                              operationFailedDialog(context);
+                                            }
+                                          });
+                                        },
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      width: 79,
-                                    ),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Currency'.tr,
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15),
-                                          ),
-                                          Text(
-                                            product.currency ?? '',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1),
-                                          ),
-                                        ]),
-                                    const SizedBox(
-                                      width: 45,
-                                    ),
-                                    Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Brand'.tr,
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15),
-                                          ),
-                                          Text(
-                                            'Rosebella',
-                                            style: TextStyle(
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontSize: 13,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1),
-                                          ),
-                                        ])
                                   ],
                                 )
                               ],
                             ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return Container(
-                            width: deviceWidth,
-                            height: 2,
-                            color:
-                                themeMode ? AppTheme.white21 : AppTheme.black28,
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 27,
-                      ),
-                    ],
-                  )
-                : const SizedBox(),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Price'.tr,
+                                      style: TextStyle(
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppTheme.white15),
+                                    ),
+                                    Text(
+                                      product.price ?? '',
+                                      style: TextStyle(
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontSize: 13,
+                                          fontWeight: FontWeight.w600,
+                                          color: themeMode
+                                              ? AppTheme.blue3
+                                              : AppTheme.white1),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 79,
+                                ),
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Currency'.tr,
+                                        style: TextStyle(
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15),
+                                      ),
+                                      Text(
+                                        product.currency ?? '',
+                                        style: TextStyle(
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1),
+                                      ),
+                                    ]),
+                                const SizedBox(
+                                  width: 45,
+                                ),
+                                Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Brand'.tr,
+                                        style: TextStyle(
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15),
+                                      ),
+                                      Text(
+                                        'Rosebella',
+                                        style: TextStyle(
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1),
+                                      ),
+                                    ])
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+                  );
+                } else {
+                  return SizedBox(
+                    height: deviceWidth + 115,
+                    child: Center(
+                        child: CupertinoActivityIndicator(
+                      color: themeMode ? AppTheme.black1 : AppTheme.white1,
+                      radius: 12,
+                    )),
+                  );
+                }
+              },
+            ),
           ],
         ),
       ),
