@@ -238,11 +238,6 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           pageBuilder: (_, __, ___) =>
                                               ProductDetailSubPage(
                                             productId: product.id!,
-                                            productName: product.name!.tr!,
-                                            imageUrl: product.images!.isNotEmpty
-                                                ? product.images![0]!
-                                                : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                            price: product.price.toString(),
                                           ),
                                           transitionDuration:
                                               const Duration(milliseconds: 0),
@@ -406,16 +401,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                    productId: product.id!,
-                                                    productName:
-                                                        product.name!.tr!,
-                                                    imageUrl: product
-                                                            .images!.isNotEmpty
-                                                        ? product.images![0]
-                                                            .toString()
-                                                        : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                                    price: product.price
-                                                        .toString()),
+                                                    productId: product.id!,),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
