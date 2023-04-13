@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -99,7 +99,7 @@ class _AddAddressSubPageState extends State<AddAddressSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black7,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

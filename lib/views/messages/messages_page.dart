@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/models/messages/message_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/messages/sub_pages/message_details_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,7 +52,7 @@ class _MessagesPageState extends State<MessagesPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black4,
-      appBar: CustomAppBar(),
+      appBar: CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

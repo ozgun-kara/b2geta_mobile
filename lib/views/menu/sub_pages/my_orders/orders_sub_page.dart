@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/orders_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _OrdersSubPageState extends State<OrdersSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

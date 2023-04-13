@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
@@ -34,32 +35,7 @@ class _MenuPageState extends State<MenuPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      appBar: AppBar(
-          toolbarHeight: 56,
-          backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-          elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: IconButton(
-              splashRadius: 24,
-              icon: Image.asset(
-                'assets/icons/back-2.png',
-                width: 23,
-                height: 17,
-                color: AppTheme.white15,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          title: SizedBox(
-              width: 103.74,
-              height: 14.0,
-              child: themeMode
-                  ? Image.asset('assets/images/b2geta_logo_light.png')
-                  : Image.asset('assets/images/b2geta_logo_dark.png')),
-          actions: []),
+      appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

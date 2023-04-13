@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -8,7 +9,6 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/messages/message_details_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 
 class MessageDetailsSubPage extends StatefulWidget {
   const MessageDetailsSubPage({
@@ -63,7 +63,7 @@ class _MessageDetailsSubPageState extends State<MessageDetailsSubPage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black7,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: Column(
         children: [
           // Container(

@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -116,7 +116,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
-        appBar: const CustomAppBar(),
+        appBar: const CustomInnerAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [
