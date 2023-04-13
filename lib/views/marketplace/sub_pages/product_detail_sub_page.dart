@@ -25,15 +25,9 @@ class ProductDetailSubPage extends StatefulWidget {
   const ProductDetailSubPage({
     Key? key,
     required this.productId,
-    required this.productName,
-    required this.imageUrl,
-    required this.price,
   }) : super(key: key);
 
   final String productId;
-  final String productName;
-  final String price;
-  final String imageUrl;
 
   @override
   State<ProductDetailSubPage> createState() => _ProductDetailSubPageState();
@@ -66,6 +60,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
       if (value != null) {
         setState(() {
           product = value;
+          getProfile();
         });
       }
     });
@@ -86,14 +81,11 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> imgList = [
-      widget.imageUrl,
-    ];
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-    getProfile();
+
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black7,
       appBar: const CustomAppBar(),
@@ -147,7 +139,10 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                 PageRouteBuilder(
                                   pageBuilder: (_, __, ___) =>
                                       CustomGalleryWidget(
-                                    urlImages: imgList,
+                                    urlImages: (product!.images != null &&
+                                            product!.images!.isNotEmpty)
+                                        ? product!.images!
+                                        : [],
                                   ),
                                   transitionDuration:
                                       const Duration(milliseconds: 0),
@@ -164,7 +159,11 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                 height: 352,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: NetworkImage(imgList[0]
+                                    image: NetworkImage(
+                                        (product!.images != null &&
+                                                product!.images!.isNotEmpty)
+                                            ? product!.images![0]
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png'
 
                                         // Provider.of<MarketPlacePageProvider>(
                                         //         context)
@@ -235,8 +234,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               height: 39,
                                               decoration: BoxDecoration(
                                                 image: DecorationImage(
-                                                  image:
-                                                      NetworkImage(imgList[0]),
+                                                  image: NetworkImage((product!
+                                                                  .images !=
+                                                              null &&
+                                                          product!.images!
+                                                              .isNotEmpty)
+                                                      ? product!.images![0]
+                                                      : 'https://doraev.com/images/custom/product-images/nophoto.png'),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),

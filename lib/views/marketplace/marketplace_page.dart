@@ -1,7 +1,9 @@
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -252,11 +254,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       pageBuilder: (_, __, ___) =>
                                           ProductDetailSubPage(
                                         productId: product.id!,
-                                        productName: product.name!.tr!,
-                                        imageUrl: product.images!.isNotEmpty
-                                            ? product.images![0]!
-                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                        price: product.price.toString(),
                                       ),
                                       transitionDuration:
                                           const Duration(milliseconds: 0),
@@ -414,15 +411,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       PageRouteBuilder(
                                         pageBuilder: (_, __, ___) =>
                                             ProductDetailSubPage(
-                                                productId: product.id!,
-                                                productName: product.name!.tr!,
-                                                imageUrl: product
-                                                        .images!.isNotEmpty
-                                                    ? product.images![0]
-                                                        .toString()
-                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                                price:
-                                                    product.price.toString()),
+                                          productId: product.id!,
+                                        ),
                                         transitionDuration:
                                             const Duration(milliseconds: 0),
                                         reverseTransitionDuration:
@@ -622,7 +612,38 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                       ),
                                                     ],
                                                   ),
-                                                  onPressed: () async {}),
+                                                  onPressed: () async {
+                                                    Navigator.push(
+                                                        context,
+                                                        PageRouteBuilder(
+                                                          pageBuilder: (_, __,
+                                                                  ___) =>
+                                                              AddMessageSubPage(
+                                                            toId: product
+                                                                .accountId!,
+                                                            fromId: Provider.of<
+                                                                        UserProvider>(
+                                                                    context,
+                                                                    listen:
+                                                                        false)
+                                                                .getUser
+                                                                .id!,
+                                                          ),
+                                                          transitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          reverseTransitionDuration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      0),
+                                                          transitionsBuilder: (_,
+                                                                  a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                        ));
+                                                  }),
                                             ),
                                           ),
                                         ],
