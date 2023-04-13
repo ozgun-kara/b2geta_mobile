@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -27,7 +27,7 @@ class _ProductDeleteSubPageState extends State<ProductDeleteSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
-        appBar: const CustomAppBar(),
+        appBar: const CustomInnerAppBar(),
         body: SingleChildScrollView(
           child: Column(
             children: [

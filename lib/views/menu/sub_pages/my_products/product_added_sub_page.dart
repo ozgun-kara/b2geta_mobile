@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ class _ProductAddedSubPageState extends State<ProductAddedSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
-        appBar: const CustomAppBar(),
+        appBar: const CustomInnerAppBar(),
         body: Column(
           children: [
             const SizedBox(height: 237),

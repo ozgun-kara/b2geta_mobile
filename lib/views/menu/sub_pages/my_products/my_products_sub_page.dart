@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

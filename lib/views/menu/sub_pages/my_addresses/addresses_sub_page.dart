@@ -3,7 +3,7 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +35,7 @@ class _AddressesSubPageState extends State<AddressesSubPage> {
 
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white36 : AppTheme.black12,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: [

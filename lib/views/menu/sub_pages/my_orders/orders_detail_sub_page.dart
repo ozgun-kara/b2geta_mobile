@@ -1,6 +1,6 @@
 import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -16,8 +16,7 @@ class OrdersDetailSubPage extends StatefulWidget {
   final String orderId;
 
   @override
-  State<OrdersDetailSubPage> createState() =>
-      _OrdersDetailSubPageState();
+  State<OrdersDetailSubPage> createState() => _OrdersDetailSubPageState();
 }
 
 class _OrdersDetailSubPageState extends State<OrdersDetailSubPage> {
@@ -50,7 +49,7 @@ class _OrdersDetailSubPageState extends State<OrdersDetailSubPage> {
 
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-        appBar: const CustomAppBar(),
+        appBar: const CustomInnerAppBar(),
         body: _orderDetailsModel != null
             ? SingleChildScrollView(
                 child: Column(
@@ -61,7 +60,7 @@ class _OrdersDetailSubPageState extends State<OrdersDetailSubPage> {
                         color:
                             themeMode ? AppTheme.white32 : Colors.transparent),
                     const SizedBox(height: 8),
-                   /*  Row(
+                    /*  Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 8),

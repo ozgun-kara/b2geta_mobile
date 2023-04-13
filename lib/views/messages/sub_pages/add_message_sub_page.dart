@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/messages/messages_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -11,7 +11,6 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/messages/message_details_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 
 class AddMessageSubPage extends StatefulWidget {
   const AddMessageSubPage({
@@ -78,7 +77,7 @@ class _AddMessageSubPageState extends State<AddMessageSubPage> {
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black7,
-      appBar: const CustomAppBar(),
+      appBar: const CustomInnerAppBar(),
       body: Column(
         children: [
           Container(
@@ -361,7 +360,6 @@ class _AddMessageSubPageState extends State<AddMessageSubPage> {
                             .then((value) async {
                           if (value) {
                             _messageController.clear();
-                           
                           }
                         });
                       },
