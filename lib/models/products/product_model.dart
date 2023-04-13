@@ -158,6 +158,7 @@ class ProductModel {
 
   String? id;
   String? productType;
+  String? accountId;
   ProductModelName? name;
   ProductModelSummary? summary;
   ProductModelDescription? description;
@@ -180,6 +181,7 @@ class ProductModel {
   ProductModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
     productType = json['product_type']?.toString();
+    accountId = json['account_id']?.toString();
     name =
         (json['name'] != null) ? ProductModelName.fromJson(json['name']) : null;
     summary = (json['summary'] != null)
@@ -206,6 +208,7 @@ class ProductModel {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['product_type'] = productType;
+    data['account_id'] = accountId;
     if (name != null) {
       data['name'] = name!.toJson();
     }
@@ -223,9 +226,9 @@ class ProductModel {
     if (images != null) {
       final v = images;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v);
-      });
+      }
       data['images'] = arr0;
     }
     return data;
