@@ -106,7 +106,7 @@ class ProductDetailModel {
   String? currency;
   String? status;
   List<ProductDetailModelCategories?>? categories;
-  List<String?>? images;
+  List<String>? images;
 
   ProductDetailModel({
     this.id,
@@ -169,17 +169,17 @@ class ProductDetailModel {
     if (categories != null) {
       final v = categories;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['categories'] = arr0;
     }
     if (images != null) {
       final v = images;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v);
-      });
+      }
       data['images'] = arr0;
     }
     return data;

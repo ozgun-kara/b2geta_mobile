@@ -60,7 +60,7 @@ class ProductsServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE BODY: $responseBody");
+      //debugPrint("RESPONSE BODY: $responseBody");
 
       var status = responseBody["status"];
       var dataList = responseBody["data"]['products'];
@@ -111,8 +111,8 @@ class ProductsServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+      // debugPrint(
+      //     "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
 

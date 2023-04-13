@@ -454,19 +454,6 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                                   ProductDetailSubPage(
                                                                 productId:
                                                                     product.id!,
-                                                                productName:
-                                                                    product
-                                                                        .name!
-                                                                        .tr!,
-                                                                imageUrl: product
-                                                                        .images!
-                                                                        .isNotEmpty
-                                                                    ? product
-                                                                        .images![0]!
-                                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                                                price: product
-                                                                    .price
-                                                                    .toString(),
                                                               ),
                                                               transitionDuration:
                                                                   const Duration(
