@@ -896,17 +896,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               .toString() !=
                                           'null') {
                                     if (widget.operation == 'Add') {
-                                      ProductDetailModel product =
-                                          ProductDetailModel(
-                                        accountId: '56',
-                                        userId: '57',
-                                        productName: productNameController.text,
-                                        productDescription:
-                                            productDescriptionController.text,
-                                        productSummary:
-                                            productSummaryController.text,
-                                      );
-
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
@@ -948,49 +937,31 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .updateProductCall(
                                               productId:
                                                   widget.passedObject!.id!,
-                                              categoryId: widget
-                                                  .passedObject!.categories
-                                                  .toString(),
-                                              productName: widget
-                                                  .passedObject!.productName
-                                                  .toString(),
-                                              productDescription: widget
-                                                  .passedObject!
-                                                  .productDescription!,
-                                              productSummary: widget
-                                                  .passedObject!
-                                                  .productSummary!,
-                                              brand: widget
-                                                  .passedObject!.brand!.id
-                                                  .toString(),
+                                              categoryId: categoryId,
+                                              productName:
+                                                  productNameController.text,
+                                              productDescription:
+                                                  productDescriptionController
+                                                      .text,
+                                              productSummary:
+                                                  productSummaryController.text,
+                                              brand: brandId,
                                               price:
-                                                  widget.passedObject!.price!,
-                                              currency: widget
-                                                  .passedObject!.currency!,
-                                              status:
-                                                  widget.passedObject!.status!)
+                                                  productPriceController.text,
+                                              currency: menuPageProvider
+                                                  .selectedCurrency
+                                                  .toString(),
+                                              status: menuPageProvider
+                                                          .selectedStatus ==
+                                                      'Active'.tr
+                                                  ? '1'
+                                                  : '0')
                                           .then((value) {
                                         if (value == true) {
                                           debugPrint(
                                               "PRODUCT HAS SUCCESSFULLY UPDATED");
 
-                                          Navigator.pushAndRemoveUntil(
-                                              context,
-                                              PageRouteBuilder(
-                                                pageBuilder: (_, __, ___) =>
-                                                    const MyProductsSubPage(),
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                reverseTransitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                transitionsBuilder: (_, a, __,
-                                                        c) =>
-                                                    FadeTransition(
-                                                        opacity: a, child: c),
-                                              ),
-                                              (route) => route.isFirst);
+                                          Navigator.pop(context);
                                         } else {
                                           debugPrint("PRODUCT HAS NOT UPDATED");
                                           operationFailedDialog(context);
@@ -1162,56 +1133,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
         );
       },
-    );
-  }
-
-  TextFormField textFormField(
-      {String? Function(String?)? validator,
-      required TextEditingController controller,
-      required String hintText,
-      TextInputType? keyboardType,
-      int? maxLines}) {
-    return TextFormField(
-      validator: validator,
-      controller: controller,
-      keyboardType: keyboardType ?? TextInputType.text,
-      maxLines: maxLines ?? 1,
-      style: TextStyle(
-          fontSize: 14,
-          fontFamily: AppTheme.appFontFamily,
-          fontWeight: FontWeight.w500,
-          color: themeMode ? AppTheme.blue3 : AppTheme.white1), // WHILE WRITING
-      decoration: InputDecoration(
-        contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
-        filled: true,
-        fillColor: themeMode ? AppTheme.white39 : AppTheme.black18,
-        hintText: "",
-        hintStyle: TextStyle(
-          fontSize: 14,
-          fontFamily: AppTheme.appFontFamily,
-          fontWeight: FontWeight.w400,
-          color: themeMode ? AppTheme.blue3 : AppTheme.white14,
-        ),
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-              width: 1,
-            )),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: const BorderSide(
-              color: Colors.transparent,
-              width: 1,
-            )),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: themeMode ? AppTheme.blue2 : AppTheme.white1,
-            width: 1,
-          ),
-        ),
-      ),
     );
   }
 }

@@ -230,30 +230,31 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                                       queryParameters: {}).then((value) {
                                                 if (value != null) {
                                                   Navigator.push(
-                                                      context,
-                                                      PageRouteBuilder(
-                                                        pageBuilder:
-                                                            (_, __,
+                                                          context,
+                                                          PageRouteBuilder(
+                                                            pageBuilder: (_, __,
                                                                     ___) =>
                                                                 AddProductSubPage(
                                                                     passedObject:
                                                                         value,
                                                                     operation:
                                                                         'Edit'),
-                                                        transitionDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    0),
-                                                        reverseTransitionDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    0),
-                                                        transitionsBuilder:
-                                                            (_, a, __, c) =>
+                                                            transitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            reverseTransitionDuration:
+                                                                const Duration(
+                                                                    milliseconds:
+                                                                        0),
+                                                            transitionsBuilder: (_,
+                                                                    a, __, c) =>
                                                                 FadeTransition(
                                                                     opacity: a,
                                                                     child: c),
-                                                      ));
+                                                          ))
+                                                      .then((_) =>
+                                                          setState(() {}));
                                                 } else {
                                                   debugPrint(
                                                       "PRODUCT DETAIL HAS NOT FETCHED");
