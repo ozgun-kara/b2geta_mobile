@@ -53,8 +53,6 @@ class _CustomReelsPageState extends State<CustomReelsPage> {
           ),
           delegate: SliverChildBuilderDelegate(
               childCount: socialProvider.reelsList.length, (context, index) {
-            debugPrint(
-                '${socialProvider.reelsList[index].videos![0]!.url.toString()}imagelar');
             return Container(
               width: 128,
               height: 128,

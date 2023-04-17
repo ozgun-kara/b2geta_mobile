@@ -2103,7 +2103,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             padding: const EdgeInsets.fromLTRB(
                                                 12, 2, 12, 0),
                                             child: Text(
-                                              'Follow'.tr,
+                                              (companyProfileModel != null)
+                                                  ? (companyProfileModel!
+                                                              .followStatus ??
+                                                          false)
+                                                      ? 'UnFollow'.tr
+                                                      : 'Follow'.tr
+                                                  : 'Follow'.tr,
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
