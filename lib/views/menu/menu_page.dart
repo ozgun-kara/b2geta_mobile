@@ -4,10 +4,11 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/orders_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -126,16 +127,34 @@ class _MenuPageState extends State<MenuPage> {
                   ),
                 ),
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const OrdersSubPage(),
-                        transitionDuration: const Duration(milliseconds: 0),
-                        reverseTransitionDuration:
-                            const Duration(milliseconds: 0),
-                        transitionsBuilder: (_, a, __, c) =>
-                            FadeTransition(opacity: a, child: c),
-                      ));
+                  if (Provider.of<UserProvider>(context, listen: false)
+                          .getUser
+                          .type !=
+                      'company') {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) =>
+                              const ProfileOrdersSubPage(),
+                          transitionDuration: const Duration(milliseconds: 0),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 0),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
+                        ));
+                  } else {
+                    Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) =>
+                              const CompanyOrdersSubPage(),
+                          transitionDuration: const Duration(milliseconds: 0),
+                          reverseTransitionDuration:
+                              const Duration(milliseconds: 0),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
+                        ));
+                  }
                 }),
             const SizedBox(height: 8),
             MaterialButton(

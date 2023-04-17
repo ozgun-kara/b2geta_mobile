@@ -2,22 +2,21 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/orders_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_detail_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-class OrdersSubPage extends StatefulWidget {
-  const OrdersSubPage({Key? key}) : super(key: key);
+class CompanyOrdersSubPage extends StatefulWidget {
+  const CompanyOrdersSubPage({Key? key}) : super(key: key);
 
   @override
-  State<OrdersSubPage> createState() => _OrdersSubPageState();
+  State<CompanyOrdersSubPage> createState() => _CompanyOrdersSubPageState();
 }
 
-class _OrdersSubPageState extends State<OrdersSubPage> {
+class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -44,7 +43,7 @@ class _OrdersSubPageState extends State<OrdersSubPage> {
                 color: themeMode ? AppTheme.white32 : Colors.transparent),
             const SizedBox(height: 21),
             Text(
-              'My Orders'.tr,
+              'Company Orders'.tr,
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: AppTheme.appFontFamily,
@@ -388,7 +387,7 @@ class _OrdersSubPageState extends State<OrdersSubPage> {
                                             context,
                                             PageRouteBuilder(
                                               pageBuilder: (_, __, ___) =>
-                                                  OrdersDetailSubPage(
+                                                  ProfileOrdersDetailSubPage(
                                                 orderId: items[index].id!,
                                               ),
                                               transitionDuration:
