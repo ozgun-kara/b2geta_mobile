@@ -83,7 +83,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       width: 36,
                       height: 36,
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Your reels video is active'.tr,
                       style: TextStyle(
@@ -93,9 +93,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -105,13 +105,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
                       width: 36,
                       height: 36,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -122,7 +122,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: Color.fromRGBO(225, 230, 250, 0.8),
                       ),
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Hasan Demir ',
                       style: TextStyle(
@@ -141,9 +141,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: AppTheme.white15,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -153,13 +153,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
                       width: 36,
                       height: 36,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -170,7 +170,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: Color.fromRGBO(225, 230, 250, 0.8),
                       ),
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Hasan Demir ',
                       style: TextStyle(
@@ -189,9 +189,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: AppTheme.white15,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -201,13 +201,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
                       width: 36,
                       height: 36,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -218,7 +218,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: Color.fromRGBO(225, 230, 250, 0.8),
                       ),
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Hasan Demir ',
                       style: TextStyle(
@@ -237,9 +237,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: AppTheme.white15,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -249,13 +249,13 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Container(
                       width: 36,
                       height: 36,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         shape: BoxShape.circle,
                         image: DecorationImage(
                           image: NetworkImage(
@@ -266,7 +266,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: Color.fromRGBO(225, 230, 250, 0.8),
                       ),
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Hasan Demir ',
                       style: TextStyle(
@@ -285,9 +285,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: AppTheme.white15,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -297,7 +297,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Image.asset(
@@ -305,7 +305,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       width: 36,
                       height: 36,
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Your reels video is active'.tr,
                       style: TextStyle(
@@ -315,9 +315,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -327,7 +327,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 Row(
                   children: [
                     Image.asset(
@@ -335,7 +335,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       width: 36,
                       height: 36,
                     ),
-                    SizedBox(width: 7),
+                    const SizedBox(width: 7),
                     Text(
                       'Your reels video is active'.tr,
                       style: TextStyle(
@@ -345,9 +345,9 @@ class _NotificationPageState extends State<NotificationPage> {
                         color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                       ),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Text(
-                      '1 ' + "Min".tr,
+                      '1 ${"Min".tr}',
                       style: TextStyle(
                         fontFamily: AppTheme.appFontFamily,
                         fontSize: 11,
@@ -357,7 +357,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
               ],
             ),
           ),
