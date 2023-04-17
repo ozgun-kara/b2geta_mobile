@@ -272,11 +272,13 @@ class FeedModelVideos {
   FeedModelVideosMeta? meta;
   String? url;
   int? duration;
+  String? image;
 
   FeedModelVideos({
     this.meta,
     this.url,
     this.duration,
+    this.image,
   });
   FeedModelVideos.fromJson(Map<String, dynamic> json) {
     meta = (json['meta'] != null)
@@ -284,6 +286,7 @@ class FeedModelVideos {
         : null;
     url = json['url']?.toString();
     duration = json['duration']?.toInt();
+    image = json['image']?.toString();
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -292,6 +295,8 @@ class FeedModelVideos {
     }
     data['url'] = url;
     data['duration'] = duration;
+    data['image'] = image;
+
     return data;
   }
 }

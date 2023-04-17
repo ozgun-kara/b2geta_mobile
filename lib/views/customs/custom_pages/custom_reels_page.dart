@@ -36,81 +36,6 @@ class _CustomReelsPageState extends State<CustomReelsPage> {
         .getReels(userId: widget.userId);
   }
 
-  List<String> reelsImageList = [
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-  ];
-
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -128,6 +53,8 @@ class _CustomReelsPageState extends State<CustomReelsPage> {
           ),
           delegate: SliverChildBuilderDelegate(
               childCount: socialProvider.reelsList.length, (context, index) {
+            debugPrint(
+                '${socialProvider.reelsList[index].videos![0]!.url.toString()}imagelar');
             return Container(
               width: 128,
               height: 128,
@@ -149,8 +76,9 @@ class _CustomReelsPageState extends State<CustomReelsPage> {
                       ));
                 },
                 child: Center(
-                  child: Image.asset(
-                    reelsImageList[index],
+                  child: Image.network(
+                    socialProvider.reelsList[index].videos![0]!.image
+                        .toString(),
                   ),
                 ),
               ),
