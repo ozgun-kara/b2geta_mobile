@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class OrdersDetailSubPage extends StatefulWidget {
-  const OrdersDetailSubPage({
+class ProfileOrdersDetailSubPage extends StatefulWidget {
+  const ProfileOrdersDetailSubPage({
     Key? key,
     required this.orderId,
   }) : super(key: key);
@@ -16,10 +16,12 @@ class OrdersDetailSubPage extends StatefulWidget {
   final String orderId;
 
   @override
-  State<OrdersDetailSubPage> createState() => _OrdersDetailSubPageState();
+  State<ProfileOrdersDetailSubPage> createState() =>
+      _ProfileOrdersDetailSubPageState();
 }
 
-class _OrdersDetailSubPageState extends State<OrdersDetailSubPage> {
+class _ProfileOrdersDetailSubPageState
+    extends State<ProfileOrdersDetailSubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
