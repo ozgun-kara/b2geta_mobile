@@ -72,91 +72,95 @@ class _CustomPostPageState extends State<CustomPostPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              if (Provider.of<UserProvider>(context,
-                                          listen: false)
-                                      .getUser
-                                      .id ==
-                                  (feed.user!.id ?? '')) {
-                                context
-                                    .read<NavigationPageProvider>()
-                                    .updateCurrentTabIndex(3);
-                              } else {
-                                Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) =>
-                                          feed.user!.type != 'company'
-                                              ? PersonalProfilePage(
-                                                  userId: feed.user!.id ?? '')
-                                              : CompanyProfilePage(
-                                                  userId: feed.user!.id ?? ''),
-                                      transitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      reverseTransitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      transitionsBuilder: (_, a, __, c) =>
-                                          FadeTransition(opacity: a, child: c),
-                                    ));
-                              }
-                            },
-                            child: Row(
-                              children: [
-                                feed.user!.photo!.isNotEmpty
-                                    ? ClipOval(
-                                        child: Image.network(
-                                          width: 40,
-                                          height: 40,
-                                          fit: BoxFit.cover,
-                                          feed.user!.photo!,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                if (Provider.of<UserProvider>(context,
+                                            listen: false)
+                                        .getUser
+                                        .id ==
+                                    (feed.user!.id ?? '')) {
+                                  context
+                                      .read<NavigationPageProvider>()
+                                      .updateCurrentTabIndex(3);
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            feed.user!.type != 'company'
+                                                ? PersonalProfilePage(
+                                                    userId: feed.user!.id ?? '')
+                                                : CompanyProfilePage(
+                                                    userId:
+                                                        feed.user!.id ?? ''),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ));
+                                }
+                              },
+                              child: Row(
+                                children: [
+                                  feed.user!.photo!.isNotEmpty
+                                      ? ClipOval(
+                                          child: Image.network(
                                             width: 40,
                                             height: 40,
                                             fit: BoxFit.cover,
+                                            feed.user!.photo!,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        )
+                                      : ClipOval(
+                                          child: Image.asset(
+                                            width: 40,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                            "assets/images/dummy_images/user_profile.png",
                                           ),
                                         ),
-                                      )
-                                    : ClipOval(
-                                        child: Image.asset(
-                                          width: 40,
-                                          height: 40,
-                                          fit: BoxFit.cover,
-                                          "assets/images/dummy_images/user_profile.png",
-                                        ),
-                                      ),
-                                const SizedBox(
-                                  width: 10.0,
-                                ),
-                                RichText(
-                                  text: TextSpan(
+                                  const SizedBox(
+                                    width: 10.0,
+                                  ),
+                                  Flexible(
+                                    flex: 3,
+                                    child: Text(
+                                      feed.user!.name ?? "",
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w800,
+                                        color: themeMode
+                                            ? AppTheme.blue3
+                                            : AppTheme.white1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      children: [
-                                        TextSpan(
-                                          text: feed.user!.name ?? "Name",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w800,
-                                            color: themeMode
-                                                ? AppTheme.blue3
-                                                : AppTheme.white1,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: ' ${'Homepage Share-2'.tr}',
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            color: AppTheme.white15,
-                                          ),
-                                        ),
-                                      ]),
-                                ),
-                              ],
+                                    ),
+                                  ),
+                                  Text(
+                                    ' ${'Homepage Share-2'.tr}',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: AppTheme.white15,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           IconButton(
