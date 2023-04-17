@@ -101,6 +101,7 @@ final Map<String, String> en = {
   'Disagreements': 'Disagreements',
   'Account Settings': 'Account Settings',
   'My Addresses': 'My Addresses',
+  'Followers': 'Followers',
   'Follow List': 'Follow List',
   'Settings': 'Settings',
   'Log Out': 'Log Out',

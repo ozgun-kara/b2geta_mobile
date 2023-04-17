@@ -19,12 +19,19 @@ class SettingsSubPage extends StatefulWidget {
 class _SettingsSubPageState extends State<SettingsSubPage> {
   ScrollController scrollController = ScrollController();
   GetStorage box = GetStorage();
-  final List<String> dropdownItems = [
+  final List<String> dropdownItems1 = [
     'English',
     'Turkish',
     // 'Deutsche',
   ];
-  String? dropdownSelectedValue;
+  String? dropdownSelectedValue1;
+
+  final List<String> dropdownItems2 = [
+    'EUR',
+    'TRY',
+    'USD',
+  ];
+  String? dropdownSelectedValue2 = 'EUR';
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -37,16 +44,16 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
       var deviceLanguage = Get.deviceLocale.toString();
 
       if (deviceLanguage == 'tr_TR') {
-        dropdownSelectedValue = 'Turkish';
+        dropdownSelectedValue1 = 'Turkish';
       } else if (deviceLanguage == 'en_US') {
-        dropdownSelectedValue = 'English';
+        dropdownSelectedValue1 = 'English';
       } else {
-        dropdownSelectedValue = 'English';
+        dropdownSelectedValue1 = 'English';
       }
     } else {
       box.read("language") == "tr_TR"
-          ? dropdownSelectedValue = 'Turkish'
-          : dropdownSelectedValue = 'English';
+          ? dropdownSelectedValue1 = 'Turkish'
+          : dropdownSelectedValue1 = 'English';
     }
 
     super.initState();
@@ -257,7 +264,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                         // alignment: AlignmentDirectional.center,
                         // isExpanded: true,
                         hint: Text(
-                          dropdownSelectedValue.toString(),
+                          dropdownSelectedValue1.toString(),
                           style: TextStyle(
                             fontSize: 14,
                             fontFamily: AppTheme.appFontFamily,
@@ -270,7 +277,7 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                           ),
                           overflow: TextOverflow.visible,
                         ),
-                        items: dropdownItems
+                        items: dropdownItems1
                             .map((item) => DropdownMenuItem<String>(
                                   value: item,
                                   child: Center(
@@ -292,10 +299,10 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                                   ),
                                 ))
                             .toList(),
-                        value: dropdownSelectedValue,
+                        value: dropdownSelectedValue1,
                         onChanged: (value) {
                           setState(() {
-                            dropdownSelectedValue = value as String;
+                            dropdownSelectedValue1 = value as String;
 
                             if (value == "English") {
                               box.write("language", "en_US");
@@ -315,6 +322,145 @@ class _SettingsSubPageState extends State<SettingsSubPage> {
                             //   var locale = const Locale('de', 'DE');
                             //   Get.updateLocale(locale);
                             // }
+                          });
+                        },
+                        icon: Center(
+                          child: Image.asset(
+                            'assets/icons/dropdown.png',
+                            width: 10,
+                            height: 6,
+                          ),
+                        ),
+                        iconSize: 24,
+                        // iconEnabledColor: Colors.yellow,
+                        // iconDisabledColor: Colors.grey,
+                        // icon: Container(),
+                        buttonHeight: 57,
+                        buttonWidth: deviceWidth,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 25, right: 17),
+                        buttonDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          // border:
+                          //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+                          // color: Colors.transparent,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white5
+                                  : AppTheme.black7,
+                        ),
+                        // buttonElevation: 2,
+                        itemHeight: 40,
+                        itemPadding: const EdgeInsets.only(left: 14, right: 14),
+                        dropdownMaxHeight: 200,
+                        // dropdownWidth: deviceWidth,
+                        dropdownPadding: null,
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          // color: Color(0xFFEFF0F7),
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.white5
+                                  : AppTheme.black7,
+                        ),
+                        // dropdownElevation: 8,
+                        scrollbarRadius: const Radius.circular(40),
+                        scrollbarThickness: 4,
+                        scrollbarAlwaysShow: true,
+                        offset: const Offset(0, 0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(23),
+                  color:
+                      Provider.of<ThemeProvider>(context).themeMode == "light"
+                          ? AppTheme.white1
+                          : AppTheme.black3,
+                  boxShadow: const [
+                    BoxShadow(
+                        offset: Offset(0, 4),
+                        color: Color.fromRGBO(41, 67, 214, 0.05),
+                        blurRadius: 26,
+                        spreadRadius: 0),
+                  ],
+                ),
+                padding: const EdgeInsets.all(28),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(
+                            'Currency'.tr,
+                            style: TextStyle(
+                              fontFamily: AppTheme.appFontFamily,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color:
+                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    DropdownButtonHideUnderline(
+                      child: DropdownButton2(
+                        // alignment: AlignmentDirectional.center,
+                        // isExpanded: true,
+                        hint: Text(
+                          dropdownSelectedValue2.toString(),
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w400,
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.black11
+                                    : AppTheme.white14,
+                          ),
+                          overflow: TextOverflow.visible,
+                        ),
+                        items: dropdownItems2
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item,
+                                  child: Center(
+                                    child: Text(
+                                      item,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white14,
+                                      ),
+                                      overflow: TextOverflow.visible,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        value: dropdownSelectedValue2,
+                        onChanged: (value) {
+                          setState(() {
+                            dropdownSelectedValue2 = value as String;
                           });
                         },
                         icon: Center(

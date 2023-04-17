@@ -102,6 +102,7 @@ final Map<String, String> tr = {
   'Disagreements': 'Anlaşmazlıklar',
   'Account Settings': 'Hesap Ayarları',
   'My Addresses': 'Adreslerim',
+  'Followers': 'Takipçi',
   'Follow List': 'Takip Listesi',
   'Settings': 'Ayarlar',
   'Log Out': 'Çıkış',
