@@ -218,13 +218,13 @@ class CompanyProfileModelCountry {
     currency = json['currency']?.toString();
     currencyName = json['currency_name']?.toString();
     currencySymbol = json['currency_symbol']?.toString();
-  if (json['timezones'] != null) {
-  final v = json['timezones'];
-  final arr0 = <CompanyProfileModelCountryTimezones>[];
-  v.forEach((v) {
-  arr0.add(CompanyProfileModelCountryTimezones.fromJson(v));
-  });
-    timezones = arr0;
+    if (json['timezones'] != null) {
+      final v = json['timezones'];
+      final arr0 = <CompanyProfileModelCountryTimezones>[];
+      v.forEach((v) {
+        arr0.add(CompanyProfileModelCountryTimezones.fromJson(v));
+      });
+      timezones = arr0;
     }
     flag = json['flag']?.toString();
   }
@@ -240,9 +240,9 @@ class CompanyProfileModelCountry {
     if (timezones != null) {
       final v = timezones;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['timezones'] = arr0;
     }
     data['flag'] = flag;
@@ -325,6 +325,7 @@ class CompanyProfileModel {
   CompanyProfileModelSettings? settings;
   String? registrationDate;
   List<CompanyProfileModelCollaborator?>? collaborator;
+  bool? followStatus;
 
   CompanyProfileModel({
     this.id,
@@ -344,6 +345,7 @@ class CompanyProfileModel {
     this.settings,
     this.registrationDate,
     this.collaborator,
+    this.followStatus,
   });
   CompanyProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
@@ -352,24 +354,34 @@ class CompanyProfileModel {
     taxNumber = json['tax_number']?.toString();
     phone = json['phone']?.toString();
     email = json['email']?.toString();
-    country = (json['country'] != null) ? CompanyProfileModelCountry.fromJson(json['country']) : null;
-    city = (json['city'] != null) ? CompanyProfileModelCity.fromJson(json['city']) : null;
-    district = (json['district'] != null) ? CompanyProfileModelDistrict.fromJson(json['district']) : null;
+    country = (json['country'] != null)
+        ? CompanyProfileModelCountry.fromJson(json['country'])
+        : null;
+    city = (json['city'] != null)
+        ? CompanyProfileModelCity.fromJson(json['city'])
+        : null;
+    district = (json['district'] != null)
+        ? CompanyProfileModelDistrict.fromJson(json['district'])
+        : null;
     address = json['address']?.toString();
     postalCode = json['postal_code']?.toString();
     logo = json['logo']?.toString();
     cover = json['cover']?.toString();
     about = json['about']?.toString();
-    settings = (json['settings'] != null) ? CompanyProfileModelSettings.fromJson(json['settings']) : null;
+    settings = (json['settings'] != null)
+        ? CompanyProfileModelSettings.fromJson(json['settings'])
+        : null;
     registrationDate = json['registration_date']?.toString();
-  if (json['collaborator'] != null) {
-  final v = json['collaborator'];
-  final arr0 = <CompanyProfileModelCollaborator>[];
-  v.forEach((v) {
-  arr0.add(CompanyProfileModelCollaborator.fromJson(v));
-  });
-    collaborator = arr0;
+    if (json['collaborator'] != null) {
+      final v = json['collaborator'];
+      final arr0 = <CompanyProfileModelCollaborator>[];
+      v.forEach((v) {
+        arr0.add(CompanyProfileModelCollaborator.fromJson(v));
+      });
+      collaborator = arr0;
     }
+
+    followStatus = json['follow_status'];
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -400,11 +412,13 @@ class CompanyProfileModel {
     if (collaborator != null) {
       final v = collaborator;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['collaborator'] = arr0;
     }
+
+    data['follow_status'] = followStatus;
     return data;
   }
 }

@@ -59,7 +59,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 228,
+              expandedHeight: 255,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -195,6 +195,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                         ? AppTheme.blue3
                                         : AppTheme.white1,
                                   ),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   "İstanbul, Türkiye",

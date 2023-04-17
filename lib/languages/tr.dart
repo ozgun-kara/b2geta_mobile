@@ -279,6 +279,7 @@ final Map<String, String> tr = {
 
   // PROFILE PAGE
   'Follow': 'Takip Et',
+  'UnFollow': 'Takibi Bırak',
 
   // APP EXCEPTION
   'Bad Request': 'Geçersiz istek',
