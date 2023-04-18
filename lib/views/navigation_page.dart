@@ -235,6 +235,50 @@ class _NavigationPageState extends State<NavigationPage> {
                     child: ButtonTheme(
                       height: 60,
                       child: MaterialButton(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16),
+                              topRight: Radius.circular(16),
+                            ),
+                          ),
+                          color: themeMode ? AppTheme.white1 : AppTheme.black5,
+                          elevation: 0,
+                          child: FittedBox(
+                            fit: BoxFit.none,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/icons/discover.png',
+                                    width: 21,
+                                    height: 21,
+                                    color: provider.currentTabIndex == 3
+                                        ? themeMode
+                                            ? AppTheme.blue2
+                                            : AppTheme.white1
+                                        : AppTheme.white15),
+                                const SizedBox(height: 4),
+                                Text('Discover'.tr,
+                                    style: TextStyle(
+                                        fontSize: 9,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w600,
+                                        color: provider.currentTabIndex == 3
+                                            ? themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white1
+                                            : AppTheme.white15)),
+                              ],
+                            ),
+                          ),
+                          onPressed: () {
+                            provider.updateCurrentTabIndex(3);
+                          }),
+                    ),
+                  ),
+                  Expanded(
+                    child: ButtonTheme(
+                      height: 60,
+                      child: MaterialButton(
                         shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
                             topLeft: Radius.circular(16),
@@ -289,7 +333,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                     fontSize: 9,
                                     fontFamily: AppTheme.appFontFamily,
                                     fontWeight: FontWeight.w600,
-                                    color: provider.currentTabIndex == 3
+                                    color: provider.currentTabIndex == 4
                                         ? themeMode
                                             ? AppTheme.blue2
                                             : AppTheme.white1
@@ -297,7 +341,7 @@ class _NavigationPageState extends State<NavigationPage> {
                           ],
                         ),
                         onPressed: () {
-                          provider.updateCurrentTabIndex(3);
+                          provider.updateCurrentTabIndex(4);
                         },
                         onLongPress: () async {
                           SharedPreferences prefs =
@@ -486,7 +530,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                       FadeTransition(opacity: a, child: c),
                                 ));
                           },
-                          child:  Text('Add Company'.tr))
+                          child: Text('Add Company'.tr))
                     ],
                   ),
                 )),
