@@ -48,286 +48,6 @@ class NotificationModelUser {
   }
 }
 
-class NotificationModelObjectUser {
-/*
-{
-  "id": "5",
-  "type": "personal",
-  "username": "user_5",
-  "name": "Fatih Sönmez",
-  "photo": "https://api.businessucces.com/uploads/profile/2023/03/11032023095731-1678525051.png",
-  "cover": ""
-} 
-*/
-
-  String? id;
-  String? type;
-  String? username;
-  String? name;
-  String? photo;
-  String? cover;
-
-  NotificationModelObjectUser({
-    this.id,
-    this.type,
-    this.username,
-    this.name,
-    this.photo,
-    this.cover,
-  });
-  NotificationModelObjectUser.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toString();
-    type = json['type']?.toString();
-    username = json['username']?.toString();
-    name = json['name']?.toString();
-    photo = json['photo']?.toString();
-    cover = json['cover']?.toString();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['username'] = username;
-    data['name'] = name;
-    data['photo'] = photo;
-    data['cover'] = cover;
-    return data;
-  }
-}
-
-class NotificationModelObjectMeta {
-/*
-{
-  "ip": "212.252.138.35",
-  "port": "43461",
-  "agent": "Dart/2.19 (dart:io)"
-} 
-*/
-
-  String? ip;
-  String? port;
-  String? agent;
-
-  NotificationModelObjectMeta({
-    this.ip,
-    this.port,
-    this.agent,
-  });
-  NotificationModelObjectMeta.fromJson(Map<String, dynamic> json) {
-    ip = json['ip']?.toString();
-    port = json['port']?.toString();
-    agent = json['agent']?.toString();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['ip'] = ip;
-    data['port'] = port;
-    data['agent'] = agent;
-    return data;
-  }
-}
-
-class NotificationModelObjectVideosMeta {
-/*
-{
-  "name": "image_picker8424493183252117744.mp4",
-  "full_path": "image_picker8424493183252117744.mp4",
-  "type": "application/octet-stream",
-  "error": 0,
-  "size": 6004212
-} 
-*/
-
-  String? name;
-  String? fullPath;
-  String? type;
-  int? error;
-  int? size;
-
-  NotificationModelObjectVideosMeta({
-    this.name,
-    this.fullPath,
-    this.type,
-    this.error,
-    this.size,
-  });
-  NotificationModelObjectVideosMeta.fromJson(Map<String, dynamic> json) {
-    name = json['name']?.toString();
-    fullPath = json['full_path']?.toString();
-    type = json['type']?.toString();
-    error = json['error']?.toInt();
-    size = json['size']?.toInt();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['name'] = name;
-    data['full_path'] = fullPath;
-    data['type'] = type;
-    data['error'] = error;
-    data['size'] = size;
-    return data;
-  }
-}
-
-class NotificationModelObjectVideos {
-/*
-{
-  "path": "videos/originals/2023/03/27032023133353-1679916833.mp4",
-  "meta": {
-    "name": "image_picker8424493183252117744.mp4",
-    "full_path": "image_picker8424493183252117744.mp4",
-    "type": "application/octet-stream",
-    "error": 0,
-    "size": 6004212
-  },
-  "url": "https://b2geta-vod.ercdn.net/videos/reels/2023/03/reels_27032023133353-1679916833.mp4",
-  "duration": 9
-} 
-*/
-
-  String? path;
-  NotificationModelObjectVideosMeta? meta;
-  String? url;
-  int? duration;
-
-  NotificationModelObjectVideos({
-    this.path,
-    this.meta,
-    this.url,
-    this.duration,
-  });
-  NotificationModelObjectVideos.fromJson(Map<String, dynamic> json) {
-    path = json['path']?.toString();
-    meta = (json['meta'] != null) ? NotificationModelObjectVideosMeta.fromJson(json['meta']) : null;
-    url = json['url']?.toString();
-    duration = json['duration']?.toInt();
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['path'] = path;
-    if (meta != null) {
-      data['meta'] = meta!.toJson();
-    }
-    data['url'] = url;
-    data['duration'] = duration;
-    return data;
-  }
-}
-
-class NotificationModelObject {
-/*
-{
-  "id": "85",
-  "type": "reels",
-  "user_id": "5",
-  "create_date": "2023-03-27 13:33:53",
-  "status": "active",
-  "content": "",
-  "videos": [
-    {
-      "path": "videos/originals/2023/03/27032023133353-1679916833.mp4",
-      "meta": {
-        "name": "image_picker8424493183252117744.mp4",
-        "full_path": "image_picker8424493183252117744.mp4",
-        "type": "application/octet-stream",
-        "error": 0,
-        "size": 6004212
-      },
-      "url": "https://b2geta-vod.ercdn.net/videos/reels/2023/03/reels_27032023133353-1679916833.mp4",
-      "duration": 9
-    }
-  ],
-  "meta": {
-    "ip": "212.252.138.35",
-    "port": "43461",
-    "agent": "Dart/2.19 (dart:io)"
-  },
-  "likes": "0",
-  "comments": "0",
-  "user": {
-    "id": "5",
-    "type": "personal",
-    "username": "user_5",
-    "name": "Fatih Sönmez",
-    "photo": "https://api.businessucces.com/uploads/profile/2023/03/11032023095731-1678525051.png",
-    "cover": ""
-  }
-} 
-*/
-
-  String? id;
-  String? type;
-  String? userId;
-  String? createDate;
-  String? status;
-  String? content;
-  List<NotificationModelObjectVideos?>? videos;
-  NotificationModelObjectMeta? meta;
-  String? likes;
-  String? comments;
-  NotificationModelObjectUser? user;
-
-  NotificationModelObject({
-    this.id,
-    this.type,
-    this.userId,
-    this.createDate,
-    this.status,
-    this.content,
-    this.videos,
-    this.meta,
-    this.likes,
-    this.comments,
-    this.user,
-  });
-  NotificationModelObject.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toString();
-    type = json['type']?.toString();
-    userId = json['user_id']?.toString();
-    createDate = json['create_date']?.toString();
-    status = json['status']?.toString();
-    content = json['content']?.toString();
-  if (json['videos'] != null) {
-  final v = json['videos'];
-  final arr0 = <NotificationModelObjectVideos>[];
-  v.forEach((v) {
-  arr0.add(NotificationModelObjectVideos.fromJson(v));
-  });
-    videos = arr0;
-    }
-    meta = (json['meta'] != null) ? NotificationModelObjectMeta.fromJson(json['meta']) : null;
-    likes = json['likes']?.toString();
-    comments = json['comments']?.toString();
-    user = (json['user'] != null) ? NotificationModelObjectUser.fromJson(json['user']) : null;
-  }
-  Map<String, dynamic> toJson() {
-    final data = <String, dynamic>{};
-    data['id'] = id;
-    data['type'] = type;
-    data['user_id'] = userId;
-    data['create_date'] = createDate;
-    data['status'] = status;
-    data['content'] = content;
-    if (videos != null) {
-      final v = videos;
-      final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
-      data['videos'] = arr0;
-    }
-    if (meta != null) {
-      data['meta'] = meta!.toJson();
-    }
-    data['likes'] = likes;
-    data['comments'] = comments;
-    if (user != null) {
-      data['user'] = user!.toJson();
-    }
-    return data;
-  }
-}
-
 class NotificationModelIcon {
 /*
 {
@@ -367,45 +87,6 @@ class NotificationModel {
     "name": "video_encoded",
     "url": "https://api.businessucces.com/assets/my/images/icon/video_encoded.png"
   },
-  "object_type": "reels",
-  "object_id": "85",
-  "object": {
-    "id": "85",
-    "type": "reels",
-    "user_id": "5",
-    "create_date": "2023-03-27 13:33:53",
-    "status": "active",
-    "content": "",
-    "videos": [
-      {
-        "path": "videos/originals/2023/03/27032023133353-1679916833.mp4",
-        "meta": {
-          "name": "image_picker8424493183252117744.mp4",
-          "full_path": "image_picker8424493183252117744.mp4",
-          "type": "application/octet-stream",
-          "error": 0,
-          "size": 6004212
-        },
-        "url": "https://b2geta-vod.ercdn.net/videos/reels/2023/03/reels_27032023133353-1679916833.mp4",
-        "duration": 9
-      }
-    ],
-    "meta": {
-      "ip": "212.252.138.35",
-      "port": "43461",
-      "agent": "Dart/2.19 (dart:io)"
-    },
-    "likes": "0",
-    "comments": "0",
-    "user": {
-      "id": "5",
-      "type": "personal",
-      "username": "user_5",
-      "name": "Fatih Sönmez",
-      "photo": "https://api.businessucces.com/uploads/profile/2023/03/11032023095731-1678525051.png",
-      "cover": ""
-    }
-  },
   "user": {
     "id": "5",
     "type": "personal",
@@ -423,9 +104,6 @@ class NotificationModel {
   bool? read;
   String? content;
   NotificationModelIcon? icon;
-  String? objectType;
-  String? objectId;
-  NotificationModelObject? object;
   NotificationModelUser? user;
 
   NotificationModel({
@@ -435,9 +113,6 @@ class NotificationModel {
     this.read,
     this.content,
     this.icon,
-    this.objectType,
-    this.objectId,
-    this.object,
     this.user,
   });
   NotificationModel.fromJson(Map<String, dynamic> json) {
@@ -447,9 +122,6 @@ class NotificationModel {
     read = json['read'];
     content = json['content']?.toString();
     icon = (json['icon'] != null) ? NotificationModelIcon.fromJson(json['icon']) : null;
-    objectType = json['object_type']?.toString();
-    objectId = json['object_id']?.toString();
-    object = (json['object'] != null) ? NotificationModelObject.fromJson(json['object']) : null;
     user = (json['user'] != null) ? NotificationModelUser.fromJson(json['user']) : null;
   }
   Map<String, dynamic> toJson() {
@@ -461,11 +133,6 @@ class NotificationModel {
     data['content'] = content;
     if (icon != null) {
       data['icon'] = icon!.toJson();
-    }
-    data['object_type'] = objectType;
-    data['object_id'] = objectId;
-    if (object != null) {
-      data['object'] = object!.toJson();
     }
     if (user != null) {
       data['user'] = user!.toJson();

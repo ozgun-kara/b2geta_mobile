@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
+import 'package:b2geta_mobile/models/social/notification_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -413,13 +414,47 @@ class SocialServices {
         return true;
       } else {
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        
+
         return false;
       }
     } else {
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
       return false;
+    }
+  }
+
+  //GET NOTIFICATION
+  Future<List<NotificationModel>> getNotifications({
+    required Map<String, String> queryParameters,
+  }) async {
+    List<NotificationModel> notifications = [];
+
+    final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/notifications')
+            .replace(queryParameters: queryParameters),
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "tr"
+        });
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        var dataList = json.decode(response.body)["data"]["notifications"];
+        for (var i = 0; i < dataList.length; i++) {
+          notifications.add(NotificationModel.fromJson(dataList[i]));
+        }
+        return notifications;
+      } else {
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return notifications;
+      }
+    } else {
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+      return notifications;
     }
   }
 }
