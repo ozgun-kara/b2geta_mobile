@@ -424,7 +424,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                         child:
                                             FutureBuilder<List<ProductModel>>(
                                           future: ProductsServices()
-                                              .productsListAndSearchCall(
+                                              .allProductsListAndSearchCall(
                                                   queryParameters: {
                                                 "limit": '1000000',
                                                 'account_id': widget.userId,
