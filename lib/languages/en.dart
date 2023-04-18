@@ -284,7 +284,7 @@ final Map<String, String> en = {
 
   // PROFILE PAGE
   'Follow': 'Follow',
-  'UnFollow': 'UnFollow',
+  'UnFollow': 'FollowUp',
 
   // APP EXCEPTION
   'Bad Request': 'Bad Request',

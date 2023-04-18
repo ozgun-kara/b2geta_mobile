@@ -214,9 +214,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         : true,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
-                          .productsListAndSearchCall(queryParameters: {
-                        "limit": '1000000',
+                          .allProductsListAndSearchCall(queryParameters: {
                         'account_id': widget.userId,
+                        "limit": '1000000',
                       }),
                       builder: (context, data) {
                         if (data.hasData) {
@@ -378,7 +378,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         : false,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
-                          .productsListAndSearchCall(queryParameters: {
+                          .allProductsListAndSearchCall(queryParameters: {
                         "limit": '10000000',
                         'account_id': widget.userId,
                       }),
