@@ -1,3 +1,5 @@
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -212,9 +214,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         : true,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
-                          .productsListAndSearchCall(queryParameters: {
-                        "limit": '1000000',
+                          .allProductsListAndSearchCall(queryParameters: {
                         'account_id': widget.userId,
+                        "limit": '1000000',
                       }),
                       builder: (context, data) {
                         if (data.hasData) {
@@ -376,7 +378,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                         : false,
                     child: FutureBuilder<List<ProductModel>>(
                       future: ProductsServices()
-                          .productsListAndSearchCall(queryParameters: {
+                          .allProductsListAndSearchCall(queryParameters: {
                         "limit": '10000000',
                         'account_id': widget.userId,
                       }),
@@ -407,7 +409,8 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                    productId: product.id!,),
+                                              productId: product.id!,
+                                            ),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
@@ -617,7 +620,42 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                           ),
                                                         ],
                                                       ),
-                                                      onPressed: () async {}),
+                                                      onPressed: () async {
+                                                        Navigator.push(
+                                                            context,
+                                                            PageRouteBuilder(
+                                                              pageBuilder: (_,
+                                                                      __,
+                                                                      ___) =>
+                                                                  AddMessageSubPage(
+                                                                toId: product
+                                                                    .accountId!,
+                                                                fromId: Provider.of<
+                                                                            UserProvider>(
+                                                                        context,
+                                                                        listen:
+                                                                            false)
+                                                                    .getUser
+                                                                    .id!,
+                                                              ),
+                                                              transitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              reverseTransitionDuration:
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
+                                                              transitionsBuilder: (_,
+                                                                      a,
+                                                                      __,
+                                                                      c) =>
+                                                                  FadeTransition(
+                                                                      opacity:
+                                                                          a,
+                                                                      child: c),
+                                                            ));
+                                                      }),
                                                 ),
                                               ),
                                             ],

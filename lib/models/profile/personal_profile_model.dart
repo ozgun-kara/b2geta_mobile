@@ -265,6 +265,7 @@ class PersonalProfileModel {
   PersonalProfileModelSettings? settings;
   String? registrationDate;
   List<PersonalProfileModelCompanies?>? companies;
+  bool? followStatus;
 
   PersonalProfileModel({
     this.id,
@@ -284,6 +285,7 @@ class PersonalProfileModel {
     this.settings,
     this.registrationDate,
     this.companies,
+    this.followStatus,
   });
   PersonalProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
@@ -314,6 +316,7 @@ class PersonalProfileModel {
       });
       companies = arr0;
     }
+    followStatus = json['follow_status'];
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -345,6 +348,7 @@ class PersonalProfileModel {
       }
       data['companies'] = arr0;
     }
+    data['follow_status'] = followStatus;
     return data;
   }
 }

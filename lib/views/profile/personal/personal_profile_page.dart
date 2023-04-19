@@ -72,7 +72,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 250,
+              expandedHeight: 275,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -198,7 +198,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                 Text(
                                   personalProfileModel != null
                                       ? personalProfileModel!.name.toString()
-                                      : 'user name',
+                                      : '',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
@@ -209,6 +209,9 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                         ? AppTheme.blue3
                                         : AppTheme.white1,
                                   ),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 Text(
                                   "İstanbul, Türkiye",
@@ -236,7 +239,13 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                     padding:
                                         const EdgeInsets.fromLTRB(13, 2, 13, 0),
                                     child: Text(
-                                      'Follow'.tr,
+                                      (personalProfileModel != null)
+                                          ? (personalProfileModel!
+                                                      .followStatus ??
+                                                  false)
+                                              ? 'UnFollow'.tr
+                                              : 'Follow'.tr
+                                          : 'Follow'.tr,
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontFamily: AppTheme.appFontFamily,

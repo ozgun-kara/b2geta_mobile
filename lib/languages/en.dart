@@ -79,6 +79,7 @@ final Map<String, String> en = {
   'Homepage': 'Homepage',
   'Marketplace': 'Marketplace',
   'My Basket': 'My Basket',
+  'Discover': 'Discover',
   'My Account': 'My Account',
   'AppBar Search': 'Search',
 
@@ -284,6 +285,7 @@ final Map<String, String> en = {
 
   // PROFILE PAGE
   'Follow': 'Follow',
+  'UnFollow': 'FollowUp',
 
   // APP EXCEPTION
   'Bad Request': 'Bad Request',

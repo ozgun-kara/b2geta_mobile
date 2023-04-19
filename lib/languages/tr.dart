@@ -80,6 +80,7 @@ final Map<String, String> tr = {
   'Homepage': 'Ana Sayfa',
   'Marketplace': 'Pazaryeri',
   'My Basket': 'Sepetim',
+  'Discover': 'Keşfet',
   'My Account': 'Hesabım',
   'AppBar Search': 'Aranacak kelimeyi giriniz',
 
@@ -279,6 +280,7 @@ final Map<String, String> tr = {
 
   // PROFILE PAGE
   'Follow': 'Takip Et',
+  'UnFollow': 'Takip',
 
   // APP EXCEPTION
   'Bad Request': 'Geçersiz istek',
