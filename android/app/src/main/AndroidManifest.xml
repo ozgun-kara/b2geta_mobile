@@ -2,7 +2,7 @@
     package="com.example.b2geta_mobile">
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="b2geta_mobile"
+        android:label="B2GETA"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
