@@ -35,7 +35,7 @@ class OrderService {
     }
   }
 
-  Future<List<OrderModel>> getOrderCall() async {
+  Future<List<OrderModel>> getMyOrdersCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/orders'),
       headers: {
@@ -70,12 +70,14 @@ class OrderService {
     }
   }
 
-  Future<List<OrderModel>> getOrderCallTest() async {
+  Future<List<OrderModel>> getMyIncomingOrdersCall() async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/orders'),
+      Uri.parse('${Constants.apiUrl}/orders/incoming'),
       headers: {
         // "Authorization": "Bearer ${Constants.userToken}",
 
+        "Content-Type": "application/json; charset=utf-8",
+        "Accept-Language": "${Constants.language}",
         "Authorization":
             "Bearer nzdngvtcmbmhtkjvlryauagpefmzybhtfjuqmpvgxmmbqvjopotusvglmgbyxdzc",
       },

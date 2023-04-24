@@ -7,27 +7,38 @@ import 'package:http/http.dart' as http;
 class BasketServices {
   // GET ALL
   Future<List<BasketModel>> getAllCall() async {
-    List<BasketModel> basketList = [];
-
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
       "Authorization": "Bearer ${Constants.userToken}",
     });
+
     debugPrint(Constants.userToken);
+
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<BasketModel> basketList = [];
+
     if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint("RESPONSE BODY: $responseBody");
+
+      var status = responseBody["status"];
 
       if (status == true) {
-        var data = jsonDecode(response.body)['data'];
+        var data = responseBody['data']['products'];
 
         for (var basket in data) {
           basketList.add(BasketModel.fromJson(basket));
         }
+
         return basketList;
       } else {
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return basketList;
       }
     } else {
+      debugPrint("API ERROR\nSTATUS CODE:  ${response.body}");
+
       return basketList;
     }
   }
