@@ -123,6 +123,10 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
               ),
             ),
             const SizedBox(height: 23),
+            Container(
+                width: deviceWidth,
+                height: 1,
+                color: themeMode ? AppTheme.white32 : Colors.transparent),
             FutureBuilder<List<OrderModel>>(
               future: OrderService().getOrderCall(),
               builder: (context, data) {
@@ -163,7 +167,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                           children: [
                             Padding(
                               padding:
-                                  const EdgeInsets.fromLTRB(21, 21, 21, 23),
+                                  const EdgeInsets.fromLTRB(25, 18, 25, 16),
                               child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -413,13 +417,80 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                 color: themeMode
                                     ? AppTheme.white21
                                     : AppTheme.black18),
-                            const SizedBox(height: 2),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                              padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
+                                  SizedBox(
+                                    height: 35,
+                                    child: MaterialButton(
+                                      onPressed: () {},
+                                      elevation: 0,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16)),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            child: Image.asset(
+                                                'assets/icons/check-4.png',
+                                                width: 12,
+                                                height: 9,
+                                                color: AppTheme.green3),
+                                          ),
+                                          const SizedBox(width: 3),
+                                          Text(
+                                            'Confirm'.tr,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.green3),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 35,
+                                    child: MaterialButton(
+                                      onPressed: () {},
+                                      elevation: 0,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(16)),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 2),
+                                            child: Image.asset(
+                                                'assets/icons/cross-3.png',
+                                                width: 9,
+                                                height: 9,
+                                                color: AppTheme.red6),
+                                          ),
+                                          const SizedBox(width: 4),
+                                          Text(
+                                            'Reject'.tr,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.red6),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                   SizedBox(
                                     height: 35,
                                     child: MaterialButton(
@@ -449,64 +520,8 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                     AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w700,
                                                 color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.blue10),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  SizedBox(
-                                    height: 35,
-                                    child: MaterialButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) =>
-                                                  ProfileOrdersDetailSubPage(
-                                                orderId: items[index].id!,
-                                              ),
-                                              transitionDuration:
-                                                  const Duration(
-                                                      milliseconds: 0),
-                                              reverseTransitionDuration:
-                                                  const Duration(
-                                                      milliseconds: 0),
-                                              transitionsBuilder:
-                                                  (_, a, __, c) =>
-                                                      FadeTransition(
-                                                          opacity: a, child: c),
-                                            ));
-                                      },
-                                      elevation: 0,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 2),
-                                            child: Image.asset(
-                                                'assets/icons/arrow.png',
-                                                width: 8,
-                                                height: 8,
-                                                color: AppTheme.white15),
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            'Details'.tr,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.blue10),
+                                                    ? AppTheme.blue3
+                                                    : AppTheme.blue13),
                                           ),
                                         ],
                                       ),

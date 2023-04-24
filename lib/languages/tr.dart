@@ -117,6 +117,7 @@ final Map<String, String> tr = {
   'Details': 'Detaylar',
   'Approved': 'Onaylandı',
   'Evaluating': 'Değerlendiriliyor',
+  'Reject': 'Reddet',
   'Denied': 'Reddedildi',
   'Order Detail': 'Sipariş Detay',
   'Address:': 'Adres:',
