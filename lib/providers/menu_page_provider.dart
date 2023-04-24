@@ -109,4 +109,5 @@ class MenuPageProvider with ChangeNotifier {
     imageFilesList!.clear();
     notifyListeners();
   }
+
 }
