@@ -118,7 +118,7 @@ final Map<String, String> en = {
   'Evaluating': 'Evaluating',
   'Reject': 'Reject',
   'Denied': 'Denied',
-  'Recieved Orders': 'Recieved Orders',
+  'Received Orders': 'Received Orders',
   'Given Orders': 'Given Orders',
   'Order Detail': 'Order Detail',
   'Address:': 'Address:',

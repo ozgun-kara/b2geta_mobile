@@ -119,7 +119,7 @@ final Map<String, String> tr = {
   'Evaluating': 'Değerlendiriliyor',
   'Reject': 'Reddet',
   'Denied': 'Reddedildi',
-  'Recieved Orders': 'Alınan Siparişler',
+  'Received Orders': 'Alınan Siparişler',
   'Given Orders': 'Verilen Siparişler',
   'Order Detail': 'Sipariş Detay',
   'Address:': 'Adres:',
