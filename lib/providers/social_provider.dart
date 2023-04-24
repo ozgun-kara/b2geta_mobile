@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 class SocialProvider with ChangeNotifier {
   List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
+  List<FeedModel> discoverList = [];
   List<FeedModel> myStoriesList = [];
 
   void getFeeds({required String userId}) async {
@@ -28,6 +29,26 @@ class SocialProvider with ChangeNotifier {
       "type": "reels"
     }, userId: userId).then((feedList) async {
       reelsList = feedList;
+    });
+
+    notifyListeners();
+  }
+
+  void getDiscover() async {
+    await locator<SocialServices>().getDiscover(
+      queryParameters: {
+        "offset": "0",
+        "limit": "100000000000",
+      },
+    ).then((feedList) async {
+      for (var feed in feedList) {
+        if (feed.type != 'story') {
+          if (feed.type == "reels" ||
+              (feed.type == 'feed' && feed.images!.isNotEmpty)) {
+            discoverList.add(feed);
+          }
+        }
+      }
     });
 
     notifyListeners();
