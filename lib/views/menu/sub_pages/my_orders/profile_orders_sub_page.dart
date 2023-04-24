@@ -53,7 +53,7 @@ class _ProfileOrdersSubPageState extends State<ProfileOrdersSubPage> {
             ),
             const SizedBox(height: 22),
             FutureBuilder<List<OrderModel>>(
-              future: OrderService().getOrderCall(),
+              future: OrderService().getMyOrdersCall(),
               builder: (context, data) {
                 if (data.hasData) {
                   var orderList = data.data;
