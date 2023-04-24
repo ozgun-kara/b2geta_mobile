@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_detail_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -126,9 +125,9 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
             Container(
                 width: deviceWidth,
                 height: 1,
-                color: themeMode ? AppTheme.white32 : Colors.transparent),
+                color: themeMode ? AppTheme.white32 : AppTheme.black28),
             FutureBuilder<List<OrderModel>>(
-              future: OrderService().getOrderCall(),
+              future: OrderService().getOrderCallTest(),
               builder: (context, data) {
                 if (data.hasData) {
                   var orderList = data.data;
@@ -138,7 +137,11 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                     shrinkWrap: true,
                     itemCount: orderList!.length,
                     separatorBuilder: (BuildContext context, int index) {
-                      return const SizedBox(height: 0);
+                      return Container(
+                          width: deviceWidth,
+                          height: 1,
+                          color:
+                              themeMode ? AppTheme.white21 : AppTheme.black28);
                     },
                     itemBuilder: ((context, index) {
                       var items = data.data;
@@ -146,10 +149,10 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                       return Container(
                         decoration: BoxDecoration(
                           color: index.isEven
-                              ? (themeMode ? AppTheme.white1 : AppTheme.black28)
+                              ? (themeMode ? AppTheme.white1 : AppTheme.black12)
                               : (themeMode
                                   ? AppTheme.white43
-                                  : AppTheme.black28),
+                                  : AppTheme.black5),
 
                           // themeMode ? AppTheme.white1 : AppTheme.black7,
 
@@ -416,7 +419,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                 height: 1,
                                 color: themeMode
                                     ? AppTheme.white21
-                                    : AppTheme.black18),
+                                    : AppTheme.black28),
                             Padding(
                               padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
                               child: Row(
