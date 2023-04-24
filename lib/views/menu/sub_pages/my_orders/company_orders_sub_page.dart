@@ -20,10 +20,10 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
   ScrollController scrollController = ScrollController();
 
   final List<String> dropdownItems = [
-    'Recieved Orders'.tr,
+    'Received Orders'.tr,
     'Given Orders'.tr,
   ];
-  String? dropdownSelectedValue = 'Recieved Orders'.tr;
+  String? dropdownSelectedValue = 'Received Orders'.tr;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -127,7 +127,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                 height: 1,
                 color: themeMode ? AppTheme.white32 : AppTheme.black28),
             Visibility(
-              visible: dropdownSelectedValue == 'Recieved Orders'.tr,
+              visible: dropdownSelectedValue == 'Received Orders'.tr,
               child: FutureBuilder<List<OrderModel>>(
                 future: OrderService().getOrderCallTest(),
                 builder: (context, data) {
@@ -963,7 +963,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                 },
               ),
             ),
-            const SizedBox(height: 82),
+            const SizedBox(height: 48),
           ],
         ),
       ),
