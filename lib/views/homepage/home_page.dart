@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
@@ -10,7 +11,7 @@ import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/cutom_story_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/custom_story_page.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -393,7 +394,11 @@ class _HomePageState extends State<HomePage> {
                                           transitionsBuilder: (_, a, __, c) =>
                                               FadeTransition(
                                                   opacity: a, child: c),
-                                        )).then((_) => setState(() {}));
+                                        )).then((_) {
+                                      Provider.of<SocialProvider>(context,
+                                              listen: false)
+                                          .getFeeds(userId: '');
+                                    });
                                   },
                                   onSubmitted: (value) async {
                                     /*  if (_postTextController.text.isNotEmpty) {
