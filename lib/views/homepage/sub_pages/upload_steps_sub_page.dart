@@ -985,6 +985,10 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                         Provider.of<HomePageProvider>(context,
                                                 listen: false)
                                             .updateUploadStep(0);
+
+                                        Provider.of<HomePageProvider>(context,
+                                                listen: false)
+                                            .getFeeds();
                                       })
                                 ],
                               ),
@@ -1013,6 +1017,8 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
               Provider.of<HomePageProvider>(context, listen: false)
                   .clearSelectedImageFilesList();
               Navigator.pop(context);
+
+              Provider.of<HomePageProvider>(context, listen: false).getFeeds();
             },
           ),
         ),
@@ -1068,9 +1074,6 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                       .then((value) {
                     Provider.of<HomePageProvider>(context, listen: false)
                         .updateUploadStep(3);
-
-                    Provider.of<HomePageProvider>(context, listen: false)
-                        .getFeeds();
                   });
                 }),
           ),

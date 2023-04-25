@@ -70,6 +70,44 @@ class OrderService {
     }
   }
 
+  Future<List<OrderModel>> getMyOrdersCallTest() async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/orders'),
+      headers: {
+        // "Authorization": "Bearer ${Constants.userToken}",
+
+        "Authorization":
+            "Bearer nzdngvtcmbmhtkjvlryauagpefmzybhtfjuqmpvgxmmbqvjopotusvglmgbyxdzc",
+      },
+    );
+
+    List<OrderModel> orderList = [];
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        List data = json.decode(response.body)["data"]["orders"];
+        int limit = jsonDecode(response.body)["data"]["summary"]["limit"];
+        int total =
+            int.parse(jsonDecode(response.body)["data"]["summary"]["total"]);
+        var dataListLength = total > limit ? limit : total;
+
+        for (var i = 0; i < dataListLength; i++) {
+          orderList.add(OrderModel.fromJson(data[i]));
+        }
+        return orderList;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
+        return orderList;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE:  ${response.body}");
+
+      return orderList;
+    }
+  }
+
   Future<List<OrderModel>> getMyIncomingOrdersCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/orders/incoming'),

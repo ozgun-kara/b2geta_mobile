@@ -404,7 +404,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ],
                           ),
-                        ),
+                        ), // STORY PANEL
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 13.0),
                           child: Row(
@@ -515,7 +515,14 @@ class _HomePageState extends State<HomePage> {
                                           transitionsBuilder: (_, a, __, c) =>
                                               FadeTransition(
                                                   opacity: a, child: c),
-                                        ));
+                                        )).then((value) => {
+                                          setState(() {
+                                            Provider.of<HomePageProvider>(
+                                                    context,
+                                                    listen: false)
+                                                .getFeeds();
+                                          })
+                                        });
                                   },
                                   onSubmitted: (value) async {
                                     /*  if (_postTextController.text.isNotEmpty) {
@@ -559,7 +566,7 @@ class _HomePageState extends State<HomePage> {
                               ), */
                             ],
                           ),
-                        ),
+                        ), // SHARING PANEL
                         const SizedBox(
                           height: 14.0,
                         ),
