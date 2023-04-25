@@ -27,13 +27,16 @@ class _BasketPageState extends State<BasketPage> {
   late double deviceHeight;
   late bool themeMode;
   ScrollController scrollController = ScrollController();
+  final BasketServices _basketServices = BasketServices();
   List<AddressModel> addressList = [];
+  BasketSummaryModel? summary;
   int? selectedAddressIndex = 0;
   String? selectedAddressId;
 
   @override
   void initState() {
     Provider.of<BasketPageProvider>(context, listen: false).getAllBasket();
+    getSummary();
     getAllAddress();
     super.initState();
   }
@@ -44,6 +47,16 @@ class _BasketPageState extends State<BasketPage> {
       setState(() {
         addressList = value;
       });
+    });
+  }
+
+  Future<void> getSummary() async {
+    _basketServices.getOrderSummary().then((value) {
+      if (value != null) {
+        setState(() {
+          summary = value;
+        });
+      }
     });
   }
 
@@ -1099,6 +1112,7 @@ class _BasketPageState extends State<BasketPage> {
                                       .then((value) {
                                     if (value) {
                                       basketPageProvider.getAllBasket();
+                                      getSummary();
                                     }
                                   });
                                 }
@@ -1153,6 +1167,7 @@ class _BasketPageState extends State<BasketPage> {
                                     .then((value) {
                                   if (value) {
                                     basketPageProvider.getAllBasket();
+                                    getSummary();
                                   }
                                 });
                               }),
@@ -1181,6 +1196,7 @@ class _BasketPageState extends State<BasketPage> {
                                     .then((bool value) {
                                   if (value) {
                                     basketPageProvider.getAllBasket();
+                                    getSummary();
                                     Navigator.pop(context);
                                   }
                                 });
@@ -1255,7 +1271,8 @@ class _BasketPageState extends State<BasketPage> {
                           RichText(
                               text: TextSpan(children: [
                             TextSpan(
-                              text: '${'Price Per Piece'.tr} 8,5',
+                              text:
+                                  '${'Price Per Piece'.tr} ${basket.product!.price ?? '0.0 '}',
                               style: TextStyle(
                                 fontSize: 11,
                                 fontFamily: AppTheme.appFontFamily,
@@ -1325,7 +1342,8 @@ class _BasketPageState extends State<BasketPage> {
                     RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                        text: '3.298,94 ',
+                        text:
+                            summary != null ? summary!.totalItemPrice : '0.0 ',
                         style: TextStyle(
                           fontSize: 32,
                           height: 1,

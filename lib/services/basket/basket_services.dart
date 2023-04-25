@@ -19,9 +19,6 @@ class BasketServices {
     List<BasketModel> basketList = [];
 
     if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE BODY: $responseBody");
-
       var status = responseBody["status"];
 
       if (status == true) {
@@ -37,9 +34,34 @@ class BasketServices {
         return basketList;
       }
     } else {
-      debugPrint("API ERROR\nSTATUS CODE:  ${response.body}");
-
       return basketList;
+    }
+  }
+
+  Future<BasketSummaryModel?> getOrderSummary() async {
+    final response =
+        await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+    });
+
+    debugPrint(Constants.userToken);
+
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    if (response.statusCode == 200) {
+      var status = responseBody["status"];
+
+      if (status == true) {
+        var summaryData =
+            BasketSummaryModel.fromJson(responseBody['data']['summary']);
+
+        return summaryData;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return null;
+      }
+    } else {
+      return null;
     }
   }
 
