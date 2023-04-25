@@ -301,9 +301,11 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                 if (feed.likeStatus!) {
                                   _socialServices.feedUnLikeCall(
                                       feedId: feed.id!);
+                                  getPostsData();
                                 } else {
                                   _socialServices.feedLikeCall(
                                       feedId: feed.id!);
+                                  getPostsData();
                                 }
                               },
                               child: SizedBox(

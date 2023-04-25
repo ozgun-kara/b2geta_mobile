@@ -294,7 +294,6 @@ class SocialServices {
     }
   }
 
-
   // Discover LIST
   Future<List<FeedModel>> getDiscover(
       {required Map<String, String> queryParameters}) async {
@@ -335,7 +334,6 @@ class SocialServices {
     }
   }
 
-
   // FEED LIKE
   Future<bool> feedLikeCall({required String feedId}) async {
     final response = await http.post(
@@ -348,12 +346,12 @@ class SocialServices {
       if (status == true) {
         return true;
       } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode} ");
 
         return false;
       }
     } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("API ERROR\nSTATUS CODE:  ${response.statusCode}");
 
       return false;
     }
@@ -371,11 +369,11 @@ class SocialServices {
       if (status == true) {
         return true;
       } else {
-        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode} ");
         return false;
       }
     } else {
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode} ");
 
       return false;
     }
