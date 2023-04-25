@@ -123,128 +123,6 @@ class _HomePageState extends State<HomePage> {
                 centerTitle: false,
                 leading: const SizedBox(),
                 flexibleSpace: FlexibleSpaceBar(
-                  titlePadding: const EdgeInsets.all(0),
-                  expandedTitleScale: 1,
-                  title: SizedBox(
-                    width: deviceWidth,
-                    child: Container(
-                      color: themeMode ? AppTheme.white1 : AppTheme.black5,
-                      width: deviceWidth,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ButtonTheme(
-                              height: 43,
-                              child: MaterialButton(
-                                  elevation: 0,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 3),
-                                        child: Image.asset(
-                                          'assets/icons/post.png',
-                                          width: 18,
-                                          height: 18,
-                                          color: themeMode
-                                              ? tabIndex == 0
-                                                  ? AppTheme.blue2
-                                                  : AppTheme.white15
-                                              : tabIndex == 0
-                                                  ? AppTheme.white1
-                                                  : AppTheme.white15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 7,
-                                      ),
-                                      Text(
-                                        'Posts'.tr,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w600,
-                                          color: themeMode
-                                              ? tabIndex == 0
-                                                  ? AppTheme.blue2
-                                                  : AppTheme.white15
-                                              : tabIndex == 0
-                                                  ? AppTheme.white1
-                                                  : AppTheme.white15,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    homePageProvider.updateTabIndex(0);
-                                  }),
-                            ),
-                          ),
-                          Expanded(
-                            child: ButtonTheme(
-                              height: 43,
-                              child: MaterialButton(
-                                  elevation: 0,
-                                  shape: const RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.all(
-                                      Radius.circular(12),
-                                    ),
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 3),
-                                        child: Image.asset(
-                                          'assets/icons/star2.png',
-                                          width: 18,
-                                          height: 18,
-                                          color: themeMode
-                                              ? tabIndex == 1
-                                                  ? AppTheme.blue2
-                                                  : AppTheme.white15
-                                              : tabIndex == 1
-                                                  ? AppTheme.white1
-                                                  : AppTheme.white15,
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 7,
-                                      ),
-                                      Text(
-                                        // 'Reels'.tr,
-                                        'Play'.tr,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w600,
-                                          color: themeMode
-                                              ? tabIndex == 1
-                                                  ? AppTheme.blue2
-                                                  : AppTheme.white15
-                                              : tabIndex == 1
-                                                  ? AppTheme.white1
-                                                  : AppTheme.white15,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  onPressed: () {
-                                    homePageProvider.updateTabIndex(1);
-                                  }),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
                   background: Container(
                     color: themeMode ? AppTheme.white1 : AppTheme.black5,
                     child: Column(
@@ -515,14 +393,7 @@ class _HomePageState extends State<HomePage> {
                                           transitionsBuilder: (_, a, __, c) =>
                                               FadeTransition(
                                                   opacity: a, child: c),
-                                        )).then((value) => {
-                                          setState(() {
-                                            Provider.of<HomePageProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .getFeeds();
-                                          })
-                                        });
+                                        )).then((_) => setState(() {}));
                                   },
                                   onSubmitted: (value) async {
                                     /*  if (_postTextController.text.isNotEmpty) {
@@ -572,6 +443,128 @@ class _HomePageState extends State<HomePage> {
                         ),
                         const Divider(height: 1),
                       ],
+                    ),
+                  ),
+                  expandedTitleScale: 1,
+                  titlePadding: const EdgeInsets.all(0),
+                  title: SizedBox(
+                    width: deviceWidth,
+                    child: Container(
+                      color: themeMode ? AppTheme.white1 : AppTheme.black5,
+                      width: deviceWidth,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ButtonTheme(
+                              height: 43,
+                              child: MaterialButton(
+                                  elevation: 0,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 3),
+                                        child: Image.asset(
+                                          'assets/icons/post.png',
+                                          width: 18,
+                                          height: 18,
+                                          color: themeMode
+                                              ? tabIndex == 0
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white15
+                                              : tabIndex == 0
+                                                  ? AppTheme.white1
+                                                  : AppTheme.white15,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        'Posts'.tr,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w600,
+                                          color: themeMode
+                                              ? tabIndex == 0
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white15
+                                              : tabIndex == 0
+                                                  ? AppTheme.white1
+                                                  : AppTheme.white15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    homePageProvider.updateTabIndex(0);
+                                  }),
+                            ),
+                          ),
+                          Expanded(
+                            child: ButtonTheme(
+                              height: 43,
+                              child: MaterialButton(
+                                  elevation: 0,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(12),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 3),
+                                        child: Image.asset(
+                                          'assets/icons/star2.png',
+                                          width: 18,
+                                          height: 18,
+                                          color: themeMode
+                                              ? tabIndex == 1
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white15
+                                              : tabIndex == 1
+                                                  ? AppTheme.white1
+                                                  : AppTheme.white15,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 7,
+                                      ),
+                                      Text(
+                                        // 'Reels'.tr,
+                                        'Play'.tr,
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w600,
+                                          color: themeMode
+                                              ? tabIndex == 1
+                                                  ? AppTheme.blue2
+                                                  : AppTheme.white15
+                                              : tabIndex == 1
+                                                  ? AppTheme.white1
+                                                  : AppTheme.white15,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  onPressed: () {
+                                    homePageProvider.updateTabIndex(1);
+                                  }),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
