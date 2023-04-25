@@ -98,7 +98,6 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                               transitionsBuilder: (_, a, __, c) =>
                                   FadeTransition(opacity: a, child: c),
                             )).then((_) => setState(() {}));
-                        ;
                       }),
                 ],
               ),
