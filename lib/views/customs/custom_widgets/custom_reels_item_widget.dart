@@ -26,6 +26,7 @@ class CustomReelsItemWidget extends StatefulWidget {
 }
 
 class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
+  late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
@@ -86,6 +87,7 @@ class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
 
   @override
   Widget build(BuildContext context) {
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     return Stack(
@@ -115,7 +117,7 @@ class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
                     ),
                   )),
         Positioned(
-          top: 22,
+          top: deviceTopPadding,
           right: 21,
           child: IconButton(
             onPressed: () {
