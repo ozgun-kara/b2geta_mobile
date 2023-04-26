@@ -14,28 +14,49 @@ class CustomGalleryWidget extends StatefulWidget {
 }
 
 class _CustomGalleryWidgetState extends State<CustomGalleryWidget> {
+  late double deviceTopPadding;
   @override
   Widget build(BuildContext context) {
+
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     return Scaffold(
-        body: PhotoViewGallery.builder(
+        body: Stack(
+          children:[
+            PhotoViewGallery.builder(
       loadingBuilder: (context, progress) => Container(
-        color: Colors.black,
-        child: Center(
-            child: CupertinoActivityIndicator(
-          color: AppTheme.white1,
-          radius: 12,
-        )),
+          color: Colors.black,
+          child: Center(
+              child: CupertinoActivityIndicator(
+            color: AppTheme.white1,
+            radius: 12,
+          )),
       ),
       itemCount: widget.urlImages.length,
       builder: (context, index) {
-        final urlImage = widget.urlImages[index];
+          final urlImage = widget.urlImages[index];
 
-        return PhotoViewGalleryPageOptions(
-          imageProvider: NetworkImage(urlImage),
-          minScale: PhotoViewComputedScale.contained,
-          maxScale: PhotoViewComputedScale.contained * 4,
-        );
+          return PhotoViewGalleryPageOptions(
+            imageProvider: NetworkImage(urlImage),
+            minScale: PhotoViewComputedScale.contained,
+            maxScale: PhotoViewComputedScale.contained * 4,
+          );
       },
-    ));
+    ),
+            Positioned(
+              top: deviceTopPadding,
+              right: 21,
+              child: IconButton(
+                onPressed: () {
+              
+                  Navigator.pop(context);
+                },
+                icon: Image.asset(
+                  "assets/icons/close.png",
+                  width: 19,
+                  height: 19,
+                ),
+              ),
+            ),
+       ] ));
   }
 }
