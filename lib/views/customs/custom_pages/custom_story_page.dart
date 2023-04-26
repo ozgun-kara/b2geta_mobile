@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
@@ -6,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:provider/provider.dart';
-
 import '../../../providers/navigation_page_provider.dart';
 
 class CustomStoryPage extends StatefulWidget {
@@ -28,6 +28,11 @@ class _CustomStoryPageState extends State<CustomStoryPage>
   late AnimationController _animationController;
   late int _storyListIndex;
   int _currentIndex = 0;
+
+  late double deviceTopPadding;
+  late double deviceWidth;
+  late double deviceHeight;
+  late bool themeMode;
 
   @override
   void initState() {
@@ -70,6 +75,10 @@ class _CustomStoryPageState extends State<CustomStoryPage>
 
   @override
   Widget build(BuildContext context) {
+    deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceWidth = MediaQuery.of(context).size.width;
+    deviceHeight = MediaQuery.of(context).size.height;
+    themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
     final FeedModel story = widget.stories[_storyListIndex][_currentIndex];
     return Scaffold(
       backgroundColor: Colors.black,
@@ -102,7 +111,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
               },
             ),
             Positioned(
-              top: 40.0,
+              top:deviceTopPadding,
               left: 10.0,
               right: 10.0,
               child: Row(
@@ -120,7 +129,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                       .toList()),
             ),
             Positioned(
-              top: 55.0,
+              top: deviceTopPadding+16.0,
               left: 10.0,
               right: 10.0,
               child: GestureDetector(
