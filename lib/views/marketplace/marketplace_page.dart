@@ -567,7 +567,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             child: ButtonTheme(
                                               // minWidth: deviceWidth,
                                               height: 22,
-
                                               child: MaterialButton(
                                                   elevation: 0,
                                                   color: Colors.transparent,
