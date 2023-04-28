@@ -173,6 +173,9 @@ final Map<String, String> tr = {
   'Add Product Image Info-1': 'Resim yüklemek için dosyalara göz atın',
   'Add Product Image Info-2': 'Desteklenen Dosyalar JPG, JPEG, PNG',
   'Add Product': 'Ürünü Ekle',
+  'Customer:': 'Alıcı:',
+  'Order Date:': 'Sipariş Zamanı:',
+  'Order Confirmation Date:': 'Sipariş Onay Tarihi:',
 
   // HOMEPAGE
   'Posts': 'Postlar',

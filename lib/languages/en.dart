@@ -177,6 +177,9 @@ final Map<String, String> en = {
   'Add Product Image Info-1': 'Browse files to upload image',
   'Add Product Image Info-2': 'Supported Files JPG, JPEG, PNG',
   'Add Product': 'Add Product',
+  'Customer:': 'Customer:',
+  'Order Date:': 'Order Date:',
+  'Order Confirmation Date:' : 'Order Confirmation Date:',
 
   // HOMEPAGE
   'Posts': 'Posts',
