@@ -56,6 +56,7 @@ class _CompanyOrdersDetailSubPageState
         body: _orderDetailsModel != null
             ? SingleChildScrollView(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
                         width: deviceWidth,
@@ -63,13 +64,15 @@ class _CompanyOrdersDetailSubPageState
                         color:
                             themeMode ? AppTheme.white32 : Colors.transparent),
                     const SizedBox(height: 27),
-                    Text(
-                      'Sipariş Detay #058743',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w600,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                    Center(
+                      child: Text(
+                        'Sipariş Detay #058743',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w600,
+                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                        ),
                       ),
                     ),
                     const SizedBox(height: 46),
@@ -78,7 +81,7 @@ class _CompanyOrdersDetailSubPageState
                         height: 1,
                         color: themeMode ? AppTheme.white32 : AppTheme.black28),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 13, 21, 20),
+                      padding: const EdgeInsets.fromLTRB(12, 13, 21, 16),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -100,88 +103,179 @@ class _CompanyOrdersDetailSubPageState
                             width: 14,
                           ),
                           Expanded(
-                            child: Text(
-                              'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w400,
-                                color: themeMode
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ),
-                            ),
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                'Total Price:'.tr,
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppTheme.white15,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 3,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 34,
-                                child: RichText(
+                                Text(
+                                  'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    height: 1,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: themeMode
+                                        ? AppTheme.blue3
+                                        : AppTheme.white1,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      'Dimension:'.tr,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        height: 1,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      '30*29*55cm',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        height: 1,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.green3,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 16,
+                                    ),
+                                    Text(
+                                      'Color:'.tr,
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        height: 1,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 6,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 4),
+                                      child: Container(
+                                        width: 16,
+                                        height: 16,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(2),
+                                          color: AppTheme.white15,
+                                        ),
+                                        child: Center(
+                                          child: Container(
+                                            width: 15,
+                                            height: 15,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(2),
+                                              color: AppTheme.orange1,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  'Adet: 10.000'.tr,
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    height: 1,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w600,
+                                    color: AppTheme.white1,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 18,
+                                ),
+                                Text(
+                                  'Total Price:'.tr,
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppTheme.white15,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 34,
+                                  child: RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                      text:
+                                          _orderDetailsModel!.totalPrice ?? '',
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppTheme.green3,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: "₺",
+                                      style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w500,
+                                        color: AppTheme.green3,
+                                      ),
+                                    )
+                                  ])),
+                                ),
+                                RichText(
                                     text: TextSpan(children: [
                                   TextSpan(
-                                    text: _orderDetailsModel!.totalPrice ?? '',
+                                    text: '${'Price Per Piece'.tr} ',
                                     style: TextStyle(
-                                      fontSize: 25,
+                                      fontSize: 11,
                                       fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppTheme.green3,
+                                      fontWeight: FontWeight.w400,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: '8,5',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
                                     ),
                                   ),
                                   TextSpan(
                                     text: "₺",
                                     style: TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppTheme.green3,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w400,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
                                     ),
                                   )
                                 ])),
-                              ),
-                              RichText(
-                                  text: TextSpan(children: [
-                                TextSpan(
-                                  text: '${'Price Per Piece'.tr} ',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: themeMode
-                                        ? AppTheme.blue3
-                                        : AppTheme.white1,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: '8,5',
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w400,
-                                    color: themeMode
-                                        ? AppTheme.blue3
-                                        : AppTheme.white1,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text: "₺",
-                                  style: TextStyle(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w400,
-                                    color: themeMode
-                                        ? AppTheme.blue3
-                                        : AppTheme.white1,
-                                  ),
-                                )
-                              ])),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
