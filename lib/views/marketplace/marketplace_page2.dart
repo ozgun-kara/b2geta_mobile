@@ -40,9 +40,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                       "assets/images/dummy_images/marketplace/marketplace_image1.png",
                   height: 205,
                   width: deviceWidth),
+              //SPACE
               const SizedBox(
                 height: 14.0,
               ),
+              //CATEGORY LIST
               SizedBox(
                 height: 130,
                 width: deviceWidth,
@@ -68,9 +70,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                   ],
                 ),
               ),
+              //SPACE
               const SizedBox(
                 height: 28.0,
               ),
+              //PRODUCT LIST
               SizedBox(
                 height: 15,
                 width: deviceWidth,
@@ -152,6 +156,7 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                   ],
                 ),
               ),
+              //SPACE
               const SizedBox(
                 height: 23,
               ),
@@ -160,9 +165,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                       "assets/images/dummy_images/marketplace/marketplace_image9.png",
                   width: deviceWidth,
                   height: 150),
+              //SPACE
               const SizedBox(
                 height: 28.0,
               ),
+              //PRODUCT LIST
               SizedBox(
                 height: 15,
                 width: deviceWidth,
@@ -244,6 +251,7 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                   ],
                 ),
               ),
+              //SPACE
               const SizedBox(
                 height: 23,
               ),
@@ -252,9 +260,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                       "assets/images/dummy_images/marketplace/marketplace_image13.png",
                   width: deviceWidth,
                   height: 150),
+              //SPACE
               const SizedBox(
                 height: 28.0,
               ),
+              //PRODUCT LIST
               SizedBox(
                 height: 15,
                 width: deviceWidth,
@@ -336,6 +346,7 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                   ],
                 ),
               ),
+              //SPACE
               const SizedBox(
                 height: 23,
               ),
@@ -344,9 +355,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                       "assets/images/dummy_images/marketplace/marketplace_image17.png",
                   width: deviceWidth,
                   height: 150),
+              //SPACE
               const SizedBox(
                 height: 23.0,
               ),
+              //PRODUCT LIST
               SizedBox(
                 height: 15,
                 width: deviceWidth,
@@ -428,6 +441,7 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                   ],
                 ),
               ),
+              //SPACE
               const SizedBox(
                 height: 23,
               ),
@@ -436,9 +450,11 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
                       "assets/images/dummy_images/marketplace/marketplace_image21.png",
                   width: deviceWidth,
                   height: 150),
+              //SPACE
               const SizedBox(
                 height: 23.0,
               ),
+              //PRODUCT LIST
               SizedBox(
                 height: 15,
                 width: deviceWidth,
@@ -490,102 +506,100 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
               const SizedBox(
                 height: 23.0,
               ),
-              SizedBox(
-                height: 950,
-                width: deviceWidth,
-                child: GridView(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 15.0,
-                    mainAxisSpacing: 21.0,
-                    mainAxisExtent: 300,
-                  ),
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image22.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image23.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image24.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image25.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image26.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image27.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image28.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image29.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image30.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                    _productItem(
-                      productImageUrl:
-                          "assets/images/dummy_images/marketplace/marketplace_image31.png",
-                      productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                      productPrice: '128 - 290',
-                      width: 178,
-                      height: 206,
-                    ),
-                  ],
+              GridView(
+                padding: const EdgeInsets.only(right: 12),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 9.0,
+                  mainAxisSpacing: 21.0,
+                  mainAxisExtent: 300,
                 ),
+                scrollDirection: Axis.vertical,
+                children: [
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image22.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image23.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image24.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image25.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image26.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image27.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image28.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image29.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image30.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                  _productItem(
+                    productImageUrl:
+                        "assets/images/dummy_images/marketplace/marketplace_image31.png",
+                    productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                    productPrice: '128 - 290',
+                    width: 178,
+                    height: 206,
+                  ),
+                ],
               ),
-              const SizedBox(height: 150),
             ],
           ),
         ),
@@ -601,7 +615,6 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
     double? height,
   }) {
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           width: width ?? 134,
@@ -713,18 +726,18 @@ class _MarketplacePage2State extends State<MarketplacePage2> {
       required double height}) {
     return Padding(
       padding: const EdgeInsets.only(
-        right: 13,
+        right: 12,
       ),
       child: Container(
-        height: 205,
-        width: deviceWidth,
+        height: height,
+        width: width,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
             image: DecorationImage(
               image: AssetImage(imageUrl),
-              fit: BoxFit.contain,
+              fit: BoxFit.cover,
             )),
       ),
     );
