@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
-import 'package:b2geta_mobile/views/discover/discover_page.dart';
+import 'package:b2geta_mobile/views/explore/explore_page.dart';
 import 'package:b2geta_mobile/views/homepage/home_page.dart';
 import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/my_account/my_account_page.dart';
@@ -12,7 +12,7 @@ class NavigationPageProvider with ChangeNotifier {
     const HomePage(),
     const MarketplacePage(),
     const BasketPage(),
-    const DiscoverPage(),
+    const ExplorePage(),
     const MyAccountPage(),
   ];
 
