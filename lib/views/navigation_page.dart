@@ -257,7 +257,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                             : AppTheme.white1
                                         : AppTheme.white15),
                                 const SizedBox(height: 4),
-                                Text('Discover'.tr,
+                                Text('Explore'.tr,
                                     style: TextStyle(
                                         fontSize: 9,
                                         fontFamily: AppTheme.appFontFamily,
