@@ -37,8 +37,8 @@ class SocialProvider with ChangeNotifier {
   void getDiscover() async {
     await locator<SocialServices>().getDiscover(
       queryParameters: {
-        "offset": "25",
-        "limit": "25",
+        "offset": "0",
+        "limit": "99",
       },
     ).then((feedList) async {
       for (var feed in feedList) {
