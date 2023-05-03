@@ -180,6 +180,8 @@ final Map<String, String> en = {
   'Customer:': 'Customer:',
   'Order Date:': 'Order Date:',
   'Order Confirmation Date:' : 'Order Confirmation Date:',
+  'My Followers': 'Followers',
+  'Following': 'Following',
 
   // HOMEPAGE
   'Posts': 'Posts',

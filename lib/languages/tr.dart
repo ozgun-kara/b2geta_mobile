@@ -176,6 +176,8 @@ final Map<String, String> tr = {
   'Customer:': 'Alıcı:',
   'Order Date:': 'Sipariş Zamanı:',
   'Order Confirmation Date:': 'Sipariş Onay Tarihi:',
+  'My Followers': 'Takip Edenler',
+  'Following': 'Takip Ettiklerim',
 
   // HOMEPAGE
   'Posts': 'Postlar',
