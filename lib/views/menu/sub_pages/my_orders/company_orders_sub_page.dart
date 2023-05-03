@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
@@ -130,7 +131,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
             Visibility(
               visible: dropdownSelectedValue == 'Received Orders'.tr,
               child: FutureBuilder<List<OrderModel>>(
-                future: OrderService().getMyIncomingOrdersCall(),
+                future: locator<OrderService>().getMyIncomingOrdersCall(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
@@ -591,7 +592,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
             Visibility(
               visible: dropdownSelectedValue == 'Given Orders'.tr,
               child: FutureBuilder<List<OrderModel>>(
-                future: OrderService().getMyOrdersCallTest(),
+                future: locator<OrderService>().getMyOrdersCallTest(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
