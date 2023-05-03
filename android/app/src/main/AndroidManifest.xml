@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.b2geta_mobile">
 
-
-
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:requestLegacyExternalStorage="true"
         android:label="B2GETA"
@@ -34,8 +34,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+
     </application>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 
 </manifest>
