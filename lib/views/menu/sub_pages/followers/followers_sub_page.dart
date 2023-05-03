@@ -1,12 +1,9 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/follow_services/my_following_model.dart';
-import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
-import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -128,8 +125,12 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             const SizedBox(height: 17),
             Visibility(
               visible: dropdownSelectedValue == 'My Followers'.tr,
-              child: FutureBuilder<List<OrderModel>>(
-                future: locator<OrderService>().getMyIncomingOrdersCall(),
+              child: FutureBuilder<List<MyFollowingModel>>(
+                future:
+                    locator<FollowServices>().followedMeCall(queryParameters: {
+                  // 'offset': '0',
+                  // 'limit': '5'
+                }),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
@@ -228,8 +229,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            // companyName ?? '',
-                                            "RAINBOW POLIKARBONAT",
+                                            '${items![index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -263,31 +263,68 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    SizedBox(
-                                      height: 22,
-                                      child: ButtonTheme(
-                                        minWidth: double.minPositive,
+                                    Visibility(
+                                      visible: true,
+                                      child: SizedBox(
                                         height: 22,
-                                        child: MaterialButton(
-                                            elevation: 0,
-                                            color: AppTheme.blue2,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(36)),
-                                            ),
-                                            padding: const EdgeInsets.fromLTRB(
-                                                12, 2, 12, 0),
-                                            child: Text(
-                                              "Follow".tr,
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white1,
+                                        child: ButtonTheme(
+                                          minWidth: double.minPositive,
+                                          height: 22,
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              color: AppTheme.blue2,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
                                               ),
-                                            ),
-                                            onPressed: () async {}),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      12, 2, 12, 0),
+                                              child: Text(
+                                                "Follow".tr,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white1,
+                                                ),
+                                              ),
+                                              onPressed: () async {}),
+                                        ),
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible: false,
+                                      child: SizedBox(
+                                        height: 22,
+                                        child: ButtonTheme(
+                                          minWidth: double.minPositive,
+                                          height: 22,
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              color: AppTheme.red6,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      12, 2, 12, 0),
+                                              child: Text(
+                                                "Unfollow".tr,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white1,
+                                                ),
+                                              ),
+                                              onPressed: () async {}),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -313,7 +350,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                   }
                 },
               ),
-            ),
+            ), // MY FOLLOWERS
             Visibility(
               visible: dropdownSelectedValue == 'Following'.tr,
               child: FutureBuilder<List<MyFollowingModel>>(
@@ -420,8 +457,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            // companyName ?? '',
-                                            "RAINBOW POLIKARBONAT",
+                                            '${items![index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -455,31 +491,68 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    SizedBox(
-                                      height: 22,
-                                      child: ButtonTheme(
-                                        minWidth: double.minPositive,
+                                    Visibility(
+                                      visible: false,
+                                      child: SizedBox(
                                         height: 22,
-                                        child: MaterialButton(
-                                            elevation: 0,
-                                            color: AppTheme.blue2,
-                                            shape: const RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(36)),
-                                            ),
-                                            padding: const EdgeInsets.fromLTRB(
-                                                12, 2, 12, 0),
-                                            child: Text(
-                                              "Follow".tr,
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: AppTheme.white1,
+                                        child: ButtonTheme(
+                                          minWidth: double.minPositive,
+                                          height: 22,
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              color: AppTheme.blue2,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
                                               ),
-                                            ),
-                                            onPressed: () async {}),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      12, 2, 12, 0),
+                                              child: Text(
+                                                "Follow".tr,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white1,
+                                                ),
+                                              ),
+                                              onPressed: () async {}),
+                                        ),
+                                      ),
+                                    ),
+                                    Visibility(
+                                      visible: true,
+                                      child: SizedBox(
+                                        height: 22,
+                                        child: ButtonTheme(
+                                          minWidth: double.minPositive,
+                                          height: 22,
+                                          child: MaterialButton(
+                                              elevation: 0,
+                                              color: AppTheme.red6,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(36)),
+                                              ),
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      12, 2, 12, 0),
+                                              child: Text(
+                                                "Unfollow".tr,
+                                                style: TextStyle(
+                                                  fontSize: 11,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: AppTheme.white1,
+                                                ),
+                                              ),
+                                              onPressed: () async {}),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -505,8 +578,8 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                   }
                 },
               ),
-            ),
-            const SizedBox(height: 48),
+            ), // MY FOLLOWING
+            const SizedBox(height: 73),
           ],
         ),
       ),

@@ -182,6 +182,7 @@ final Map<String, String> en = {
   'Order Confirmation Date:' : 'Order Confirmation Date:',
   'My Followers': 'Followers',
   'Following': 'Following',
+  'Unfollow': 'Unfollow',
 
   // HOMEPAGE
   'Posts': 'Posts',
