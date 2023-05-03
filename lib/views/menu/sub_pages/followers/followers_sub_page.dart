@@ -1,7 +1,9 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/follow_services/my_following_model.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
@@ -314,8 +316,12 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             ),
             Visibility(
               visible: dropdownSelectedValue == 'Following'.tr,
-              child: FutureBuilder<List<OrderModel>>(
-                future: locator<OrderService>().getMyIncomingOrdersCall(),
+              child: FutureBuilder<List<MyFollowingModel>>(
+                future:
+                    locator<FollowServices>().followedMeCall(queryParameters: {
+                  // 'offset': '0',
+                  // 'limit': '5'
+                }),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
