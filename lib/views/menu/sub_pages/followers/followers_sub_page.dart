@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
@@ -126,7 +127,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             Visibility(
               visible: dropdownSelectedValue == 'My Followers'.tr,
               child: FutureBuilder<List<OrderModel>>(
-                future: OrderService().getMyIncomingOrdersCall(),
+                future: locator<OrderService>().getMyIncomingOrdersCall(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
@@ -167,369 +168,124 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                               ),
                             ],
                           ),
-                          child: Column(
+                          padding: const EdgeInsets.fromLTRB(12, 23, 27, 20),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(25, 18, 25, 16),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Date:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                items![index].orderDate ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Order Number:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                items[index].id ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Product Number:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                '210477',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 55,
+                                    height: 55,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          width: 1,
+                                          color: themeMode
+                                              ? AppTheme.white21
+                                              : AppTheme.black20),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            // companyPhoto.isNotEmpty
+                                            //     ? companyPhoto
+                                            //     : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',
+                                            'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
-                                    const SizedBox(height: 18),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Seller:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                items[index].seller!.name ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '9,2',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.white15,
                                         ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Quantity:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                '10.000',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Status:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              items[index].status == "approved"
-                                                  ? Text(
-                                                      'Approved'.tr,
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: themeMode
-                                                            ? AppTheme.green6
-                                                            : AppTheme.green7,
-                                                      ),
-                                                    )
-                                                  : items[index].status == "new"
-                                                      ? Text(
-                                                          'Evaluating'.tr,
-                                                          style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: themeMode
-                                                                ? AppTheme.blue3
-                                                                : AppTheme
-                                                                    .white1,
-                                                          ),
-                                                        )
-                                                      : Text(
-                                                          'Denied'.tr,
-                                                          style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: themeMode
-                                                                ? AppTheme.red2
-                                                                : AppTheme.red3,
-                                                          ),
-                                                        )
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                      const SizedBox(width: 4),
+                                      Image.asset('assets/icons/star.png',
+                                          width: 15, height: 15),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              Container(
-                                  width: deviceWidth,
-                                  height: 1,
-                                  color: themeMode
-                                      ? AppTheme.white21
-                                      : AppTheme.black28),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/check-4.png',
-                                                  width: 12,
-                                                  height: 9,
-                                                  color: AppTheme.green3),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            // companyName ?? '',
+                                            "RAINBOW POLIKARBONAT",
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w600,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.black19
+                                                  : AppTheme.white1,
                                             ),
-                                            const SizedBox(width: 3),
-                                            Text(
-                                              'Confirm'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.green3),
-                                            ),
-                                          ],
+                                          ),
                                         ),
+                                        Visibility(
+                                          visible: true,
+                                          child: Image.asset(
+                                              'assets/icons/check.png',
+                                              width: 23,
+                                              height: 23),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'İstanbul, Türkiye',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15,
                                       ),
                                     ),
+                                    const SizedBox(height: 4),
                                     SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/cross-3.png',
-                                                  width: 9,
-                                                  height: 9,
-                                                  color: AppTheme.red6),
+                                      height: 22,
+                                      child: ButtonTheme(
+                                        minWidth: double.minPositive,
+                                        height: 22,
+                                        child: MaterialButton(
+                                            elevation: 0,
+                                            color: AppTheme.blue2,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(36)),
                                             ),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              'Reject'.tr,
+                                            padding: const EdgeInsets.fromLTRB(
+                                                12, 2, 12, 0),
+                                            child: Text(
+                                              "Follow".tr,
                                               style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.red6),
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.white1,
+                                              ),
                                             ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/message.png',
-                                                  width: 12,
-                                                  height: 10,
-                                                  color: AppTheme.white15),
-                                            ),
-                                            const SizedBox(width: 5),
-                                            Text(
-                                              'Send Message'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.blue13),
-                                            ),
-                                          ],
-                                        ),
+                                            onPressed: () async {}),
                                       ),
                                     ),
                                   ],
@@ -557,9 +313,9 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
               ),
             ),
             Visibility(
-              visible: dropdownSelectedValue == 'Given Orders'.tr,
+              visible: dropdownSelectedValue == 'Following'.tr,
               child: FutureBuilder<List<OrderModel>>(
-                future: OrderService().getMyOrdersCallTest(),
+                future: locator<OrderService>().getMyIncomingOrdersCall(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
@@ -567,405 +323,163 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                     return ListView.separated(
                       controller: scrollController,
                       shrinkWrap: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
                       itemCount: orderList!.length,
                       separatorBuilder: (BuildContext context, int index) {
-                        return Container(
-                            width: deviceWidth,
-                            height: 1,
-                            color: themeMode
-                                ? AppTheme.white21
-                                : AppTheme.black28);
+                        return SizedBox(
+                          height: 10,
+                        );
                       },
                       itemBuilder: ((context, index) {
                         var items = data.data;
 
-                        return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  pageBuilder: (_, __, ___) =>
-                                      CompanyOrdersDetailSubPage(
-                                    orderId: items[index].id!,
-                                  ),
-                                  transitionDuration:
-                                      const Duration(milliseconds: 0),
-                                  reverseTransitionDuration:
-                                      const Duration(milliseconds: 0),
-                                  transitionsBuilder: (_, a, __, c) =>
-                                      FadeTransition(opacity: a, child: c),
-                                ));
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: index.isEven
-                                  ? (themeMode
-                                      ? AppTheme.white1
-                                      : AppTheme.black12)
-                                  : (themeMode
-                                      ? AppTheme.white43
-                                      : AppTheme.black5),
-
-                              // themeMode ? AppTheme.white1 : AppTheme.black7,
-
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     blurStyle: BlurStyle.normal,
-                              //     offset: const Offset(0, -4),
-                              //     blurRadius: 26,
-                              //     spreadRadius: 0,
-                              //     color: const Color(0xFF2B3361).withOpacity(0.10),
-                              //   ),
-                              // ],
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(22)),
+                            border: Border.all(
+                              width: 1,
+                              color: themeMode
+                                  ? AppTheme.white21
+                                  : AppTheme.black28,
                             ),
-                            child: Column(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(25, 18, 25, 16),
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Date:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  items![index].orderDate ?? '',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Order Number:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  items[index].id ?? '',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Product Number:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '210477',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
+                            color:
+                                themeMode ? AppTheme.white1 : AppTheme.black12,
+                            boxShadow: [
+                              BoxShadow(
+                                blurStyle: BlurStyle.normal,
+                                offset: const Offset(0, -4),
+                                blurRadius: 26,
+                                spreadRadius: 0,
+                                color:
+                                    const Color(0xFF2B3361).withOpacity(0.10),
+                              ),
+                            ],
+                          ),
+                          padding: const EdgeInsets.fromLTRB(12, 23, 27, 20),
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 55,
+                                    height: 55,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      border: Border.all(
+                                          width: 1,
+                                          color: themeMode
+                                              ? AppTheme.white21
+                                              : AppTheme.black20),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            // companyPhoto.isNotEmpty
+                                            //     ? companyPhoto
+                                            //     : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',
+                                            'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
+                                        fit: BoxFit.cover,
                                       ),
-                                      const SizedBox(height: 18),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Seller:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  items[index].seller!.name ??
-                                                      '',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Quantity:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '10.000',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  'Status:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                items[index].status ==
-                                                        "approved"
-                                                    ? Text(
-                                                        'Approved'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: themeMode
-                                                              ? AppTheme.green6
-                                                              : AppTheme.green7,
-                                                        ),
-                                                      )
-                                                    : items[index].status ==
-                                                            "new"
-                                                        ? Text(
-                                                            'Evaluating'.tr,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .blue3
-                                                                  : AppTheme
-                                                                      .white1,
-                                                            ),
-                                                          )
-                                                        : Text(
-                                                            'Denied'.tr,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .red2
-                                                                  : AppTheme
-                                                                      .red3,
-                                                            ),
-                                                          )
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                                Container(
-                                    width: deviceWidth,
-                                    height: 1,
-                                    color: themeMode
-                                        ? AppTheme.white21
-                                        : AppTheme.black28),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(4, 4, 4, 4),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  const SizedBox(height: 4),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {},
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/exclamation.png',
-                                                    width: 12,
-                                                    height: 12,
-                                                    color: AppTheme.white15),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                'Start Dispute'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.red6),
-                                              ),
-                                            ],
-                                          ),
+                                      Text(
+                                        '9,2',
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w800,
+                                          color: AppTheme.white15,
                                         ),
                                       ),
-                                      SizedBox(width: 16),
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {},
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/message.png',
-                                                    width: 12,
-                                                    height: 10,
-                                                    color: AppTheme.white15),
-                                              ),
-                                              const SizedBox(width: 5),
-                                              Text(
-                                                'Send Message'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.blue13),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                      const SizedBox(width: 4),
+                                      Image.asset('assets/icons/star.png',
+                                          width: 15, height: 15),
                                     ],
                                   ),
+                                ],
+                              ),
+                              const SizedBox(width: 10),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            // companyName ?? '',
+                                            "RAINBOW POLIKARBONAT",
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w600,
+                                              color: Provider.of<ThemeProvider>(
+                                                              context)
+                                                          .themeMode ==
+                                                      "light"
+                                                  ? AppTheme.black19
+                                                  : AppTheme.white1,
+                                            ),
+                                          ),
+                                        ),
+                                        Visibility(
+                                          visible: true,
+                                          child: Image.asset(
+                                              'assets/icons/check.png',
+                                              width: 23,
+                                              height: 23),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      'İstanbul, Türkiye',
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    SizedBox(
+                                      height: 22,
+                                      child: ButtonTheme(
+                                        minWidth: double.minPositive,
+                                        height: 22,
+                                        child: MaterialButton(
+                                            elevation: 0,
+                                            color: AppTheme.blue2,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(36)),
+                                            ),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                12, 2, 12, 0),
+                                            child: Text(
+                                              "Follow".tr,
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.white1,
+                                              ),
+                                            ),
+                                            onPressed: () async {}),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         );
                       }),
