@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/follow_services/my_follower_model.dart';
 import 'package:b2geta_mobile/models/follow_services/my_following_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
@@ -125,21 +126,21 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             const SizedBox(height: 17),
             Visibility(
               visible: dropdownSelectedValue == 'My Followers'.tr,
-              child: FutureBuilder<List<MyFollowingModel>>(
+              child: FutureBuilder<List<MyFollowerModel>>(
                 future:
-                    locator<FollowServices>().followedMeCall(queryParameters: {
+                    locator<FollowServices>().myFollowersCall(queryParameters: {
                   // 'offset': '0',
                   // 'limit': '5'
                 }),
                 builder: (context, data) {
                   if (data.hasData) {
-                    var orderList = data.data;
+                    var myFollowersList = data.data;
 
                     return ListView.separated(
                       controller: scrollController,
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: orderList!.length,
+                      itemCount: myFollowersList!.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: 10,
@@ -188,10 +189,8 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               ? AppTheme.white21
                                               : AppTheme.black20),
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                            // companyPhoto.isNotEmpty
-                                            //     ? companyPhoto
-                                            //     : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',
+                                        image: NetworkImage(items![index]
+                                                .followingAvatar ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
                                       ),
@@ -229,7 +228,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items![index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
+                                            '${items[index].followingFirstname.toString().toUpperCase()} ${items[index].followingLastname.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -361,13 +360,13 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                 }),
                 builder: (context, data) {
                   if (data.hasData) {
-                    var orderList = data.data;
+                    var myFollowingList = data.data;
 
                     return ListView.separated(
                       controller: scrollController,
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: orderList!.length,
+                      itemCount: myFollowingList!.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: 10,
@@ -416,10 +415,8 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               ? AppTheme.white21
                                               : AppTheme.black20),
                                       image: DecorationImage(
-                                        image: NetworkImage(
-                                            // companyPhoto.isNotEmpty
-                                            //     ? companyPhoto
-                                            //     : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',
+                                        image: NetworkImage(items![index]
+                                                .userPhoto ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
                                       ),
@@ -457,7 +454,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items![index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
+                                            '${items[index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
