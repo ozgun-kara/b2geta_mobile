@@ -179,6 +179,13 @@ final Map<String, String> tr = {
   'My Followers': 'Takip Edenler',
   'Following': 'Takip Ettiklerim',
   'Unfollow': 'Takipten Çık',
+  'My Disagreement Forms': 'Anlaşmazlık Formlarım',
+  'Add New Disagreement Form': 'Yeni Anlaşmazlık Formu Ekle',
+  'Problem Category:': 'Sorun Kategorisi:',
+  'Open': 'Açık',
+  'Closed': 'Kapandı',
+  'Seller fulfilled the request': 'Satıcı talebi gerçekleştirdi',
+  'Awaiting response from seller': 'Satıcıdan yanıt bekleniyor',
 
   // HOMEPAGE
   'Posts': 'Postlar',
