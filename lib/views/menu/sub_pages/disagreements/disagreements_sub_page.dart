@@ -44,7 +44,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
             const SizedBox(height: 27),
             Center(
               child: Text(
-                'Anlaşmazlık Formlarım',
+                'My Disagreement Forms'.tr,
                 style: TextStyle(
                   fontSize: 18,
                   fontFamily: AppTheme.appFontFamily,
@@ -69,7 +69,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                         width: 12, height: 16, color: AppTheme.white1),
                     const SizedBox(width: 5),
                     Text(
-                      'Yeni Anlaşmazlık Formu Ekle'.tr,
+                      'Add New Disagreement Form'.tr,
                       style: TextStyle(
                           fontSize: 12,
                           fontFamily: AppTheme.appFontFamily,
@@ -136,24 +136,14 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              color:
-                                  themeMode ? AppTheme.white1 : AppTheme.black12
-
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     blurStyle: BlurStyle.normal,
-                              //     offset: const Offset(0, -4),
-                              //     blurRadius: 26,
-                              //     spreadRadius: 0,
-                              //     color: const Color(0xFF2B3361).withOpacity(0.10),
-                              //   ),
-                              // ],
-                              ),
+                              color: themeMode
+                                  ? AppTheme.white1
+                                  : AppTheme.black12),
                           child: Column(
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(25, 18, 25, 16),
+                                    const EdgeInsets.fromLTRB(25, 18, 25, 39),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -275,7 +265,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Sorun Kategorisi:'.tr,
+                                                'Problem Category:'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -301,124 +291,104 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                         ),
                                       ],
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                  width: deviceWidth,
-                                  height: 1,
-                                  color: themeMode
-                                      ? AppTheme.white21
-                                      : AppTheme.black28),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(4, 4, 4, 4),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
+                                    const SizedBox(height: 18),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Status:'.tr,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppTheme.white15,
+                                          ),
                                         ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/check-4.png',
-                                                  width: 12,
-                                                  height: 9,
-                                                  color: AppTheme.green3),
-                                            ),
-                                            const SizedBox(width: 3),
-                                            Text(
-                                              'Confirm'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.green3),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/cross-3.png',
-                                                  width: 9,
-                                                  height: 9,
-                                                  color: AppTheme.red6),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Text(
-                                              'Reject'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.red6),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 35,
-                                      child: MaterialButton(
-                                        onPressed: () {},
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(16)),
-                                        ),
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 2),
-                                              child: Image.asset(
-                                                  'assets/icons/message.png',
-                                                  width: 12,
-                                                  height: 10,
-                                                  color: AppTheme.white15),
-                                            ),
-                                            const SizedBox(width: 5),
-                                            Text(
-                                              'Send Message'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
+                                        const SizedBox(height: 8),
+                                        Visibility(
+                                          visible: true,
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                   color: themeMode
                                                       ? AppTheme.blue3
-                                                      : AppTheme.blue13),
-                                            ),
-                                          ],
+                                                      : AppTheme.blue2,
+                                                ),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    8, 2, 8, 2),
+                                                child: Text(
+                                                  'Closed'.tr,
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppTheme.white1,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12),
+                                              Text(
+                                                'Seller fulfilled the request'
+                                                    .tr,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                        Visibility(
+                                          visible: false,
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                  color: AppTheme.green11,
+                                                ),
+                                                padding: EdgeInsets.fromLTRB(
+                                                    19, 2, 19, 2),
+                                                child: Text(
+                                                  'Open'.tr,
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppTheme.white1,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12),
+                                              Text(
+                                                'Awaiting response from seller'
+                                                    .tr,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -444,6 +414,10 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                 }
               },
             ),
+            Container(
+                width: deviceWidth,
+                height: 1,
+                color: themeMode ? AppTheme.white21 : AppTheme.black28),
             const SizedBox(height: 48),
           ],
         ),

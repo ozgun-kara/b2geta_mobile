@@ -179,10 +179,17 @@ final Map<String, String> en = {
   'Add Product': 'Add Product',
   'Customer:': 'Customer:',
   'Order Date:': 'Order Date:',
-  'Order Confirmation Date:' : 'Order Confirmation Date:',
+  'Order Confirmation Date:': 'Order Confirmation Date:',
   'My Followers': 'Followers',
   'Following': 'Following',
   'Unfollow': 'Unfollow',
+  'My Disagreement Forms': 'My Disagreement Forms',
+  'Add New Disagreement Form': 'Add New Disagreement Form',
+  'Problem Category:': 'Problem Category:',
+  'Open': 'Open',
+  'Closed': 'Closed',
+  'Seller fulfilled the request': 'Seller fulfilled the request',
+  'Awaiting response from seller': 'Awaiting response from seller',
 
   // HOMEPAGE
   'Posts': 'Posts',
