@@ -287,58 +287,61 @@ class _NavigationPageState extends State<NavigationPage> {
                         ),
                         color: themeMode ? AppTheme.white1 : AppTheme.black5,
                         elevation: 0,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ClipOval(
-                              child: (context
-                                              .watch<UserProvider>()
-                                              .getUser
-                                              .avatar !=
-                                          null &&
-                                      context
-                                          .watch<UserProvider>()
-                                          .getUser
-                                          .avatar!
-                                          .isNotEmpty)
-                                  ? Image.network(
-                                      '${context.watch<UserProvider>().getUser.avatar}',
-                                      width: 24,
-                                      height: 24,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) {
-                                        return ClipOval(
-                                          child: Image.asset(
-                                            width: 24,
-                                            height: 24,
-                                            'assets/images/dummy_images/user_profile.png',
-                                            fit: BoxFit.cover,
-                                          ),
-                                        );
-                                      },
-                                    )
-                                  : ClipOval(
-                                      child: Image.asset(
+                        child: FittedBox(
+                          fit: BoxFit.none,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              ClipOval(
+                                child: (context
+                                                .watch<UserProvider>()
+                                                .getUser
+                                                .avatar !=
+                                            null &&
+                                        context
+                                            .watch<UserProvider>()
+                                            .getUser
+                                            .avatar!
+                                            .isNotEmpty)
+                                    ? Image.network(
+                                        '${context.watch<UserProvider>().getUser.avatar}',
                                         width: 24,
                                         height: 24,
-                                        'assets/images/dummy_images/user_profile.png',
                                         fit: BoxFit.cover,
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
+                                          return ClipOval(
+                                            child: Image.asset(
+                                              width: 24,
+                                              height: 24,
+                                              'assets/images/dummy_images/user_profile.png',
+                                              fit: BoxFit.cover,
+                                            ),
+                                          );
+                                        },
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset(
+                                          width: 24,
+                                          height: 24,
+                                          'assets/images/dummy_images/user_profile.png',
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
-                                    ),
-                            ),
-                            const SizedBox(height: 5),
-                            Text('My Account'.tr,
-                                style: TextStyle(
-                                    fontSize: 9,
-                                    fontFamily: AppTheme.appFontFamily,
-                                    fontWeight: FontWeight.w600,
-                                    color: provider.currentTabIndex == 4
-                                        ? themeMode
-                                            ? AppTheme.blue2
-                                            : AppTheme.white1
-                                        : AppTheme.white15)),
-                          ],
+                              ),
+                              const SizedBox(height: 5),
+                              Text('My Account'.tr,
+                                  style: TextStyle(
+                                      fontSize: 9,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: provider.currentTabIndex == 4
+                                          ? themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white1
+                                          : AppTheme.white15)),
+                            ],
+                          ),
                         ),
                         onPressed: () {
                           provider.updateCurrentTabIndex(4);
