@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -137,26 +136,19 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: index.isEven
-                                ? (themeMode
-                                    ? AppTheme.white1
-                                    : AppTheme.black12)
-                                : (themeMode
-                                    ? AppTheme.white43
-                                    : AppTheme.black5),
+                              color:
+                                  themeMode ? AppTheme.white1 : AppTheme.black12
 
-                            // themeMode ? AppTheme.white1 : AppTheme.black7,
-
-                            // boxShadow: [
-                            //   BoxShadow(
-                            //     blurStyle: BlurStyle.normal,
-                            //     offset: const Offset(0, -4),
-                            //     blurRadius: 26,
-                            //     spreadRadius: 0,
-                            //     color: const Color(0xFF2B3361).withOpacity(0.10),
-                            //   ),
-                            // ],
-                          ),
+                              // boxShadow: [
+                              //   BoxShadow(
+                              //     blurStyle: BlurStyle.normal,
+                              //     offset: const Offset(0, -4),
+                              //     blurRadius: 26,
+                              //     spreadRadius: 0,
+                              //     color: const Color(0xFF2B3361).withOpacity(0.10),
+                              //   ),
+                              // ],
+                              ),
                           child: Column(
                             children: [
                               Padding(
@@ -221,39 +213,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                 ),
                                               ),
                                               Text(
-                                                items[index].id ?? '',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Product Number:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              Text(
-                                                '210477',
+                                                '058743',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontFamily:
@@ -315,7 +275,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Quantity:'.tr,
+                                                'Sorun Kategorisi:'.tr,
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   fontFamily:
@@ -325,7 +285,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                 ),
                                               ),
                                               Text(
-                                                '10.000',
+                                                'Bozuk Ürün',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontFamily:
@@ -336,68 +296,6 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                       : AppTheme.white1,
                                                 ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Status:'.tr,
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: AppTheme.white15,
-                                                ),
-                                              ),
-                                              items[index].status == "approved"
-                                                  ? Text(
-                                                      'Approved'.tr,
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: themeMode
-                                                            ? AppTheme.green6
-                                                            : AppTheme.green7,
-                                                      ),
-                                                    )
-                                                  : items[index].status == "new"
-                                                      ? Text(
-                                                          'Evaluating'.tr,
-                                                          style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: themeMode
-                                                                ? AppTheme.blue3
-                                                                : AppTheme
-                                                                    .white1,
-                                                          ),
-                                                        )
-                                                      : Text(
-                                                          'Denied'.tr,
-                                                          style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: themeMode
-                                                                ? AppTheme.red2
-                                                                : AppTheme.red3,
-                                                          ),
-                                                        )
                                             ],
                                           ),
                                         ),
