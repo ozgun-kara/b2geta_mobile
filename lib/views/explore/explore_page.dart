@@ -49,8 +49,9 @@ class _ExplorePageState extends State<ExplorePage> {
           crossAxisSpacing: 2.0,
           itemCount: socialProvider.discoverList.length,
           staggeredTileBuilder: (int index) {
+            var discover = socialProvider.discoverList[index];
             return StaggeredTile.count(
-                (index % 7 == 0) ? 2 : 1, (index % 7 == 0) ? 2 : 1);
+                1, (discover.type == 'reels' && (index % 3 == 0)) ? 2 : 1);
           },
           itemBuilder: (context, index) {
             var discover = socialProvider.discoverList[index];
@@ -75,9 +76,24 @@ class _ExplorePageState extends State<ExplorePage> {
                                   FadeTransition(opacity: a, child: c),
                             ));
                       },
-                      child: Image.network(
-                        discover.videos![0]!.image.toString(),
-                        fit: BoxFit.cover,
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Image.network(
+                              discover.videos![0]!.image.toString(),
+                              width: 128,
+                              height: 256,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          const Align(
+                            alignment: Alignment.center,
+                            child: Icon(
+                              Icons.slow_motion_video,
+                              color: Colors.white,
+                            ),
+                          )
+                        ],
                       ),
                     )
                   : (discover.type == 'feed' && discover.images!.isNotEmpty)
@@ -98,9 +114,43 @@ class _ExplorePageState extends State<ExplorePage> {
                                       FadeTransition(opacity: a, child: c),
                                 ));
                           },
-                          child: Image.network(
-                            discover.images![0]!.url!,
-                            fit: BoxFit.cover,
+                          child: Stack(
+                            children: [
+                              Image.network(
+                                discover.images![0]!.url!,
+                                fit: BoxFit.cover,
+                              ),
+                              Visibility(
+                                visible:
+                                    discover.images!.length > 1 ? true : false,
+                                child: Align(
+                                  alignment: Alignment.bottomRight,
+                                  child: IgnorePointer(
+                                    child: Container(
+                                      width: 37,
+                                      height: 37,
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF2F2F2F)
+                                            .withOpacity(.66),
+                                        borderRadius:
+                                            BorderRadius.circular(13.0),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            "assets/icons/post_image_add.png",
+                                            width: 18,
+                                            height: 18,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
                           ),
                         )
                       : const SizedBox(),
