@@ -80,8 +80,10 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
             Visibility(
+              // visible: Provider.of<UserProvider>(context).getUser.type == 'company',
+
               visible:
-                  Provider.of<UserProvider>(context).getUser.type == 'company',
+                  Provider.of<UserProvider>(context).getUser.type != 'personal',
               child: Column(
                 children: [
                   MaterialButton(

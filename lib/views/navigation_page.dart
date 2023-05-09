@@ -612,49 +612,52 @@ class _NavigationPageState extends State<NavigationPage> {
                       },
                       child: Column(
                         children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              personalProfileModel.photo != null
-                                  ? ClipOval(
-                                      child: Image.network(
-                                        width: 20,
-                                        height: 20,
-                                        personalProfileModel.photo!,
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return Image.asset(
-                                            "assets/images/dummy_images/user_profile.png",
-                                            width: 20,
-                                            height: 20,
-                                          );
-                                        },
-                                      ),
-                                    )
-                                  : ClipOval(
-                                      child: Image.asset(
+                          Expanded(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                personalProfileModel.photo != null
+                                    ? ClipOval(
+                                        child: Image.network(
                                           width: 20,
                                           height: 20,
-                                          'assets/images/dummy_images/user_profile.png'),
-                                    ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  personalProfileModel.name ?? '',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w500,
-                                      color: Provider.of<ThemeProvider>(context)
-                                                  .themeMode ==
-                                              "light"
-                                          ? AppTheme.black11
-                                          : AppTheme.white1),
+                                          personalProfileModel.photo!,
+                                          errorBuilder:
+                                              (context, error, stackTrace) {
+                                            return Image.asset(
+                                              "assets/images/dummy_images/user_profile.png",
+                                              width: 20,
+                                              height: 20,
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : ClipOval(
+                                        child: Image.asset(
+                                            width: 20,
+                                            height: 20,
+                                            'assets/images/dummy_images/user_profile.png'),
+                                      ),
+                                const SizedBox(
+                                  width: 10,
                                 ),
-                              ),
-                            ],
+                                Expanded(
+                                  child: Text(
+                                    personalProfileModel.name ?? '',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w500,
+                                        color:
+                                            Provider.of<ThemeProvider>(context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 16.0,
