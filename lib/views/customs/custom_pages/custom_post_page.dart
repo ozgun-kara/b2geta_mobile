@@ -293,37 +293,83 @@ class _CustomPostPageState extends State<CustomPostPage> {
                     Container(
                       height: 49,
                       padding: const EdgeInsets.only(left: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          TextButton(
-                              onPressed: () {
-                                if (feed.likeStatus!) {
-                                  _socialServices.feedUnLikeCall(
-                                      feedId: feed.id!);
-                                  getPostsData();
-                                } else {
-                                  _socialServices.feedLikeCall(
-                                      feedId: feed.id!);
-                                  getPostsData();
-                                }
-                              },
-                              child: SizedBox(
+                      child: FittedBox(
+                        fit: BoxFit.none,
+                        child: Row(
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  if (feed.likeStatus!) {
+                                    _socialServices.feedUnLikeCall(
+                                        feedId: feed.id!);
+                                    getPostsData();
+                                  } else {
+                                    _socialServices.feedLikeCall(
+                                        feedId: feed.id!);
+                                    getPostsData();
+                                  }
+                                },
+                                child: SizedBox(
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        "assets/icons/like.png",
+                                        width: 15,
+                                        height: 15,
+                                      ),
+                                      const SizedBox(
+                                        width: 4.0,
+                                      ),
+                                      Text(
+                                        feed.likeStatus!
+                                            ? 'Like-2'.tr
+                                            : 'Like-1'.tr,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w700,
+                                          color: AppTheme.white15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )),
+                            TextButton(
+                                style: TextButton.styleFrom(),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __, ___) =>
+                                            CustomCommentPage(
+                                          feedId: feed.id!,
+                                          user: feed.user!,
+                                          content: feed.content!,
+                                        ),
+                                        transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                        transitionsBuilder: (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a, child: c),
+                                      ));
+                                },
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Image.asset(
-                                      "assets/icons/like.png",
-                                      width: 15,
-                                      height: 15,
+                                      "assets/icons/comment2.png",
+                                      width: 17.5,
+                                      height: 17.5,
                                     ),
                                     const SizedBox(
                                       width: 4.0,
                                     ),
                                     Text(
-                                      feed.likeStatus!
-                                          ? 'Like-2'.tr
-                                          : 'Like-1'.tr,
+                                      'Comment-1'.tr,
                                       style: TextStyle(
                                         fontSize: 11,
                                         fontFamily: AppTheme.appFontFamily,
@@ -332,99 +378,57 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                       ),
                                     ),
                                   ],
-                                ),
-                              )),
-                          TextButton(
-                              style: TextButton.styleFrom(),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) =>
-                                          CustomCommentPage(
-                                        feedId: feed.id!,
-                                        user: feed.user!,
-                                        content: feed.content!,
+                                )),
+                            TextButton(
+                                onPressed: () {},
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/share.png",
+                                      width: 18,
+                                      height: 15,
+                                    ),
+                                    const SizedBox(
+                                      width: 4.0,
+                                    ),
+                                    Text(
+                                      'Homepage Share-3'.tr,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white15,
                                       ),
-                                      transitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      reverseTransitionDuration:
-                                          const Duration(milliseconds: 0),
-                                      transitionsBuilder: (_, a, __, c) =>
-                                          FadeTransition(opacity: a, child: c),
-                                    ));
-                              },
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/comment2.png",
-                                    width: 17.5,
-                                    height: 17.5,
-                                  ),
-                                  const SizedBox(
-                                    width: 4.0,
-                                  ),
-                                  Text(
-                                    'Comment-1'.tr,
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppTheme.white15,
                                     ),
-                                  ),
-                                ],
-                              )),
-                          TextButton(
-                              onPressed: () {},
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/share.png",
-                                    width: 18,
-                                    height: 15,
-                                  ),
-                                  const SizedBox(
-                                    width: 4.0,
-                                  ),
-                                  Text(
-                                    'Homepage Share-3'.tr,
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppTheme.white15,
+                                  ],
+                                )),
+                            TextButton(
+                                onPressed: () {},
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      "assets/icons/save.png",
+                                      width: 12,
+                                      height: 15,
                                     ),
-                                  ),
-                                ],
-                              )),
-                          TextButton(
-                              onPressed: () {},
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    "assets/icons/save.png",
-                                    width: 12,
-                                    height: 15,
-                                  ),
-                                  const SizedBox(
-                                    width: 4.0,
-                                  ),
-                                  Text(
-                                    'Save'.tr,
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w700,
-                                      color: AppTheme.white15,
+                                    const SizedBox(
+                                      width: 4.0,
                                     ),
-                                  ),
-                                ],
-                              ))
-                        ],
+                                    Text(
+                                      'Save'.tr,
+                                      style: TextStyle(
+                                        fontSize: 11,
+                                        fontFamily: AppTheme.appFontFamily,
+                                        fontWeight: FontWeight.w700,
+                                        color: AppTheme.white15,
+                                      ),
+                                    ),
+                                  ],
+                                ))
+                          ],
+                        ),
                       ),
                     ),
                     const Divider(height: 1),
