@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
+import 'dart:math' as math;
+
 class DisagreementsSubPage extends StatefulWidget {
   const DisagreementsSubPage({Key? key}) : super(key: key);
 
@@ -19,6 +21,8 @@ class DisagreementsSubPage extends StatefulWidget {
 
 class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
   ScrollController scrollController = ScrollController();
+  bool infoDialogVisible = false;
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -134,14 +138,14 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                     FadeTransition(opacity: a, child: c),
                               ));
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: themeMode
-                                  ? AppTheme.white1
-                                  : AppTheme.black12),
-                          child: Column(
-                            children: [
-                              Padding(
+                        child: Stack(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: themeMode
+                                      ? AppTheme.white1
+                                      : AppTheme.black12),
+                              child: Padding(
                                 padding:
                                     const EdgeInsets.fromLTRB(25, 18, 25, 39),
                                 child: Column(
@@ -227,7 +231,12 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                       ? AppTheme.white44
                                                       : AppTheme.black28,
                                                   child: InkWell(
-                                                    onTap: () {},
+                                                    onTap: () {
+                                                      setState(() {
+                                                        infoDialogVisible =
+                                                            !infoDialogVisible;
+                                                      });
+                                                    },
                                                     child: SizedBox(
                                                       width: 32,
                                                       height: 32,
@@ -427,8 +436,54 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                            Positioned(
+                              top: 36,
+                              right: 48,
+                              child: Visibility(
+                                visible: infoDialogVisible,
+                                child: TapRegion(
+                                  onTapOutside: (tap) {
+                                    setState(() {
+                                      infoDialogVisible = !infoDialogVisible;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 208,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(14)),
+                                      color: themeMode
+                                          ? AppTheme.white1
+                                          : AppTheme.white39,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          offset: Offset(0, 10),
+                                          blurRadius: 26,
+                                          color:
+                                              Color.fromRGBO(43, 51, 97, 0.25),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16),
+                                      child: Center(
+                                        child: Text(
+                                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus justo, tristique a mi ac, pulvinar.',
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontFamily:
+                                                  AppTheme.appFontFamily,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       );
                     }),
