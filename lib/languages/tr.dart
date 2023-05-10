@@ -186,6 +186,8 @@ final Map<String, String> tr = {
   'Closed': 'Kapandı',
   'Seller fulfilled the request': 'Satıcı talebi gerçekleştirdi',
   'Awaiting response from seller': 'Satıcıdan yanıt bekleniyor',
+  'Remove From List':  'Listeden Kaldır',
+  'Reopen':  'Yeniden Aç',
 
   // HOMEPAGE
   'Posts': 'Postlar',
