@@ -155,7 +155,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          flex: 2,
+                                          flex: 4,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -187,7 +187,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                         ),
                                         const Spacer(),
                                         Expanded(
-                                          flex: 2,
+                                          flex: 4,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -217,6 +217,36 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                             ],
                                           ),
                                         ),
+                                        const Spacer(),
+                                        Expanded(
+                                            flex: 1,
+                                            child: Center(
+                                              child: ClipOval(
+                                                child: Material(
+                                                  color: themeMode
+                                                      ? AppTheme.white44
+                                                      : AppTheme.black28,
+                                                  child: InkWell(
+                                                    onTap: () {},
+                                                    child: SizedBox(
+                                                      width: 32,
+                                                      height: 32,
+                                                      child: Center(
+                                                        child: Image.asset(
+                                                          'assets/icons/more.png',
+                                                          width: 16,
+                                                          height: 3.2,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
+                                                          // color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            )),
                                       ],
                                     ),
                                     const SizedBox(height: 18),
@@ -227,7 +257,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Expanded(
-                                          flex: 2,
+                                          flex: 4,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -259,7 +289,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                         ),
                                         const Spacer(),
                                         Expanded(
-                                          flex: 2,
+                                          flex: 4,
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
@@ -288,6 +318,10 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                               ),
                                             ],
                                           ),
+                                        ),
+                                        const Spacer(),
+                                        const Spacer(
+                                          flex: 1,
                                         ),
                                       ],
                                     ),
