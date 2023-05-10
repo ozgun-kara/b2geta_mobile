@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 
-import 'dart:math' as math;
-
 class DisagreementsSubPage extends StatefulWidget {
   const DisagreementsSubPage({Key? key}) : super(key: key);
 
@@ -21,7 +19,8 @@ class DisagreementsSubPage extends StatefulWidget {
 
 class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
   ScrollController scrollController = ScrollController();
-  bool infoDialogVisible = false;
+
+  List<bool> infoDialogVisibleList = [];
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -105,12 +104,16 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
               future: locator<OrderService>().getMyIncomingOrdersCall(),
               builder: (context, data) {
                 if (data.hasData) {
-                  var orderList = data.data;
+                  var disagreementList = data.data;
+
+                  for (var element in disagreementList!) {
+                    infoDialogVisibleList.add(false);
+                  }
 
                   return ListView.separated(
                     controller: scrollController,
                     shrinkWrap: true,
-                    itemCount: orderList!.length,
+                    itemCount: disagreementList!.length,
                     separatorBuilder: (BuildContext context, int index) {
                       return Container(
                           width: deviceWidth,
@@ -147,7 +150,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                       : AppTheme.black12),
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.fromLTRB(25, 18, 25, 39),
+                                    const EdgeInsets.fromLTRB(25, 18, 13, 39),
                                 child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -233,8 +236,10 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                                   child: InkWell(
                                                     onTap: () {
                                                       setState(() {
-                                                        infoDialogVisible =
-                                                            !infoDialogVisible;
+                                                        infoDialogVisibleList[
+                                                                index] =
+                                                            !infoDialogVisibleList[
+                                                                index];
                                                       });
                                                     },
                                                     child: SizedBox(
@@ -441,12 +446,13 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                               top: 36,
                               right: 48,
                               child: Visibility(
-                                visible: infoDialogVisible,
+                                // visible: infoDialogVisible,
+                                visible: infoDialogVisibleList[index],
                                 child: TapRegion(
                                   onTapOutside: (tap) {
-                                    setState(() {
-                                      infoDialogVisible = !infoDialogVisible;
-                                    });
+                                    // setState(() {
+                                    //   infoDialogVisible = !infoDialogVisible;
+                                    // });
                                   },
                                   child: Container(
                                     width: 208,
@@ -466,17 +472,38 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                       ],
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsets.all(16),
-                                      child: Center(
-                                        child: Text(
-                                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus purus justo, tristique a mi ac, pulvinar.',
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.black),
-                                        ),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
+                                      child: Column(
+                                        children: [
+                                          MaterialButton(
+                                              minWidth: deviceWidth,
+                                              elevation: 0,
+                                              child: Text(
+                                                'Listeden Kaldır'.tr,
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppTheme.red6),
+                                              ),
+                                              onPressed: () {}),
+                                          const SizedBox(height: 0),
+                                          MaterialButton(
+                                              minWidth: deviceWidth,
+                                              elevation: 0,
+                                              child: Text(
+                                                'Yeniden Aç'.tr,
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: AppTheme.blue3),
+                                              ),
+                                              onPressed: () {}),
+                                        ],
                                       ),
                                     ),
                                   ),
