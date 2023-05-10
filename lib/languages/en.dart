@@ -190,6 +190,8 @@ final Map<String, String> en = {
   'Closed': 'Closed',
   'Seller fulfilled the request': 'Seller fulfilled the request',
   'Awaiting response from seller': 'Awaiting response from seller',
+  'Remove From List':  'Remove From List',
+  'Reopen':  'Reopen',
 
   // HOMEPAGE
   'Posts': 'Posts',

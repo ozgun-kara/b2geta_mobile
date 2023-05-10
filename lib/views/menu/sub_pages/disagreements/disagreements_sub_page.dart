@@ -19,7 +19,6 @@ class DisagreementsSubPage extends StatefulWidget {
 
 class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
   ScrollController scrollController = ScrollController();
-
   List<bool> infoDialogVisibleList = [];
 
   late double deviceTopPadding;
@@ -113,7 +112,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                   return ListView.separated(
                     controller: scrollController,
                     shrinkWrap: true,
-                    itemCount: disagreementList!.length,
+                    itemCount: disagreementList.length,
                     separatorBuilder: (BuildContext context, int index) {
                       return Container(
                           width: deviceWidth,
@@ -225,42 +224,37 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                           ),
                                         ),
                                         const Spacer(),
-                                        Expanded(
-                                            flex: 1,
-                                            child: Center(
-                                              child: ClipOval(
-                                                child: Material(
-                                                  color: themeMode
-                                                      ? AppTheme.white44
-                                                      : AppTheme.black28,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        infoDialogVisibleList[
-                                                                index] =
-                                                            !infoDialogVisibleList[
-                                                                index];
-                                                      });
-                                                    },
-                                                    child: SizedBox(
-                                                      width: 32,
-                                                      height: 32,
-                                                      child: Center(
-                                                        child: Image.asset(
-                                                          'assets/icons/more.png',
-                                                          width: 16,
-                                                          height: 3.2,
-                                                          color: themeMode
-                                                              ? AppTheme.blue3
-                                                              : AppTheme.white1,
-                                                          // color: Colors.white,
-                                                        ),
-                                                      ),
-                                                    ),
+                                        ClipOval(
+                                          child: Material(
+                                            color: themeMode
+                                                ? AppTheme.white44
+                                                : AppTheme.black28,
+                                            child: InkWell(
+                                              onTap: () {
+                                                setState(() {
+                                                  infoDialogVisibleList[index] =
+                                                      !infoDialogVisibleList[
+                                                          index];
+                                                });
+                                              },
+                                              child: SizedBox(
+                                                width: 32,
+                                                height: 32,
+                                                child: Center(
+                                                  child: Image.asset(
+                                                    'assets/icons/more.png',
+                                                    width: 16,
+                                                    height: 3.2,
+                                                    color: themeMode
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white1,
+                                                    // color: Colors.white,
                                                   ),
                                                 ),
                                               ),
-                                            )),
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     const SizedBox(height: 18),
@@ -444,15 +438,14 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                             ),
                             Positioned(
                               top: 36,
-                              right: 48,
+                              right: 36,
                               child: Visibility(
-                                // visible: infoDialogVisible,
                                 visible: infoDialogVisibleList[index],
                                 child: TapRegion(
                                   onTapOutside: (tap) {
-                                    // setState(() {
-                                    //   infoDialogVisible = !infoDialogVisible;
-                                    // });
+                                    setState(() {
+                                      // infoDialogVisibleList[index] = !infoDialogVisibleList[index];
+                                    });
                                   },
                                   child: Container(
                                     width: 208,
@@ -476,33 +469,52 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                                           vertical: 16),
                                       child: Column(
                                         children: [
-                                          MaterialButton(
-                                              minWidth: deviceWidth,
-                                              elevation: 0,
-                                              child: Text(
-                                                'Listeden Kaldır'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppTheme.red6),
-                                              ),
-                                              onPressed: () {}),
+                                          SizedBox(
+                                            height: 36,
+                                            child: MaterialButton(
+                                                minWidth: deviceWidth,
+                                                elevation: 0,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      'Remove From List'.tr,
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: AppTheme.red6),
+                                                    ),
+                                                  ],
+                                                ),
+                                                onPressed: () {}),
+                                          ),
                                           const SizedBox(height: 0),
-                                          MaterialButton(
-                                              minWidth: deviceWidth,
-                                              elevation: 0,
-                                              child: Text(
-                                                'Yeniden Aç'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: AppTheme.blue3),
-                                              ),
-                                              onPressed: () {}),
+                                          SizedBox(
+                                            height: 36,
+                                            child: MaterialButton(
+                                                minWidth: deviceWidth,
+                                                elevation: 0,
+                                                child: Row(
+                                                  children: [
+                                                    SizedBox(width: 16),
+                                                    Text(
+                                                      'Reopen'.tr,
+                                                      style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color:
+                                                              AppTheme.blue3),
+                                                    ),
+                                                  ],
+                                                ),
+                                                onPressed: () {}),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -534,7 +546,7 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                 width: deviceWidth,
                 height: 1,
                 color: themeMode ? AppTheme.white21 : AppTheme.black28),
-            const SizedBox(height: 48),
+            const SizedBox(height: 123),
           ],
         ),
       ),
