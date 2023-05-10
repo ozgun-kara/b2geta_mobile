@@ -10,6 +10,44 @@ class SocialProvider with ChangeNotifier {
   List<FeedModel> discoverList = [];
   List<FeedModel> myStoriesList = [];
 
+  final int _limit = 25;
+  int _offset = 0;
+  int _page = 0;
+
+  void getDiscover() async {
+    await locator<SocialServices>().getDiscover(
+      queryParameters: {
+        "offset": _offset.toString(),
+        "limit": _limit.toString(),
+      },
+    ).then((feedList) async {
+      List<FeedModel> tempList = [];
+
+      _offset = _page * _limit;
+      _page++;
+
+      for (var feed in feedList) {
+         if (feed.type != 'story') {
+          if (feed.type == "reels" ||
+              (feed.type == 'feed' && feed.images!.isNotEmpty)) {
+            tempList.add(feed);
+          }
+        }
+      }
+
+      addDiscoverToDiscoverList(tempList);
+    });
+    notifyListeners();
+  }
+
+  void addDiscoverToDiscoverList(List<FeedModel> discovers) {
+    discoverList.addAll(discovers);
+    debugPrint('$_offset dataOffset');
+    debugPrint('$_page dataPage');
+    debugPrint('${discoverList.length} data');
+    notifyListeners();
+  }
+
   void getFeeds({required String userId}) async {
     await locator<SocialServices>().getFeedCall(queryParameters: {
       "offset": "0",
@@ -29,26 +67,6 @@ class SocialProvider with ChangeNotifier {
       "type": "reels"
     }, userId: userId).then((feedList) async {
       reelsList = feedList;
-    });
-
-    notifyListeners();
-  }
-
-  void getDiscover() async {
-    await locator<SocialServices>().getDiscover(
-      queryParameters: {
-        "offset": "0",
-        "limit": "99",
-      },
-    ).then((feedList) async {
-      for (var feed in feedList) {
-        if (feed.type != 'story') {
-          if (feed.type == "reels" ||
-              (feed.type == 'feed' && feed.images!.isNotEmpty)) {
-            discoverList.add(feed);
-          }
-        }
-      }
     });
 
     notifyListeners();
