@@ -14,9 +14,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
 
 class AddDisagreementSubPage extends StatefulWidget {
-  const AddDisagreementSubPage({Key? key, this.passedObject}) : super(key: key);
-
-  final ProductDetailModel? passedObject;
+  const AddDisagreementSubPage({Key? key}) : super(key: key);
 
   @override
   State<AddDisagreementSubPage> createState() => _AddDisagreementSubPageState();
@@ -823,7 +821,7 @@ class _AddDisagreementSubPageState extends State<AddDisagreementSubPage> {
                                     BorderRadius.all(Radius.circular(16)),
                               ),
                               child: Text(
-                                "Test",
+                                'Send'.tr,
                                 style: TextStyle(
                                     fontSize: 16,
                                     fontFamily: AppTheme.appFontFamily,
