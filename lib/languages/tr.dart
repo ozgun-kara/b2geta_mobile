@@ -188,6 +188,13 @@ final Map<String, String> tr = {
   'Awaiting response from seller': 'Satıcıdan yanıt bekleniyor',
   'Remove From List':  'Listeden Kaldır',
   'Reopen':  'Yeniden Aç',
+  'Disagreement Form': 'Anlaşmazlık Formu',
+  'Order Number': 'Sipariş No',
+  'Order Number Validate': 'Lütfen sipariş numarasını giriniz',
+  'Disagreement Category': 'Anlaşmazlık Kategorisi',
+  'Disagreement Description': 'Anlaşmazlık Açıklaması',
+  'Request': 'Talep',
+  'Request Validate': 'Lütfen talebinizi giriniz',
 
   // HOMEPAGE
   'Posts': 'Postlar',

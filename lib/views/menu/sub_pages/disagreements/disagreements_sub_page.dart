@@ -81,17 +81,17 @@ class _DisagreementsSubPageState extends State<DisagreementsSubPage> {
                   ],
                 ),
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     PageRouteBuilder(
-                  //       pageBuilder: (_, __, ___) =>
-                  //           const AddDisagreementSubPage(),
-                  //       transitionDuration: const Duration(milliseconds: 0),
-                  //       reverseTransitionDuration:
-                  //           const Duration(milliseconds: 0),
-                  //       transitionsBuilder: (_, a, __, c) =>
-                  //           FadeTransition(opacity: a, child: c),
-                  //     )).then((_) => setState(() {}));
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            const AddDisagreementSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
+                      )).then((_) => setState(() {}));
                 }),
             const SizedBox(height: 28),
             Container(
