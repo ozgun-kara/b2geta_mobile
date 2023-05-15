@@ -13,6 +13,8 @@ class SocialProvider with ChangeNotifier {
   final int _limit = 25;
   int _offset = 0;
   int _page = 0;
+  bool _isMoreData = true;
+  get isMoreData => _isMoreData;
 
   void getDiscover() async {
     await locator<SocialServices>().getDiscover(
@@ -23,17 +25,20 @@ class SocialProvider with ChangeNotifier {
     ).then((feedList) async {
       List<FeedModel> tempList = [];
 
-      _offset = _page * _limit;
-      _page++;
-
       for (var feed in feedList) {
-         if (feed.type != 'story') {
+        if (feed.type != 'story') {
           if (feed.type == "reels" ||
               (feed.type == 'feed' && feed.images!.isNotEmpty)) {
             tempList.add(feed);
           }
         }
       }
+      if (tempList.isEmpty) {
+        _isMoreData = false;
+      }
+
+      _offset = _page * _limit;
+      _page++;
 
       addDiscoverToDiscoverList(tempList);
     });
@@ -42,9 +47,7 @@ class SocialProvider with ChangeNotifier {
 
   void addDiscoverToDiscoverList(List<FeedModel> discovers) {
     discoverList.addAll(discovers);
-    debugPrint('$_offset dataOffset');
-    debugPrint('$_page dataPage');
-    debugPrint('${discoverList.length} data');
+
     notifyListeners();
   }
 

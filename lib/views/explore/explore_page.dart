@@ -32,7 +32,9 @@ class _ExplorePageState extends State<ExplorePage> {
       () {
         if (scrollController.position.maxScrollExtent ==
             scrollController.offset) {
-          getDiscover();
+          if (Provider.of<SocialProvider>(context, listen: false).isMoreData) {
+            getDiscover();
+          }
         }
       },
     );
