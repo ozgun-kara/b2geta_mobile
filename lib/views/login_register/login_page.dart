@@ -100,169 +100,169 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           const SizedBox(height: 20),
-                          // TextFormField(
-                          //   validator: (value) {
-                          //     if (value == null || value.trim().isEmpty) {
-                          //       return 'E-mail Validate-1'.tr;
-                          //     }
-                          //     if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                          //       return 'E-mail Validate-2'.tr;
-                          //     }
-                          //     return null;
-                          //   },
-                          //
-                          //   keyboardType: TextInputType.emailAddress,
-                          //   controller: emailController1,
-                          //   style: TextStyle(
-                          //       fontSize: 16,
-                          //       fontFamily: AppTheme.appFontFamily,
-                          //       fontWeight: FontWeight.w500,
-                          //       color: themeMode
-                          //           ? AppTheme.black11
-                          //           : AppTheme.white1), // WHILE WRITING
-                          //   maxLines: 1,
-                          //   decoration: InputDecoration(
-                          //     contentPadding:
-                          //         const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                          //     filled: true,
-                          //     fillColor: Colors.transparent,
-                          //     hintText: 'E-mail'.tr,
-                          //     hintStyle: TextStyle(
-                          //       fontSize: 14,
-                          //       fontFamily: AppTheme.appFontFamily,
-                          //       fontWeight: FontWeight.w400,
-                          //       color: themeMode
-                          //           ? AppTheme.black11
-                          //           : AppTheme.white14,
-                          //     ),
-                          //     border: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //         borderSide: BorderSide(
-                          //           color: themeMode
-                          //               ? AppTheme.white10
-                          //               : AppTheme.black14,
-                          //           width: 1,
-                          //         )),
-                          //     enabledBorder: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //         borderSide: BorderSide(
-                          //           color: themeMode
-                          //               ? AppTheme.white10
-                          //               : AppTheme.black14,
-                          //           width: 1,
-                          //         )),
-                          //     focusedBorder: OutlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(10),
-                          //       borderSide: BorderSide(
-                          //         color: themeMode
-                          //             ? AppTheme.blue2
-                          //             : AppTheme.white1,
-                          //         width: 1,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                          // const SizedBox(height: 13),
-                          // TextFormField(
-                          //   validator: (value) {
-                          //     if (value == null || value.trim().isEmpty) {
-                          //       return 'Password Validate-1'.tr;
-                          //     }
-                          //     if (value.trim().length < 8) {
-                          //       return 'Password Validate-2'.tr;
-                          //     }
-                          //     return null;
-                          //   },
-                          //   controller: passwordController1,
-                          //   style: TextStyle(
-                          //       fontSize: 16,
-                          //       fontFamily: AppTheme.appFontFamily,
-                          //       fontWeight: FontWeight.w500,
-                          //       color: themeMode
-                          //           ? AppTheme.black11
-                          //           : AppTheme.white1), // WHILE WRITING
-                          //   maxLines: 1,
-                          //   obscureText:
-                          //       !Provider.of<LoginRegisterPageProvider>(context)
-                          //           .loginPasswordVisible,
-                          //   decoration: InputDecoration(
-                          //     contentPadding:
-                          //         const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                          //     filled: true,
-                          //     fillColor: Colors.transparent,
-                          //     hintText: 'Password'.tr,
-                          //     hintStyle: TextStyle(
-                          //       fontSize: 14,
-                          //       fontFamily: AppTheme.appFontFamily,
-                          //       fontWeight: FontWeight.w400,
-                          //       color: themeMode
-                          //           ? AppTheme.black11
-                          //           : AppTheme.white14,
-                          //     ),
-                          //     suffixIcon: IconButton(
-                          //       splashRadius: 24,
-                          //       icon: Provider.of<LoginRegisterPageProvider>(
-                          //                   context)
-                          //               .loginPasswordVisible
-                          //           ? SizedBox(
-                          //               child: Image.asset(
-                          //                   'assets/icons/eye-off-line.png',
-                          //                   width: 20,
-                          //                   height: 20,
-                          //                   color: Provider.of<ThemeProvider>(
-                          //                                   context)
-                          //                               .themeMode ==
-                          //                           "light"
-                          //                       ? AppTheme.black11
-                          //                       : AppTheme.white1),
-                          //             )
-                          //           : SizedBox(
-                          //               child: Image.asset(
-                          //                   'assets/icons/eye-line.png',
-                          //                   width: 20,
-                          //                   height: 20,
-                          //                   color: Provider.of<ThemeProvider>(
-                          //                                   context)
-                          //                               .themeMode ==
-                          //                           "light"
-                          //                       ? AppTheme.black11
-                          //                       : AppTheme.white1),
-                          //             ),
-                          //       splashColor: Colors.transparent,
-                          //       onPressed: () async {
-                          //         Provider.of<LoginRegisterPageProvider>(
-                          //                 context,
-                          //                 listen: false)
-                          //             .updateLoginPasswordVisible();
-                          //       },
-                          //     ),
-                          //     border: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //         borderSide: BorderSide(
-                          //           color: themeMode
-                          //               ? AppTheme.white10
-                          //               : AppTheme.black14,
-                          //           width: 1,
-                          //         )),
-                          //     enabledBorder: OutlineInputBorder(
-                          //         borderRadius: BorderRadius.circular(10),
-                          //         borderSide: BorderSide(
-                          //           color: themeMode
-                          //               ? AppTheme.white10
-                          //               : AppTheme.black14,
-                          //           width: 1,
-                          //         )),
-                          //     focusedBorder: OutlineInputBorder(
-                          //       borderRadius: BorderRadius.circular(10),
-                          //       borderSide: BorderSide(
-                          //         color: themeMode
-                          //             ? AppTheme.blue2
-                          //             : AppTheme.white1,
-                          //         width: 1,
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'E-mail Validate-1'.tr;
+                              }
+                              if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
+                                return 'E-mail Validate-2'.tr;
+                              }
+                              return null;
+                            },
+
+                            keyboardType: TextInputType.emailAddress,
+                            controller: emailController1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w500,
+                                color: themeMode
+                                    ? AppTheme.black11
+                                    : AppTheme.white1), // WHILE WRITING
+                            maxLines: 1,
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              hintText: 'E-mail'.tr,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: themeMode
+                                    ? AppTheme.black11
+                                    : AppTheme.white14,
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: themeMode
+                                        ? AppTheme.white10
+                                        : AppTheme.black14,
+                                    width: 1,
+                                  )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: themeMode
+                                        ? AppTheme.white10
+                                        : AppTheme.black14,
+                                    width: 1,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white1,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 13),
+                          TextFormField(
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Password Validate-1'.tr;
+                              }
+                              if (value.trim().length < 8) {
+                                return 'Password Validate-2'.tr;
+                              }
+                              return null;
+                            },
+                            controller: passwordController1,
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w500,
+                                color: themeMode
+                                    ? AppTheme.black11
+                                    : AppTheme.white1), // WHILE WRITING
+                            maxLines: 1,
+                            obscureText:
+                                !Provider.of<LoginRegisterPageProvider>(context)
+                                    .loginPasswordVisible,
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              hintText: 'Password'.tr,
+                              hintStyle: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: themeMode
+                                    ? AppTheme.black11
+                                    : AppTheme.white14,
+                              ),
+                              suffixIcon: IconButton(
+                                splashRadius: 24,
+                                icon: Provider.of<LoginRegisterPageProvider>(
+                                            context)
+                                        .loginPasswordVisible
+                                    ? SizedBox(
+                                        child: Image.asset(
+                                            'assets/icons/eye-off-line.png',
+                                            width: 20,
+                                            height: 20,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                      )
+                                    : SizedBox(
+                                        child: Image.asset(
+                                            'assets/icons/eye-line.png',
+                                            width: 20,
+                                            height: 20,
+                                            color: Provider.of<ThemeProvider>(
+                                                            context)
+                                                        .themeMode ==
+                                                    "light"
+                                                ? AppTheme.black11
+                                                : AppTheme.white1),
+                                      ),
+                                splashColor: Colors.transparent,
+                                onPressed: () async {
+                                  Provider.of<LoginRegisterPageProvider>(
+                                          context,
+                                          listen: false)
+                                      .updateLoginPasswordVisible();
+                                },
+                              ),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: themeMode
+                                        ? AppTheme.white10
+                                        : AppTheme.black14,
+                                    width: 1,
+                                  )),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(
+                                    color: themeMode
+                                        ? AppTheme.white10
+                                        : AppTheme.black14,
+                                    width: 1,
+                                  )),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white1,
+                                  width: 1,
+                                ),
+                              ),
+                            ),
+                          ),
                           const SizedBox(height: 20),
                           Padding(
                             padding: const EdgeInsets.only(left: 7, right: 3),
@@ -397,15 +397,11 @@ class _LoginPageState extends State<LoginPage> {
 
                                             locator<MemberServices>()
                                                 .loginCall(
-                                                    // email: emailController1.text
-                                                    //     .trim(),
-                                                    // password:
-                                                    //     passwordController1.text
-                                                    //         .trim()
-
-                                                    email:
-                                                        'f.sonmez@outlook.com',
-                                                    password: '12345678')
+                                                    email: emailController1.text
+                                                        .trim(),
+                                                    password:
+                                                        passwordController1.text
+                                                            .trim())
                                                 .then((value) async {
                                               if (value.isEmpty) {
                                                 await _memberServices
