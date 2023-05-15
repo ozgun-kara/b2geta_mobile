@@ -10,7 +10,7 @@ class SocialProvider with ChangeNotifier {
   List<FeedModel> discoverList = [];
   List<FeedModel> myStoriesList = [];
 
-  final int _limit = 25;
+  final int _limit = 30;
   int _offset = 0;
   int _page = 0;
   bool _isMoreData = true;
