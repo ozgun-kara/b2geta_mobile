@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/login_register/sub_pages/lighting_text_sub_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/clarification_text_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/sub_pages/membership_agreement_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/sub_pages/verify_sub_page.dart';
 import 'package:flutter/material.dart';
@@ -531,7 +531,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 context,
                                 PageRouteBuilder(
                                   pageBuilder: (_, __, ___) =>
-                                      const LightingTextSubPage(),
+                                      const ClarificationTextSubPage(),
                                   transitionDuration:
                                       const Duration(milliseconds: 0),
                                   reverseTransitionDuration:
