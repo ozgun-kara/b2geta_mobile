@@ -670,6 +670,8 @@ class _BasketPageState extends State<BasketPage> {
                                   height: 9,
                                 ),
                                 Container(
+                                  width: deviceWidth,
+                                  height: 250,
                                   padding: const EdgeInsets.only(
                                     top: 18,
                                     left: 18,
@@ -682,17 +684,21 @@ class _BasketPageState extends State<BasketPage> {
                                         : AppTheme.black18,
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  child: Text(
-                                    'Agreement and Conditions Detail'.tr,
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      height: 1.44,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w500,
-                                      color: themeMode
-                                          ? AppTheme.blue12
-                                          : AppTheme.white37,
-                                    ),
+                                  child: ListView(
+                                    children: [
+                                      Text(
+                                        'Agreement and Conditions Detail'.tr,
+                                        style: TextStyle(
+                                          fontSize: 11,
+                                          height: 1.44,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w500,
+                                          color: themeMode
+                                              ? AppTheme.blue12
+                                              : AppTheme.white37,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 const SizedBox(

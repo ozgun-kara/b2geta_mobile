@@ -89,37 +89,35 @@ class _PrivacyPolicySubPageState extends State<PrivacyPolicySubPage> {
               ),
             ),
           )),
-      body: SingleChildScrollView(
-          child: privacyPolicyText != null
-              ? Html(
-                  data: privacyPolicyText ?? "",
-                  style: {
-                    "table": Style(
-                      backgroundColor: Colors.pink,
-                      textDecorationColor: Colors.black,
-                    ),
-                    "tr": Style(
-                      border:
-                          const Border(bottom: BorderSide(color: Colors.grey)),
-                      textDecorationColor: Colors.black,
-                    ),
-                    "th": Style(
-                      padding: const EdgeInsets.all(6),
-                      backgroundColor: Colors.grey,
-                      textDecorationColor: Colors.black,
-                    ),
-                    "td": Style(
-                      padding: const EdgeInsets.all(6),
-                      alignment: Alignment.topLeft,
-                      textDecorationColor: Colors.black,
-                    ),
-                    'h5':
-                        Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
-                  },
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                )),
+      body: privacyPolicyText != null
+          ? SingleChildScrollView(
+              child: Html(
+              data: privacyPolicyText ?? "",
+              style: {
+                "table": Style(
+                  backgroundColor: Colors.pink,
+                  textDecorationColor: Colors.black,
+                ),
+                "tr": Style(
+                  border: const Border(bottom: BorderSide(color: Colors.grey)),
+                  textDecorationColor: Colors.black,
+                ),
+                "th": Style(
+                  padding: const EdgeInsets.all(6),
+                  backgroundColor: Colors.grey,
+                  textDecorationColor: Colors.black,
+                ),
+                "td": Style(
+                  padding: const EdgeInsets.all(6),
+                  alignment: Alignment.topLeft,
+                  textDecorationColor: Colors.black,
+                ),
+                'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+              },
+            ))
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
