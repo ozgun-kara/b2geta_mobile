@@ -30,7 +30,8 @@ final Map<String, String> tr = {
   'Password Validate-2': 'Şifre en az 8 karakter uzunluğunda olmalıdır',
   'Login Error': 'E-mail Veya Şifre Hatalı',
   'Close': 'Kapat',
-
+  'Clarification Text': 'Aydınlatma Metni',
+  'Privacy Policy': 'Gizlilik Politikası',
   // REGISTER PAGE
   'Create Account': 'Hesap Oluştur',
   'E-mail (confirm)': 'E-mail (tekrar)',
@@ -186,8 +187,8 @@ final Map<String, String> tr = {
   'Closed': 'Kapandı',
   'Seller fulfilled the request': 'Satıcı talebi gerçekleştirdi',
   'Awaiting response from seller': 'Satıcıdan yanıt bekleniyor',
-  'Remove From List':  'Listeden Kaldır',
-  'Reopen':  'Yeniden Aç',
+  'Remove From List': 'Listeden Kaldır',
+  'Reopen': 'Yeniden Aç',
   'Disagreement Form': 'Anlaşmazlık Formu',
   'Order Number': 'Sipariş No',
   'Order Number Validate': 'Lütfen sipariş numarasını giriniz',
