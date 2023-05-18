@@ -6,33 +6,32 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-class ClarificationTextSubPage extends StatefulWidget {
-  const ClarificationTextSubPage({Key? key}) : super(key: key);
+class PrivacyPolicySubPage extends StatefulWidget {
+  const PrivacyPolicySubPage({Key? key}) : super(key: key);
 
   @override
-  State<ClarificationTextSubPage> createState() =>
-      _ClarificationTextSubPageState();
+  State<PrivacyPolicySubPage> createState() => _PrivacyPolicySubPageState();
 }
 
-class _ClarificationTextSubPageState extends State<ClarificationTextSubPage> {
+class _PrivacyPolicySubPageState extends State<PrivacyPolicySubPage> {
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
 
-  String? clarificationText;
+  String? privacyPolicyText;
   final AgreementServices _agreementServices = AgreementServices();
 
   @override
   void initState() {
     super.initState();
-    clarificationTextGet();
+    privacyPolicyGet();
   }
 
-  Future<void> clarificationTextGet() async {
-    _agreementServices.clarificationTextCall().then((value) {
+  Future<void> privacyPolicyGet() async {
+    _agreementServices.privacyPolicyCall().then((value) {
       if (value != null) {
         setState(() {
-          clarificationText = value;
+          privacyPolicyText = value;
         });
       }
     });
@@ -75,7 +74,7 @@ class _ClarificationTextSubPageState extends State<ClarificationTextSubPage> {
                 padding: const EdgeInsets.only(top: 65),
                 // padding: EdgeInsets.only(top: 49),
                 child: Text(
-                  'Clarification Text'.tr,
+                  'Privacy Policy'.tr,
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: AppTheme.appFontFamily,
@@ -90,35 +89,37 @@ class _ClarificationTextSubPageState extends State<ClarificationTextSubPage> {
               ),
             ),
           )),
-      body: clarificationText != null
-          ? SingleChildScrollView(
-              child: Html(
-              data: clarificationText ?? "",
-              style: {
-                "table": Style(
-                  backgroundColor: Colors.pink,
-                  textDecorationColor: Colors.black,
-                ),
-                "tr": Style(
-                  border: const Border(bottom: BorderSide(color: Colors.grey)),
-                  textDecorationColor: Colors.black,
-                ),
-                "th": Style(
-                  padding: const EdgeInsets.all(6),
-                  backgroundColor: Colors.grey,
-                  textDecorationColor: Colors.black,
-                ),
-                "td": Style(
-                  padding: const EdgeInsets.all(6),
-                  alignment: Alignment.topLeft,
-                  textDecorationColor: Colors.black,
-                ),
-                'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
-              },
-            ))
-          : const Center(
-              child: CircularProgressIndicator(),
-            ),
+      body: SingleChildScrollView(
+          child: privacyPolicyText != null
+              ? Html(
+                  data: privacyPolicyText ?? "",
+                  style: {
+                    "table": Style(
+                      backgroundColor: Colors.pink,
+                      textDecorationColor: Colors.black,
+                    ),
+                    "tr": Style(
+                      border:
+                          const Border(bottom: BorderSide(color: Colors.grey)),
+                      textDecorationColor: Colors.black,
+                    ),
+                    "th": Style(
+                      padding: const EdgeInsets.all(6),
+                      backgroundColor: Colors.grey,
+                      textDecorationColor: Colors.black,
+                    ),
+                    "td": Style(
+                      padding: const EdgeInsets.all(6),
+                      alignment: Alignment.topLeft,
+                      textDecorationColor: Colors.black,
+                    ),
+                    'h5':
+                        Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+                  },
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                )),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/login_register/sub_pages/forgot_password_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/register_page.dart';
+import 'package:b2geta_mobile/views/login_register/sub_pages/privacy_policy_sub_page.dart';
 import 'package:b2geta_mobile/views/login_register/sub_pages/verify_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:flutter/material.dart';
@@ -585,7 +586,20 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         const SizedBox(width: 16),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      const PrivacyPolicySubPage(),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6)),
                           child: Text(
