@@ -2,7 +2,6 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
@@ -42,7 +41,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     _animationController = AnimationController(vsync: this);
 
     final FeedModel firstStory = widget.stories[_storyListIndex].first;
-    _loadStory(story: firstStory, animateToPage: false);
+    //_loadStory(story: firstStory, animateToPage: false);
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _animationController.stop();
@@ -102,16 +101,23 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                     ? story.images![0]!.url
                     : "https://api.businessucces.com/uploads/posts/2023/01/13012023205120-1673639480.jpeg";
                 if (storyUrl != null) {
-                  return CachedNetworkImage(
-                    imageUrl: storyUrl,
+                  return Image.network(
+                    storyUrl,
                     fit: BoxFit.fitWidth,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) {
+                        return child;
+                      } else {
+                        return const SizedBox();
+                      }
+                    },
                   );
                 }
                 return const SizedBox.shrink();
               },
             ),
             Positioned(
-              top:deviceTopPadding,
+              top: deviceTopPadding,
               left: 10.0,
               right: 10.0,
               child: Row(
@@ -129,7 +135,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                       .toList()),
             ),
             Positioned(
-              top: deviceTopPadding+16.0,
+              top: deviceTopPadding + 16.0,
               left: 10.0,
               right: 10.0,
               child: GestureDetector(
@@ -255,7 +261,10 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     }
   }
 
-  void _loadStory({required FeedModel story, bool animateToPage = true}) {
+  void _loadStory({
+    required FeedModel story,
+    bool animateToPage = true,
+  }) {
     _animationController.stop();
     _animationController.reset();
     final storyDetails = story.images;
