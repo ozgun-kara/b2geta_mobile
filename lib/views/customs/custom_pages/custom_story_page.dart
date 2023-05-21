@@ -41,7 +41,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     _animationController = AnimationController(vsync: this);
 
     final FeedModel firstStory = widget.stories[_storyListIndex].first;
-    //_loadStory(story: firstStory, animateToPage: false);
+    _loadStory(story: firstStory, animateToPage: false);
     _animationController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _animationController.stop();
@@ -104,13 +104,6 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                   return Image.network(
                     storyUrl,
                     fit: BoxFit.fitWidth,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) {
-                        return child;
-                      } else {
-                        return const SizedBox();
-                      }
-                    },
                   );
                 }
                 return const SizedBox.shrink();
