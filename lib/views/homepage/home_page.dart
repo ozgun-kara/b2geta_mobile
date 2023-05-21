@@ -9,6 +9,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
+import 'package:b2geta_mobile/views/customs/custom_pages/story_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_story_page.dart';
@@ -178,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                                                     PageRouteBuilder(
                                                       pageBuilder:
                                                           (_, __, ___) =>
-                                                              CustomStoryPage(
+                                                              StoryPage(
                                                         stories: groupStories
                                                             .values
                                                             .toList(),
