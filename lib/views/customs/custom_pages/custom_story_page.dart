@@ -1,12 +1,9 @@
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
-import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:provider/provider.dart';
-import '../../../providers/navigation_page_provider.dart';
+import 'package:story_view/controller/story_controller.dart';
+import 'package:story_view/widgets/story_view.dart';
 
 class CustomStoryPage extends StatefulWidget {
   const CustomStoryPage({
@@ -33,12 +30,18 @@ class _CustomStoryPageState extends State<CustomStoryPage>
   late double deviceHeight;
   late bool themeMode;
 
+  final storyItems = <StoryItem>[];
+  late StoryController _storyController;
+
   @override
   void initState() {
     super.initState();
     _storyListIndex = widget.index;
     _pageController = PageController();
     _animationController = AnimationController(vsync: this);
+    _storyController = StoryController();
+
+    addStoryItems();
 
     final FeedModel firstStory = widget.stories[_storyListIndex].first;
     _loadStory(story: firstStory, animateToPage: false);
@@ -63,6 +66,15 @@ class _CustomStoryPageState extends State<CustomStoryPage>
         });
       }
     });
+  }
+
+  void addStoryItems() {
+    for (final story in widget.stories[_storyListIndex]) {
+      storyItems.add(StoryItem.pageImage(
+          url: story.images![0]!.url.toString(),
+          controller: _storyController,
+          duration: const Duration(seconds: 3)));
+    }
   }
 
   @override
@@ -97,105 +109,10 @@ class _CustomStoryPageState extends State<CustomStoryPage>
               itemCount: widget.stories.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                final storyUrl = story.images!.isNotEmpty
-                    ? story.images![0]!.url
-                    : "https://api.businessucces.com/uploads/posts/2023/01/13012023205120-1673639480.jpeg";
-                if (storyUrl != null) {
-                  return Image.network(
-                    storyUrl,
-                    fit: BoxFit.fitWidth,
-                  );
-                }
-                return const SizedBox.shrink();
+                return StoryView(
+                    storyItems: storyItems, controller: _storyController);
               },
             ),
-            Positioned(
-              top: deviceTopPadding,
-              left: 10.0,
-              right: 10.0,
-              child: Row(
-                  children: widget.stories[_storyListIndex]
-                      .asMap()
-                      .map((i, e) {
-                        return MapEntry(
-                            i,
-                            AnimatedBar(
-                                animationController: _animationController,
-                                position: i,
-                                currentIndex: _currentIndex));
-                      })
-                      .values
-                      .toList()),
-            ),
-            Positioned(
-              top: deviceTopPadding + 16.0,
-              left: 10.0,
-              right: 10.0,
-              child: GestureDetector(
-                onTap: () {
-                  if (Provider.of<UserProvider>(context, listen: false)
-                          .getUser
-                          .id ==
-                      (story.user!.id ?? '')) {
-                    context
-                        .read<NavigationPageProvider>()
-                        .updateCurrentTabIndex(3);
-                    Navigator.pop(context);
-                  } else {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) =>
-                              story.user!.type != 'company'
-                                  ? PersonalProfilePage(
-                                      userId: story.user!.id ?? '')
-                                  : CompanyProfilePage(
-                                      userId: story.user!.id ?? ''),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  }
-                },
-                child: Row(
-                  children: [
-                    (story.user!.photo != null && story.user!.photo!.isNotEmpty)
-                        ? ClipOval(
-                            child: Image.network(
-                              width: 30,
-                              height: 30,
-                              fit: BoxFit.cover,
-                              story.user!.photo!,
-                            ),
-                          )
-                        : ClipOval(
-                            child: Image.asset(
-                                width: 30,
-                                height: 30,
-                                fit: BoxFit.cover,
-                                "assets/images/dummy_images/user_profile.png"),
-                          ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      (story.user!.name != null && story.user!.name!.length > 2)
-                          ? story.user!.name!
-                          : "User Name",
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: 13,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w600,
-                        color: AppTheme.white1,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            )
           ],
         ),
       ),
