@@ -1,14 +1,14 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:story_view/story_view.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
-import 'package:flutter/material.dart';
-import 'package:b2geta_mobile/models/social/feed_model.dart';
-import 'package:provider/provider.dart';
-import 'package:story_view/controller/story_controller.dart';
-import 'package:story_view/widgets/story_view.dart';
 
 class CustomStoryPage extends StatefulWidget {
   const CustomStoryPage({
@@ -26,7 +26,6 @@ class CustomStoryPage extends StatefulWidget {
 class _CustomStoryPageState extends State<CustomStoryPage>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
-  late AnimationController _animationController;
   late int _storyListIndex;
   int _currentIndex = 0;
 
@@ -43,49 +42,44 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     super.initState();
     _storyListIndex = widget.index;
     _pageController = PageController();
-    _animationController = AnimationController(vsync: this);
     _storyController = StoryController();
-
-    addStoryItems();
 
     final FeedModel firstStory = widget.stories[_storyListIndex].first;
     _loadStory(story: firstStory, animateToPage: false);
-    _animationController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        _animationController.stop();
-        _animationController.reset();
-        setState(() {
-          if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
-            _currentIndex += 1;
-            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-          } else {
-            // nav.pop
-            if (_storyListIndex + 1 < widget.stories.length) {
-              _storyListIndex += 1;
-              _currentIndex = 0;
-              _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-            } else {
-              Navigator.pop(context);
-            }
-          }
-        });
+  }
+
+  void ilerleme() {
+    setState(() {
+      if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
+        _currentIndex += 1;
+        _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+      } else {
+        // nav.pop
+        if (_storyListIndex + 1 < widget.stories.length) {
+          _storyListIndex += 1;
+          _currentIndex = 0;
+          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+        } else {
+          Navigator.pop(context);
+        }
       }
     });
   }
 
-  void addStoryItems() {
-    for (final story in widget.stories[_storyListIndex]) {
-      storyItems.add(StoryItem.pageImage(
-          url: story.images![0]!.url.toString(),
-          controller: _storyController,
-          duration: const Duration(seconds: 3)));
+  void onComplete() {
+    if (_storyListIndex + 1 < widget.stories.length) {
+      _storyListIndex++;
+      setState(() {});
+      _pageController.nextPage(
+          duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
+    } else {
+      Navigator.pop(context);
     }
   }
 
   @override
   void dispose() {
     _pageController.dispose();
-    _animationController.dispose();
     super.dispose();
   }
 
@@ -99,14 +93,9 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
-        onTapDown: (details) => _onTapDown(details, story),
         onVerticalDragUpdate: (details) => _onVerticalDragUpdate(details),
-        onLongPress: (() {
-          _animationController.stop();
-        }),
-        onLongPressEnd: ((details) {
-          _animationController.forward();
-        }),
+        onLongPress: (() {}),
+        onLongPressEnd: ((details) {}),
         child: Stack(
           children: [
             PageView.builder(
@@ -114,8 +103,13 @@ class _CustomStoryPageState extends State<CustomStoryPage>
               itemCount: widget.stories.length,
               physics: const NeverScrollableScrollPhysics(),
               itemBuilder: (context, index) {
-                return StoryView(
-                    storyItems: storyItems, controller: _storyController);
+                return StoryWidget(
+                  storyList: widget.stories[_storyListIndex],
+                  storyController: _storyController,
+                  onComplete: () {
+                    onComplete();
+                  },
+                );
               },
             ),
             Positioned(
@@ -249,14 +243,9 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     required FeedModel story,
     bool animateToPage = true,
   }) {
-    _animationController.stop();
-    _animationController.reset();
     final storyDetails = story.images;
 
-    if (storyDetails != null) {
-      _animationController.duration = const Duration(seconds: 3);
-      _animationController.forward();
-    }
+    if (storyDetails != null) {}
 
     if (animateToPage) {
       _pageController.animateToPage(_currentIndex,
@@ -265,60 +254,44 @@ class _CustomStoryPageState extends State<CustomStoryPage>
   }
 }
 
-class AnimatedBar extends StatelessWidget {
-  const AnimatedBar({
+class StoryWidget extends StatefulWidget {
+  const StoryWidget({
     Key? key,
-    required this.animationController,
-    required this.position,
-    required this.currentIndex,
+    required this.storyList,
+    required this.storyController,
+    this.onComplete,
   }) : super(key: key);
-  final AnimationController animationController;
-  final int position;
-  final int currentIndex;
+  final List<FeedModel> storyList;
+  final StoryController storyController;
+  final Function()? onComplete;
+
+  @override
+  State<StoryWidget> createState() => _StoryWidgetState();
+}
+
+class _StoryWidgetState extends State<StoryWidget> {
+  final storyItems = <StoryItem>[];
+
+  @override
+  void initState() {
+    super.initState();
+    addStoryItems();
+  }
+
+  void addStoryItems() {
+    for (final story in widget.storyList) {
+      storyItems.add(StoryItem.pageImage(
+          url: story.images![0]!.url.toString(),
+          controller: widget.storyController,
+          duration: const Duration(seconds: 3)));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 1.5),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            return Stack(children: [
-              _buildContainer(
-                double.infinity,
-                position < currentIndex
-                    ? Colors.white
-                    : Colors.white.withOpacity(.5),
-              ),
-              position == currentIndex
-                  ? AnimatedBuilder(
-                      animation: animationController,
-                      builder: (context, child) {
-                        return _buildContainer(
-                            constraints.maxWidth * animationController.value,
-                            Colors.white);
-                      },
-                    )
-                  : const SizedBox.shrink(),
-            ]);
-          },
-        ),
-      ),
-    );
-  }
-
-  Container _buildContainer(double width, Color color) {
-    return Container(
-      height: 3.0,
-      width: width,
-      decoration: BoxDecoration(
-        color: color,
-        border: Border.all(
-          color: Colors.black26,
-          width: .8,
-        ),
-        borderRadius: BorderRadius.circular(1.0),
-      ),
-    );
+    return StoryView(
+        storyItems: storyItems,
+        controller: widget.storyController,
+        onComplete: widget.onComplete);
   }
 }
