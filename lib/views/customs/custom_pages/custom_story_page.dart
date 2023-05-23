@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_view/story_view.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -27,7 +26,6 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     with SingleTickerProviderStateMixin {
   late PageController _pageController;
   late int _storyListIndex;
-  int _currentIndex = 0;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -43,27 +41,6 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     _storyListIndex = widget.index;
     _pageController = PageController();
     _storyController = StoryController();
-
-    final FeedModel firstStory = widget.stories[_storyListIndex].first;
-    _loadStory(story: firstStory, animateToPage: false);
-  }
-
-  void ilerleme() {
-    setState(() {
-      if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
-        _currentIndex += 1;
-        _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-      } else {
-        // nav.pop
-        if (_storyListIndex + 1 < widget.stories.length) {
-          _storyListIndex += 1;
-          _currentIndex = 0;
-          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-        } else {
-          Navigator.pop(context);
-        }
-      }
-    });
   }
 
   void onComplete() {
@@ -89,11 +66,12 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-    final FeedModel story = widget.stories[_storyListIndex][_currentIndex];
+    final FeedModel story = widget.stories[_storyListIndex][0];
     return Scaffold(
       backgroundColor: Colors.black,
       body: GestureDetector(
         onVerticalDragUpdate: (details) => _onVerticalDragUpdate(details),
+        onTapDown: (details) => onTapLeft(details, _storyListIndex - 1),
         onLongPress: (() {}),
         onLongPressEnd: ((details) {}),
         child: Stack(
@@ -187,45 +165,27 @@ class _CustomStoryPageState extends State<CustomStoryPage>
     );
   }
 
-  void _onTapDown(TapDownDetails details, FeedModel story) {
+  void onTapLeft(TapDownDetails details, int page) {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double dx = details.globalPosition.dx;
 
-    //left click
     if (dx < screenWidth / 3) {
-      setState(() {
-        if (_currentIndex - 1 >= 0) {
-          _currentIndex -= 1;
-          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
+      if (_storyListIndex > 0) {
+        _storyListIndex -= 1;
+        setState(() {});
+        _pageController.previousPage(
+            duration: const Duration(milliseconds: 100), curve: Curves.easeIn);
+      } else if (dx > 2 * screenWidth / 3) {
+        if (_storyListIndex + 1 < widget.stories.length) {
+          _storyListIndex++;
+          setState(() {});
+          _pageController.nextPage(
+              duration: const Duration(milliseconds: 100),
+              curve: Curves.easeIn);
         } else {
-          if (_storyListIndex - 1 >= 0) {
-            _storyListIndex -= 1;
-            _currentIndex = widget.stories[_storyListIndex].length - 1;
-            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-          } else {
-            _storyListIndex = 0;
-            _currentIndex = 0;
-            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-          }
+          Navigator.pop(context);
         }
-      });
-      //right click
-    } else if (dx > 2 * screenWidth / 3) {
-      setState(() {
-        if (_currentIndex + 1 < widget.stories[_storyListIndex].length) {
-          _currentIndex += 1;
-          _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-        } else {
-          //nav.pop
-          if (_storyListIndex + 1 < widget.stories.length) {
-            _storyListIndex += 1;
-            _currentIndex = 0;
-            _loadStory(story: widget.stories[_storyListIndex][_currentIndex]);
-          } else {
-            Navigator.pop(context);
-          }
-        }
-      });
+      }
     }
   }
 
@@ -238,20 +198,6 @@ class _CustomStoryPageState extends State<CustomStoryPage>
       // Up Swipe
     }
   }
-
-  void _loadStory({
-    required FeedModel story,
-    bool animateToPage = true,
-  }) {
-    final storyDetails = story.images;
-
-    if (storyDetails != null) {}
-
-    if (animateToPage) {
-      _pageController.animateToPage(_currentIndex,
-          duration: const Duration(microseconds: 1), curve: Curves.easeOut);
-    }
-  }
 }
 
 class StoryWidget extends StatefulWidget {
@@ -260,10 +206,12 @@ class StoryWidget extends StatefulWidget {
     required this.storyList,
     required this.storyController,
     this.onComplete,
+    this.onVerticalSwipeComplete,
   }) : super(key: key);
   final List<FeedModel> storyList;
   final StoryController storyController;
   final Function()? onComplete;
+  final dynamic Function(Direction?)? onVerticalSwipeComplete;
 
   @override
   State<StoryWidget> createState() => _StoryWidgetState();
@@ -290,8 +238,10 @@ class _StoryWidgetState extends State<StoryWidget> {
   @override
   Widget build(BuildContext context) {
     return StoryView(
-        storyItems: storyItems,
-        controller: widget.storyController,
-        onComplete: widget.onComplete);
+      storyItems: storyItems,
+      controller: widget.storyController,
+      onComplete: widget.onComplete,
+      onVerticalSwipeComplete: widget.onVerticalSwipeComplete,
+    );
   }
 }
