@@ -298,15 +298,23 @@ class _CustomPostPageState extends State<CustomPostPage> {
                         child: Row(
                           children: [
                             TextButton(
-                                onPressed: () {
+                                onPressed: () async {
                                   if (feed.likeStatus!) {
-                                    _socialServices.feedUnLikeCall(
-                                        feedId: feed.id!);
-                                    getPostsData();
-                                  } else {
-                                    _socialServices.feedLikeCall(
-                                        feedId: feed.id!);
-                                    getPostsData();
+                                    await _socialServices
+                                        .feedUnLikeCall(feedId: feed.id!)
+                                        .then((value) {
+                                      if (value) {
+                                        getPostsData();
+                                      }
+                                    });
+                                  } else if (!feed.likeStatus!) {
+                                    await _socialServices
+                                        .feedLikeCall(feedId: feed.id!)
+                                        .then((value) {
+                                      if (value) {
+                                        getPostsData();
+                                      }
+                                    });
                                   }
                                 },
                                 child: SizedBox(

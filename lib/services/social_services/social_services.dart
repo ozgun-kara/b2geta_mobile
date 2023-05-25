@@ -352,7 +352,6 @@ class SocialServices {
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-
       return false;
     }
   }
@@ -370,11 +369,11 @@ class SocialServices {
         return true;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode} ");
+
         return false;
       }
     } else {
-      debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode} ");
-
+      debugPrint("DATA ERROR\nSTATUS CODE:  ${response.body} ");
       return false;
     }
   }
