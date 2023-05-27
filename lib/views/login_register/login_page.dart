@@ -31,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController1 = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -175,6 +174,16 @@ class _LoginPageState extends State<LoginPage> {
                               return null;
                             },
                             controller: passwordController1,
+                            onChanged: (v) async {
+                              SharedPreferences prefs =
+                                  await SharedPreferences.getInstance();
+                              prefs.setString("Email", '');
+                              prefs.setString("Password", '');
+                              Provider.of<LoginRegisterPageProvider>(context,
+                                      listen: false)
+                                  .updateLoginSwitch(false);
+                              prefs.setBool("Switch", false);
+                            },
                             style: TextStyle(
                                 fontSize: 16,
                                 fontFamily: AppTheme.appFontFamily,

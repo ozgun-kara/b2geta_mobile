@@ -265,13 +265,22 @@ class _HomePageState extends State<HomePage> {
                                                                   [0]
                                                               .user!
                                                               .username!,
-                                                          style:
-                                                              const TextStyle(
-                                                            fontSize: 11,
-                                                          ))
-                                                      : const Text("User Name",
                                                           style: TextStyle(
                                                             fontSize: 11,
+                                                            color: themeMode
+                                                                ? AppTheme
+                                                                    .black1
+                                                                : AppTheme
+                                                                    .white1,
+                                                          ))
+                                                      : Text("User Name",
+                                                          style: TextStyle(
+                                                            fontSize: 11,
+                                                            color: themeMode
+                                                                ? AppTheme
+                                                                    .black1
+                                                                : AppTheme
+                                                                    .white1,
                                                           )),
                                                 ],
                                               ),
