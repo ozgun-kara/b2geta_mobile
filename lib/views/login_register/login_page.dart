@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:ui';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/login_register_page_provider.dart';
@@ -17,6 +15,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class LoginPage extends StatefulWidget {
   final String email;
@@ -31,6 +30,19 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController1 = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
+
+  final List<String> imgList = [
+    'https://i.ibb.co/c89gHKk/onboarding-1.png',
+    'https://i.ibb.co/k4j2sR7/onboarding-2.png',
+    'https://i.ibb.co/BcN5fnT/onboarding-3.png',
+    // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+  ];
+
+  int _current = 0;
+  final CarouselController _controller = CarouselController();
+
+  List<Widget>? imageSliders;
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -38,9 +50,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    super.initState();
     getLocalData();
     emailController1.text = widget.email;
+
+    super.initState();
   }
 
   final MemberServices _memberServices = MemberServices();
@@ -64,19 +77,66 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black12,
       body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxHeight: deviceHeight),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(30, deviceTopPadding + 32, 30, 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Image.asset(
-                  'assets/images/b2geta_logo_white.png',
-                  width: 153,
-                  height: 20.65,
-                ),
-                Column(
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(0, deviceTopPadding + 16, 0, 0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Stack(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: imgList.length,
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        aspectRatio: 1.3,
+                        enlargeCenterPage: true,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _current = index;
+                          });
+                        }),
+                    itemBuilder: (context, index, realIdx) {
+                      return Image.network(imgList[index], fit: BoxFit.cover);
+                    },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Center(
+                      child: Image.asset(
+                        'assets/images/b2geta_logo_white.png',
+                        width: 153,
+                        height: 20.65,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    left: 60,
+                    bottom: 20,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: imgList.asMap().entries.map((entry) {
+                        return GestureDetector(
+                          onTap: () => _controller.animateToPage(entry.key),
+                          child: Container(
+                            width: 13.5,
+                            height: 13.5,
+                            margin: EdgeInsets.symmetric(
+                                vertical: 16, horizontal: 4),
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: _current == entry.key
+                                    ? Colors.redAccent
+                                    : Color(0xFFD6D8E7)),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(30, 16, 30, 16),
+                child: Column(
                   children: [
                     Form(
                       key: formKey,
@@ -680,8 +740,8 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
