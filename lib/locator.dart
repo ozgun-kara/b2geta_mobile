@@ -1,3 +1,4 @@
+import 'package:b2geta_mobile/services/agreement/agreement_services.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -29,4 +30,5 @@ void setupLocator() {
   locator.registerLazySingleton<CategoriesServices>(() => CategoriesServices());
   locator.registerLazySingleton<OrderService>(() => OrderService());
   locator.registerLazySingleton<SocialServices>(() => SocialServices());
+  locator.registerLazySingleton<AgreementServices>(() => AgreementServices());
 }
