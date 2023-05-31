@@ -1,10 +1,10 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/explore_page_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_post_item_widget.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
 class ExplorePage extends StatefulWidget {
@@ -27,21 +27,22 @@ class _ExplorePageState extends State<ExplorePage> {
   @override
   void initState() {
     super.initState();
-    getDiscover();
+    getExplore();
     scrollController.addListener(
       () {
         if (scrollController.position.maxScrollExtent ==
             scrollController.offset) {
-          if (Provider.of<SocialProvider>(context, listen: false).isMoreData) {
-            getDiscover();
+          if (Provider.of<ExplorePageProvider>(context, listen: false)
+              .isMoreData) {
+            getExplore();
           }
         }
       },
     );
   }
 
-  void getDiscover() async {
-    Provider.of<SocialProvider>(context, listen: false).getDiscover();
+  void getExplore() async {
+    Provider.of<ExplorePageProvider>(context, listen: false).getExploreList();
   }
 
   @override
@@ -57,22 +58,22 @@ class _ExplorePageState extends State<ExplorePage> {
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    return Consumer<SocialProvider>(
-      builder: (context, socialProvider, child) {
+    return Consumer<ExplorePageProvider>(
+      builder: (context, provider, child) {
         return StaggeredGridView.countBuilder(
           controller: scrollController,
           crossAxisCount: 3,
           mainAxisSpacing: 2.0,
           crossAxisSpacing: 2.0,
-          itemCount: socialProvider.discoverList.length,
+          itemCount: provider.exploreList.length,
           staggeredTileBuilder: (int index) {
-            var discover = socialProvider.discoverList[index];
+            var discover = provider.exploreList[index];
             return StaggeredTile.count(
                 1, (discover.type == 'reels' && (index % 3 == 0)) ? 2 : 1);
           },
           itemBuilder: (context, index) {
-            var discover = socialProvider.discoverList[index];
-            if (index < socialProvider.discoverList.length) {
+            var discover = provider.exploreList[index];
+            if (index < provider.exploreList.length) {
               return Container(
                 color: themeMode ? AppTheme.white4 : AppTheme.black3,
                 child: discover.type == 'reels'
