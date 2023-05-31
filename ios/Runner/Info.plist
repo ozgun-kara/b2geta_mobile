@@ -54,7 +54,11 @@
   	<key>NSMicrophoneUsageDescription</key>
   	<string>Post videos to profile</string>
 	<key>NSAppTransportSecurity</key>
-	<dict>
+	<key>NSMotionUsageDescription</key>
+	<string>Motion Usage Required</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow access to photo library so you can easily upload your photos.</string>
+	<dict>NSMicrophoneUsageDescription 
    		<key>NSAllowsArbitraryLoads</key><true/>
 	</dict>
 </dict>

@@ -35,19 +35,15 @@ class _HomePageState extends State<HomePage> {
 
   bool isList = false;
   final SocialServices _socialServices = SocialServices();
-
   Map<String?, List<FeedModel>> groupStories = {};
-
   final TextEditingController _postTextController = TextEditingController();
 
   final ImagePicker _picker = ImagePicker();
 
   @override
   void initState() {
-    Provider.of<HomePageProvider>(context, listen: false).getFeeds();
-    getStories();
-    Provider.of<HomePageProvider>(context, listen: false).getReels();
     super.initState();
+    getStories();
   }
 
   Future<void> _getFromGallery() async {
@@ -89,21 +85,6 @@ class _HomePageState extends State<HomePage> {
     return groups;
   }
 
-  List<String> reelsImageList = [
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-  ];
-
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
@@ -138,6 +119,7 @@ class _HomePageState extends State<HomePage> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 11.0),
                                 child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
                                         width: 50,
@@ -198,6 +180,8 @@ class _HomePageState extends State<HomePage> {
                                                     ));
                                               },
                                               child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   Container(
                                                     width: 50,
@@ -254,7 +238,7 @@ class _HomePageState extends State<HomePage> {
                                                             ),
                                                           ),
                                                   ),
-                                                  groupStories.values
+                                                  /*   groupStories.values
                                                           .toList()[index][0]
                                                           .user!
                                                           .username!
@@ -281,7 +265,7 @@ class _HomePageState extends State<HomePage> {
                                                                     .black1
                                                                 : AppTheme
                                                                     .white1,
-                                                          )),
+                                                          )), */
                                                 ],
                                               ),
                                             )
