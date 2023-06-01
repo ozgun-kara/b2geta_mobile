@@ -14,9 +14,10 @@ class MyAccountPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFeeds() async {
-    await locator<SocialServices>().getAllFeedCall(
+  void getFeeds({required String userId}) async {
+    await locator<SocialServices>().getFeedCall(
       queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
+      userId: userId,
     ).then((feedList) {
       feedsList = feedList;
     });
@@ -24,9 +25,10 @@ class MyAccountPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getReels() async {
-    await locator<SocialServices>().getAllReelsCall(
+  void getReels({required String userId}) async {
+    await locator<SocialServices>().getReelsCall(
       queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
+      userId: userId,
     ).then((feedList) async {
       reelsList = feedList;
     });

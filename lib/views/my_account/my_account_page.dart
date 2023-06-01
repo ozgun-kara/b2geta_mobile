@@ -2,11 +2,11 @@ import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dart';
+import 'package:b2geta_mobile/views/my_account/posts/my_account_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/products/my_account_products_sub_page.dart';
+import 'package:b2geta_mobile/views/my_account/reels/my_account_reels_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -369,14 +369,14 @@ class _MyAccountPageState extends State<MyAccountPage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CustomPostPage(
+                ? MyAccountPostPage(
                     userId: Provider.of<UserProvider>(context)
                         .getUser
                         .id
                         .toString(),
                   )
                 : provider.currentTabIndex == 1
-                    ? CustomReelsPage(
+                    ? MyAccountReelsPage(
                         userId: Provider.of<UserProvider>(context)
                             .getUser
                             .id
