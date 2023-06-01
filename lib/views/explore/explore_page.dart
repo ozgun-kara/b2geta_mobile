@@ -103,6 +103,13 @@ class _ExplorePageState extends State<ExplorePage> {
                                 width: 128,
                                 height: 256,
                                 fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.asset(
+                                  'assets/images/image_not_found.jpg',
+                                  width: 128,
+                                  height: 256,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             const Align(

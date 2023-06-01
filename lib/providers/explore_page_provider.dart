@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 
 class ExplorePageProvider with ChangeNotifier {
   List<FeedModel> exploreList = [];
-  final int _limit = 30;
+  final int _limit = 25;
   int _offset = 0;
   int _page = 0;
-  bool _isMoreData = true;
+  bool _isMoreData = false;
 
   get isMoreData => _isMoreData;
 
@@ -31,11 +31,12 @@ class ExplorePageProvider with ChangeNotifier {
       }
       if (tempList.isEmpty) {
         _isMoreData = false;
+      } else {
+        _isMoreData = true;
       }
-
-      _offset = _page * _limit;
       _page++;
 
+      _offset = _page * _limit;
       addDiscoverToDiscoverList(tempList);
     });
     notifyListeners();
