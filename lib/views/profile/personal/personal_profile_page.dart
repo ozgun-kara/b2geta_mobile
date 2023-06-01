@@ -1,9 +1,10 @@
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/profile/personal/posts/personal_posts_sub_page.dart';
+import 'package:b2geta_mobile/views/profile/personal/reels/personal_reels_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -36,10 +37,6 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
 
   @override
   void initState() {
-    Provider.of<PersonalProfilePageProvider>(context, listen: false)
-        .getFeeds(widget.userId);
-    Provider.of<PersonalProfilePageProvider>(context, listen: false)
-        .getReels(widget.userId);
     Provider.of<PersonalProfilePageProvider>(context, listen: false)
         .getMyStories(widget.userId);
     getProfile();
@@ -329,10 +326,10 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CustomPostPage(
+                ? PersonalProfilePostSubPage(
                     userId: widget.userId,
                   )
-                : CustomReelsPage(userId: widget.userId),
+                : PersonalProfileReelsSubPage(userId: widget.userId),
             const SliverToBoxAdapter(
               child: SizedBox(
                 height: 80,
