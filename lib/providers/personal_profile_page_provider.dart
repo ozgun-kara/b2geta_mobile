@@ -14,7 +14,7 @@ class PersonalProfilePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getFeeds(String userId) async {
+  void getFeeds({required String userId}) async {
     await locator<SocialServices>().getFeedCall(
         queryParameters: {"offset": "0", "limit": "25", "type": "feed"},
         userId: userId).then((feedList) {
@@ -24,7 +24,7 @@ class PersonalProfilePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void getReels(String userId) async {
+  void getReels({required String userId}) async {
     await locator<SocialServices>().getReelsCall(
       queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
       userId: userId,
