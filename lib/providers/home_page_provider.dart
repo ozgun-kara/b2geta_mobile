@@ -5,7 +5,7 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 
 class HomePageProvider with ChangeNotifier {
-  List<FeedModel> feeds = [];
+  List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
 
   int _tabIndex = 0;
@@ -21,7 +21,7 @@ class HomePageProvider with ChangeNotifier {
       "limit": "25",
       "type": "feed"
     }).then((feedList) {
-      feeds = feedList;
+      feedsList = feedList;
     });
 
     notifyListeners();

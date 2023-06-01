@@ -7,8 +7,8 @@ import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
+import 'package:b2geta_mobile/views/homepage/post/home_post_sub_page.dart';
+import 'package:b2geta_mobile/views/homepage/reels/home_reels_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_story_page.dart';
@@ -568,8 +568,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               tabIndex == 1
-                  ? const CustomReelsPage(userId: '')
-                  : const CustomPostPage(userId: ''),
+                  ? const HomeReelsSubPage()
+                  : const HomePostSubPage(),
               const SliverToBoxAdapter(
                 child: SizedBox(
                   height: 80,
