@@ -2,10 +2,10 @@ import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_post_page.dart';
-import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
+import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -404,9 +404,9 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
               ),
             ),
             provider.currentTabIndex == 0
-                ? CustomPostPage(userId: widget.userId)
+                ? CompanyProfilePostSubPage(userId: widget.userId)
                 : provider.currentTabIndex == 1
-                    ? CustomReelsPage(userId: widget.userId)
+                    ? CompanyProfileReelsSubPage(userId: widget.userId)
                     : provider.currentTabIndex == 2
                         ? CompanyProductsSubPage(
                             userId: widget.userId,

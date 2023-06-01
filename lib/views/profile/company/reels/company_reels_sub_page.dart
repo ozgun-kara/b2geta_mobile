@@ -1,25 +1,26 @@
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:b2geta_mobile/models/social/feed_model.dart';
+
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
-class CompanyReelsSubPage extends StatefulWidget {
-  const CompanyReelsSubPage({
+class CompanyProfileReelsSubPage extends StatefulWidget {
+  const CompanyProfileReelsSubPage({
     Key? key,
     required this.userId,
   }) : super(key: key);
   final String userId;
 
   @override
-  State<CompanyReelsSubPage> createState() => _CompanyReelsSubPageState();
+  State<CompanyProfileReelsSubPage> createState() =>
+      _CompanyProfileReelsSubPageState();
 }
 
-class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
+class _CompanyProfileReelsSubPageState
+    extends State<CompanyProfileReelsSubPage> {
   ScrollController scrollController = ScrollController();
-  final SocialServices _socialServices = SocialServices();
-  List<FeedModel> reelsList = [];
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -33,28 +34,9 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
   }
 
   void getReels() async {
-    await _socialServices.getReelsCall(
-        queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
-        userId: widget.userId).then((feedList) async {
-      reelsList = feedList;
-      setState(() {});
-    });
+    Provider.of<CompanyProfilePageProvider>(context, listen: false)
+        .getReels(userId: widget.userId);
   }
-
-  List<String> reelsImageList = [
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-    "assets/images/dummy_images/reels_image_4.png",
-    "assets/images/dummy_images/reels_image_5.png",
-    "assets/images/dummy_images/reels_image_6.png",
-    "assets/images/dummy_images/reels_image_7.png",
-    "assets/images/dummy_images/reels_image_8.png",
-    "assets/images/dummy_images/reels_image_9.png",
-    "assets/images/dummy_images/reels_image_1.png",
-    "assets/images/dummy_images/reels_image_2.png",
-    "assets/images/dummy_images/reels_image_3.png",
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -63,36 +45,47 @@ class _CompanyReelsSubPageState extends State<CompanyReelsSubPage> {
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
 
-    return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 128.0,
-        mainAxisSpacing: 3.0,
-        crossAxisSpacing: 3.0,
-      ),
-      delegate: SliverChildBuilderDelegate(childCount: reelsList.length,
-          (context, index) {
-        return SizedBox(
-          width: 128,
-          height: 128,
-          child: InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (_, __, ___) => CustomReelsPageViewWidget(
-                      reelsList: reelsList,
-                      videoUrlIndex: index,
-                    ),
-                    transitionDuration: const Duration(milliseconds: 0),
-                    reverseTransitionDuration: const Duration(milliseconds: 0),
-                    transitionsBuilder: (_, a, __, c) =>
-                        FadeTransition(opacity: a, child: c),
-                  ));
-            },
-            child: Image.asset("assets/images/play.png"),
+    return Consumer<CompanyProfilePageProvider>(
+      builder: (context, socialProvider, child) {
+        return SliverGrid(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 128.0,
+            mainAxisSpacing: 3.0,
+            crossAxisSpacing: 3.0,
           ),
+          delegate: SliverChildBuilderDelegate(
+              childCount: socialProvider.reelsList.length, (context, index) {
+            return Container(
+              width: 128,
+              height: 128,
+              color: themeMode ? AppTheme.white4 : AppTheme.black3,
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) => CustomReelsPageViewWidget(
+                          reelsList: socialProvider.reelsList,
+                          videoUrlIndex: index,
+                        ),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
+                      ));
+                },
+                child: Center(
+                  child: Image.network(
+                    socialProvider.reelsList[index].videos![0]!.image
+                        .toString(),
+                  ),
+                ),
+              ),
+            );
+          }),
         );
-      }),
+      },
     );
   }
 }
