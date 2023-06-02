@@ -5,14 +5,22 @@ import 'package:flutter/material.dart';
 
 class ExplorePageProvider with ChangeNotifier {
   List<FeedModel> exploreList = [];
-  final int _limit = 25;
+  final int _limit = 30;
   int _offset = 0;
   int _page = 0;
   bool _isMoreData = false;
 
   get isMoreData => _isMoreData;
 
-  void getExploreList() async {
+  void onRefresh() {
+    _offset = 0;
+    _page = 0;
+    _isMoreData = false;
+    exploreList.clear();
+    getExploreList();
+  }
+
+  Future getExploreList() async {
     await locator<SocialServices>().getDiscover(
       queryParameters: {
         "offset": _offset.toString(),
