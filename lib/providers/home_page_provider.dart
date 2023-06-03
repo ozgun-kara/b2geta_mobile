@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'dart:io';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/social/feed_model.dart';
@@ -5,37 +7,109 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 
 class HomePageProvider with ChangeNotifier {
+  //POST
   List<FeedModel> feedsList = [];
+  final int _limitFeed = 25;
+  int _offsetFeed = 0;
+  int _pageFeed = 0;
+
+  bool _isMoreFeedData = false;
+  get isMoreFeedData => _isMoreFeedData;
+
+  void onRefreshFeed() {
+    _offsetFeed = 0;
+    _pageFeed = 0;
+    _isMoreFeedData = false;
+    feedsList.clear();
+    getFeeds();
+  }
+
+  void getFeeds() async {
+    await locator<SocialServices>().getAllFeedCall(queryParameters: {
+      "offset": _offsetFeed.toString(),
+      "limit": _limitFeed.toString(),
+      "type": "feed"
+    }).then((feedList) {
+      List<FeedModel> tempList = [];
+      for (var feed in feedList) {
+        tempList.add(feed);
+      }
+      if (tempList.isEmpty) {
+        _isMoreFeedData = false;
+      } else {
+        _isMoreFeedData = true;
+      }
+      _pageFeed++;
+
+      _offsetFeed = _pageFeed * _limitFeed;
+      addFeedToFeedList(tempList);
+    });
+
+    notifyListeners();
+  }
+
+  void addFeedToFeedList(List<FeedModel> feeds) {
+    feedsList.addAll(feeds);
+
+    notifyListeners();
+  }
+
+//REELS
   List<FeedModel> reelsList = [];
 
+  final int _limitReels = 25;
+  int _offsetReels = 0;
+  int _pageReels = 0;
+  bool _isMoreReelsData = false;
+
+  get isMoreReelsData => _isMoreReelsData;
+  void onRefreshReels() {
+    _offsetReels = 0;
+    _pageReels = 0;
+    _isMoreReelsData = false;
+    reelsList.clear();
+    getReels();
+  }
+
+  void getReels() async {
+    await locator<SocialServices>().getAllReelsCall(
+      queryParameters: {
+        "offset": _offsetReels.toString(),
+        "limit": _limitReels.toString(),
+        "type": "reels"
+      },
+    ).then((feedList) async {
+      List<FeedModel> tempList = [];
+      for (var feed in feedList) {
+        tempList.add(feed);
+      }
+      if (tempList.isEmpty) {
+        _isMoreReelsData = false;
+      } else {
+        _isMoreReelsData = true;
+      }
+      _pageReels++;
+
+      _offsetReels = _pageReels * _limitReels;
+      addReelsToReelsList(tempList);
+    });
+
+    notifyListeners();
+  }
+
+  void addReelsToReelsList(List<FeedModel> reels) {
+    reelsList.addAll(reels);
+
+    notifyListeners();
+  }
+
+  //CREATE POST/REELS
   int _tabIndex = 0;
   get tabIndex => _tabIndex;
 
   late String uploadType = 'Post'; // POST, REELS
   int uploadStep = 0; // 0,1,2,3
   List<File>? imageFilesList = [];
-
-  void getFeeds() async {
-    await locator<SocialServices>().getAllFeedCall(queryParameters: {
-      "offset": "0",
-      "limit": "25",
-      "type": "feed"
-    }).then((feedList) {
-      feedsList = feedList;
-    });
-
-    notifyListeners();
-  }
-
-  void getReels() async {
-    await locator<SocialServices>().getAllReelsCall(
-      queryParameters: {"offset": "0", "limit": "12", "type": "reels"},
-    ).then((feedList) async {
-      reelsList = feedList;
-    });
-
-    notifyListeners();
-  }
 
   void updateTabIndex(int value) {
     _tabIndex = value;
