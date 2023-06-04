@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/views/marketplace/models/banner_model.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_list_sub_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -117,7 +118,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
                                 productList: productList ?? [],
-                                productListName: 'İnşaat Malzemeleri',
+                                productListName: 'Construction Materials'.tr,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -130,7 +131,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                       child: _categoryItem(
                           imageUrl:
                               "assets/images/dummy_images/marketplace/marketplace_image2.png",
-                          text: 'İnşaat Malzemeleri'),
+                          text: 'Construction Materials'.tr),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -139,7 +140,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
                                 productList: productList ?? [],
-                                productListName: 'Mobilya ve Dekorasyon',
+                                productListName: 'Furniture and Decoration'.tr,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -152,7 +153,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                       child: _categoryItem(
                           imageUrl:
                               "assets/images/dummy_images/marketplace/marketplace_image3.png",
-                          text: 'Mobilya ve Dekorasyon'),
+                          text: 'Furniture and Decoration'.tr),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -161,7 +162,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
                                 productList: productList ?? [],
-                                productListName: 'Otomotiv Yedek Parça',
+                                productListName: 'Automotive spare parts'.tr,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -174,7 +175,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                       child: _categoryItem(
                           imageUrl:
                               "assets/images/dummy_images/marketplace/marketplace_image4.png",
-                          text: 'Otomotiv Yedek Parça'),
+                          text: 'Automotive spare parts'.tr),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -183,7 +184,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
                                 productList: productList ?? [],
-                                productListName: 'Ham Madde',
+                                productListName: 'Raw materials'.tr,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -196,7 +197,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                       child: _categoryItem(
                           imageUrl:
                               "assets/images/dummy_images/marketplace/marketplace_image5.png",
-                          text: 'Ham Madde'),
+                          text: 'Raw materials'.tr),
                     ),
                   ],
                 ),
@@ -214,7 +215,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'En çok talep gören ürünler',
+                      'The most demanded products'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         height: 1,
@@ -230,7 +231,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
                                 productList: productList ?? [],
-                                productListName: 'En çok talep gören ürünler',
+                                productListName:
+                                    'The most demanded products'.tr,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -245,7 +247,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         child: Row(
                           children: [
                             Text(
-                              'Tümü',
+                              "All".tr,
                               style: TextStyle(
                                 fontSize: 15,
                                 height: 1.3,
@@ -340,7 +342,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Mobilya ve Dekorasyon',
+                      'Furniture and Decoration'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         height: 1,
@@ -358,7 +360,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               PageRouteBuilder(
                                 pageBuilder: (_, __, ___) => ProductListSubPage(
                                   productList: productList ?? [],
-                                  productListName: 'Mobilya ve Dekorasyon',
+                                  productListName:
+                                      'Furniture and Decoration'.tr,
                                 ),
                                 transitionDuration:
                                     const Duration(milliseconds: 0),
@@ -371,7 +374,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         child: Row(
                           children: [
                             Text(
-                              'Tümü',
+                              'All'.tr,
                               style: TextStyle(
                                 fontSize: 15,
                                 height: 1.3,
@@ -466,7 +469,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'İstanbul\'dan Popüler Ürünler',
+                      'Popular Products from Istanbul'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         height: 1,
@@ -485,7 +488,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                 pageBuilder: (_, __, ___) => ProductListSubPage(
                                   productList: productList ?? [],
                                   productListName:
-                                      'İstanbul\'dan Popüler Ürünler',
+                                      'Popular Products from Istanbul'.tr,
                                 ),
                                 transitionDuration:
                                     const Duration(milliseconds: 0),
@@ -498,7 +501,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         child: Row(
                           children: [
                             Text(
-                              'Tümü',
+                              'All'.tr,
                               style: TextStyle(
                                 fontSize: 15,
                                 height: 1.3,
@@ -593,7 +596,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Otomotiv Yedek Parça',
+                      'Automotive spare parts'.tr,
                       style: TextStyle(
                         fontSize: 15,
                         height: 1,
@@ -611,7 +614,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               PageRouteBuilder(
                                 pageBuilder: (_, __, ___) => ProductListSubPage(
                                   productList: productList ?? [],
-                                  productListName: 'Otomotiv Yedek Parça',
+                                  productListName: 'Automotive spare parts'.tr,
                                 ),
                                 transitionDuration:
                                     const Duration(milliseconds: 0),
@@ -624,7 +627,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         child: Row(
                           children: [
                             Text(
-                              'Tümü',
+                              'All'.tr,
                               style: TextStyle(
                                 fontSize: 15,
                                 height: 1.3,
@@ -735,7 +738,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         Text(
-                                          'Yeni Eklenen Ürünler',
+                                          'Newly Added Products'.tr,
                                           style: TextStyle(
                                             fontSize: 15,
                                             height: 1,
@@ -758,7 +761,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                         ProductListSubPage(
                                                       productList: productList,
                                                       productListName:
-                                                          'Yeni Eklenen Ürünler',
+                                                          'Newly Added Products'
+                                                              .tr,
                                                     ),
                                                     transitionDuration:
                                                         const Duration(
@@ -776,7 +780,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  'Tümü',
+                                                  'All'.tr,
                                                   style: TextStyle(
                                                     fontSize: 15,
                                                     height: 1.3,
@@ -813,6 +817,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               ),
                               GridView.builder(
                                 itemCount: productList.length,
+                                reverse: true,
                                 padding: const EdgeInsets.only(right: 12),
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),

@@ -246,6 +246,7 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                 child: (widget.productList.isNotEmpty)
                     ? GridView.builder(
                         controller: scrollController,
+                        reverse: true,
                         shrinkWrap: true,
                         itemCount: widget.productList.length,
                         padding: const EdgeInsets.fromLTRB(14, 0, 14, 0),
@@ -381,6 +382,7 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                 child: (widget.productList.isNotEmpty)
                     ? ListView.separated(
                         controller: scrollController,
+                        reverse: true,
                         shrinkWrap: true,
                         padding: const EdgeInsets.all(0),
                         itemCount: widget.productList.length,
