@@ -279,6 +279,13 @@ final Map<String, String> tr = {
   'With photo': 'Fotoğraflı',
   'Latest': 'En yeniler',
   'Show more': 'Daha fazla göster',
+  'Construction Materials': 'İnşaat Malzemeleri',
+  'Furniture and Decoration': 'Mobilya ve Dekorasyon',
+  'Automotive spare parts': 'Otomotiv yedek parça',
+  'Raw materials': 'Ham Madde',
+  'The most demanded products': 'En çok talep gören ürünler',
+  'Popular Products from Istanbul': 'İstanbul\'dan Popüler Ürünler',
+  'Newly Added Products': 'Yeni Eklenen Ürünler',
 
   // BASKET PAGE
   'Basket Page Route': 'Ana Sayfa - Sepetim',

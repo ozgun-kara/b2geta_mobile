@@ -30,8 +30,8 @@ final Map<String, String> en = {
   'Password Validate-2': 'Password must be at least 8 characters in length',
   'Login Error': 'Invalid Email or Password',
   'Close': 'Close',
-  'Clarification Text':'Clarification Text',
-  'Privacy Policy':'Privacy Policy',
+  'Clarification Text': 'Clarification Text',
+  'Privacy Policy': 'Privacy Policy',
 
   // REGISTER PAGE
   'Create Account': 'Create Account',
@@ -285,7 +285,13 @@ final Map<String, String> en = {
   'With photo': 'With photo',
   'Latest': 'Latest',
   'Show more': 'Show more',
-
+  'Construction Materials': 'Construction Materials',
+  'Furniture and Decoration': 'Furniture and Decoration',
+  'Automotive spare parts': 'Automotive spare parts',
+  'Raw materials': 'Raw materials',
+  'The most demanded products': 'The most demanded products',
+  'Popular Products from Istanbul': 'Popular Products from Istanbul',
+  'Newly Added Products': 'Newly Added Products',
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
   'Delivery Time-2': 'Delivery Time:',
