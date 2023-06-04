@@ -103,6 +103,44 @@ class HomePageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  //STORY
+  List<FeedModel> storyList = [];
+  final int _limitStory = 50;
+  int _offsetStory = 0;
+  int _pageStory = 0;
+
+  bool _isMoreStoryData = false;
+  get isMoreStoryData => _isMoreFeedData;
+
+  Future getStory() async {
+    await locator<SocialServices>().getAllStoryCall(queryParameters: {
+      "offset": _offsetStory.toString(),
+      "limit": _limitStory.toString(),
+      "type": "story"
+    }).then((feedList) {
+      List<FeedModel> tempList = [];
+      for (var feed in feedList) {
+        tempList.add(feed);
+      }
+      if (tempList.isEmpty) {
+        _isMoreStoryData = false;
+      } else {
+        _isMoreStoryData = true;
+      }
+      _pageStory++;
+
+      _offsetStory = _pageStory * _limitStory;
+      addStoryToStoryList(tempList);
+    });
+
+    notifyListeners();
+  }
+
+  void addStoryToStoryList(List<FeedModel> feeds) {
+    storyList.addAll(feeds);
+    notifyListeners();
+  }
+
   //CREATE POST/REELS
   int _tabIndex = 0;
   get tabIndex => _tabIndex;

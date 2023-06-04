@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   bool isList = false;
   final ScrollController _scrollController = ScrollController();
+  final ScrollController _storyScrollController = ScrollController();
   final SocialServices _socialServices = SocialServices();
   Map<String?, List<FeedModel>> groupStories = {};
   final TextEditingController _postTextController = TextEditingController();
@@ -44,6 +45,17 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getStories();
+    _storyScrollController.addListener(
+      () {
+        if (_storyScrollController.position.maxScrollExtent ==
+            _storyScrollController.offset) {
+          if (Provider.of<HomePageProvider>(context, listen: false)
+              .isMoreStoryData) {
+            getStories();
+          }
+        }
+      },
+    );
   }
 
   Future<void> _getFromGallery() async {
@@ -68,20 +80,17 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void getStories() async { 
-    await _socialServices.getAllStoryCall(
-      queryParameters: {"offset": "0", "limit": "35", "type": "story"},
-    ).then((feedList) {
-      groupStories = groupStoryByUser(feedList);
-      setState(() {});
-    });
+  void getStories() async {
+    await Provider.of<HomePageProvider>(context, listen: false).getStory();
+    groupStories = groupStoryByUser();
   }
 
-  Map<String?, List<FeedModel>> groupStoryByUser(List<FeedModel> stories) {
-    final groups = groupBy(stories, (FeedModel story) {
+  Map<String?, List<FeedModel>> groupStoryByUser() {
+    var groups =
+        groupBy(Provider.of<HomePageProvider>(context, listen: false).storyList,
+            (FeedModel story) {
       return story.user!.id;
     });
-
     return groups;
   }
 
@@ -159,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                                 Expanded(
                                   child: SizedBox(
                                     child: ListView.builder(
+                                      controller: _storyScrollController,
                                       itemCount: groupStories.keys.length,
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
