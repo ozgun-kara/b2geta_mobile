@@ -79,6 +79,12 @@ class _CompanyProfileReelsSubPageState
                   child: Image.network(
                     socialProvider.reelsList[index].videos![0]!.image
                         .toString(),
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      'assets/images/image_not_found.jpg',
+                      width: 128,
+                      height: 256,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
