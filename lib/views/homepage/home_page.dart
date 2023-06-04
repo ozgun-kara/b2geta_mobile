@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
-  void getStories() async {
+  void getStories() async { 
     await _socialServices.getAllStoryCall(
       queryParameters: {"offset": "0", "limit": "35", "type": "story"},
     ).then((feedList) {
