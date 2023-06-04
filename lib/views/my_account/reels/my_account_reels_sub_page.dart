@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
@@ -78,6 +77,12 @@ class _MyAccountReelsPageState extends State<MyAccountReelsPage> {
                   child: Image.network(
                     socialProvider.reelsList[index].videos![0]!.image
                         .toString(),
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      'assets/images/image_not_found.jpg',
+                      width: 128,
+                      height: 256,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

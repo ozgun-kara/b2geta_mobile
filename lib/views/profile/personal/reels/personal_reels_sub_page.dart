@@ -3,7 +3,6 @@ import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
 
@@ -15,10 +14,12 @@ class PersonalProfileReelsSubPage extends StatefulWidget {
   final String userId;
 
   @override
-  State<PersonalProfileReelsSubPage> createState() => _PersonalProfileReelsSubPageState();
+  State<PersonalProfileReelsSubPage> createState() =>
+      _PersonalProfileReelsSubPageState();
 }
 
-class _PersonalProfileReelsSubPageState extends State<PersonalProfileReelsSubPage> {
+class _PersonalProfileReelsSubPageState
+    extends State<PersonalProfileReelsSubPage> {
   ScrollController scrollController = ScrollController();
 
   late double deviceTopPadding;
@@ -78,6 +79,12 @@ class _PersonalProfileReelsSubPageState extends State<PersonalProfileReelsSubPag
                   child: Image.network(
                     socialProvider.reelsList[index].videos![0]!.image
                         .toString(),
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      'assets/images/image_not_found.jpg',
+                      width: 128,
+                      height: 256,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
