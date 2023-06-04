@@ -1,5 +1,5 @@
 import 'package:b2geta_mobile/models/products/product_model.dart';
-import 'package:b2geta_mobile/services/products/products_services.dart';
+import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/views/marketplace/models/banner_model.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_list_sub_page.dart';
@@ -18,7 +18,6 @@ class MarketplacePage extends StatefulWidget {
 
 class _MarketplacePageState extends State<MarketplacePage> {
   ScrollController scrollController = ScrollController();
-  final ProductsServices _productsServices = ProductsServices();
   List<ProductModel>? productList;
 
   late double deviceTopPadding;
@@ -30,16 +29,21 @@ class _MarketplacePageState extends State<MarketplacePage> {
   void initState() {
     super.initState();
     getProductList();
+    scrollController.addListener(
+      () {
+        if (scrollController.position.maxScrollExtent ==
+            scrollController.offset) {
+          if (Provider.of<MarketPlacePageProvider>(context, listen: false)
+              .isMoreData) {
+            getProductList();
+          }
+        }
+      },
+    );
   }
 
   getProductList() async {
-    await _productsServices.allProductsListAndSearchCall(queryParameters: {
-      "limit": '10000000',
-    }).then((value) {
-      setState(() {
-        productList = value;
-      });
-    });
+    Provider.of<MarketPlacePageProvider>(context, listen: false).getProducts();
   }
 
   @override
@@ -75,50 +79,25 @@ class _MarketplacePageState extends State<MarketplacePage> {
         width: deviceWidth);
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black12,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 11,
-            left: 13,
-          ),
-          child: Column(
-            children: [
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProductListSubPage(
-                            productList: productList ?? [],
-                            bannerItem: banner1,
-                          ),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  },
-                  child: _bannerItem(bannerItem: banner1)),
-              //SPACE
-              const SizedBox(
-                height: 14.0,
+      body: Consumer<MarketPlacePageProvider>(
+        builder: (context, marketPlaceProvider, child) {
+          return SingleChildScrollView(
+            controller: scrollController,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 11,
+                left: 13,
               ),
-              //CATEGORY LIST
-              SizedBox(
-                height: 130,
-                width: deviceWidth,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    GestureDetector(
+              child: Column(
+                children: [
+                  GestureDetector(
                       onTap: () {
                         Navigator.push(
                             context,
                             PageRouteBuilder(
                               pageBuilder: (_, __, ___) => ProductListSubPage(
-                                productList: productList ?? [],
-                                productListName: 'Construction Materials'.tr,
+                                productList: marketPlaceProvider.productList,
+                                bannerItem: banner1,
                               ),
                               transitionDuration:
                                   const Duration(milliseconds: 0),
@@ -128,717 +107,697 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   FadeTransition(opacity: a, child: c),
                             ));
                       },
-                      child: _categoryItem(
-                          imageUrl:
-                              "assets/images/dummy_images/marketplace/marketplace_image2.png",
-                          text: 'Construction Materials'.tr),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => ProductListSubPage(
-                                productList: productList ?? [],
-                                productListName: 'Furniture and Decoration'.tr,
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 0),
-                              reverseTransitionDuration:
-                                  const Duration(milliseconds: 0),
-                              transitionsBuilder: (_, a, __, c) =>
-                                  FadeTransition(opacity: a, child: c),
-                            ));
-                      },
-                      child: _categoryItem(
-                          imageUrl:
-                              "assets/images/dummy_images/marketplace/marketplace_image3.png",
-                          text: 'Furniture and Decoration'.tr),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => ProductListSubPage(
-                                productList: productList ?? [],
-                                productListName: 'Automotive spare parts'.tr,
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 0),
-                              reverseTransitionDuration:
-                                  const Duration(milliseconds: 0),
-                              transitionsBuilder: (_, a, __, c) =>
-                                  FadeTransition(opacity: a, child: c),
-                            ));
-                      },
-                      child: _categoryItem(
-                          imageUrl:
-                              "assets/images/dummy_images/marketplace/marketplace_image4.png",
-                          text: 'Automotive spare parts'.tr),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => ProductListSubPage(
-                                productList: productList ?? [],
-                                productListName: 'Raw materials'.tr,
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 0),
-                              reverseTransitionDuration:
-                                  const Duration(milliseconds: 0),
-                              transitionsBuilder: (_, a, __, c) =>
-                                  FadeTransition(opacity: a, child: c),
-                            ));
-                      },
-                      child: _categoryItem(
-                          imageUrl:
-                              "assets/images/dummy_images/marketplace/marketplace_image5.png",
-                          text: 'Raw materials'.tr),
-                    ),
-                  ],
-                ),
-              ),
-              //SPACE
-              const SizedBox(
-                height: 28.0,
-              ),
-              //PRODUCT LIST
-              SizedBox(
-                height: 15,
-                width: deviceWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'The most demanded products'.tr,
-                      style: TextStyle(
-                        fontSize: 15,
-                        height: 1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) => ProductListSubPage(
-                                productList: productList ?? [],
-                                productListName:
-                                    'The most demanded products'.tr,
-                              ),
-                              transitionDuration:
-                                  const Duration(milliseconds: 0),
-                              reverseTransitionDuration:
-                                  const Duration(milliseconds: 0),
-                              transitionsBuilder: (_, a, __, c) =>
-                                  FadeTransition(opacity: a, child: c),
-                            ));
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 13.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              "All".tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                                height: 1.3,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue2
-                                    : AppTheme.white11,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 9,
-                            ),
-                            Image.asset(
-                              "assets/icons/next.png",
-                              width: 10,
-                              height: 8,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white11,
-                            )
-                          ],
+                      child: _bannerItem(bannerItem: banner1)),
+                  //SPACE
+                  const SizedBox(
+                    height: 14.0,
+                  ),
+                  //CATEGORY LIST
+                  SizedBox(
+                    height: 130,
+                    width: deviceWidth,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      ProductListSubPage(
+                                    productList:
+                                        marketPlaceProvider.productList,
+                                    productListName:
+                                        'Construction Materials'.tr,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: _categoryItem(
+                              imageUrl:
+                                  "assets/images/dummy_images/marketplace/marketplace_image2.png",
+                              text: 'Construction Materials'.tr),
                         ),
-                      ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      ProductListSubPage(
+                                    productList:
+                                        marketPlaceProvider.productList,
+                                    productListName:
+                                        'Furniture and Decoration'.tr,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: _categoryItem(
+                              imageUrl:
+                                  "assets/images/dummy_images/marketplace/marketplace_image3.png",
+                              text: 'Furniture and Decoration'.tr),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      ProductListSubPage(
+                                    productList:
+                                        marketPlaceProvider.productList,
+                                    productListName:
+                                        'Automotive spare parts'.tr,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: _categoryItem(
+                              imageUrl:
+                                  "assets/images/dummy_images/marketplace/marketplace_image4.png",
+                              text: 'Automotive spare parts'.tr),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      ProductListSubPage(
+                                    productList:
+                                        marketPlaceProvider.productList,
+                                    productListName: 'Raw materials'.tr,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: _categoryItem(
+                              imageUrl:
+                                  "assets/images/dummy_images/marketplace/marketplace_image5.png",
+                              text: 'Raw materials'.tr),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 23.0,
-              ),
-              SizedBox(
-                height: 222,
-                width: deviceWidth,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image6.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image7.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image8.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                  ],
-                ),
-              ),
-              //SPACE
-              const SizedBox(
-                height: 23,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProductListSubPage(
-                            productList: productList ?? [],
-                            bannerItem: banner2,
+                  ),
+                  //SPACE
+                  const SizedBox(
+                    height: 28.0,
+                  ),
+                  //PRODUCT LIST
+                  SizedBox(
+                    height: 15,
+                    width: deviceWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'The most demanded products'.tr,
+                          style: TextStyle(
+                            fontSize: 15,
+                            height: 1,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  },
-                  child: _bannerItem(bannerItem: banner2)),
-              //SPACE
-              const SizedBox(
-                height: 28.0,
-              ),
-              //PRODUCT LIST
-              SizedBox(
-                height: 15,
-                width: deviceWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Furniture and Decoration'.tr,
-                      style: TextStyle(
-                        fontSize: 15,
-                        height: 1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 13.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => ProductListSubPage(
-                                  productList: productList ?? [],
-                                  productListName:
-                                      'Furniture and Decoration'.tr,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (_, __, ___) =>
+                                      ProductListSubPage(
+                                    productList:
+                                        marketPlaceProvider.productList,
+                                    productListName:
+                                        'The most demanded products'.tr,
+                                  ),
+                                  transitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  reverseTransitionDuration:
+                                      const Duration(milliseconds: 0),
+                                  transitionsBuilder: (_, a, __, c) =>
+                                      FadeTransition(opacity: a, child: c),
+                                ));
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 13.0),
+                            child: Row(
+                              children: [
+                                Text(
+                                  "All".tr,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    height: 1.3,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue2
+                                        : AppTheme.white11,
+                                  ),
                                 ),
-                                transitionDuration:
-                                    const Duration(milliseconds: 0),
-                                reverseTransitionDuration:
-                                    const Duration(milliseconds: 0),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
-                              ));
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              'All'.tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                                height: 1.3,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue2
-                                    : AppTheme.white11,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 9,
-                            ),
-                            Image.asset(
-                              "assets/icons/next.png",
-                              width: 10,
-                              height: 8,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white11,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 23.0,
-              ),
-              SizedBox(
-                height: 222,
-                width: deviceWidth,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image10.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image11.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image12.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                  ],
-                ),
-              ),
-              //SPACE
-              const SizedBox(
-                height: 23,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProductListSubPage(
-                            productList: productList ?? [],
-                            bannerItem: banner3,
-                          ),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  },
-                  child: _bannerItem(bannerItem: banner3)),
-              //SPACE
-              const SizedBox(
-                height: 28.0,
-              ),
-              //PRODUCT LIST
-              SizedBox(
-                height: 15,
-                width: deviceWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Popular Products from Istanbul'.tr,
-                      style: TextStyle(
-                        fontSize: 15,
-                        height: 1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 13.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => ProductListSubPage(
-                                  productList: productList ?? [],
-                                  productListName:
-                                      'Popular Products from Istanbul'.tr,
+                                const SizedBox(
+                                  width: 9,
                                 ),
-                                transitionDuration:
-                                    const Duration(milliseconds: 0),
-                                reverseTransitionDuration:
-                                    const Duration(milliseconds: 0),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
-                              ));
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              'All'.tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                                height: 1.3,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue2
-                                    : AppTheme.white11,
-                              ),
+                                Image.asset(
+                                  "assets/icons/next.png",
+                                  width: 10,
+                                  height: 8,
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white11,
+                                )
+                              ],
                             ),
-                            const SizedBox(
-                              width: 9,
-                            ),
-                            Image.asset(
-                              "assets/icons/next.png",
-                              width: 10,
-                              height: 8,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white11,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 23.0,
-              ),
-              SizedBox(
-                height: 222,
-                width: deviceWidth,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image14.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image15.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image16.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                  ],
-                ),
-              ),
-              //SPACE
-              const SizedBox(
-                height: 23,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProductListSubPage(
-                            productList: productList ?? [],
-                            bannerItem: banner4,
                           ),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  },
-                  child: _bannerItem(bannerItem: banner4)),
-              //SPACE
-              const SizedBox(
-                height: 23.0,
-              ),
-              //PRODUCT LIST
-              SizedBox(
-                height: 15,
-                width: deviceWidth,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Automotive spare parts'.tr,
-                      style: TextStyle(
-                        fontSize: 15,
-                        height: 1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontWeight: FontWeight.w700,
-                        color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 13.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => ProductListSubPage(
-                                  productList: productList ?? [],
-                                  productListName: 'Automotive spare parts'.tr,
-                                ),
-                                transitionDuration:
-                                    const Duration(milliseconds: 0),
-                                reverseTransitionDuration:
-                                    const Duration(milliseconds: 0),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
-                              ));
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              'All'.tr,
-                              style: TextStyle(
-                                fontSize: 15,
-                                height: 1.3,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue2
-                                    : AppTheme.white11,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 9,
-                            ),
-                            Image.asset(
-                              "assets/icons/next.png",
-                              width: 10,
-                              height: 8,
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white11,
-                            )
-                          ],
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 23.0,
-              ),
-              SizedBox(
-                height: 222,
-                width: deviceWidth,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image18.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
+                  ),
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  SizedBox(
+                    height: 222,
+                    width: deviceWidth,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image6.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image7.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image8.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                      ],
                     ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image19.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                    const SizedBox(
-                      width: 15,
-                    ),
-                    _productItem(
-                        productImageUrl:
-                            "assets/images/dummy_images/marketplace/marketplace_image20.png",
-                        productName: 'Karaca Keenover 10 Parça Bıçak Seti Xl',
-                        productPrice: '128 - 290'),
-                  ],
-                ),
-              ),
-              //SPACE
-              const SizedBox(
-                height: 23,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder: (_, __, ___) => ProductListSubPage(
-                            productList: productList ?? [],
-                            bannerItem: banner5,
+                  ),
+                  //SPACE
+                  const SizedBox(
+                    height: 23,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => ProductListSubPage(
+                                productList: marketPlaceProvider.productList,
+                                bannerItem: banner2,
+                              ),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ));
+                      },
+                      child: _bannerItem(bannerItem: banner2)),
+                  //SPACE
+                  const SizedBox(
+                    height: 28.0,
+                  ),
+                  //PRODUCT LIST
+                  SizedBox(
+                    height: 15,
+                    width: deviceWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Furniture and Decoration'.tr,
+                          style: TextStyle(
+                            fontSize: 15,
+                            height: 1,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                           ),
-                          transitionDuration: const Duration(milliseconds: 0),
-                          reverseTransitionDuration:
-                              const Duration(milliseconds: 0),
-                          transitionsBuilder: (_, a, __, c) =>
-                              FadeTransition(opacity: a, child: c),
-                        ));
-                  },
-                  child: _bannerItem(bannerItem: banner5)),
-              //SPACE
-              const SizedBox(
-                height: 23.0,
-              ),
-              //PRODUCT LIST
-              FutureBuilder<List<ProductModel>>(
-                future: ProductsServices()
-                    .allProductsListAndSearchCall(queryParameters: {
-                  "limit": '10000000',
-                }),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    var productList = snapshot.data;
-
-                    return productList!.isNotEmpty
-                        ? Column(
-                            children: [
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    height: 15,
-                                    width: deviceWidth,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Newly Added Products'.tr,
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            height: 1,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w700,
-                                            color: themeMode
-                                                ? AppTheme.blue3
-                                                : AppTheme.white1,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              right: 13.0),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  PageRouteBuilder(
-                                                    pageBuilder: (_, __, ___) =>
-                                                        ProductListSubPage(
-                                                      productList: productList,
-                                                      productListName:
-                                                          'Newly Added Products'
-                                                              .tr,
-                                                    ),
-                                                    transitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    reverseTransitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    transitionsBuilder:
-                                                        (_, a, __, c) =>
-                                                            FadeTransition(
-                                                                opacity: a,
-                                                                child: c),
-                                                  ));
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Text(
-                                                  'All'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    height: 1.3,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white11,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 9,
-                                                ),
-                                                Image.asset(
-                                                  "assets/icons/next.png",
-                                                  width: 10,
-                                                  height: 8,
-                                                  color: themeMode
-                                                      ? AppTheme.blue2
-                                                      : AppTheme.white11,
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 13.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        ProductListSubPage(
+                                      productList:
+                                          marketPlaceProvider.productList,
+                                      productListName:
+                                          'Furniture and Decoration'.tr,
                                     ),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    reverseTransitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    transitionsBuilder: (_, a, __, c) =>
+                                        FadeTransition(opacity: a, child: c),
+                                  ));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'All'.tr,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    height: 1.3,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue2
+                                        : AppTheme.white11,
                                   ),
-                                  const SizedBox(
-                                    height: 23.0,
-                                  ),
-                                ],
-                              ),
-                              GridView.builder(
-                                itemCount: productList.length,
-                                reverse: true,
-                                padding: const EdgeInsets.only(right: 12),
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  crossAxisSpacing: 9.0,
-                                  mainAxisSpacing: 9.0,
-                                  mainAxisExtent: 275,
                                 ),
-                                scrollDirection: Axis.vertical,
-                                itemBuilder: (context, index) {
-                                  var product = productList[index];
-                                  return GestureDetector(
+                                const SizedBox(
+                                  width: 9,
+                                ),
+                                Image.asset(
+                                  "assets/icons/next.png",
+                                  width: 10,
+                                  height: 8,
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white11,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  SizedBox(
+                    height: 222,
+                    width: deviceWidth,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image10.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image11.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image12.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                      ],
+                    ),
+                  ),
+                  //SPACE
+                  const SizedBox(
+                    height: 23,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => ProductListSubPage(
+                                productList: marketPlaceProvider.productList,
+                                bannerItem: banner3,
+                              ),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ));
+                      },
+                      child: _bannerItem(bannerItem: banner3)),
+                  //SPACE
+                  const SizedBox(
+                    height: 28.0,
+                  ),
+                  //PRODUCT LIST
+                  SizedBox(
+                    height: 15,
+                    width: deviceWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Popular Products from Istanbul'.tr,
+                          style: TextStyle(
+                            fontSize: 15,
+                            height: 1,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 13.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        ProductListSubPage(
+                                      productList:
+                                          marketPlaceProvider.productList,
+                                      productListName:
+                                          'Popular Products from Istanbul'.tr,
+                                    ),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    reverseTransitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    transitionsBuilder: (_, a, __, c) =>
+                                        FadeTransition(opacity: a, child: c),
+                                  ));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'All'.tr,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    height: 1.3,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue2
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 9,
+                                ),
+                                Image.asset(
+                                  "assets/icons/next.png",
+                                  width: 10,
+                                  height: 8,
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white11,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  SizedBox(
+                    height: 222,
+                    width: deviceWidth,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image14.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image15.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image16.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                      ],
+                    ),
+                  ),
+                  //SPACE
+                  const SizedBox(
+                    height: 23,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => ProductListSubPage(
+                                productList: marketPlaceProvider.productList,
+                                bannerItem: banner4,
+                              ),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ));
+                      },
+                      child: _bannerItem(bannerItem: banner4)),
+                  //SPACE
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  //PRODUCT LIST
+                  SizedBox(
+                    height: 15,
+                    width: deviceWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Automotive spare parts'.tr,
+                          style: TextStyle(
+                            fontSize: 15,
+                            height: 1,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w700,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 13.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        ProductListSubPage(
+                                      productList:
+                                          marketPlaceProvider.productList,
+                                      productListName:
+                                          'Automotive spare parts'.tr,
+                                    ),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    reverseTransitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    transitionsBuilder: (_, a, __, c) =>
+                                        FadeTransition(opacity: a, child: c),
+                                  ));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  'All'.tr,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    height: 1.3,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue2
+                                        : AppTheme.white11,
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 9,
+                                ),
+                                Image.asset(
+                                  "assets/icons/next.png",
+                                  width: 10,
+                                  height: 8,
+                                  color: themeMode
+                                      ? AppTheme.blue2
+                                      : AppTheme.white11,
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  SizedBox(
+                    height: 222,
+                    width: deviceWidth,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image18.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image19.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        _productItem(
+                            productImageUrl:
+                                "assets/images/dummy_images/marketplace/marketplace_image20.png",
+                            productName:
+                                'Karaca Keenover 10 Parça Bıçak Seti Xl',
+                            productPrice: '128 - 290'),
+                      ],
+                    ),
+                  ),
+                  //SPACE
+                  const SizedBox(
+                    height: 23,
+                  ),
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) => ProductListSubPage(
+                                productList: marketPlaceProvider.productList,
+                                bannerItem: banner5,
+                              ),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ));
+                      },
+                      child: _bannerItem(bannerItem: banner5)),
+                  //SPACE
+                  const SizedBox(
+                    height: 23.0,
+                  ),
+                  //PRODUCT LIST
+                  Column(
+                    children: [
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 15,
+                            width: deviceWidth,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Newly Added Products'.tr,
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    height: 1,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: themeMode
+                                        ? AppTheme.blue3
+                                        : AppTheme.white1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 13.0),
+                                  child: GestureDetector(
                                     onTap: () {
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
-                                                ProductDetailSubPage(
-                                              productId: product.id!,
+                                                ProductListSubPage(
+                                              productList: marketPlaceProvider
+                                                  .productList,
+                                              productListName:
+                                                  'Newly Added Products'.tr,
                                             ),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
@@ -849,30 +808,91 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                     opacity: a, child: c),
                                           ));
                                     },
-                                    child: _productItemNetwork(
-                                        productImageUrl: product
-                                                .images!.isNotEmpty
-                                            ? product.images![0].toString()
-                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                        productName:
-                                            product.name!.tr.toString(),
-                                        productPrice: product.price.toString()),
-                                  );
-                                },
-                              ),
-                            ],
-                          )
-                        : const CircularProgressIndicator();
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'All'.tr,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            height: 1.3,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                            color: themeMode
+                                                ? AppTheme.blue2
+                                                : AppTheme.white11,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 9,
+                                        ),
+                                        Image.asset(
+                                          "assets/icons/next.png",
+                                          width: 10,
+                                          height: 8,
+                                          color: themeMode
+                                              ? AppTheme.blue2
+                                              : AppTheme.white11,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 23.0,
+                          ),
+                        ],
+                      ),
+                      GridView.builder(
+                        itemCount: marketPlaceProvider.productList.length,
+                        padding: const EdgeInsets.only(right: 12),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 9.0,
+                          mainAxisSpacing: 9.0,
+                          mainAxisExtent: 275,
+                        ),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          var product = marketPlaceProvider.productList[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (_, __, ___) =>
+                                        ProductDetailSubPage(
+                                      productId: product.id!,
+                                    ),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    reverseTransitionDuration:
+                                        const Duration(milliseconds: 0),
+                                    transitionsBuilder: (_, a, __, c) =>
+                                        FadeTransition(opacity: a, child: c),
+                                  ));
+                            },
+                            child: _productItemNetwork(
+                                productImageUrl: product.images!.isNotEmpty
+                                    ? product.images![0].toString()
+                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                productName: product.name!.tr.toString(),
+                                productPrice: product.price.toString()),
+                          );
+                        },
+                      ),
+                    ],
+                  )
+                ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
