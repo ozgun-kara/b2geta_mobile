@@ -41,7 +41,6 @@ class MarketPlacePageProvider with ChangeNotifier {
 
       _offset = _page * _limit;
       addProductToProductList(tempList);
-      debugPrint("calisti");
     });
 
     notifyListeners();
