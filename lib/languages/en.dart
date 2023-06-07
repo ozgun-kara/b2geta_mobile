@@ -201,6 +201,10 @@ final Map<String, String> en = {
   'Disagreement Description': 'Disagreement Description',
   'Request': 'Request',
   'Request Validate': 'Please enter the request',
+  'Delete My Account': 'Delete My Account',
+  'Are you sure you want to delete your account?':
+      'Are you sure you want to delete your account?',
+  'Yes': 'Yes',
 
   // HOMEPAGE
   'Posts': 'Posts',
