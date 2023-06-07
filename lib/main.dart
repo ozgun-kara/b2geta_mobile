@@ -22,7 +22,6 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await GetStorage.init();
-  WidgetsFlutterBinding.ensureInitialized();
   OneSignalApi.setupOneSignal();
   setupLocator();
 
