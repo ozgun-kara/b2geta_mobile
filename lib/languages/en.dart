@@ -205,6 +205,7 @@ final Map<String, String> en = {
   'Are you sure you want to delete your account?':
       'Are you sure you want to delete your account?',
   'Yes': 'Yes',
+  'No':'No',
 
   // HOMEPAGE
   'Posts': 'Posts',

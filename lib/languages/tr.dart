@@ -200,6 +200,7 @@ final Map<String, String> tr = {
   'Are you sure you want to delete your account?':
       'Hesabınızı silmek istediğinizden emin misiniz?',
   'Yes': 'Evet',
+  'No':'Hayır',
 
   // HOMEPAGE
   'Posts': 'Postlar',
