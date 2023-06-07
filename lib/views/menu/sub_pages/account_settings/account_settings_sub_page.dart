@@ -200,7 +200,7 @@ class _AccountSettingsSubPageState extends State<AccountSettingsSubPage> {
                                   BorderRadius.all(Radius.circular(16)),
                             ),
                             child: Text(
-                              'Close'.tr,
+                              'No'.tr,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
