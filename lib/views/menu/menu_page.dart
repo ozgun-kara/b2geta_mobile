@@ -3,12 +3,13 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/account_settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/disagreements/disagreements_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/followers/followers_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/settings_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/settings/settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
@@ -227,7 +228,19 @@ class _MenuPageState extends State<MenuPage> {
                     color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                   ),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (_, __, ___) =>
+                            const AccountSettingsSubPage(),
+                        transitionDuration: const Duration(milliseconds: 0),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 0),
+                        transitionsBuilder: (_, a, __, c) =>
+                            FadeTransition(opacity: a, child: c),
+                      ));
+                }),
             const SizedBox(height: 8),
             MaterialButton(
                 minWidth: deviceWidth,
