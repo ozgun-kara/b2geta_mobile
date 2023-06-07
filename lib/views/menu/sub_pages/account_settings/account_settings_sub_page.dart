@@ -2,7 +2,9 @@ import 'dart:ui';
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:b2geta_mobile/views/login_register/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ class AccountSettingsSubPage extends StatefulWidget {
 
 class _AccountSettingsSubPageState extends State<AccountSettingsSubPage> {
   ScrollController scrollController = ScrollController();
+  final MemberServices _memberServices = MemberServices();
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -76,39 +79,63 @@ class _AccountSettingsSubPageState extends State<AccountSettingsSubPage> {
                         spreadRadius: 0),
                   ],
                 ),
-                child: MaterialButton(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(26)),
-                  ),
-                  onPressed: () {
-                    dialog(
-                        titleText:
-                            'Are you sure you want to delete your account?'.tr,
-                        buttonText: 'Yes'.tr,
-                        buttonColor: AppTheme.red1,
-                        onPressed: () {});
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        "assets/icons/tabler_trash.png",
-                        width: 16,
-                        color: AppTheme.red1,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        'Delete My Account'.tr,
-                        style: TextStyle(
-                          fontFamily: AppTheme.appFontFamily,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                child: ButtonTheme(
+                  minWidth: 32,
+                  child: MaterialButton(
+                    elevation: 0,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(16)),
+                    ),
+                    onPressed: () {
+                      dialog(
+                          titleText:
+                              'Are you sure you want to delete your account?'
+                                  .tr,
+                          buttonText: 'Yes'.tr,
+                          buttonColor: AppTheme.red2,
+                          onPressed: () {
+                            _memberServices.deleteAccountCall().then((value) {
+                              if (value) {
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          const LoginPage(
+                                        email: '',
+                                      ),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ));
+                              }
+                            });
+                          });
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/icons/tabler_trash.png",
+                          width: 16,
+                          color: AppTheme.red2,
                         ),
-                      ),
-                    ],
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          'Delete My Account'.tr,
+                          style: TextStyle(
+                            fontFamily: AppTheme.appFontFamily,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
     // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
   ];
 
-  int _current = 0;
+  final int _current = 0;
   final CarouselController _controller = CarouselController();
 
   List<Widget>? imageSliders;
@@ -82,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Stack(
+              /*   Stack(
                 children: [
                   CarouselSlider.builder(
                     itemCount: imgList.length,
@@ -133,9 +133,9 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ],
-              ),
+              ), */
               Padding(
-                padding: EdgeInsets.fromLTRB(30, 16, 30, 16),
+                padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
                 child: Column(
                   children: [
                     Form(

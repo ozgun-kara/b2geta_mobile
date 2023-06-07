@@ -380,6 +380,27 @@ class MemberServices {
     }
   }
 
+  // UPDATE PASSWORD
+  Future<bool> deleteAccountCall() async {
+    final response = await http.delete(
+      Uri.parse('${Constants.apiUrl}/member/delete'),
+      headers: Constants.headers,
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        deleteToken();
+        deleteUserId();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
   // TOKEN FUNCTIONS
   Future<void> saveToken(String token) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
