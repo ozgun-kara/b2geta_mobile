@@ -1,6 +1,5 @@
 import 'package:b2geta_mobile/app_languages.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/onesignal_api.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/explore_page_provider.dart';
@@ -22,8 +21,6 @@ import 'package:provider/provider.dart';
 
 void main() async {
   await GetStorage.init();
-  WidgetsFlutterBinding.ensureInitialized();
-  OneSignalApi.setupOneSignal();
   setupLocator();
 
   runApp(MultiProvider(providers: [
