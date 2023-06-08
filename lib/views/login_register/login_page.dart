@@ -31,14 +31,20 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController1 = TextEditingController();
   TextEditingController passwordController1 = TextEditingController();
 
+  // final List<String> imgList = [
+  //   'https://i.ibb.co/c89gHKk/onboarding-1.png',
+  //   'https://i.ibb.co/k4j2sR7/onboarding-2.png',
+  //   'https://i.ibb.co/BcN5fnT/onboarding-3.png',
+  //   // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+  // ];
+
   final List<String> imgList = [
-    'https://i.ibb.co/c89gHKk/onboarding-1.png',
-    'https://i.ibb.co/k4j2sR7/onboarding-2.png',
-    'https://i.ibb.co/BcN5fnT/onboarding-3.png',
-    // 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
+    'assets/images/onboarding-1.png',
+    'assets/images/onboarding-2.png',
+    'assets/images/onboarding-3.png',
   ];
 
-  final int _current = 0;
+  late int _current = 0;
   final CarouselController _controller = CarouselController();
 
   List<Widget>? imageSliders;
@@ -82,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              /*   Stack(
+              Stack(
                 children: [
                   CarouselSlider.builder(
                     itemCount: imgList.length,
@@ -96,7 +102,9 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         }),
                     itemBuilder: (context, index, realIdx) {
-                      return Image.network(imgList[index], fit: BoxFit.cover);
+                      // return Image.network(imgList[index], fit: BoxFit.cover);
+
+                      return Image.asset(imgList[index], fit: BoxFit.cover);
                     },
                   ),
                   Padding(
@@ -133,7 +141,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ],
-              ), */
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(30, 16, 30, 16),
                 child: Column(
