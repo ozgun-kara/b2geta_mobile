@@ -28,7 +28,6 @@ class _BasketPageState extends State<BasketPage> {
   late double deviceHeight;
   late bool themeMode;
   ScrollController scrollController = ScrollController();
-  final BasketServices _basketServices = BasketServices();
   List<AddressModel> addressList = [];
   int? selectedAddressIndex = 0;
   String? selectedAddressId;
