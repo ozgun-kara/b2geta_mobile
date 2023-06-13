@@ -23,6 +23,7 @@ class BasketPage extends StatefulWidget {
 
 class _BasketPageState extends State<BasketPage> {
   late double deviceTopPadding;
+  late double deviceBottomPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
@@ -63,6 +64,7 @@ class _BasketPageState extends State<BasketPage> {
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceBottomPadding = MediaQuery.of(context).padding.bottom;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
@@ -76,791 +78,791 @@ class _BasketPageState extends State<BasketPage> {
               children: [
                 const SizedBox(height: 1),
                 _pagePathName(),
-                _basketCount(),
+                _basketCount(basketPageProvider.basketList.length.toString()),
                 (basketPageProvider.basketList.isNotEmpty)
                     ? ListView.builder(
-                        padding: EdgeInsets.zero,
-                        controller: scrollController,
-                        shrinkWrap: true,
-                        itemCount: basketPageProvider.basketList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return _cartItem(
-                              basketPageProvider.basketList[index], index);
-                        },
-                      )
+                  padding: EdgeInsets.zero,
+                  controller: scrollController,
+                  shrinkWrap: true,
+                  itemCount: basketPageProvider.basketList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _cartItem(
+                        basketPageProvider.basketList[index], index);
+                  },
+                )
                     : SizedBox(
-                        width: deviceWidth,
-                        height: deviceHeight - 200,
-                        child: Center(
-                            child: Text(
-                          'Empty Chart'.tr,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color:
-                                themeMode ? AppTheme.black12 : AppTheme.white24,
-                          ),
-                        )),
-                      ),
+                  width: deviceWidth,
+                  height: deviceHeight - 200,
+                  child: Center(
+                      child: Text(
+                        'Empty Chart'.tr,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w500,
+                          color:
+                          themeMode ? AppTheme.black12 : AppTheme.white24,
+                        ),
+                      )),
+                ),
                 (basketPageProvider.basketList.isNotEmpty)
                     ? Column(
-                        children: [
-                          _orderSummary(),
-                          addressList.isNotEmpty
-                              ? Column(
-                                  children: [
-                                    Container(
-                                      width: deviceWidth,
-                                      height: 47.0,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20.0),
-                                      decoration: BoxDecoration(
-                                        color: themeMode
-                                            ? AppTheme.white22
-                                            : AppTheme.black18,
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Address Choice'.tr,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w800,
+                  children: [
+                    _orderSummary(),
+                    addressList.isNotEmpty
+                        ? Column(
+                      children: [
+                        Container(
+                          width: deviceWidth,
+                          height: 47.0,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0),
+                          decoration: BoxDecoration(
+                            color: themeMode
+                                ? AppTheme.white22
+                                : AppTheme.black18,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Address Choice'.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w800,
+                                color: themeMode
+                                    ? AppTheme.blue2
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: themeMode
+                              ? AppTheme.white1
+                              : AppTheme.black7,
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 11,
+                              ),
+                              SizedBox(
+                                  width: deviceWidth,
+                                  height: 200,
+                                  child: ListView.separated(
+                                    padding:
+                                    const EdgeInsets.all(0),
+                                    controller: scrollController,
+                                    shrinkWrap: true,
+                                    itemCount: addressList.length,
+                                    separatorBuilder:
+                                        (BuildContext context,
+                                        int index) {
+                                      return const SizedBox(
+                                          height: 10);
+                                    },
+                                    itemBuilder: ((context, index) {
+                                      var address =
+                                      addressList[index];
+                                      return Padding(
+                                        padding: const EdgeInsets
+                                            .symmetric(
+                                            horizontal: 9),
+                                        child: Container(
+                                          decoration: BoxDecoration(
                                             color: themeMode
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
+                                                ? AppTheme.white1
+                                                : AppTheme.black7,
+                                            borderRadius:
+                                            const BorderRadius
+                                                .all(
+                                                Radius.circular(
+                                                    5)),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: themeMode
+                                                  ? AppTheme.white35
+                                                  : AppTheme
+                                                  .black18,
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      color: themeMode
-                                          ? AppTheme.white1
-                                          : AppTheme.black7,
-                                      child: Column(
-                                        children: [
-                                          const SizedBox(
-                                            height: 11,
-                                          ),
-                                          SizedBox(
-                                              width: deviceWidth,
-                                              height: 200,
-                                              child: ListView.separated(
-                                                padding:
-                                                    const EdgeInsets.all(0),
-                                                controller: scrollController,
-                                                shrinkWrap: true,
-                                                itemCount: addressList.length,
-                                                separatorBuilder:
-                                                    (BuildContext context,
-                                                        int index) {
-                                                  return const SizedBox(
-                                                      height: 10);
-                                                },
-                                                itemBuilder: ((context, index) {
-                                                  var address =
-                                                      addressList[index];
-                                                  return Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        horizontal: 9),
-                                                    child: Container(
-                                                      decoration: BoxDecoration(
-                                                        color: themeMode
-                                                            ? AppTheme.white1
-                                                            : AppTheme.black7,
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    5)),
-                                                        border: Border.all(
-                                                          width: 1,
-                                                          color: themeMode
-                                                              ? AppTheme.white35
-                                                              : AppTheme
-                                                                  .black18,
-                                                        ),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                24, 21, 24, 21),
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Flexible(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Name'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.name ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              28),
-                                                                      Text(
-                                                                        'City'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.city!.name ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Address'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.address ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              28),
-                                                                      Text(
-                                                                        'Country'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.country!.name ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'District'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.district!.name ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              28),
-                                                                      Text(
-                                                                        'Postal Code'
-                                                                            .tr,
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w600,
-                                                                          color:
-                                                                              AppTheme.white15,
-                                                                        ),
-                                                                      ),
-                                                                      Text(
-                                                                        address.postalCode ??
-                                                                            '',
-                                                                        style:
-                                                                            TextStyle(
-                                                                          fontSize:
-                                                                              12,
-                                                                          fontFamily:
-                                                                              AppTheme.appFontFamily,
-                                                                          fontWeight:
-                                                                              FontWeight.w400,
-                                                                          color: themeMode
-                                                                              ? AppTheme.blue3
-                                                                              : AppTheme.white1,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ],
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets
+                                                .fromLTRB(
+                                                24, 21, 24, 21),
+                                            child: Column(
+                                              children: [
+                                                Row(
+                                                  mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                                  children: [
+                                                    Flexible(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'Name'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
                                                             ),
-                                                            const SizedBox(
-                                                                height: 16),
-                                                            Row(
-                                                              children: [
-                                                                Expanded(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    height: 30,
-                                                                    child: MaterialButton(
-                                                                        height: 30,
-                                                                        color: selectedAddressIndex == index ? AppTheme.green1 : AppTheme.blue2,
-                                                                        shape: const RoundedRectangleBorder(
-                                                                          borderRadius:
-                                                                              BorderRadius.all(Radius.circular(8)),
-                                                                        ),
-                                                                        elevation: 0,
-                                                                        child: Text(
-                                                                          selectedAddressIndex == index
-                                                                              ? 'Chosen'.tr
-                                                                              : 'Choose'.tr,
-                                                                          style: TextStyle(
-                                                                              fontSize: 12,
-                                                                              fontFamily: AppTheme.appFontFamily,
-                                                                              fontWeight: FontWeight.w700,
-                                                                              color: AppTheme.white1),
-                                                                        ),
-                                                                        onPressed: () {
-                                                                          selectedAddressIndex =
-                                                                              index;
-                                                                          selectedAddressId =
-                                                                              address.id;
-                                                                          setState(
-                                                                              () {});
-                                                                        }),
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                          ),
+                                                          Text(
+                                                            address.name ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
                                                             ),
-                                                          ],
-                                                        ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                              28),
+                                                          Text(
+                                                            'City'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            address.city!.name ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
+                                                            ),
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
-                                                  );
-                                                }),
-                                              )),
-                                          const SizedBox(
-                                            height: 22,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 9),
-                                            child: SizedBox(
-                                              height: 47,
-                                              child: MaterialButton(
-                                                  height: 47,
-                                                  minWidth: deviceWidth,
-                                                  shape: RoundedRectangleBorder(
-                                                    side: BorderSide(
-                                                        width: 1,
-                                                        color: themeMode
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(5)),
-                                                  ),
-                                                  elevation: 0,
-                                                  child: Text(
-                                                    'Add an Address'.tr,
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: themeMode
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1),
-                                                  ),
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                            context,
-                                                            PageRouteBuilder(
-                                                              pageBuilder: (_,
-                                                                      __,
-                                                                      ___) =>
-                                                                  const AddAddressSubPage(
-                                                                      operation:
-                                                                          'Add'),
-                                                              transitionDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          0),
-                                                              reverseTransitionDuration:
-                                                                  const Duration(
-                                                                      milliseconds:
-                                                                          0),
-                                                              transitionsBuilder: (_,
-                                                                      a,
-                                                                      __,
-                                                                      c) =>
-                                                                  FadeTransition(
-                                                                      opacity:
-                                                                          a,
-                                                                      child: c),
-                                                            ))
-                                                        .then((_) =>
-                                                            setState(() {}));
-                                                  }),
+                                                    Flexible(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'Address'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            address.address ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                              28),
+                                                          Text(
+                                                            'Country'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            address.country!.name ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Flexible(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                        children: [
+                                                          Text(
+                                                            'District'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            address.district!.name ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                              28),
+                                                          Text(
+                                                            'Postal Code'
+                                                                .tr,
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w600,
+                                                              color:
+                                                              AppTheme.white15,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            address.postalCode ??
+                                                                '',
+                                                            style:
+                                                            TextStyle(
+                                                              fontSize:
+                                                              12,
+                                                              fontFamily:
+                                                              AppTheme.appFontFamily,
+                                                              fontWeight:
+                                                              FontWeight.w400,
+                                                              color: themeMode
+                                                                  ? AppTheme.blue3
+                                                                  : AppTheme.white1,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                    height: 16),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child:
+                                                      SizedBox(
+                                                        height: 30,
+                                                        child: MaterialButton(
+                                                            height: 30,
+                                                            color: selectedAddressIndex == index ? AppTheme.green1 : AppTheme.blue2,
+                                                            shape: const RoundedRectangleBorder(
+                                                              borderRadius:
+                                                              BorderRadius.all(Radius.circular(8)),
+                                                            ),
+                                                            elevation: 0,
+                                                            child: Text(
+                                                              selectedAddressIndex == index
+                                                                  ? 'Chosen'.tr
+                                                                  : 'Choose'.tr,
+                                                              style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  fontFamily: AppTheme.appFontFamily,
+                                                                  fontWeight: FontWeight.w700,
+                                                                  color: AppTheme.white1),
+                                                            ),
+                                                            onPressed: () {
+                                                              selectedAddressIndex =
+                                                                  index;
+                                                              selectedAddressId =
+                                                                  address.id;
+                                                              setState(
+                                                                      () {});
+                                                            }),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                          const SizedBox(
-                                            height: 22,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Column(
-                                  children: [
-                                    const SizedBox(
-                                      height: 22,
-                                    ),
-                                    Container(
-                                      width: deviceWidth,
-                                      height: 47.0,
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 20.0),
-                                      decoration: BoxDecoration(
-                                        color: themeMode
-                                            ? AppTheme.white22
-                                            : AppTheme.black18,
-                                      ),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          'Address Choice'.tr,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w800,
-                                            color: themeMode
-                                                ? AppTheme.blue2
-                                                : AppTheme.white1,
                                           ),
                                         ),
+                                      );
+                                    }),
+                                  )),
+                              const SizedBox(
+                                height: 22,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 9),
+                                child: SizedBox(
+                                  height: 47,
+                                  child: MaterialButton(
+                                      height: 47,
+                                      minWidth: deviceWidth,
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            width: 1,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1),
+                                        borderRadius:
+                                        const BorderRadius.all(
+                                            Radius.circular(5)),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 22,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 9),
-                                      child: SizedBox(
-                                        height: 47,
-                                        child: MaterialButton(
-                                            height: 47,
-                                            minWidth: deviceWidth,
-                                            shape: RoundedRectangleBorder(
-                                              side: BorderSide(
-                                                  width: 1,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1),
-                                              borderRadius:
-                                                  const BorderRadius.all(
-                                                      Radius.circular(5)),
-                                            ),
-                                            elevation: 0,
-                                            child: Text(
-                                              'Add an Address'.tr,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white1),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.push(
-                                                      context,
-                                                      PageRouteBuilder(
-                                                        pageBuilder: (_, __,
-                                                                ___) =>
-                                                            const AddAddressSubPage(
-                                                                operation:
-                                                                    'Add'),
-                                                        transitionDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    0),
-                                                        reverseTransitionDuration:
-                                                            const Duration(
-                                                                milliseconds:
-                                                                    0),
-                                                        transitionsBuilder:
-                                                            (_, a, __, c) =>
-                                                                FadeTransition(
-                                                                    opacity: a,
-                                                                    child: c),
-                                                      ))
-                                                  .then((_) => setState(() {}));
-                                            }),
+                                      elevation: 0,
+                                      child: Text(
+                                        'Add an Address'.tr,
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: AppTheme
+                                                .appFontFamily,
+                                            fontWeight:
+                                            FontWeight.w600,
+                                            color: themeMode
+                                                ? AppTheme.blue3
+                                                : AppTheme.white1),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      height: 22,
-                                    ),
-                                  ],
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(
+                                              pageBuilder: (_,
+                                                  __,
+                                                  ___) =>
+                                              const AddAddressSubPage(
+                                                  operation:
+                                                  'Add'),
+                                              transitionDuration:
+                                              const Duration(
+                                                  milliseconds:
+                                                  0),
+                                              reverseTransitionDuration:
+                                              const Duration(
+                                                  milliseconds:
+                                                  0),
+                                              transitionsBuilder: (_,
+                                                  a,
+                                                  __,
+                                                  c) =>
+                                                  FadeTransition(
+                                                      opacity:
+                                                      a,
+                                                      child: c),
+                                            ))
+                                            .then((_) =>
+                                            setState(() {}));
+                                      }),
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 22,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                        : Column(
+                      children: [
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Container(
+                          width: deviceWidth,
+                          height: 47.0,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0),
+                          decoration: BoxDecoration(
+                            color: themeMode
+                                ? AppTheme.white22
+                                : AppTheme.black18,
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Address Choice'.tr,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w800,
+                                color: themeMode
+                                    ? AppTheme.blue2
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 9),
+                          child: SizedBox(
+                            height: 47,
+                            child: MaterialButton(
+                                height: 47,
+                                minWidth: deviceWidth,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      width: 1,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1),
+                                  borderRadius:
+                                  const BorderRadius.all(
+                                      Radius.circular(5)),
+                                ),
+                                elevation: 0,
+                                child: Text(
+                                  'Add an Address'.tr,
+                                  style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily:
+                                      AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1),
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (_, __,
+                                            ___) =>
+                                        const AddAddressSubPage(
+                                            operation:
+                                            'Add'),
+                                        transitionDuration:
+                                        const Duration(
+                                            milliseconds:
+                                            0),
+                                        reverseTransitionDuration:
+                                        const Duration(
+                                            milliseconds:
+                                            0),
+                                        transitionsBuilder:
+                                            (_, a, __, c) =>
+                                            FadeTransition(
+                                                opacity: a,
+                                                child: c),
+                                      ))
+                                      .then((_) => setState(() {}));
+                                }),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 22,
+                        ),
+                      ],
+                    ),
+                    Container(
+                      width: deviceWidth,
+                      height: 47.0,
+                      padding:
+                      const EdgeInsets.symmetric(horizontal: 20.0),
+                      decoration: BoxDecoration(
+                        color: themeMode
+                            ? AppTheme.white22
+                            : AppTheme.black18,
+                      ),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Agreement and Conditions'.tr,
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontFamily: AppTheme.appFontFamily,
+                            fontWeight: FontWeight.w800,
+                            color: themeMode
+                                ? AppTheme.blue2
+                                : AppTheme.white1,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 9),
+                      color:
+                      themeMode ? AppTheme.white1 : AppTheme.black7,
+                      width: deviceWidth,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 9,
+                          ),
                           Container(
                             width: deviceWidth,
-                            height: 47.0,
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            height: 250,
+                            padding: const EdgeInsets.only(
+                              top: 18,
+                              left: 18,
+                              right: 21,
+                              bottom: 20,
+                            ),
                             decoration: BoxDecoration(
                               color: themeMode
                                   ? AppTheme.white22
                                   : AppTheme.black18,
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'Agreement and Conditions'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w800,
-                                  color: themeMode
-                                      ? AppTheme.blue2
-                                      : AppTheme.white1,
-                                ),
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 9),
-                            color:
-                                themeMode ? AppTheme.white1 : AppTheme.black7,
-                            width: deviceWidth,
-                            child: Column(
+                            child: ListView(
                               children: [
-                                const SizedBox(
-                                  height: 9,
-                                ),
-                                Container(
-                                  width: deviceWidth,
-                                  height: 250,
-                                  padding: const EdgeInsets.only(
-                                    top: 18,
-                                    left: 18,
-                                    right: 21,
-                                    bottom: 20,
-                                  ),
-                                  decoration: BoxDecoration(
+                                Text(
+                                  'Agreement and Conditions Detail'.tr,
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    height: 1.44,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
                                     color: themeMode
-                                        ? AppTheme.white22
-                                        : AppTheme.black18,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: ListView(
-                                    children: [
-                                      Text(
-                                        'Agreement and Conditions Detail'.tr,
-                                        style: TextStyle(
-                                          fontSize: 11,
-                                          height: 1.44,
-                                          fontFamily: AppTheme.appFontFamily,
-                                          fontWeight: FontWeight.w500,
-                                          color: themeMode
-                                              ? AppTheme.blue12
-                                              : AppTheme.white37,
-                                        ),
-                                      ),
-                                    ],
+                                        ? AppTheme.blue12
+                                        : AppTheme.white37,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 53,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    SizedBox(
-                                      height: 16,
-                                      width: 16,
-                                      child: Checkbox(
-                                        activeColor: AppTheme.blue2,
-                                        value: true,
-                                        onChanged: (value) {},
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 12,
-                                    ),
-                                    Text(
-                                      'I have read and I accept'.tr,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        height: 1,
-                                        fontFamily: AppTheme.appFontFamily,
-                                        fontWeight: FontWeight.w400,
-                                        color: themeMode
-                                            ? AppTheme.blue3
-                                            : AppTheme.white1,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 51,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 19),
-                                  child: MaterialButton(
-                                      minWidth: deviceWidth,
-                                      height: 52,
-                                      elevation: 0,
-                                      color: AppTheme.green2,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      child: Text(
-                                        'Confirm Basket'.tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w700,
-                                            color: AppTheme.white1),
-                                      ),
-                                      onPressed: () {
-                                        dialog(
-                                            titleText:
-                                                'Confirm Basket Dialog'.tr,
-                                            buttonText: 'Confirm'.tr,
-                                            buttonColor: AppTheme.green1,
-                                            onPressed: () {
-                                              if (selectedAddressId == null) {
-                                                if (addressList.isNotEmpty) {
-                                                  selectedAddressId =
-                                                      addressList.first.id;
-                                                  OrderService()
-                                                      .createOrderCall(
-                                                          requestBody: {
-                                                        "shipping_address_id":
-                                                            selectedAddressId!,
-                                                        "billing_address_id":
-                                                            selectedAddressId!,
-                                                        "agreement": "1"
-                                                      }).then((List? value) {
-                                                    if (value != null) {
-                                                      debugPrint(
-                                                          "${value}veri");
-
-                                                      Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                            pageBuilder: (_, __,
-                                                                    ___) =>
-                                                                ShoppingSummarySubPage(
-                                                                    companyInfoList:
-                                                                        value),
-                                                            transitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            reverseTransitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            transitionsBuilder: (_,
-                                                                    a, __, c) =>
-                                                                FadeTransition(
-                                                                    opacity: a,
-                                                                    child: c),
-                                                          ));
-
-                                                      BasketServices()
-                                                          .emptyBasketCall();
-                                                    }
-                                                  });
-                                                } else {
-                                                  operationFailedDialog(
-                                                      context);
-                                                }
-                                              } else {
-                                                OrderService().createOrderCall(
-                                                    requestBody: {
-                                                      "shipping_address_id":
-                                                          selectedAddressId!,
-                                                      "billing_address_id":
-                                                          selectedAddressId!,
-                                                      "agreement": "1"
-                                                    }).then((List? value) {
-                                                  if (value != null) {
-                                                    debugPrint("${value}veri");
-
-                                                    Navigator.push(
-                                                        context,
-                                                        PageRouteBuilder(
-                                                          pageBuilder: (_, __,
-                                                                  ___) =>
-                                                              ShoppingSummarySubPage(
-                                                                  companyInfoList:
-                                                                      value),
-                                                          transitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      0),
-                                                          reverseTransitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      0),
-                                                          transitionsBuilder: (_,
-                                                                  a, __, c) =>
-                                                              FadeTransition(
-                                                                  opacity: a,
-                                                                  child: c),
-                                                        ));
-
-                                                    BasketServices()
-                                                        .emptyBasketCall();
-                                                  }
-                                                });
-                                              }
-                                            });
-                                      }),
-                                ),
-                                const SizedBox(height: 36)
                               ],
                             ),
                           ),
+                          const SizedBox(
+                            height: 53,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              SizedBox(
+                                height: 16,
+                                width: 16,
+                                child: Checkbox(
+                                  activeColor: AppTheme.blue2,
+                                  value: true,
+                                  onChanged: (value) {},
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 12,
+                              ),
+                              Text(
+                                'I have read and I accept'.tr,
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  height: 1,
+                                  fontFamily: AppTheme.appFontFamily,
+                                  fontWeight: FontWeight.w400,
+                                  color: themeMode
+                                      ? AppTheme.blue3
+                                      : AppTheme.white1,
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 51,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 19),
+                            child: MaterialButton(
+                                minWidth: deviceWidth,
+                                height: 52,
+                                elevation: 0,
+                                color: AppTheme.green2,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(16)),
+                                ),
+                                child: Text(
+                                  'Confirm Basket'.tr,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppTheme.white1),
+                                ),
+                                onPressed: () {
+                                  dialog(
+                                      titleText:
+                                      'Confirm Basket Dialog'.tr,
+                                      buttonText: 'Confirm'.tr,
+                                      buttonColor: AppTheme.green1,
+                                      onPressed: () {
+                                        if (selectedAddressId == null) {
+                                          if (addressList.isNotEmpty) {
+                                            selectedAddressId =
+                                                addressList.first.id;
+                                            OrderService()
+                                                .createOrderCall(
+                                                requestBody: {
+                                                  "shipping_address_id":
+                                                  selectedAddressId!,
+                                                  "billing_address_id":
+                                                  selectedAddressId!,
+                                                  "agreement": "1"
+                                                }).then((List? value) {
+                                              if (value != null) {
+                                                debugPrint(
+                                                    "${value}veri");
+
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                          ___) =>
+                                                          ShoppingSummarySubPage(
+                                                              companyInfoList:
+                                                              value),
+                                                      transitionDuration:
+                                                      const Duration(
+                                                          milliseconds:
+                                                          0),
+                                                      reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds:
+                                                          0),
+                                                      transitionsBuilder: (_,
+                                                          a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
+                                                    ));
+
+                                                BasketServices()
+                                                    .emptyBasketCall();
+                                              }
+                                            });
+                                          } else {
+                                            operationFailedDialog(
+                                                context);
+                                          }
+                                        } else {
+                                          OrderService().createOrderCall(
+                                              requestBody: {
+                                                "shipping_address_id":
+                                                selectedAddressId!,
+                                                "billing_address_id":
+                                                selectedAddressId!,
+                                                "agreement": "1"
+                                              }).then((List? value) {
+                                            if (value != null) {
+                                              debugPrint("${value}veri");
+
+                                              Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __,
+                                                        ___) =>
+                                                        ShoppingSummarySubPage(
+                                                            companyInfoList:
+                                                            value),
+                                                    transitionDuration:
+                                                    const Duration(
+                                                        milliseconds:
+                                                        0),
+                                                    reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds:
+                                                        0),
+                                                    transitionsBuilder: (_,
+                                                        a, __, c) =>
+                                                        FadeTransition(
+                                                            opacity: a,
+                                                            child: c),
+                                                  ));
+
+                                              BasketServices()
+                                                  .emptyBasketCall();
+                                            }
+                                          });
+                                        }
+                                      });
+                                }),
+                          ),
+                          const SizedBox(height: 36)
                         ],
-                      )
+                      ),
+                    ),
+                  ],
+                )
                     : const SizedBox(),
                 const SizedBox(height: 60)
               ],
@@ -895,7 +897,7 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
-  Widget _basketCount() {
+  Widget _basketCount(String basketCount) {
     return Container(
       width: deviceWidth,
       height: 63.0,
@@ -929,7 +931,7 @@ class _BasketPageState extends State<BasketPage> {
                 ),
               ),
               TextSpan(
-                text: ' (2)',
+                text: ' ($basketCount)',
                 style: TextStyle(
                   fontSize: 20,
                   fontFamily: AppTheme.appFontFamily,
@@ -1082,14 +1084,14 @@ class _BasketPageState extends State<BasketPage> {
                               elevation: 0,
                               color: int.parse(basket.quantity!) == 1
                                   ? themeMode
-                                      ? AppTheme.white1.withOpacity(.5)
-                                      : AppTheme.black7.withOpacity(.5)
+                                  ? AppTheme.white1.withOpacity(.5)
+                                  : AppTheme.black7.withOpacity(.5)
                                   : themeMode
-                                      ? AppTheme.white1
-                                      : AppTheme.black7,
+                                  ? AppTheme.white1
+                                  : AppTheme.black7,
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(7)),
+                                BorderRadius.all(Radius.circular(7)),
                               ),
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Center(
@@ -1107,14 +1109,14 @@ class _BasketPageState extends State<BasketPage> {
                               ),
                               onPressed: () {
                                 var basketQuantity =
-                                    int.parse(basket.quantity!);
+                                int.parse(basket.quantity!);
 
                                 if (basketQuantity > 1) {
                                   locator<BasketServices>()
                                       .updateProductInBasketCall(
-                                          productId: basket.productId!,
-                                          quantity:
-                                              "${int.parse(basket.quantity!) - 1}")
+                                      productId: basket.productId!,
+                                      quantity:
+                                      "${int.parse(basket.quantity!) - 1}")
                                       .then((value) {
                                     if (value) {
                                       basketPageProvider.getAllBasket();
@@ -1134,7 +1136,7 @@ class _BasketPageState extends State<BasketPage> {
                               fontFamily: AppTheme.appFontFamily,
                               fontWeight: FontWeight.w500,
                               color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.white1,
+                              themeMode ? AppTheme.blue3 : AppTheme.white1,
                             ),
                           ),
                         ),
@@ -1145,10 +1147,10 @@ class _BasketPageState extends State<BasketPage> {
                               height: 31,
                               elevation: 0,
                               color:
-                                  themeMode ? AppTheme.white1 : AppTheme.black7,
+                              themeMode ? AppTheme.white1 : AppTheme.black7,
                               shape: const RoundedRectangleBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(7)),
+                                BorderRadius.all(Radius.circular(7)),
                               ),
                               padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                               child: Center(
@@ -1167,9 +1169,9 @@ class _BasketPageState extends State<BasketPage> {
                               onPressed: () {
                                 BasketServices()
                                     .updateProductInBasketCall(
-                                        productId: basket.productId!,
-                                        quantity:
-                                            "${int.parse(basket.quantity!) + 1}")
+                                    productId: basket.productId!,
+                                    quantity:
+                                    "${int.parse(basket.quantity!) + 1}")
                                     .then((value) {
                                   if (value) {
                                     basketPageProvider.getAllBasket();
@@ -1198,7 +1200,7 @@ class _BasketPageState extends State<BasketPage> {
                               onPressed: () {
                                 locator<BasketServices>()
                                     .deleteProductInBasketCall(
-                                        param1: basket.product!.id!)
+                                    param1: basket.product!.id!)
                                     .then((bool value) {
                                   if (value) {
                                     basketPageProvider.getAllBasket();
@@ -1252,53 +1254,53 @@ class _BasketPageState extends State<BasketPage> {
                           ),
                           RichText(
                               text: TextSpan(children: [
-                            TextSpan(
-                              text: basket.product!.price ?? '0.0 ',
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.green3
-                                    : AppTheme.green4,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "₺",
-                              style: TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.green3
-                                    : AppTheme.green4,
-                              ),
-                            )
-                          ])),
+                                TextSpan(
+                                  text: basket.product!.price ?? '0.0 ',
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.green3
+                                        : AppTheme.green4,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "₺",
+                                  style: TextStyle(
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.green3
+                                        : AppTheme.green4,
+                                  ),
+                                )
+                              ])),
                           RichText(
                               text: TextSpan(children: [
-                            TextSpan(
-                              text:
+                                TextSpan(
+                                  text:
                                   '${'Price Per Piece'.tr} ${basket.product!.price ?? '0.0 '}',
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontFamily: AppTheme.appFontFamily,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ),
-                            ),
-                            TextSpan(
-                              text: "₺",
-                              style: TextStyle(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                color: themeMode
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
-                              ),
-                            )
-                          ])),
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue3
+                                        : AppTheme.white1,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: "₺",
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w500,
+                                    color: themeMode
+                                        ? AppTheme.blue3
+                                        : AppTheme.white1,
+                                  ),
+                                )
+                              ])),
                         ],
                       )
                     ],
@@ -1345,29 +1347,29 @@ class _BasketPageState extends State<BasketPage> {
                     const SizedBox(
                       height: 6,
                     ),
-                    RichText(
+                     summary !=null ? RichText(
                         text: TextSpan(children: [
-                      TextSpan(
-                        text:
-                            summary != null ? summary!.totalItemPrice : '0.0 ',
-                        style: TextStyle(
-                          fontSize: 32,
-                          height: 1,
-                          fontFamily: AppTheme.appFontFamily,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      ),
-                      TextSpan(
-                        text: "₺",
-                        style: TextStyle(
-                          fontSize: 32,
-                          height: 1,
-                          fontWeight: FontWeight.w500,
-                          color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                        ),
-                      )
-                    ])),
+                          TextSpan(
+                            text:
+                            summary!.totalItemPrice,
+                            style: TextStyle(
+                              fontSize: 32,
+                              height: 1,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "₺",
+                            style: TextStyle(
+                              fontSize: 32,
+                              height: 1,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                            ),
+                          )
+                        ])) : CircularProgressIndicator(),
                     const SizedBox(
                       height: 7,
                     ),
@@ -1381,9 +1383,9 @@ class _BasketPageState extends State<BasketPage> {
 
   void dialog(
       {required String titleText,
-      required String buttonText,
-      required buttonColor,
-      required VoidCallback onPressed}) {
+        required String buttonText,
+        required buttonColor,
+        required VoidCallback onPressed}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -1412,7 +1414,7 @@ class _BasketPageState extends State<BasketPage> {
                             fontFamily: AppTheme.appFontFamily,
                             fontWeight: FontWeight.w500,
                             color:
-                                themeMode ? AppTheme.black25 : AppTheme.white1,
+                            themeMode ? AppTheme.black25 : AppTheme.white1,
                           ),
                         ),
                       ),
@@ -1427,10 +1429,10 @@ class _BasketPageState extends State<BasketPage> {
                         child: MaterialButton(
                             elevation: 0,
                             color:
-                                themeMode ? AppTheme.black16 : AppTheme.black18,
+                            themeMode ? AppTheme.black16 : AppTheme.black18,
                             shape: const RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
+                              BorderRadius.all(Radius.circular(16)),
                             ),
                             child: Text(
                               'Close'.tr,
@@ -1454,7 +1456,7 @@ class _BasketPageState extends State<BasketPage> {
                             color: buttonColor,
                             shape: const RoundedRectangleBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
+                              BorderRadius.all(Radius.circular(16)),
                             ),
                             onPressed: onPressed,
                             child: Text(
@@ -1527,7 +1529,7 @@ class _BasketPageState extends State<BasketPage> {
                       child: MaterialButton(
                           elevation: 0,
                           color:
-                              themeMode ? AppTheme.black16 : AppTheme.black18,
+                          themeMode ? AppTheme.black16 : AppTheme.black18,
                           shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.all(Radius.circular(16)),
                           ),

@@ -114,32 +114,20 @@ class HomePageProvider with ChangeNotifier {
 
   Future getStory() async {
     await locator<SocialServices>().getAllStoryCall(queryParameters: {
-      "offset": _offsetStory.toString(),
-      "limit": _limitStory.toString(),
+      "offset": '0',
+      "limit": '99',
       "type": "story"
     }).then((feedList) {
       List<FeedModel> tempList = [];
       for (var feed in feedList) {
-        tempList.add(feed);
+        storyList.add(feed);
       }
-      if (tempList.isEmpty) {
-        _isMoreStoryData = false;
-      } else {
-        _isMoreStoryData = true;
-      }
-      _pageStory++;
-
-      _offsetStory = _pageStory * _limitStory;
-      addStoryToStoryList(tempList);
     });
 
     notifyListeners();
   }
 
-  void addStoryToStoryList(List<FeedModel> feeds) {
-    storyList.addAll(feeds);
-    notifyListeners();
-  }
+
 
   //CREATE POST/REELS
   int _tabIndex = 0;
