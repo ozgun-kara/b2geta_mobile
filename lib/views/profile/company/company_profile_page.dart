@@ -1,5 +1,7 @@
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
+import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
@@ -252,17 +254,46 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       debugPrint("COMPANY ID: " +
                                           companyProfileModel!.id.toString());
 
-                                      // locator<FollowServices>()
-                                      //     .followCall(userId: personalProfileModel!.id.toString())
-                                      //     .then((value) {
-                                      //   if (value == true) {
-                                      //     debugPrint(
-                                      //         "COMPANY SUCCESSFULLY FOLLOWED");
-                                      //   } else {
-                                      //     debugPrint(
-                                      //         "THE COMPANY IS NOT FOLLOWED");
-                                      //   }
-                                      // });
+                                      if (companyProfileModel != null) {
+                                        if (companyProfileModel!.followStatus ??
+                                            false) {
+                                          // UNFOLLOW COMPANY
+                                          debugPrint("UNFOLLOW COMPANY");
+
+                                          locator<FollowServices>()
+                                              .unfollowCall(
+                                                  userId: companyProfileModel!
+                                                      .id
+                                                      .toString())
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "COMPANY SUCCESSFULLY UNFOLLOWED");
+                                            } else {
+                                              debugPrint(
+                                                  "THE COMPANY IS NOT UNFOLLOWED");
+                                            }
+                                          });
+                                        } else {
+                                          // FOLLOW COMPANY
+                                          debugPrint("FOLLOW COMPANY");
+
+                                          locator<FollowServices>()
+                                              .followCall(
+                                                  userId: companyProfileModel!
+                                                      .id
+                                                      .toString())
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "COMPANY SUCCESSFULLY FOLLOWED");
+                                            } else {
+                                              debugPrint(
+                                                  "THE COMPANY IS NOT FOLLOWED");
+                                            }
+                                          });
+                                        }
+                                      } else {}
                                     }),
                               ),
                             ),
