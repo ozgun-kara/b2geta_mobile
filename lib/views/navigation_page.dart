@@ -30,6 +30,7 @@ class _NavigationPageState extends State<NavigationPage> {
   TextEditingController searchController = TextEditingController();
 
   late double deviceTopPadding;
+  late double deviceBottomPadding;
   late double deviceWidth;
   late double deviceHeight;
 
@@ -58,6 +59,7 @@ class _NavigationPageState extends State<NavigationPage> {
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceBottomPadding = MediaQuery.of(context).padding.bottom;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     var themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
@@ -80,7 +82,7 @@ class _NavigationPageState extends State<NavigationPage> {
             ),
             bottomNavigationBar: Container(
               width: deviceWidth,
-              height: 60,
+              height: 60 + (deviceBottomPadding / 2),
               decoration: BoxDecoration(
                 // borderRadius: BorderRadius.only(
                 //     topLeft: Radius.circular(16), topRight: Radius.circular(16)),

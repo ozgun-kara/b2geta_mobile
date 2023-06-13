@@ -18,10 +18,11 @@ class StoryAddSubPage extends StatefulWidget {
 
 class _StoryAddSubPageState extends State<StoryAddSubPage> {
   final SocialServices _socialServices = SocialServices();
+  late double deviceTopPadding;
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(widget.imageFile.path.capitalize.toString());
+    deviceTopPadding = MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Stack(
         children: [
@@ -35,7 +36,7 @@ class _StoryAddSubPageState extends State<StoryAddSubPage> {
           ),
           Positioned(
             right: 20,
-            top: 35,
+            top: deviceTopPadding,
             child: GestureDetector(
               onTap: () => Navigator.pop(context),
               child: Image.asset(
