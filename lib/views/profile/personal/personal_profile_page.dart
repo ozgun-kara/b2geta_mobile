@@ -256,19 +256,47 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                       debugPrint("PERSONAL ID: " +
                                           personalProfileModel!.id.toString());
 
-                                      locator<FollowServices>()
-                                          .followCall(
-                                              userId: personalProfileModel!.id
-                                                  .toString())
-                                          .then((value) {
-                                        if (value == true) {
-                                          debugPrint(
-                                              "PERSONAL SUCCESSFULLY FOLLOWED");
+                                      if (personalProfileModel != null) {
+                                        if (personalProfileModel!
+                                                .followStatus ??
+                                            false) {
+                                          // UNFOLLOW COMPANY
+                                          debugPrint("UNFOLLOW PERSON");
+
+                                          locator<FollowServices>()
+                                              .unfollowCall(
+                                                  userId: personalProfileModel!
+                                                      .id
+                                                      .toString())
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "PERSONAL SUCCESSFULLY UNFOLLOWED");
+                                            } else {
+                                              debugPrint(
+                                                  "THE PERSONAL IS NOT UNFOLLOWED");
+                                            }
+                                          });
                                         } else {
-                                          debugPrint(
-                                              "THE PERSONAL IS NOT FOLLOWED");
+                                          // FOLLOW COMPANY
+                                          debugPrint("FOLLOW PERSON");
+
+                                          locator<FollowServices>()
+                                              .followCall(
+                                                  userId: personalProfileModel!
+                                                      .id
+                                                      .toString())
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "PERSONAL SUCCESSFULLY FOLLOWED");
+                                            } else {
+                                              debugPrint(
+                                                  "THE PERSONAL IS NOT FOLLOWED");
+                                            }
+                                          });
                                         }
-                                      });
+                                      } else {}
                                     }),
                               ),
                             ),
