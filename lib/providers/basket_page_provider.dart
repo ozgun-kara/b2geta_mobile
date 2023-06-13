@@ -5,12 +5,15 @@ import 'package:flutter/material.dart';
 
 class BasketPageProvider with ChangeNotifier {
   List<BasketModel> basketList = [];
+  BasketSummaryModel? summaryData;
 
   Future<void> getAllBasket() async {
-    await locator<BasketServices>().getAllCall().then((list) {
-      basketList = list;
+    await locator<BasketServices>()
+        .getAllCall()
+        .then((Map<String, Object?> object) {
+      basketList = object['basketList'] as List<BasketModel>;
+      summaryData = object['summaryData'] as BasketSummaryModel;
     });
-
     notifyListeners();
   }
 }
