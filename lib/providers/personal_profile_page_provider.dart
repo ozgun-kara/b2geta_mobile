@@ -4,7 +4,7 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:flutter/material.dart';
 
 class PersonalProfilePageProvider with ChangeNotifier {
-  int currentTabIndex = 4;
+  int currentTabIndex = 0;
   List<FeedModel> feedsList = [];
   List<FeedModel> reelsList = [];
   List<FeedModel> myStoriesList = [];

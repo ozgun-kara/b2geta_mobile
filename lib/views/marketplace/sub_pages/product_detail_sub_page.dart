@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -2839,7 +2840,20 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     context
                                         .read<NavigationPageProvider>()
                                         .updateCurrentTabIndex(2);
-                                    Navigator.pop(context);
+
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              const NavigationPage(),
+                                          transitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                              const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
+                                        ));
                                   },
                                   child: Text(
                                     "Go To Basket".tr,
