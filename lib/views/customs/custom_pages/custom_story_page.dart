@@ -102,7 +102,7 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                       (story.user!.id ?? '')) {
                     context
                         .read<NavigationPageProvider>()
-                        .updateCurrentTabIndex(3);
+                        .updateCurrentTabIndex(4);
                     Navigator.pop(context);
                   } else {
                     Navigator.push(
