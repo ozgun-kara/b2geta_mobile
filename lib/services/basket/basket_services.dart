@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class BasketServices {
   // GET ALL
-  Future<List<BasketModel>> getAllCall() async {
+  Future<Map<String, Object?>> getAllCall() async {
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
       "Authorization": "Bearer ${Constants.userToken}",
@@ -17,24 +17,26 @@ class BasketServices {
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
     List<BasketModel> basketList = [];
+    BasketSummaryModel? summaryData;
 
     if (response.statusCode == 200) {
       var status = responseBody["status"];
 
       if (status == true) {
         var data = responseBody['data']['products'];
-
+        summaryData =
+            BasketSummaryModel.fromJson(responseBody['data']['summary']);
         for (var basket in data) {
           basketList.add(BasketModel.fromJson(basket));
         }
 
-        return basketList;
+        return {"basketList": basketList, "summaryData": summaryData};
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return basketList;
+        return {"basketList": basketList, "summary": summaryData};
       }
     } else {
-      return basketList;
+      return {"basketList": basketList, "summary": summaryData};
     }
   }
 
