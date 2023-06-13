@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
+import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
@@ -2808,10 +2809,15 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             productId: widget.productId,
                                             quantity: '1')
                                         .then(
-                                          (value) => showSnackbar(
-                                              context: context,
-                                              message: "Product cart added".tr),
-                                        );
+                                      (value) {
+                                        showSnackbar(
+                                            context: context,
+                                            message: "Product cart added".tr);
+                                        Provider.of<BasketPageProvider>(context,
+                                                listen: false)
+                                            .getAllBasket();
+                                      },
+                                    );
                                   }),
                             ),
                             const SizedBox(width: 8),
@@ -2826,6 +2832,10 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         BorderRadius.all(Radius.circular(7)),
                                   ),
                                   onPressed: () {
+                                    Provider.of<BasketPageProvider>(context,
+                                            listen: false)
+                                        .getAllBasket();
+
                                     context
                                         .read<NavigationPageProvider>()
                                         .updateCurrentTabIndex(2);
