@@ -29,17 +29,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
   void initState() {
     super.initState();
     getProductList();
-    scrollController.addListener(
-      () {
-        if (scrollController.position.maxScrollExtent ==
-            scrollController.offset) {
-          if (Provider.of<MarketPlacePageProvider>(context, listen: false)
-              .isMoreData) {
-            getProductList();
-          }
-        }
-      },
-    );
+
   }
 
   getProductList() async {

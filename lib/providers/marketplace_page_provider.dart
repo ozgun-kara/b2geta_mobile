@@ -7,50 +7,24 @@ class MarketPlacePageProvider with ChangeNotifier {
   // MARKETPLACE PAGE
 
   List<ProductModel> productList = [];
-  final int _limit = 25;
-  int _offset = 0;
-  int _page = 0;
 
-  bool _isMoreData = false;
-  get isMoreData => _isMoreData;
-
-  void onRefresh() {
-    _offset = 0;
-    _page = 0;
-    _isMoreData = false;
-    productList.clear();
-    getProducts();
-  }
 
   Future getProducts() async {
     await locator<ProductsServices>()
         .allProductsListAndSearchCall(queryParameters: {
-      "offset": _offset.toString(),
-      "limit": _limit.toString(),
+      "offset": '0',
+      "limit": '99',
     }).then((products) {
-      List<ProductModel> tempList = [];
-      for (var product in products) {
-        tempList.add(product);
-      }
-      if (tempList.isEmpty) {
-        _isMoreData = false;
-      } else {
-        _isMoreData = true;
-      }
-      _page++;
 
-      _offset = _page * _limit;
-      addProductToProductList(tempList);
+      for (var product in products) {
+        productList.add(product);
+      }
+
     });
 
     notifyListeners();
   }
 
-  void addProductToProductList(List<ProductModel> products) {
-    productList.addAll(products);
-
-    notifyListeners();
-  }
 
   bool filterSwitch = true;
 
