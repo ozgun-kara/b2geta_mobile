@@ -45,17 +45,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getStories();
-    _storyScrollController.addListener(
-      () {
-        if (_storyScrollController.position.maxScrollExtent ==
-            _storyScrollController.offset) {
-          if (Provider.of<HomePageProvider>(context, listen: false)
-              .isMoreStoryData) {
-            getStories();
-          }
-        }
-      },
-    );
+
   }
 
   Future<void> _getFromGallery() async {
