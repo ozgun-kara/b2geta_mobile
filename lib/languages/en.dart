@@ -205,7 +205,7 @@ final Map<String, String> en = {
   'Are you sure you want to delete your account?':
       'Are you sure you want to delete your account?',
   'Yes': 'Yes',
-  'No':'No',
+  'No': 'No',
 
   // HOMEPAGE
   'Posts': 'Posts',
@@ -323,7 +323,7 @@ final Map<String, String> en = {
 
   // PROFILE PAGE
   'Follow': 'Follow',
-  'UnFollow': 'FollowUp',
+  'Unfollow': 'Unfollow',
 
   // APP EXCEPTION
   'Bad Request': 'Bad Request',

@@ -242,7 +242,7 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                           ? (personalProfileModel!
                                                       .followStatus ??
                                                   false)
-                                              ? 'UnFollow'.tr
+                                              ? 'Unfollow'.tr
                                               : 'Follow'.tr
                                           : 'Follow'.tr,
                                       style: TextStyle(
@@ -253,20 +253,22 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      debugPrint("COMPANY ID: " +
+                                      debugPrint("PERSONAL ID: " +
                                           personalProfileModel!.id.toString());
 
-                                      // locator<FollowServices>()
-                                      //     .followCall(userId: personalProfileModel!.id.toString())
-                                      //     .then((value) {
-                                      //   if (value == true) {
-                                      //     debugPrint(
-                                      //         "COMPANY SUCCESSFULLY FOLLOWED");
-                                      //   } else {
-                                      //     debugPrint(
-                                      //         "THE COMPANY IS NOT FOLLOWED");
-                                      //   }
-                                      // });
+                                      locator<FollowServices>()
+                                          .followCall(
+                                              userId: personalProfileModel!.id
+                                                  .toString())
+                                          .then((value) {
+                                        if (value == true) {
+                                          debugPrint(
+                                              "PERSONAL SUCCESSFULLY FOLLOWED");
+                                        } else {
+                                          debugPrint(
+                                              "THE PERSONAL IS NOT FOLLOWED");
+                                        }
+                                      });
                                     }),
                               ),
                             ),

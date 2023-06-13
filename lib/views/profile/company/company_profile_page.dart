@@ -238,7 +238,7 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                           ? (companyProfileModel!
                                                       .followStatus ??
                                                   false)
-                                              ? 'UnFollow'.tr
+                                              ? 'Unfollow'.tr
                                               : 'Follow'.tr
                                           : 'Follow'.tr,
                                       style: TextStyle(
