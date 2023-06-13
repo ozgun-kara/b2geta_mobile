@@ -1,5 +1,7 @@
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/personal_profile_page_provider.dart';
+import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_reels_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
@@ -250,7 +252,22 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                         color: AppTheme.white1,
                                       ),
                                     ),
-                                    onPressed: () {}),
+                                    onPressed: () {
+                                      debugPrint("COMPANY ID: " +
+                                          personalProfileModel!.id.toString());
+
+                                      // locator<FollowServices>()
+                                      //     .followCall(userId: personalProfileModel!.id.toString())
+                                      //     .then((value) {
+                                      //   if (value == true) {
+                                      //     debugPrint(
+                                      //         "COMPANY SUCCESSFULLY FOLLOWED");
+                                      //   } else {
+                                      //     debugPrint(
+                                      //         "THE COMPANY IS NOT FOLLOWED");
+                                      //   }
+                                      // });
+                                    }),
                               ),
                             ),
                           ],

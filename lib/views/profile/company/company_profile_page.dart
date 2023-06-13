@@ -248,7 +248,22 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                         color: AppTheme.white1,
                                       ),
                                     ),
-                                    onPressed: () {}),
+                                    onPressed: () {
+                                      debugPrint("COMPANY ID: " +
+                                          companyProfileModel!.id.toString());
+
+                                      // locator<FollowServices>()
+                                      //     .followCall(userId: personalProfileModel!.id.toString())
+                                      //     .then((value) {
+                                      //   if (value == true) {
+                                      //     debugPrint(
+                                      //         "COMPANY SUCCESSFULLY FOLLOWED");
+                                      //   } else {
+                                      //     debugPrint(
+                                      //         "THE COMPANY IS NOT FOLLOWED");
+                                      //   }
+                                      // });
+                                    }),
                               ),
                             ),
                           ],

@@ -10,13 +10,15 @@ class FollowServices {
   Future<bool> followCall({
     required String userId,
   }) async {
-    final response =
-        await http.post(Uri.parse('${Constants.apiUrl}/follow'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": "Bearer ${Constants.userToken}",
-    }, body: {
-      "user_id": userId
-    });
+    final response = await http.post(Uri.parse('${Constants.apiUrl}/follow'),
+
+        //         headers: {
+        //   "Content-Type": "application/x-www-form-urlencoded",
+        //   "Authorization": "Bearer ${Constants.userToken}",
+        // },
+
+        headers: Constants.headers,
+        body: {"user_id": userId});
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
