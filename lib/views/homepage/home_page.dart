@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
-import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/homepage/post/home_post_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/reels/home_reels_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
@@ -35,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   bool isList = false;
   final ScrollController _scrollController = ScrollController();
   final ScrollController _storyScrollController = ScrollController();
-  final SocialServices _socialServices = SocialServices();
   Map<String?, List<FeedModel>> groupStories = {};
   final TextEditingController _postTextController = TextEditingController();
 
