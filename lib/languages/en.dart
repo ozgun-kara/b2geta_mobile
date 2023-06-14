@@ -295,8 +295,11 @@ final Map<String, String> en = {
   'Automotive spare parts': 'Automotive spare parts',
   'Raw materials': 'Raw materials',
   'The most demanded products': 'The most demanded products',
-  'Popular Products from Istanbul': 'Popular Products from Istanbul',
+  'Popular Products': 'Popular Products',
   'Newly Added Products': 'Newly Added Products',
+  'Textile':'Textile',
+  'Clothes':'Clothes',
+
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
   'Delivery Time-2': 'Delivery Time:',

@@ -1,4 +1,3 @@
-
 class MarketPlaceModelPopularProductsDataAccount {
 /*
 {
@@ -13,7 +12,7 @@ class MarketPlaceModelPopularProductsDataAccount {
 
   String? id;
   String? type;
-  String? username; 
+  String? username;
   String? name;
   String? photo;
   String? cover;
@@ -26,7 +25,8 @@ class MarketPlaceModelPopularProductsDataAccount {
     this.photo,
     this.cover,
   });
-  MarketPlaceModelPopularProductsDataAccount.fromJson(Map<String, dynamic> json) {
+  MarketPlaceModelPopularProductsDataAccount.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     type = json['type']?.toString();
     username = json['username']?.toString();
@@ -55,7 +55,7 @@ class MarketPlaceModelPopularProductsDataImage {
 } 
 */
 
-  int? id;
+  String? id;
   String? url;
   String? productId;
 
@@ -65,7 +65,7 @@ class MarketPlaceModelPopularProductsDataImage {
     this.productId,
   });
   MarketPlaceModelPopularProductsDataImage.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toInt();
+    id = json['id']?.toString();
     url = json['url']?.toString();
     productId = json['product_id']?.toString();
   }
@@ -141,8 +141,12 @@ class MarketPlaceModelPopularProductsData {
     brand = json['brand']?.toString();
     price = json['price']?.toString();
     currency = json['currency']?.toString();
-    image = (json['image'] != null) ? MarketPlaceModelPopularProductsDataImage.fromJson(json['image']) : null;
-    account = (json['account'] != null) ? MarketPlaceModelPopularProductsDataAccount.fromJson(json['account']) : null;
+    image = (json['image'] != null)
+        ? MarketPlaceModelPopularProductsDataImage.fromJson(json['image'])
+        : null;
+    account = (json['account'] != null)
+        ? MarketPlaceModelPopularProductsDataAccount.fromJson(json['account'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -206,13 +210,13 @@ class MarketPlaceModelPopularProducts {
     this.count,
   });
   MarketPlaceModelPopularProducts.fromJson(Map<String, dynamic> json) {
-  if (json['data'] != null) {
-  final v = json['data'];
-  final arr0 = <MarketPlaceModelPopularProductsData>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelPopularProductsData.fromJson(v));
-  });
-    this.data = arr0;
+    if (json['data'] != null) {
+      final v = json['data'];
+      final arr0 = <MarketPlaceModelPopularProductsData>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelPopularProductsData.fromJson(v));
+      });
+      data = arr0;
     }
     count = json['count']?.toString();
   }
@@ -221,9 +225,9 @@ class MarketPlaceModelPopularProducts {
     if (this.data != null) {
       final v = this.data;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['data'] = arr0;
     }
     data['count'] = count;
@@ -287,7 +291,7 @@ class MarketPlaceModelNewProductsDataImage {
 } 
 */
 
-  int? id;
+  String? id;
   String? url;
   String? productId;
 
@@ -297,7 +301,7 @@ class MarketPlaceModelNewProductsDataImage {
     this.productId,
   });
   MarketPlaceModelNewProductsDataImage.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toInt();
+    id = json['id']?.toString();
     url = json['url']?.toString();
     productId = json['product_id']?.toString();
   }
@@ -373,8 +377,12 @@ class MarketPlaceModelNewProductsData {
     brand = json['brand']?.toString();
     price = json['price']?.toString();
     currency = json['currency']?.toString();
-    image = (json['image'] != null) ? MarketPlaceModelNewProductsDataImage.fromJson(json['image']) : null;
-    account = (json['account'] != null) ? MarketPlaceModelNewProductsDataAccount.fromJson(json['account']) : null;
+    image = (json['image'] != null)
+        ? MarketPlaceModelNewProductsDataImage.fromJson(json['image'])
+        : null;
+    account = (json['account'] != null)
+        ? MarketPlaceModelNewProductsDataAccount.fromJson(json['account'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -438,13 +446,13 @@ class MarketPlaceModelNewProducts {
     this.count,
   });
   MarketPlaceModelNewProducts.fromJson(Map<String, dynamic> json) {
-  if (json['data'] != null) {
-  final v = json['data'];
-  final arr0 = <MarketPlaceModelNewProductsData>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelNewProductsData.fromJson(v));
-  });
-    this.data = arr0;
+    if (json['data'] != null) {
+      final v = json['data'];
+      final arr0 = <MarketPlaceModelNewProductsData>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelNewProductsData.fromJson(v));
+      });
+      data = arr0;
     }
     count = json['count']?.toString();
   }
@@ -453,9 +461,9 @@ class MarketPlaceModelNewProducts {
     if (this.data != null) {
       final v = this.data;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['data'] = arr0;
     }
     data['count'] = count;
@@ -490,7 +498,8 @@ class MarketPlaceModelMostDemandProductsDataAccount {
     this.photo,
     this.cover,
   });
-  MarketPlaceModelMostDemandProductsDataAccount.fromJson(Map<String, dynamic> json) {
+  MarketPlaceModelMostDemandProductsDataAccount.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     type = json['type']?.toString();
     username = json['username']?.toString();
@@ -528,7 +537,8 @@ class MarketPlaceModelMostDemandProductsDataImage {
     this.url,
     this.productId,
   });
-  MarketPlaceModelMostDemandProductsDataImage.fromJson(Map<String, dynamic> json) {
+  MarketPlaceModelMostDemandProductsDataImage.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     url = json['url']?.toString();
     productId = json['product_id']?.toString();
@@ -605,8 +615,13 @@ class MarketPlaceModelMostDemandProductsData {
     brand = json['brand']?.toString();
     price = json['price']?.toString();
     currency = json['currency']?.toString();
-    image = (json['image'] != null) ? MarketPlaceModelMostDemandProductsDataImage.fromJson(json['image']) : null;
-    account = (json['account'] != null) ? MarketPlaceModelMostDemandProductsDataAccount.fromJson(json['account']) : null;
+    image = (json['image'] != null)
+        ? MarketPlaceModelMostDemandProductsDataImage.fromJson(json['image'])
+        : null;
+    account = (json['account'] != null)
+        ? MarketPlaceModelMostDemandProductsDataAccount.fromJson(
+            json['account'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -670,13 +685,13 @@ class MarketPlaceModelMostDemandProducts {
     this.count,
   });
   MarketPlaceModelMostDemandProducts.fromJson(Map<String, dynamic> json) {
-  if (json['data'] != null) {
-  final v = json['data'];
-  final arr0 = <MarketPlaceModelMostDemandProductsData>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelMostDemandProductsData.fromJson(v));
-  });
-    this.data = arr0;
+    if (json['data'] != null) {
+      final v = json['data'];
+      final arr0 = <MarketPlaceModelMostDemandProductsData>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelMostDemandProductsData.fromJson(v));
+      });
+      data = arr0;
     }
     count = json['count']?.toString();
   }
@@ -685,9 +700,9 @@ class MarketPlaceModelMostDemandProducts {
     if (this.data != null) {
       final v = this.data;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['data'] = arr0;
     }
     data['count'] = count;
@@ -856,9 +871,15 @@ class MarketPlaceModelCompletedOrders {
   });
   MarketPlaceModelCompletedOrders.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toInt();
-    user = (json['user'] != null) ? MarketPlaceModelCompletedOrdersUser.fromJson(json['user']) : null;
-    comment = (json['comment'] != null) ? MarketPlaceModelCompletedOrdersComment.fromJson(json['comment']) : null;
-    seller = (json['seller'] != null) ? MarketPlaceModelCompletedOrdersSeller.fromJson(json['seller']) : null;
+    user = (json['user'] != null)
+        ? MarketPlaceModelCompletedOrdersUser.fromJson(json['user'])
+        : null;
+    comment = (json['comment'] != null)
+        ? MarketPlaceModelCompletedOrdersComment.fromJson(json['comment'])
+        : null;
+    seller = (json['seller'] != null)
+        ? MarketPlaceModelCompletedOrdersSeller.fromJson(json['seller'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -945,7 +966,8 @@ class MarketPlaceModelCategoriesProductsDataAccount {
     this.photo,
     this.cover,
   });
-  MarketPlaceModelCategoriesProductsDataAccount.fromJson(Map<String, dynamic> json) {
+  MarketPlaceModelCategoriesProductsDataAccount.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     type = json['type']?.toString();
     username = json['username']?.toString();
@@ -974,7 +996,7 @@ class MarketPlaceModelCategoriesProductsDataImage {
 } 
 */
 
-  int? id;
+  String? id;
   String? url;
   String? productId;
 
@@ -983,8 +1005,9 @@ class MarketPlaceModelCategoriesProductsDataImage {
     this.url,
     this.productId,
   });
-  MarketPlaceModelCategoriesProductsDataImage.fromJson(Map<String, dynamic> json) {
-    id = json['id']?.toInt();
+  MarketPlaceModelCategoriesProductsDataImage.fromJson(
+      Map<String, dynamic> json) {
+    id = json['id']?.toString();
     url = json['url']?.toString();
     productId = json['product_id']?.toString();
   }
@@ -1060,8 +1083,13 @@ class MarketPlaceModelCategoriesProductsData {
     brand = json['brand']?.toString();
     price = json['price']?.toString();
     currency = json['currency']?.toString();
-    image = (json['image'] != null) ? MarketPlaceModelCategoriesProductsDataImage.fromJson(json['image']) : null;
-    account = (json['account'] != null) ? MarketPlaceModelCategoriesProductsDataAccount.fromJson(json['account']) : null;
+    image = (json['image'] != null)
+        ? MarketPlaceModelCategoriesProductsDataImage.fromJson(json['image'])
+        : null;
+    account = (json['account'] != null)
+        ? MarketPlaceModelCategoriesProductsDataAccount.fromJson(
+            json['account'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -1125,13 +1153,13 @@ class MarketPlaceModelCategoriesProducts {
     this.count,
   });
   MarketPlaceModelCategoriesProducts.fromJson(Map<String, dynamic> json) {
-  if (json['data'] != null) {
-  final v = json['data'];
-  final arr0 = <MarketPlaceModelCategoriesProductsData>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelCategoriesProductsData.fromJson(v));
-  });
-    this.data = arr0;
+    if (json['data'] != null) {
+      final v = json['data'];
+      final arr0 = <MarketPlaceModelCategoriesProductsData>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelCategoriesProductsData.fromJson(v));
+      });
+      data = arr0;
     }
     count = json['count']?.toString();
   }
@@ -1140,9 +1168,9 @@ class MarketPlaceModelCategoriesProducts {
     if (this.data != null) {
       final v = this.data;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['data'] = arr0;
     }
     data['count'] = count;
@@ -1211,7 +1239,9 @@ class MarketPlaceModelCategories {
     categoryName = json['category_name']?.toString();
     categorySlug = json['category_slug']?.toString();
     sort = json['sort']?.toString();
-    products = (json['products'] != null) ? MarketPlaceModelCategoriesProducts.fromJson(json['products']) : null;
+    products = (json['products'] != null)
+        ? MarketPlaceModelCategoriesProducts.fromJson(json['products'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -1408,58 +1438,65 @@ class MarketPlaceModel {
     this.popularProducts,
   });
   MarketPlaceModel.fromJson(Map<String, dynamic> json) {
-  if (json['categories'] != null) {
-  final v = json['categories'];
-  final arr0 = <MarketPlaceModelCategories>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelCategories.fromJson(v));
-  });
-    categories = arr0;
+    if (json['categories'] != null) {
+      final v = json['categories'];
+      final arr0 = <MarketPlaceModelCategories>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelCategories.fromJson(v));
+      });
+      categories = arr0;
     }
-  if (json['sliders'] != null) {
-  final v = json['sliders'];
-  final arr0 = <MarketPlaceModelSliders>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelSliders.fromJson(v));
-  });
-    sliders = arr0;
+    if (json['sliders'] != null) {
+      final v = json['sliders'];
+      final arr0 = <MarketPlaceModelSliders>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelSliders.fromJson(v));
+      });
+      sliders = arr0;
     }
-  if (json['completed_orders'] != null) {
-  final v = json['completed_orders'];
-  final arr0 = <MarketPlaceModelCompletedOrders>[];
-  v.forEach((v) {
-  arr0.add(MarketPlaceModelCompletedOrders.fromJson(v));
-  });
-    completedOrders = arr0;
+    if (json['completed_orders'] != null) {
+      final v = json['completed_orders'];
+      final arr0 = <MarketPlaceModelCompletedOrders>[];
+      v.forEach((v) {
+        arr0.add(MarketPlaceModelCompletedOrders.fromJson(v));
+      });
+      completedOrders = arr0;
     }
-    mostDemandProducts = (json['most_demand_products'] != null) ? MarketPlaceModelMostDemandProducts.fromJson(json['most_demand_products']) : null;
-    newProducts = (json['new_products'] != null) ? MarketPlaceModelNewProducts.fromJson(json['new_products']) : null;
-    popularProducts = (json['popular_products'] != null) ? MarketPlaceModelPopularProducts.fromJson(json['popular_products']) : null;
+    mostDemandProducts = (json['most_demand_products'] != null)
+        ? MarketPlaceModelMostDemandProducts.fromJson(
+            json['most_demand_products'])
+        : null;
+    newProducts = (json['new_products'] != null)
+        ? MarketPlaceModelNewProducts.fromJson(json['new_products'])
+        : null;
+    popularProducts = (json['popular_products'] != null)
+        ? MarketPlaceModelPopularProducts.fromJson(json['popular_products'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     if (categories != null) {
       final v = categories;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['categories'] = arr0;
     }
     if (sliders != null) {
       final v = sliders;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['sliders'] = arr0;
     }
     if (completedOrders != null) {
       final v = completedOrders;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['completed_orders'] = arr0;
     }
     if (mostDemandProducts != null) {

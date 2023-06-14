@@ -1,5 +1,7 @@
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/marketplace/marketplace_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
+import 'package:b2geta_mobile/services/marketplace/marketplace_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +9,7 @@ class MarketPlacePageProvider with ChangeNotifier {
   // MARKETPLACE PAGE
 
   List<ProductModel> productList = [];
-
+  MarketPlaceModel? marketPlaceModel;
 
   Future getProducts() async {
     await locator<ProductsServices>()
@@ -15,16 +17,23 @@ class MarketPlacePageProvider with ChangeNotifier {
       "offset": '0',
       "limit": '99',
     }).then((products) {
-
       for (var product in products) {
         productList.add(product);
       }
-
     });
 
     notifyListeners();
   }
 
+  Future getMarketPlaceData() async {
+    await locator<MarketplaceServices>().getData().then((marketplaceModel) {
+      if (marketplaceModel != null) {
+        marketPlaceModel = marketplaceModel;
+      }
+    });
+
+    notifyListeners();
+  }
 
   bool filterSwitch = true;
 
