@@ -267,6 +267,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                       .toString())
                                               .then((value) {
                                             if (value == true) {
+                                              getProfile();
+
                                               debugPrint(
                                                   "COMPANY SUCCESSFULLY UNFOLLOWED");
                                             } else {
@@ -285,6 +287,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                       .toString())
                                               .then((value) {
                                             if (value == true) {
+                                              getProfile();
+
                                               debugPrint(
                                                   "COMPANY SUCCESSFULLY FOLLOWED");
                                             } else {
