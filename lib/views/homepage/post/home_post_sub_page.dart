@@ -89,28 +89,28 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                               child: GestureDetector(
                                 onTap: () {
                                   if (Provider.of<UserProvider>(context,
-                                      listen: false)
-                                      .getUser
-                                      .id ==
+                                              listen: false)
+                                          .getUser
+                                          .id ==
                                       (feed.user!.id ?? '')) {
                                     context
                                         .read<NavigationPageProvider>()
-                                        .updateCurrentTabIndex(3);
+                                        .updateCurrentTabIndex(4);
                                   } else {
                                     Navigator.push(
                                         context,
                                         PageRouteBuilder(
                                           pageBuilder: (_, __, ___) => feed
-                                              .user!.type !=
-                                              'company'
+                                                      .user!.type !=
+                                                  'company'
                                               ? PersonalProfilePage(
-                                              userId: feed.user!.id ?? '')
+                                                  userId: feed.user!.id ?? '')
                                               : CompanyProfilePage(
-                                              userId: feed.user!.id ?? ''),
+                                                  userId: feed.user!.id ?? ''),
                                           transitionDuration:
-                                          const Duration(milliseconds: 0),
+                                              const Duration(milliseconds: 0),
                                           reverseTransitionDuration:
-                                          const Duration(milliseconds: 0),
+                                              const Duration(milliseconds: 0),
                                           transitionsBuilder: (_, a, __, c) =>
                                               FadeTransition(
                                                   opacity: a, child: c),
@@ -121,29 +121,29 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                                   children: [
                                     feed.user!.photo!.isNotEmpty
                                         ? ClipOval(
-                                      child: Image.network(
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.cover,
-                                        feed.user!.photo!,
-                                        errorBuilder: (context, error,
-                                            stackTrace) =>
-                                            Image.asset(
-                                              "assets/images/dummy_images/user_profile.png",
+                                            child: Image.network(
                                               width: 40,
                                               height: 40,
                                               fit: BoxFit.cover,
+                                              feed.user!.photo!,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  Image.asset(
+                                                "assets/images/dummy_images/user_profile.png",
+                                                width: 40,
+                                                height: 40,
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
-                                      ),
-                                    )
+                                          )
                                         : ClipOval(
-                                      child: Image.asset(
-                                        width: 40,
-                                        height: 40,
-                                        fit: BoxFit.cover,
-                                        "assets/images/dummy_images/user_profile.png",
-                                      ),
-                                    ),
+                                            child: Image.asset(
+                                              width: 40,
+                                              height: 40,
+                                              fit: BoxFit.cover,
+                                              "assets/images/dummy_images/user_profile.png",
+                                            ),
+                                          ),
                                     const SizedBox(
                                       width: 10.0,
                                     ),
