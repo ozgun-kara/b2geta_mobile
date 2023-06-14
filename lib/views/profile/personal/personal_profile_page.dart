@@ -270,6 +270,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                                       .toString())
                                               .then((value) {
                                             if (value == true) {
+                                              getProfile();
+
                                               debugPrint(
                                                   "PERSONAL SUCCESSFULLY UNFOLLOWED");
                                             } else {
@@ -288,6 +290,8 @@ class _PersonalProfilePageState extends State<PersonalProfilePage> {
                                                       .toString())
                                               .then((value) {
                                             if (value == true) {
+                                              getProfile();
+
                                               debugPrint(
                                                   "PERSONAL SUCCESSFULLY FOLLOWED");
                                             } else {
