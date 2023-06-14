@@ -89,8 +89,8 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
                   },
                   child: Center(
                     child: Image.network(
-                      homeProvider.reelsList[index].videos![0]!.image
-                          .toString(),
+                      homeProvider.reelsList[index].videos![0]!.image ??
+                          'assets/images/image_not_found.jpg',
                       errorBuilder: (context, error, stackTrace) => Image.asset(
                         'assets/images/image_not_found.jpg',
                         width: 128,
