@@ -144,4 +144,34 @@ class AgreementServices {
       return null;
     }
   }
+
+  //Membership
+    Future<String?> membershipAgreementCall() async {
+    final response = await http.get(
+      Uri.parse('${Constants.apiUrl}/aggrements/membership'),
+      headers: {
+        "Accept-Language": Constants.language ?? '',
+      },
+    );
+
+    final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      var content = json.decode(response.body)["data"]["content"];
+      if (status == true) {
+        return content;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint("responseCode: ${responseBody["responseCode"]}");
+        debugPrint("responseText: ${responseBody["responseText"]}");
+        return null;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      return null;
+    }
+  }
+
+
 }

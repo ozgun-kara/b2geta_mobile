@@ -1,6 +1,8 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/agreement/agreement_services.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +19,25 @@ class _MembershipAgreementSubPageState
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
+
+  String? membershipText;
+  final AgreementServices _agreementServices = AgreementServices();
+
+  @override
+  void initState() {
+    super.initState();
+    membershipTextGet();
+  }
+
+  Future<void> membershipTextGet() async {
+    _agreementServices.membershipAgreementCall().then((value) {
+      if (value != null) {
+        setState(() {
+          membershipText = value;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,51 +91,37 @@ class _MembershipAgreementSubPageState
               ),
             ),
           )),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 47,
-            ),
-            SizedBox(
-              width: deviceWidth,
-              height: deviceHeight,
+      body: membershipText != null
+          ? SingleChildScrollView(
               child: Padding(
-                  padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-                  child: RichText(
-                      text: TextSpan(children: [
-                    TextSpan(
-                      text: 'ÜYELİK SÖZLEŞMESİ \n',
-                      style: TextStyle(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontSize: 15,
-                        height: 1.8,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    TextSpan(
-                      text:
-                          '1.TARAFLAR İşbu Üyelik Sözleşmesi ("Sözleşme");  alan adlı internet sitesi ve mobil cihaz uygulamalarının sahibi olan ve Maslak Mahallesi, Saat Sokak (Spine Tower), No: 5, İç Kapı No: 19, Sarıyer/İstanbul adresinde bulunan DSM GRUP DANIŞMANLIK İLETİŞİM VE SATIŞ TİC. A.Ş. (“DSM”) ile;  alan adlı internet sitesi ve mobil uygulamasına (“Platform”) işbu Sözleşme’deki koşul ve şartları kabul ederek üye olan kullanıcı (“Üye”, “Üyeler”) arasında, Üye\'nin DSM\'nin sunduğu hizmetlerden yararlanmasına ilişkin koşul ve şartların belirlenmesi için akdedilmiştir.DSM ve Üye işbu Sözleşme\'de ayrı ayrı “Taraf” birlikte “Taraflar” olarak anılacaktır.\n1.TANIMLAR \nPazaryeri : \nDSM’nin 6563 sayılı Elektronik Ticaretin Düzenlenmesi Hakkında Kanun uyarınca "elektronik ticaret aracı hizmet sağlayıcı" ve 5651 sayılı İnternet Ortamında Yapılan Yayınların Düzenlenmesi ve Bu Yayınlar Yoluyla İşlenen Suçlarla Mücadele Edilmesi Hakkında Kanun uyarınca',
-                      style: TextStyle(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                "light"
-                            ? AppTheme.blue3
-                            : AppTheme.white1,
-                        fontFamily: AppTheme.appFontFamily,
-                        fontSize: 15,
-                        height: 1.8,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ]))),
-            ),
-          ],
-        ),
-      ),
+              padding: const EdgeInsets.all(10.0),
+              child: Html(
+                data: membershipText ?? "",
+                style: {
+                  "table": Style(
+                    backgroundColor: Colors.pink,
+                    textDecorationColor: Colors.black,
+                  ),
+                  "tr": Style(
+                    border:
+                        const Border(bottom: BorderSide(color: Colors.grey)),
+                    textDecorationColor: Colors.black,
+                  ),
+                  "th": Style(
+                    padding: const EdgeInsets.all(6),
+                    backgroundColor: Colors.grey,
+                    textDecorationColor: Colors.black,
+                  ),
+                  "td": Style(
+                    padding: const EdgeInsets.all(6),
+                    alignment: Alignment.topLeft,
+                    textDecorationColor: Colors.black,
+                  ),
+                  'h5': Style(maxLines: 2, textOverflow: TextOverflow.ellipsis),
+                },
+              ),
+            ))
+          : const Center(child: CircularProgressIndicator()),
     );
   }
 }
