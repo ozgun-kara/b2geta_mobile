@@ -938,13 +938,17 @@ class _MarketplacePageState extends State<MarketplacePage> {
           width: width ?? 134,
           height: height ?? 155,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(9),
-              border: Border.all(color: AppTheme.white21),
-              color: AppTheme.white1,
-              image: DecorationImage(
-                image: NetworkImage(productImageUrl),
-                fit: BoxFit.cover,
-              )),
+            borderRadius: BorderRadius.circular(9),
+            border: Border.all(color: AppTheme.white21),
+            color: AppTheme.white1,
+          ),
+          child: Image.network(
+            productImageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => Image.asset(
+                'assets/images/image_not_found.jpg',
+                fit: BoxFit.cover),
+          ),
         ),
         const SizedBox(
           height: 14.0,
@@ -1005,13 +1009,17 @@ class _MarketplacePageState extends State<MarketplacePage> {
           width: 178,
           height: 206,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(9),
-              border: Border.all(color: AppTheme.white21),
-              color: AppTheme.white1,
-              image: DecorationImage(
-                image: NetworkImage(productImageUrl),
-                fit: BoxFit.cover,
-              )),
+            borderRadius: BorderRadius.circular(9),
+            border: Border.all(color: AppTheme.white21),
+            color: AppTheme.white1,
+          ),
+          child: Image.network(
+            productImageUrl,
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) => Image.asset(
+                'assets/images/image_not_found.jpg',
+                fit: BoxFit.cover),
+          ),
         ),
         const SizedBox(
           height: 14.0,
