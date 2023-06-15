@@ -2433,7 +2433,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                 .isNotEmpty
                                                             ? product.images![
                                                                     0] ??
-                                                                'assets/images/image_not_found.jpg'
+                                                            'https://doraev.com/images/custom/product-images/nophoto.png'
                                                             : 'assets/images/image_not_found.jpg',
                                                         fit: BoxFit.cover,
                                                         errorBuilder: (context,
