@@ -510,7 +510,7 @@ class _PersonalProfilePostSubPageState
                                     ),
                                     children: [
                                       const TextSpan(
-                                        text: '93',
+                                        text: '0',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                         ),

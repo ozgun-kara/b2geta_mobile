@@ -75,8 +75,8 @@ class _MyAccountReelsPageState extends State<MyAccountReelsPage> {
                 },
                 child: Center(
                   child: Image.network(
-                    socialProvider.reelsList[index].videos![0]!.image
-                        .toString(),
+                    socialProvider.reelsList[index].videos![0]!.image ??
+                        'assets/images/image_not_found.jpg',
                     errorBuilder: (context, error, stackTrace) => Image.asset(
                       'assets/images/image_not_found.jpg',
                       width: 128,
