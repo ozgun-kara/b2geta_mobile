@@ -77,34 +77,34 @@ class _PersonalProfilePostSubPageState
                           Expanded(
                             child: GestureDetector(
                               onTap: () {
-                                if (Provider.of<UserProvider>(context,
-                                            listen: false)
-                                        .getUser
-                                        .id ==
-                                    (feed.user!.id ?? '')) {
-                                  context
-                                      .read<NavigationPageProvider>()
-                                      .updateCurrentTabIndex(3);
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            feed.user!.type != 'company'
-                                                ? PersonalProfilePage(
-                                                    userId: feed.user!.id ?? '')
-                                                : CompanyProfilePage(
-                                                    userId:
-                                                        feed.user!.id ?? ''),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
-                                      ));
-                                }
+                                // if (Provider.of<UserProvider>(context,
+                                //     listen: false)
+                                //     .getUser
+                                //     .id ==
+                                //     (feed.user!.id ?? '')) {
+                                //   context
+                                //       .read<NavigationPageProvider>()
+                                //       .updateCurrentTabIndex(3);
+                                // } else {
+                                //   Navigator.push(
+                                //       context,
+                                //       PageRouteBuilder(
+                                //         pageBuilder: (_, __, ___) =>
+                                //         feed.user!.type != 'company'
+                                //             ? PersonalProfilePage(
+                                //             userId: feed.user!.id ?? '')
+                                //             : CompanyProfilePage(
+                                //             userId:
+                                //             feed.user!.id ?? ''),
+                                //         transitionDuration:
+                                //         const Duration(milliseconds: 0),
+                                //         reverseTransitionDuration:
+                                //         const Duration(milliseconds: 0),
+                                //         transitionsBuilder: (_, a, __, c) =>
+                                //             FadeTransition(
+                                //                 opacity: a, child: c),
+                                //       ));
+                                // }
                               },
                               child: Row(
                                 children: [

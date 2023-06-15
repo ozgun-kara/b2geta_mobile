@@ -489,7 +489,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                     ),
                                     const SizedBox(height: 4),
                                     Visibility(
-                                      visible: true,
+                                      visible: false,
                                       child: SizedBox(
                                         height: 22,
                                         child: ButtonTheme(
@@ -521,7 +521,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       ),
                                     ),
                                     Visibility(
-                                      visible: false,
+                                      visible: true,
                                       child: SizedBox(
                                         height: 22,
                                         child: ButtonTheme(
