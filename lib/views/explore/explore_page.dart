@@ -109,7 +109,8 @@ class _ExplorePageState extends State<ExplorePage> {
                               children: [
                                 Center(
                                   child: Image.network(
-                                    discover.videos![0]!.image.toString(),
+                                    discover.videos![0]!.image ??
+                                        'assets/images/image_not_found.jpg',
                                     width: 128,
                                     height: 256,
                                     fit: BoxFit.cover,

@@ -200,7 +200,7 @@ final Map<String, String> tr = {
   'Are you sure you want to delete your account?':
       'Hesabınızı silmek istediğinizden emin misiniz?',
   'Yes': 'Evet',
-  'No':'Hayır',
+  'No': 'Hayır',
 
   // HOMEPAGE
   'Posts': 'Postlar',
@@ -289,8 +289,10 @@ final Map<String, String> tr = {
   'Automotive spare parts': 'Otomotiv yedek parça',
   'Raw materials': 'Ham Madde',
   'The most demanded products': 'En çok talep gören ürünler',
-  'Popular Products from Istanbul': 'İstanbul\'dan Popüler Ürünler',
+  'Popular Products': 'Popüler Ürünler',
   'Newly Added Products': 'Yeni Eklenen Ürünler',
+  'Textile': 'Tekstil',
+  'Clothes': 'Giyim',
 
   // BASKET PAGE
   'Basket Page Route': 'Ana Sayfa - Sepetim',

@@ -3,6 +3,7 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/marketplace/marketplace_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
