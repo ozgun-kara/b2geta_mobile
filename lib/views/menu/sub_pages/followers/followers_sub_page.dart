@@ -228,7 +228,10 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items[index].followingCompanyName.toString().toUpperCase()}',
+                                            items[index]
+                                                .followingCompanyName
+                                                .toString()
+                                                .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -454,7 +457,13 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items[index].followingCompanyName.toString().toUpperCase()}',
+                                            items[index].followingType ==
+                                                    'personal'
+                                                ? '${items[index].followingFirstname.toString().toUpperCase()} ${items[index].followingLastname.toString().toUpperCase()}'
+                                                : items[index]
+                                                    .followingCompanyName
+                                                    .toString()
+                                                    .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
