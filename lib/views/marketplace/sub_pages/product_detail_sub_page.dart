@@ -2412,7 +2412,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                 ),
                                                 padding:
                                                     const EdgeInsets.all(8),
-                                                child: Row(
+                                                child:  Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
