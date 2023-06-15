@@ -41,6 +41,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   int rating = 4;
 
   late double deviceTopPadding;
+  late double deviceBottomPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
@@ -85,6 +86,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceBottomPadding = MediaQuery.of(context).padding.bottom;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
@@ -2793,18 +2795,18 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                         ? scrollController.position.userScrollDirection ==
                                 ScrollDirection.reverse
                             ? 0
-                            : 60
-                        : 60,
+                            : 60+deviceBottomPadding
+                        : 60+deviceBottomPadding,
                     child: child);
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
                   width: deviceWidth,
-                  height: 60,
+                  height: 60+deviceBottomPadding,
                   color: AppTheme.blue2,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(11, 0, 9, 0),
+                    padding: const EdgeInsets.fromLTRB(17, 0, 15, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
