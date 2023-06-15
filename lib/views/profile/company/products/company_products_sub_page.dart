@@ -314,7 +314,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: "₺",
+                                                text: product.currency,
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
@@ -502,7 +502,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: "₺",
+                                                  text: product.currency,
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
