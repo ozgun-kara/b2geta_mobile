@@ -126,9 +126,9 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             const SizedBox(height: 17),
             Visibility(
               visible: dropdownSelectedValue == 'My Followers'.tr,
-              child: FutureBuilder<List<MyFollowerModel>>(
+              child: FutureBuilder<List<MyFollowingModel>>(
                 future:
-                    locator<FollowServices>().myFollowersCall(queryParameters: {
+                    locator<FollowServices>().followedMeCall(queryParameters: {
                   // 'offset': '0',
                   // 'limit': '5'
                 }),
@@ -228,7 +228,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items[index].followingFirstname.toString().toUpperCase()} ${items[index].followingLastname.toString().toUpperCase()}',
+                                            '${items[index].followingCompanyName.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -352,21 +352,21 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
             ), // MY FOLLOWERS
             Visibility(
               visible: dropdownSelectedValue == 'Following'.tr,
-              child: FutureBuilder<List<MyFollowingModel>>(
+              child: FutureBuilder<List<MyFollowerModel>>(
                 future:
-                    locator<FollowServices>().followedMeCall(queryParameters: {
+                    locator<FollowServices>().myFollowersCall(queryParameters: {
                   // 'offset': '0',
                   // 'limit': '5'
                 }),
                 builder: (context, data) {
                   if (data.hasData) {
-                    var myFollowingList = data.data;
+                    var myFollowersList = data.data;
 
                     return ListView.separated(
                       controller: scrollController,
                       shrinkWrap: true,
                       padding: const EdgeInsets.symmetric(horizontal: 16),
-                      itemCount: myFollowingList!.length,
+                      itemCount: myFollowersList!.length,
                       separatorBuilder: (BuildContext context, int index) {
                         return SizedBox(
                           height: 10,
@@ -416,7 +416,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               : AppTheme.black20),
                                       image: DecorationImage(
                                         image: NetworkImage(items![index]
-                                                .userPhoto ??
+                                                .followingAvatar ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
                                       ),
@@ -454,7 +454,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            '${items[index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}',
+                                            '${items[index].followingCompanyName.toString().toUpperCase()}',
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -489,7 +489,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                     ),
                                     const SizedBox(height: 4),
                                     Visibility(
-                                      visible: false,
+                                      visible: true,
                                       child: SizedBox(
                                         height: 22,
                                         child: ButtonTheme(
@@ -521,7 +521,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       ),
                                     ),
                                     Visibility(
-                                      visible: true,
+                                      visible: false,
                                       child: SizedBox(
                                         height: 22,
                                         child: ButtonTheme(
