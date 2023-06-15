@@ -439,27 +439,25 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ClipOval(
-                                      child: Container(
-                                        width: 126,
-                                        height: 145,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(2),
-                                          ),
+                                    Container(
+                                      width: 126,
+                                      height: 145,
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(2),
                                         ),
-                                        child: Image.network(
-                                          product.images!.isNotEmpty
-                                              ? product.images![0] ??
-                                                  'https://doraev.com/images/custom/product-images/nophoto.png'
-                                              : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error,
-                                                  stackTrace) =>
-                                              Image.asset(
-                                                  'assets/images/image_not_found.jpg',
-                                                  fit: BoxFit.cover),
-                                        ),
+                                      ),
+                                      child: Image.network(
+                                        product.images!.isNotEmpty
+                                            ? product.images![0] ??
+                                                'https://doraev.com/images/custom/product-images/nophoto.png'
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (context, error,
+                                                stackTrace) =>
+                                            Image.asset(
+                                                'assets/images/image_not_found.jpg',
+                                                fit: BoxFit.cover),
                                       ),
                                     ),
                                     const SizedBox(width: 10),

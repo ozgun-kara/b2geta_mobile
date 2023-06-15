@@ -164,7 +164,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   (product!.images != null &&
                                           product!.images!.isNotEmpty)
                                       ? product!.images![0]
-                                      : 'assets/images/image_not_found.jpg',
+                                      : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Image.asset(
@@ -2079,17 +2079,19 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               width: 1,
                                               color: AppTheme.white21),
                                         ),
-                                        child: Image.network(
-                                          (companyProfileModel != null)
-                                              ? companyProfileModel!.logo ??
-                                                  "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
-                                              : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
-                                          fit: BoxFit.cover,
-                                          errorBuilder:
-                                              (context, error, stackTrace) =>
-                                                  Image.asset(
-                                            'assets/images/image_not_found.jpg',
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            (companyProfileModel != null)
+                                                ? companyProfileModel!.logo ??
+                                                    "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
+                                                : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                             fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              'assets/images/image_not_found.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
