@@ -2,11 +2,13 @@ import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,14 +16,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/dummy_models/product_dummy_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_first_tab_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_second_tab_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:b2geta_mobile/models/products/product_model.dart';
 
 class ProductDetailSubPage extends StatefulWidget {
   const ProductDetailSubPage({
@@ -156,21 +157,18 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                           },
                           child: Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: deviceWidth,
                                 height: 352,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        (product!.images != null &&
-                                                product!.images!.isNotEmpty)
-                                            ? product!.images![0]
-                                            : 'https://doraev.com/images/custom/product-images/nophoto.png'
-
-                                        // Provider.of<MarketPlacePageProvider>(
-                                        //         context)
-                                        //     .productImageIndex]
-                                        ),
+                                child: Image.network(
+                                  (product!.images != null &&
+                                          product!.images!.isNotEmpty)
+                                      ? product!.images![0]
+                                      : 'assets/images/image_not_found.jpg',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.asset(
+                                    'assets/images/image_not_found.jpg',
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -231,18 +229,20 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           ),
                                           child: FittedBox(
                                             fit: BoxFit.none,
-                                            child: Container(
+                                            child: SizedBox(
                                               width: 39,
                                               height: 39,
-                                              decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                  image: NetworkImage((product!
-                                                                  .images !=
-                                                              null &&
-                                                          product!.images!
-                                                              .isNotEmpty)
-                                                      ? product!.images![0]
-                                                      : 'https://doraev.com/images/custom/product-images/nophoto.png'),
+                                              child: Image.network(
+                                                (product!.images != null &&
+                                                        product!
+                                                            .images!.isNotEmpty)
+                                                    ? product!.images![0]
+                                                    : 'assets/images/image_not_found.jpg',
+                                                fit: BoxFit.cover,
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    Image.asset(
+                                                  'assets/images/image_not_found.jpg',
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -2331,36 +2331,65 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                 ],
                               ),
                               const SizedBox(height: 25),
-                              FutureBuilder(
-                                future: DummyService().getProductList(),
+                              FutureBuilder<List<ProductModel>>(
+                                future: ProductsServices()
+                                    .allProductsListAndSearchCall(
+                                        queryParameters: {
+                                      "offset": "0",
+                                      "limit": '10000000',
+                                    }),
                                 builder: (context, data) {
                                   if (data.hasData) {
-                                    var items =
-                                        data.data as List<ProductDummyModel>;
+                                    var productList = data.data;
 
-                                    return ListView.builder(
+                                    if (productList!.isNotEmpty) {
+                                      return ListView.separated(
                                         physics:
                                             const NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
-                                        itemCount: items.length,
+                                        padding: const EdgeInsets.all(0),
+                                        itemCount: productList.length,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
                                         itemBuilder: ((context, index) {
+                                          var product = productList[index];
+
                                           return Padding(
                                             padding: const EdgeInsets.fromLTRB(
-                                                0, 0, 0, 8),
+                                                12, 0, 12, 0),
                                             child: InkWell(
-                                              onTap: () {},
+                                              onTap: () {
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          ProductDetailSubPage(
+                                                        productId: product.id!,
+                                                      ),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
+                                              },
                                               child: Container(
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       const BorderRadius.all(
                                                           Radius.circular(3)),
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.white1
-                                                          : AppTheme.black22,
+                                                  color: themeMode
+                                                      ? AppTheme.white1
+                                                      : AppTheme.black7,
                                                   boxShadow: [
                                                     BoxShadow(
                                                       blurStyle:
@@ -2384,20 +2413,28 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     Container(
                                                       width: 126,
                                                       height: 145,
-                                                      decoration: BoxDecoration(
-                                                        image: DecorationImage(
-                                                          image: NetworkImage(
-                                                            items[index]
-                                                                    .imgUrl ??
-                                                                '',
-                                                          ),
-                                                          fit: BoxFit.cover,
-                                                        ),
+                                                      decoration:
+                                                          const BoxDecoration(
                                                         borderRadius:
-                                                            const BorderRadius
-                                                                .all(
+                                                            BorderRadius.all(
                                                           Radius.circular(2),
                                                         ),
+                                                      ),
+                                                      child: Image.network(
+                                                        product.images!
+                                                                .isNotEmpty
+                                                            ? product.images![
+                                                                    0] ??
+                                                                'assets/images/image_not_found.jpg'
+                                                            : 'assets/images/image_not_found.jpg',
+                                                        fit: BoxFit.cover,
+                                                        errorBuilder: (context,
+                                                                error,
+                                                                stackTrace) =>
+                                                            Image.asset(
+                                                                'assets/images/image_not_found.jpg',
+                                                                fit: BoxFit
+                                                                    .cover),
                                                       ),
                                                     ),
                                                     const SizedBox(width: 10),
@@ -2407,17 +2444,14 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                               .start,
                                                       children: [
                                                         SizedBox(
-                                                          width: deviceWidth -
-                                                              (24 +
-                                                                  16 +
-                                                                  126 +
-                                                                  10),
-                                                          height: 35,
+                                                          width: deviceWidth , 
                                                           child: Text(
-                                                            items[index]
-                                                                    .title ??
-                                                                '',
-                                                            maxLines: 2,
+                                                            product.name!.tr
+                                                                .toString(),
+                                                            maxLines: 1,
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
                                                             style: TextStyle(
                                                               fontSize: 11,
                                                               fontFamily: AppTheme
@@ -2425,10 +2459,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w500,
-                                                              color: Provider.of<ThemeProvider>(
-                                                                              context)
-                                                                          .themeMode ==
-                                                                      "light"
+                                                              color: themeMode
                                                                   ? AppTheme
                                                                       .blue3
                                                                   : AppTheme
@@ -2436,42 +2467,52 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                             ),
                                                           ),
                                                         ),
-                                                        Text(
-                                                          items[index].price ??
-                                                              '',
-                                                          style: TextStyle(
-                                                            fontSize: 16,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Provider.of<ThemeProvider>(
-                                                                            context)
-                                                                        .themeMode ==
-                                                                    "light"
-                                                                ? AppTheme.blue2
-                                                                : AppTheme
-                                                                    .white1,
-                                                          ),
-                                                        ),
-                                                        Text(
-                                                          '10 ${'Minimum Order'.tr}',
-                                                          style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: AppTheme
-                                                                .white15,
-                                                          ),
-                                                        ),
                                                         const SizedBox(
-                                                            height: 8),
+                                                          height: 8,
+                                                        ),
+                                                        RichText(
+                                                            text: TextSpan(
+                                                                children: [
+                                                              TextSpan(
+                                                                text:
+                                                                    "${product.price} ",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontFamily:
+                                                                      AppTheme
+                                                                          .appFontFamily,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: themeMode
+                                                                      ? AppTheme
+                                                                          .blue2
+                                                                      : AppTheme
+                                                                          .white1,
+                                                                ),
+                                                              ),
+                                                              TextSpan(
+                                                                text: "₺",
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  color: themeMode
+                                                                      ? AppTheme
+                                                                          .blue2
+                                                                      : AppTheme
+                                                                          .white1,
+                                                                ),
+                                                              ),
+                                                            ])),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
                                                         Text(
-                                                          items[index]
-                                                                  .province ??
-                                                              '',
+                                                          "İstanbul, Türkiye",
                                                           style: TextStyle(
                                                             fontSize: 10,
                                                             fontFamily: AppTheme
@@ -2483,15 +2524,16 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                           ),
                                                         ),
                                                         const SizedBox(
-                                                            height: 1),
+                                                          height: 4,
+                                                        ),
                                                         Row(
                                                           crossAxisAlignment:
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
                                                             Text(
-                                                              items[index]
-                                                                      .company ??
+                                                              product.seller!
+                                                                      .name ??
                                                                   '',
                                                               style: TextStyle(
                                                                 fontSize: 11,
@@ -2500,43 +2542,17 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w700,
-                                                                color: Provider.of<ThemeProvider>(
-                                                                                context)
-                                                                            .themeMode ==
-                                                                        "light"
+                                                                color: themeMode
                                                                     ? AppTheme
                                                                         .blue3
                                                                     : AppTheme
                                                                         .white11,
                                                               ),
                                                             ),
-                                                            const SizedBox(
-                                                                width: 5),
-                                                            Text(
-                                                              items[index]
-                                                                      .totalRate ??
-                                                                  '',
-                                                              style: TextStyle(
-                                                                fontSize: 11,
-                                                                fontFamily: AppTheme
-                                                                    .appFontFamily,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w800,
-                                                                color: AppTheme
-                                                                    .white15,
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                                width: 4),
-                                                            Image.asset(
-                                                                'assets/icons/star.png',
-                                                                width: 15,
-                                                                height: 15),
                                                           ],
                                                         ),
                                                         const SizedBox(
-                                                            height: 2),
+                                                            height: 8),
                                                         SizedBox(
                                                           height: 24,
                                                           child: ButtonTheme(
@@ -2594,7 +2610,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                                 AppTheme.appFontFamily,
                                                                             fontWeight:
                                                                                 FontWeight.w700,
-                                                                            color: Provider.of<ThemeProvider>(context).themeMode == "light"
+                                                                            color: themeMode
                                                                                 ? AppTheme.blue2
                                                                                 : AppTheme.white1,
                                                                           ),
@@ -2602,7 +2618,23 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                       ],
                                                                     ),
                                                                     onPressed:
-                                                                        () async {}),
+                                                                        () async {
+                                                                      Navigator.push(
+                                                                          context,
+                                                                          PageRouteBuilder(
+                                                                            pageBuilder: (_, __, ___) =>
+                                                                                AddMessageSubPage(
+                                                                              toId: product.accountId!,
+                                                                              fromId: Provider.of<UserProvider>(context, listen: false).getUser.id!,
+                                                                            ),
+                                                                            transitionDuration:
+                                                                                const Duration(milliseconds: 0),
+                                                                            reverseTransitionDuration:
+                                                                                const Duration(milliseconds: 0),
+                                                                            transitionsBuilder: (_, a, __, c) =>
+                                                                                FadeTransition(opacity: a, child: c),
+                                                                          ));
+                                                                    }),
                                                           ),
                                                         ),
                                                       ],
@@ -2612,7 +2644,23 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               ),
                                             ),
                                           );
-                                        }));
+                                        }),
+                                      );
+                                    } else {
+                                      return SizedBox(
+                                        width: deviceWidth,
+                                        height: deviceHeight - 200,
+                                        child: Center(
+                                            child: Text(
+                                          "Ürün bulunmamaktadır.",
+                                          style: TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: AppTheme.appFontFamily,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )),
+                                      );
+                                    }
                                   } else {
                                     // return ListView.builder(
                                     //   controller: scrollController,
@@ -2698,12 +2746,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       height: deviceWidth + 115,
                                       child: Center(
                                           child: CupertinoActivityIndicator(
-                                        color:
-                                            Provider.of<ThemeProvider>(context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.black1
-                                                : AppTheme.white1,
+                                        color: themeMode
+                                            ? AppTheme.black1
+                                            : AppTheme.white1,
                                         radius: 12,
                                       )),
                                     );

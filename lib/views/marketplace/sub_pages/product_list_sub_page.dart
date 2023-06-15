@@ -3,7 +3,6 @@ import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/models/marketplace/marketplace_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -295,9 +294,15 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                     ),
                                     child: Image.network(
                                       product.images!.isNotEmpty
-                                          ? product.images![0]!
+                                          ? product.images![0] ??
+                                              'https://doraev.com/images/custom/product-images/nophoto.png'
                                           : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                       fit: BoxFit.cover,
+                                      errorBuilder: (context, error,
+                                              stackTrace) =>
+                                          Image.asset(
+                                              'assets/images/image_not_found.jpg',
+                                              fit: BoxFit.cover),
                                     ),
                                   ),
                                   const SizedBox(height: 11),
@@ -444,9 +449,15 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                       ),
                                       child: Image.network(
                                         product.images!.isNotEmpty
-                                            ? product.images![0].toString()
+                                            ? product.images![0] ??
+                                                'https://doraev.com/images/custom/product-images/nophoto.png'
                                             : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                         fit: BoxFit.cover,
+                                        errorBuilder: (context, error,
+                                                stackTrace) =>
+                                            Image.asset(
+                                                'assets/images/image_not_found.jpg',
+                                                fit: BoxFit.cover),
                                       ),
                                     ),
                                     const SizedBox(width: 10),
@@ -520,7 +531,7 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "İteme İnşaat",
+                                              product.seller!.name ?? '',
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -531,20 +542,6 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                                     : AppTheme.white11,
                                               ),
                                             ),
-                                            const SizedBox(width: 5),
-                                            Text(
-                                              "9,2",
-                                              style: TextStyle(
-                                                fontSize: 11,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w800,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 4),
-                                            Image.asset('assets/icons/star.png',
-                                                width: 15, height: 15),
                                           ],
                                         ),
                                         const SizedBox(height: 8),

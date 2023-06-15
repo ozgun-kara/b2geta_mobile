@@ -265,9 +265,16 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           ),
                                           child: Image.network(
                                             product.images!.isNotEmpty
-                                                ? product.images![0]!
+                                                ? product.images![0] ??
+                                                    'https://doraev.com/images/custom/product-images/nophoto.png'
                                                 : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                             fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              'assets/images/image_not_found.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                         const SizedBox(height: 11),
@@ -306,7 +313,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                 ),
                                               ),
                                               TextSpan(
-                                                text: "₺",
+                                                text: product.currency,
                                                 style: TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w500,
@@ -401,7 +408,8 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                    productId: product.id!,),
+                                              productId: product.id!,
+                                            ),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
@@ -444,10 +452,16 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                             ),
                                             child: Image.network(
                                               product.images!.isNotEmpty
-                                                  ? product.images![0]
-                                                      .toString()
+                                                  ? product.images![0] ??
+                                                      'https://doraev.com/images/custom/product-images/nophoto.png'
                                                   : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,
+                                              errorBuilder: (context, error,
+                                                      stackTrace) =>
+                                                  Image.asset(
+                                                'assets/images/image_not_found.jpg',
+                                                fit: BoxFit.cover,
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(width: 10),
@@ -492,7 +506,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                   ),
                                                 ),
                                                 TextSpan(
-                                                  text: "₺",
+                                                  text: product.currency,
                                                   style: TextStyle(
                                                     fontSize: 16,
                                                     fontWeight: FontWeight.w500,
@@ -516,14 +530,14 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                 ),
                                               ),
                                               const SizedBox(
-                                                height: 4,
+                                                height: 8,
                                               ),
                                               Row(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "İteme İnşaat",
+                                                    product.seller!.name ?? '',
                                                     style: TextStyle(
                                                       fontSize: 11,
                                                       fontFamily: AppTheme
@@ -535,85 +549,9 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                           : AppTheme.white11,
                                                     ),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  Text(
-                                                    "9,2",
-                                                    style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      color: AppTheme.white15,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Image.asset(
-                                                      'assets/icons/star.png',
-                                                      width: 15,
-                                                      height: 15),
                                                 ],
                                               ),
                                               const SizedBox(height: 8),
-                                              SizedBox(
-                                                height: 24,
-                                                child: ButtonTheme(
-                                                  // minWidth: deviceWidth,
-                                                  height: 22,
-
-                                                  child: MaterialButton(
-                                                      elevation: 0,
-                                                      color: Colors.transparent,
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        side: BorderSide(
-                                                            width: 1,
-                                                            color: AppTheme
-                                                                .white19),
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                    .all(
-                                                                Radius.circular(
-                                                                    36)),
-                                                      ),
-                                                      padding: const EdgeInsets
-                                                              .fromLTRB(
-                                                          10, 2, 10, 3.5),
-                                                      child: Row(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Image.asset(
-                                                              'assets/icons/comment.png',
-                                                              width: 12.5,
-                                                              height: 12.5,
-                                                              color: AppTheme
-                                                                  .black16),
-                                                          const SizedBox(
-                                                              width: 3.5),
-                                                          Text(
-                                                            'Contact to Supplier'
-                                                                .tr,
-                                                            style: TextStyle(
-                                                              fontSize: 10,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .blue2
-                                                                  : AppTheme
-                                                                      .white1,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      onPressed: () async {}),
-                                                ),
-                                              ),
                                             ],
                                           ),
                                         ],

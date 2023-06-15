@@ -272,8 +272,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           ),
                                           child: Image.network(
                                             product.images!.isNotEmpty
-                                                ? product.images![0]!
-                                                : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                ? product.images![0] ??
+                                                    'assets/images/image_not_found.jpg'
+                                                : 'assets/images/image_not_found.jpg',
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -453,9 +454,9 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                             ),
                                             child: Image.network(
                                               product.images!.isNotEmpty
-                                                  ? product.images![0]
-                                                      .toString()
-                                                  : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                                  ? product.images![0] ??
+                                                      'assets/images/image_not_found.jpg'
+                                                  : 'assets/images/image_not_found.jpg',
                                               fit: BoxFit.cover,
                                             ),
                                           ),
@@ -532,7 +533,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    "İteme İnşaat",
+                                                    product.seller!.name ?? '',
                                                     style: TextStyle(
                                                       fontSize: 11,
                                                       fontFamily: AppTheme
@@ -544,23 +545,6 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                           : AppTheme.white11,
                                                     ),
                                                   ),
-                                                  const SizedBox(width: 5),
-                                                  Text(
-                                                    "9,2",
-                                                    style: TextStyle(
-                                                      fontSize: 11,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w800,
-                                                      color: AppTheme.white15,
-                                                    ),
-                                                  ),
-                                                  const SizedBox(width: 4),
-                                                  Image.asset(
-                                                      'assets/icons/star.png',
-                                                      width: 15,
-                                                      height: 15),
                                                 ],
                                               ),
                                               const SizedBox(height: 8),
