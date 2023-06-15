@@ -472,10 +472,10 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       child: SizedBox(
                                         height: deviceHeight,
                                         child:
-                                        FutureBuilder<List<ProductModel>>(
+                                            FutureBuilder<List<ProductModel>>(
                                           future: ProductsServices()
                                               .allProductsListAndSearchCall(
-                                              queryParameters: {
+                                                  queryParameters: {
                                                 "limit": '1000000',
                                                 'account_id': widget.userId,
                                               }),
@@ -488,19 +488,19 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                   shrinkWrap: true,
                                                   itemCount: productList.length,
                                                   padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      14, 0, 14, 0),
+                                                      const EdgeInsets.fromLTRB(
+                                                          14, 0, 14, 0),
                                                   gridDelegate:
-                                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                                      const SliverGridDelegateWithFixedCrossAxisCount(
                                                     crossAxisCount: 2,
                                                     crossAxisSpacing: 10,
                                                     mainAxisSpacing: 21,
                                                     mainAxisExtent: 304,
                                                   ),
                                                   itemBuilder:
-                                                  ((context, index) {
+                                                      ((context, index) {
                                                     var product =
-                                                    productList[index];
+                                                        productList[index];
 
                                                     return InkWell(
                                                       onTap: () {
@@ -508,59 +508,59 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                             context,
                                                             PageRouteBuilder(
                                                               pageBuilder: (_,
-                                                                  __,
-                                                                  ___) =>
+                                                                      __,
+                                                                      ___) =>
                                                                   ProductDetailSubPage(
-                                                                    productId:
+                                                                productId:
                                                                     product.id!,
-                                                                  ),
+                                                              ),
                                                               transitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                  0),
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
                                                               reverseTransitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                  0),
+                                                                  const Duration(
+                                                                      milliseconds:
+                                                                          0),
                                                               transitionsBuilder: (_,
-                                                                  a,
-                                                                  __,
-                                                                  c) =>
+                                                                      a,
+                                                                      __,
+                                                                      c) =>
                                                                   FadeTransition(
                                                                       opacity:
-                                                                      a,
+                                                                          a,
                                                                       child: c),
                                                             ));
                                                       },
                                                       child: Container(
                                                         decoration:
-                                                        const BoxDecoration(
-                                                            color: Colors
-                                                                .transparent),
+                                                            const BoxDecoration(
+                                                                color: Colors
+                                                                    .transparent),
                                                         child: Column(
                                                           children: [
                                                             Container(
                                                               // width: 126,
                                                               // height: 145,
                                                               width:
-                                                              deviceWidth,
+                                                                  deviceWidth,
                                                               height: 206,
                                                               decoration:
-                                                              const BoxDecoration(
+                                                                  const BoxDecoration(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .all(
+                                                                    BorderRadius
+                                                                        .all(
                                                                   Radius
                                                                       .circular(
-                                                                      9),
+                                                                          9),
                                                                 ),
                                                               ),
                                                               child:
-                                                              Image.network(
+                                                                  Image.network(
                                                                 product.images!
-                                                                    .isNotEmpty
+                                                                        .isNotEmpty
                                                                     ? product
-                                                                    .images![0]!
+                                                                        .images![0]!
                                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                                 fit: BoxFit
                                                                     .cover,
@@ -570,8 +570,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                                 height: 11),
                                                             Column(
                                                               crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                                  CrossAxisAlignment
+                                                                      .start,
                                                               children: [
                                                                 Text(
                                                                   product
@@ -579,23 +579,23 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                                       .toString(),
                                                                   maxLines: 1,
                                                                   overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
+                                                                      TextOverflow
+                                                                          .ellipsis,
                                                                   style:
-                                                                  TextStyle(
+                                                                      TextStyle(
                                                                     fontSize:
-                                                                    12,
+                                                                        12,
                                                                     fontFamily:
-                                                                    AppTheme
-                                                                        .appFontFamily,
+                                                                        AppTheme
+                                                                            .appFontFamily,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                     color: themeMode
                                                                         ? AppTheme
-                                                                        .blue3
+                                                                            .blue3
                                                                         : AppTheme
-                                                                        .white11,
+                                                                            .white11,
                                                                   ),
                                                                 ),
                                                                 const SizedBox(
@@ -603,51 +603,51 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                                 RichText(
                                                                     text: TextSpan(
                                                                         children: [
-                                                                          TextSpan(
-                                                                            text:
+                                                                      TextSpan(
+                                                                        text:
                                                                             "${product.price.toString()} ",
-                                                                            style:
+                                                                        style:
                                                                             TextStyle(
-                                                                              fontSize:
+                                                                          fontSize:
                                                                               16,
-                                                                              fontFamily:
+                                                                          fontFamily:
                                                                               AppTheme.appFontFamily,
-                                                                              fontWeight:
+                                                                          fontWeight:
                                                                               FontWeight.w500,
-                                                                              color: themeMode
-                                                                                  ? AppTheme.blue2
-                                                                                  : AppTheme.white1,
-                                                                            ),
-                                                                          ),
-                                                                          TextSpan(
-                                                                            text:
+                                                                          color: themeMode
+                                                                              ? AppTheme.blue2
+                                                                              : AppTheme.white1,
+                                                                        ),
+                                                                      ),
+                                                                      TextSpan(
+                                                                        text:
                                                                             "₺",
-                                                                            style:
+                                                                        style:
                                                                             TextStyle(
-                                                                              fontSize:
+                                                                          fontSize:
                                                                               16,
-                                                                              fontWeight:
+                                                                          fontWeight:
                                                                               FontWeight.w500,
-                                                                              color: themeMode
-                                                                                  ? AppTheme.blue2
-                                                                                  : AppTheme.white1,
-                                                                            ),
-                                                                          )
-                                                                        ])),
+                                                                          color: themeMode
+                                                                              ? AppTheme.blue2
+                                                                              : AppTheme.white1,
+                                                                        ),
+                                                                      )
+                                                                    ])),
                                                                 const SizedBox(
                                                                     height: 2),
                                                                 Text(
                                                                   "10 ${'Minimum Order'.tr}",
                                                                   style:
-                                                                  TextStyle(
+                                                                      TextStyle(
                                                                     fontSize:
-                                                                    12,
+                                                                        12,
                                                                     fontFamily:
-                                                                    AppTheme
-                                                                        .appFontFamily,
+                                                                        AppTheme
+                                                                            .appFontFamily,
                                                                     fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
+                                                                        FontWeight
+                                                                            .w500,
                                                                     color: AppTheme
                                                                         .white15,
                                                                   ),
@@ -666,15 +666,15 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                   height: deviceHeight - 200,
                                                   child: Center(
                                                       child: Text(
-                                                        "Ürün bulunmamaktadır.",
-                                                        style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
+                                                    "Ürün bulunmamaktadır.",
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
                                                           FontWeight.w500,
-                                                        ),
-                                                      )),
+                                                    ),
+                                                  )),
                                                 );
                                               }
                                             } else {
@@ -682,12 +682,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                 height: deviceWidth + 115,
                                                 child: Center(
                                                     child:
-                                                    CupertinoActivityIndicator(
-                                                      color: themeMode
-                                                          ? AppTheme.black1
-                                                          : AppTheme.white1,
-                                                      radius: 12,
-                                                    )),
+                                                        CupertinoActivityIndicator(
+                                                  color: themeMode
+                                                      ? AppTheme.black1
+                                                      : AppTheme.white1,
+                                                  radius: 12,
+                                                )),
                                               );
                                             }
                                           },
