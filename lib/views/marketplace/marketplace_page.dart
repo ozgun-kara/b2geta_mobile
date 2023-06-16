@@ -911,7 +911,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             .image!.url!.isNotEmpty
                                         ? product.image!.url.toString()
                                         : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                    productName: product.name!.tr.toString(),
+                                    productName: product.name!,
                                     productPrice: product.price.toString(),
                                     productCurrency:
                                         product.currency.toString(),
