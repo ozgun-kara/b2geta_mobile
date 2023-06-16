@@ -146,7 +146,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                     SizedBox(
                                       width: deviceWidth - 140,
                                       child: Text(
-                                        product.name!.tr ?? 'Product Name',
+                                        product.name!.tr ?? product.name!.en!,
                                         style: TextStyle(
                                           overflow: TextOverflow.ellipsis,
                                           fontFamily: AppTheme.appFontFamily,
