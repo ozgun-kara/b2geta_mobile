@@ -283,7 +283,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              product.name!.tr.toString(),
+                                              product.name!.tr ?? product.name!.en!,
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
@@ -473,7 +473,7 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                 width: deviceWidth -
                                                     (24 + 16 + 126 + 10),
                                                 child: Text(
-                                                  product.name!.tr.toString(),
+                                                  product.name!.tr ?? product.name!.en!,
                                                   maxLines: 1,
                                                   overflow:
                                                       TextOverflow.ellipsis,
