@@ -41,6 +41,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   int rating = 4;
 
   late double deviceTopPadding;
+  late double deviceBottomPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
@@ -85,6 +86,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceBottomPadding = MediaQuery.of(context).padding.bottom;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
@@ -164,7 +166,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   (product!.images != null &&
                                           product!.images!.isNotEmpty)
                                       ? product!.images![0]
-                                      : 'assets/images/image_not_found.jpg',
+                                      : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
                                       Image.asset(
@@ -237,7 +239,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         product!
                                                             .images!.isNotEmpty)
                                                     ? product!.images![0]
-                                                    : 'assets/images/image_not_found.jpg',
+                                                    : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (context, error,
                                                         stackTrace) =>
@@ -591,7 +593,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               ),
                                             ),
                                             Text(
-                                              "89,05₺",
+                                              "89,05",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontFamily:
@@ -659,7 +661,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               ),
                                             ),
                                             Text(
-                                              "83,11₺",
+                                              "83,11",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontFamily:
@@ -727,7 +729,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               ),
                                             ),
                                             Text(
-                                              "79,15₺",
+                                              "79,15",
                                               style: TextStyle(
                                                 fontSize: 15,
                                                 fontFamily:
@@ -2078,14 +2080,20 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                           border: Border.all(
                                               width: 1,
                                               color: AppTheme.white21),
-                                          image: DecorationImage(
-                                            image: NetworkImage(
-                                              (companyProfileModel != null)
-                                                  ? companyProfileModel!.logo ??
-                                                      "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
-                                                  : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
-                                            ),
+                                        ),
+                                        child: ClipOval(
+                                          child: Image.network(
+                                            (companyProfileModel != null)
+                                                ? companyProfileModel!.logo ??
+                                                    "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
+                                                : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                             fit: BoxFit.cover,
+                                            errorBuilder:
+                                                (context, error, stackTrace) =>
+                                                    Image.asset(
+                                              'assets/images/image_not_found.jpg',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -2406,13 +2414,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                 ),
                                                 padding:
                                                     const EdgeInsets.all(8),
-                                                child: Row(
+                                                child:  Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     Container(
-                                                      width: 126,
-                                                      height: 145,
+                                                      width: 100,
+                                                      height: 125,
                                                       decoration:
                                                           const BoxDecoration(
                                                         borderRadius:
@@ -2425,7 +2433,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                 .isNotEmpty
                                                             ? product.images![
                                                                     0] ??
-                                                                'assets/images/image_not_found.jpg'
+                                                            'https://doraev.com/images/custom/product-images/nophoto.png'
                                                             : 'assets/images/image_not_found.jpg',
                                                         fit: BoxFit.cover,
                                                         errorBuilder: (context,
@@ -2444,7 +2452,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                               .start,
                                                       children: [
                                                         SizedBox(
-                                                          width: deviceWidth , 
+                                                          width: 200,
                                                           child: Text(
                                                             product.name!.tr
                                                                 .toString(),
@@ -2493,7 +2501,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                 ),
                                                               ),
                                                               TextSpan(
-                                                                text: "₺",
+                                                                text: product
+                                                                    .currency,
                                                                 style:
                                                                     TextStyle(
                                                                   fontSize: 16,
@@ -2535,6 +2544,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                               product.seller!
                                                                       .name ??
                                                                   '',
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
                                                               style: TextStyle(
                                                                 fontSize: 11,
                                                                 fontFamily: AppTheme
@@ -2783,18 +2795,18 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                         ? scrollController.position.userScrollDirection ==
                                 ScrollDirection.reverse
                             ? 0
-                            : 60
-                        : 60,
+                            : 60+deviceBottomPadding
+                        : 60+deviceBottomPadding,
                     child: child);
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
                   width: deviceWidth,
-                  height: 60,
+                  height: 60+deviceBottomPadding,
                   color: AppTheme.blue2,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(11, 0, 9, 0),
+                    padding: const EdgeInsets.fromLTRB(17, 0, 15, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -2817,7 +2829,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                               ),
                               Flexible(
                                 child: Text(
-                                  "${product!.price} ₺",
+                                  "${product!.price} ${product!.currency}",
                                   overflow: TextOverflow.visible,
                                   style: TextStyle(
                                     fontSize: 18,

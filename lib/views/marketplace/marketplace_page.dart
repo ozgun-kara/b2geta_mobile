@@ -315,20 +315,21 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               return Column(
                                 children: [
                                   _productItem(
-                                      productImageUrl: mostDemandProduct!
-                                          .image!.url
-                                          .toString(),
-                                      productName:
-                                          mostDemandProduct.name.toString(),
-                                      productPrice:
-                                          mostDemandProduct.price.toString()),
+                                    productImageUrl: mostDemandProduct!
+                                        .image!.url
+                                        .toString(),
+                                    productName:
+                                        mostDemandProduct.name.toString(),
+                                    productPrice:
+                                        mostDemandProduct.price.toString(),
+                                    productCurrency:
+                                        mostDemandProduct.currency.toString(),
+                                  ),
                                   const SizedBox(
                                     width: 15,
                                   ),
                                 ],
                               );
-
-                              return null;
                             },
                           ),
                         ),
@@ -460,7 +461,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       productName:
                                           categoryProduct.name.toString(),
                                       productPrice:
-                                          categoryProduct.price.toString()),
+                                          categoryProduct.price.toString(),
+                                      productCurrency:
+                                          categoryProduct.currency.toString()),
                                   const SizedBox(
                                     width: 15,
                                   ),
@@ -595,14 +598,14 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       productName:
                                           popularProduct.name.toString(),
                                       productPrice:
-                                          popularProduct.price.toString()),
+                                          popularProduct.price.toString(),
+                                      productCurrency:
+                                          popularProduct.currency.toString()),
                                   const SizedBox(
                                     width: 15,
                                   ),
                                 ],
                               );
-
-                              return null;
                             },
                           ),
                         ),
@@ -733,7 +736,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       productName:
                                           categoryProduct.name.toString(),
                                       productPrice:
-                                          categoryProduct.price.toString()),
+                                          categoryProduct.price.toString(),
+                                      productCurrency:
+                                          categoryProduct.currency.toString()),
                                   const SizedBox(
                                     width: 15,
                                   ),
@@ -902,12 +907,15 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         ));
                                   },
                                   child: _productItemNetwork(
-                                      productImageUrl: product!
-                                              .image!.url!.isNotEmpty
-                                          ? product.image!.url.toString()
-                                          : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                      productName: product.name!.tr.toString(),
-                                      productPrice: product.price.toString()),
+                                    productImageUrl: product!
+                                            .image!.url!.isNotEmpty
+                                        ? product.image!.url.toString()
+                                        : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                    productName: product.name!,
+                                    productPrice: product.price.toString(),
+                                    productCurrency:
+                                        product.currency.toString(),
+                                  ),
                                 );
                               },
                             ),
@@ -929,6 +937,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
     required String productImageUrl,
     required String productName,
     required String productPrice,
+    required String productCurrency,
     double? width,
     double? height,
   }) {
@@ -986,7 +995,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
             ),
             TextSpan(
-              text: "₺",
+              text: productCurrency,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
@@ -999,10 +1008,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
     );
   }
 
-  Widget _productItemNetwork(
-      {required String productImageUrl,
-      required String productName,
-      required String productPrice}) {
+  Widget _productItemNetwork({
+    required String productImageUrl,
+    required String productName,
+    required String productPrice,
+    required String productCurrency,
+  }) {
     return Column(
       children: [
         Container(
@@ -1059,7 +1070,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ),
             ),
             TextSpan(
-              text: "₺",
+              text: productCurrency,
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w500,

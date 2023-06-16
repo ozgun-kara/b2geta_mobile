@@ -871,7 +871,7 @@ class _MarketplacePageCopyState extends State<MarketplacePageCopy> {
                                 productImageUrl: product.images!.isNotEmpty
                                     ? product.images![0].toString()
                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
-                                productName: product.name!.tr.toString(),
+                                productName: product.name!.tr ?? product.name!.en!,
                                 productPrice: product.price.toString()),
                           );
                         },
