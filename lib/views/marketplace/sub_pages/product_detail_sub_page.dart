@@ -118,21 +118,21 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                "Mobilya ve Dekorasyon   -   Ofis Mobilyaları",
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w600,
-                                  color: AppTheme.white15,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        // child: Row(
+                        //   children: [
+                        //     Expanded(
+                        //       child: Text(
+                        //         "Mobilya ve Dekorasyon   -   Ofis Mobilyaları",
+                        //         style: TextStyle(
+                        //           fontSize: 11,
+                        //           fontFamily: AppTheme.appFontFamily,
+                        //           fontWeight: FontWeight.w600,
+                        //           color: AppTheme.white15,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ),
                     ),
                     Column(
