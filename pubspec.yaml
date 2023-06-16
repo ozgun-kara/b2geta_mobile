@@ -116,6 +116,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/dummy_images/
+    - assets/images/image_not_found.jpg
     - assets/images/dummy_images/marketplace/
     - database/general/
 
