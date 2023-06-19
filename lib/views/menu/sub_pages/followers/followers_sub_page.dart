@@ -128,7 +128,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
               visible: dropdownSelectedValue == 'My Followers'.tr,
               child: FutureBuilder<List<MyFollowingModel>>(
                 future:
-                    locator<FollowServices>().followedMeCall(queryParameters: {
+                    locator<FollowServices>().myFollowersCall(queryParameters: {
                   // 'offset': '0',
                   // 'limit': '5'
                 }),
@@ -357,7 +357,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
               visible: dropdownSelectedValue == 'Following'.tr,
               child: FutureBuilder<List<MyFollowerModel>>(
                 future:
-                    locator<FollowServices>().myFollowersCall(queryParameters: {
+                locator<FollowServices>().myFollowingCall(queryParameters: {
                   // 'offset': '0',
                   // 'limit': '5'
                 }),
@@ -381,7 +381,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                         return Container(
                           decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(22)),
+                            const BorderRadius.all(Radius.circular(22)),
                             border: Border.all(
                               width: 1,
                               color: themeMode
@@ -389,7 +389,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                   : AppTheme.black28,
                             ),
                             color:
-                                themeMode ? AppTheme.white1 : AppTheme.black12,
+                            themeMode ? AppTheme.white1 : AppTheme.black12,
                             boxShadow: [
                               BoxShadow(
                                 blurStyle: BlurStyle.normal,
@@ -397,7 +397,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                 blurRadius: 26,
                                 spreadRadius: 0,
                                 color:
-                                    const Color(0xFF2B3361).withOpacity(0.10),
+                                const Color(0xFF2B3361).withOpacity(0.10),
                               ),
                             ],
                           ),
@@ -419,7 +419,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               : AppTheme.black20),
                                       image: DecorationImage(
                                         image: NetworkImage(items![index]
-                                                .followingAvatar ??
+                                            .followingAvatar ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
                                       ),
@@ -428,7 +428,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                   const SizedBox(height: 4),
                                   Row(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         '9,2',
@@ -453,26 +453,26 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                   children: [
                                     Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                      MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Text(
                                             items[index].followingType ==
-                                                    'personal'
+                                                'personal'
                                                 ? '${items[index].followingFirstname.toString().toUpperCase()} ${items[index].followingLastname.toString().toUpperCase()}'
                                                 : items[index]
-                                                    .followingCompanyName
-                                                    .toString()
-                                                    .toUpperCase(),
+                                                .followingCompanyName
+                                                .toString()
+                                                .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
-                                                  AppTheme.appFontFamily,
+                                              AppTheme.appFontFamily,
                                               fontWeight: FontWeight.w600,
                                               color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
+                                                  context)
+                                                  .themeMode ==
+                                                  "light"
                                                   ? AppTheme.black19
                                                   : AppTheme.white1,
                                             ),
@@ -508,19 +508,19 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               elevation: 0,
                                               color: AppTheme.blue2,
                                               shape:
-                                                  const RoundedRectangleBorder(
+                                              const RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(36)),
                                               ),
                                               padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      12, 2, 12, 0),
+                                              const EdgeInsets.fromLTRB(
+                                                  12, 2, 12, 0),
                                               child: Text(
                                                 "Follow".tr,
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
-                                                      AppTheme.appFontFamily,
+                                                  AppTheme.appFontFamily,
                                                   fontWeight: FontWeight.w700,
                                                   color: AppTheme.white1,
                                                 ),
@@ -540,19 +540,19 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               elevation: 0,
                                               color: AppTheme.red6,
                                               shape:
-                                                  const RoundedRectangleBorder(
+                                              const RoundedRectangleBorder(
                                                 borderRadius: BorderRadius.all(
                                                     Radius.circular(36)),
                                               ),
                                               padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      12, 2, 12, 0),
+                                              const EdgeInsets.fromLTRB(
+                                                  12, 2, 12, 0),
                                               child: Text(
                                                 "Unfollow".tr,
                                                 style: TextStyle(
                                                   fontSize: 11,
                                                   fontFamily:
-                                                      AppTheme.appFontFamily,
+                                                  AppTheme.appFontFamily,
                                                   fontWeight: FontWeight.w700,
                                                   color: AppTheme.white1,
                                                 ),
@@ -574,12 +574,12 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                       height: deviceWidth + 115,
                       child: Center(
                           child: CupertinoActivityIndicator(
-                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                            color: Provider.of<ThemeProvider>(context).themeMode ==
                                 "light"
-                            ? AppTheme.black1
-                            : AppTheme.white1,
-                        radius: 12,
-                      )),
+                                ? AppTheme.black1
+                                : AppTheme.white1,
+                            radius: 12,
+                          )),
                     );
                   }
                 },

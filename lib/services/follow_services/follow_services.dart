@@ -86,47 +86,8 @@ class FollowServices {
     }
   }
 
-  // MY FOLLOWERS
-  Future<List<MyFollowerModel>> myFollowersCall({
-    required Map<String, String> queryParameters,
-  }) async {
-    final response = await http.get(
-        Uri.parse('${Constants.apiUrl}/my-followers/${Constants.userId}')
-            .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
-
-    List<MyFollowerModel> myFollowersList = [];
-
-    if (response.statusCode == 200) {
-      debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint(
-          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
-
-      var status = json.decode(response.body)["status"];
-
-      if (status == true) {
-        var data = json.decode(response.body)["data"]["data"];
-        for (var element in data) {
-          myFollowersList.add(MyFollowerModel.fromJson(element));
-        }
-
-        return myFollowersList;
-      } else {
-        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
-        debugPrint(
-            "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
-        return myFollowersList;
-      }
-    } else {
-      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
-      return myFollowersList;
-    }
-  }
-
-  // FOLLOWED ME (MY FOLLOWING)
-  Future<List<MyFollowingModel>> followedMeCall({
+  //  MY FOLLOWERS
+  Future<List<MyFollowingModel>> myFollowersCall({
     required Map<String, String> queryParameters,
   }) async {
     final response = await http.get(
@@ -161,6 +122,45 @@ class FollowServices {
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       return myFollowingList;
+    }
+  }
+
+  // MY FOLLOWING
+  Future<List<MyFollowerModel>> myFollowingCall({
+    required Map<String, String> queryParameters,
+  }) async {
+    final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/my-followers/${Constants.userId}')
+            .replace(queryParameters: queryParameters),
+        headers: Constants.headers);
+
+    List<MyFollowerModel> myFollowersList = [];
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+
+      if (status == true) {
+        var data = json.decode(response.body)["data"]["data"];
+        for (var element in data) {
+          myFollowersList.add(MyFollowerModel.fromJson(element));
+        }
+
+        return myFollowersList;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        return myFollowersList;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      return myFollowersList;
     }
   }
 }
