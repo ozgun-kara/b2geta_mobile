@@ -190,7 +190,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               : AppTheme.black20),
                                       image: DecorationImage(
                                         image: NetworkImage(items![index]
-                                                .followingAvatar ??
+                                                .userPhoto ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
                                       ),
@@ -228,10 +228,13 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       children: [
                                         Expanded(
                                           child: Text(
-                                            items[index]
-                                                .followingCompanyName
-                                                .toString()
-                                                .toUpperCase(),
+                                            items[index].followingType ==
+                                                    'personal'
+                                                ? '${items[index].userFirstname.toString().toUpperCase()} ${items[index].userLastname.toString().toUpperCase()}'
+                                                : items[index]
+                                                    .userCompanyName
+                                                    .toString()
+                                                    .toUpperCase(),
                                             style: TextStyle(
                                               fontSize: 13,
                                               fontFamily:
@@ -265,68 +268,79 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                       ),
                                     ),
                                     const SizedBox(height: 4),
-                                    Visibility(
-                                      visible: true,
-                                      child: SizedBox(
+                                    // Visibility(
+                                    //   visible: false,
+                                    //   child: SizedBox(
+                                    //     height: 22,
+                                    //     child: ButtonTheme(
+                                    //       minWidth: double.minPositive,
+                                    //       height: 22,
+                                    //       child: MaterialButton(
+                                    //           elevation: 0,
+                                    //           color: AppTheme.blue2,
+                                    //           shape:
+                                    //               const RoundedRectangleBorder(
+                                    //             borderRadius: BorderRadius.all(
+                                    //                 Radius.circular(36)),
+                                    //           ),
+                                    //           padding:
+                                    //               const EdgeInsets.fromLTRB(
+                                    //                   12, 2, 12, 0),
+                                    //           child: Text(
+                                    //             "Follow".tr,
+                                    //             style: TextStyle(
+                                    //               fontSize: 11,
+                                    //               fontFamily:
+                                    //                   AppTheme.appFontFamily,
+                                    //               fontWeight: FontWeight.w700,
+                                    //               color: AppTheme.white1,
+                                    //             ),
+                                    //           ),
+                                    //           onPressed: () async {}),
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                    SizedBox(
+                                      height: 22,
+                                      child: ButtonTheme(
+                                        minWidth: double.minPositive,
                                         height: 22,
-                                        child: ButtonTheme(
-                                          minWidth: double.minPositive,
-                                          height: 22,
-                                          child: MaterialButton(
-                                              elevation: 0,
-                                              color: AppTheme.blue2,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(36)),
+                                        child: MaterialButton(
+                                            elevation: 0,
+                                            color: AppTheme.red6,
+                                            shape: const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(36)),
+                                            ),
+                                            padding: const EdgeInsets.fromLTRB(
+                                                12, 2, 12, 0),
+                                            child: Text(
+                                              "Unfollow".tr,
+                                              style: TextStyle(
+                                                fontSize: 11,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppTheme.white1,
                                               ),
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      12, 2, 12, 0),
-                                              child: Text(
-                                                "Follow".tr,
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.white1,
-                                                ),
-                                              ),
-                                              onPressed: () async {}),
-                                        ),
-                                      ),
-                                    ),
-                                    Visibility(
-                                      visible: false,
-                                      child: SizedBox(
-                                        height: 22,
-                                        child: ButtonTheme(
-                                          minWidth: double.minPositive,
-                                          height: 22,
-                                          child: MaterialButton(
-                                              elevation: 0,
-                                              color: AppTheme.red6,
-                                              shape:
-                                                  const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(36)),
-                                              ),
-                                              padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      12, 2, 12, 0),
-                                              child: Text(
-                                                "Unfollow".tr,
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w700,
-                                                  color: AppTheme.white1,
-                                                ),
-                                              ),
-                                              onPressed: () async {}),
-                                        ),
+                                            ),
+                                            onPressed: () async {
+                                              locator<FollowServices>()
+                                                  .unfollowCall(
+                                                      userId: items[index]
+                                                          .followingId
+                                                          .toString())
+                                                  .then((value) {
+                                                if (value == true) {
+                                                  setState(() {});
+                                                  debugPrint(
+                                                      "SUCCESSFULLY UNFOLLOWED");
+                                                } else {
+                                                  debugPrint(
+                                                      "COULD NOT UNFOLLOWED");
+                                                }
+                                              });
+                                            }),
                                       ),
                                     ),
                                   ],
