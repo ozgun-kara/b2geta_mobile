@@ -163,6 +163,7 @@ class _MyAccountPostPageState extends State<MyAccountPostPage> {
                               ),
                             ),
                           ),
+                          /*
                           IconButton(
                             onPressed: () {},
                             icon: Image.asset(
@@ -170,7 +171,7 @@ class _MyAccountPostPageState extends State<MyAccountPostPage> {
                               color:
                                   themeMode ? AppTheme.blue3 : AppTheme.white12,
                             ),
-                          )
+                          )*/
                         ],
                       ),
                     ),
