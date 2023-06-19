@@ -164,14 +164,14 @@ class _CompanyProfilePostSubPageState extends State<CompanyProfilePostSubPage> {
                               ),
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Image.asset(
-                              "assets/icons/post_menu.png",
-                              color:
-                                  themeMode ? AppTheme.blue3 : AppTheme.white12,
-                            ),
-                          )
+                          // IconButton(
+                          //   onPressed: () {},
+                          //   icon: Image.asset(
+                          //     "assets/icons/post_menu.png",
+                          //     color:
+                          //         themeMode ? AppTheme.blue3 : AppTheme.white12,
+                          //   ),
+                          // )
                         ],
                       ),
                     ),
