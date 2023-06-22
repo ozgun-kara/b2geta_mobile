@@ -8,7 +8,6 @@ import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
-import 'package:get_storage/get_storage.dart';
 
 class MenuPageProvider with ChangeNotifier {
   // MY ADDRESSES SUBPAGE
@@ -109,5 +108,4 @@ class MenuPageProvider with ChangeNotifier {
     imageFilesList!.clear();
     notifyListeners();
   }
-
 }

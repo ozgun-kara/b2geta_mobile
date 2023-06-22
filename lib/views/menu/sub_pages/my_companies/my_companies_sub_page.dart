@@ -7,7 +7,6 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
