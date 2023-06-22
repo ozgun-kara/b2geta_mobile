@@ -10,7 +10,7 @@ class NavigationPageProvider with ChangeNotifier {
 
   final List<Widget> pages = [
     const HomePage(),
-    const MarketplacePage(),
+    const MarketPlacePageCopy(),
     const BasketPage(),
     const ExplorePage(),
     const MyAccountPage(),

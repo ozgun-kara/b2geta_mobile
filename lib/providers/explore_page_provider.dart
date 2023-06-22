@@ -21,7 +21,7 @@ class ExplorePageProvider with ChangeNotifier {
   }
 
   Future getExploreList() async {
-    await locator<SocialServices>().getDiscover(
+  await locator<SocialServices>().getDiscover(
       queryParameters: {
         "offset": _offset.toString(),
         "limit": _limit.toString(),
@@ -31,7 +31,7 @@ class ExplorePageProvider with ChangeNotifier {
 
       for (var feed in feedList) {
         if (feed.type != 'story') {
-          if (feed.type == "reels" ||
+          if ((feed.type == "reels") ||
               (feed.type == 'feed' && feed.images!.isNotEmpty)) {
             tempList.add(feed);
           }

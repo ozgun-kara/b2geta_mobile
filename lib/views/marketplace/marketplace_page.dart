@@ -9,14 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 
-class MarketplacePage extends StatefulWidget {
-  const MarketplacePage({Key? key}) : super(key: key);
+class MarketPlacePageCopy extends StatefulWidget {
+  const MarketPlacePageCopy({Key? key}) : super(key: key);
 
   @override
-  State<MarketplacePage> createState() => _MarketplacePageState();
+  State<MarketPlacePageCopy> createState() => _MarketPlacePageCopyState();
 }
 
-class _MarketplacePageState extends State<MarketplacePage> {
+class _MarketPlacePageCopyState extends State<MarketPlacePageCopy> {
   ScrollController scrollController = ScrollController();
   List<ProductModel>? productList;
 
@@ -29,7 +29,6 @@ class _MarketplacePageState extends State<MarketplacePage> {
   void initState() {
     super.initState();
     getProductList();
-
   }
 
   getProductList() async {
