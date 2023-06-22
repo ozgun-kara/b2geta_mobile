@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';

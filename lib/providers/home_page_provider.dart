@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field
+// ignore_for_file: unused_field, unused_local_variable
 
 import 'dart:io';
 import 'package:b2geta_mobile/locator.dart';
@@ -126,8 +126,6 @@ class HomePageProvider with ChangeNotifier {
 
     notifyListeners();
   }
-
-
 
   //CREATE POST/REELS
   int _tabIndex = 0;

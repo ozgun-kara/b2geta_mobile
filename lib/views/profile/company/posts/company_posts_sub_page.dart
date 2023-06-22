@@ -1,7 +1,5 @@
 import 'package:b2geta_mobile/providers/company_profile_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
-import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
-import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';

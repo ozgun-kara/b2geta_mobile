@@ -1,3 +1,5 @@
+// ignore_for_file: equal_keys_in_map
+
 final Map<String, String> en = {
   // LANGUAGE PAGE
   'Language Selection': 'Language Selection',
@@ -297,8 +299,8 @@ final Map<String, String> en = {
   'The most demanded products': 'The most demanded products',
   'Popular Products': 'Popular Products',
   'Newly Added Products': 'Newly Added Products',
-  'Textile':'Textile',
-  'Clothes':'Clothes',
+  'Textile': 'Textile',
+  'Clothes': 'Clothes',
 
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
