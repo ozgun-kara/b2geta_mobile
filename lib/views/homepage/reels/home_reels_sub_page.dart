@@ -9,17 +9,15 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_vie
 class HomeReelsSubPage extends StatefulWidget {
   const HomeReelsSubPage({
     Key? key,
-    required this.scrollController,
   }) : super(key: key);
 
-  final ScrollController scrollController;
 
   @override
   State<HomeReelsSubPage> createState() => _HomeReelsSubPageState();
 }
 
 class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
-  late ScrollController _scrollController;
+
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -30,18 +28,7 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
   void initState() {
     super.initState();
     getReels();
-    _scrollController = widget.scrollController;
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.maxScrollExtent ==
-            _scrollController.offset) {
-          if (Provider.of<HomePageProvider>(context, listen: false)
-              .isMoreFeedData) {
-            getReels();
-          }
-        }
-      },
-    );
+    
   }
 
   void getReels() async {
