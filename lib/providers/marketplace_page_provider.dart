@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class MarketPlacePageProvider with ChangeNotifier {
   // MARKETPLACE PAGE
 
-  List<ProductModel> productList = [];
+  List productList = [];
   MarketPlaceModel? marketPlaceModel;
 
   Future getProducts() async {

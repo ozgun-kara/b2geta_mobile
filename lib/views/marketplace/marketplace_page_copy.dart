@@ -43,27 +43,27 @@ class _MarketplacePageState extends State<MarketplacePage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-    final BannerModel banner1 = BannerModel(
+    final SliderModel slider1 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image1.png",
         height: 205,
         width: deviceWidth);
-    final BannerModel banner2 = BannerModel(
+    final SliderModel slider2 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image9.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner3 = BannerModel(
+    final SliderModel slider3 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image13.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner4 = BannerModel(
+    final SliderModel slider4 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image17.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner5 = BannerModel(
+    final SliderModel slider5 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image21.png",
         height: 150,
@@ -82,26 +82,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                     ),
                     child: Column(
                       children: [
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        ProductListSubPage(
-                                      productList:
-                                          marketPlaceProvider.productList,
-                                      bannerItem: banner1,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: _bannerItem(bannerItem: banner1)),
+                        _sliderItem(sliderItem: slider1),
                         //SPACE
                         const SizedBox(
                           height: 14.0,
@@ -110,20 +91,23 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         SizedBox(
                           height: 130,
                           width: deviceWidth,
-                          child: ListView(
+                          child: ListView.builder(
                             scrollDirection: Axis.horizontal,
-                            children: [
-                              GestureDetector(
+                            itemCount: marketPlaceProvider
+                                .marketPlaceModel!.categories!.length,
+                            itemBuilder: (context, index) {
+                              var category = marketPlaceProvider
+                                  .marketPlaceModel!.categories![index];
+                              return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
                                       context,
                                       PageRouteBuilder(
                                         pageBuilder: (_, __, ___) =>
                                             ProductListSubPage(
-                                          productList:
-                                              marketPlaceProvider.productList,
+                                          productList: category.products!.data!,
                                           productListName:
-                                              'Construction Materials'.tr,
+                                              category.categoryName.toString(),
                                         ),
                                         transitionDuration:
                                             const Duration(milliseconds: 0),
@@ -135,87 +119,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       ));
                                 },
                                 child: _categoryItem(
-                                    imageUrl:
-                                        "assets/images/dummy_images/marketplace/marketplace_image2.png",
-                                    text: 'Construction Materials'.tr),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            ProductListSubPage(
-                                          productList:
-                                              marketPlaceProvider.productList,
-                                          productListName:
-                                              'Furniture and Decoration'.tr,
-                                        ),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
-                                      ));
-                                },
-                                child: _categoryItem(
-                                    imageUrl:
-                                        "assets/images/dummy_images/marketplace/marketplace_image3.png",
-                                    text: 'Furniture and Decoration'.tr),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            ProductListSubPage(
-                                          productList:
-                                              marketPlaceProvider.productList,
-                                          productListName: 'Clothes'.tr,
-                                        ),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
-                                      ));
-                                },
-                                child: _categoryItem(
-                                    imageUrl:
-                                        "assets/images/dummy_images/marketplace/marketplace_image5.jpg",
-                                    text: 'Clothes'.tr),
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (_, __, ___) =>
-                                            ProductListSubPage(
-                                          productList:
-                                              marketPlaceProvider.productList,
-                                          productListName: 'Textile'.tr,
-                                        ),
-                                        transitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
-                                        transitionsBuilder: (_, a, __, c) =>
-                                            FadeTransition(
-                                                opacity: a, child: c),
-                                      ));
-                                },
-                                child: _categoryItem(
-                                    imageUrl:
-                                        "assets/images/dummy_images/marketplace/marketplace_image4.jpeg",
-                                    text: 'Textile'.tr),
-                              ),
-                            ],
+                                  imageUrl: category!.image ??
+                                      "assets/images/dummy_images/marketplace/marketplace_image2.png",
+                                  text: category.categoryName.toString(),
+                                ),
+                              );
+                            },
                           ),
                         ),
                         //SPACE
@@ -249,8 +158,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                       PageRouteBuilder(
                                         pageBuilder: (_, __, ___) =>
                                             ProductListSubPage(
-                                          productList:
-                                              marketPlaceProvider.productList,
+                                          productList: marketPlaceProvider
+                                                  .marketPlaceModel!
+                                                  .mostDemandProducts!
+                                                  .data ??
+                                              [],
                                           productListName:
                                               'The most demanded products'.tr,
                                         ),
@@ -337,26 +249,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         const SizedBox(
                           height: 23,
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        ProductListSubPage(
-                                      productList:
-                                          marketPlaceProvider.productList,
-                                      bannerItem: banner2,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: _bannerItem(bannerItem: banner2)),
+                        _sliderItem(sliderItem: slider2),
                         //SPACE
                         const SizedBox(
                           height: 28.0,
@@ -370,7 +263,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Furniture and Decoration'.tr,
+                                marketPlaceProvider.marketPlaceModel!
+                                    .categories![1]!.categoryName
+                                    .toString(),
                                 style: TextStyle(
                                   fontSize: 15,
                                   height: 1,
@@ -390,10 +285,15 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         PageRouteBuilder(
                                           pageBuilder: (_, __, ___) =>
                                               ProductListSubPage(
-                                            productList:
-                                                marketPlaceProvider.productList,
-                                            productListName:
-                                                'Furniture and Decoration'.tr,
+                                            productList: marketPlaceProvider
+                                                .marketPlaceModel!
+                                                .categories![1]!
+                                                .products!
+                                                .data!,
+                                            productListName: marketPlaceProvider
+                                                .marketPlaceModel!
+                                                .categories![1]!
+                                                .categoryName,
                                           ),
                                           transitionDuration:
                                               const Duration(milliseconds: 0),
@@ -476,26 +376,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         const SizedBox(
                           height: 23,
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        ProductListSubPage(
-                                      productList:
-                                          marketPlaceProvider.productList,
-                                      bannerItem: banner3,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: _bannerItem(bannerItem: banner3)),
+                        _sliderItem(sliderItem: slider3),
                         //SPACE
                         const SizedBox(
                           height: 28.0,
@@ -529,8 +410,11 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         PageRouteBuilder(
                                           pageBuilder: (_, __, ___) =>
                                               ProductListSubPage(
-                                            productList:
-                                                marketPlaceProvider.productList,
+                                            productList: marketPlaceProvider
+                                                    .marketPlaceModel!
+                                                    .popularProducts!
+                                                    .data ??
+                                                [],
                                             productListName:
                                                 'Popular Products'.tr,
                                           ),
@@ -613,26 +497,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         const SizedBox(
                           height: 23,
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        ProductListSubPage(
-                                      productList:
-                                          marketPlaceProvider.productList,
-                                      bannerItem: banner4,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: _bannerItem(bannerItem: banner4)),
+                        _sliderItem(sliderItem: slider4),
                         //SPACE
                         const SizedBox(
                           height: 23.0,
@@ -646,7 +511,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Textile'.tr,
+                                marketPlaceProvider.marketPlaceModel!
+                                    .categories![2]!.categoryName!,
                                 style: TextStyle(
                                   fontSize: 15,
                                   height: 1,
@@ -666,9 +532,15 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         PageRouteBuilder(
                                           pageBuilder: (_, __, ___) =>
                                               ProductListSubPage(
-                                            productList:
-                                                marketPlaceProvider.productList,
-                                            productListName: 'Textile'.tr,
+                                            productList: marketPlaceProvider
+                                                .marketPlaceModel!
+                                                .categories![2]!
+                                                .products!
+                                                .data!,
+                                            productListName: marketPlaceProvider
+                                                .marketPlaceModel!
+                                                .categories![2]!
+                                                .categoryName!,
                                           ),
                                           transitionDuration:
                                               const Duration(milliseconds: 0),
@@ -751,26 +623,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                         const SizedBox(
                           height: 23,
                         ),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (_, __, ___) =>
-                                        ProductListSubPage(
-                                      productList:
-                                          marketPlaceProvider.productList,
-                                      bannerItem: banner5,
-                                    ),
-                                    transitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    reverseTransitionDuration:
-                                        const Duration(milliseconds: 0),
-                                    transitionsBuilder: (_, a, __, c) =>
-                                        FadeTransition(opacity: a, child: c),
-                                  ));
-                            },
-                            child: _bannerItem(bannerItem: banner5)),
+                        _sliderItem(sliderItem: slider5),
                         //SPACE
                         const SizedBox(
                           height: 23.0,
@@ -813,7 +666,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                                       ProductListSubPage(
                                                     productList:
                                                         marketPlaceProvider
-                                                            .productList,
+                                                                .marketPlaceModel!
+                                                                .newProducts!
+                                                                .data ??
+                                                            [],
                                                     productListName:
                                                         'Newly Added Products'
                                                             .tr,
@@ -1096,7 +952,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 Radius.circular(10),
               ),
               image: DecorationImage(
-                image: AssetImage(
+                image: NetworkImage(
                   imageUrl,
                 ),
                 fit: BoxFit.cover,
@@ -1126,20 +982,20 @@ class _MarketplacePageState extends State<MarketplacePage> {
     );
   }
 
-  Widget _bannerItem({required BannerModel bannerItem}) {
+  Widget _sliderItem({required SliderModel sliderItem}) {
     return Padding(
       padding: const EdgeInsets.only(
         right: 12,
       ),
       child: Container(
-        height: bannerItem.height,
-        width: bannerItem.width,
+        height: sliderItem.height,
+        width: sliderItem.width,
         decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
             image: DecorationImage(
-              image: AssetImage(bannerItem.imageUrl),
+              image: AssetImage(sliderItem.imageUrl),
               fit: BoxFit.cover,
             )),
       ),

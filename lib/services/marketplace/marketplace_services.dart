@@ -9,9 +9,7 @@ class MarketplaceServices {
   Future<MarketPlaceModel?> getData() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/marketplace'),
-      headers: {
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
+      headers: Constants.headers,
     );
 
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
