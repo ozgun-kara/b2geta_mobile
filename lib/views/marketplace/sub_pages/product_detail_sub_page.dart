@@ -2021,7 +2021,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         const SizedBox(
                                                             width: 6),
                                                         Text(
-                                                          'Store'.tr,
+                                                          'Send Message'.tr,
                                                           style: TextStyle(
                                                             fontSize: 12,
                                                             fontFamily: AppTheme
@@ -2045,10 +2045,17 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                           PageRouteBuilder(
                                                             pageBuilder: (_, __,
                                                                     ___) =>
-                                                                CompanyProfilePage(
-                                                                    userId:
-                                                                        product!.userId ??
-                                                                            ''),
+                                                               AddMessageSubPage(
+                                                                toId: product!
+                                                                    .userId!,
+                                                                fromId: Provider.of<
+                                                                            UserProvider>(
+                                                                        context,
+                                                                        listen:
+                                                                            false)
+                                                                    .getUser
+                                                                    .id!,
+                                                              ),
                                                             transitionDuration:
                                                                 const Duration(
                                                                     milliseconds:
