@@ -301,6 +301,7 @@ final Map<String, String> en = {
   'Newly Added Products': 'Newly Added Products',
   'Textile': 'Textile',
   'Clothes': 'Clothes',
+  'Send Message': 'Send Message',
 
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
