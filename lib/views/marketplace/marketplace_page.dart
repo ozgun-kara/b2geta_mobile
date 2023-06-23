@@ -41,27 +41,27 @@ class _MarketPlacePageCopyState extends State<MarketPlacePageCopy> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-    final BannerModel banner1 = BannerModel(
+    final SliderModel banner1 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image1.png",
         height: 205,
         width: deviceWidth);
-    final BannerModel banner2 = BannerModel(
+    final SliderModel banner2 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image9.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner3 = BannerModel(
+    final SliderModel banner3 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image13.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner4 = BannerModel(
+    final SliderModel banner4 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image17.png",
         height: 150,
         width: deviceWidth);
-    final BannerModel banner5 = BannerModel(
+    final SliderModel banner5 = SliderModel(
         imageUrl:
             "assets/images/dummy_images/marketplace/marketplace_image21.png",
         height: 150,
@@ -1068,7 +1068,7 @@ class _MarketPlacePageCopyState extends State<MarketPlacePageCopy> {
     );
   }
 
-  Widget _bannerItem({required BannerModel bannerItem}) {
+  Widget _bannerItem({required SliderModel bannerItem}) {
     return Padding(
       padding: const EdgeInsets.only(
         right: 12,
