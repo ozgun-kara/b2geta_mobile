@@ -5,54 +5,28 @@ import 'package:flutter/material.dart';
 
 class ExplorePageProvider with ChangeNotifier {
   List<FeedModel> exploreList = [];
-  final int _limit = 30;
-  int _offset = 0;
-  int _page = 0;
-  bool _isMoreData = false;
 
-  get isMoreData => _isMoreData;
-
-  void onRefresh() {
-    _offset = 0;
-    _page = 0;
-    _isMoreData = false;
-    exploreList.clear();
-    getExploreList();
-  }
 
   Future getExploreList() async {
   await locator<SocialServices>().getDiscover(
       queryParameters: {
-        "offset": _offset.toString(),
-        "limit": _limit.toString(),
+        "offset":"0",
+        "limit": "99",
       },
     ).then((feedList) async {
-      List<FeedModel> tempList = [];
+
 
       for (var feed in feedList) {
         if (feed.type != 'story') {
           if ((feed.type == "reels") ||
               (feed.type == 'feed' && feed.images!.isNotEmpty)) {
-            tempList.add(feed);
+            exploreList.add(feed);
           }
         }
       }
-      if (tempList.isEmpty) {
-        _isMoreData = false;
-      } else {
-        _isMoreData = true;
-      }
-      _page++;
 
-      _offset = _page * _limit;
-      addDiscoverToDiscoverList(tempList);
     });
     notifyListeners();
   }
 
-  void addDiscoverToDiscoverList(List<FeedModel> discovers) {
-    exploreList.addAll(discovers);
-
-    notifyListeners();
-  }
 }
