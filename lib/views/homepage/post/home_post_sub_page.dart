@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
@@ -16,9 +15,7 @@ import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart'
 class HomePostSubPage extends StatefulWidget {
   const HomePostSubPage({
     Key? key,
-    required this.scrollController,
   }) : super(key: key);
-  final ScrollController scrollController;
 
   @override
   State<HomePostSubPage> createState() => _HomePostSubPageState();
@@ -26,7 +23,6 @@ class HomePostSubPage extends StatefulWidget {
 
 class _HomePostSubPageState extends State<HomePostSubPage> {
   final SocialServices _socialServices = SocialServices();
-  late ScrollController _scrollController;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -37,18 +33,6 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
   void initState() {
     super.initState();
     getPostsData();
-    _scrollController = widget.scrollController;
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.maxScrollExtent ==
-            _scrollController.offset) {
-          if (Provider.of<HomePageProvider>(context, listen: false)
-              .isMoreFeedData) {
-            getPostsData();
-          }
-        }
-      },
-    );
   }
 
   getPostsData() {

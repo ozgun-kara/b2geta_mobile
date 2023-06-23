@@ -43,7 +43,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     getStories();
-
   }
 
   Future<void> _getFromGallery() async {
@@ -97,8 +96,6 @@ class _HomePageState extends State<HomePage> {
             return RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 2));
-                homePageProvider.onRefreshFeed();
-                homePageProvider.onRefreshReels();
               },
               color: Colors.black,
               child: CustomScrollView(controller: _scrollController, slivers: [
@@ -589,12 +586,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 tabIndex == 1
-                    ? HomeReelsSubPage(
-                        scrollController: _scrollController,
-                      )
-                    : HomePostSubPage(
-                        scrollController: _scrollController,
-                      ),
+                    ? const HomeReelsSubPage()
+                    : const HomePostSubPage(),
                 const SliverToBoxAdapter(
                   child: SizedBox(
                     height: 80,
