@@ -1,6 +1,5 @@
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/marketplace/marketplace_model.dart';
-import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/services/marketplace/marketplace_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:flutter/material.dart';
