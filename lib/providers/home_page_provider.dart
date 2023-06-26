@@ -12,48 +12,31 @@ class HomePageProvider with ChangeNotifier {
 
   void getFeeds() async {
     await locator<SocialServices>().getAllFeedCall(queryParameters: {
-      "offset":"0",
+      "offset": "0",
       "limit": "99",
       "type": "feed"
     }).then((feedList) {
-
-      for (var feed in feedList) {
-        feedsList.add(feed);
-      }
+      feedsList = feedList;
     });
 
     notifyListeners();
   }
-
-
 
 //REELS
   List<FeedModel> reelsList = [];
 
-
-
   void getReels() async {
     await locator<SocialServices>().getAllReelsCall(
-      queryParameters: {
-        "offset": "0",
-        "limit": "99",
-        "type": "reels"
-      },
+      queryParameters: {"offset": "0", "limit": "99", "type": "reels"},
     ).then((feedList) async {
-
-      for (var feed in feedList) {
-        reelsList.add(feed);
-      }
-
+      reelsList = feedList;
     });
 
     notifyListeners();
   }
 
-
   //STORY
   List<FeedModel> storyList = [];
-
 
   Future getStory() async {
     await locator<SocialServices>().getAllStoryCall(queryParameters: {

@@ -316,6 +316,7 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                                           getPostsData();
                                         }
                                       });
+                                      setState(() {});
                                     }
                                   },
                                   child: SizedBox(
