@@ -18,7 +18,7 @@ class MarketplaceServices {
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
-      debugPrint("RESPONSE BODY: $responseBody");
+      //debugPrint("RESPONSE BODY: $responseBody");
       // debugPrint("RESPONSE DATA: ${response.body}");
 
       var status = json.decode(response.body)["status"];
