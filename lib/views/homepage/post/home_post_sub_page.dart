@@ -53,7 +53,7 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
             childCount: homeProvider.feedsList.length,
             (context, index) {
               var feed = homeProvider.feedsList[index];
-              if (index < homeProvider.feedsList.length) {
+              if (homeProvider.feedsList.isNotEmpty) {
                 return Container(
                   width: deviceWidth,
                   color: themeMode ? AppTheme.white1 : AppTheme.black7,
