@@ -172,5 +172,22 @@ class BasketServices {
     }
   }
 
+  // EMPTY BASKET
+  Future<bool> emptyBasketCall() async {
+    final response = await http
+        .delete(Uri.parse('${Constants.apiUrl}/basket/empty'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+    });
 
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
 }
