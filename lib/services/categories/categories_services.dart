@@ -48,14 +48,15 @@ class CategoriesServices {
     }
   }
 
-  // CATEGORIES NESTED
-  Future<bool> categoriesNestedCall({required String language}) async {
+  // SUB CATEGORIES
+  Future<List<CategoryModel>> subCategoriesCall(
+      {required String parentId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/categories/nested'),
-      headers: {
-        "Accept-Language": language,
-      },
+      Uri.parse('${Constants.apiUrl}/categories?parent_id=$parentId'),
+      headers: Constants.headers,
     );
+
+    List<CategoryModel> subCategoryList = [];
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
@@ -64,9 +65,13 @@ class CategoriesServices {
           "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
+      var dataList = json.decode(response.body)["data"];
 
       if (status == true) {
-        return true;
+        for (var subCategory in dataList) {
+          subCategoryList.add(CategoryModel.fromJson(subCategory));
+        }
+        return subCategoryList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
@@ -74,12 +79,12 @@ class CategoriesServices {
         debugPrint(
             "responseText: ${json.decode(response.body)["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return subCategoryList;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+      return subCategoryList;
     }
   }
 
