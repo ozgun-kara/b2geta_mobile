@@ -1,4 +1,8 @@
-
+import 'dart:convert';
+import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/basket/basket_model.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class BasketServices {
   // GET ALL
@@ -168,22 +172,5 @@ class BasketServices {
     }
   }
 
-  // EMPTY BASKET
-  Future<bool> emptyBasketCall() async {
-    final response = await http
-        .delete(Uri.parse('${Constants.apiUrl}/basket/empty'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}",
-    });
 
-    if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
-      if (status == true) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
 }
