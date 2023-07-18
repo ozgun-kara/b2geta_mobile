@@ -211,12 +211,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                                   categoryId = categoryList[categoryIndex].id;
 
-                                
-                                      Provider.of<MenuPageProvider>(context,
-                                              listen: false)
-                                          .fetchSubCategoryList(
-                                              parentId: categoryId);
-                                 
+                                  Provider.of<MenuPageProvider>(context,
+                                          listen: false)
+                                      .fetchSubCategoryList(
+                                          parentId: categoryId);
                                 }
                               },
 
@@ -349,7 +347,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ),
                           Visibility(
-                            visible: menuPageProvider.subCategoryList.isNotEmpty,
+                            visible:
+                                menuPageProvider.subCategoryList.isNotEmpty,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -418,7 +417,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .updateSelectedSubCategory(
                                               value as String);
 
-                                      var categoryIndex = menuPageProvider.subCategoryList
+                                      var categoryIndex = menuPageProvider
+                                          .subCategoryList
                                           .indexWhere(((element) =>
                                               element.categoryName == value));
                                       if (categoryIndex != -1) {
@@ -427,8 +427,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         debugPrint(
                                             'CATEGORY ID: ${categoryList[categoryIndex].id}');
 
-                                        categoryId =
-                                            categoryList[categoryIndex].id;
+                                        var subCategoryId = menuPageProvider
+                                            .subCategoryList[categoryIndex].id;
+
+                                       
+                                        Provider.of<MenuPageProvider>(context,
+                                                listen: false)
+                                            .fetchCategoryFeatureasList(
+                                                categoryId: subCategoryId!);
                                       }
                                     },
 
@@ -571,7 +577,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ),
                           Visibility(
-                            visible: false,
+                            visible: menuPageProvider
+                                .categoryFeatureasList.isNotEmpty,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -612,11 +619,12 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     //         : AppTheme.white14,
                                     //   ),
                                     // ),
-                                    items: categoryList
+                                    items: menuPageProvider
+                                        .categoryFeatureasList
                                         .map((item) => DropdownMenuItem<String>(
-                                              value: item.categoryName,
+                                              value: item.feature!.label,
                                               child: Text(
-                                                item.categoryName ?? '',
+                                                item.feature!.label ?? '',
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   fontFamily:
@@ -633,23 +641,29 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               ),
                                             ))
                                         .toList(),
-                                    value: menuPageProvider.selectedCategory,
+                                    value: menuPageProvider
+                                        .selectedCategoryFeatureas,
 
                                     onChanged: (value) {
-                                      menuPageProvider.updateSelectedCategory(
-                                          value as String);
+                                      menuPageProvider
+                                          .updateSelectedCategoryFeatureas(
+                                              value as String);
 
-                                      var categoryIndex =
-                                          categoryList.indexWhere(((element) =>
-                                              element.categoryName == value));
+                                      var categoryIndex = menuPageProvider
+                                          .categoryFeatureasList
+                                          .indexWhere(((element) =>
+                                              element.feature!.label == value));
                                       if (categoryIndex != -1) {
                                         debugPrint(
                                             'CATEGORY INDEX: $categoryIndex');
                                         debugPrint(
                                             'CATEGORY ID: ${categoryList[categoryIndex].id}');
 
-                                        categoryId =
-                                            categoryList[categoryIndex].id;
+                                        var categoryFeatureasId =
+                                            menuPageProvider
+                                                .categoryFeatureasList[
+                                                    categoryIndex]
+                                                .id;
                                       }
                                     },
 
