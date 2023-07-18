@@ -198,6 +198,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               value: menuPageProvider.selectedCategory,
 
                               onChanged: (value) {
+                               // menuPageProvider.subCategoryList = [];
+                                menuPageProvider.selectedSubCategory = null;
+                                menuPageProvider.selectedCategoryFeatureas =
+                                    null;
+
                                 menuPageProvider
                                     .updateSelectedCategory(value as String);
 
@@ -417,20 +422,20 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .updateSelectedSubCategory(
                                               value as String);
 
-                                      var categoryIndex = menuPageProvider
+                                      var subCategoryIndex = menuPageProvider
                                           .subCategoryList
                                           .indexWhere(((element) =>
                                               element.categoryName == value));
-                                      if (categoryIndex != -1) {
+                                      if (subCategoryIndex != -1) {
                                         debugPrint(
-                                            'CATEGORY INDEX: $categoryIndex');
+                                            'CATEGORY INDEX: $subCategoryIndex');
                                         debugPrint(
-                                            'CATEGORY ID: ${categoryList[categoryIndex].id}');
+                                            'CATEGORY ID: ${menuPageProvider.subCategoryList[subCategoryIndex].id}');
 
                                         var subCategoryId = menuPageProvider
-                                            .subCategoryList[categoryIndex].id;
+                                            .subCategoryList[subCategoryIndex]
+                                            .id;
 
-                                       
                                         Provider.of<MenuPageProvider>(context,
                                                 listen: false)
                                             .fetchCategoryFeatureasList(
@@ -649,20 +654,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .updateSelectedCategoryFeatureas(
                                               value as String);
 
-                                      var categoryIndex = menuPageProvider
-                                          .categoryFeatureasList
-                                          .indexWhere(((element) =>
-                                              element.feature!.label == value));
-                                      if (categoryIndex != -1) {
+                                      var categoryFeatureasIndex =
+                                          menuPageProvider.categoryFeatureasList
+                                              .indexWhere(((element) =>
+                                                  element.feature!.label ==
+                                                  value));
+                                      if (categoryFeatureasIndex != -1) {
                                         debugPrint(
-                                            'CATEGORY INDEX: $categoryIndex');
+                                            'CATEGORY INDEX: $categoryFeatureasIndex');
                                         debugPrint(
-                                            'CATEGORY ID: ${categoryList[categoryIndex].id}');
+                                            'CATEGORY ID: ${menuPageProvider.categoryFeatureasList[categoryFeatureasIndex].id}');
 
                                         var categoryFeatureasId =
                                             menuPageProvider
                                                 .categoryFeatureasList[
-                                                    categoryIndex]
+                                                    categoryFeatureasIndex]
                                                 .id;
                                       }
                                     },
