@@ -52,7 +52,9 @@ class MenuPageProvider with ChangeNotifier {
 
   // MY PRODUCTS SUBPAGE
   List<CategoryModel> categoryList = [];
+  List<CategoryModel> subCategoryList = [];
   String? selectedCategory;
+  String? selectedSubCategory;
   List<BrandModel> brandList = [];
   String? selectedBrand;
   List<String> statusList = [];
@@ -69,8 +71,19 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  fetchSubCategoryList({required String parentId}) async {
+    subCategoryList =
+        await locator<CategoriesServices>().subCategoriesCall(parentId: parentId);
+    notifyListeners();
+  }
+
   void updateSelectedCategory(String value) {
     selectedCategory = value;
+    notifyListeners();
+  }
+
+void updateSelectedSubCategory(String value) {
+    selectedSubCategory = value;
     notifyListeners();
   }
 
