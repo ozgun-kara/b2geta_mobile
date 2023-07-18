@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/city_model.dart';
@@ -53,8 +54,10 @@ class MenuPageProvider with ChangeNotifier {
   // MY PRODUCTS SUBPAGE
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
+  List<CategoryFeatureasModel> categoryFeatureasList = [];
   String? selectedCategory;
   String? selectedSubCategory;
+  String? selectedCategoryFeatureas;
   List<BrandModel> brandList = [];
   String? selectedBrand;
   List<String> statusList = [];
@@ -72,8 +75,14 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   fetchSubCategoryList({required String parentId}) async {
-    subCategoryList =
-        await locator<CategoriesServices>().subCategoriesCall(parentId: parentId);
+    subCategoryList = await locator<CategoriesServices>()
+        .subCategoriesCall(parentId: parentId);
+    notifyListeners();
+  }
+
+  fetchCategoryFeatureasList({required String categoryId}) async {
+    categoryFeatureasList = await locator<CategoriesServices>()
+        .categoryFeaturesCall(categoryId: categoryId);
     notifyListeners();
   }
 
@@ -82,8 +91,13 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-void updateSelectedSubCategory(String value) {
+  void updateSelectedSubCategory(String value) {
     selectedSubCategory = value;
+    notifyListeners();
+  }
+
+  void updateSelectedCategoryFeatureas(String value) {
+    selectedCategoryFeatureas = value;
     notifyListeners();
   }
 
