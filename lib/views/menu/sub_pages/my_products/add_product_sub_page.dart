@@ -198,6 +198,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               value: menuPageProvider.selectedCategory,
 
                               onChanged: (value) {
+                               // menuPageProvider.subCategoryList = [];
+                                menuPageProvider.selectedSubCategory = null;
+                                menuPageProvider.selectedCategoryFeatureas =
+                                    null;
+
                                 menuPageProvider
                                     .updateSelectedCategory(value as String);
 
@@ -211,12 +216,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                                   categoryId = categoryList[categoryIndex].id;
 
-                                
-                                      Provider.of<MenuPageProvider>(context,
-                                              listen: false)
-                                          .fetchSubCategoryList(
-                                              parentId: categoryId);
-                                 
+                                  Provider.of<MenuPageProvider>(context,
+                                          listen: false)
+                                      .fetchSubCategoryList(
+                                          parentId: categoryId);
                                 }
                               },
 
@@ -349,7 +352,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ),
                           Visibility(
-                            visible: menuPageProvider.subCategoryList.isNotEmpty,
+                            visible:
+                                menuPageProvider.subCategoryList.isNotEmpty,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -418,17 +422,24 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .updateSelectedSubCategory(
                                               value as String);
 
-                                      var categoryIndex = menuPageProvider.subCategoryList
+                                      var subCategoryIndex = menuPageProvider
+                                          .subCategoryList
                                           .indexWhere(((element) =>
                                               element.categoryName == value));
-                                      if (categoryIndex != -1) {
+                                      if (subCategoryIndex != -1) {
                                         debugPrint(
-                                            'CATEGORY INDEX: $categoryIndex');
+                                            'CATEGORY INDEX: $subCategoryIndex');
                                         debugPrint(
-                                            'CATEGORY ID: ${categoryList[categoryIndex].id}');
+                                            'CATEGORY ID: ${menuPageProvider.subCategoryList[subCategoryIndex].id}');
 
-                                        categoryId =
-                                            categoryList[categoryIndex].id;
+                                        var subCategoryId = menuPageProvider
+                                            .subCategoryList[subCategoryIndex]
+                                            .id;
+
+                                        Provider.of<MenuPageProvider>(context,
+                                                listen: false)
+                                            .fetchCategoryFeatureasList(
+                                                categoryId: subCategoryId!);
                                       }
                                     },
 
@@ -571,7 +582,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ),
                           Visibility(
-                            visible: false,
+                            visible: menuPageProvider
+                                .categoryFeatureasList.isNotEmpty,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -612,11 +624,12 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     //         : AppTheme.white14,
                                     //   ),
                                     // ),
-                                    items: categoryList
+                                    items: menuPageProvider
+                                        .categoryFeatureasList
                                         .map((item) => DropdownMenuItem<String>(
-                                              value: item.categoryName,
+                                              value: item.feature!.label,
                                               child: Text(
-                                                item.categoryName ?? '',
+                                                item.feature!.label ?? '',
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   fontFamily:
@@ -633,23 +646,30 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               ),
                                             ))
                                         .toList(),
-                                    value: menuPageProvider.selectedCategory,
+                                    value: menuPageProvider
+                                        .selectedCategoryFeatureas,
 
                                     onChanged: (value) {
-                                      menuPageProvider.updateSelectedCategory(
-                                          value as String);
+                                      menuPageProvider
+                                          .updateSelectedCategoryFeatureas(
+                                              value as String);
 
-                                      var categoryIndex =
-                                          categoryList.indexWhere(((element) =>
-                                              element.categoryName == value));
-                                      if (categoryIndex != -1) {
+                                      var categoryFeatureasIndex =
+                                          menuPageProvider.categoryFeatureasList
+                                              .indexWhere(((element) =>
+                                                  element.feature!.label ==
+                                                  value));
+                                      if (categoryFeatureasIndex != -1) {
                                         debugPrint(
-                                            'CATEGORY INDEX: $categoryIndex');
+                                            'CATEGORY INDEX: $categoryFeatureasIndex');
                                         debugPrint(
-                                            'CATEGORY ID: ${categoryList[categoryIndex].id}');
+                                            'CATEGORY ID: ${menuPageProvider.categoryFeatureasList[categoryFeatureasIndex].id}');
 
-                                        categoryId =
-                                            categoryList[categoryIndex].id;
+                                        var categoryFeatureasId =
+                                            menuPageProvider
+                                                .categoryFeatureasList[
+                                                    categoryFeatureasIndex]
+                                                .id;
                                       }
                                     },
 

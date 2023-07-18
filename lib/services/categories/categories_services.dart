@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -89,13 +90,15 @@ class CategoriesServices {
   }
 
   // CATEGORY FEATURES
-  Future<bool> categoryFeaturesCall(
-      {required Map<String, String> queryParameters}) async {
+  Future<List<CategoryFeatureasModel>> categoryFeaturesCall(
+      {required String categoryId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/category_features')
-          .replace(queryParameters: queryParameters),
-      headers: {},
+      Uri.parse('${Constants.apiUrl}/category_features?category_id[]=$categoryId')
+     ,
+      headers: Constants.headers,
     );
+
+    List<CategoryFeatureasModel> categoryFeatureasList = [];
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
@@ -104,9 +107,13 @@ class CategoriesServices {
           "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
 
       var status = json.decode(response.body)["status"];
+      var dataList = json.decode(response.body)["data"];
 
       if (status == true) {
-        return true;
+      for (var categoryFeatureas in dataList) {
+          categoryFeatureasList.add(CategoryFeatureasModel.fromJson(categoryFeatureas));
+        }
+        return categoryFeatureasList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
@@ -114,12 +121,12 @@ class CategoriesServices {
         debugPrint(
             "responseText: ${json.decode(response.body)["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
-        return false;
+        return categoryFeatureasList;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
-      return false;
+      return categoryFeatureasList;
     }
   }
 }
