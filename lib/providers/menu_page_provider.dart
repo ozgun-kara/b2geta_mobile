@@ -54,10 +54,12 @@ class MenuPageProvider with ChangeNotifier {
   // MY PRODUCTS SUBPAGE
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
-  List<CategoryFeatureasModel> categoryFeatureasList = [];
+  List<CategoryModel> deepCategoryList = [];
   String? selectedCategory;
   String? selectedSubCategory;
-  String? selectedCategoryFeatureas;
+  String? selectedDeepCategory;
+  bool visibilitySubCategory = false;
+  bool visibilityDeepCategory = false;
   List<BrandModel> brandList = [];
   String? selectedBrand;
   List<String> statusList = [];
@@ -80,9 +82,9 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchCategoryFeatureasList({required String categoryId}) async {
-    categoryFeatureasList = await locator<CategoriesServices>()
-        .categoryFeaturesCall(categoryId: categoryId);
+  fetchDeepCategoryList({required String categoryId}) async {
+    deepCategoryList = await locator<CategoriesServices>()
+        .subCategoriesCall(parentId: categoryId);
     notifyListeners();
   }
 
@@ -97,7 +99,17 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   void updateSelectedCategoryFeatureas(String value) {
-    selectedCategoryFeatureas = value;
+    selectedDeepCategory = value;
+    notifyListeners();
+  }
+
+    void updateVisibilitySubCategory(bool value) {
+    visibilitySubCategory = value;
+    notifyListeners();
+  }
+
+  void updateVisibilityDeepCategory(bool value) {
+    visibilityDeepCategory = value;
     notifyListeners();
   }
 
