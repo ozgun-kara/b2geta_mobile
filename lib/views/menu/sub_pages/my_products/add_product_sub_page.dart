@@ -198,10 +198,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               value: menuPageProvider.selectedCategory,
 
                               onChanged: (value) {
-                               // menuPageProvider.subCategoryList = [];
+                                // menuPageProvider.subCategoryList = [];
                                 menuPageProvider.selectedSubCategory = null;
-                                menuPageProvider.selectedCategoryFeatureas =
-                                    null;
+                                menuPageProvider.selectedDeepCategory = null;
+                                menuPageProvider
+                                    .updateVisibilitySubCategory(false);
+                                menuPageProvider
+                                    .updateVisibilityDeepCategory(false);
 
                                 menuPageProvider
                                     .updateSelectedCategory(value as String);
@@ -220,6 +223,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           listen: false)
                                       .fetchSubCategoryList(
                                           parentId: categoryId);
+
+                                  menuPageProvider
+                                      .updateVisibilitySubCategory(true);
                                 }
                               },
 
@@ -353,7 +359,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           ),
                           Visibility(
                             visible:
-                                menuPageProvider.subCategoryList.isNotEmpty,
+                                menuPageProvider.subCategoryList.isNotEmpty &&
+                                    menuPageProvider.visibilitySubCategory,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -418,6 +425,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     value: menuPageProvider.selectedSubCategory,
 
                                     onChanged: (value) {
+                                      menuPageProvider.selectedDeepCategory =
+                                          null;
+                                      menuPageProvider
+                                          .updateVisibilityDeepCategory(false);
                                       menuPageProvider
                                           .updateSelectedSubCategory(
                                               value as String);
@@ -438,8 +449,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                                         Provider.of<MenuPageProvider>(context,
                                                 listen: false)
-                                            .fetchCategoryFeatureasList(
+                                            .fetchDeepCategoryList(
                                                 categoryId: subCategoryId!);
+                                        menuPageProvider
+                                            .updateVisibilityDeepCategory(true);
                                       }
                                     },
 
@@ -582,8 +595,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ),
                           Visibility(
-                            visible: menuPageProvider
-                                .categoryFeatureasList.isNotEmpty,
+                            visible:
+                                menuPageProvider.deepCategoryList.isNotEmpty &&
+                                    menuPageProvider.visibilityDeepCategory,
                             child: Column(
                               children: [
                                 const SizedBox(
@@ -624,12 +638,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     //         : AppTheme.white14,
                                     //   ),
                                     // ),
-                                    items: menuPageProvider
-                                        .categoryFeatureasList
+                                    items: menuPageProvider.deepCategoryList
                                         .map((item) => DropdownMenuItem<String>(
-                                              value: item.feature!.label,
+                                              value: item.categoryName,
                                               child: Text(
-                                                item.feature!.label ?? '',
+                                                item.categoryName ?? '',
                                                 style: TextStyle(
                                                   fontSize: 14,
                                                   fontFamily:
@@ -646,30 +659,27 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                               ),
                                             ))
                                         .toList(),
-                                    value: menuPageProvider
-                                        .selectedCategoryFeatureas,
+                                    value:
+                                        menuPageProvider.selectedDeepCategory,
 
                                     onChanged: (value) {
                                       menuPageProvider
                                           .updateSelectedCategoryFeatureas(
                                               value as String);
 
-                                      var categoryFeatureasIndex =
-                                          menuPageProvider.categoryFeatureasList
-                                              .indexWhere(((element) =>
-                                                  element.feature!.label ==
-                                                  value));
-                                      if (categoryFeatureasIndex != -1) {
+                                      var deepCategoryIndex = menuPageProvider
+                                          .deepCategoryList
+                                          .indexWhere(((element) =>
+                                              element.categoryName == value));
+                                      if (deepCategoryIndex != -1) {
                                         debugPrint(
-                                            'CATEGORY INDEX: $categoryFeatureasIndex');
+                                            'CATEGORY INDEX: $deepCategoryIndex');
                                         debugPrint(
-                                            'CATEGORY ID: ${menuPageProvider.categoryFeatureasList[categoryFeatureasIndex].id}');
+                                            'CATEGORY ID: ${menuPageProvider.deepCategoryList[deepCategoryIndex].id}');
 
-                                        var categoryFeatureasId =
-                                            menuPageProvider
-                                                .categoryFeatureasList[
-                                                    categoryFeatureasIndex]
-                                                .id;
+                                        var deepCategoryId = menuPageProvider
+                                            .deepCategoryList[deepCategoryIndex]
+                                            .id;
                                       }
                                     },
 

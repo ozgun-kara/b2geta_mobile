@@ -203,6 +203,8 @@ final Map<String, String> tr = {
       'Hesabınızı silmek istediğinizden emin misiniz?',
   'Yes': 'Evet',
   'No': 'Hayır',
+  'Sub Categories': 'Alt Kategoriler',
+  'Deep Categories': 'Dip Kategoriler',
 
   // HOMEPAGE
   'Posts': 'Postlar',
@@ -295,7 +297,7 @@ final Map<String, String> tr = {
   'Newly Added Products': 'Yeni Eklenen Ürünler',
   'Textile': 'Tekstil',
   'Clothes': 'Giyim',
-  'Send Message' : 'Mesaj Gönder',
+  'Send Message': 'Mesaj Gönder',
 
   // BASKET PAGE
   'Basket Page Route': 'Ana Sayfa - Sepetim',
