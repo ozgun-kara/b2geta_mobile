@@ -55,11 +55,14 @@ class MenuPageProvider with ChangeNotifier {
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
   List<CategoryModel> deepCategoryList = [];
+   List<CategoryFeatureasModel> categoryFeatureasList = [];
   String? selectedCategory;
   String? selectedSubCategory;
   String? selectedDeepCategory;
+  String? selectedCategoryFeature;
   bool visibilitySubCategory = false;
   bool visibilityDeepCategory = false;
+  bool visibilitycategoryFeatureasList = false;
   List<BrandModel> brandList = [];
   String? selectedBrand;
   List<String> statusList = [];
@@ -82,9 +85,14 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchDeepCategoryList({required String categoryId}) async {
+  fetchDeepCategoryList({required String parentId}) async {
     deepCategoryList = await locator<CategoriesServices>()
-        .subCategoriesCall(parentId: categoryId);
+        .subCategoriesCall(parentId: parentId);
+    notifyListeners();
+  }
+  fetchCategoryFeatureasList({required String categoryId}) async {
+    categoryFeatureasList = await locator<CategoriesServices>()
+        .categoryFeaturesCall(categoryId: categoryId);
     notifyListeners();
   }
 
@@ -98,8 +106,13 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSelectedCategoryFeatureas(String value) {
+  void updateSelectedDeepCategory(String value) {
     selectedDeepCategory = value;
+    notifyListeners();
+  }
+
+   void updateSelectedCategoriesFeatureas(String value) {
+    selectedCategoryFeature = value;
     notifyListeners();
   }
 
@@ -110,6 +123,11 @@ class MenuPageProvider with ChangeNotifier {
 
   void updateVisibilityDeepCategory(bool value) {
     visibilityDeepCategory = value;
+    notifyListeners();
+  }
+
+    void updateVisibilityCategoryFeatureas(bool value) {
+    visibilitycategoryFeatureasList = value;
     notifyListeners();
   }
 
