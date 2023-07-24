@@ -809,236 +809,279 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             height: 13,
                           ),
                           Visibility(
-                            visible: menuPageProvider
-                                    .categoryFeatureasList.isNotEmpty &&
-                                menuPageProvider
-                                    .visibilitycategoryFeatureasList,
-                            child: ListView.builder(
-                                padding: EdgeInsets.zero,
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: menuPageProvider
-                                    .categoryFeatureasList.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  var featureas = menuPageProvider
-                                      .categoryFeatureasList[index].feature;
-                                  return Column(
-                                    children: [
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8),
-                                          child: Text(
-                                            featureas!.label ?? '',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white14,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      DropdownButtonHideUnderline(
-                                        child: DropdownButton2(
-                                          isExpanded: true,
+                              visible: menuPageProvider
+                                      .categoryFeatureasList.isNotEmpty &&
+                                  menuPageProvider
+                                      .visibilitycategoryFeatureasList,
+                              child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: menuPageProvider
+                                      .categoryFeatureasList.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    var featureas = menuPageProvider
+                                        .categoryFeatureasList[index].feature;
+                                    return featureas!.values!.isNotEmpty
+                                        ? Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.centerLeft,
+                                                child: Padding(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(horizontal: 8),
+                                                  child: Text(
+                                                    featureas.label ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 14,
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: themeMode
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white14,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              DropdownButtonHideUnderline(
+                                                child: DropdownButton2(
+                                                  isExpanded: true,
 
-                                          items: featureas.values!
-                                              .map((item) =>
-                                                  DropdownMenuItem<String>(
-                                                    value:
-                                                        item!.displayedValue ??
-                                                            '',
-                                                    child: Text(
-                                                      item.displayedValue ?? '',
+                                                  items: featureas.values!
+                                                      .map(
+                                                          (item) =>
+                                                              DropdownMenuItem<
+                                                                  String>(
+                                                                value: item!
+                                                                        .displayedValue ??
+                                                                    '',
+                                                                child: Row(
+                                                                  children: [
+                                                                    Checkbox(
+                                                                        value:
+                                                                            false,
+                                                                        onChanged:
+                                                                            (value) {}),
+                                                                    Text(
+                                                                      item.displayedValue ??
+                                                                          '',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontFamily:
+                                                                            AppTheme.appFontFamily,
+                                                                        fontWeight:
+                                                                            FontWeight.w400,
+                                                                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                                                                "light"
+                                                                            ? AppTheme.blue3
+                                                                            : AppTheme.white1,
+                                                                      ),
+                                                                    ),
+                                                                  ],
+                                                                ),
+                                                              ))
+                                                      .toList(),
+                                                  value: featureas.value,
+
+                                                  onChanged: (value) {
+                                                    menuPageProvider
+                                                        .updateSelectedCategoriesFeatureas(
+                                                            value as String);
+                                                  },
+
+                                                  icon: Center(
+                                                    child: Image.asset(
+                                                      'assets/icons/dropdown.png',
+                                                      width: 10,
+                                                      height: 6,
+                                                      color: Provider.of<ThemeProvider>(
+                                                                      context)
+                                                                  .themeMode ==
+                                                              "light"
+                                                          ? AppTheme.blue3
+                                                          : AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                  iconSize: 24,
+                                                  // iconEnabledColor: Colors.yellow,
+                                                  // iconDisabledColor: Colors.grey,
+                                                  // icon: Container(),
+                                                  buttonHeight: 57,
+                                                  buttonWidth: deviceWidth,
+                                                  buttonPadding:
+                                                      const EdgeInsets.only(
+                                                          left: 25, right: 17),
+                                                  buttonDecoration:
+                                                      BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    // border:
+                                                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.white39
+                                                            : AppTheme.black18,
+                                                  ),
+                                                  // buttonElevation: 2,
+                                                  itemHeight: 40,
+                                                  itemPadding: const EdgeInsets
+                                                          .symmetric(
+                                                      horizontal: 32),
+                                                  // dropdownMaxHeight: deviceHeight * 0.4,
+                                                  dropdownMaxHeight: 350,
+                                                  // dropdownWidth: deviceWidth,
+                                                  dropdownPadding: null,
+                                                  dropdownDecoration:
+                                                      BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            14),
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.white39
+                                                            : AppTheme.black18,
+                                                  ),
+                                                  // dropdownElevation: 8,
+                                                  scrollbarRadius:
+                                                      const Radius.circular(40),
+                                                  scrollbarThickness: 4,
+                                                  scrollbarAlwaysShow: true,
+                                                  // offset: const Offset(0, 180),
+
+                                                  searchController:
+                                                      categoriesController,
+                                                  searchInnerWidget: Padding(
+                                                    padding: const EdgeInsets
+                                                            .fromLTRB(
+                                                        16, 16, 16, 4),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          categoriesController,
                                                       style: TextStyle(
                                                         fontSize: 14,
                                                         fontFamily: AppTheme
                                                             .appFontFamily,
                                                         fontWeight:
-                                                            FontWeight.w400,
+                                                            FontWeight.w500,
                                                         color: Provider.of<ThemeProvider>(
                                                                         context)
                                                                     .themeMode ==
                                                                 "light"
                                                             ? AppTheme.blue3
                                                             : AppTheme.white1,
+                                                      ), // WHILE WRITING
+                                                      decoration:
+                                                          InputDecoration(
+                                                        isDense: true,
+                                                        contentPadding:
+                                                            const EdgeInsets
+                                                                .symmetric(
+                                                          horizontal: 16,
+                                                          vertical: 12,
+                                                        ),
+                                                        hintText:
+                                                            'Search...'.tr,
+                                                        hintStyle: TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: Provider.of<ThemeProvider>(
+                                                                          context)
+                                                                      .themeMode ==
+                                                                  "light"
+                                                              ? AppTheme.blue3
+                                                              : AppTheme
+                                                                  .white14,
+                                                        ),
+                                                        border:
+                                                            OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: AppTheme
+                                                                      .white15,
+                                                                  width: 1,
+                                                                )),
+                                                        enabledBorder:
+                                                            OutlineInputBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            10),
+                                                                borderSide:
+                                                                    BorderSide(
+                                                                  color: AppTheme
+                                                                      .white15,
+                                                                  width: 1,
+                                                                )),
+                                                        focusedBorder:
+                                                            OutlineInputBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Provider.of<ThemeProvider>(
+                                                                            context)
+                                                                        .themeMode ==
+                                                                    "light"
+                                                                ? AppTheme.blue3
+                                                                : AppTheme
+                                                                    .white1,
+                                                            width: 1,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
-                                                  ))
-                                              .toList(),
-                                          value: featureas.value,
-
-                                          onChanged: (value) {
-                                            menuPageProvider
-                                                .updateSelectedCategoriesFeatureas(
-                                                    value as String);
-                                          },
-
-                                          icon: Center(
-                                            child: Image.asset(
-                                              'assets/icons/dropdown.png',
-                                              width: 10,
-                                              height: 6,
-                                              color: Provider.of<ThemeProvider>(
-                                                              context)
-                                                          .themeMode ==
-                                                      "light"
-                                                  ? AppTheme.blue3
-                                                  : AppTheme.white15,
-                                            ),
-                                          ),
-                                          iconSize: 24,
-                                          // iconEnabledColor: Colors.yellow,
-                                          // iconDisabledColor: Colors.grey,
-                                          // icon: Container(),
-                                          buttonHeight: 57,
-                                          buttonWidth: deviceWidth,
-                                          buttonPadding: const EdgeInsets.only(
-                                              left: 25, right: 17),
-                                          buttonDecoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            // border:
-                                            //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.white39
-                                                : AppTheme.black18,
-                                          ),
-                                          // buttonElevation: 2,
-                                          itemHeight: 40,
-                                          itemPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 32),
-                                          // dropdownMaxHeight: deviceHeight * 0.4,
-                                          dropdownMaxHeight: 350,
-                                          // dropdownWidth: deviceWidth,
-                                          dropdownPadding: null,
-                                          dropdownDecoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(14),
-                                            color: Provider.of<ThemeProvider>(
-                                                            context)
-                                                        .themeMode ==
-                                                    "light"
-                                                ? AppTheme.white39
-                                                : AppTheme.black18,
-                                          ),
-                                          // dropdownElevation: 8,
-                                          scrollbarRadius:
-                                              const Radius.circular(40),
-                                          scrollbarThickness: 4,
-                                          scrollbarAlwaysShow: true,
-                                          // offset: const Offset(0, 180),
-
-                                          searchController:
-                                              categoriesController,
-                                          searchInnerWidget: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                16, 16, 16, 4),
-                                            child: TextFormField(
-                                              controller: categoriesController,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color:
-                                                    Provider.of<ThemeProvider>(
-                                                                    context)
-                                                                .themeMode ==
-                                                            "light"
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                              ), // WHILE WRITING
-                                              decoration: InputDecoration(
-                                                isDense: true,
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                  horizontal: 16,
-                                                  vertical: 12,
-                                                ),
-                                                hintText: 'Search...'.tr,
-                                                hintStyle: TextStyle(
-                                                  fontSize: 14,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color:
-                                                      Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue3
-                                                          : AppTheme.white14,
-                                                ),
-                                                border: OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    borderSide: BorderSide(
-                                                      color: AppTheme.white15,
-                                                      width: 1,
-                                                    )),
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              AppTheme.white15,
-                                                          width: 1,
-                                                        )),
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  borderSide: BorderSide(
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1,
-                                                    width: 1,
                                                   ),
+                                                  searchMatchFn:
+                                                      (item, searchValue) {
+                                                    debugPrint(
+                                                        "ITEM:${item.value}");
+
+                                                    return (item.value
+                                                        .toLowerCase()
+                                                        .contains(searchValue
+                                                            .toLowerCase()));
+                                                  },
+                                                  //This to clear the search value when you close the menu
+                                                  onMenuStateChange: (isOpen) {
+                                                    if (!isOpen) {
+                                                      categoriesController
+                                                          .clear();
+                                                    }
+                                                  },
                                                 ),
                                               ),
-                                            ),
-                                          ),
-                                          searchMatchFn: (item, searchValue) {
-                                            debugPrint("ITEM:${item.value}");
-
-                                            return (item.value
-                                                .toLowerCase()
-                                                .contains(
-                                                    searchValue.toLowerCase()));
-                                          },
-                                          //This to clear the search value when you close the menu
-                                          onMenuStateChange: (isOpen) {
-                                            if (!isOpen) {
-                                              categoriesController.clear();
-                                            }
-                                          },
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        height: 13,
-                                      ),
-                                    ],
-                                  );
-                                }),
-                          ),
+                                              const SizedBox(
+                                                height: 13,
+                                              ),
+                                            ],
+                                          )
+                                        : const SizedBox();
+                                  })),
                           CustomTextFormField(
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
