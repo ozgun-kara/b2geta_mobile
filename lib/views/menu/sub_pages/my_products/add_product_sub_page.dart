@@ -1,5 +1,8 @@
+// ignore_for_file: iterable_contains_unrelated_type
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -851,51 +854,69 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 ),
                                               ),
                                               DropdownButtonHideUnderline(
-                                                child: DropdownButton2(
+                                                child: DropdownButton2<
+                                                    CategoryFeatureasModelFeatureValues?>(
                                                   isExpanded: true,
-
                                                   items: featureas.values!
-                                                      .map(
-                                                          (item) =>
-                                                              DropdownMenuItem<
-                                                                  String>(
-                                                                value: item!
-                                                                        .displayedValue ??
-                                                                    '',
-                                                                child: Row(
-                                                                  children: [
-                                                                    Checkbox(
-                                                                        value:
-                                                                            false,
-                                                                        onChanged:
-                                                                            (value) {}),
-                                                                    Text(
-                                                                      item.displayedValue ??
-                                                                          '',
-                                                                      style:
-                                                                          TextStyle(
-                                                                        fontSize:
-                                                                            14,
-                                                                        fontFamily:
-                                                                            AppTheme.appFontFamily,
-                                                                        fontWeight:
-                                                                            FontWeight.w400,
-                                                                        color: Provider.of<ThemeProvider>(context).themeMode ==
-                                                                                "light"
-                                                                            ? AppTheme.blue3
-                                                                            : AppTheme.white1,
-                                                                      ),
-                                                                    ),
-                                                                  ],
+                                                      .map((item) =>
+                                                          DropdownMenuItem<
+                                                              CategoryFeatureasModelFeatureValues?>(
+                                                            value: item!,
+                                                            child: Row(
+                                                              children: [
+                                                                Checkbox(
+                                                                    value: menuPageProvider
+                                                                        .selectedFetureasList
+                                                                        .contains(
+                                                                            item),
+                                                                    onChanged:
+                                                                        (value) {
+                                                                      if (value !=
+                                                                          null) {
+                                                                        menuPageProvider.updateSelectedFetureas(
+                                                                            selectedFetureasModel:
+                                                                                item,
+                                                                            isSelected:
+                                                                                value);
+                                                                      }
+                                                                    }),
+                                                                Text(
+                                                                  item.displayedValue ??
+                                                                      '',
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400,
+                                                                    color: Provider.of<ThemeProvider>(context).themeMode ==
+                                                                            "light"
+                                                                        ? AppTheme
+                                                                            .blue3
+                                                                        : AppTheme
+                                                                            .white1,
+                                                                  ),
                                                                 ),
-                                                              ))
+                                                              ],
+                                                            ),
+                                                          ))
                                                       .toList(),
-                                                  value: featureas.value,
+                                                  value: null,
 
-                                                  onChanged: (value) {
-                                                    menuPageProvider
-                                                        .updateSelectedCategoriesFeatureas(
-                                                            value as String);
+                                                  onChanged:
+                                                      (CategoryFeatureasModelFeatureValues?
+                                                          value) {
+                                                    if (value != null) {
+                                                      menuPageProvider
+                                                          .updateSelectedFetureas(
+                                                              selectedFetureasModel:
+                                                                  value,
+                                                              isSelected: true);
+                                                    }
                                                   },
 
                                                   icon: Center(
@@ -912,9 +933,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     ),
                                                   ),
                                                   iconSize: 24,
-                                                  // iconEnabledColor: Colors.yellow,
-                                                  // iconDisabledColor: Colors.grey,
-                                                  // icon: Container(),
                                                   buttonHeight: 57,
                                                   buttonWidth: deviceWidth,
                                                   buttonPadding:
@@ -925,9 +943,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    // border:
-                                                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
                                                     color:
                                                         Provider.of<ThemeProvider>(
                                                                         context)
@@ -936,7 +951,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                             ? AppTheme.white39
                                                             : AppTheme.black18,
                                                   ),
-                                                  // buttonElevation: 2,
+
                                                   itemHeight: 40,
                                                   itemPadding: const EdgeInsets
                                                           .symmetric(
@@ -1056,16 +1071,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       ),
                                                     ),
                                                   ),
-                                                  searchMatchFn:
-                                                      (item, searchValue) {
-                                                    debugPrint(
-                                                        "ITEM:${item.value}");
-
-                                                    return (item.value
-                                                        .toLowerCase()
-                                                        .contains(searchValue
-                                                            .toLowerCase()));
-                                                  },
                                                   //This to clear the search value when you close the menu
                                                   onMenuStateChange: (isOpen) {
                                                     if (!isOpen) {

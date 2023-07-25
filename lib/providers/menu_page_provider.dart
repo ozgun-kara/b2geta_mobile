@@ -55,11 +55,12 @@ class MenuPageProvider with ChangeNotifier {
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
   List<CategoryModel> deepCategoryList = [];
-   List<CategoryFeatureasModel> categoryFeatureasList = [];
+  List<CategoryFeatureasModel> categoryFeatureasList = [];
+  List<CategoryFeatureasModelFeatureValues> selectedFetureasList = [];
   String? selectedCategory;
   String? selectedSubCategory;
   String? selectedDeepCategory;
-  String? selectedCategoryFeature;
+  CategoryFeatureasModelFeatureValues? selectedCategoryFeature;
   bool visibilitySubCategory = false;
   bool visibilityDeepCategory = false;
   bool visibilitycategoryFeatureasList = false;
@@ -90,10 +91,24 @@ class MenuPageProvider with ChangeNotifier {
         .subCategoriesCall(parentId: parentId);
     notifyListeners();
   }
+
   fetchCategoryFeatureasList({required String categoryId}) async {
     categoryFeatureasList = await locator<CategoriesServices>()
         .categoryFeaturesCall(categoryId: categoryId);
     notifyListeners();
+  }
+
+  void updateSelectedFetureas(
+      {required CategoryFeatureasModelFeatureValues selectedFetureasModel,
+      required bool isSelected}) async {
+    if (isSelected) {
+      selectedCategoryFeature = selectedFetureasModel;
+      selectedFetureasList.add(selectedFetureasModel);
+      notifyListeners();
+    } else {
+      selectedFetureasList.remove(selectedFetureasModel);
+      notifyListeners();
+    }
   }
 
   void updateSelectedCategory(String value) {
@@ -111,12 +126,8 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-   void updateSelectedCategoriesFeatureas(String value) {
-    selectedCategoryFeature = value;
-    notifyListeners();
-  }
 
-    void updateVisibilitySubCategory(bool value) {
+  void updateVisibilitySubCategory(bool value) {
     visibilitySubCategory = value;
     notifyListeners();
   }
@@ -126,7 +137,7 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-    void updateVisibilityCategoryFeatureas(bool value) {
+  void updateVisibilityCategoryFeatureas(bool value) {
     visibilitycategoryFeatureasList = value;
     notifyListeners();
   }
