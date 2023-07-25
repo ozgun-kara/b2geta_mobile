@@ -724,12 +724,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     scrollbarAlwaysShow: true,
                                     // offset: const Offset(0, 180),
 
-                                    searchController: categoriesController,
                                     searchInnerWidget: Padding(
                                       padding: const EdgeInsets.fromLTRB(
                                           16, 16, 16, 4),
                                       child: TextFormField(
-                                        controller: categoriesController,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontFamily: AppTheme.appFontFamily,
@@ -858,65 +856,124 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     CategoryFeatureasModelFeatureValues?>(
                                                   isExpanded: true,
                                                   items: featureas.values!
-                                                      .map((item) =>
-                                                          DropdownMenuItem<
-                                                              CategoryFeatureasModelFeatureValues?>(
-                                                            value: item!,
-                                                            child: Row(
-                                                              children: [
-                                                                Checkbox(
-                                                                    value: menuPageProvider
-                                                                        .selectedFetureasList
-                                                                        .contains(
-                                                                            item),
-                                                                    onChanged:
-                                                                        (value) {
-                                                                      if (value !=
-                                                                          null) {
-                                                                        menuPageProvider.updateSelectedFetureas(
-                                                                            selectedFetureasModel:
-                                                                                item,
-                                                                            isSelected:
-                                                                                value);
-                                                                      }
-                                                                    }),
-                                                                Text(
-                                                                  item.displayedValue ??
-                                                                      '',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        AppTheme
-                                                                            .appFontFamily,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color: Provider.of<ThemeProvider>(context).themeMode ==
-                                                                            "light"
-                                                                        ? AppTheme
-                                                                            .blue3
-                                                                        : AppTheme
-                                                                            .white1,
+                                                      .map((item) {
+                                                    return DropdownMenuItem<
+                                                        CategoryFeatureasModelFeatureValues?>(
+                                                      value: item,
+                                                      //disable default onTap to avoid closing menu when selecting an item
+                                                      enabled: false,
+                                                      child: StatefulBuilder(
+                                                        builder: (context,
+                                                            menuSetState) {
+                                                          final isSelected =
+                                                              Provider.of<MenuPageProvider>(context,listen: false)
+                                                                  .selectedFetureasList
+                                                                  .contains(
+                                                                      item);
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              Provider.of<MenuPageProvider>(context,listen: false)
+                                                                  .updateSelectedFetureas(
+                                                                      selectedFetureasModel:
+                                                                          item,
+                                                                      isSelected:
+                                                                          !isSelected);
+                                                              // isSelected
+                                                              //     ? menuPageProvider
+                                                              //         .selectedFetureasList
+                                                              //         .remove(
+                                                              //             item)
+                                                              //     : menuPageProvider
+                                                              //         .selectedFetureasList
+                                                              //         .add(
+                                                              //             item);
+                                                              //This rebuilds the StatefulWidget to update the button's text
+                                                              setState(() {});
+                                                              //This rebuilds the dropdownMenu Widget to update the check mark
+                                                              menuSetState(
+                                                                  () {});
+                                                            },
+                                                            child: Container(
+                                                              height: double
+                                                                  .infinity,
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      16.0),
+                                                              child: Row(
+                                                                children: [
+                                                                  if (isSelected)
+                                                                    const Icon(Icons
+                                                                        .check_box_outlined)
+                                                                  else
+                                                                    const Icon(Icons
+                                                                        .check_box_outline_blank),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16),
+                                                                  Expanded(
+                                                                    child: Text(
+                                                                      item!
+                                                                          .displayedValue
+                                                                          .toString(),
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                      ),
+                                                                    ),
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                ],
+                                                              ),
                                                             ),
-                                                          ))
-                                                      .toList(),
+                                                          );
+                                                        },
+                                                      ),
+                                                    );
+                                                  }).toList(),
                                                   value: null,
+                                                  // value: menuPageProvider
+                                                  //         .selectedFetureasList
+                                                  //         .isEmpty
+                                                  //     ? null
+                                                  //     : menuPageProvider
+                                                  //         .selectedFetureasList
+                                                  //         .last,
 
-                                                  onChanged:
-                                                      (CategoryFeatureasModelFeatureValues?
-                                                          value) {
-                                                    if (value != null) {
-                                                      menuPageProvider
-                                                          .updateSelectedFetureas(
-                                                              selectedFetureasModel:
-                                                                  value,
-                                                              isSelected: true);
-                                                    }
+                                                  onChanged: (value) {
+                                                    // if (value != null) {
+                                                    //   menuPageProvider
+                                                    //       .updateSelectedFetureas(
+                                                    //           selectedFetureasModel:
+                                                    //               value,
+                                                    //           isSelected: true);
+                                                    // }
+                                                  },
+                                                  selectedItemBuilder:
+                                                      (context) {
+                                                    return featureas.values!
+                                                        .map(
+                                                      (item) {
+                                                        return Container(
+                                                          alignment:
+                                                              AlignmentDirectional
+                                                                  .center,
+                                                          child: Text(
+                                                            menuPageProvider
+                                                                .selectedFetureasList
+                                                                .join(', '),
+                                                            style:
+                                                                const TextStyle(
+                                                              fontSize: 14,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                            maxLines: 1,
+                                                          ),
+                                                        );
+                                                      },
+                                                    ).toList();
                                                   },
 
                                                   icon: Center(

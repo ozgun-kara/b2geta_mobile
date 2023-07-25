@@ -31,6 +31,11 @@ class CategoryFeatureasModelFeatureValues {
     data['displayed_value'] = displayedValue;
     return data;
   }
+
+  @override
+  String toString() {
+    return '$displayedValue';
+  }
 }
 
 class CategoryFeatureasModelFeature {
@@ -83,13 +88,13 @@ class CategoryFeatureasModelFeature {
     fieldType = json['field_type']?.toString();
     label = json['label']?.toString();
     value = json['value']?.toString();
-  if (json['values'] != null) {
-  final v = json['values'];
-  final arr0 = <CategoryFeatureasModelFeatureValues>[];
-  v.forEach((v) {
-  arr0.add(CategoryFeatureasModelFeatureValues.fromJson(v));
-  });
-    values = arr0;
+    if (json['values'] != null) {
+      final v = json['values'];
+      final arr0 = <CategoryFeatureasModelFeatureValues>[];
+      v.forEach((v) {
+        arr0.add(CategoryFeatureasModelFeatureValues.fromJson(v));
+      });
+      values = arr0;
     }
     required = json['required']?.toString();
     markedToBuy = json['marked_to_buy']?.toString();
@@ -106,9 +111,9 @@ class CategoryFeatureasModelFeature {
     if (values != null) {
       final v = values;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      v!.forEach((v) {
+        arr0.add(v!.toJson());
+      });
       data['values'] = arr0;
     }
     data['required'] = required;
@@ -158,7 +163,9 @@ class CategoryFeatureasModel {
   CategoryFeatureasModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
     featureId = json['feature_id']?.toString();
-    feature = (json['feature'] != null) ? CategoryFeatureasModelFeature.fromJson(json['feature']) : null;
+    feature = (json['feature'] != null)
+        ? CategoryFeatureasModelFeature.fromJson(json['feature'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

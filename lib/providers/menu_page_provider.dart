@@ -60,7 +60,6 @@ class MenuPageProvider with ChangeNotifier {
   String? selectedCategory;
   String? selectedSubCategory;
   String? selectedDeepCategory;
-  CategoryFeatureasModelFeatureValues? selectedCategoryFeature;
   bool visibilitySubCategory = false;
   bool visibilityDeepCategory = false;
   bool visibilitycategoryFeatureasList = false;
@@ -102,7 +101,6 @@ class MenuPageProvider with ChangeNotifier {
       {required CategoryFeatureasModelFeatureValues selectedFetureasModel,
       required bool isSelected}) async {
     if (isSelected) {
-      selectedCategoryFeature = selectedFetureasModel;
       selectedFetureasList.add(selectedFetureasModel);
       notifyListeners();
     } else {
