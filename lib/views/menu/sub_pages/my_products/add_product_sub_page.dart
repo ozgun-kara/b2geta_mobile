@@ -43,6 +43,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   var categoryId;
   var brandId;
 
+  List<CategoryFeatureasModelFeatureValues?> selectedFetureasList = [];
+
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -855,8 +857,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 child: DropdownButton2<
                                                     CategoryFeatureasModelFeatureValues?>(
                                                   isExpanded: true,
-                                                  items: featureas.values!
-                                                      .map((item) {
+                                                  items: featureas.values!.map(
+                                                      (CategoryFeatureasModelFeatureValues?
+                                                          item) {
                                                     return DropdownMenuItem<
                                                         CategoryFeatureasModelFeatureValues?>(
                                                       value: item,
@@ -866,27 +869,25 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         builder: (context,
                                                             menuSetState) {
                                                           final isSelected =
-                                                              Provider.of<MenuPageProvider>(context,listen: false)
-                                                                  .selectedFetureasList
+                                                              selectedFetureasList
                                                                   .contains(
                                                                       item);
                                                           return InkWell(
                                                             onTap: () {
-                                                              Provider.of<MenuPageProvider>(context,listen: false)
-                                                                  .updateSelectedFetureas(
-                                                                      selectedFetureasModel:
-                                                                          item,
-                                                                      isSelected:
-                                                                          !isSelected);
-                                                              // isSelected
-                                                              //     ? menuPageProvider
-                                                              //         .selectedFetureasList
-                                                              //         .remove(
-                                                              //             item)
-                                                              //     : menuPageProvider
-                                                              //         .selectedFetureasList
-                                                              //         .add(
-                                                              //             item);
+                                                              // menuPageProvider
+                                                              //     .updateSelectedFetureas(
+                                                              //         selectedFetureasModel:
+                                                              //             item,
+                                                              //         isSelected:
+                                                              //             !isSelected);
+
+                                                              isSelected
+                                                                  ? selectedFetureasList
+                                                                      .remove(
+                                                                          item)
+                                                                  : selectedFetureasList
+                                                                      .add(
+                                                                          item);
                                                               //This rebuilds the StatefulWidget to update the button's text
                                                               setState(() {});
                                                               //This rebuilds the dropdownMenu Widget to update the check mark
@@ -914,8 +915,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                                   Expanded(
                                                                     child: Text(
                                                                       item!
-                                                                          .displayedValue
-                                                                          .toString(),
+                                                                          .displayedValue!,
                                                                       style:
                                                                           const TextStyle(
                                                                         fontSize:
@@ -931,14 +931,22 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       ),
                                                     );
                                                   }).toList(),
-                                                  value: null,
-                                                  // value: menuPageProvider
-                                                  //         .selectedFetureasList
-                                                  //         .isEmpty
-                                                  //     ? null
-                                                  //     : menuPageProvider
-                                                  //         .selectedFetureasList
-                                                  //         .last,
+                                                  value: selectedFetureasList
+                                                          .isNotEmpty
+                                                      ? selectedFetureasList
+                                                          .last
+                                                      : null,
+                                                  /*
+                                                  value: menuPageProvider
+                                                          .selectedFetureasList
+                                                          .isNotEmpty
+                                                      ? menuPageProvider
+                                                          .selectedFetureasList
+                                                          .last
+                                                      : null,
+
+
+                                                   */
 
                                                   onChanged: (value) {
                                                     // if (value != null) {
@@ -959,8 +967,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                               AlignmentDirectional
                                                                   .center,
                                                           child: Text(
-                                                            menuPageProvider
-                                                                .selectedFetureasList
+                                                            selectedFetureasList
                                                                 .join(', '),
                                                             style:
                                                                 const TextStyle(
@@ -1008,7 +1015,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                             ? AppTheme.white39
                                                             : AppTheme.black18,
                                                   ),
-
                                                   itemHeight: 40,
                                                   itemPadding: const EdgeInsets
                                                           .symmetric(

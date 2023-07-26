@@ -56,7 +56,8 @@ class MenuPageProvider with ChangeNotifier {
   List<CategoryModel> subCategoryList = [];
   List<CategoryModel> deepCategoryList = [];
   List<CategoryFeatureasModel> categoryFeatureasList = [];
-  List<CategoryFeatureasModelFeatureValues> selectedFetureasList = [];
+  List<CategoryFeatureasModelFeatureValues?> selectedFetureasList = [];
+  CategoryFeatureasModelFeatureValues? selectedFetureas;
   String? selectedCategory;
   String? selectedSubCategory;
   String? selectedDeepCategory;
@@ -101,9 +102,11 @@ class MenuPageProvider with ChangeNotifier {
       {required CategoryFeatureasModelFeatureValues selectedFetureasModel,
       required bool isSelected}) async {
     if (isSelected) {
+      selectedFetureas = selectedFetureasModel;
       selectedFetureasList.add(selectedFetureasModel);
       notifyListeners();
     } else {
+    selectedFetureas = selectedFetureasModel;
       selectedFetureasList.remove(selectedFetureasModel);
       notifyListeners();
     }
@@ -123,7 +126,6 @@ class MenuPageProvider with ChangeNotifier {
     selectedDeepCategory = value;
     notifyListeners();
   }
-
 
   void updateVisibilitySubCategory(bool value) {
     visibilitySubCategory = value;
