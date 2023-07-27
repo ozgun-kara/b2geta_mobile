@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:flutter/material.dart';
@@ -141,6 +142,8 @@ class ProductsServices {
   Future<bool> addProductCall(
       {required String accountId,
       required String categoryId,
+      required String subCategoryId,
+      required String deepCategoryId,
       required String productName,
       required String productDescription,
       required String productSummary,
@@ -148,6 +151,7 @@ class ProductsServices {
       required String price,
       required String currency,
       required String status,
+      required List<CategoryFeatureasModelFeatureValues> categoryFeatures,
       required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/create'));
@@ -155,6 +159,8 @@ class ProductsServices {
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
     request.fields["category_id[]"] = categoryId;
+    request.fields["category_id[]"] = subCategoryId;
+    request.fields["category_id[]"] = deepCategoryId;
     request.fields["product_name[${Constants.language}]"] = productName;
     request.fields["product_description[${Constants.language}]"] =
         productDescription;
@@ -163,6 +169,9 @@ class ProductsServices {
     request.fields["price"] = price;
     request.fields["currency"] = currency;
     request.fields["status"] = status;
+    for (var feature in categoryFeatures) {
+      request.fields["feature[${feature.attributeId!}][]"] = feature.id!;
+    }
 
     List<http.MultipartFile> files = [];
     for (File file in images) {

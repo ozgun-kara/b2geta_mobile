@@ -56,7 +56,7 @@ class MenuPageProvider with ChangeNotifier {
   List<CategoryModel> subCategoryList = [];
   List<CategoryModel> deepCategoryList = [];
   List<CategoryFeatureasModel> categoryFeatureasList = [];
-  List<CategoryFeatureasModelFeatureValues?> selectedFetureasList = [];
+  List<CategoryFeatureasModelFeatureValues> selectedFetureasList = [];
   String? selectedCategory;
   String? selectedSubCategory;
   String? selectedDeepCategory;

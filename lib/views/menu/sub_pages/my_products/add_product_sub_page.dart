@@ -2,7 +2,6 @@
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -11,7 +10,6 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -42,6 +40,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final statusController = TextEditingController();
 
   var categoryId;
+  var subCategoryId;
+  var deepCategoryId;
   var brandId;
 
   late double deviceTopPadding;
@@ -447,7 +447,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         debugPrint(
                                             'CATEGORY ID: ${menuPageProvider.subCategoryList[subCategoryIndex].id}');
 
-                                        var subCategoryId = menuPageProvider
+                                        subCategoryId = menuPageProvider
                                             .subCategoryList[subCategoryIndex]
                                             .id;
 
@@ -667,7 +667,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         debugPrint(
                                             'CATEGORY ID: ${menuPageProvider.deepCategoryList[deepCategoryIndex].id}');
 
-                                        var deepCategoryId = menuPageProvider
+                                        deepCategoryId = menuPageProvider
                                             .deepCategoryList[deepCategoryIndex]
                                             .id;
                                         menuPageProvider
@@ -1483,6 +1483,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 AddProductImageSubPage(
                                                     accountId: '',
                                                     categoryId: categoryId,
+                                                    subCategoryId:
+                                                        subCategoryId,
+                                                    deepCategoryId:
+                                                        deepCategoryId,
+                                                    categoryFeatures:
+                                                        menuPageProvider
+                                                            .selectedFetureasList,
                                                     productName:
                                                         productNameController
                                                             .text,
@@ -1493,9 +1500,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         productSummaryController
                                                             .text,
                                                     brand: brandId,
-                                                    price:
-                                                        productPriceController
-                                                            .text,
+                                                    price: productPriceController
+                                                        .text,
                                                     currency: menuPageProvider
                                                         .selectedCurrency
                                                         .toString(),
