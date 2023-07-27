@@ -54,10 +54,16 @@ class MenuPageProvider with ChangeNotifier {
   // MY PRODUCTS SUBPAGE
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
+  List<CategoryModel> deepCategoryList = [];
   List<CategoryFeatureasModel> categoryFeatureasList = [];
+  List<CategoryFeatureasModelFeatureValues?> selectedFetureasList = [];
+  CategoryFeatureasModelFeatureValues? selectedFetureas;
   String? selectedCategory;
   String? selectedSubCategory;
-  String? selectedCategoryFeatureas;
+  String? selectedDeepCategory;
+  bool visibilitySubCategory = false;
+  bool visibilityDeepCategory = false;
+  bool visibilitycategoryFeatureasList = false;
   List<BrandModel> brandList = [];
   String? selectedBrand;
   List<String> statusList = [];
@@ -80,10 +86,30 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  fetchDeepCategoryList({required String parentId}) async {
+    deepCategoryList = await locator<CategoriesServices>()
+        .subCategoriesCall(parentId: parentId);
+    notifyListeners();
+  }
+
   fetchCategoryFeatureasList({required String categoryId}) async {
     categoryFeatureasList = await locator<CategoriesServices>()
         .categoryFeaturesCall(categoryId: categoryId);
     notifyListeners();
+  }
+
+  void updateSelectedFetureas(
+      {required CategoryFeatureasModelFeatureValues selectedFetureasModel,
+      required bool isSelected}) async {
+    if (isSelected) {
+      selectedFetureas = selectedFetureasModel;
+      selectedFetureasList.add(selectedFetureasModel);
+      notifyListeners();
+    } else {
+    selectedFetureas = selectedFetureasModel;
+      selectedFetureasList.remove(selectedFetureasModel);
+      notifyListeners();
+    }
   }
 
   void updateSelectedCategory(String value) {
@@ -96,8 +122,23 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateSelectedCategoryFeatureas(String value) {
-    selectedCategoryFeatureas = value;
+  void updateSelectedDeepCategory(String value) {
+    selectedDeepCategory = value;
+    notifyListeners();
+  }
+
+  void updateVisibilitySubCategory(bool value) {
+    visibilitySubCategory = value;
+    notifyListeners();
+  }
+
+  void updateVisibilityDeepCategory(bool value) {
+    visibilityDeepCategory = value;
+    notifyListeners();
+  }
+
+  void updateVisibilityCategoryFeatureas(bool value) {
+    visibilitycategoryFeatureasList = value;
     notifyListeners();
   }
 

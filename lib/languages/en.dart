@@ -208,6 +208,8 @@ final Map<String, String> en = {
       'Are you sure you want to delete your account?',
   'Yes': 'Yes',
   'No': 'No',
+  'Sub Categories':'Sub Categories',
+  'Deep Categories':'Deep Categories',
 
   // HOMEPAGE
   'Posts': 'Posts',
