@@ -217,8 +217,67 @@ class ProductsServices {
     required String price,
     required String currency,
     required String status,
-    // required List<File> images
   }) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/products/update/$productId'));
+    request.headers.addAll(Constants.headers);
+
+    request.fields["category_id[]"] = categoryId;
+    request.fields["product_name[${Constants.language}]"] = productName;
+    request.fields["product_description[${Constants.language}]"] =
+        productDescription;
+    request.fields["product_summary[${Constants.language}]"] = productSummary;
+    request.fields["brand"] = brand;
+    request.fields["price"] = price;
+    request.fields["currency"] = currency;
+    request.fields["status"] = status;
+
+    // List<http.MultipartFile> files = [];
+    // for (File file in images) {
+    //   var f = await http.MultipartFile.fromPath('images[]', file.path);
+    //   files.add(f);
+    // }
+    // request.files.addAll(files);
+
+    var response = await request.send();
+
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+    debugPrint("RESPONSE $responseString");
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      var status = json.decode(responseString)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(responseString)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(responseString)["responseText"]}");
+        return false;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      return false;
+    }
+  }
+
+  // UPDATE PRODUCT
+  Future<bool> updateProductCallNew(
+      {required String productId,
+      required String categoryId,
+      required String productName,
+      required String productDescription,
+      required String productSummary,
+      required String brand,
+      required String price,
+      required String currency,
+      required String status,
+      required List<CategoryFeatureasModelFeatureValues> categoryFeatures,
+      required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/update/$productId'));
     request.headers.addAll(Constants.headers);
