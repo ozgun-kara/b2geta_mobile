@@ -2,7 +2,6 @@
 
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -41,9 +40,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final statusController = TextEditingController();
 
   var categoryId;
+  var subCategoryId;
+  var deepCategoryId;
   var brandId;
-
-  List<CategoryFeatureasModelFeatureValues?> selectedFetureasList = [];
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -448,7 +447,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         debugPrint(
                                             'CATEGORY ID: ${menuPageProvider.subCategoryList[subCategoryIndex].id}');
 
-                                        var subCategoryId = menuPageProvider
+                                        subCategoryId = menuPageProvider
                                             .subCategoryList[subCategoryIndex]
                                             .id;
 
@@ -661,13 +660,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           .deepCategoryList
                                           .indexWhere(((element) =>
                                               element.categoryName == value));
+
                                       if (deepCategoryIndex != -1) {
                                         debugPrint(
                                             'CATEGORY INDEX: $deepCategoryIndex');
                                         debugPrint(
                                             'CATEGORY ID: ${menuPageProvider.deepCategoryList[deepCategoryIndex].id}');
 
-                                        var deepCategoryId = menuPageProvider
+                                        deepCategoryId = menuPageProvider
                                             .deepCategoryList[deepCategoryIndex]
                                             .id;
                                         menuPageProvider
@@ -826,6 +826,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       (BuildContext context, int index) {
                                     var featureas = menuPageProvider
                                         .categoryFeatureasList[index].feature;
+
                                     return featureas!.values!.isNotEmpty
                                         ? Column(
                                             mainAxisAlignment:
@@ -853,294 +854,81 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   ),
                                                 ),
                                               ),
-                                              DropdownButtonHideUnderline(
-                                                child: DropdownButton2<
-                                                    CategoryFeatureasModelFeatureValues?>(
-                                                  isExpanded: true,
-                                                  items: featureas.values!.map(
-                                                      (CategoryFeatureasModelFeatureValues?
-                                                          item) {
-                                                    return DropdownMenuItem<
-                                                        CategoryFeatureasModelFeatureValues?>(
-                                                      value: item,
-                                                      //disable default onTap to avoid closing menu when selecting an item
-                                                      enabled: false,
-                                                      child: StatefulBuilder(
-                                                        builder: (context,
-                                                            menuSetState) {
-                                                          final isSelected =
-                                                              selectedFetureasList
-                                                                  .contains(
-                                                                      item);
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              // menuPageProvider
-                                                              //     .updateSelectedFetureas(
-                                                              //         selectedFetureasModel:
-                                                              //             item,
-                                                              //         isSelected:
-                                                              //             !isSelected);
-
-                                                              isSelected
-                                                                  ? selectedFetureasList
-                                                                      .remove(
-                                                                          item)
-                                                                  : selectedFetureasList
-                                                                      .add(
-                                                                          item);
-                                                              //This rebuilds the StatefulWidget to update the button's text
-                                                              setState(() {});
-                                                              //This rebuilds the dropdownMenu Widget to update the check mark
-                                                              menuSetState(
-                                                                  () {});
-                                                            },
-                                                            child: Container(
-                                                              height: double
-                                                                  .infinity,
-                                                              padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      16.0),
-                                                              child: Row(
-                                                                children: [
-                                                                  if (isSelected)
-                                                                    const Icon(Icons
-                                                                        .check_box_outlined)
-                                                                  else
-                                                                    const Icon(Icons
-                                                                        .check_box_outline_blank),
-                                                                  const SizedBox(
-                                                                      width:
-                                                                          16),
-                                                                  Expanded(
-                                                                    child: Text(
-                                                                      item!
-                                                                          .displayedValue!,
-                                                                      style:
-                                                                          const TextStyle(
-                                                                        fontSize:
-                                                                            14,
+                                              Container(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        minWidth:
+                                                            double.infinity,
+                                                        maxHeight: 250),
+                                                decoration: BoxDecoration(
+                                                    color:
+                                                        Provider.of<ThemeProvider>(
+                                                                        context)
+                                                                    .themeMode ==
+                                                                "light"
+                                                            ? AppTheme.white39
+                                                            : AppTheme.black18,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 13.0),
+                                                child: Scrollbar(
+                                                  child: ListView.builder(
+                                                      shrinkWrap: true,
+                                                      padding: EdgeInsets.zero,
+                                                      itemCount: featureas
+                                                          .values!.length,
+                                                      itemBuilder:
+                                                          ((context, index) {
+                                                        var feature = featureas
+                                                            .values![index];
+                                                        var isSelected =
+                                                            menuPageProvider
+                                                                .selectedFetureasList
+                                                                .contains(
+                                                                    feature);
+                                                        return feature != null
+                                                            ? Container(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        16.0),
+                                                                child: InkWell(
+                                                                  onTap: () {
+                                                                    menuPageProvider.updateSelectedFetureas(
+                                                                        selectedFetureasModel:
+                                                                            feature,
+                                                                        isSelected:
+                                                                            !isSelected);
+                                                                  },
+                                                                  child: Row(
+                                                                    children: [
+                                                                      if (isSelected)
+                                                                        const Icon(Icons
+                                                                            .check_box_outlined)
+                                                                      else
+                                                                        const Icon(
+                                                                            Icons.check_box_outline_blank),
+                                                                      const SizedBox(
+                                                                          width:
+                                                                              16),
+                                                                      Text(
+                                                                        feature
+                                                                            .displayedValue!,
+                                                                        style:
+                                                                            const TextStyle(
+                                                                          fontSize:
+                                                                              14,
+                                                                        ),
                                                                       ),
-                                                                    ),
+                                                                    ],
                                                                   ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    );
-                                                  }).toList(),
-                                                  value: selectedFetureasList
-                                                          .isNotEmpty
-                                                      ? selectedFetureasList
-                                                          .last
-                                                      : null,
-                                                  /*
-                                                  value: menuPageProvider
-                                                          .selectedFetureasList
-                                                          .isNotEmpty
-                                                      ? menuPageProvider
-                                                          .selectedFetureasList
-                                                          .last
-                                                      : null,
-
-
-                                                   */
-
-                                                  onChanged: (value) {
-                                                    // if (value != null) {
-                                                    //   menuPageProvider
-                                                    //       .updateSelectedFetureas(
-                                                    //           selectedFetureasModel:
-                                                    //               value,
-                                                    //           isSelected: true);
-                                                    // }
-                                                  },
-                                                  selectedItemBuilder:
-                                                      (context) {
-                                                    return featureas.values!
-                                                        .map(
-                                                      (item) {
-                                                        return Container(
-                                                          alignment:
-                                                              AlignmentDirectional
-                                                                  .center,
-                                                          child: Text(
-                                                            selectedFetureasList
-                                                                .join(', '),
-                                                            style:
-                                                                const TextStyle(
-                                                              fontSize: 14,
-                                                              overflow:
-                                                                  TextOverflow
-                                                                      .ellipsis,
-                                                            ),
-                                                            maxLines: 1,
-                                                          ),
-                                                        );
-                                                      },
-                                                    ).toList();
-                                                  },
-
-                                                  icon: Center(
-                                                    child: Image.asset(
-                                                      'assets/icons/dropdown.png',
-                                                      width: 10,
-                                                      height: 6,
-                                                      color: Provider.of<ThemeProvider>(
-                                                                      context)
-                                                                  .themeMode ==
-                                                              "light"
-                                                          ? AppTheme.blue3
-                                                          : AppTheme.white15,
-                                                    ),
-                                                  ),
-                                                  iconSize: 24,
-                                                  buttonHeight: 57,
-                                                  buttonWidth: deviceWidth,
-                                                  buttonPadding:
-                                                      const EdgeInsets.only(
-                                                          left: 25, right: 17),
-                                                  buttonDecoration:
-                                                      BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                  ),
-                                                  itemHeight: 40,
-                                                  itemPadding: const EdgeInsets
-                                                          .symmetric(
-                                                      horizontal: 32),
-                                                  // dropdownMaxHeight: deviceHeight * 0.4,
-                                                  dropdownMaxHeight: 350,
-                                                  // dropdownWidth: deviceWidth,
-                                                  dropdownPadding: null,
-                                                  dropdownDecoration:
-                                                      BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            14),
-                                                    color:
-                                                        Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                  ),
-                                                  // dropdownElevation: 8,
-                                                  scrollbarRadius:
-                                                      const Radius.circular(40),
-                                                  scrollbarThickness: 4,
-                                                  scrollbarAlwaysShow: true,
-                                                  // offset: const Offset(0, 180),
-
-                                                  searchController:
-                                                      categoriesController,
-                                                  searchInnerWidget: Padding(
-                                                    padding: const EdgeInsets
-                                                            .fromLTRB(
-                                                        16, 16, 16, 4),
-                                                    child: TextFormField(
-                                                      controller:
-                                                          categoriesController,
-                                                      style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1,
-                                                      ), // WHILE WRITING
-                                                      decoration:
-                                                          InputDecoration(
-                                                        isDense: true,
-                                                        contentPadding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 12,
-                                                        ),
-                                                        hintText:
-                                                            'Search...'.tr,
-                                                        hintStyle: TextStyle(
-                                                          fontSize: 14,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: Provider.of<ThemeProvider>(
-                                                                          context)
-                                                                      .themeMode ==
-                                                                  "light"
-                                                              ? AppTheme.blue3
-                                                              : AppTheme
-                                                                  .white14,
-                                                        ),
-                                                        border:
-                                                            OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: AppTheme
-                                                                      .white15,
-                                                                  width: 1,
-                                                                )),
-                                                        enabledBorder:
-                                                            OutlineInputBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            10),
-                                                                borderSide:
-                                                                    BorderSide(
-                                                                  color: AppTheme
-                                                                      .white15,
-                                                                  width: 1,
-                                                                )),
-                                                        focusedBorder:
-                                                            OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          borderSide:
-                                                              BorderSide(
-                                                            color: Provider.of<ThemeProvider>(
-                                                                            context)
-                                                                        .themeMode ==
-                                                                    "light"
-                                                                ? AppTheme.blue3
-                                                                : AppTheme
-                                                                    .white1,
-                                                            width: 1,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  //This to clear the search value when you close the menu
-                                                  onMenuStateChange: (isOpen) {
-                                                    if (!isOpen) {
-                                                      categoriesController
-                                                          .clear();
-                                                    }
-                                                  },
+                                                                ),
+                                                              )
+                                                            : const SizedBox();
+                                                      })),
                                                 ),
                                               ),
                                               const SizedBox(
@@ -1695,6 +1483,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 AddProductImageSubPage(
                                                     accountId: '',
                                                     categoryId: categoryId,
+                                                    subCategoryId:
+                                                        subCategoryId,
+                                                    deepCategoryId:
+                                                        deepCategoryId,
+                                                    categoryFeatures:
+                                                        menuPageProvider
+                                                            .selectedFetureasList,
                                                     productName:
                                                         productNameController
                                                             .text,
@@ -1705,9 +1500,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         productSummaryController
                                                             .text,
                                                     brand: brandId,
-                                                    price:
-                                                        productPriceController
-                                                            .text,
+                                                    price: productPriceController
+                                                        .text,
                                                     currency: menuPageProvider
                                                         .selectedCurrency
                                                         .toString(),

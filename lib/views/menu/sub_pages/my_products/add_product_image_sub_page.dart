@@ -3,6 +3,7 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
@@ -19,6 +20,9 @@ class AddProductImageSubPage extends StatefulWidget {
     Key? key,
     required this.accountId,
     required this.categoryId,
+    required this.subCategoryId,
+    required this.deepCategoryId,
+    required this.categoryFeatures,
     required this.productName,
     required this.productDescription,
     required this.productSummary,
@@ -30,6 +34,9 @@ class AddProductImageSubPage extends StatefulWidget {
 
   final String accountId;
   final String categoryId;
+  final String subCategoryId;
+  final String deepCategoryId;
+  final List<CategoryFeatureasModelFeatureValues> categoryFeatures;
   final String productName;
   final String productDescription;
   final String productSummary;
@@ -290,6 +297,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                   .addProductCall(
                                       accountId: widget.accountId,
                                       categoryId: widget.categoryId,
+                                      subCategoryId: widget.subCategoryId,
+                                      deepCategoryId: widget.deepCategoryId,
                                       productName: widget.productName,
                                       productDescription:
                                           widget.productDescription,
@@ -298,7 +307,8 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                       price: widget.price,
                                       currency: widget.currency,
                                       status: widget.status,
-                                      images: menuPageProvider.imageFilesList!)
+                                      images: menuPageProvider.imageFilesList!,
+                                      categoryFeatures: widget.categoryFeatures,)
                                   .then((value) {
                                 if (value == true) {
                                   debugPrint("PRODUCT HAS SUCCESSFULLY ADDED");
