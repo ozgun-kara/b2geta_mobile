@@ -104,6 +104,20 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   }
 
   @override
+  void dispose() {
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .subCategoryList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .deepCategoryList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .selectedFetureasList
+        .clear();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
     deviceWidth = MediaQuery.of(context).size.width;

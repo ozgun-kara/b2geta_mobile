@@ -28,8 +28,6 @@ class _ExplorePageState extends State<ExplorePage> {
   void initState() {
     super.initState();
     getExplore();
-  
-       
   }
 
   Future getExplore() async {
@@ -58,11 +56,8 @@ class _ExplorePageState extends State<ExplorePage> {
                   itemCount: provider.exploreList.length,
                   staggeredTileBuilder: (int index) {
                     var discover = provider.exploreList[index];
-                    return StaggeredTile.count(
-                        1,
-                        (discover.type == 'reels' && (index % 3 == 0))
-                            ? 2
-                            : 1);
+                    return StaggeredTile.count(1,
+                        (discover.type == 'reels' && (index % 3 == 0)) ? 2 : 1);
                   },
                   itemBuilder: (context, index) {
                     var discover = provider.exploreList[index];
@@ -92,10 +87,13 @@ class _ExplorePageState extends State<ExplorePage> {
                                 child: Stack(
                                   children: [
                                     Center(
-                                      child: (discover.videos!.isNotEmpty && discover.videos![0]!=null)
+                                      child: (discover.videos!.isNotEmpty &&
+                                              discover.videos![0] != null &&
+                                              discover.videos![0]!.image!
+                                                  .isNotEmpty)
                                           ? Image.network(
-                                              discover.videos![0]!.image ??
-                                                  'assets/images/image_not_found.jpg',
+                                              //  discover.videos![0]!.image!,
+                                              'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
                                               width: 128,
                                               height: 256,
                                               fit: BoxFit.cover,
@@ -137,15 +135,12 @@ class _ExplorePageState extends State<ExplorePage> {
                                               feed: discover,
                                             ),
                                             transitionDuration:
-                                                const Duration(
-                                                    milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
-                                                const Duration(
-                                                    milliseconds: 0),
-                                            transitionsBuilder:
-                                                (_, a, __, c) =>
-                                                    FadeTransition(
-                                                        opacity: a, child: c),
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
                                           ));
                                     },
                                     child: Stack(
@@ -153,6 +148,14 @@ class _ExplorePageState extends State<ExplorePage> {
                                         Image.network(
                                           discover.images![0]!.url!,
                                           fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            'assets/images/image_not_found.jpg',
+                                            width: 128,
+                                            height: 256,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                         Visibility(
                                           visible: discover.images!.length > 1
@@ -165,17 +168,15 @@ class _ExplorePageState extends State<ExplorePage> {
                                                 width: 37,
                                                 height: 37,
                                                 decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFF2F2F2F)
-                                                          .withOpacity(.66),
+                                                  color: const Color(0xFF2F2F2F)
+                                                      .withOpacity(.66),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           13.0),
                                                 ),
                                                 child: Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
+                                                      MainAxisAlignment.center,
                                                   children: [
                                                     Image.asset(
                                                       "assets/icons/post_image_add.png",
