@@ -72,10 +72,12 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
                   },
                   child: Center(
                     child: (homeProvider.reelsList[index].videos!.isNotEmpty &&
-                            homeProvider.reelsList[index].videos![0] != null)
+                            homeProvider.reelsList[index].videos![0] != null &&
+                            homeProvider
+                                .reelsList[index].videos![0]!.image!.isNotEmpty)
                         ? Image.network(
-                            homeProvider.reelsList[index].videos![0]!.image ??
-                                'assets/images/image_not_found.jpg',
+                           // homeProvider.reelsList[index].videos![0]!.image!,
+                           'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
                             errorBuilder: (context, error, stackTrace) =>
                                 Image.asset(
                               'assets/images/image_not_found.jpg',

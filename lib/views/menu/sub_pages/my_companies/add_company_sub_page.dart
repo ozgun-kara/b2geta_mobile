@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/company/company_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
@@ -10,6 +11,7 @@ import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_s
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:iban_form_field/iban_form_field.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
@@ -838,6 +840,22 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         controller: aboutController,
                         hintText: 'About'.tr,
                         maxLines: 5,
+                      ),
+                      const SizedBox(height: 13),
+                      Container(
+                        padding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
+                        decoration: BoxDecoration(
+                          color:
+                              themeMode ? AppTheme.white39 : AppTheme.black18,
+                          borderRadius: BorderRadius.circular(10),
+                          border:
+                              Border.all(color: Colors.transparent, width: 1),
+                        ),
+                        child: IbanFormField(
+                          initialValue: Iban(Constants.language != null
+                              ? Constants.language!.toUpperCase()
+                              : 'TR'),
+                        ),
                       ),
                       const SizedBox(height: 28),
                       MaterialButton(

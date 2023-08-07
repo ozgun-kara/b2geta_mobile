@@ -131,6 +131,12 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                               height: 30,
                               fit: BoxFit.cover,
                               story.user!.photo!,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Image.asset(
+                                      width: 30,
+                                      height: 30,
+                                      fit: BoxFit.cover,
+                                      "assets/images/dummy_images/user_profile.png"),
                             ),
                           )
                         : ClipOval(

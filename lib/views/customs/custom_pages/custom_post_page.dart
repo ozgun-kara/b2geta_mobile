@@ -225,18 +225,26 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                                   opacity: a, child: c),
                                         ));
                                   },
-                                  child: Image.network(
-                                    feed.images![0]!.url.toString(),
-                                    width: deviceWidth,
-                                    fit: BoxFit.cover,
-                                    errorBuilder:
-                                        (context, error, stackTrace) =>
-                                            Image.asset(
-                                      "assets/images/dummy_images/image_not_found.jpg",
-                                      width: deviceWidth,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
+                                  child: (feed.images!.isNotEmpty &&
+                                          feed.images![0] != null &&
+                                          feed.images![0]!.url!.isNotEmpty)
+                                      ? Image.network(
+                                          feed.images![0]!.url.toString(),
+                                          width: deviceWidth,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              (context, error, stackTrace) =>
+                                                  Image.asset(
+                                            "assets/images/dummy_images/image_not_found.jpg",
+                                            width: deviceWidth,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : Image.asset(
+                                          "assets/images/dummy_images/image_not_found.jpg",
+                                          width: deviceWidth,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                                 Visibility(
                                   visible:

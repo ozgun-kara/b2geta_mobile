@@ -53,9 +53,6 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
 
   @override
   void dispose() {
-    Provider.of<MenuPageProvider>(context).subCategoryList.clear();
-    Provider.of<MenuPageProvider>(context).deepCategoryList.clear();
-    Provider.of<MenuPageProvider>(context).selectedFetureasList.clear();
     super.dispose();
   }
 

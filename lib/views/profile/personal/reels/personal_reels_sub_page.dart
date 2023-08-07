@@ -76,10 +76,13 @@ class _PersonalProfileReelsSubPageState
                       ));
                 },
                 child: Center(
-                  child: socialProvider.reelsList[index].videos!.isNotEmpty
+                  child: (socialProvider.reelsList[index].videos!.isNotEmpty &&
+                          socialProvider.reelsList[index].videos![0] != null &&
+                          socialProvider
+                              .reelsList[index].videos![0]!.image!.isNotEmpty)
                       ? Image.network(
-                          socialProvider.reelsList[index].videos![0]!.image ??
-                              'assets/images/image_not_found.jpg',
+                          // socialProvider.reelsList[index].videos![0]!.image!,
+                          'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
                           errorBuilder: (context, error, stackTrace) =>
                               Image.asset(
                             'assets/images/image_not_found.jpg',
