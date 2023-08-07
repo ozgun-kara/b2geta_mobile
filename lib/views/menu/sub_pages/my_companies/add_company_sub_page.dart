@@ -830,18 +830,6 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         ),
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'About Validate'.tr;
-                          }
-                          return null;
-                        },
-                        controller: aboutController,
-                        hintText: 'About'.tr,
-                        maxLines: 5,
-                      ),
-                      const SizedBox(height: 13),
                       Container(
                         padding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
                         decoration: BoxDecoration(
@@ -856,6 +844,18 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                               ? Constants.language!.toUpperCase()
                               : 'TR'),
                         ),
+                      ),
+                      const SizedBox(height: 13),
+                      textFormField(
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'About Validate'.tr;
+                          }
+                          return null;
+                        },
+                        controller: aboutController,
+                        hintText: 'About'.tr,
+                        maxLines: 5,
                       ),
                       const SizedBox(height: 28),
                       MaterialButton(
