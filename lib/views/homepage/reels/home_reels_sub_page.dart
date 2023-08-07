@@ -11,14 +11,11 @@ class HomeReelsSubPage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-
   @override
   State<HomeReelsSubPage> createState() => _HomeReelsSubPageState();
 }
 
 class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
-
-
   late double deviceTopPadding;
   late double deviceWidth;
   late double deviceHeight;
@@ -28,7 +25,6 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
   void initState() {
     super.initState();
     getReels();
-    
   }
 
   void getReels() async {
@@ -75,7 +71,8 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
                         ));
                   },
                   child: Center(
-                    child: homeProvider.reelsList[index].videos!.isNotEmpty
+                    child: (homeProvider.reelsList[index].videos!.isNotEmpty &&
+                            homeProvider.reelsList[index].videos![0] != null)
                         ? Image.network(
                             homeProvider.reelsList[index].videos![0]!.image ??
                                 'assets/images/image_not_found.jpg',
