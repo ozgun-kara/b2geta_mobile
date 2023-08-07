@@ -92,7 +92,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                 child: Stack(
                                   children: [
                                     Center(
-                                      child: discover.videos!.isNotEmpty
+                                      child: (discover.videos!.isNotEmpty && discover.videos![0]!=null)
                                           ? Image.network(
                                               discover.videos![0]!.image ??
                                                   'assets/images/image_not_found.jpg',
