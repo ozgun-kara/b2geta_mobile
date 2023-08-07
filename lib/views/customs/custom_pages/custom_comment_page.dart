@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
