@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
@@ -48,6 +49,14 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
       comments = value;
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    Provider.of<MenuPageProvider>(context).subCategoryList.clear();
+    Provider.of<MenuPageProvider>(context).deepCategoryList.clear();
+    Provider.of<MenuPageProvider>(context).selectedFetureasList.clear();
+    super.dispose();
   }
 
   @override
@@ -208,10 +217,20 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                                         shape: BoxShape.circle,
                                         color: AppTheme.white1,
                                       ),
-                                      child: Image.network(
-                                        comment.user!.photo!,
-                                        fit: BoxFit.cover,
-                                      ),
+                                      child: comment.user!.photo != null
+                                          ? Image.network(
+                                              comment.user!.photo!,
+                                              fit: BoxFit.cover,
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return Image.asset(
+                                                    fit: BoxFit.cover,
+                                                    "assets/images/dummy_images/user_profile.png");
+                                              },
+                                            )
+                                          : Image.asset(
+                                              fit: BoxFit.cover,
+                                              "assets/images/dummy_images/user_profile.png"),
                                     ),
                                   ),
                                   const SizedBox(
