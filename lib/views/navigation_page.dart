@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/notification/notification_page.dart';
+import 'package:b2geta_mobile/views/search_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -744,6 +745,7 @@ class _NavigationPageState extends State<NavigationPage> {
   }
 
   PreferredSizeWidget searchAppBar(themeMode) {
+    searchController.clear();
     return AppBar(
       toolbarHeight: 56,
       backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
@@ -769,61 +771,76 @@ class _NavigationPageState extends State<NavigationPage> {
       title: SizedBox(
         height: 39,
         child: TextFormField(
-          controller: searchController,
-          style: TextStyle(
-              fontSize: 14,
-              fontFamily: AppTheme.appFontFamily,
-              fontWeight: FontWeight.w500,
-              color: themeMode
-                  ? AppTheme.black11
-                  : AppTheme.white1), // WHILE WRITING
-          maxLines: 1,
-          decoration: InputDecoration(
-            contentPadding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
-            filled: true,
-            fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
-            hintText: 'AppBar Search'.tr,
-            hintStyle: TextStyle(
-              fontSize: 11,
-              fontFamily: AppTheme.appFontFamily,
-              fontWeight: FontWeight.w600,
-              color: AppTheme.white13,
-            ),
-            prefixIcon: IconButton(
-              splashRadius: 24,
-              onPressed: () {},
-              icon: SizedBox(
-                width: 19,
-                height: 19,
-                child: Image.asset(
-                  'assets/icons/search.png',
+            controller: searchController,
+            autofocus: true,
+            style: TextStyle(
+                fontSize: 14,
+                fontFamily: AppTheme.appFontFamily,
+                fontWeight: FontWeight.w500,
+                color: themeMode
+                    ? AppTheme.black11
+                    : AppTheme.white1), // WHILE WRITING
+            maxLines: 1,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+              filled: true,
+              fillColor: themeMode ? AppTheme.white3 : AppTheme.black7,
+              hintText: 'AppBar Search'.tr,
+              hintStyle: TextStyle(
+                fontSize: 11,
+                fontFamily: AppTheme.appFontFamily,
+                fontWeight: FontWeight.w600,
+                color: AppTheme.white13,
+              ),
+              prefixIcon: IconButton(
+                splashRadius: 24,
+                onPressed: () {},
+                icon: SizedBox(
                   width: 19,
                   height: 19,
-                  color: AppTheme.white15,
+                  child: Image.asset(
+                    'assets/icons/search.png',
+                    width: 19,
+                    height: 19,
+                    color: AppTheme.white15,
+                  ),
+                ),
+              ),
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(41),
+                  borderSide: BorderSide(
+                    color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                    width: 1,
+                  )),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(41),
+                  borderSide: BorderSide(
+                    color: themeMode ? AppTheme.white10 : AppTheme.black14,
+                    width: 1,
+                  )),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(41),
+                borderSide: BorderSide(
+                  color: themeMode ? AppTheme.blue2 : AppTheme.white1,
+                  width: 1,
                 ),
               ),
             ),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(41),
-                borderSide: BorderSide(
-                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
-                  width: 1,
-                )),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(41),
-                borderSide: BorderSide(
-                  color: themeMode ? AppTheme.white10 : AppTheme.black14,
-                  width: 1,
-                )),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(41),
-              borderSide: BorderSide(
-                color: themeMode ? AppTheme.blue2 : AppTheme.white1,
-                width: 1,
-              ),
-            ),
-          ),
-        ),
+            onFieldSubmitted: (value) {
+              Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    pageBuilder: (_, __, ___) => SearchPage(
+                      searchKeyword: searchController.text,
+                    ),
+                    transitionDuration: const Duration(milliseconds: 0),
+                    reverseTransitionDuration: const Duration(milliseconds: 0),
+                    transitionsBuilder: (_, a, __, c) =>
+                        FadeTransition(opacity: a, child: c),
+                  ));
+              Provider.of<NavigationPageProvider>(context, listen: false)
+                  .updateSearchState();
+            }),
       ),
     );
   }

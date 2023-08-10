@@ -1,7 +1,7 @@
 import 'package:b2geta_mobile/views/basket/basket_page.dart';
 import 'package:b2geta_mobile/views/explore/explore_page.dart';
 import 'package:b2geta_mobile/views/homepage/home_page.dart';
-import 'package:b2geta_mobile/views/marketplace/marketplace_page_copy.dart';
+import 'package:b2geta_mobile/views/marketplace/marketplace_page.dart';
 import 'package:b2geta_mobile/views/my_account/my_account_page.dart';
 import 'package:flutter/material.dart';
 
