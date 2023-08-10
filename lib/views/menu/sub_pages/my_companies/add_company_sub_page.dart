@@ -840,9 +840,18 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                               Border.all(color: Colors.transparent, width: 1),
                         ),
                         child: IbanFormField(
+                          onSaved: (iban) {
+                            debugPrint(iban.toString());
+                          },
                           initialValue: Iban(Constants.language != null
                               ? Constants.language!.toUpperCase()
                               : 'TR'),
+                          validator: (iban) {
+                            if (!iban!.isValid) {
+                              return 'This IBAN is not valid';
+                            }
+                            return null;
+                          },
                         ),
                       ),
                       const SizedBox(height: 13),
