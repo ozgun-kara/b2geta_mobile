@@ -960,7 +960,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               return null;
                             },
                             controller: productNameController,
-                            hintText: 'Product Name'.tr,
+                            titleText: 'Product Name'.tr,
                           ),
                           const SizedBox(height: 13),
                           CustomTextFormField(
@@ -971,7 +971,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               return null;
                             },
                             controller: productDescriptionController,
-                            hintText: 'Product Description'.tr,
+                            titleText: 'Product Description'.tr,
                             minLines: 2,
                             maxLines: 5,
                           ),
@@ -1321,7 +1321,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               return null;
                             },
                             controller: productPriceController,
-                            hintText: 'Price'.tr,
+                            titleText: 'Price'.tr,
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 13),
@@ -1333,7 +1333,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               return null;
                             },
                             controller: productSummaryController,
-                            hintText: 'Product Summary'.tr,
+                            titleText: 'Product Summary'.tr,
                             keyboardType: TextInputType.text,
                             minLines: 2,
                             maxLines: 5,
