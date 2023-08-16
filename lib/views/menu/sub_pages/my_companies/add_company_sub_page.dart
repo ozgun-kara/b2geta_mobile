@@ -761,19 +761,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         ),
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
-                        validator: (value) {
-                          if (value == null || value.trim().isEmpty) {
-                            return 'Address Validate-1'.tr;
-                          }
-                          return null;
-                        },
-                        controller: addressController,
-                        hintText: 'Address'.tr,
-                        maxLines: 3,
-                      ),
-                      const SizedBox(height: 13),
-                      TextFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Postal Code Validate'.tr;
@@ -782,54 +770,20 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         },
                         controller: postalCodeController,
                         keyboardType: TextInputType.number,
-                        maxLength: 10,
-                        inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.,]')),
-                        ],
-                        style: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w500,
-                            color: themeMode
-                                ? AppTheme.blue3
-                                : AppTheme.white1), // WHILE WRITING
-                        maxLines: 1,
-                        decoration: InputDecoration(
-                          counterText: "",
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(25, 16, 25, 16),
-                          filled: true,
-                          fillColor:
-                              themeMode ? AppTheme.white39 : AppTheme.black18,
-                          hintText: 'Postal Code'.tr,
-                          hintStyle: TextStyle(
-                            fontSize: 14,
-                            fontFamily: AppTheme.appFontFamily,
-                            fontWeight: FontWeight.w400,
-                            color:
-                                themeMode ? AppTheme.blue3 : AppTheme.white14,
-                          ),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              )),
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              )),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(
-                              color:
-                                  themeMode ? AppTheme.blue2 : AppTheme.white1,
-                              width: 1,
-                            ),
-                          ),
-                        ),
+                        hintText: 'Postal Code'.tr,
+                      ),
+                      const SizedBox(height: 13),
+                      CustomTextFormField(
+                        validator: (value) {
+                          if (value == null || value.trim().isEmpty) {
+                            return 'Address Validate-1'.tr;
+                          }
+                          return null;
+                        },
+                        controller: addressController,
+                        hintText: 'Address'.tr,
+                        minLines: 2,
+                        maxLines: 5,
                       ),
                       const SizedBox(height: 13),
                       Container(
@@ -857,7 +811,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         ),
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'About Validate'.tr;
@@ -866,6 +820,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         },
                         controller: aboutController,
                         hintText: 'About'.tr,
+                        minLines: 3,
                         maxLines: 5,
                       ),
                       const SizedBox(height: 28),
