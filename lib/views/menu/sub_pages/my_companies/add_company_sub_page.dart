@@ -6,6 +6,7 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -138,7 +139,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                   key: companyGlobalKey,
                   child: Column(
                     children: [
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Company Name Validate-2'.tr;
@@ -149,7 +150,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         hintText: 'Company Name'.tr,
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Tax Office Validate'.tr;
@@ -160,7 +161,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         hintText: 'Tax Office'.tr,
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Address Name Validate'.tr;
@@ -171,7 +172,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         hintText: 'Tax Number'.tr,
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'Phone Number Validate'.tr;
@@ -183,7 +184,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         keyboardType: TextInputType.phone,
                       ),
                       const SizedBox(height: 13),
-                      textFormField(
+                      CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
                             return 'E-mail Validate-4'.tr;
@@ -769,6 +770,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                         },
                         controller: addressController,
                         hintText: 'Address'.tr,
+                        maxLines: 3,
                       ),
                       const SizedBox(height: 13),
                       TextFormField(
