@@ -166,6 +166,8 @@ final Map<String, String> en = {
   'Address Validate-1': 'Please enter the address',
   'Postal Code Validate-1': 'Please enter the postal code',
   'About Validate': 'Please enter the about field',
+  'IBAN': 'IBAN',
+  'IBAN Validate': 'Please enter your IBAN',
   'Company Added Message':
       'Your company has been added.\nAfter approval, you can use your company profile.',
   'Company Updated Message': 'Your company has been updated',
@@ -208,8 +210,8 @@ final Map<String, String> en = {
       'Are you sure you want to delete your account?',
   'Yes': 'Yes',
   'No': 'No',
-  'Sub Categories':'Sub Categories',
-  'Deep Categories':'Deep Categories',
+  'Sub Categories': 'Sub Categories',
+  'Deep Categories': 'Deep Categories',
 
   // HOMEPAGE
   'Posts': 'Posts',

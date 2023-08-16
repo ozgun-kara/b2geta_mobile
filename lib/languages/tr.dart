@@ -161,6 +161,8 @@ final Map<String, String> tr = {
   'Address Validate-1': 'Lütfen adresi giriniz',
   'Postal Code Validate-1': 'Lütfen posta kodunu giriniz',
   'About Validate': 'Lütfen hakkında alanını giriniz',
+  'IBAN': 'IBAN',
+  'IBAN Validate': 'Lütfen IBAN kodunu giriniz',
   'Company Added Message':
       'Firmanız eklendi.\nOnaylandıktan sonra firma profilinizi kullanabilirsiniz.',
   'Company Updated Message': 'Firman bilgileriniz güncellendi',

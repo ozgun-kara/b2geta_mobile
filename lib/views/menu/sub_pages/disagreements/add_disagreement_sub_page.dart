@@ -112,7 +112,7 @@ class _AddDisagreementSubPageState extends State<AddDisagreementSubPage> {
                               return null;
                             },
                             controller: orderNumberController,
-                            hintText: 'Order Number'.tr,
+                            titleText: 'Order Number'.tr,
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(
@@ -249,7 +249,7 @@ class _AddDisagreementSubPageState extends State<AddDisagreementSubPage> {
                               return null;
                             },
                             controller: disagreementDescriptionController,
-                            hintText: 'Disagreement Description'.tr,
+                            titleText: 'Disagreement Description'.tr,
                             minLines: 5,
                             maxLines: 5,
                           ),
@@ -264,7 +264,7 @@ class _AddDisagreementSubPageState extends State<AddDisagreementSubPage> {
                               return null;
                             },
                             controller: requestController,
-                            hintText: 'Request'.tr,
+                            titleText: 'Request'.tr,
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 28),
