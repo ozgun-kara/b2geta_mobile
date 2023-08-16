@@ -224,19 +224,19 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                             child: DropdownButton2(
                               // alignment: AlignmentDirectional.center,
                               isExpanded: true,
-                              hint: Text(
-                                'Country'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white14,
-                                ),
-                              ),
+                              // hint: Text(
+                              //   'Country'.tr,
+                              //   style: TextStyle(
+                              //     fontSize: 14,
+                              //     fontFamily: AppTheme.appFontFamily,
+                              //     fontWeight: FontWeight.w400,
+                              //     color: Provider.of<ThemeProvider>(context)
+                              //                 .themeMode ==
+                              //             "light"
+                              //         ? AppTheme.blue3
+                              //         : AppTheme.white14,
+                              //   ),
+                              // ),
                               items: countryList
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item.name,
@@ -440,19 +440,19 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                             child: DropdownButton2(
                               // alignment: AlignmentDirectional.center,
                               isExpanded: true,
-                              hint: Text(
-                                'City'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white14,
-                                ),
-                              ),
+                              // hint: Text(
+                              //   'City'.tr,
+                              //   style: TextStyle(
+                              //     fontSize: 14,
+                              //     fontFamily: AppTheme.appFontFamily,
+                              //     fontWeight: FontWeight.w400,
+                              //     color: Provider.of<ThemeProvider>(context)
+                              //                 .themeMode ==
+                              //             "light"
+                              //         ? AppTheme.blue3
+                              //         : AppTheme.white14,
+                              //   ),
+                              // ),
                               items: cityList
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item.name,
@@ -654,19 +654,19 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                             child: DropdownButton2(
                               // alignment: AlignmentDirectional.center,
                               isExpanded: true,
-                              hint: Text(
-                                'District'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: Provider.of<ThemeProvider>(context)
-                                              .themeMode ==
-                                          "light"
-                                      ? AppTheme.blue3
-                                      : AppTheme.white14,
-                                ),
-                              ),
+                              // hint: Text(
+                              //   'District'.tr,
+                              //   style: TextStyle(
+                              //     fontSize: 14,
+                              //     fontFamily: AppTheme.appFontFamily,
+                              //     fontWeight: FontWeight.w400,
+                              //     color: Provider.of<ThemeProvider>(context)
+                              //                 .themeMode ==
+                              //             "light"
+                              //         ? AppTheme.blue3
+                              //         : AppTheme.white14,
+                              //   ),
+                              // ),
                               items: districtList
                                   .map((item) => DropdownMenuItem<String>(
                                         value: item.name,
@@ -948,6 +948,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                     "Address: ${addressController.text}");
                                 debugPrint(
                                     "Postal Code: ${postalCodeController.text}");
+                                debugPrint("IBAN: ${ibanController.text}");
                                 debugPrint("About: ${aboutController.text}");
 
                                 if (widget.operation == 'Add') {
@@ -964,6 +965,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                     district: districtId,
                                     address: addressController.text,
                                     postalCode: postalCodeController.text,
+                                    iban: ibanController.text,
                                     about: aboutController.text,
                                     languageCode: 'tr',
                                     countryCode: countryCode,
@@ -1011,6 +1013,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                           district: districtId,
                                           address: addressController.text,
                                           postalCode: postalCodeController.text,
+                                          iban: ibanController.text,
                                           about: aboutController.text,
                                           languageCode: 'tr',
                                           countryCode: countryCode,
