@@ -99,6 +99,7 @@ class CompanyServices {
     required String district,
     required String address,
     required String postalCode,
+    required String iban,
     required String about,
     required String languageCode,
     required String countryCode,
@@ -122,6 +123,7 @@ class CompanyServices {
         "district": district,
         "address": address,
         "postal_code": postalCode,
+        "iban": iban,
         "about": about,
         "language_code": languageCode,
         "country_code": countryCode,
@@ -167,6 +169,7 @@ class CompanyServices {
     required String district,
     required String address,
     required String postalCode,
+    required String iban,
     required String about,
     required String languageCode,
     required String countryCode,
@@ -190,6 +193,7 @@ class CompanyServices {
         "district": district,
         "address": address,
         "postal_code": postalCode,
+        "iban": iban,
         "about": about,
         "language_code": languageCode,
         "country_code": countryCode,
@@ -475,7 +479,8 @@ class CompanyServices {
 
       if (status == true) {
         String accessToken = json.decode(response.body)["access_token"];
-        String userId = json.decode(response.body)["data"]["user_id"].toString();
+        String userId =
+            json.decode(response.body)["data"]["user_id"].toString();
 
         final SharedPreferences prefs = await SharedPreferences.getInstance();
 
