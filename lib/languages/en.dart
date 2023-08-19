@@ -330,6 +330,9 @@ final Map<String, String> en = {
   'Confirm Basket': 'Confirm Basket',
   'Confirm': 'Confirm',
   'Empty Chart': 'There are no items in your cart',
+  'Card Information':'Card Information',
+  'Card number':'Card number',
+  'Full Name':'Full Name',
 
   // PROFILE PAGE
   'Follow': 'Follow',

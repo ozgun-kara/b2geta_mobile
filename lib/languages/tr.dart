@@ -324,6 +324,9 @@ final Map<String, String> tr = {
   'Confirm Basket': 'Sepeti Onayla',
   'Confirm': 'Onayla',
   'Empty Chart': 'Sepetinizde ürün bulunmamaktadır',
+  'Card Information': 'Kart Bilgileri',
+  'Card number': 'Kart Numarası',
+  'Full Name': 'Ad Soyad',
 
   // PROFILE PAGE
   'Follow': 'Takip Et',
