@@ -1178,128 +1178,80 @@ class _BasketPageState extends State<BasketPage> {
                                 const SizedBox(
                                   height: 51,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 19),
-                                  child: MaterialButton(
-                                      minWidth: deviceWidth,
-                                      height: 52,
-                                      elevation: 0,
-                                      color: AppTheme.green2,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      child: Text(
-                                        'Confirm Basket'.tr,
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontFamily: AppTheme.appFontFamily,
-                                            fontWeight: FontWeight.w700,
-                                            color: AppTheme.white1),
-                                      ),
-                                      onPressed: () {
-                                        dialog(
-                                            titleText:
-                                                'Confirm Basket Dialog'.tr,
-                                            buttonText: 'Confirm'.tr,
-                                            buttonColor: AppTheme.green1,
-                                            onPressed: () {
-                                              if (selectedAddressId == null) {
-                                                if (addressList.isNotEmpty) {
-                                                  selectedAddressId =
-                                                      addressList.first.id;
-                                                  OrderService()
-                                                      .createOrderCall(
-                                                          requestBody: {
-                                                        "shipping_address_id":
-                                                            selectedAddressId!,
-                                                        "billing_address_id":
-                                                            selectedAddressId!,
-                                                        "agreement": "1"
-                                                      }).then((List? value) {
-                                                    if (value != null) {
-                                                      debugPrint(
-                                                          "${value}veri");
-
-                                                      Navigator.push(
-                                                          context,
-                                                          PageRouteBuilder(
-                                                            pageBuilder: (_, __,
-                                                                    ___) =>
-                                                                ShoppingSummarySubPage(
-                                                                    companyInfoList:
-                                                                        value),
-                                                            transitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            reverseTransitionDuration:
-                                                                const Duration(
-                                                                    milliseconds:
-                                                                        0),
-                                                            transitionsBuilder: (_,
-                                                                    a, __, c) =>
-                                                                FadeTransition(
-                                                                    opacity: a,
-                                                                    child: c),
-                                                          ));
-
-                                                      BasketServices()
-                                                          .emptyBasketCall();
-                                                    }
-                                                  });
-                                                } else {
-                                                  operationFailedDialog(
-                                                      context);
-                                                }
-                                              } else {
-                                                OrderService().createOrderCall(
-                                                    requestBody: {
-                                                      "shipping_address_id":
-                                                          selectedAddressId!,
-                                                      "billing_address_id":
-                                                          selectedAddressId!,
-                                                      "agreement": "1"
-                                                    }).then((List? value) {
-                                                  if (value != null) {
-                                                    debugPrint("${value}veri");
-
-                                                    Navigator.push(
-                                                        context,
-                                                        PageRouteBuilder(
-                                                          pageBuilder: (_, __,
-                                                                  ___) =>
-                                                              ShoppingSummarySubPage(
-                                                                  companyInfoList:
-                                                                      value),
-                                                          transitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      0),
-                                                          reverseTransitionDuration:
-                                                              const Duration(
-                                                                  milliseconds:
-                                                                      0),
-                                                          transitionsBuilder: (_,
-                                                                  a, __, c) =>
-                                                              FadeTransition(
-                                                                  opacity: a,
-                                                                  child: c),
-                                                        ));
-
-                                                    BasketServices()
-                                                        .emptyBasketCall();
-                                                  }
-                                                });
-                                              }
-                                            });
-                                      }),
-                                ),
-                                const SizedBox(height: 36)
                               ],
                             ),
-                          )
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 19),
+                            child: MaterialButton(
+                                minWidth: deviceWidth,
+                                height: 52,
+                                elevation: 0,
+                                color: AppTheme.green2,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                ),
+                                child: Text(
+                                  'Confirm Basket'.tr,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w700,
+                                      color: AppTheme.white1),
+                                ),
+                                onPressed: () {
+                                  dialog(
+                                      titleText: 'Confirm Basket Dialog'.tr,
+                                      buttonText: 'Confirm'.tr,
+                                      buttonColor: AppTheme.green1,
+                                      onPressed: () {
+                                        if (selectedAddressId == null &&
+                                            addressList.isNotEmpty) {
+                                          selectedAddressId =
+                                              addressList.first.id;
+                                          OrderService()
+                                              .createOrderCall(requestBody: {
+                                            "shipping_address_id":
+                                                selectedAddressId!,
+                                            "billing_address_id":
+                                                selectedAddressId!,
+                                            "agreement": "1"
+                                          }).then((List? value) {
+                                            if (value != null) {
+                                              Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
+                                                        ShoppingSummarySubPage(
+                                                            companyInfoList:
+                                                                value),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
+                                                  ));
+
+                                              BasketServices()
+                                                  .emptyBasketCall();
+                                            } else {
+                                              operationFailedDialog(context);
+                                            }
+                                          });
+                                        } else {
+                                          operationFailedDialog(context);
+                                        }
+                                      });
+                                }),
+                          ),
+                          const SizedBox(height: 36)
                         ],
                       )
                     : SizedBox(
