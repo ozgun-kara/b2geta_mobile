@@ -37,8 +37,8 @@ class _BasketPageState extends State<BasketPage> {
   int? selectedAddressIndex = 0;
   String? selectedAddressId;
 
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _cardNumberController = TextEditingController();
-
   final TextEditingController _cardFullNameController = TextEditingController();
   final TextEditingController _cardCvvController = TextEditingController();
   final TextEditingController _cardDateController = TextEditingController();
@@ -658,420 +658,458 @@ class _BasketPageState extends State<BasketPage> {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20.0, vertical: 20.0),
                                 child: Form(
+                                    key: _formKey,
                                     child: Column(
-                                  children: [
-                                    Column(
                                       children: [
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: Text(
-                                              'Card number'.tr,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white14,
+                                        Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
+                                                child: Text(
+                                                  'Card number'.tr,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: themeMode
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white14,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        TextFormField(
-                                          controller: _cardNumberController,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter
-                                                .digitsOnly,
-                                            LengthLimitingTextInputFormatter(
-                                                19),
-                                            CardNumberInputFormatter(),
+                                            TextFormField(
+                                              controller: _cardNumberController,
+                                              inputFormatters: [
+                                                FilteringTextInputFormatter
+                                                    .digitsOnly,
+                                                LengthLimitingTextInputFormatter(
+                                                    19),
+                                                CardNumberInputFormatter(),
+                                              ],
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  height: 1.5,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme
+                                                          .white1), // WHILE WRITING
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        25, 16, 25, 16),
+                                                filled: true,
+                                                fillColor: themeMode
+                                                    ? AppTheme.white39
+                                                    : AppTheme.black18,
+                                                hintText: "",
+                                                suffixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: CardUtils.getCardIcon(
+                                                      cardType),
+                                                ),
+                                                prefixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: SvgPicture.asset(
+                                                    "assets/icons/card.svg",
+                                                  ),
+                                                ),
+                                                hintStyle: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.white17
+                                                      : AppTheme.white14,
+                                                ),
+                                                border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    borderSide:
+                                                        const BorderSide(
+                                                      color: Colors.transparent,
+                                                      width: 1,
+                                                    )),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        )),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                    color: themeMode
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white1,
+                                                    width: 1,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                           ],
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              height: 1.5,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme
-                                                      .white1), // WHILE WRITING
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                                    25, 16, 25, 16),
-                                            filled: true,
-                                            fillColor: themeMode
-                                                ? AppTheme.white39
-                                                : AppTheme.black18,
-                                            hintText: "",
-                                            suffixIcon: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: CardUtils.getCardIcon(
-                                                  cardType),
-                                            ),
-                                            prefixIcon: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/card.svg",
-                                              ),
-                                            ),
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: themeMode
-                                                  ? AppTheme.white17
-                                                  : AppTheme.white14,
-                                            ),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                )),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                )),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide(
-                                                color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.white1,
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
                                         ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 13),
-                                    Column(
-                                      children: [
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: Text(
-                                              'Full Name'.tr,
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white14,
+                                        const SizedBox(height: 13),
+                                        Column(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
+                                                child: Text(
+                                                  'Full Name'.tr,
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: themeMode
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.white14,
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ),
-                                        TextFormField(
-                                          controller: _cardFullNameController,
+                                            TextFormField(
+                                              controller:
+                                                  _cardFullNameController,
 
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              height: 1.5,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w500,
-                                              color: themeMode
-                                                  ? AppTheme.blue3
-                                                  : AppTheme
-                                                      .white1), // WHILE WRITING
-                                          decoration: InputDecoration(
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                                    25, 16, 25, 16),
-                                            filled: true,
-                                            fillColor: themeMode
-                                                ? AppTheme.white39
-                                                : AppTheme.black18,
-                                            hintText: "",
-                                            prefixIcon: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: SvgPicture.asset(
-                                                "assets/icons/user.svg",
-                                              ),
-                                            ),
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily:
-                                                  AppTheme.appFontFamily,
-                                              fontWeight: FontWeight.w400,
-                                              color: themeMode
-                                                  ? AppTheme.white17
-                                                  : AppTheme.white14,
-                                            ),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                )),
-                                            enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                borderSide: const BorderSide(
-                                                  color: Colors.transparent,
-                                                  width: 1,
-                                                )),
-                                            focusedBorder: OutlineInputBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              borderSide: BorderSide(
-                                                color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.white1,
-                                                width: 1,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 13),
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 8),
-                                                  child: Text(
-                                                    'CVV',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: themeMode
-                                                          ? AppTheme.blue3
-                                                          : AppTheme.white14,
-                                                    ),
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  height: 1.5,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w500,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme
+                                                          .white1), // WHILE WRITING
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        25, 16, 25, 16),
+                                                filled: true,
+                                                fillColor: themeMode
+                                                    ? AppTheme.white39
+                                                    : AppTheme.black18,
+                                                hintText: "",
+                                                prefixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: SvgPicture.asset(
+                                                    "assets/icons/user.svg",
                                                   ),
                                                 ),
-                                              ),
-                                              TextFormField(
-                                                controller: _cardCvvController,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(
-                                                      3)
-                                                ],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    height: 1.5,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme
-                                                            .white1), // WHILE WRITING
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          25, 16, 25, 16),
-                                                  filled: true,
-                                                  fillColor: themeMode
-                                                      ? AppTheme.white39
-                                                      : AppTheme.black18,
-                                                  hintText: "",
-                                                  prefixIcon: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: SvgPicture.asset(
-                                                      "assets/icons/Cvv.svg",
-                                                    ),
-                                                  ),
-                                                  hintStyle: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: themeMode
-                                                        ? AppTheme.white17
-                                                        : AppTheme.white14,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1,
-                                                      )),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1,
-                                                          )),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
+                                                hintStyle: TextStyle(
+                                                  fontSize: 14,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: themeMode
+                                                      ? AppTheme.white17
+                                                      : AppTheme.white14,
+                                                ),
+                                                border: OutlineInputBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10),
-                                                    borderSide: BorderSide(
-                                                      color: themeMode
-                                                          ? AppTheme.blue2
-                                                          : AppTheme.white1,
+                                                    borderSide:
+                                                        const BorderSide(
+                                                      color: Colors.transparent,
                                                       width: 1,
-                                                    ),
+                                                    )),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide:
+                                                            const BorderSide(
+                                                          color: Colors
+                                                              .transparent,
+                                                          width: 1,
+                                                        )),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  borderSide: BorderSide(
+                                                    color: themeMode
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.white1,
+                                                    width: 1,
                                                   ),
                                                 ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        const SizedBox(
-                                          width: 16.0,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            children: [
-                                              Align(
-                                                alignment: Alignment.centerLeft,
-                                                child: Padding(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(horizontal: 8),
-                                                  child: Text(
-                                                    'MM/YY',
+                                        const SizedBox(height: 13),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8),
+                                                      child: Text(
+                                                        'CVV',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme
+                                                                  .white14,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        _cardCvvController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
+                                                      LengthLimitingTextInputFormatter(
+                                                          3)
+                                                    ],
                                                     style: TextStyle(
-                                                      fontSize: 14,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: themeMode
-                                                          ? AppTheme.blue3
-                                                          : AppTheme.white14,
+                                                        fontSize: 14,
+                                                        height: 1.5,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme
+                                                                .white1), // WHILE WRITING
+                                                    decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .fromLTRB(
+                                                              25, 16, 25, 16),
+                                                      filled: true,
+                                                      fillColor: themeMode
+                                                          ? AppTheme.white39
+                                                          : AppTheme.black18,
+                                                      hintText: "",
+                                                      prefixIcon: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: SvgPicture.asset(
+                                                          "assets/icons/Cvv.svg",
+                                                        ),
+                                                      ),
+                                                      hintStyle: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: themeMode
+                                                            ? AppTheme.white17
+                                                            : AppTheme.white14,
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1,
+                                                              )),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1,
+                                                              )),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide: BorderSide(
+                                                          color: themeMode
+                                                              ? AppTheme.blue2
+                                                              : AppTheme.white1,
+                                                          width: 1,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              ),
-                                              TextFormField(
-                                                controller: _cardDateController,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .digitsOnly,
-                                                  LengthLimitingTextInputFormatter(
-                                                      4),
-                                                  CardMonthInputFormatter(),
                                                 ],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    height: 1.5,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme
-                                                            .white1), // WHILE WRITING
-                                                decoration: InputDecoration(
-                                                  contentPadding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          25, 16, 25, 16),
-                                                  filled: true,
-                                                  fillColor: themeMode
-                                                      ? AppTheme.white39
-                                                      : AppTheme.black18,
-                                                  hintText: "",
-                                                  prefixIcon: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: SvgPicture.asset(
-                                                      "assets/icons/calender.svg",
-                                                    ),
-                                                  ),
-                                                  hintStyle: TextStyle(
-                                                    fontSize: 14,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: themeMode
-                                                        ? AppTheme.white17
-                                                        : AppTheme.white14,
-                                                  ),
-                                                  border: OutlineInputBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              10),
-                                                      borderSide:
-                                                          const BorderSide(
-                                                        color:
-                                                            Colors.transparent,
-                                                        width: 1,
-                                                      )),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          borderSide:
-                                                              const BorderSide(
-                                                            color: Colors
-                                                                .transparent,
-                                                            width: 1,
-                                                          )),
-                                                  focusedBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    borderSide: BorderSide(
-                                                      color: themeMode
-                                                          ? AppTheme.blue2
-                                                          : AppTheme.white1,
-                                                      width: 1,
-                                                    ),
-                                                  ),
-                                                ),
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                            const SizedBox(
+                                              width: 16.0,
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 8),
+                                                      child: Text(
+                                                        'MM/YY',
+                                                        style: TextStyle(
+                                                          fontSize: 14,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme
+                                                                  .white14,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  TextFormField(
+                                                    controller:
+                                                        _cardDateController,
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .digitsOnly,
+                                                      LengthLimitingTextInputFormatter(
+                                                          4),
+                                                      CardMonthInputFormatter(),
+                                                    ],
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        height: 1.5,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme
+                                                                .white1), // WHILE WRITING
+                                                    decoration: InputDecoration(
+                                                      contentPadding:
+                                                          const EdgeInsets
+                                                                  .fromLTRB(
+                                                              25, 16, 25, 16),
+                                                      filled: true,
+                                                      fillColor: themeMode
+                                                          ? AppTheme.white39
+                                                          : AppTheme.black18,
+                                                      hintText: "",
+                                                      prefixIcon: Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(8.0),
+                                                        child: SvgPicture.asset(
+                                                          "assets/icons/calender.svg",
+                                                        ),
+                                                      ),
+                                                      hintStyle: TextStyle(
+                                                        fontSize: 14,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: themeMode
+                                                            ? AppTheme.white17
+                                                            : AppTheme.white14,
+                                                      ),
+                                                      border:
+                                                          OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1,
+                                                              )),
+                                                      enabledBorder:
+                                                          OutlineInputBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          10),
+                                                              borderSide:
+                                                                  const BorderSide(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                width: 1,
+                                                              )),
+                                                      focusedBorder:
+                                                          OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide: BorderSide(
+                                                          color: themeMode
+                                                              ? AppTheme.blue2
+                                                              : AppTheme.white1,
+                                                          width: 1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
-                                    ),
-                                  ],
-                                )),
+                                    )),
                               )
                             ],
                           ),
@@ -1207,7 +1245,8 @@ class _BasketPageState extends State<BasketPage> {
                                       buttonColor: AppTheme.green1,
                                       onPressed: () {
                                         if (selectedAddressId == null &&
-                                            addressList.isNotEmpty) {
+                                            addressList.isNotEmpty &&
+                                            _formKey.currentState!.validate()) {
                                           selectedAddressId =
                                               addressList.first.id;
                                           OrderService()
@@ -1216,7 +1255,20 @@ class _BasketPageState extends State<BasketPage> {
                                                 selectedAddressId!,
                                             "billing_address_id":
                                                 selectedAddressId!,
-                                            "agreement": "1"
+                                            "agreement": "1",
+                                            "cardHolderName":
+                                                _cardFullNameController.text,
+                                            "cardNumber":
+                                                _cardNumberController.text,
+                                            "expireMonth": _cardDateController
+                                                .text
+                                                .split('/')[0],
+                                            "expireYear": _cardDateController
+                                                .text
+                                                .split('/')[1],
+                                            "cvc": _cardCvvController.text,
+                                            "callback_url":
+                                                "https://www.b2geta.com/payment/callback",
                                           }).then((List? value) {
                                             if (value != null) {
                                               Navigator.push(
