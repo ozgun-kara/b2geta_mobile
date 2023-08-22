@@ -11,13 +11,15 @@ import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/basket/components/card_type.dart';
 import 'package:b2geta_mobile/views/basket/components/card_utilis.dart';
 import 'package:b2geta_mobile/views/basket/components/input_formatters.dart';
-import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+// Import for Android features.
+// Import for iOS features.
 
 class BasketPage extends StatefulWidget {
   const BasketPage({Key? key}) : super(key: key);
@@ -692,6 +694,9 @@ class _BasketPageState extends State<BasketPage> {
                                                     19),
                                                 CardNumberInputFormatter(),
                                               ],
+                                              onChanged: (value) {
+                                                debugPrint(value);
+                                              },
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   height: 1.5,
@@ -1219,6 +1224,7 @@ class _BasketPageState extends State<BasketPage> {
                               ],
                             ),
                           ),
+
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 19),
                             child: MaterialButton(
@@ -1258,8 +1264,9 @@ class _BasketPageState extends State<BasketPage> {
                                             "agreement": "1",
                                             "cardHolderName":
                                                 _cardFullNameController.text,
-                                            "cardNumber":
-                                                _cardNumberController.text,
+                                            "cardNumber": _cardNumberController
+                                                .text
+                                                .replaceAll('  ', ''),
                                             "expireMonth": _cardDateController
                                                 .text
                                                 .split('/')[0],
@@ -1269,8 +1276,39 @@ class _BasketPageState extends State<BasketPage> {
                                             "cvc": _cardCvvController.text,
                                             "callback_url":
                                                 "https://www.b2geta.com/payment/callback",
-                                          }).then((List? value) {
+                                          }).then((String? value) {
                                             if (value != null) {
+                                              var controller =
+                                                  WebViewController()
+                                                    ..setJavaScriptMode(
+                                                        JavaScriptMode
+                                                            .unrestricted)
+                                                    ..setBackgroundColor(
+                                                        const Color(0x00000000))
+                                                    ..setNavigationDelegate(
+                                                      NavigationDelegate(
+                                                        onProgress:
+                                                            (int progress) {
+                                                          // Update loading bar.
+                                                        },
+                                                        onPageStarted:
+                                                            (String url) {},
+                                                        onPageFinished:
+                                                            (String url) {},
+                                                        onWebResourceError:
+                                                            (WebResourceError
+                                                                error) {},
+                                                      ),
+                                                    )
+                                                    ..loadRequest(
+                                                        Uri.dataFromString(
+                                                            value,
+                                                            mimeType:
+                                                                "text/html"));
+                                              webViewDialog(
+                                                  webViewController:
+                                                      controller);
+                                              /*
                                               Navigator.push(
                                                   context,
                                                   PageRouteBuilder(
@@ -1293,6 +1331,8 @@ class _BasketPageState extends State<BasketPage> {
 
                                               BasketServices()
                                                   .emptyBasketCall();
+
+                                              */
                                             } else {
                                               operationFailedDialog(context);
                                             }
@@ -1855,6 +1895,44 @@ class _BasketPageState extends State<BasketPage> {
             ),
           ],
         ));
+  }
+
+  void webViewDialog({required WebViewController webViewController}) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog(
+            insetPadding: const EdgeInsets.all(4),
+            backgroundColor: Colors.transparent,
+            content: Container(
+              width: deviceWidth,
+              height: deviceHeight,
+              decoration: BoxDecoration(
+                  color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              padding: const EdgeInsets.fromLTRB(6, 32, 6, 16),
+              child: Column(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.close)),
+                  Expanded(
+                    child: WebViewWidget(
+                      controller: webViewController,
+                    ),
+                  ),
+                  const Text("sonu")
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void dialog(
