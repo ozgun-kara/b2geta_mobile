@@ -7,7 +7,7 @@ import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  Future<List?> createOrderCall(
+  Future<String?> createOrderCall(
       {required Map<String, String> requestBody}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/orders/create'),
@@ -17,12 +17,14 @@ class OrderService {
       body: requestBody,
     );
 
+    var status = json.decode(response.body)["status"];
+
     if (response.statusCode == 200) {
-      var status = json.decode(response.body)["status"];
       if (status == true) {
-        List data = json.decode(response.body)["data"];
-        debugPrint("DATA:  ${response.statusCode} ${data.toString()}");
-        return data;
+        String htmlData =
+            json.decode(response.body)["data"]["payment"]["htmlContent"];
+
+        return htmlData;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
 
