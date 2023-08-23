@@ -8,6 +8,7 @@ import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
@@ -18,7 +19,6 @@ import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_first_tab_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_second_tab_sub_page.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -56,6 +56,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   void initState() {
     super.initState();
     getProduct();
+    getProfile();
   }
 
   Future<void> getProduct() async {
@@ -64,7 +65,6 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
       if (value != null) {
         setState(() {
           product = value;
-          getProfile();
         });
       }
     });
@@ -90,7 +90,6 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black7,
       appBar: const CustomAppBar(),
@@ -116,36 +115,21 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                           ),
                         ],
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        // child: Row(
-                        //   children: [
-                        //     Expanded(
-                        //       child: Text(
-                        //         "Mobilya ve Dekorasyon   -   Ofis Mobilyaları",
-                        //         style: TextStyle(
-                        //           fontSize: 11,
-                        //           fontFamily: AppTheme.appFontFamily,
-                        //           fontWeight: FontWeight.w600,
-                        //           color: AppTheme.white15,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                      child: const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
                       ),
                     ),
                     Column(
                       children: [
                         InkWell(
                           onTap: () {
+
                             Navigator.push(
                                 context,
                                 PageRouteBuilder(
                                   pageBuilder: (_, __, ___) =>
                                       CustomGalleryWidget(
-                                    urlImages: (product!.images != null &&
-                                            product!.images!.isNotEmpty)
+                                    urlImages: (product!.images != null)
                                         ? product!.images!
                                         : [],
                                   ),
@@ -156,6 +140,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   transitionsBuilder: (_, a, __, c) =>
                                       FadeTransition(opacity: a, child: c),
                                 ));
+
                           },
                           child: Stack(
                             children: [
@@ -166,6 +151,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   (product!.images != null &&
                                           product!.images!.isNotEmpty)
                                       ? product!.images![0]
+                                          .replaceAll('////', '//')
+                                          .replaceAll('///', '//')
                                       : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) =>
@@ -239,6 +226,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         product!
                                                             .images!.isNotEmpty)
                                                     ? product!.images![0]
+                                                        .replaceAll(
+                                                            '////', '//')
+                                                        .replaceAll('///', '//')
                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                 fit: BoxFit.cover,
                                                 errorBuilder: (context, error,
@@ -2045,17 +2035,17 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                           PageRouteBuilder(
                                                             pageBuilder: (_, __,
                                                                     ___) =>
-                                                               AddMessageSubPage(
-                                                                toId: product!
-                                                                    .userId!,
-                                                                fromId: Provider.of<
-                                                                            UserProvider>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .getUser
-                                                                    .id!,
-                                                              ),
+                                                                AddMessageSubPage(
+                                                              toId: product!
+                                                                  .userId!,
+                                                              fromId: Provider.of<
+                                                                          UserProvider>(
+                                                                      context,
+                                                                      listen:
+                                                                          false)
+                                                                  .getUser
+                                                                  .id!,
+                                                            ),
                                                             transitionDuration:
                                                                 const Duration(
                                                                     milliseconds:
@@ -2090,9 +2080,12 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                         ),
                                         child: ClipOval(
                                           child: Image.network(
-                                            (companyProfileModel != null)
-                                                ? companyProfileModel!.logo ??
-                                                    "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png"
+                                            (companyProfileModel != null &&
+                                                    companyProfileModel!.logo !=
+                                                        null)
+                                                ? companyProfileModel!.logo!
+                                                    .replaceAll('////', '//')
+                                                    .replaceAll('///', '//')
                                                 : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                             fit: BoxFit.cover,
                                             errorBuilder:
@@ -2421,7 +2414,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                 ),
                                                 padding:
                                                     const EdgeInsets.all(8),
-                                                child:  Row(
+                                                child: Row(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
@@ -2436,12 +2429,19 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         ),
                                                       ),
                                                       child: Image.network(
-                                                        product.images!
-                                                                .isNotEmpty
-                                                            ? product.images![
-                                                                    0] ??
-                                                            'https://doraev.com/images/custom/product-images/nophoto.png'
-                                                            : 'assets/images/image_not_found.jpg',
+                                                        (product.images!
+                                                                    .isNotEmpty &&
+                                                                product.images![
+                                                                        0] !=
+                                                                    null)
+                                                            ? product
+                                                                .images![0]!
+                                                                .replaceAll(
+                                                                    '////',
+                                                                    '//')
+                                                                .replaceAll(
+                                                                    '///', '//')
+                                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                         fit: BoxFit.cover,
                                                         errorBuilder: (context,
                                                                 error,
@@ -2802,15 +2802,15 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                         ? scrollController.position.userScrollDirection ==
                                 ScrollDirection.reverse
                             ? 0
-                            : 60+deviceBottomPadding
-                        : 60+deviceBottomPadding,
+                            : 60 + deviceBottomPadding
+                        : 60 + deviceBottomPadding,
                     child: child);
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 0),
                 child: Container(
                   width: deviceWidth,
-                  height: 60+deviceBottomPadding,
+                  height: 60 + deviceBottomPadding,
                   color: AppTheme.blue2,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(17, 0, 15, 0),
