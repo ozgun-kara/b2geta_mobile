@@ -56,7 +56,6 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
   void initState() {
     super.initState();
     getProduct();
-    getProfile();
   }
 
   Future<void> getProduct() async {
@@ -65,12 +64,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
       if (value != null) {
         setState(() {
           product = value;
+          getProfile();
         });
       }
     });
   }
 
-  getProfile() async {
+  Future<void> getProfile() async {
     if (product != null) {
       await _memberServices
           .getCompanyProfileCall(userId: product!.accountId!)
@@ -123,7 +123,6 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                       children: [
                         InkWell(
                           onTap: () {
-
                             Navigator.push(
                                 context,
                                 PageRouteBuilder(
@@ -140,7 +139,6 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                   transitionsBuilder: (_, a, __, c) =>
                                       FadeTransition(opacity: a, child: c),
                                 ));
-
                           },
                           child: Stack(
                             children: [
@@ -1976,7 +1974,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         RoundedRectangleBorder(
                                                       borderRadius:
                                                           const BorderRadius
-                                                                  .all(
+                                                              .all(
                                                               Radius.circular(
                                                                   5)),
                                                       side: BorderSide(
@@ -1993,7 +1991,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .only(
+                                                                  .only(
                                                                   bottom: 2),
                                                           child: Image.asset(
                                                             'assets/icons/bag.png',
@@ -2592,16 +2590,16 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                           color:
                                                                               AppTheme.white19),
                                                                       borderRadius: const BorderRadius
-                                                                              .all(
+                                                                          .all(
                                                                           Radius.circular(
                                                                               36)),
                                                                     ),
-                                                                    padding:
-                                                                        const EdgeInsets.fromLTRB(
-                                                                            10,
-                                                                            2,
-                                                                            10,
-                                                                            3.5),
+                                                                    padding: const EdgeInsets
+                                                                        .fromLTRB(
+                                                                        10,
+                                                                        2,
+                                                                        10,
+                                                                        3.5),
                                                                     child: Row(
                                                                       crossAxisAlignment:
                                                                           CrossAxisAlignment
