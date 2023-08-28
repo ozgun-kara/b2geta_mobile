@@ -226,16 +226,35 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   .data![index];
                               return Column(
                                 children: [
-                                  _productItem(
-                                    productImageUrl: mostDemandProduct!
-                                        .image!.url
-                                        .toString(),
-                                    productName:
-                                        mostDemandProduct.name.toString(),
-                                    productPrice:
-                                        mostDemandProduct.price.toString(),
-                                    productCurrency:
-                                        mostDemandProduct.currency.toString(),
+                                  GestureDetector(
+                                    onTap:(){
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                                  productId: mostDemandProduct.id!.toString(),
+                                                ),
+                                            transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
+                                    },
+                                    child: _productItem(
+                                      productImageUrl: mostDemandProduct!
+                                          .image!.url
+                                          .toString(),
+                                      productName:
+                                          mostDemandProduct.name.toString(),
+                                      productPrice:
+                                          mostDemandProduct.price.toString(),
+                                      productCurrency:
+                                          mostDemandProduct.currency.toString(),
+                                    ),
                                   ),
                                   const SizedBox(
                                     width: 15,
@@ -354,16 +373,35 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   .data![index];
                               return Column(
                                 children: [
-                                  _productItem(
-                                      productImageUrl: categoryProduct!
-                                          .image!.url
-                                          .toString(),
-                                      productName:
-                                          categoryProduct.name.toString(),
-                                      productPrice:
-                                          categoryProduct.price.toString(),
-                                      productCurrency:
-                                          categoryProduct.currency.toString()),
+                                  GestureDetector(
+                                    onTap:(){
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                                  productId: categoryProduct.id!.toString(),
+                                                ),
+                                            transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
+                                    },
+                                    child: _productItem(
+                                        productImageUrl: categoryProduct!
+                                            .image!.url
+                                            .toString(),
+                                        productName:
+                                            categoryProduct.name.toString(),
+                                        productPrice:
+                                            categoryProduct.price.toString(),
+                                        productCurrency:
+                                            categoryProduct.currency.toString()),
+                                  ),
                                   const SizedBox(
                                     width: 15,
                                   ),
@@ -476,15 +514,34 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   .data![index];
                               return Column(
                                 children: [
-                                  _productItem(
-                                      productImageUrl:
-                                          popularProduct!.image!.url.toString(),
-                                      productName:
-                                          popularProduct.name.toString(),
-                                      productPrice:
-                                          popularProduct.price.toString(),
-                                      productCurrency:
-                                          popularProduct.currency.toString()),
+                                  GestureDetector(
+                                    onTap:(){
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                                  productId: popularProduct.id!.toString(),
+                                                ),
+                                            transitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                            const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
+                                    },
+                                    child: _productItem(
+                                        productImageUrl:
+                                            popularProduct!.image!.url.toString(),
+                                        productName:
+                                            popularProduct.name.toString(),
+                                        productPrice:
+                                            popularProduct.price.toString(),
+                                        productCurrency:
+                                            popularProduct.currency.toString()),
+                                  ),
                                   const SizedBox(
                                     width: 15,
                                   ),
@@ -601,16 +658,35 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                   .data![index];
                               return Column(
                                 children: [
-                                  _productItem(
-                                      productImageUrl: categoryProduct!
-                                          .image!.url
-                                          .toString(),
-                                      productName:
-                                          categoryProduct.name.toString(),
-                                      productPrice:
-                                          categoryProduct.price.toString(),
-                                      productCurrency:
-                                          categoryProduct.currency.toString()),
+                                  GestureDetector(
+                                  onTap:(){
+                                    Navigator.push(
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (_, __, ___) =>
+                                              ProductDetailSubPage(
+                                                productId: categoryProduct.id!.toString(),
+                                              ),
+                                          transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                          reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                          transitionsBuilder: (_, a, __, c) =>
+                                              FadeTransition(
+                                                  opacity: a, child: c),
+                                        ));
+                                  },
+                                    child: _productItem(
+                                        productImageUrl: categoryProduct!
+                                            .image!.url
+                                            .toString(),
+                                        productName:
+                                            categoryProduct.name.toString(),
+                                        productPrice:
+                                            categoryProduct.price.toString(),
+                                        productCurrency:
+                                            categoryProduct.currency.toString()),
+                                  ),
                                   const SizedBox(
                                     width: 15,
                                   ),
@@ -802,11 +878,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
         Container(
           width: width ?? 134,
           height: height ?? 155,
+          margin: EdgeInsets.only(right: 16.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(9),
             border: Border.all(color: AppTheme.white21),
             color: AppTheme.white1,
           ),
+
           child: Image.network(
             productImageUrl,
             fit: BoxFit.cover,

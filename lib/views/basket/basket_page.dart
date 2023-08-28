@@ -1197,8 +1197,10 @@ class _BasketPageState extends State<BasketPage> {
                                       width: 16,
                                       child: Checkbox(
                                         activeColor: AppTheme.blue2,
-                                        value: true,
-                                        onChanged: (value) {},
+                                        value: basketPageProvider.acceptCheckbox,
+                                        onChanged: (value) {
+                                          basketPageProvider.updateAcceptCheckbox(value!);
+                                        },
                                       ),
                                     ),
                                     const SizedBox(
@@ -1261,7 +1263,7 @@ class _BasketPageState extends State<BasketPage> {
                                                 selectedAddressId!,
                                             "billing_address_id":
                                                 selectedAddressId!,
-                                            "agreement": "1",
+                                            "agreement": basketPageProvider.acceptCheckbox ? "1": "0",
                                             "cardHolderName":
                                                 _cardFullNameController.text,
                                             "cardNumber": _cardNumberController
@@ -1292,9 +1294,14 @@ class _BasketPageState extends State<BasketPage> {
                                                           // Update loading bar.
                                                         },
                                                         onPageStarted:
-                                                            (String url) {},
+                                                            (String url) {
+
+
+                                                            },
                                                         onPageFinished:
-                                                            (String url) {},
+                                                            (String url) {
+                                                          debugPrint('Finished url:' + url);
+                                                            },
                                                         onWebResourceError:
                                                             (WebResourceError
                                                                 error) {},
