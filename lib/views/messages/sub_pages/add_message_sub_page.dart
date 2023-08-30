@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -101,11 +102,11 @@ class _AddMessageSubPageState extends State<AddMessageSubPage> {
               children: [
                 ClipOval(
                   child: companyProfileModel != null
-                      ? Image.network(
+                      ? CachedNetworkImage(
                           width: 43,
                           height: 43,
                           fit: BoxFit.cover,
-                          companyProfileModel!.id !=
+                          imageUrl:companyProfileModel!.id !=
                                   Provider.of<UserProvider>(context,
                                           listen: false)
                                       .getUser
@@ -115,7 +116,7 @@ class _AddMessageSubPageState extends State<AddMessageSubPage> {
                                       listen: false)
                                   .getUser
                                   .avatar!,
-                          errorBuilder: (context, error, stackTrace) =>
+                          errorWidget: (context, error, stackTrace) =>
                               Image.asset(
                             "assets/images/dummy_images/user_profile.png",
                           ),

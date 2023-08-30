@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/views/messages/messages_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
@@ -229,7 +230,7 @@ class _ShoppingSummarySubPageState extends State<ShoppingSummarySubPage> {
                                                 ? AppTheme.white21
                                                 : AppTheme.black20),
                                         image: DecorationImage(
-                                          image: NetworkImage(
+                                          image: CachedNetworkImageProvider(
                                             companyPhoto.isNotEmpty
                                                 ? companyPhoto
                                                 : 'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png',

@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -95,12 +96,12 @@ class _CustomPostItemWidgetState extends State<CustomPostItemWidget> {
                             children: [
                               widget.feed.user!.photo!.isNotEmpty
                                   ? ClipOval(
-                                      child: Image.network(
+                                      child: CachedNetworkImage(
                                         width: 40,
                                         height: 40,
                                         fit: BoxFit.cover,
-                                        widget.feed.user!.photo!,
-                                        errorBuilder:
+                                       imageUrl: widget.feed.user!.photo!,
+                                        errorWidget:
                                             (context, error, stackTrace) =>
                                                 Image.asset(
                                           "assets/images/dummy_images/user_profile.png",
@@ -212,11 +213,11 @@ class _CustomPostItemWidgetState extends State<CustomPostItemWidget> {
                                           FadeTransition(opacity: a, child: c),
                                     ));
                               },
-                              child: Image.network(
-                                widget.feed.images![0]!.url.toString(),
+                              child: CachedNetworkImage(
+                               imageUrl: widget.feed.images![0]!.url.toString(),
                                 width: deviceWidth,
                                 fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) =>
+                                errorWidget: (context, error, stackTrace) =>
                                     Image.asset(
                                   "assets/images/dummy_images/image_not_found.jpg",
                                   width: deviceWidth,
@@ -537,10 +538,10 @@ class _CustomPostItemWidgetState extends State<CustomPostItemWidget> {
                                         .getUser
                                         .avatar!
                                         .isNotEmpty)
-                                ? Image.network(
-                                    '${context.watch<UserProvider>().getUser.avatar}',
+                                ? CachedNetworkImage(
+                                    imageUrl:'${context.watch<UserProvider>().getUser.avatar}',
                                     fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
+                                    errorWidget: (context, error, stackTrace) {
                                       return Image.asset(
                                         "assets/images/dummy_images/user_profile.png",
                                         fit: BoxFit.cover,

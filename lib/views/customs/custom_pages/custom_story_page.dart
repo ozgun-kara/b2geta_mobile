@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:story_view/story_view.dart';
@@ -126,12 +127,12 @@ class _CustomStoryPageState extends State<CustomStoryPage>
                   children: [
                     (story.user!.photo != null && story.user!.photo!.isNotEmpty)
                         ? ClipOval(
-                            child: Image.network(
+                            child: CachedNetworkImage(
                               width: 30,
                               height: 30,
                               fit: BoxFit.cover,
-                              story.user!.photo!,
-                              errorBuilder: (context, error, stackTrace) =>
+                             imageUrl: story.user!.photo!,
+                              errorWidget: (context, error, stackTrace) =>
                                   Image.asset(
                                       width: 30,
                                       height: 30,

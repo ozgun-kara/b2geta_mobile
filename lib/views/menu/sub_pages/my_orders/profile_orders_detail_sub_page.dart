@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -108,7 +109,7 @@ class _ProfileOrdersDetailSubPageState
                                       height: 82,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
-                                          image: NetworkImage(
+                                          image: CachedNetworkImageProvider(
                                               _orderDetailsModel!
                                                   .products![index]!.image
                                                   .toString()),

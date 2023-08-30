@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -115,10 +116,10 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                             color: AppTheme.white1,
                           ),
                           child: widget.user.photo!.isNotEmpty
-                              ? Image.network(
-                                  widget.user.photo.toString(),
+                              ? CachedNetworkImage(
+                                  imageUrl: widget.user.photo.toString(),
                                   fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
+                                  errorWidget: (context, error, stackTrace) {
                                     return Image.asset(
                                         fit: BoxFit.cover,
                                         "assets/images/dummy_images/user_profile.png");
@@ -214,10 +215,10 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                                         color: AppTheme.white1,
                                       ),
                                       child: comment.user!.photo != null
-                                          ? Image.network(
-                                              comment.user!.photo!,
+                                          ? CachedNetworkImage(
+                                              imageUrl: comment.user!.photo!,
                                               fit: BoxFit.cover,
-                                              errorBuilder:
+                                              errorWidget:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(
                                                     fit: BoxFit.cover,
@@ -400,10 +401,10 @@ class _CustomCommentPageState extends State<CustomCommentPage> {
                                   .getUser
                                   .avatar!
                                   .isNotEmpty)
-                          ? Image.network(
-                              '${context.watch<UserProvider>().getUser.avatar}',
+                          ? CachedNetworkImage(
+                             imageUrl: '${context.watch<UserProvider>().getUser.avatar}',
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
+                              errorWidget: (context, error, stackTrace) {
                                 return Image.asset(
                                     "assets/images/dummy_images/user_profile.png");
                               },

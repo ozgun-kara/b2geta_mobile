@@ -1,5 +1,3 @@
-import 'package:b2geta_mobile/models/products/product_model.dart';
-import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

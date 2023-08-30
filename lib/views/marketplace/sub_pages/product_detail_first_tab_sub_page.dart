@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -535,7 +536,7 @@ class _ProductDetailFirstTabSubPageState
           height: 305,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: NetworkImage(
+              image: CachedNetworkImageProvider(
                 "https://s3.gifyu.com/images/dummy-product-1.png",
               ),
               fit: BoxFit.cover,

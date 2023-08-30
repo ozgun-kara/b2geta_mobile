@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -105,12 +106,12 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                                   children: [
                                     feed.user!.photo!.isNotEmpty
                                         ? ClipOval(
-                                            child: Image.network(
+                                            child: CachedNetworkImage(
                                               width: 40,
                                               height: 40,
                                               fit: BoxFit.cover,
-                                              feed.user!.photo!,
-                                              errorBuilder: (context, error,
+                                              imageUrl: feed.user!.photo!,
+                                              errorWidget: (context, error,
                                                       stackTrace) =>
                                                   Image.asset(
                                                 "assets/images/dummy_images/user_profile.png",
@@ -226,11 +227,11 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                                                     opacity: a, child: c),
                                           ));
                                     },
-                                    child: Image.network(
-                                      feed.images![0]!.url.toString(),
+                                    child: CachedNetworkImage(
+                                      imageUrl: feed.images![0]!.url.toString(),
                                       width: deviceWidth,
                                       fit: BoxFit.cover,
-                                      errorBuilder:
+                                      errorWidget:
                                           (context, error, stackTrace) =>
                                               Image.asset(
                                         "assets/images/dummy_images/image_not_found.jpg",
@@ -572,10 +573,11 @@ class _HomePostSubPageState extends State<HomePostSubPage> {
                                               .getUser
                                               .avatar!
                                               .isNotEmpty)
-                                      ? Image.network(
-                                          '${context.watch<UserProvider>().getUser.avatar}',
+                                      ? CachedNetworkImage(
+                                          imageUrl:
+                                              '${context.watch<UserProvider>().getUser.avatar}',
                                           fit: BoxFit.cover,
-                                          errorBuilder:
+                                          errorWidget:
                                               (context, error, stackTrace) {
                                             return Image.asset(
                                               "assets/images/dummy_images/user_profile.png",

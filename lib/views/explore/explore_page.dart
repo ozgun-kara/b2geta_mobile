@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/providers/explore_page_provider.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_post_item_widget.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_reels_page_view_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
@@ -91,13 +92,15 @@ class _ExplorePageState extends State<ExplorePage> {
                                               discover.videos![0] != null &&
                                               discover.videos![0]!.image!
                                                   .isNotEmpty)
-                                          ? Image.network(
+                                          ? CachedNetworkImage(
                                               //  discover.videos![0]!.image!,
-                                              'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
+                                              imageUrl: discover
+                                                      .videos![0]!.image ??
+                                                  'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
                                               width: 128,
                                               height: 256,
                                               fit: BoxFit.cover,
-                                              errorBuilder: (context, error,
+                                              errorWidget: (context, error,
                                                       stackTrace) =>
                                                   Image.asset(
                                                 'assets/images/image_not_found.jpg',
@@ -145,10 +148,10 @@ class _ExplorePageState extends State<ExplorePage> {
                                     },
                                     child: Stack(
                                       children: [
-                                        Image.network(
-                                          discover.images![0]!.url!,
+                                        CachedNetworkImage(
+                                          imageUrl: discover.images![0]!.url!,
                                           fit: BoxFit.cover,
-                                          errorBuilder:
+                                          errorWidget:
                                               (context, error, stackTrace) =>
                                                   Image.asset(
                                             'assets/images/image_not_found.jpg',

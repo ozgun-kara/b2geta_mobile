@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/notification/notification_page.dart';
 import 'package:b2geta_mobile/views/search_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -307,12 +308,12 @@ class _NavigationPageState extends State<NavigationPage> {
                                             .getUser
                                             .avatar!
                                             .isNotEmpty)
-                                    ? Image.network(
-                                        '${context.watch<UserProvider>().getUser.avatar}',
+                                    ? CachedNetworkImage(
+                                        imageUrl: '${context.watch<UserProvider>().getUser.avatar}',
                                         width: 24,
                                         height: 24,
                                         fit: BoxFit.cover,
-                                        errorBuilder:
+                                        errorWidget:
                                             (context, error, stackTrace) {
                                           return ClipOval(
                                             child: Image.asset(
@@ -472,11 +473,11 @@ class _NavigationPageState extends State<NavigationPage> {
                                     children: [
                                       company!.logo!.isNotEmpty
                                           ? ClipOval(
-                                              child: Image.network(
+                                              child: CachedNetworkImage(
                                                 width: 20,
                                                 height: 20,
-                                                company.logo.toString(),
-                                                errorBuilder: (context, error,
+                                                imageUrl:company.logo.toString(),
+                                                errorWidget: (context, error,
                                                     stackTrace) {
                                                   return Image.asset(
                                                     "assets/images/dummy_images/user_profile.png",
@@ -622,11 +623,11 @@ class _NavigationPageState extends State<NavigationPage> {
                               children: [
                                 personalProfileModel.photo != null
                                     ? ClipOval(
-                                        child: Image.network(
+                                        child: CachedNetworkImage(
                                           width: 20,
                                           height: 20,
-                                          personalProfileModel.photo!,
-                                          errorBuilder:
+                                          imageUrl:personalProfileModel.photo!,
+                                          errorWidget:
                                               (context, error, stackTrace) {
                                             return Image.asset(
                                               "assets/images/dummy_images/user_profile.png",

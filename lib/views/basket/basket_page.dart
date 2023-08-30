@@ -12,6 +12,7 @@ import 'package:b2geta_mobile/views/basket/components/card_type.dart';
 import 'package:b2geta_mobile/views/basket/components/card_utilis.dart';
 import 'package:b2geta_mobile/views/basket/components/input_formatters.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -158,7 +159,7 @@ class _BasketPageState extends State<BasketPage> {
                                                       addressList[index];
                                                   return Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 9),
                                                     child: Container(
                                                       decoration: BoxDecoration(
@@ -167,7 +168,7 @@ class _BasketPageState extends State<BasketPage> {
                                                             : AppTheme.black7,
                                                         borderRadius:
                                                             const BorderRadius
-                                                                    .all(
+                                                                .all(
                                                                 Radius.circular(
                                                                     5)),
                                                         border: Border.all(
@@ -181,7 +182,7 @@ class _BasketPageState extends State<BasketPage> {
                                                       child: Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .fromLTRB(
+                                                                .fromLTRB(
                                                                 24, 21, 24, 21),
                                                         child: Column(
                                                           children: [
@@ -881,7 +882,7 @@ class _BasketPageState extends State<BasketPage> {
                                                         Alignment.centerLeft,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 8),
                                                       child: Text(
                                                         'CVV',
@@ -924,7 +925,7 @@ class _BasketPageState extends State<BasketPage> {
                                                     decoration: InputDecoration(
                                                       contentPadding:
                                                           const EdgeInsets
-                                                                  .fromLTRB(
+                                                              .fromLTRB(
                                                               25, 16, 25, 16),
                                                       filled: true,
                                                       fillColor: themeMode
@@ -1001,7 +1002,7 @@ class _BasketPageState extends State<BasketPage> {
                                                         Alignment.centerLeft,
                                                     child: Padding(
                                                       padding: const EdgeInsets
-                                                              .symmetric(
+                                                          .symmetric(
                                                           horizontal: 8),
                                                       child: Text(
                                                         'MM/YY',
@@ -1045,7 +1046,7 @@ class _BasketPageState extends State<BasketPage> {
                                                     decoration: InputDecoration(
                                                       contentPadding:
                                                           const EdgeInsets
-                                                                  .fromLTRB(
+                                                              .fromLTRB(
                                                               25, 16, 25, 16),
                                                       filled: true,
                                                       fillColor: themeMode
@@ -1197,9 +1198,11 @@ class _BasketPageState extends State<BasketPage> {
                                       width: 16,
                                       child: Checkbox(
                                         activeColor: AppTheme.blue2,
-                                        value: basketPageProvider.acceptCheckbox,
+                                        value:
+                                            basketPageProvider.acceptCheckbox,
                                         onChanged: (value) {
-                                          basketPageProvider.updateAcceptCheckbox(value!);
+                                          basketPageProvider
+                                              .updateAcceptCheckbox(value!);
                                         },
                                       ),
                                     ),
@@ -1263,7 +1266,10 @@ class _BasketPageState extends State<BasketPage> {
                                                 selectedAddressId!,
                                             "billing_address_id":
                                                 selectedAddressId!,
-                                            "agreement": basketPageProvider.acceptCheckbox ? "1": "0",
+                                            "agreement": basketPageProvider
+                                                    .acceptCheckbox
+                                                ? "1"
+                                                : "0",
                                             "cardHolderName":
                                                 _cardFullNameController.text,
                                             "cardNumber": _cardNumberController
@@ -1294,14 +1300,12 @@ class _BasketPageState extends State<BasketPage> {
                                                           // Update loading bar.
                                                         },
                                                         onPageStarted:
-                                                            (String url) {
-
-
-                                                            },
+                                                            (String url) {},
                                                         onPageFinished:
                                                             (String url) {
-                                                          debugPrint('Finished url:' + url);
-                                                            },
+                                                          debugPrint(
+                                                              'Finished url:$url');
+                                                        },
                                                         onWebResourceError:
                                                             (WebResourceError
                                                                 error) {},
@@ -1511,14 +1515,16 @@ class _BasketPageState extends State<BasketPage> {
                         width: 82,
                         height: 82,
                         decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(basket.product!.image != null
-                                ? basket.product!.image!
-                                : 'https://doraev.com/images/custom/product-images/nophoto.png'),
-                            fit: BoxFit.cover,
-                          ),
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(width: 1, color: AppTheme.white21),
+                        ),
+                        child: CachedNetworkImage(
+                          imageUrl: basket.product!.image != null
+                              ? basket.product!.image!
+                              : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                          fit: BoxFit.cover,
+                          errorWidget: (context, url, error) =>
+                              Image.asset('assets/images/image_not_found.jpg'),
                         ),
                       ),
                       const SizedBox(

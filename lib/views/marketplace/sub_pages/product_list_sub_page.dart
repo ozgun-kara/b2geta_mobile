@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -304,13 +305,13 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                               Radius.circular(9),
                                             ),
                                           ),
-                                          child: Image.network(
-                                            ( product.image!=null && product!.image.url!=null)
+                                          child: CachedNetworkImage(
+                                            imageUrl:( product.image!=null && product!.image.url!=null)
                                                 ? product.image.url[0] ??
                                                     'https://doraev.com/images/custom/product-images/nophoto.png'
                                                 : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                             fit: BoxFit.cover,
-                                            errorBuilder: (context, error,
+                                            errorWidget: (context, error,
                                                     stackTrace) =>
                                                 Image.asset(
                                                     'assets/images/image_not_found.jpg',
@@ -467,13 +468,13 @@ class _ProductListSubPageState extends State<ProductListSubPage> {
                                                 Radius.circular(2),
                                               ),
                                             ),
-                                            child: Image.network(
-                                              product.image!=null
+                                            child: CachedNetworkImage(
+                                             imageUrl: product.image!=null
                                                   ? product.image!.url ??
                                                       'https://doraev.com/images/custom/product-images/nophoto.png'
                                                   : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,
-                                              errorBuilder: (context, error,
+                                              errorWidget: (context, error,
                                                       stackTrace) =>
                                                   Image.asset(
                                                       'assets/images/image_not_found.jpg',

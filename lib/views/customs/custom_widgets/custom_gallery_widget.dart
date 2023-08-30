@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
@@ -34,7 +35,7 @@ class _CustomGalleryWidgetState extends State<CustomGalleryWidget> {
           final urlImage = widget.urlImages[index];
 
           return PhotoViewGalleryPageOptions(
-            imageProvider: NetworkImage(urlImage),
+            imageProvider: CachedNetworkImageProvider(urlImage),
             minScale: PhotoViewComputedScale.contained,
             maxScale: PhotoViewComputedScale.contained * 4,
           );
