@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -263,13 +264,13 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                               Radius.circular(9),
                                             ),
                                           ),
-                                          child: Image.network(
-                                            product.images!.isNotEmpty
+                                          child: CachedNetworkImage(
+                                           imageUrl: product.images!.isNotEmpty
                                                 ? product.images![0] ??
                                                     'https://doraev.com/images/custom/product-images/nophoto.png'
                                                 : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                             fit: BoxFit.cover,
-                                            errorBuilder:
+                                            errorWidget:
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               'assets/images/image_not_found.jpg',
@@ -450,13 +451,13 @@ class _MyAccountProductsSubPageState extends State<MyAccountProductsSubPage> {
                                                 Radius.circular(2),
                                               ),
                                             ),
-                                            child: Image.network(
-                                              product.images!.isNotEmpty
+                                            child: CachedNetworkImage(
+                                             imageUrl: product.images!.isNotEmpty
                                                   ? product.images![0] ??
                                                       'https://doraev.com/images/custom/product-images/nophoto.png'
                                                   : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,
-                                              errorBuilder: (context, error,
+                                              errorWidget: (context, error,
                                                       stackTrace) =>
                                                   Image.asset(
                                                 'assets/images/image_not_found.jpg',

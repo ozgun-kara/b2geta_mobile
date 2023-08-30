@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -164,12 +165,17 @@ class _SearchPageState extends State<SearchPage> {
                                           Radius.circular(2),
                                         ),
                                       ),
-                                      child: Image.network(
-                                        product.images!.isNotEmpty
+                                      child: CachedNetworkImage(
+                                        imageUrl: product.images!.isNotEmpty
                                             ? product.images![0] ??
-                                                'assets/images/image_not_found.jpg'
-                                            : 'assets/images/image_not_found.jpg',
+                                                'https://doraev.com/images/custom/product-images/nophoto.png'
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                         fit: BoxFit.cover,
+                                        errorWidget: (context, error,
+                                                stackTrace) =>
+                                            Image.asset(
+                                                'assets/images/image_not_found.jpg',
+                                                fit: BoxFit.cover),
                                       ),
                                     ),
                                     const SizedBox(width: 10),

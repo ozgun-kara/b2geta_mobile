@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/models/dummy_models/customer_comment_dummy_model.dart';
 import 'package:b2geta_mobile/services/dummy_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -84,7 +85,7 @@ class _ProductDetailSecondTabSubPageState
             ),
             const SizedBox(height: 14),
             Text(
-              '2' + ' ' + 'Comment'.tr,
+              '2 ${'Comment'.tr}',
               style: TextStyle(
                 fontSize: 14,
                 fontFamily: AppTheme.appFontFamily,
@@ -871,7 +872,7 @@ class _ProductDetailSecondTabSubPageState
                                           height: 13,
                                           decoration: BoxDecoration(
                                             image: DecorationImage(
-                                              image: NetworkImage(
+                                              image: CachedNetworkImageProvider(
                                                 items[index].flagImgUrl,
                                               ),
                                               fit: BoxFit.cover,
@@ -946,8 +947,10 @@ class _ProductDetailSecondTabSubPageState
                                                 height: deviceWidth * 0.5 - 36,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        items[index].images[0]),
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            items[index]
+                                                                .images[0]),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -983,8 +986,10 @@ class _ProductDetailSecondTabSubPageState
                                                 height: deviceWidth * 0.5 - 36,
                                                 decoration: BoxDecoration(
                                                   image: DecorationImage(
-                                                    image: NetworkImage(
-                                                        items[index].images[1]),
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            items[index]
+                                                                .images[1]),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),

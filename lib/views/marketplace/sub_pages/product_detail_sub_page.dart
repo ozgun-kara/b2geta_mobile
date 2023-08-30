@@ -12,6 +12,7 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_gallery_widget
 import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
 import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -145,15 +146,15 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                               SizedBox(
                                 width: deviceWidth,
                                 height: 352,
-                                child: Image.network(
-                                  (product!.images != null &&
+                                child: CachedNetworkImage(
+                                  imageUrl: (product!.images != null &&
                                           product!.images!.isNotEmpty)
                                       ? product!.images![0]
                                           .replaceAll('////', '//')
                                           .replaceAll('///', '//')
                                       : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                   fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) =>
+                                  errorWidget: (context, error, stackTrace) =>
                                       Image.asset(
                                     'assets/images/image_not_found.jpg',
                                     fit: BoxFit.cover,
@@ -219,8 +220,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                             child: SizedBox(
                                               width: 39,
                                               height: 39,
-                                              child: Image.network(
-                                                (product!.images != null &&
+                                              child: CachedNetworkImage(
+                                                imageUrl: (product!.images !=
+                                                            null &&
                                                         product!
                                                             .images!.isNotEmpty)
                                                     ? product!.images![0]
@@ -229,7 +231,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         .replaceAll('///', '//')
                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                 fit: BoxFit.cover,
-                                                errorBuilder: (context, error,
+                                                errorWidget: (context, error,
                                                         stackTrace) =>
                                                     Image.asset(
                                                   'assets/images/image_not_found.jpg',
@@ -2077,8 +2079,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                               color: AppTheme.white21),
                                         ),
                                         child: ClipOval(
-                                          child: Image.network(
-                                            (companyProfileModel != null &&
+                                          child: CachedNetworkImage(
+                                            imageUrl: (companyProfileModel !=
+                                                        null &&
                                                     companyProfileModel!.logo !=
                                                         null)
                                                 ? companyProfileModel!.logo!
@@ -2086,7 +2089,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                     .replaceAll('///', '//')
                                                 : "https://s3.gifyu.com/images/dummy-logo-22408bfa4a3ddec34.png",
                                             fit: BoxFit.cover,
-                                            errorBuilder:
+                                            errorWidget:
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               'assets/images/image_not_found.jpg',
@@ -2342,7 +2345,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                     .allProductsListAndSearchCall(
                                         queryParameters: {
                                       "offset": "0",
-                                      "limit": '10000000',
+                                      "limit": '100',
                                     }),
                                 builder: (context, data) {
                                   if (data.hasData) {
@@ -2426,8 +2429,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                           Radius.circular(2),
                                                         ),
                                                       ),
-                                                      child: Image.network(
-                                                        (product.images!
+                                                      child: CachedNetworkImage(
+                                                        imageUrl:(product.images!
                                                                     .isNotEmpty &&
                                                                 product.images![
                                                                         0] !=
@@ -2441,7 +2444,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     '///', '//')
                                                             : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                         fit: BoxFit.cover,
-                                                        errorBuilder: (context,
+                                                        errorWidget: (context,
                                                                 error,
                                                                 stackTrace) =>
                                                             Image.asset(

@@ -10,6 +10,7 @@ import 'package:b2geta_mobile/views/homepage/reels/home_reels_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/story_add_sub_page.dart';
 import 'package:b2geta_mobile/views/homepage/sub_pages/upload_steps_sub_page.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_story_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:collection/collection.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -215,19 +216,20 @@ class _HomePageState extends State<HomePage> {
                                                               3)
                                                           ? ClipOval(
                                                               child:
-                                                                  Image.network(
+                                                                  CachedNetworkImage(
                                                                 width: 50,
                                                                 height: 50,
                                                                 fit: BoxFit
                                                                     .cover,
-                                                                groupStories
-                                                                    .values
-                                                                    .toList()[
-                                                                        index]
-                                                                        [0]
-                                                                    .user!
-                                                                    .photo!,
-                                                                errorBuilder: (context,
+                                                                imageUrl:
+                                                                    groupStories
+                                                                        .values
+                                                                        .toList()[
+                                                                            index]
+                                                                            [0]
+                                                                        .user!
+                                                                        .photo!,
+                                                                errorWidget: (context,
                                                                         error,
                                                                         stackTrace) =>
                                                                     Image.asset(
@@ -316,10 +318,11 @@ class _HomePageState extends State<HomePage> {
                                                   .getUser
                                                   .avatar!
                                                   .isNotEmpty)
-                                          ? Image.network(
-                                              '${context.watch<UserProvider>().getUser.avatar}',
+                                          ? CachedNetworkImage(
+                                              imageUrl:
+                                                  '${context.watch<UserProvider>().getUser.avatar}',
                                               fit: BoxFit.cover,
-                                              errorBuilder:
+                                              errorWidget:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(
                                                   "assets/images/dummy_images/user_profile.png",

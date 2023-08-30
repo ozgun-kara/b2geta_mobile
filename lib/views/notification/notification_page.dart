@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/social/notification_page.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -141,11 +142,12 @@ class _NotificationPageState extends State<NotificationPage> {
                                 : Row(
                                     children: [
                                       ClipOval(
-                                        child: Image.network(
+                                        child: CachedNetworkImage(
                                           width: 36,
                                           height: 36,
-                                          notification.user!.photo.toString(),
-                                          errorBuilder:
+                                          imageUrl: notification.user!.photo
+                                              .toString(),
+                                          errorWidget:
                                               (context, error, stackTrace) {
                                             return Image.asset(
                                               "assets/images/dummy_images/user_profile.png",
@@ -242,7 +244,7 @@ class _NotificationPageState extends State<NotificationPage> {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: NetworkImage(
+                  image: CachedNetworkImageProvider(
                     "https://s2.gifyu.com/images/com.vicman.newprofilepic.icon.2022-06-07-21-33-07.png",
                   ),
                   fit: BoxFit.cover,

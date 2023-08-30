@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/messages/messages_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/messages/sub_pages/message_details_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -182,18 +183,18 @@ class _MessagesPageState extends State<MessagesPage> {
                         children: [
                           ClipOval(
                             child: message.toAvatar!.isNotEmpty
-                                ? Image.network(
+                                ?CachedNetworkImage(
                                     width: 40,
                                     height: 40,
                                     fit: BoxFit.cover,
-                                    message.toId !=
+                                    imageUrl:message.toId !=
                                             Provider.of<UserProvider>(context,
                                                     listen: false)
                                                 .getUser
                                                 .id
                                         ? message.toAvatar!
                                         : message.fromAvatar!,
-                                    errorBuilder:
+                                    errorWidget:
                                         (context, error, stackTrace) =>
                                             Image.asset(
                                       "assets/images/dummy_images/user_profile.png",

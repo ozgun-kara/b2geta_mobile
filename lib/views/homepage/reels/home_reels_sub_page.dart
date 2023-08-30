@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -75,10 +76,10 @@ class _HomeReelsSubPageState extends State<HomeReelsSubPage> {
                             homeProvider.reelsList[index].videos![0] != null &&
                             homeProvider
                                 .reelsList[index].videos![0]!.image!.isNotEmpty)
-                        ? Image.network(
+                        ? CachedNetworkImage(
                            // homeProvider.reelsList[index].videos![0]!.image!,
-                           'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
-                            errorBuilder: (context, error, stackTrace) =>
+                          imageUrl: homeProvider.reelsList[index].videos![0]!.image ??'https://static.vecteezy.com/system/resources/previews/005/337/799/original/icon-image-not-found-free-vector.jpg',
+                            errorWidget: (context, error, stackTrace) =>
                                 Image.asset(
                               'assets/images/image_not_found.jpg',
                               width: 128,

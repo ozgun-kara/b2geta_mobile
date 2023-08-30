@@ -1,6 +1,7 @@
 import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -228,11 +229,11 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                   child: (feed.images!.isNotEmpty &&
                                           feed.images![0] != null &&
                                           feed.images![0]!.url!.isNotEmpty)
-                                      ? Image.network(
-                                          feed.images![0]!.url.toString(),
+                                      ? CachedNetworkImage(
+                                          imageUrl:feed.images![0]!.url.toString(),
                                           width: deviceWidth,
                                           fit: BoxFit.cover,
-                                          errorBuilder:
+                                          errorWidget:
                                               (context, error, stackTrace) =>
                                                   Image.asset(
                                             "assets/images/dummy_images/image_not_found.jpg",
@@ -574,10 +575,10 @@ class _CustomPostPageState extends State<CustomPostPage> {
                                             .getUser
                                             .avatar!
                                             .isNotEmpty)
-                                    ? Image.network(
-                                        '${context.watch<UserProvider>().getUser.avatar}',
+                                    ? CachedNetworkImage(
+                                        imageUrl: '${context.watch<UserProvider>().getUser.avatar}',
                                         fit: BoxFit.cover,
-                                        errorBuilder:
+                                        errorWidget:
                                             (context, error, stackTrace) {
                                           return Image.asset(
                                             "assets/images/dummy_images/user_profile.png",

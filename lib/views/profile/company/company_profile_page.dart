@@ -8,6 +8,7 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_app_bar.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/posts/company_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/profile/company/reels/company_reels_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -138,11 +139,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                           child: (companyProfileModel != null &&
                                                   companyProfileModel!
                                                       .logo!.isNotEmpty)
-                                              ? Image.network(
-                                                  companyProfileModel!.logo
+                                              ? CachedNetworkImage(
+                                                  imageUrl: companyProfileModel!
+                                                      .logo
                                                       .toString(),
                                                   fit: BoxFit.cover,
-                                                  errorBuilder: (context, error,
+                                                  errorWidget: (context, error,
                                                       stackTrace) {
                                                     return Image.asset(
                                                       "assets/images/dummy_images/user_profile.png",
@@ -170,11 +172,12 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       child: (companyProfileModel != null &&
                                               companyProfileModel!
                                                   .logo!.isNotEmpty)
-                                          ? Image.network(
-                                              companyProfileModel!.logo
+                                          ? CachedNetworkImage(
+                                              imageUrl: companyProfileModel!
+                                                  .logo
                                                   .toString(),
                                               fit: BoxFit.cover,
-                                              errorBuilder:
+                                              errorWidget:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(
                                                   "assets/images/dummy_images/user_profile.png",
@@ -251,8 +254,8 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      debugPrint("COMPANY ID: " +
-                                          companyProfileModel!.id.toString());
+                                      debugPrint(
+                                          "COMPANY ID: ${companyProfileModel!.id}");
 
                                       if (companyProfileModel != null) {
                                         if (companyProfileModel!.followStatus ??
@@ -556,14 +559,22 @@ class _CompanyProfilePageState extends State<CompanyProfilePage> {
                                                                 ),
                                                               ),
                                                               child:
-                                                                  Image.network(
-                                                                product.images!
+                                                                  CachedNetworkImage(
+                                                                imageUrl: product
+                                                                        .images!
                                                                         .isNotEmpty
                                                                     ? product
                                                                         .images![0]!
                                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                                 fit: BoxFit
                                                                     .cover,
+                                                                errorWidget: (context,
+                                                                        error,
+                                                                        stackTrace) =>
+                                                                    Image.asset(
+                                                                        'assets/images/image_not_found.jpg',
+                                                                        fit: BoxFit
+                                                                            .cover),
                                                               ),
                                                             ),
                                                             const SizedBox(

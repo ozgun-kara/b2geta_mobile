@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/views/my_account/info/my_account_info_sub_page.dar
 import 'package:b2geta_mobile/views/my_account/posts/my_account_posts_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/products/my_account_products_sub_page.dart';
 import 'package:b2geta_mobile/views/my_account/reels/my_account_reels_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -129,10 +130,11 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                       .getUser
                                                       .avatar!
                                                       .isNotEmpty)
-                                              ? Image.network(
-                                                  "${Provider.of<UserProvider>(context).getUser.avatar}",
+                                              ? CachedNetworkImage(
+                                                  imageUrl:
+                                                      "${Provider.of<UserProvider>(context).getUser.avatar}",
                                                   fit: BoxFit.cover,
-                                                  errorBuilder: (context, error,
+                                                  errorWidget: (context, error,
                                                       stackTrace) {
                                                     return Image.asset(
                                                       "assets/images/dummy_images/user_profile.png",
@@ -165,10 +167,10 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                   .getUser
                                                   .avatar!
                                                   .isNotEmpty)
-                                          ? Image.network(
-                                              "${user.avatar}",
+                                          ? CachedNetworkImage(
+                                              imageUrl: "${user.avatar}",
                                               fit: BoxFit.cover,
-                                              errorBuilder:
+                                              errorWidget:
                                                   (context, error, stackTrace) {
                                                 return Image.asset(
                                                   "assets/images/dummy_images/user_profile.png",
@@ -478,14 +480,23 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                                 ),
                                                               ),
                                                               child:
-                                                                  Image.network(
-                                                                product.images!
+                                                                  CachedNetworkImage(
+                                                                imageUrl: product
+                                                                        .images!
                                                                         .isNotEmpty
                                                                     ? product
                                                                         .images![0]!
                                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                                 fit: BoxFit
                                                                     .cover,
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    Image.asset(
+                                                                  'assets/images/image_not_found.jpg',
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
                                                               ),
                                                             ),
                                                             const SizedBox(

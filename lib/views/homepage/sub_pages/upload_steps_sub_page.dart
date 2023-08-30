@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/providers/home_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/social_services/social_services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -114,10 +115,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                 .getUser
                                                 .avatar!
                                                 .isNotEmpty)
-                                        ? Image.network(
-                                            '${context.watch<UserProvider>().getUser.avatar}',
+                                        ? CachedNetworkImage(
+                                            imageUrl:
+                                                '${context.watch<UserProvider>().getUser.avatar}',
                                             fit: BoxFit.cover,
-                                            errorBuilder:
+                                            errorWidget:
                                                 (context, error, stackTrace) =>
                                                     Image.asset(
                                               "assets/images/dummy_images/user_profile.png",
@@ -442,10 +444,11 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                             9)),
                                                               ),
                                                               elevation: 0,
-                                                              padding: const EdgeInsets
+                                                              padding:
+                                                                  const EdgeInsets
                                                                       .symmetric(
-                                                                  horizontal:
-                                                                      22),
+                                                                      horizontal:
+                                                                          22),
                                                               child: Text(
                                                                 'Select From Gallery'
                                                                     .tr,
@@ -495,7 +498,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                                     child:
                                                                         ClipRRect(
                                                                       borderRadius: const BorderRadius
-                                                                              .all(
+                                                                          .all(
                                                                           Radius.circular(
                                                                               4)),
                                                                       child:
@@ -542,7 +545,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                           Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .fromLTRB(
+                                                                    .fromLTRB(
                                                                     26,
                                                                     114,
                                                                     26,
@@ -679,7 +682,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                           elevation: 0,
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal:
                                                                       22),
                                                           child: Text(
@@ -717,7 +720,7 @@ class _UploadStepsSubPageState extends State<UploadStepsSubPage> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .fromLTRB(
+                                                                .fromLTRB(
                                                                 26, 44, 26, 36),
                                                         child: Row(
                                                           children: [

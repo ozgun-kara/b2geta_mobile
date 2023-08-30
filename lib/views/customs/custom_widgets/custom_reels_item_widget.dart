@@ -4,6 +4,7 @@ import 'package:b2geta_mobile/services/social_services/social_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_pages/custom_comment_page.dart';
 import 'package:b2geta_mobile/views/profile/company/company_profile_page.dart';
 import 'package:b2geta_mobile/views/profile/personal/personal_profile_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -172,10 +173,10 @@ class _CustomReelsItemWidgetState extends State<CustomReelsItemWidget> {
                     color: AppTheme.white1,
                   ),
                   child: widget.reelsModel.user!.photo!.isNotEmpty
-                      ? Image.network(
-                          widget.reelsModel.user!.photo!,
+                      ? CachedNetworkImage(
+                          imageUrl :widget.reelsModel.user!.photo!,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
+                          errorWidget: (context, error, stackTrace) {
                             return Image.asset(
                               "assets/images/dummy_images/user_profile.png",
                               fit: BoxFit.cover,

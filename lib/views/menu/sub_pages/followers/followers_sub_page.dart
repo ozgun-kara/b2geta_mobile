@@ -5,6 +5,7 @@ import 'package:b2geta_mobile/models/follow_services/my_following_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/follow_services/follow_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -189,7 +190,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               ? AppTheme.white21
                                               : AppTheme.black20),
                                       image: DecorationImage(
-                                        image: NetworkImage(items![index]
+                                        image: CachedNetworkImageProvider(items![index]
                                                 .userPhoto ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,
@@ -432,7 +433,7 @@ class _FollowersSubPageState extends State<FollowersSubPage> {
                                               ? AppTheme.white21
                                               : AppTheme.black20),
                                       image: DecorationImage(
-                                        image: NetworkImage(items![index]
+                                        image: CachedNetworkImageProvider(items![index]
                                                 .followingAvatar ??
                                             'https://api.businessucces.com/uploads/profile/2023/01/15012023203949-1673811589.png'),
                                         fit: BoxFit.cover,

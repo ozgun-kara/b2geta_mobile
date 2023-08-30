@@ -3,6 +3,7 @@ import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/views/marketplace/models/banner_model.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_list_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -891,10 +892,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
             border: Border.all(color: AppTheme.white21),
             color: AppTheme.white1,
           ),
-          child: Image.network(
-            productImageUrl,
+          child: CachedNetworkImage(
+            imageUrl: productImageUrl,
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => Image.asset(
+            errorWidget: (context, error, stackTrace) => Image.asset(
                 'assets/images/image_not_found.jpg',
                 fit: BoxFit.cover),
           ),
@@ -964,10 +965,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
             border: Border.all(color: AppTheme.white21),
             color: AppTheme.white1,
           ),
-          child: Image.network(
-            productImageUrl,
+          child: CachedNetworkImage(
+            imageUrl: productImageUrl,
             fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) => Image.asset(
+            errorWidget: (context, error, stackTrace) => Image.asset(
                 'assets/images/image_not_found.jpg',
                 fit: BoxFit.cover),
           ),
@@ -1036,7 +1037,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
                 Radius.circular(10),
               ),
               image: DecorationImage(
-                image: NetworkImage(
+                image: CachedNetworkImageProvider(
                   imageUrl,
                 ),
                 fit: BoxFit.cover,
