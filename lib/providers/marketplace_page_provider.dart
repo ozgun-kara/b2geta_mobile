@@ -21,15 +21,14 @@ class MarketPlacePageProvider with ChangeNotifier {
   }
 
   Future getProducts(
-      {bool isRefresh = false, required int limit, required int offset}) async {
+      {bool isRefresh = false,
+      required Map<String, String> queryParameters}) async {
     if (isRefresh) {
       _productList.clear();
     }
     await locator<ProductsServices>()
-        .allProductsListAndSearchCall(queryParameters: {
-      "offset": offset.toString(),
-      "limit": limit.toString(),
-    }).then((products) {
+        .allProductsListAndSearchCall(queryParameters: queryParameters)
+        .then((products) {
       if (products.isNotEmpty) {
         for (var product in products) {
           _productList.add(product);

@@ -306,6 +306,7 @@ final Map<String, String> en = {
   'Textile': 'Textile',
   'Clothes': 'Clothes',
   'Send Message': 'Send Message',
+  'All Products': 'All Products',
 
   // BASKET PAGE
   'Basket Page Route': 'Homepage - My Basket',
@@ -330,9 +331,9 @@ final Map<String, String> en = {
   'Confirm Basket': 'Confirm Basket',
   'Confirm': 'Confirm',
   'Empty Chart': 'There are no items in your cart',
-  'Card Information':'Card Information',
-  'Card number':'Card number',
-  'Full Name':'Full Name',
+  'Card Information': 'Card Information',
+  'Card number': 'Card number',
+  'Full Name': 'Full Name',
 
   // PROFILE PAGE
   'Follow': 'Follow',
