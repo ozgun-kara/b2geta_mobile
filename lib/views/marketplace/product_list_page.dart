@@ -579,7 +579,8 @@ class _ProductListPageState extends State<ProductListPage> {
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        product.accountId ?? '',
+                                                        product.seller!.name ??
+                                                            '',
                                                         style: TextStyle(
                                                           fontSize: 11,
                                                           fontFamily: AppTheme
