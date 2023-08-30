@@ -300,6 +300,7 @@ final Map<String, String> tr = {
   'Textile': 'Tekstil',
   'Clothes': 'Giyim',
   'Send Message': 'Mesaj Gönder',
+  'All Products': 'Tüm Ürünler',
 
   // BASKET PAGE
   'Basket Page Route': 'Ana Sayfa - Sepetim',

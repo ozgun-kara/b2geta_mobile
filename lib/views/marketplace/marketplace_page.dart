@@ -1,9 +1,11 @@
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/providers/marketplace_page_provider.dart';
 import 'package:b2geta_mobile/views/marketplace/models/banner_model.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/product_list_sub_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +24,13 @@ class _MarketplacePageState extends State<MarketplacePage> {
   List<ProductModel>? productList;
 
   late double deviceTopPadding;
+  late double deviceBottomPadding;
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  int limit = 20;
+  int offset = 0;
 
   @override
   void initState() {
@@ -32,6 +38,29 @@ class _MarketplacePageState extends State<MarketplacePage> {
     getProductList();
     Provider.of<MarketPlacePageProvider>(context, listen: false)
         .getMarketPlaceData();
+    Provider.of<MarketPlacePageProvider>(context, listen: false).getProducts(
+        queryParameters: {
+          'limit': limit.toString(),
+          'offset': offset.toString()
+        });
+    scrollController.addListener(() {
+      if (Provider.of<MarketPlacePageProvider>(context, listen: false)
+              .isFinished !=
+          false) return;
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        Provider.of<MarketPlacePageProvider>(context, listen: false)
+            .updateIsLoadMore(true);
+        offset = offset + limit;
+        Provider.of<MarketPlacePageProvider>(context, listen: false)
+            .getProducts(queryParameters: {
+          'limit': limit.toString(),
+          'offset': offset.toString()
+        });
+        Provider.of<MarketPlacePageProvider>(context, listen: false)
+            .updateIsLoadMore(false);
+      }
+    });
   }
 
   getProductList() async {
@@ -41,6 +70,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
   @override
   Widget build(BuildContext context) {
     deviceTopPadding = MediaQuery.of(context).padding.top;
+    deviceBottomPadding = MediaQuery.of(context).padding.bottom;
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
@@ -77,9 +107,10 @@ class _MarketplacePageState extends State<MarketplacePage> {
               ? SingleChildScrollView(
                   controller: scrollController,
                   child: Padding(
-                    padding: const EdgeInsets.only(
+                    padding: EdgeInsets.only(
                       top: 11,
                       left: 13,
+                      bottom: deviceBottomPadding,
                     ),
                     child: Column(
                       children: [
@@ -859,6 +890,111 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                 );
                               },
                             ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 23.0,
+                        ),
+                        const SizedBox(
+                          height: 23.0,
+                        ),
+                        Column(
+                          children: [
+                            Column(
+                              children: [
+                                SizedBox(
+                                  height: 15,
+                                  width: deviceWidth,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'All Products'.tr,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          height: 1,
+                                          fontFamily: AppTheme.appFontFamily,
+                                          fontWeight: FontWeight.w700,
+                                          color: themeMode
+                                              ? AppTheme.blue3
+                                              : AppTheme.white1,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 23.0,
+                                ),
+                              ],
+                            ),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              padding: const EdgeInsets.only(right: 12),
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 9.0,
+                                mainAxisSpacing: 9.0,
+                                mainAxisExtent: 275,
+                              ),
+                              scrollDirection: Axis.vertical,
+                              itemCount: marketPlaceProvider.isLoadMore
+                                  ? marketPlaceProvider.productList.length + 1
+                                  : marketPlaceProvider.productList.length,
+                              itemBuilder: ((context, index) {
+                                var product =
+                                    marketPlaceProvider.productList[index];
+                                if (index ==
+                                        marketPlaceProvider.productList.length -
+                                            1 &&
+                                    !marketPlaceProvider.isFinished) {
+                                  return const Center(
+                                    child: CupertinoActivityIndicator(),
+                                  );
+                                } else {
+                                  return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            PageRouteBuilder(
+                                              pageBuilder: (_, __, ___) =>
+                                                  ProductDetailSubPage(
+                                                productId: product.id!,
+                                              ),
+                                              transitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              reverseTransitionDuration:
+                                                  const Duration(
+                                                      milliseconds: 0),
+                                              transitionsBuilder:
+                                                  (_, a, __, c) =>
+                                                      FadeTransition(
+                                                          opacity: a, child: c),
+                                            ));
+                                      },
+                                      child: _productItemNetwork(
+                                        productName: Constants.language == 'tr'
+                                            ? product.name!.tr ?? ''
+                                            : product.name!.en ?? '',
+                                        productPrice: product.price ?? '0',
+                                        productCurrency: product.currency ?? '',
+                                        productImageUrl: (product.images !=
+                                                    null &&
+                                                product.images!.isNotEmpty &&
+                                                product.images![0] != null)
+                                            ? product.images![0] ??
+                                                'https://doraev.com/images/custom/product-images/nophoto.png'
+                                            : 'https://doraev.com/images/custom/product-images/nophoto.png',
+                                      ));
+                                }
+                              }),
+                            )
                           ],
                         )
                       ],

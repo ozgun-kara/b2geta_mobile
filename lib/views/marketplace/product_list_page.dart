@@ -31,8 +31,11 @@ class _ProductListPageState extends State<ProductListPage> {
 
   @override
   void initState() {
-    Provider.of<MarketPlacePageProvider>(context, listen: false)
-        .getProducts(limit: limit, offset: offset);
+    Provider.of<MarketPlacePageProvider>(context, listen: false).getProducts(
+        queryParameters: {
+          'limit': limit.toString(),
+          'offset': offset.toString()
+        });
     scrollController.addListener(() {
       if (Provider.of<MarketPlacePageProvider>(context, listen: false)
               .isFinished !=
@@ -43,7 +46,10 @@ class _ProductListPageState extends State<ProductListPage> {
             .updateIsLoadMore(true);
         offset = offset + limit;
         Provider.of<MarketPlacePageProvider>(context, listen: false)
-            .getProducts(limit: limit, offset: offset);
+            .getProducts(queryParameters: {
+          'limit': limit.toString(),
+          'offset': offset.toString()
+        });
         Provider.of<MarketPlacePageProvider>(context, listen: false)
             .updateIsLoadMore(false);
       }
@@ -66,7 +72,10 @@ class _ProductListPageState extends State<ProductListPage> {
             return RefreshIndicator(
               onRefresh: () async {
                 await Future.delayed(const Duration(seconds: 2));
-                provider.getProducts(limit: 20, offset: 0, isRefresh: true);
+                provider.getProducts(isRefresh: true, queryParameters: {
+                  'limit': limit.toString(),
+                  'offset': '0'
+                });
               },
               child: SingleChildScrollView(
                 controller: scrollController,
@@ -253,7 +262,9 @@ class _ProductListPageState extends State<ProductListPage> {
                                   if (index ==
                                           provider.productList.length - 1 &&
                                       !provider.isFinished) {
-                                    return const Center();
+                                    return const Center(
+                                      child: CupertinoActivityIndicator(),
+                                    );
                                   } else {
                                     return InkWell(
                                       onTap: () {
