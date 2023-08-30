@@ -1,28 +1,49 @@
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/marketplace/marketplace_model.dart';
+import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/services/marketplace/marketplace_services.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:flutter/material.dart';
 
 class MarketPlacePageProvider with ChangeNotifier {
-  // MARKETPLACE PAGE
+  final List<ProductModel> _productList = [];
+  bool _isLoadMore = false;
+  bool _isFinished = false;
 
-  List productList = [];
-  MarketPlaceModel? marketPlaceModel;
+  List<ProductModel> get productList => _productList;
 
-  Future getProducts() async {
+  bool get isLoadMore => _isLoadMore;
+  bool get isFinished => _isFinished;
+
+  void updateIsLoadMore(bool value) {
+    _isLoadMore = value;
+    notifyListeners();
+  }
+
+  Future getProducts(
+      {bool isRefresh = false, required int limit, required int offset}) async {
+    if (isRefresh) {
+      _productList.clear();
+    }
     await locator<ProductsServices>()
         .allProductsListAndSearchCall(queryParameters: {
-      "offset": '0',
-      "limit": '99',
+      "offset": offset.toString(),
+      "limit": limit.toString(),
     }).then((products) {
-      for (var product in products) {
-        productList.add(product);
+      if (products.isNotEmpty) {
+        for (var product in products) {
+          _productList.add(product);
+        }
+      } else {
+        _isFinished = true;
       }
     });
 
     notifyListeners();
   }
+
+  // MARKETPLACE PAGE
+  MarketPlaceModel? marketPlaceModel;
 
   Future getMarketPlaceData() async {
     await locator<MarketplaceServices>().getData().then((marketplaceModel) {

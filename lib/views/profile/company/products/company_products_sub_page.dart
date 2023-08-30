@@ -1,5 +1,6 @@
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/messages/sub_pages/add_message_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -270,12 +271,16 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                               Radius.circular(9),
                                             ),
                                           ),
-                                          child: Image.network(
-                                            product.images!.isNotEmpty
+                                          child: CachedNetworkImage(
+                                            imageUrl: product.images!.isNotEmpty
                                                 ? product.images![0] ??
-                                                    'assets/images/image_not_found.jpg'
-                                                : 'assets/images/image_not_found.jpg',
+                                                    'https://doraev.com/images/custom/product-images/nophoto.png'
+                                                : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                             fit: BoxFit.cover,
+                                            errorWidget: (context, url,
+                                                    error) =>
+                                                Image.asset(
+                                                    'assets/images/image_not_found.jpg'),
                                           ),
                                         ),
                                         const SizedBox(height: 11),
@@ -453,12 +458,17 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                 Radius.circular(2),
                                               ),
                                             ),
-                                            child: Image.network(
-                                              product.images!.isNotEmpty
+                                            child: CachedNetworkImage(
+                                              imageUrl: product
+                                                      .images!.isNotEmpty
                                                   ? product.images![0] ??
-                                                      'assets/images/image_not_found.jpg'
-                                                  : 'assets/images/image_not_found.jpg',
+                                                      'https://doraev.com/images/custom/product-images/nophoto.png'
+                                                  : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,
+                                              errorWidget: (context, url,
+                                                      error) =>
+                                                  Image.asset(
+                                                      'assets/images/image_not_found.jpg'),
                                             ),
                                           ),
                                           const SizedBox(width: 10),
@@ -567,12 +577,12 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                                                 .white19),
                                                         borderRadius:
                                                             const BorderRadius
-                                                                    .all(
+                                                                .all(
                                                                 Radius.circular(
                                                                     36)),
                                                       ),
                                                       padding: const EdgeInsets
-                                                              .fromLTRB(
+                                                          .fromLTRB(
                                                           10, 2, 10, 3.5),
                                                       child: Row(
                                                         crossAxisAlignment:

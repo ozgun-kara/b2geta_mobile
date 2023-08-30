@@ -34,7 +34,7 @@ class _MarketplacePageState extends State<MarketplacePage> {
   }
 
   getProductList() async {
-    Provider.of<MarketPlacePageProvider>(context, listen: false).getProducts();
+    //Provider.of<MarketPlacePageProvider>(context, listen: false).getProducts();
   }
 
   @override
@@ -227,18 +227,19 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               return Column(
                                 children: [
                                   GestureDetector(
-                                    onTap:(){
+                                    onTap: () {
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                  productId: mostDemandProduct.id!.toString(),
-                                                ),
+                                              productId: mostDemandProduct.id!
+                                                  .toString(),
+                                            ),
                                             transitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
@@ -374,18 +375,19 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               return Column(
                                 children: [
                                   GestureDetector(
-                                    onTap:(){
+                                    onTap: () {
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                  productId: categoryProduct.id!.toString(),
-                                                ),
+                                              productId: categoryProduct.id!
+                                                  .toString(),
+                                            ),
                                             transitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
@@ -399,8 +401,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             categoryProduct.name.toString(),
                                         productPrice:
                                             categoryProduct.price.toString(),
-                                        productCurrency:
-                                            categoryProduct.currency.toString()),
+                                        productCurrency: categoryProduct
+                                            .currency
+                                            .toString()),
                                   ),
                                   const SizedBox(
                                     width: 15,
@@ -515,26 +518,28 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               return Column(
                                 children: [
                                   GestureDetector(
-                                    onTap:(){
+                                    onTap: () {
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
                                             pageBuilder: (_, __, ___) =>
                                                 ProductDetailSubPage(
-                                                  productId: popularProduct.id!.toString(),
-                                                ),
+                                              productId:
+                                                  popularProduct.id!.toString(),
+                                            ),
                                             transitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
-                                            const Duration(milliseconds: 0),
+                                                const Duration(milliseconds: 0),
                                             transitionsBuilder: (_, a, __, c) =>
                                                 FadeTransition(
                                                     opacity: a, child: c),
                                           ));
                                     },
                                     child: _productItem(
-                                        productImageUrl:
-                                            popularProduct!.image!.url.toString(),
+                                        productImageUrl: popularProduct!
+                                            .image!.url
+                                            .toString(),
                                         productName:
                                             popularProduct.name.toString(),
                                         productPrice:
@@ -659,23 +664,24 @@ class _MarketplacePageState extends State<MarketplacePage> {
                               return Column(
                                 children: [
                                   GestureDetector(
-                                  onTap:(){
-                                    Navigator.push(
-                                        context,
-                                        PageRouteBuilder(
-                                          pageBuilder: (_, __, ___) =>
-                                              ProductDetailSubPage(
-                                                productId: categoryProduct.id!.toString(),
-                                              ),
-                                          transitionDuration:
-                                          const Duration(milliseconds: 0),
-                                          reverseTransitionDuration:
-                                          const Duration(milliseconds: 0),
-                                          transitionsBuilder: (_, a, __, c) =>
-                                              FadeTransition(
-                                                  opacity: a, child: c),
-                                        ));
-                                  },
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          PageRouteBuilder(
+                                            pageBuilder: (_, __, ___) =>
+                                                ProductDetailSubPage(
+                                              productId: categoryProduct.id!
+                                                  .toString(),
+                                            ),
+                                            transitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            reverseTransitionDuration:
+                                                const Duration(milliseconds: 0),
+                                            transitionsBuilder: (_, a, __, c) =>
+                                                FadeTransition(
+                                                    opacity: a, child: c),
+                                          ));
+                                    },
                                     child: _productItem(
                                         productImageUrl: categoryProduct!
                                             .image!.url
@@ -684,8 +690,9 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                             categoryProduct.name.toString(),
                                         productPrice:
                                             categoryProduct.price.toString(),
-                                        productCurrency:
-                                            categoryProduct.currency.toString()),
+                                        productCurrency: categoryProduct
+                                            .currency
+                                            .toString()),
                                   ),
                                   const SizedBox(
                                     width: 15,
@@ -878,13 +885,12 @@ class _MarketplacePageState extends State<MarketplacePage> {
         Container(
           width: width ?? 134,
           height: height ?? 155,
-          margin: EdgeInsets.only(right: 16.0),
+          margin: const EdgeInsets.only(right: 16.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(9),
             border: Border.all(color: AppTheme.white21),
             color: AppTheme.white1,
           ),
-
           child: Image.network(
             productImageUrl,
             fit: BoxFit.cover,
