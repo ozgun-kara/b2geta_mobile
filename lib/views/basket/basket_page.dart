@@ -695,9 +695,17 @@ class _BasketPageState extends State<BasketPage> {
                                                     19),
                                                 CardNumberInputFormatter(),
                                               ],
-                                              onChanged: (value) {
-                                                debugPrint(value);
+                                              onChanged: (value) {},
+                                              validator: (value) {
+                                                if (value == null ||
+                                                    value.trim().isEmpty) {
+                                                  return 'Card Number Validate'
+                                                      .tr;
+                                                }
+
+                                                return null;
                                               },
+
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   height: 1.5,
@@ -800,7 +808,15 @@ class _BasketPageState extends State<BasketPage> {
                                             TextFormField(
                                               controller:
                                                   _cardFullNameController,
+                                              validator: (value) {
+                                                if (value == null ||
+                                                    value.trim().isEmpty) {
+                                                  return 'Card Name Validate'
+                                                      .tr;
+                                                }
 
+                                                return null;
+                                              },
                                               style: TextStyle(
                                                   fontSize: 14,
                                                   height: 1.5,
@@ -911,6 +927,17 @@ class _BasketPageState extends State<BasketPage> {
                                                       LengthLimitingTextInputFormatter(
                                                           3)
                                                     ],
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
+                                                        return 'Card CVV Validate'
+                                                            .tr;
+                                                      }
+
+                                                      return null;
+                                                    },
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         height: 1.5,
@@ -1032,6 +1059,17 @@ class _BasketPageState extends State<BasketPage> {
                                                           4),
                                                       CardMonthInputFormatter(),
                                                     ],
+                                                    validator: (value) {
+                                                      if (value == null ||
+                                                          value
+                                                              .trim()
+                                                              .isEmpty) {
+                                                        return 'Card Date Validate'
+                                                            .tr;
+                                                      }
+
+                                                      return null;
+                                                    },
                                                     style: TextStyle(
                                                         fontSize: 14,
                                                         height: 1.5,
@@ -1197,17 +1235,21 @@ class _BasketPageState extends State<BasketPage> {
                                       height: 16,
                                       width: 16,
                                       child: Checkbox(
-                                        activeColor: AppTheme.blue2,
                                         value:
                                             basketPageProvider.acceptCheckbox,
                                         onChanged: (value) {
+                                          webViewDialog2();
+
                                           basketPageProvider
                                               .updateAcceptCheckbox(value!);
+                                          basketPageProvider
+                                              .updateAcceptCheckboxValidate(
+                                                  false);
                                         },
                                       ),
                                     ),
                                     const SizedBox(
-                                      width: 12,
+                                      width: 10,
                                     ),
                                     Text(
                                       'I have read and I accept'.tr,
@@ -1222,6 +1264,27 @@ class _BasketPageState extends State<BasketPage> {
                                       ),
                                     )
                                   ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Visibility(
+                                  visible:
+                                      (!basketPageProvider.acceptCheckbox &&
+                                          basketPageProvider
+                                              .acceptCheckboxValidate),
+                                  child: Text(
+                                    'Accept Checkbox Validate'.tr,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      height: 1,
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontWeight: FontWeight.w400,
+                                      color: themeMode
+                                          ? AppTheme.red4
+                                          : AppTheme.red3,
+                                    ),
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 51,
@@ -1250,14 +1313,17 @@ class _BasketPageState extends State<BasketPage> {
                                       color: AppTheme.white1),
                                 ),
                                 onPressed: () {
-                                  dialog(
-                                      titleText: 'Confirm Basket Dialog'.tr,
-                                      buttonText: 'Confirm'.tr,
-                                      buttonColor: AppTheme.green1,
-                                      onPressed: () {
-                                        if (selectedAddressId == null &&
-                                            addressList.isNotEmpty &&
-                                            _formKey.currentState!.validate()) {
+                                  basketPageProvider
+                                      .updateAcceptCheckboxValidate(true);
+                                  if (selectedAddressId == null &&
+                                      addressList.isNotEmpty &&
+                                      _formKey.currentState!.validate() &&
+                                      basketPageProvider.acceptCheckbox) {
+                                    dialog(
+                                        titleText: 'Confirm Basket Dialog'.tr,
+                                        buttonText: 'Confirm'.tr,
+                                        buttonColor: AppTheme.green1,
+                                        onPressed: () {
                                           selectedAddressId =
                                               addressList.first.id;
                                           OrderService()
@@ -1348,10 +1414,10 @@ class _BasketPageState extends State<BasketPage> {
                                               operationFailedDialog(context);
                                             }
                                           });
-                                        } else {
-                                          operationFailedDialog(context);
-                                        }
-                                      });
+                                        });
+                                  } else {
+                                    operationEmptyDialog(context);
+                                  }
                                 }),
                           ),
                           const SizedBox(height: 36)
@@ -1928,17 +1994,48 @@ class _BasketPageState extends State<BasketPage> {
               padding: const EdgeInsets.fromLTRB(6, 32, 6, 16),
               child: Column(
                 children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: const Icon(Icons.close)),
+                  Padding(
+                    padding: EdgeInsets.only(left: deviceWidth * .4),
+                    child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        color: Colors.red,
+                        icon: const Icon(Icons.close)),
+                  ),
                   Expanded(
                     child: WebViewWidget(
                       controller: webViewController,
                     ),
                   ),
-                  const Text("sonu")
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void webViewDialog2() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+          child: AlertDialog(
+            insetPadding: const EdgeInsets.all(4),
+            backgroundColor: Colors.transparent,
+            content: Container(
+              width: deviceWidth,
+              height: deviceHeight,
+              decoration: BoxDecoration(
+                  color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                  borderRadius: const BorderRadius.all(Radius.circular(16))),
+              padding: const EdgeInsets.fromLTRB(6, 32, 6, 16),
+              child: Column(
+                children: [
+                  Expanded(child: Container()),
                 ],
               ),
             ),
@@ -2071,6 +2168,82 @@ class _BasketPageState extends State<BasketPage> {
                         Expanded(
                           child: Text(
                             'Operation Failed Dialog'.tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w500,
+                              color: themeMode
+                                  ? AppTheme.black25
+                                  : AppTheme.white1,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Icon(
+                          Icons.error_outline_sharp,
+                          size: 24,
+                          color: themeMode ? AppTheme.black16 : AppTheme.white1,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    ButtonTheme(
+                      height: 32,
+                      child: MaterialButton(
+                        elevation: 0,
+                        color: themeMode ? AppTheme.black16 : AppTheme.black18,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Close'.tr,
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void operationEmptyDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Center(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: AlertDialog(
+              insetPadding: const EdgeInsets.all(4),
+              backgroundColor: Colors.transparent,
+              content: Container(
+                width: deviceWidth,
+                decoration: BoxDecoration(
+                    color: themeMode ? AppTheme.white1 : AppTheme.black12,
+                    borderRadius: const BorderRadius.all(Radius.circular(16))),
+                padding: const EdgeInsets.fromLTRB(32, 32, 32, 16),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        const SizedBox(width: 40),
+                        Expanded(
+                          child: Text(
+                            'Lütfen boş alan bırakmayınız'.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,

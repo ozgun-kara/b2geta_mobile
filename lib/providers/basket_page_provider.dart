@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 class BasketPageProvider with ChangeNotifier {
   List<BasketModel> basketList = [];
   BasketSummaryModel? summaryData;
-  bool acceptCheckbox =false;
-
+  bool acceptCheckbox = false;
+  bool acceptCheckboxValidate = false;
 
   Future<void> getAllBasket() async {
     await locator<BasketServices>()
@@ -19,8 +19,13 @@ class BasketPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateAcceptCheckbox(bool value){
-    acceptCheckbox=value;
+  void updateAcceptCheckbox(bool value) {
+    acceptCheckbox = value;
+    notifyListeners();
+  }
+
+  void updateAcceptCheckboxValidate(bool value) {
+    acceptCheckboxValidate = value;
     notifyListeners();
   }
 }
