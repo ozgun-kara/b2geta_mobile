@@ -334,6 +334,9 @@ final Map<String, String> en = {
   'Card Information': 'Card Information',
   'Card number': 'Card number',
   'Full Name': 'Full Name',
+  'Card Number Validate': 'Please enter the card number',
+  'Card Date Validate': 'Please enter the card date',
+  'Accept Checkbox Validate': 'You need to confirm to continue.',
 
   // PROFILE PAGE
   'Follow': 'Follow',

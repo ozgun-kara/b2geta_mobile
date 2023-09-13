@@ -328,6 +328,11 @@ final Map<String, String> tr = {
   'Card Information': 'Kart Bilgileri',
   'Card number': 'Kart Numarası',
   'Full Name': 'Ad Soyad',
+  'Card Number Validate':'Lütfen kart numarasını giriniz',
+  'Card Name Validate':'Lütfen kart isminizi giriniz',
+  'Card CVV Validate':'Lütfen cvv giriniz',
+  'Card Date Validate':'Lütfen kart tarihini giriniz',
+  'Accept Checkbox Validate':'Devam etmek için onaylamanız gerekiyor.',
 
   // PROFILE PAGE
   'Follow': 'Takip Et',
