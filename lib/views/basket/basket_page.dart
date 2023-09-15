@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/models/basket/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
-import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
@@ -14,8 +13,6 @@ import 'package:b2geta_mobile/views/basket/components/card_utilis.dart';
 import 'package:b2geta_mobile/views/basket/components/input_formatters.dart';
 import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_detail_sub_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -90,7 +87,6 @@ class _BasketPageState extends State<BasketPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
-    var user = Provider.of<UserProvider>(context).getUser;
 
     return Consumer<BasketPageProvider>(
       builder: (context, basketPageProvider, child) {
