@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/basket/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
+import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/basket/basket_services.dart';
 import 'package:b2geta_mobile/services/member/member_addresses_services.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
@@ -12,6 +15,8 @@ import 'package:b2geta_mobile/views/basket/components/card_type.dart';
 import 'package:b2geta_mobile/views/basket/components/card_utilis.dart';
 import 'package:b2geta_mobile/views/basket/components/input_formatters.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_detail_sub_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -86,6 +91,7 @@ class _BasketPageState extends State<BasketPage> {
     deviceWidth = MediaQuery.of(context).size.width;
     deviceHeight = MediaQuery.of(context).size.height;
     themeMode = Provider.of<ThemeProvider>(context).themeMode == "light";
+    var user = Provider.of<UserProvider>(context).getUser;
 
     return Consumer<BasketPageProvider>(
       builder: (context, basketPageProvider, child) {
@@ -1238,8 +1244,6 @@ class _BasketPageState extends State<BasketPage> {
                                         value:
                                             basketPageProvider.acceptCheckbox,
                                         onChanged: (value) {
-                                          webViewDialog2();
-
                                           basketPageProvider
                                               .updateAcceptCheckbox(value!);
                                           basketPageProvider
@@ -1350,7 +1354,7 @@ class _BasketPageState extends State<BasketPage> {
                                             "cvc": _cardCvvController.text,
                                             "callback_url":
                                                 "https://www.b2geta.com/payment/callback",
-                                          }).then((String? value) {
+                                          }).then((dynamic value) {
                                             if (value != null) {
                                               var controller =
                                                   WebViewController()
@@ -1369,8 +1373,37 @@ class _BasketPageState extends State<BasketPage> {
                                                             (String url) {},
                                                         onPageFinished:
                                                             (String url) {
-                                                          debugPrint(
-                                                              'Finished url:$url');
+                                                          if (url ==
+                                                              "https://www.b2geta.com/payment/callback") {
+                                                            Future.delayed(
+                                                                const Duration(
+                                                                    seconds: 3),
+                                                                () {
+                                                              Navigator.pop(
+                                                                  context);
+                                                              Navigator.pop(
+                                                                  context);
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) {
+                                                                return user.type
+                                                                            .toString()
+                                                                            .toLowerCase() ==
+                                                                        'company'
+                                                                    ? CompanyOrdersDetailSubPage(
+                                                                        orderId:
+                                                                            (value["0"]["order_id"])
+                                                                                .toString())
+                                                                    : ProfileOrdersDetailSubPage(
+                                                                        orderId:
+                                                                            (value["0"]["order_id"]).toString());
+                                                              }));
+                                                            });
+                                                            BasketServices()
+                                                                .emptyBasketCall();
+                                                          }
                                                         },
                                                         onWebResourceError:
                                                             (WebResourceError
@@ -1379,7 +1412,8 @@ class _BasketPageState extends State<BasketPage> {
                                                     )
                                                     ..loadRequest(
                                                         Uri.dataFromString(
-                                                            value,
+                                                            value["payment"]
+                                                                ["htmlContent"],
                                                             mimeType:
                                                                 "text/html"));
                                               webViewDialog(
@@ -1994,48 +2028,28 @@ class _BasketPageState extends State<BasketPage> {
               padding: const EdgeInsets.fromLTRB(6, 32, 6, 16),
               child: Column(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: deviceWidth * .4),
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        color: Colors.red,
-                        icon: const Icon(Icons.close)),
-                  ),
+                  /*  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const CompanyOrdersDetailSubPage(
+                                          orderId: '123'),
+                                ));
+                          },
+                          icon: const Icon(Icons.close)),
+                    ],
+                  ), */
                   Expanded(
                     child: WebViewWidget(
                       controller: webViewController,
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void webViewDialog2() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-          child: AlertDialog(
-            insetPadding: const EdgeInsets.all(4),
-            backgroundColor: Colors.transparent,
-            content: Container(
-              width: deviceWidth,
-              height: deviceHeight,
-              decoration: BoxDecoration(
-                  color: themeMode ? AppTheme.white1 : AppTheme.black12,
-                  borderRadius: const BorderRadius.all(Radius.circular(16))),
-              padding: const EdgeInsets.fromLTRB(6, 32, 6, 16),
-              child: Column(
-                children: [
-                  Expanded(child: Container()),
                 ],
               ),
             ),

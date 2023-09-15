@@ -7,7 +7,7 @@ import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  Future<String?> createOrderCall(
+  Future<dynamic?> createOrderCall(
       {required Map<String, String> requestBody}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/orders/create'),
@@ -21,8 +21,8 @@ class OrderService {
 
     if (response.statusCode == 200) {
       if (status == true) {
-        String htmlData =
-            json.decode(response.body)["data"]["payment"]["htmlContent"];
+        var htmlData =
+            json.decode(response.body)["data"];
 
         return htmlData;
       } else {
