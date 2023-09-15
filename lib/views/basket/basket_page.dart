@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/basket/basket_model.dart';
 import 'package:b2geta_mobile/models/member/address_model.dart';
-import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/providers/basket_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
@@ -14,6 +12,7 @@ import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/basket/components/card_type.dart';
 import 'package:b2geta_mobile/views/basket/components/card_utilis.dart';
 import 'package:b2geta_mobile/views/basket/components/input_formatters.dart';
+import 'package:b2geta_mobile/views/marketplace/sub_pages/shopping_summary_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/add_address_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_detail_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_detail_sub_page.dart';
@@ -1383,26 +1382,37 @@ class _BasketPageState extends State<BasketPage> {
                                                                   context);
                                                               Navigator.pop(
                                                                   context);
+
                                                               Navigator.push(
                                                                   context,
-                                                                  MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) {
-                                                                return user.type
-                                                                            .toString()
-                                                                            .toLowerCase() ==
-                                                                        'company'
-                                                                    ? CompanyOrdersDetailSubPage(
-                                                                        orderId:
-                                                                            (value["0"]["order_id"])
-                                                                                .toString())
-                                                                    : ProfileOrdersDetailSubPage(
-                                                                        orderId:
-                                                                            (value["0"]["order_id"]).toString());
-                                                              }));
+                                                                  PageRouteBuilder(
+                                                                    pageBuilder: (_,
+                                                                            __,
+                                                                            ___) =>
+                                                                        ShoppingSummarySubPage(
+                                                                            orderId:
+                                                                                (value["0"]["order_id"]).toString()),
+                                                                    transitionDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                0),
+                                                                    reverseTransitionDuration:
+                                                                        const Duration(
+                                                                            milliseconds:
+                                                                                0),
+                                                                    transitionsBuilder: (_,
+                                                                            a,
+                                                                            __,
+                                                                            c) =>
+                                                                        FadeTransition(
+                                                                            opacity:
+                                                                                a,
+                                                                            child:
+                                                                                c),
+                                                                  ));
+                                                              BasketServices()
+                                                                  .emptyBasketCall();
                                                             });
-                                                            BasketServices()
-                                                                .emptyBasketCall();
                                                           }
                                                         },
                                                         onWebResourceError:
