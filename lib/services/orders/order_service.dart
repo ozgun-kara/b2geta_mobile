@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/models/orders/order_model.dart';
 import 'package:flutter/material.dart';
-
 import '../../constants.dart';
 import 'package:http/http.dart' as http;
 
 class OrderService {
-  Future<dynamic?> createOrderCall(
+  Future<dynamic> createOrderCall(
       {required Map<String, String> requestBody}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/orders/create'),
@@ -21,8 +20,7 @@ class OrderService {
 
     if (response.statusCode == 200) {
       if (status == true) {
-        var htmlData =
-            json.decode(response.body)["data"];
+        var htmlData = json.decode(response.body)["data"];
 
         return htmlData;
       } else {
