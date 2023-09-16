@@ -143,7 +143,7 @@ class _ProfileOrdersDetailSubPageState
                                             ),
                                           ),
                                           const SizedBox(
-                                            height: 17,
+                                            height: 10,
                                           ),
                                           Text(
                                             'Total Price:'.tr,
@@ -161,6 +161,7 @@ class _ProfileOrdersDetailSubPageState
                                                 text: TextSpan(children: [
                                               TextSpan(
                                                 text: _orderDetailsModel!
+                                                        .products![index]!
                                                         .totalPrice ??
                                                     '',
                                                 style: TextStyle(
@@ -196,7 +197,10 @@ class _ProfileOrdersDetailSubPageState
                                               ),
                                             ),
                                             TextSpan(
-                                              text: '8,5',
+                                              text: _orderDetailsModel!
+                                                      .products![index]!
+                                                      .price ??
+                                                  '',
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 fontFamily:
@@ -402,7 +406,10 @@ class _ProfileOrdersDetailSubPageState
                                                 ),
                                               ),
                                               Text(
-                                                '10.000',
+                                                _orderDetailsModel!
+                                                        .products![index]!
+                                                        .quantity ??
+                                                    '',
                                                 style: TextStyle(
                                                   fontSize: 13,
                                                   fontFamily:
@@ -483,39 +490,78 @@ class _ProfileOrdersDetailSubPageState
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 16),
+                                    const SizedBox(height: 18),
                                     Row(
                                       children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Address:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
+                                        Expanded(
+                                          flex: 8,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Address:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              _orderDetailsModel!.addresses!
-                                                      .shipping!.address ??
-                                                  '',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
+                                              Text(
+                                                _orderDetailsModel!.addresses!
+                                                        .shipping!.address ??
+                                                    '',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
                                               ),
-                                            ),
-                                            const SizedBox(height: 16),
-                                          ],
+                                              const SizedBox(height: 16),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Payment Status:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                _orderDetailsModel!
+                                                        .paymentStatus!
+                                                    ? 'Done'.tr
+                                                    : 'Not Done'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                              const SizedBox(height: 16),
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
