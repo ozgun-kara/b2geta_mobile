@@ -1314,17 +1314,15 @@ class _BasketPageState extends State<BasketPage> {
                                 onPressed: () {
                                   basketPageProvider
                                       .updateAcceptCheckboxValidate(true);
-                                  if (selectedAddressId == null &&
-                                      addressList.isNotEmpty &&
-                                      _formKey.currentState!.validate() &&
+                                  selectedAddressId ??= addressList.first.id;
+
+                                  if (_formKey.currentState!.validate() &&
                                       basketPageProvider.acceptCheckbox) {
                                     dialog(
                                         titleText: 'Confirm Basket Dialog'.tr,
                                         buttonText: 'Confirm'.tr,
                                         buttonColor: AppTheme.green1,
                                         onPressed: () {
-                                          selectedAddressId =
-                                              addressList.first.id;
                                           OrderService()
                                               .createOrderCall(requestBody: {
                                             "shipping_address_id":
@@ -2019,6 +2017,7 @@ class _BasketPageState extends State<BasketPage> {
   void webViewDialog({required WebViewController webViewController}) {
     showDialog(
       context: context,
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
