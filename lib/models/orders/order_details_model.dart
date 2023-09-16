@@ -162,7 +162,8 @@ class OrderDetailsModelAddressesBillingDistrict {
     this.id,
     this.name,
   });
-  OrderDetailsModelAddressesBillingDistrict.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModelAddressesBillingDistrict.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     name = json['name']?.toString();
   }
@@ -198,7 +199,8 @@ class OrderDetailsModelAddressesBillingCountryTimezones {
     this.abbreviation,
     this.tzName,
   });
-  OrderDetailsModelAddressesBillingCountryTimezones.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModelAddressesBillingCountryTimezones.fromJson(
+      Map<String, dynamic> json) {
     zoneName = json['zoneName']?.toString();
     gmtOffset = json['gmtOffset']?.toInt();
     gmtOffsetName = json['gmtOffsetName']?.toString();
@@ -268,13 +270,13 @@ class OrderDetailsModelAddressesBillingCountry {
     currency = json['currency']?.toString();
     currencyName = json['currency_name']?.toString();
     currencySymbol = json['currency_symbol']?.toString();
-  if (json['timezones'] != null) {
-  final v = json['timezones'];
-  final arr0 = <OrderDetailsModelAddressesBillingCountryTimezones>[];
-  v.forEach((v) {
-  arr0.add(OrderDetailsModelAddressesBillingCountryTimezones.fromJson(v));
-  });
-    timezones = arr0;
+    if (json['timezones'] != null) {
+      final v = json['timezones'];
+      final arr0 = <OrderDetailsModelAddressesBillingCountryTimezones>[];
+      v.forEach((v) {
+        arr0.add(OrderDetailsModelAddressesBillingCountryTimezones.fromJson(v));
+      });
+      timezones = arr0;
     }
     flag = json['flag']?.toString();
   }
@@ -290,9 +292,9 @@ class OrderDetailsModelAddressesBillingCountry {
     if (timezones != null) {
       final v = timezones;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['timezones'] = arr0;
     }
     data['flag'] = flag;
@@ -367,9 +369,13 @@ class OrderDetailsModelAddressesBilling {
     phone = json['phone']?.toString();
     email = json['email']?.toString();
     address = json['address']?.toString();
-    country = (json['country'] != null) ? OrderDetailsModelAddressesBillingCountry.fromJson(json['country']) : null;
+    country = (json['country'] != null)
+        ? OrderDetailsModelAddressesBillingCountry.fromJson(json['country'])
+        : null;
     city = json['city'];
-    district = (json['district'] != null) ? OrderDetailsModelAddressesBillingDistrict.fromJson(json['district']) : null;
+    district = (json['district'] != null)
+        ? OrderDetailsModelAddressesBillingDistrict.fromJson(json['district'])
+        : null;
     postalCode = json['postal_code']?.toString();
   }
   Map<String, dynamic> toJson() {
@@ -407,7 +413,8 @@ class OrderDetailsModelAddressesShippingDistrict {
     this.id,
     this.name,
   });
-  OrderDetailsModelAddressesShippingDistrict.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModelAddressesShippingDistrict.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     name = json['name']?.toString();
   }
@@ -443,7 +450,8 @@ class OrderDetailsModelAddressesShippingCountryTimezones {
     this.abbreviation,
     this.tzName,
   });
-  OrderDetailsModelAddressesShippingCountryTimezones.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModelAddressesShippingCountryTimezones.fromJson(
+      Map<String, dynamic> json) {
     zoneName = json['zoneName']?.toString();
     gmtOffset = json['gmtOffset']?.toInt();
     gmtOffsetName = json['gmtOffsetName']?.toString();
@@ -505,7 +513,8 @@ class OrderDetailsModelAddressesShippingCountry {
     this.timezones,
     this.flag,
   });
-  OrderDetailsModelAddressesShippingCountry.fromJson(Map<String, dynamic> json) {
+  OrderDetailsModelAddressesShippingCountry.fromJson(
+      Map<String, dynamic> json) {
     id = json['id']?.toString();
     name = json['name']?.toString();
     code = json['code']?.toString();
@@ -513,13 +522,14 @@ class OrderDetailsModelAddressesShippingCountry {
     currency = json['currency']?.toString();
     currencyName = json['currency_name']?.toString();
     currencySymbol = json['currency_symbol']?.toString();
-  if (json['timezones'] != null) {
-  final v = json['timezones'];
-  final arr0 = <OrderDetailsModelAddressesShippingCountryTimezones>[];
-  v.forEach((v) {
-  arr0.add(OrderDetailsModelAddressesShippingCountryTimezones.fromJson(v));
-  });
-    timezones = arr0;
+    if (json['timezones'] != null) {
+      final v = json['timezones'];
+      final arr0 = <OrderDetailsModelAddressesShippingCountryTimezones>[];
+      v.forEach((v) {
+        arr0.add(
+            OrderDetailsModelAddressesShippingCountryTimezones.fromJson(v));
+      });
+      timezones = arr0;
     }
     flag = json['flag']?.toString();
   }
@@ -535,9 +545,9 @@ class OrderDetailsModelAddressesShippingCountry {
     if (timezones != null) {
       final v = timezones;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['timezones'] = arr0;
     }
     data['flag'] = flag;
@@ -612,9 +622,13 @@ class OrderDetailsModelAddressesShipping {
     phone = json['phone']?.toString();
     email = json['email']?.toString();
     address = json['address']?.toString();
-    country = (json['country'] != null) ? OrderDetailsModelAddressesShippingCountry.fromJson(json['country']) : null;
+    country = (json['country'] != null)
+        ? OrderDetailsModelAddressesShippingCountry.fromJson(json['country'])
+        : null;
     city = json['city'];
-    district = (json['district'] != null) ? OrderDetailsModelAddressesShippingDistrict.fromJson(json['district']) : null;
+    district = (json['district'] != null)
+        ? OrderDetailsModelAddressesShippingDistrict.fromJson(json['district'])
+        : null;
     postalCode = json['postal_code']?.toString();
   }
   Map<String, dynamic> toJson() {
@@ -717,8 +731,12 @@ class OrderDetailsModelAddresses {
     this.billing,
   });
   OrderDetailsModelAddresses.fromJson(Map<String, dynamic> json) {
-    shipping = (json['shipping'] != null) ? OrderDetailsModelAddressesShipping.fromJson(json['shipping']) : null;
-    billing = (json['billing'] != null) ? OrderDetailsModelAddressesBilling.fromJson(json['billing']) : null;
+    shipping = (json['shipping'] != null)
+        ? OrderDetailsModelAddressesShipping.fromJson(json['shipping'])
+        : null;
+    billing = (json['billing'] != null)
+        ? OrderDetailsModelAddressesBilling.fromJson(json['billing'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -842,6 +860,7 @@ class OrderDetailsModel {
 
   String? id;
   String? status;
+  bool? paymentStatus;
   String? orderDate;
   String? totalPrice;
   String? tax;
@@ -855,6 +874,7 @@ class OrderDetailsModel {
   OrderDetailsModel({
     this.id,
     this.status,
+    this.paymentStatus,
     this.orderDate,
     this.totalPrice,
     this.tax,
@@ -868,27 +888,35 @@ class OrderDetailsModel {
   OrderDetailsModel.fromJson(Map<String, dynamic> json) {
     id = json['id']?.toString();
     status = json['status']?.toString();
+    paymentStatus = json['payment_status'];
     orderDate = json['order_date']?.toString();
     totalPrice = json['total_price']?.toString();
     tax = json['tax']?.toString();
     discount = json['discount']?.toString();
     shippingPrice = json['shipping_price']?.toString();
-    addresses = (json['addresses'] != null) ? OrderDetailsModelAddresses.fromJson(json['addresses']) : null;
-    seller = (json['seller'] != null) ? OrderDetailsModelSeller.fromJson(json['seller']) : null;
-    buyer = (json['buyer'] != null) ? OrderDetailsModelBuyer.fromJson(json['buyer']) : null;
-  if (json['products'] != null) {
-  final v = json['products'];
-  final arr0 = <OrderDetailsModelProducts>[];
-  v.forEach((v) {
-  arr0.add(OrderDetailsModelProducts.fromJson(v));
-  });
-    products = arr0;
+    addresses = (json['addresses'] != null)
+        ? OrderDetailsModelAddresses.fromJson(json['addresses'])
+        : null;
+    seller = (json['seller'] != null)
+        ? OrderDetailsModelSeller.fromJson(json['seller'])
+        : null;
+    buyer = (json['buyer'] != null)
+        ? OrderDetailsModelBuyer.fromJson(json['buyer'])
+        : null;
+    if (json['products'] != null) {
+      final v = json['products'];
+      final arr0 = <OrderDetailsModelProducts>[];
+      v.forEach((v) {
+        arr0.add(OrderDetailsModelProducts.fromJson(v));
+      });
+      products = arr0;
     }
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
     data['id'] = id;
     data['status'] = status;
+    data['payment_status'] = paymentStatus;
     data['order_date'] = orderDate;
     data['total_price'] = totalPrice;
     data['tax'] = tax;
@@ -906,9 +934,9 @@ class OrderDetailsModel {
     if (products != null) {
       final v = products;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v!.toJson());
-  });
+      for (var v in v!) {
+        arr0.add(v!.toJson());
+      }
       data['products'] = arr0;
     }
     return data;
