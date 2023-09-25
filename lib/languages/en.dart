@@ -355,6 +355,15 @@ final Map<String, String> en = {
   "Product cart added": "Product cart added",
   "Ask seller": "Ask seller",
 
+  // PROFILE SETTINGS PAGE
+  'First Name': 'First Name',
+  'Last Name': 'Last Name',
+  'First Name Validate': 'Please enter the first name.',
+  'Last Name Validate': 'Please enter the last name.',
+  'CitizenshipNumber': 'CitizenshipNumber',
+  'CitizenshipNumber-1': 'Please enter the citizenship number.',
+  'CitizenshipNumber-2': ' Please enter a valid citizenship number.',
+
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'My Products',
   'Add Product-1': 'Add Product',

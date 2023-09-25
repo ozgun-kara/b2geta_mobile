@@ -4,16 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  const CustomTextFormField(
-      {Key? key,
-      this.validator,
-      required this.controller,
-      required this.titleText,
-      this.hintText,
-      this.keyboardType,
-      this.minLines,
-      this.maxLines})
-      : super(key: key);
+  const CustomTextFormField({
+    Key? key,
+    this.validator,
+    required this.controller,
+    required this.titleText,
+    this.hintText,
+    this.keyboardType,
+    this.minLines,
+    this.maxLines,
+    this.color,
+  }) : super(key: key);
 
   final String? Function(String?)? validator;
   final TextEditingController controller;
@@ -22,6 +23,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType? keyboardType;
   final int? minLines;
   final int? maxLines;
+  final Color? color;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -62,7 +64,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           controller: widget.controller,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           minLines: widget.minLines ?? 1,
-          maxLines: widget.maxLines ?? null,
+          maxLines: widget.maxLines,
           style: TextStyle(
               fontSize: 14,
               height: 1.5,
@@ -74,7 +76,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
             filled: true,
-            fillColor: themeMode ? AppTheme.white39 : AppTheme.black18,
+            fillColor: widget.color ??
+                (themeMode ? AppTheme.white39 : AppTheme.black18),
             hintText: widget.hintText ?? "",
             hintStyle: TextStyle(
               fontSize: 14,

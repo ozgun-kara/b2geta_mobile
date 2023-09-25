@@ -1,12 +1,16 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
+import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/account_settings_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/company_account_settings_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/personal_account_settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/disagreements/disagreements_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/followers/followers_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_addresses/addresses_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/company_orders_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/settings/settings_sub_page.dart';
@@ -29,6 +33,39 @@ class _MenuPageState extends State<MenuPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+  final MemberServices _memberServices = MemberServices();
+  PersonalProfileModel _personalProfileModel = PersonalProfileModel();
+  CompanyProfileModel _companyProfileModel = CompanyProfileModel();
+
+  @override
+  void initState() {
+    super.initState();
+    getPersonalProfile(
+        Provider.of<UserProvider>(context, listen: false).getUser.id!);
+    if (Provider.of<UserProvider>(context, listen: false).getUser.type ==
+        'company') {
+      getCompanyProfile(
+          Provider.of<UserProvider>(context, listen: false).getUser.id!);
+    }
+  }
+
+  getPersonalProfile(String userId) async {
+    await _memberServices.getPersonalProfileCall(userId: userId).then((value) {
+      if (value != null) {
+        _personalProfileModel = value;
+        setState(() {});
+      }
+    });
+  }
+
+  getCompanyProfile(String userId) async {
+    await _memberServices.getCompanyProfileCall(userId: userId).then((value) {
+      if (value != null) {
+        _companyProfileModel = value;
+        setState(() {});
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +231,7 @@ class _MenuPageState extends State<MenuPage> {
                 elevation: 0,
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'Followers'.tr,
+                  'Follow List'.tr,
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: AppTheme.appFontFamily,
@@ -207,33 +244,6 @@ class _MenuPageState extends State<MenuPage> {
                       context,
                       PageRouteBuilder(
                         pageBuilder: (_, __, ___) => const FollowersSubPage(),
-                        transitionDuration: const Duration(milliseconds: 0),
-                        reverseTransitionDuration:
-                            const Duration(milliseconds: 0),
-                        transitionsBuilder: (_, a, __, c) =>
-                            FadeTransition(opacity: a, child: c),
-                      ));
-                }),
-            const SizedBox(height: 8),
-            MaterialButton(
-                minWidth: deviceWidth,
-                elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Text(
-                  'Account Settings'.tr,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: AppTheme.appFontFamily,
-                    fontWeight: FontWeight.w400,
-                    color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) =>
-                            const AccountSettingsSubPage(),
                         transitionDuration: const Duration(milliseconds: 0),
                         reverseTransitionDuration:
                             const Duration(milliseconds: 0),
@@ -273,7 +283,7 @@ class _MenuPageState extends State<MenuPage> {
                 elevation: 0,
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
-                  'Follow List'.tr,
+                  'Account Settings'.tr,
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: AppTheme.appFontFamily,
@@ -281,7 +291,38 @@ class _MenuPageState extends State<MenuPage> {
                     color: themeMode ? AppTheme.blue3 : AppTheme.white1,
                   ),
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Provider.of<UserProvider>(context, listen: false)
+                              .getUser
+                              .type ==
+                          'company'
+                      ? Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) => AddCompanySubPage(
+                              passedObject: _companyProfileModel,
+                              operation: 'Account',
+                            ),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ))
+                      : Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (_, __, ___) =>
+                                CompanyAccountSettingsSubPage(
+                              companyProfileModel: _companyProfileModel,
+                            ),
+                            transitionDuration: const Duration(milliseconds: 0),
+                            reverseTransitionDuration:
+                                const Duration(milliseconds: 0),
+                            transitionsBuilder: (_, a, __, c) =>
+                                FadeTransition(opacity: a, child: c),
+                          ));
+                }),
             const SizedBox(height: 8),
             MaterialButton(
                 minWidth: deviceWidth,

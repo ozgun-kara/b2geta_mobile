@@ -4,10 +4,10 @@
 class PersonalProfileModelCompanies {
 /*
 {
-  "id": "99",
+  "id": "126",
   "role": "admin",
-  "name": "company name up",
-  "logo": "https://api.businessucces.com/uploads/logos/2023/01/22012023122737-1674386857.jpg"
+  "name": "Vio Mobilya",
+  "logo": "https://api.businessucces.com/uploads/logos/2023/04/03042023131646-1680517006.png"
 } 
 */
 
@@ -70,14 +70,68 @@ class PersonalProfileModelSettings {
   }
 }
 
+class PersonalProfileModelDistrict {
+/*
+{
+  "id": "225",
+  "name": "Turkey"
+} 
+*/
+
+  String? id;
+  String? name;
+
+  PersonalProfileModelDistrict({
+    this.id,
+    this.name,
+  });
+  PersonalProfileModelDistrict.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    name = json['name']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
+}
+
+class PersonalProfileModelCity {
+/*
+{
+  "id": "2188",
+  "name": "Yozgat"
+} 
+*/
+
+  String? id;
+  String? name;
+
+  PersonalProfileModelCity({
+    this.id,
+    this.name,
+  });
+  PersonalProfileModelCity.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    name = json['name']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    return data;
+  }
+}
+
 class PersonalProfileModelCountryTimezones {
 /*
 {
-  "zoneName": "America/Adak",
-  "gmtOffset": -36000,
-  "gmtOffsetName": "UTC-10:00",
-  "abbreviation": "HST",
-  "tzName": "Hawaii–Aleutian Standard Time"
+  "zoneName": "Europe/Istanbul",
+  "gmtOffset": 10800,
+  "gmtOffsetName": "UTC+03:00",
+  "abbreviation": "EET",
+  "tzName": "Eastern European Time"
 } 
 */
 
@@ -115,23 +169,23 @@ class PersonalProfileModelCountryTimezones {
 class PersonalProfileModelCountry {
 /*
 {
-  "id": "233",
-  "name": "United States",
-  "code": "US",
-  "phonecode": "1",
-  "currency": "USD",
-  "currency_name": "United States dollar",
-  "currency_symbol": "$",
+  "id": "225",
+  "name": "Turkey",
+  "code": "TR",
+  "phonecode": "90",
+  "currency": "TRY",
+  "currency_name": "Turkish lira",
+  "currency_symbol": "₺",
   "timezones": [
     {
-      "zoneName": "America/Adak",
-      "gmtOffset": -36000,
-      "gmtOffsetName": "UTC-10:00",
-      "abbreviation": "HST",
-      "tzName": "Hawaii–Aleutian Standard Time"
+      "zoneName": "Europe/Istanbul",
+      "gmtOffset": 10800,
+      "gmtOffsetName": "UTC+03:00",
+      "abbreviation": "EET",
+      "tzName": "Eastern European Time"
     }
   ],
-  "flag": "🇺🇸"
+  "flag": "🇹🇷"
 } 
 */
 
@@ -164,13 +218,13 @@ class PersonalProfileModelCountry {
     currency = json['currency']?.toString();
     currencyName = json['currency_name']?.toString();
     currencySymbol = json['currency_symbol']?.toString();
-    if (json['timezones'] != null) {
-      final v = json['timezones'];
-      final arr0 = <PersonalProfileModelCountryTimezones>[];
-      v.forEach((v) {
-        arr0.add(PersonalProfileModelCountryTimezones.fromJson(v));
-      });
-      timezones = arr0;
+  if (json['timezones'] != null) {
+  final v = json['timezones'];
+  final arr0 = <PersonalProfileModelCountryTimezones>[];
+  v.forEach((v) {
+  arr0.add(PersonalProfileModelCountryTimezones.fromJson(v));
+  });
+    timezones = arr0;
     }
     flag = json['flag']?.toString();
   }
@@ -186,9 +240,9 @@ class PersonalProfileModelCountry {
     if (timezones != null) {
       final v = timezones;
       final arr0 = [];
-      for (var v in v!) {
-        arr0.add(v!.toJson());
-      }
+  v!.forEach((v) {
+  arr0.add(v!.toJson());
+  });
       data['timezones'] = arr0;
     }
     data['flag'] = flag;
@@ -199,52 +253,61 @@ class PersonalProfileModelCountry {
 class PersonalProfileModel {
 /*
 {
-  "id": "93",
-  "name": " ",
-  "photo": "https://api.businessucces.com/uploads/profile/2023/02/05022023104627-1675590387.jpg",
-  "cover": "https://api.businessucces.com/uploads/covers/2023/01/14012023223252-1673731972.jpg",
-  "phone": "",
-  "email": "test100.personal@gmail.com",
-  "citizenship_number": "",
+  "id": "125",
+  "name": "Nefise Banu Tunç",
+  "photo": "https://api.businessucces.com/uploads/profile/2023/04/03042023125922-1680515962.jpg",
+  "cover": "",
+  "phone": "905424775644",
+  "email": "nefise.tunc45@gmail.com",
+  "citizenship_number": "20090781108",
   "tax_office": "",
   "tax_number": "0",
   "gender": "Unknown",
   "country": {
-    "id": "233",
-    "name": "United States",
-    "code": "US",
-    "phonecode": "1",
-    "currency": "USD",
-    "currency_name": "United States dollar",
-    "currency_symbol": "$",
+    "id": "225",
+    "name": "Turkey",
+    "code": "TR",
+    "phonecode": "90",
+    "currency": "TRY",
+    "currency_name": "Turkish lira",
+    "currency_symbol": "₺",
     "timezones": [
       {
-        "zoneName": "America/Adak",
-        "gmtOffset": -36000,
-        "gmtOffsetName": "UTC-10:00",
-        "abbreviation": "HST",
-        "tzName": "Hawaii–Aleutian Standard Time"
+        "zoneName": "Europe/Istanbul",
+        "gmtOffset": 10800,
+        "gmtOffsetName": "UTC+03:00",
+        "abbreviation": "EET",
+        "tzName": "Eastern European Time"
       }
     ],
-    "flag": "🇺🇸"
+    "flag": "🇹🇷"
   },
-  "address": "",
-  "postal_code": "",
+  "city": {
+    "id": "2188",
+    "name": "Yozgat"
+  },
+  "district": {
+    "id": "225",
+    "name": "Turkey"
+  },
+  "address": "Deneme adres bilgisi",
+  "postal_code": "66700",
   "about": "",
   "settings": {
     "language": "en",
     "country": "",
     "timezone": "-5.00"
   },
-  "registration_date": "2022-11-18 17:38:22",
+  "registration_date": "2023-04-03 11:57:23",
   "companies": [
     {
-      "id": "99",
+      "id": "126",
       "role": "admin",
-      "name": "company name up",
-      "logo": "https://api.businessucces.com/uploads/logos/2023/01/22012023122737-1674386857.jpg"
+      "name": "Vio Mobilya",
+      "logo": "https://api.businessucces.com/uploads/logos/2023/04/03042023131646-1680517006.png"
     }
-  ]
+  ],
+  "follow_status": false
 } 
 */
 
@@ -259,6 +322,8 @@ class PersonalProfileModel {
   String? taxNumber;
   String? gender;
   PersonalProfileModelCountry? country;
+  PersonalProfileModelCity? city;
+  PersonalProfileModelDistrict? district;
   String? address;
   String? postalCode;
   String? about;
@@ -279,6 +344,8 @@ class PersonalProfileModel {
     this.taxNumber,
     this.gender,
     this.country,
+    this.city,
+    this.district,
     this.address,
     this.postalCode,
     this.about,
@@ -298,23 +365,21 @@ class PersonalProfileModel {
     taxOffice = json['tax_office']?.toString();
     taxNumber = json['tax_number']?.toString();
     gender = json['gender']?.toString();
-    country = (json['country'] != null)
-        ? PersonalProfileModelCountry.fromJson(json['country'])
-        : null;
+    country = (json['country'] != null) ? PersonalProfileModelCountry.fromJson(json['country']) : null;
+    city = (json['city'] != null) ? PersonalProfileModelCity.fromJson(json['city']) : null;
+    district = (json['district'] != null) ? PersonalProfileModelDistrict.fromJson(json['district']) : null;
     address = json['address']?.toString();
     postalCode = json['postal_code']?.toString();
     about = json['about']?.toString();
-    settings = (json['settings'] != null)
-        ? PersonalProfileModelSettings.fromJson(json['settings'])
-        : null;
+    settings = (json['settings'] != null) ? PersonalProfileModelSettings.fromJson(json['settings']) : null;
     registrationDate = json['registration_date']?.toString();
-    if (json['companies'] != null) {
-      final v = json['companies'];
-      final arr0 = <PersonalProfileModelCompanies>[];
-      v.forEach((v) {
-        arr0.add(PersonalProfileModelCompanies.fromJson(v));
-      });
-      companies = arr0;
+  if (json['companies'] != null) {
+  final v = json['companies'];
+  final arr0 = <PersonalProfileModelCompanies>[];
+  v.forEach((v) {
+  arr0.add(PersonalProfileModelCompanies.fromJson(v));
+  });
+    companies = arr0;
     }
     followStatus = json['follow_status'];
   }
@@ -333,6 +398,12 @@ class PersonalProfileModel {
     if (country != null) {
       data['country'] = country!.toJson();
     }
+    if (city != null) {
+      data['city'] = city!.toJson();
+    }
+    if (district != null) {
+      data['district'] = district!.toJson();
+    }
     data['address'] = address;
     data['postal_code'] = postalCode;
     data['about'] = about;
@@ -343,9 +414,9 @@ class PersonalProfileModel {
     if (companies != null) {
       final v = companies;
       final arr0 = [];
-      for (var v in v!) {
-        arr0.add(v!.toJson());
-      }
+  v!.forEach((v) {
+  arr0.add(v!.toJson());
+  });
       data['companies'] = arr0;
     }
     data['follow_status'] = followStatus;

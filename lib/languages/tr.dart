@@ -351,6 +351,15 @@ final Map<String, String> tr = {
   "Product cart added": "Ürün sepeti eklendi",
   "Ask seller": "Satıcıya sor",
 
+  // PROFILE SETTINGS PAGE
+  'First Name': 'İsim',
+  'Last Name': 'Soyisim',
+  'First Name Validate': 'Lütfen adını giriniz',
+  'Last Surname Validate': 'Lütfen soyadını giriniz',
+  'CitizenshipNumber': 'Kimlik Numarası',
+  'CitizenshipNumber-1': 'Lütfen kimlik numaranızı giriniz',
+  'CitizenshipNumber-2': 'Lütfen geçerli bir kimlik numarası giriniz',
+
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',
   'Add Product-1': 'Ürün Ekle',

@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/company/company_detail_model.dart';
+import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
@@ -9,6 +10,7 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +22,7 @@ class AddCompanySubPage extends StatefulWidget {
       {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
-  final CompanyDetailModel? passedObject;
+  final CompanyProfileModel? passedObject;
   final String operation;
 
   @override
@@ -67,7 +69,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
 
-    if (widget.operation == 'Edit') {
+    if (widget.operation == 'Edit' || widget.operation == 'Account') {
       companyNameController.text = widget.passedObject!.name.toString();
       taxOfficeController.text = widget.passedObject!.taxOffice.toString();
       taxNumberController.text = widget.passedObject!.taxNumber.toString();
@@ -123,7 +125,9 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
               Text(
                 widget.operation == 'Add'
                     ? 'Add Company'.tr
-                    : 'Edit Company'.tr,
+                    : widget.operation == 'Account'
+                        ? 'Account Settings'.tr
+                        : 'Edit Company'.tr,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18,
@@ -138,6 +142,60 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                   key: companyGlobalKey,
                   child: Column(
                     children: [
+                      Stack(
+                        children: [
+                          ClipOval(
+                            child: (widget.passedObject!.logo != null &&
+                                    widget.passedObject!.logo!.isNotEmpty)
+                                ? CachedNetworkImage(
+                                    imageUrl: '${widget.passedObject!.logo}',
+                                    width: 150,
+                                    height: 150,
+                                    fit: BoxFit.cover,
+                                    errorWidget: (context, error, stackTrace) {
+                                      return ClipOval(
+                                        child: Image.asset(
+                                          width: 150,
+                                          height: 150,
+                                          'assets/images/dummy_images/user_profile.png',
+                                          fit: BoxFit.cover,
+                                        ),
+                                      );
+                                    },
+                                  )
+                                : ClipOval(
+                                    child: Image.asset(
+                                      width: 150,
+                                      height: 150,
+                                      'assets/images/dummy_images/user_profile.png',
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                          ),
+                          Positioned(
+                              right: 10,
+                              bottom: 10,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withOpacity(.8),
+                                  borderRadius: BorderRadius.circular(30.0),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Colors.black45,
+                                      offset: Offset(1, 1),
+                                      blurRadius: 6,
+                                    ),
+                                    // to make the coloured border
+                                  ],
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(Icons.edit_sharp),
+                                  onPressed: () {},
+                                ),
+                              ))
+                        ],
+                      ),
+                      const SizedBox(height: 27),
                       CustomTextFormField(
                         validator: (value) {
                           if (value == null || value.trim().isEmpty) {
