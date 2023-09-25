@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
-
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -198,7 +197,6 @@ class _PersonalAccountSettingsSubPageState
               CustomTextFormField(
                 titleText: 'Name'.tr,
                 controller: _nameController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Name Validate'.tr;
@@ -210,7 +208,6 @@ class _PersonalAccountSettingsSubPageState
               CustomTextFormField(
                 titleText: 'E-mail'.tr,
                 controller: _emailController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'E-mail Validate-1'.tr;
@@ -225,7 +222,6 @@ class _PersonalAccountSettingsSubPageState
               CustomTextFormField(
                 titleText: 'Phone'.tr,
                 controller: _phoneNumberController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Phone Number Validate'.tr;
@@ -238,59 +234,12 @@ class _PersonalAccountSettingsSubPageState
               CustomTextFormField(
                 titleText: 'CitizenshipNumber'.tr,
                 controller: _citizenshipNumberController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'CitizenshipNumber-1'.tr;
                   }
                   if (value.length < 11) {
                     return 'CitizenshipNumber-2'.tr;
-                  }
-
-                  return null;
-                },
-              ),
-              const SizedBox(height: 13),
-              CustomTextFormField(
-                titleText: 'Tax Office'.tr,
-                controller: _taxOfficeController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Tax Office Validate'.tr;
-                  }
-
-                  return null;
-                },
-              ),
-              const SizedBox(height: 13),
-              CustomTextFormField(
-                titleText: 'Tax Number'.tr,
-                controller: _taxNumberController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Tax Number Validate'.tr;
-                  }
-
-                  return null;
-                },
-              ),
-              const SizedBox(height: 13),
-              CustomTextFormField(
-                titleText: 'Gender'.tr,
-                controller: _genderController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
-              ),
-              const SizedBox(height: 13),
-              CustomTextFormField(
-                titleText: 'About'.tr,
-                controller: _aboutController,
-                color: themeMode ? AppTheme.white5 : AppTheme.black7,
-                maxLines: 5,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'About Validate'.tr;
                   }
 
                   return null;
@@ -895,6 +844,30 @@ class _PersonalAccountSettingsSubPageState
               ),
               const SizedBox(height: 13),
               CustomTextFormField(
+                titleText: 'Tax Office'.tr,
+                controller: _taxOfficeController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Tax Office Validate'.tr;
+                  }
+
+                  return null;
+                },
+              ),
+              const SizedBox(height: 13),
+              CustomTextFormField(
+                titleText: 'Tax Number'.tr,
+                controller: _taxNumberController,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'Tax Number Validate'.tr;
+                  }
+
+                  return null;
+                },
+              ),
+              const SizedBox(height: 13),
+              CustomTextFormField(
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'IBAN Validate'.tr;
@@ -907,6 +880,39 @@ class _PersonalAccountSettingsSubPageState
                     '${Constants.language!.toUpperCase()} 0006 0000 0000 0000 0000',
                 maxLines: 1,
               ),
+              const SizedBox(height: 13),
+              CustomTextFormField(
+                titleText: 'About'.tr,
+                controller: _aboutController,
+                minLines: 3,
+                maxLines: 5,
+                validator: (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'About Validate'.tr;
+                  }
+
+                  return null;
+                },
+              ),
+              const SizedBox(height: 13),
+              const SizedBox(height: 27),
+              MaterialButton(
+                  minWidth: deviceWidth,
+                  height: 52,
+                  elevation: 0,
+                  color: AppTheme.green1,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16)),
+                  ),
+                  child: Text(
+                    'Edit'.tr,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w700,
+                        color: AppTheme.white1),
+                  ),
+                  onPressed: () {}),
               const SizedBox(height: 27),
               Container(
                 width: deviceWidth,

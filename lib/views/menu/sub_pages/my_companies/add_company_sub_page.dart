@@ -1,7 +1,6 @@
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/company/company_detail_model.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';

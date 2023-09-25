@@ -5,7 +5,6 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/company_account_settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/account_settings/personal_account_settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/disagreements/disagreements_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/followers/followers_sub_page.dart';
@@ -313,8 +312,8 @@ class _MenuPageState extends State<MenuPage> {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (_, __, ___) =>
-                                CompanyAccountSettingsSubPage(
-                              companyProfileModel: _companyProfileModel,
+                                PersonalAccountSettingsSubPage(
+                              personalProfileModel: _personalProfileModel,
                             ),
                             transitionDuration: const Duration(milliseconds: 0),
                             reverseTransitionDuration:
