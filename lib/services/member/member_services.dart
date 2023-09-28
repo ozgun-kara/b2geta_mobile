@@ -8,8 +8,6 @@ import 'package:b2geta_mobile/models/member/register_model.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -383,7 +381,7 @@ class MemberServices {
     }
   }
 
-  // UPDATE PASSWORD
+  // DELETE ACCOUNT
   Future<bool> deleteAccountCall() async {
     final response = await http.delete(
       Uri.parse('${Constants.apiUrl}/member/delete'),
@@ -446,6 +444,34 @@ class MemberServices {
 
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  // UPDATE PROFILE
+  Future<bool> updateProfileCall(
+      {required String email,
+      required String password,
+      required String verifyCode}) async {
+    final response = await http.post(
+        Uri.parse('${Constants.apiUrl}/member/update'),
+        headers: Constants.headers,
+        body: {
+          'username': email,
+          'code': verifyCode,
+          'password': password,
+          'new_password': password,
+        });
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+
       if (status == true) {
         return true;
       } else {
