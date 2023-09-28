@@ -1,12 +1,15 @@
 // ignore_for_file: use_build_context_synchronously, unused_local_variable
 
 import 'dart:convert';
+import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/models/member/register_model.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/models/user/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -392,6 +395,58 @@ class MemberServices {
       if (status == true) {
         deleteToken();
         deleteUserId();
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  // PROFILE PHOTO SET
+  Future<bool> profilePhotoSet({
+    File? image,
+  }) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/member/photo'));
+    request.headers.addAll(Constants.headers);
+
+    // IMAGE CONTROL PART
+    if (image != null) {
+      if (image.path.isNotEmpty) {
+        var i = await http.MultipartFile.fromPath('photo', image.path);
+        request.files.add(i);
+      }
+    }
+
+    var response = await request.send();
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+
+    if (response.statusCode == 200) {
+      var status = json.decode(responseString)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  }
+
+  // PROFILE PHOTO DELETE
+  Future<bool> deleteProfilePhoto() async {
+    final response = await http.delete(
+      Uri.parse('${Constants.apiUrl}/member/photo'),
+      headers: Constants.headers,
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
         return true;
       } else {
         return false;

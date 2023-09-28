@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class UserModel {
   String? id;
   String? token;
@@ -82,5 +83,61 @@ class UserModel {
   @override
   String toString() {
     return 'UserModel(id: $id,type: $type, userConfirmed: $userConfirmed, firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, avatar: $avatar, cover: $cover, citizenshipNumber: $citizenshipNumber, taxOffice: $taxOffice, taxNumber: $taxNumber, gender: $gender, wantEmail: $wantEmail, country: $country, city: $city, town: $town, address: $address, about: $about, postalCode: $postalCode, languageCode: $languageCode, countryCode: $countryCode, timezone: $timezone, createdAt: $createdAt)';
+  }
+
+  UserModel copyWith({
+    String? id,
+    String? token,
+    String? type,
+    String? userConfirmed,
+    String? firstname,
+    String? lastname,
+    String? phone,
+    String? email,
+    String? avatar,
+    String? cover,
+    String? citizenshipNumber,
+    String? taxOffice,
+    String? taxNumber,
+    String? gender,
+    String? wantEmail,
+    String? country,
+    String? city,
+    String? town,
+    String? address,
+    String? about,
+    String? postalCode,
+    String? languageCode,
+    String? countryCode,
+    String? timezone,
+    String? createdAt,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      token: token ?? this.token,
+      type: type ?? this.type,
+      userConfirmed: userConfirmed ?? this.userConfirmed,
+      firstname: firstname ?? this.firstname,
+      lastname: lastname ?? this.lastname,
+      phone: phone ?? this.phone,
+      email: email ?? this.email,
+      avatar: avatar ?? this.avatar,
+      cover: cover ?? this.cover,
+      citizenshipNumber: citizenshipNumber ?? this.citizenshipNumber,
+      taxOffice: taxOffice ?? this.taxOffice,
+      taxNumber: taxNumber ?? this.taxNumber,
+      gender: gender ?? this.gender,
+      wantEmail: wantEmail ?? this.wantEmail,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      town: town ?? this.town,
+      address: address ?? this.address,
+      about: about ?? this.about,
+      postalCode: postalCode ?? this.postalCode,
+      languageCode: languageCode ?? this.languageCode,
+      countryCode: countryCode ?? this.countryCode,
+      timezone: timezone ?? this.timezone,
+      createdAt: createdAt ?? this.createdAt,
+    );
   }
 }

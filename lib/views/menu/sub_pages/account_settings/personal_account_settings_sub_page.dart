@@ -1,11 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/utils.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
@@ -55,6 +59,22 @@ class _PersonalAccountSettingsSubPageState
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  final ImagePicker _picker = ImagePicker();
+  File? imageFile;
+
+  Future<void> _getFromGallery() async {
+    await _picker
+        .pickImage(
+      source: ImageSource.gallery,
+    )
+        .then((pickedFile) {
+      if (pickedFile != null) {
+        imageFile = File(pickedFile.path);
+        setState(() {});
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -114,6 +134,7 @@ class _PersonalAccountSettingsSubPageState
         Provider.of<MenuPageProvider>(context, listen: false).cityList;
     var districtList =
         Provider.of<MenuPageProvider>(context, listen: false).districtList;
+
     return Scaffold(
       backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
       appBar: const CustomInnerAppBar(),
@@ -142,34 +163,39 @@ class _PersonalAccountSettingsSubPageState
               const SizedBox(height: 27),
               Stack(
                 children: [
-                  ClipOval(
-                    child: (widget.personalProfileModel.photo != null &&
-                            widget.personalProfileModel.photo!.isNotEmpty)
-                        ? CachedNetworkImage(
-                            imageUrl: '${widget.personalProfileModel.photo}',
-                            width: 150,
-                            height: 150,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, error, stackTrace) {
-                              return ClipOval(
-                                child: Image.asset(
+                  (imageFile != null && imageFile!.path.isNotEmpty)
+                      ? ClipOval(
+                          child: Image.file(
+                          imageFile!,
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.cover,
+                        ))
+                      : ClipOval(
+                          child: (widget.personalProfileModel.photo != null &&
+                                  widget.personalProfileModel.photo!.isNotEmpty)
+                              ? CachedNetworkImage(
+                                  imageUrl:
+                                      '${widget.personalProfileModel.photo}',
+                                  width: 150,
+                                  height: 150,
+                                  fit: BoxFit.cover,
+                                  errorWidget: (context, error, stackTrace) {
+                                    return Image.asset(
+                                      width: 150,
+                                      height: 150,
+                                      'assets/images/dummy_images/user_profile.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.asset(
                                   width: 150,
                                   height: 150,
                                   'assets/images/dummy_images/user_profile.png',
                                   fit: BoxFit.cover,
                                 ),
-                              );
-                            },
-                          )
-                        : ClipOval(
-                            child: Image.asset(
-                              width: 150,
-                              height: 150,
-                              'assets/images/dummy_images/user_profile.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
+                        ),
                   Positioned(
                       right: 0,
                       bottom: 0,
@@ -186,9 +212,49 @@ class _PersonalAccountSettingsSubPageState
                             // to make the coloured border
                           ],
                         ),
-                        child: IconButton(
-                          icon: const Icon(Icons.edit_sharp),
-                          onPressed: () {},
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.edit_sharp),
+                              onPressed: () async {
+                                await _getFromGallery();
+                                if (imageFile != null) {
+                                  if (imageFile!.path.isNotEmpty) {
+                                    await _memberServices
+                                        .profilePhotoSet(image: imageFile)
+                                        .then((value) {
+                                      if (value) {
+                                        showSnackbar(
+                                            context: context,
+                                            message:
+                                                "Profile Photo Updated".tr);
+                                        Provider.of<UserProvider>(context,
+                                                listen: false)
+                                            .getProfile();
+                                      }
+                                    });
+                                  }
+                                }
+                              },
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  await _memberServices
+                                      .deleteProfilePhoto()
+                                      .then((value) {
+                                    if (value) {
+                                      imageFile = null;
+                                      widget.personalProfileModel.photo = null;
+                                      setState(() {});
+                                      Provider.of<UserProvider>(context,
+                                              listen: false)
+                                          .getProfile();
+                                    }
+                                  });
+                                },
+                                icon: const Icon(Icons.delete))
+                          ],
                         ),
                       ))
                 ],

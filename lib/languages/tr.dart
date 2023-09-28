@@ -359,6 +359,7 @@ final Map<String, String> tr = {
   'CitizenshipNumber': 'Kimlik Numarası',
   'CitizenshipNumber-1': 'Lütfen kimlik numaranızı giriniz',
   'CitizenshipNumber-2': 'Lütfen geçerli bir kimlik numarası giriniz',
+  "Profile Photo Updated": "Profil Fotoğrafı Güncellendi",
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',
