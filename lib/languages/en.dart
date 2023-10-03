@@ -364,6 +364,7 @@ final Map<String, String> en = {
   'CitizenshipNumber-1': 'Please enter the citizenship number.',
   'CitizenshipNumber-2': ' Please enter a valid citizenship number.',
   "Profile Photo Updated": "Profile Photo Updated",
+  "Profile Updated": "Profile Updated",
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'My Products',

@@ -455,19 +455,40 @@ class MemberServices {
   }
 
   // UPDATE PROFILE
-  Future<bool> updateProfileCall(
-      {required String email,
-      required String password,
-      required String verifyCode}) async {
-    final response = await http.post(
-        Uri.parse('${Constants.apiUrl}/member/update'),
-        headers: Constants.headers,
-        body: {
-          'username': email,
-          'code': verifyCode,
-          'password': password,
-          'new_password': password,
-        });
+  Future<bool> updateProfileCall({
+    required String firstname,
+    required String lastname,
+    required String citizenshipNumber,
+    required String taxOffice,
+    required String taxNumber,
+    required String phoneNumber,
+    required String country,
+    required String cityId,
+    required String districtId,
+    required String address,
+    required String postalCode,
+    required String about,
+    required String countryCode,
+  }) async {
+    final response = await http
+        .post(Uri.parse('${Constants.apiUrl}/member/update'), headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Bearer ${Constants.userToken}",
+    }, body: {
+      'first_name': firstname,
+      'last_name': lastname,
+      'citizenship_number': citizenshipNumber,
+      'tax_office': taxOffice,
+      'tax_number': taxNumber,
+      'phone_number': phoneNumber,
+      'country': country,
+      'country_code': countryCode,
+      'city': cityId,
+      'district': districtId,
+      'address': address,
+      'postal_code': postalCode,
+      'about': about,
+    });
 
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
