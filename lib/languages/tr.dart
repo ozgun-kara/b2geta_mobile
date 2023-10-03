@@ -140,7 +140,7 @@ final Map<String, String> tr = {
   'Go Back': 'Geri Git',
   'Address Name Validate': 'Lütfen adres adını giriniz',
   'Address Validate': 'Lütfen adresi giriniz',
-  'Postal Code Validate': 'Lütfen posta kodunu adını giriniz',
+  'Postal Code Validate': 'Lütfen posta kodunu giriniz',
   'Settings Page Route': 'Anasayfa - Ayarlar',
   'Theme': 'Tema',
   'Role:': 'Rol:',
@@ -352,14 +352,15 @@ final Map<String, String> tr = {
   "Ask seller": "Satıcıya sor",
 
   // PROFILE SETTINGS PAGE
-  'First Name': 'İsim',
-  'Last Name': 'Soyisim',
+  'First Name': 'Ad',
+  'Last Name': 'Soyad',
   'First Name Validate': 'Lütfen adını giriniz',
   'Last Surname Validate': 'Lütfen soyadını giriniz',
   'CitizenshipNumber': 'Kimlik Numarası',
   'CitizenshipNumber-1': 'Lütfen kimlik numaranızı giriniz',
   'CitizenshipNumber-2': 'Lütfen geçerli bir kimlik numarası giriniz',
   "Profile Photo Updated": "Profil Fotoğrafı Güncellendi",
+  "Profile Updated":"Profil Güncellendi",
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',

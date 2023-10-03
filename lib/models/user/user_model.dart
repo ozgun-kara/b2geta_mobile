@@ -17,6 +17,7 @@ class UserModel {
   String? wantEmail;
   String? country;
   String? city;
+  String? district;
   String? town;
   String? address;
   String? about;
@@ -44,6 +45,7 @@ class UserModel {
     this.wantEmail,
     this.country,
     this.city,
+    this.district,
     this.town,
     this.address,
     this.about,
@@ -70,6 +72,7 @@ class UserModel {
     wantEmail = json['want_email']?.toString();
     country = json['country']?.toString();
     city = json['city']?.toString();
+    district = json['district']?.toString();
     town = json['town']?.toString();
     address = json['address']?.toString();
     about = json['about']?.toString();
@@ -103,6 +106,7 @@ class UserModel {
     String? wantEmail,
     String? country,
     String? city,
+    String? district,
     String? town,
     String? address,
     String? about,
@@ -130,6 +134,7 @@ class UserModel {
       wantEmail: wantEmail ?? this.wantEmail,
       country: country ?? this.country,
       city: city ?? this.city,
+      district: district ?? this.district,
       town: town ?? this.town,
       address: address ?? this.address,
       about: about ?? this.about,
