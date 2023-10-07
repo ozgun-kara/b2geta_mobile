@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/company/company_model2.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
@@ -70,6 +71,7 @@ class CompanyServices {
         var data = json.decode(response.body)["data"];
         CompanyProfileModel companyDetailModel =
             CompanyProfileModel.fromJson(data);
+
         return companyDetailModel;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
@@ -221,6 +223,61 @@ class CompanyServices {
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return false;
+    }
+  }
+
+  // COMPANY PHOTO SET
+  Future<bool> companyPhotoSet({
+    File? image,
+  }) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/company/photo'));
+    request.headers.addAll(Constants.headers);
+
+    // IMAGE CONTROL PART
+    if (image != null) {
+      if (image.path.isNotEmpty) {
+        var i = await http.MultipartFile.fromPath('photo', image.path);
+        request.files.add(i);
+      }
+    }
+
+    var response = await request.send();
+    var responseData = await response.stream.toBytes();
+    var responseString = String.fromCharCodes(responseData);
+
+    if (response.statusCode == 200) {
+      var status = json.decode(responseString)["status"];
+
+      if (status == true) {
+        return true;
+      } else {
+        debugPrint(responseString);
+        return false;
+      }
+    } else {
+      debugPrint(responseString);
+
+      return false;
+    }
+  }
+
+  // COMPANY PHOTO DELETE
+  Future<bool> deleteCompanyPhoto() async {
+    final response = await http.delete(
+      Uri.parse('${Constants.apiUrl}/member/photo'),
+      headers: Constants.headers,
+    );
+
+    if (response.statusCode == 200) {
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
       return false;
     }
   }

@@ -19,7 +19,7 @@ class MenuPageProvider with ChangeNotifier {
   List<DistrictModel> districtList = [];
   String? selectedDistrict;
 
-  fetchCountryList() async {
+  Future<void> fetchCountryList() async {
     countryList = await locator<GeneralService>().countriesCall();
     notifyListeners();
   }
@@ -29,7 +29,7 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchCityList(String countryCode) async {
+  Future<void> fetchCityList(String countryCode) async {
     cityList.clear();
     districtList.clear();
     cityList = await locator<GeneralService>().citiesCall(country: countryCode);
@@ -41,7 +41,7 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  fetchDistrictList(String cityId) async {
+  Future<void> fetchDistrictList(String cityId) async {
     districtList = await locator<GeneralService>().townListCall(city: cityId);
     notifyListeners();
   }
