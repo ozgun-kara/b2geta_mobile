@@ -322,6 +322,7 @@ class CompanyProfileModel {
   String? logo;
   String? cover;
   String? about;
+  String? iban;
   CompanyProfileModelSettings? settings;
   String? registrationDate;
   List<CompanyProfileModelCollaborator?>? collaborator;
@@ -342,6 +343,7 @@ class CompanyProfileModel {
     this.logo,
     this.cover,
     this.about,
+    this.iban,
     this.settings,
     this.registrationDate,
     this.collaborator,
@@ -368,6 +370,7 @@ class CompanyProfileModel {
     logo = json['logo']?.toString();
     cover = json['cover']?.toString();
     about = json['about']?.toString();
+    iban = json['iban']?.toString();
     settings = (json['settings'] != null)
         ? CompanyProfileModelSettings.fromJson(json['settings'])
         : null;
@@ -405,6 +408,7 @@ class CompanyProfileModel {
     data['logo'] = logo;
     data['cover'] = cover;
     data['about'] = about;
+    data['iban'] = iban;
     if (settings != null) {
       data['settings'] = settings!.toJson();
     }
