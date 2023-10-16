@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/locator.dart';
@@ -78,8 +77,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
   @override
   void initState() {
-    var menuPageProvider =
-        Provider.of<MenuPageProvider>(context, listen: false);
+
 
     Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
         null;

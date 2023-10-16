@@ -384,4 +384,11 @@ final Map<String, String> en = {
   'Product Description Validate': 'Please enter the product description',
   'Price Validate': 'Please enter the price',
   'Product Summary Validate': 'Please enter the product summary',
+  'Width': 'Width',
+  'Height': 'Height',
+  'Weight': 'Weight',
+  'Length': 'Length',
+  'Turkish': 'Turkish',
+  'English':'English',
+  'German':'German',
 };

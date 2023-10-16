@@ -164,7 +164,6 @@ class _PersonalAccountSettingsSubPageState
         }
       },
     );
-  
   }
 
   @override
@@ -277,6 +276,7 @@ class _PersonalAccountSettingsSubPageState
                                                   listen: false)
                                               .getProfile()
                                               .then((value) {
+                                            setState(() {});
                                             showSnackbar(
                                                 context: context,
                                                 message:

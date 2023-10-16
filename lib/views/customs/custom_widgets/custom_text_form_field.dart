@@ -10,6 +10,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.controller,
     required this.titleText,
     this.hintText,
+    this.suffixText,
     this.keyboardType,
     this.minLines,
     this.maxLines,
@@ -20,6 +21,7 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController controller;
   final String titleText;
   final String? hintText;
+  final String? suffixText;
   final TextInputType? keyboardType;
   final int? minLines;
   final int? maxLines;
@@ -75,6 +77,18 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   : AppTheme.white1), // WHILE WRITING
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.fromLTRB(25, 16, 25, 16),
+            suffixIcon: widget.suffixText != null
+                ? Padding(
+                    padding: const EdgeInsets.only(top: 20.0, left: 10.0),
+                    child: Text(widget.suffixText.toString()),
+                  )
+                : null,
+            suffixStyle: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w400,
+              color: themeMode ? AppTheme.white17 : AppTheme.white14,
+            ),
             filled: true,
             fillColor: widget.color ??
                 (themeMode ? AppTheme.white39 : AppTheme.black18),

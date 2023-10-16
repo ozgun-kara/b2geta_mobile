@@ -360,7 +360,7 @@ final Map<String, String> tr = {
   'CitizenshipNumber-1': 'Lütfen kimlik numaranızı giriniz',
   'CitizenshipNumber-2': 'Lütfen geçerli bir kimlik numarası giriniz',
   "Profile Photo Updated": "Profil Fotoğrafı Güncellendi",
-  "Profile Updated":"Profil Güncellendi",
+  "Profile Updated": "Profil Güncellendi",
 
   // MY PRODUCTS SUB PAGE AND ADD PRODUCT SUB PAGE
   'My Products-1': 'Ürünlerim',
@@ -380,4 +380,11 @@ final Map<String, String> tr = {
   'Product Description Validate': 'Lütfen ürün açıklamasını giriniz',
   'Price Validate': 'Lütfen ürün fiyatını giriniz',
   'Product Summary Validate': 'Lütfen ürün özetini giriniz',
+  'Width': 'Genişlik',
+  'Height': 'Yükseklik',
+  'Weight': 'Ağırlık',
+  'Length': 'Uzunluk',
+  'Turkish': 'Türkçe',
+  'English': 'İngilizce',
+  'German': 'Almanca'
 };
