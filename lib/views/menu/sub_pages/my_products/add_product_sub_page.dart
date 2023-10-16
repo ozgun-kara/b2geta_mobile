@@ -31,10 +31,16 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   ScrollController scrollController = ScrollController();
   GlobalKey<FormState> productGlobalKey = GlobalKey<FormState>();
 
-  final productNameController = TextEditingController();
-  final productDescriptionController = TextEditingController();
+  final productNameTRController = TextEditingController();
+  final productNameENController = TextEditingController();
+  final productNameDEController = TextEditingController();
+  final productDescriptionTRController = TextEditingController();
+  final productDescriptionENController = TextEditingController();
+  final productDescriptionGEController = TextEditingController();
   final productPriceController = TextEditingController();
-  final productSummaryController = TextEditingController();
+  final productSummaryTRController = TextEditingController();
+  final productSummaryENController = TextEditingController();
+  final productSummaryGEController = TextEditingController();
   final categoriesController = TextEditingController();
   final brandController = TextEditingController();
   final statusController = TextEditingController();
@@ -48,6 +54,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+  int isSelectedProductName = 0;
+  int isSelectedProductDescription = 0;
+  int isSelectedProductSummary = 0;
 
   @override
   void initState() {
@@ -78,11 +87,12 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     ];
 
     if (widget.operation == 'Edit') {
-      productNameController.text = widget.passedObject!.productName.toString();
-      productDescriptionController.text =
+      productNameTRController.text =
+          widget.passedObject!.productName.toString();
+      productDescriptionTRController.text =
           widget.passedObject!.productDescription.toString();
       productPriceController.text = widget.passedObject!.price.toString();
-      productSummaryController.text =
+      productSummaryTRController.text =
           widget.passedObject!.productSummary.toString();
 
       categoryId = widget.passedObject!.categories!.first!.categoryId;
@@ -158,6 +168,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                     child: Form(
                       key: productGlobalKey,
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Align(
                             alignment: Alignment.centerLeft,
@@ -906,7 +918,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         return feature != null
                                                             ? Container(
                                                                 padding: const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     horizontal:
                                                                         16.0),
                                                                 child: InkWell(
@@ -952,28 +964,157 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           )
                                         : const SizedBox();
                                   })),
-                          CustomTextFormField(
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Product Name Validate'.tr;
-                              }
-                              return null;
-                            },
-                            controller: productNameController,
-                            titleText: 'Product Name'.tr,
+                          isSelectedProductName == 1
+                              ? CustomTextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.trim().isEmpty) {
+                                      return 'Product Name Validate'.tr;
+                                    }
+                                    return null;
+                                  },
+                                  controller: productNameTRController,
+                                  titleText: 'Product Name'.tr,
+                                )
+                              : isSelectedProductName == 2
+                                  ? CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Name Validate'.tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller: productNameENController,
+                                      titleText: 'Product Name'.tr,
+                                    )
+                                  : CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Name Validate'.tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller: productNameDEController,
+                                      titleText: 'Product Name'.tr,
+                                    ),
+                          Row(
+                            children: [
+                              _choiceChipProductName('Turkish'.tr, 1),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductName(
+                                'English'.tr,
+                                2,
+                              ),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductName(
+                                'German'.tr,
+                                3,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 13),
+                          isSelectedProductDescription == 1
+                              ? CustomTextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.trim().isEmpty) {
+                                      return 'Product Description Validate'.tr;
+                                    }
+                                    return null;
+                                  },
+                                  controller: productDescriptionTRController,
+                                  titleText: 'Product Description'.tr,
+                                  minLines: 2,
+                                  maxLines: 5,
+                                )
+                              : isSelectedProductDescription == 2
+                                  ? CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Description Validate'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller:
+                                          productDescriptionENController,
+                                      titleText: 'Product Description'.tr,
+                                      minLines: 2,
+                                      maxLines: 5,
+                                    )
+                                  : CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Description Validate'
+                                              .tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller:
+                                          productDescriptionGEController,
+                                      titleText: 'Product Description'.tr,
+                                      minLines: 2,
+                                      maxLines: 5,
+                                    ),
+                          Row(
+                            children: [
+                              _choiceChipProductDescription(
+                                'Turkish'.tr,
+                                1,
+                              ),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductDescription(
+                                'English'.tr,
+                                2,
+                              ),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductDescription(
+                                'German'.tr,
+                                3,
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 13),
                           CustomTextFormField(
+                            controller: productPriceController,
+                            titleText: 'Width'.tr,
+                            keyboardType: TextInputType.number,
+                            suffixText: 'sm',
+                          ),
+                          const SizedBox(
+                            height: 13,
+                          ),
+                          CustomTextFormField(
+                            controller: productPriceController,
+                            titleText: 'Height'.tr,
+                            suffixText: 'cm',
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(
+                            height: 13,
+                          ),
+                          CustomTextFormField(
+                            controller: productPriceController,
+                            titleText: 'Weight'.tr,
+                            suffixText: 'gr',
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(
+                            height: 13,
+                          ),
+                          CustomTextFormField(
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
-                                return 'Product Description Validate'.tr;
+                                return 'Price Validate'.tr;
                               }
                               return null;
                             },
-                            controller: productDescriptionController,
-                            titleText: 'Product Description'.tr,
-                            minLines: 2,
-                            maxLines: 5,
+                            controller: productPriceController,
+                            titleText: 'Length'.tr,
+                            suffixText: 'cm',
+                            keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 13),
                           Column(
@@ -1325,18 +1466,66 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 13),
-                          CustomTextFormField(
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'Product Summary Validate'.tr;
-                              }
-                              return null;
-                            },
-                            controller: productSummaryController,
-                            titleText: 'Product Summary'.tr,
-                            keyboardType: TextInputType.text,
-                            minLines: 2,
-                            maxLines: 5,
+                          isSelectedProductSummary == 1
+                              ? CustomTextFormField(
+                                  validator: (value) {
+                                    if (value == null || value.trim().isEmpty) {
+                                      return 'Product Summary Validate'.tr;
+                                    }
+                                    return null;
+                                  },
+                                  controller: productSummaryTRController,
+                                  titleText: 'Product Summary'.tr,
+                                  keyboardType: TextInputType.text,
+                                  minLines: 2,
+                                  maxLines: 5,
+                                )
+                              : isSelectedProductSummary == 2
+                                  ? CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Summary Validate'.tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller: productSummaryENController,
+                                      titleText: 'Product Summary'.tr,
+                                      keyboardType: TextInputType.text,
+                                      minLines: 2,
+                                      maxLines: 5,
+                                    )
+                                  : CustomTextFormField(
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.trim().isEmpty) {
+                                          return 'Product Summary Validate'.tr;
+                                        }
+                                        return null;
+                                      },
+                                      controller: productSummaryGEController,
+                                      titleText: 'Product Summary'.tr,
+                                      keyboardType: TextInputType.text,
+                                      minLines: 2,
+                                      maxLines: 5,
+                                    ),
+                          Row(
+                            children: [
+                              _choiceChipProductSummary(
+                                'Turkish'.tr,
+                                1,
+                              ),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductSummary(
+                                'English'.tr,
+                                2,
+                              ),
+                              const SizedBox(width: 10.0),
+                              _choiceChipProductSummary(
+                                'German'.tr,
+                                3,
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 13),
                           Column(
@@ -1501,21 +1690,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         subCategoryId,
                                                     deepCategoryId:
                                                         deepCategoryId,
-                                                    categoryFeatures:
-                                                        menuPageProvider
-                                                            .selectedFetureasList,
+                                                    categoryFeatures: menuPageProvider
+                                                        .selectedFetureasList,
                                                     productName:
-                                                        productNameController
+                                                        productNameTRController
                                                             .text,
                                                     productDescription:
-                                                        productDescriptionController
+                                                        productDescriptionTRController
                                                             .text,
                                                     productSummary:
-                                                        productSummaryController
+                                                        productSummaryTRController
                                                             .text,
                                                     brand: brandId,
-                                                    price: productPriceController
-                                                        .text,
+                                                    price:
+                                                        productPriceController
+                                                            .text,
                                                     currency: menuPageProvider
                                                         .selectedCurrency
                                                         .toString(),
@@ -1539,12 +1728,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   widget.passedObject!.id!,
                                               categoryId: categoryId,
                                               productName:
-                                                  productNameController.text,
+                                                  productNameTRController.text,
                                               productDescription:
-                                                  productDescriptionController
+                                                  productDescriptionTRController
                                                       .text,
                                               productSummary:
-                                                  productSummaryController.text,
+                                                  productSummaryTRController
+                                                      .text,
                                               brand: brandId,
                                               price:
                                                   productPriceController.text,
@@ -1582,6 +1772,69 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             ],
           ),
         ));
+  }
+
+  Widget _choiceChipProductName(
+    String title,
+    int index,
+  ) {
+    return ChoiceChip(
+      label: Text(title,
+          style: isSelectedProductName == index
+              ? const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w600)
+              : null),
+      showCheckmark: true,
+      checkmarkColor: AppTheme.green12,
+      selectedColor: AppTheme.blue2,
+      selected: isSelectedProductName == index,
+      onSelected: (value) {
+        isSelectedProductName = index;
+        setState(() {});
+      },
+    );
+  }
+
+  Widget _choiceChipProductDescription(
+    String title,
+    int index,
+  ) {
+    return ChoiceChip(
+      label: Text(title,
+          style: isSelectedProductDescription == index
+              ? const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w600)
+              : null),
+      showCheckmark: true,
+      checkmarkColor: AppTheme.green12,
+      selectedColor: AppTheme.blue2,
+      selected: isSelectedProductDescription == index,
+      onSelected: (value) {
+        isSelectedProductDescription = index;
+        setState(() {});
+      },
+    );
+  }
+
+  Widget _choiceChipProductSummary(
+    String title,
+    int index,
+  ) {
+    return ChoiceChip(
+      label: Text(title,
+          style: isSelectedProductSummary == index
+              ? const TextStyle(
+                  color: Colors.white, fontWeight: FontWeight.w600)
+              : null),
+      showCheckmark: true,
+      checkmarkColor: AppTheme.green12,
+      selectedColor: AppTheme.blue2,
+      selected: isSelectedProductSummary == index,
+      onSelected: (value) {
+        isSelectedProductSummary = index;
+        setState(() {});
+      },
+    );
   }
 
   void validationErrorDialog(BuildContext context) {
