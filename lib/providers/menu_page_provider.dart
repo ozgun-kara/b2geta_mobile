@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
 
 class MenuPageProvider with ChangeNotifier {
-  // MY ADDRESSES SUBPAGE
+  // MY ADDRESSES SUB PAGE
   List<CountryModel> countryList = [];
   String? selectedCountry;
   List<CityModel> cityList = [];
@@ -51,7 +51,7 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // MY PRODUCTS SUBPAGE
+  // MY PRODUCTS SUB PAGE
   List<CategoryModel> categoryList = [];
   List<CategoryModel> subCategoryList = [];
   List<CategoryModel> deepCategoryList = [];
@@ -173,4 +173,27 @@ class MenuPageProvider with ChangeNotifier {
     imageFilesList!.clear();
     notifyListeners();
   }
+
+  // ADD PRODUCT SUB PAGE
+  int isSelectedProductNameIndex = 0;
+  int isSelectedProductDescriptionIndex = 0;
+  int isSelectedProductSummaryIndex = 0;
+
+
+    void updateSelectedProductName(int value) {
+    isSelectedProductNameIndex = value;
+    notifyListeners();
+  }
+
+   void updateSelectedProductDescription(int value) {
+    isSelectedProductDescriptionIndex = value;
+    notifyListeners();
+  }
+
+   void updateSelectedProductSummary(int value) {
+    isSelectedProductSummaryIndex= value;
+    notifyListeners();
+  }
+
+
 }
