@@ -1877,7 +1877,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               ),
                               child: Text(
                                 widget.operation == 'Add'
-                                    ? 'Continue'.tr
+                                    ? 'Add'.tr
                                     : 'Edit'.tr,
                                 style: TextStyle(
                                     fontSize: 16,
