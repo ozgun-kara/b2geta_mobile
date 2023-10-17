@@ -1,5 +1,8 @@
 // ignore_for_file: iterable_contains_unrelated_type
 
+import 'dart:io';
+import 'dart:math';
+
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
@@ -11,9 +14,11 @@ import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_fiel
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
+import 'package:path/path.dart' as path;
 
 class AddProductSubPage extends StatefulWidget {
   const AddProductSubPage(
@@ -54,9 +59,28 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-  int isSelectedProductName = 0;
-  int isSelectedProductDescription = 0;
-  int isSelectedProductSummary = 0;
+
+  final ImagePicker imagePicker = ImagePicker();
+
+  void selectImages() async {
+    final List<XFile> pickedFiles = await imagePicker.pickMultiImage();
+
+    final List<File> selectedImages =
+        pickedFiles.map<File>((xfile) => File(xfile.path)).toList();
+
+    if (selectedImages.isNotEmpty) {
+      // ignore: use_build_context_synchronously
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateSelectedImageFilesList(selectedImages);
+    }
+  }
+
+  String formatBytes(int bytes, int decimals) {
+    if (bytes <= 0) return "0 B";
+    const suffixes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+    var i = (log(bytes) / log(1024)).floor();
+    return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
+  }
 
   @override
   void initState() {
@@ -964,7 +988,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           )
                                         : const SizedBox();
                                   })),
-                          isSelectedProductName == 1
+                          menuPageProvider.isSelectedProductNameIndex == 1
                               ? CustomTextFormField(
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
@@ -975,7 +999,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   controller: productNameTRController,
                                   titleText: 'Product Name'.tr,
                                 )
-                              : isSelectedProductName == 2
+                              : menuPageProvider.isSelectedProductNameIndex == 2
                                   ? CustomTextFormField(
                                       validator: (value) {
                                         if (value == null ||
@@ -1014,7 +1038,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ],
                           ),
                           const SizedBox(height: 13),
-                          isSelectedProductDescription == 1
+                          menuPageProvider.isSelectedProductDescriptionIndex ==
+                                  1
                               ? CustomTextFormField(
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
@@ -1027,7 +1052,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   minLines: 2,
                                   maxLines: 5,
                                 )
-                              : isSelectedProductDescription == 2
+                              : menuPageProvider
+                                          .isSelectedProductDescriptionIndex ==
+                                      2
                                   ? CustomTextFormField(
                                       validator: (value) {
                                         if (value == null ||
@@ -1466,7 +1493,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             keyboardType: TextInputType.number,
                           ),
                           const SizedBox(height: 13),
-                          isSelectedProductSummary == 1
+                          menuPageProvider.isSelectedProductSummaryIndex == 1
                               ? CustomTextFormField(
                                   validator: (value) {
                                     if (value == null || value.trim().isEmpty) {
@@ -1480,7 +1507,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   minLines: 2,
                                   maxLines: 5,
                                 )
-                              : isSelectedProductSummary == 2
+                              : menuPageProvider
+                                          .isSelectedProductSummaryIndex ==
+                                      2
                                   ? CustomTextFormField(
                                       validator: (value) {
                                         if (value == null ||
@@ -1648,6 +1677,194 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               ),
                             ],
                           ),
+                          const SizedBox(
+                            height: 13.0,
+                          ),
+                          Column(
+                            children: [
+                              const SizedBox(height: 27),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Add Product Image'.tr,
+                                    style: TextStyle(
+                                      fontFamily: AppTheme.appFontFamily,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: themeMode
+                                          ? AppTheme.blue3
+                                          : AppTheme.white1,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 13),
+                                  MaterialButton(
+                                      minWidth: deviceWidth,
+                                      height: 52,
+                                      elevation: 0,
+                                      color: AppTheme.blue2,
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
+                                      ),
+                                      padding: const EdgeInsets.fromLTRB(
+                                          56, 43, 56, 38),
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'Add Product Image Info-1'.tr,
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppTheme.white1),
+                                          ),
+                                          const SizedBox(height: 28),
+                                          Image.asset(
+                                            "assets/icons/mdi_cloud-upload-outline.png",
+                                            width: 116,
+                                            height: 116,
+                                            color: Colors.white,
+                                          ),
+                                          const SizedBox(height: 28),
+                                          Text(
+                                            'Add Product Image Info-2'.tr,
+                                            style: TextStyle(
+                                                fontSize: 13,
+                                                fontFamily:
+                                                    AppTheme.appFontFamily,
+                                                fontWeight: FontWeight.w600,
+                                                color: AppTheme.white1),
+                                          ),
+                                        ],
+                                      ),
+                                      onPressed: () {
+                                        selectImages();
+                                      }),
+                                  const SizedBox(height: 21),
+                                  Visibility(
+                                    visible: menuPageProvider
+                                        .imageFilesList!.isNotEmpty,
+                                    child: ListView.separated(
+                                      controller: scrollController,
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(0),
+                                      itemCount: menuPageProvider
+                                          .imageFilesList!.length,
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return const SizedBox(height: 11);
+                                      },
+                                      itemBuilder: ((context, index) {
+                                        var image = menuPageProvider
+                                            .imageFilesList![index];
+
+                                        String imageName = path
+                                            .basename(image.path)
+                                            .substring(12);
+
+                                        final file = File(image.path);
+                                        String imageSize =
+                                            formatBytes(file.lengthSync(), 2);
+
+                                        return Container(
+                                          width: deviceWidth,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: themeMode
+                                                  ? AppTheme.white10
+                                                  : AppTheme.black28,
+                                            ),
+                                            color: themeMode
+                                                ? AppTheme.white5
+                                                : Colors.transparent,
+                                          ),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              12, 12, 12, 12),
+                                          child: Row(
+                                            children: [
+                                              Container(
+                                                width: 60,
+                                                height: 60,
+                                                color: AppTheme.white10,
+                                                child: Center(
+                                                  child: Image.file(
+                                                    File(image.path),
+                                                    width: 59,
+                                                    height: 59,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(width: 10),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Center(
+                                                    child: SizedBox(
+                                                      width: deviceWidth * .5,
+                                                      child: Text(
+                                                        imageName,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        style: TextStyle(
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontSize: 11,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    imageSize,
+                                                    style: TextStyle(
+                                                      fontFamily: AppTheme
+                                                          .appFontFamily,
+                                                      fontSize: 11,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: AppTheme.white15,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              const Spacer(),
+                                              IconButton(
+                                                splashRadius: 24,
+                                                icon: Image.asset(
+                                                  'assets/icons/tabler_trash.png',
+                                                  width: 24,
+                                                  height: 24,
+                                                  color: themeMode
+                                                      ? AppTheme.blue2
+                                                      : AppTheme.white15,
+                                                ),
+                                                onPressed: () {
+                                                  menuPageProvider
+                                                      .deleteSelectedImage(
+                                                          image);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                           const SizedBox(height: 28),
                           MaterialButton(
                               minWidth: deviceWidth,
@@ -1780,16 +1997,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   ) {
     return ChoiceChip(
       label: Text(title,
-          style: isSelectedProductName == index
+          style: Provider.of<MenuPageProvider>(context)
+                      .isSelectedProductNameIndex ==
+                  index
               ? const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w600)
               : null),
       showCheckmark: true,
       checkmarkColor: AppTheme.green12,
       selectedColor: AppTheme.blue2,
-      selected: isSelectedProductName == index,
+      selected:
+          Provider.of<MenuPageProvider>(context).isSelectedProductNameIndex ==
+              index,
       onSelected: (value) {
-        isSelectedProductName = index;
+        Provider.of<MenuPageProvider>(context, listen: false)
+            .updateSelectedProductName(index);
         setState(() {});
       },
     );
@@ -1801,17 +2023,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   ) {
     return ChoiceChip(
       label: Text(title,
-          style: isSelectedProductDescription == index
+          style: Provider.of<MenuPageProvider>(context)
+                      .isSelectedProductDescriptionIndex ==
+                  index
               ? const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w600)
               : null),
       showCheckmark: true,
       checkmarkColor: AppTheme.green12,
       selectedColor: AppTheme.blue2,
-      selected: isSelectedProductDescription == index,
+      selected: Provider.of<MenuPageProvider>(context)
+              .isSelectedProductDescriptionIndex ==
+          index,
       onSelected: (value) {
-        isSelectedProductDescription = index;
-        setState(() {});
+        Provider.of<MenuPageProvider>(context, listen: false)
+            .updateSelectedProductDescription(index);
       },
     );
   }
@@ -1822,17 +2048,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   ) {
     return ChoiceChip(
       label: Text(title,
-          style: isSelectedProductSummary == index
+          style: Provider.of<MenuPageProvider>(context)
+                      .isSelectedProductSummaryIndex ==
+                  index
               ? const TextStyle(
                   color: Colors.white, fontWeight: FontWeight.w600)
               : null),
       showCheckmark: true,
       checkmarkColor: AppTheme.green12,
       selectedColor: AppTheme.blue2,
-      selected: isSelectedProductSummary == index,
+      selected: Provider.of<MenuPageProvider>(context)
+              .isSelectedProductSummaryIndex ==
+          index,
       onSelected: (value) {
-        isSelectedProductSummary = index;
-        setState(() {});
+        Provider.of<MenuPageProvider>(context, listen: false)
+            .updateSelectedProductSummary(index);
       },
     );
   }
