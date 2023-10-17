@@ -386,5 +386,6 @@ final Map<String, String> tr = {
   'Length': 'Uzunluk',
   'Turkish': 'Türkçe',
   'English': 'İngilizce',
-  'German': 'Almanca'
+  'German': 'Almanca',
+  'Quantity':'Miktar',
 };

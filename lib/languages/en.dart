@@ -389,6 +389,7 @@ final Map<String, String> en = {
   'Weight': 'Weight',
   'Length': 'Length',
   'Turkish': 'Turkish',
-  'English':'English',
-  'German':'German',
+  'English': 'English',
+  'German': 'German',
+  'Quantity': 'Quantity',
 };

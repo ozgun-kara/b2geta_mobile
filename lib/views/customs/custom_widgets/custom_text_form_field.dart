@@ -1,7 +1,9 @@
-import 'package:b2geta_mobile/app_theme.dart';
-import 'package:b2geta_mobile/providers/theme_provider.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/providers/theme_provider.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
@@ -15,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
     this.minLines,
     this.maxLines,
     this.color,
+    this.enabled,
   }) : super(key: key);
 
   final String? Function(String?)? validator;
@@ -26,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? minLines;
   final int? maxLines;
   final Color? color;
+  final bool? enabled;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -63,6 +67,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         ),
         TextFormField(
           validator: widget.validator,
+          enabled: widget.enabled ?? true,
           controller: widget.controller,
           keyboardType: widget.keyboardType ?? TextInputType.text,
           minLines: widget.minLines ?? 1,

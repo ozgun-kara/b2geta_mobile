@@ -178,22 +178,31 @@ class MenuPageProvider with ChangeNotifier {
   int isSelectedProductNameIndex = 0;
   int isSelectedProductDescriptionIndex = 0;
   int isSelectedProductSummaryIndex = 0;
+  bool selectedRetailSale = false;
+  bool selectedWholeSale = false;
 
-
-    void updateSelectedProductName(int value) {
+  void updateSelectedProductName(int value) {
     isSelectedProductNameIndex = value;
     notifyListeners();
   }
 
-   void updateSelectedProductDescription(int value) {
+  void updateSelectedProductDescription(int value) {
     isSelectedProductDescriptionIndex = value;
     notifyListeners();
   }
 
-   void updateSelectedProductSummary(int value) {
-    isSelectedProductSummaryIndex= value;
+  void updateSelectedProductSummary(int value) {
+    isSelectedProductSummaryIndex = value;
     notifyListeners();
   }
 
+  void updateSelectedRetailSale(bool value) {
+    selectedRetailSale = value;
+    notifyListeners();
+  }
 
+  void updateSelectedWholeSale(bool value) {
+    selectedWholeSale = value;
+    notifyListeners();
+  }
 }
