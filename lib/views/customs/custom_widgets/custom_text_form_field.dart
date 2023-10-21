@@ -8,9 +8,10 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     Key? key,
-    this.validator,
-    required this.controller,
     required this.titleText,
+    this.validator,
+    this.onChanged,
+    this.controller,
     this.hintText,
     this.suffixText,
     this.keyboardType,
@@ -21,7 +22,8 @@ class CustomTextFormField extends StatefulWidget {
   }) : super(key: key);
 
   final String? Function(String?)? validator;
-  final TextEditingController controller;
+  final String? Function(String?)? onChanged;
+  final TextEditingController? controller;
   final String titleText;
   final String? hintText;
   final String? suffixText;
@@ -72,6 +74,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType ?? TextInputType.text,
           minLines: widget.minLines ?? 1,
           maxLines: widget.maxLines,
+          onChanged: (value) {
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
+          },
           style: TextStyle(
               fontSize: 14,
               height: 1.5,
