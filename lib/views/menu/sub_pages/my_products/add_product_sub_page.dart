@@ -7,6 +7,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/brand_model.dart';
+import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -63,8 +64,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceHeight;
   late bool themeMode;
 
-  int fiyatIndexLength = 1;
-  int selectedFiyatIndex = 0;
+  String? retailSaleCountry;
+  String? retailSaleCurrency;
+  String? retailSalePrice;
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -327,7 +329,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       padding: EdgeInsets.zero,
-                                      itemCount: fiyatIndexLength,
+                                      itemCount:
+                                          menuPageProvider.retailSaleListLength,
                                       itemBuilder: (context, index) {
                                         return Container(
                                           width: deviceWidth - 60,
@@ -377,7 +380,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   DropdownButtonHideUnderline(
                                                     child: DropdownButton2(
                                                       isExpanded: true,
-
                                                       items: countryList
                                                           .map((item) =>
                                                               DropdownMenuItem<
@@ -419,6 +421,20 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                             .updateSelectedCountry(
                                                                 value
                                                                     as String);
+
+                                                        var countryIndex =
+                                                            countryList.indexWhere(
+                                                                ((element) =>
+                                                                    element
+                                                                        .name ==
+                                                                    value));
+                                                        if (countryIndex !=
+                                                            -1) {
+                                                          retailSaleCountry =
+                                                              countryList[
+                                                                      countryIndex]
+                                                                  .code;
+                                                        }
                                                       },
 
                                                       icon: Center(
@@ -436,9 +452,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         ),
                                                       ),
                                                       iconSize: 24,
-                                                      // iconEnabledColor: Colors.yellow,
-                                                      // iconDisabledColor: Colors.grey,
-                                                      // icon: Container(),
                                                       buttonHeight: 57,
                                                       buttonWidth: deviceWidth,
                                                       buttonPadding:
@@ -450,9 +463,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10),
-                                                        // border:
-                                                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
                                                         color: Provider.of<ThemeProvider>(
                                                                         context)
                                                                     .themeMode ==
@@ -490,8 +500,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       scrollbarAlwaysShow: true,
                                                       // offset: const Offset(0, 180),
 
-                                                      searchController:
-                                                          countryController,
                                                       searchInnerWidget:
                                                           Padding(
                                                         padding:
@@ -499,8 +507,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                                 .fromLTRB(
                                                                 16, 16, 16, 4),
                                                         child: TextFormField(
-                                                          controller:
-                                                              countryController,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             fontFamily: AppTheme
@@ -600,10 +606,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       //This to clear the search value when you close the menu
                                                       onMenuStateChange:
                                                           (isOpen) {
-                                                        if (!isOpen) {
-                                                          countryController
-                                                              .clear();
-                                                        }
+                                                        if (!isOpen) {}
                                                       },
                                                     ),
                                                   ),
@@ -638,7 +641,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   DropdownButtonHideUnderline(
                                                     child: DropdownButton2(
                                                       isExpanded: true,
-
                                                       items: currencyList
                                                           .map((item) =>
                                                               DropdownMenuItem<
@@ -669,10 +671,25 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       value: menuPageProvider
                                                           .selectedCurrency,
                                                       onChanged: (value) {
-                                                        menuPageProvider
+                                                        Provider.of<MenuPageProvider>(
+                                                                context,
+                                                                listen: false)
                                                             .updateSelectedCurrency(
                                                                 value
                                                                     as String);
+
+                                                        var currencyIndex =
+                                                            currencyList
+                                                                .indexWhere(
+                                                                    ((element) =>
+                                                                        element ==
+                                                                        value));
+                                                        if (currencyIndex !=
+                                                            -1) {
+                                                          retailSaleCurrency =
+                                                              currencyList[
+                                                                  currencyIndex];
+                                                        }
                                                       },
                                                       icon: Center(
                                                         child: Image.asset(
@@ -689,9 +706,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         ),
                                                       ),
                                                       iconSize: 24,
-                                                      // iconEnabledColor: Colors.yellow,
-                                                      // iconDisabledColor: Colors.grey,
-                                                      // icon: Container(),
                                                       buttonHeight: 57,
                                                       buttonWidth: deviceWidth,
                                                       buttonPadding:
@@ -703,9 +717,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(10),
-                                                        // border:
-                                                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
                                                         color: Provider.of<ThemeProvider>(
                                                                         context)
                                                                     .themeMode ==
@@ -741,7 +752,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                               40),
                                                       scrollbarThickness: 4,
                                                       scrollbarAlwaysShow: true,
-                                                      // offset: const Offset(0, 180),
                                                     ),
                                                   ),
                                                 ],
@@ -755,47 +765,66 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   }
                                                   return null;
                                                 },
-                                                controller:
-                                                    productPriceController,
                                                 titleText: 'Price'.tr,
                                                 keyboardType:
                                                     TextInputType.number,
+                                                onChanged: (p0) {
+                                                  setState(() {});
+                                                  if (p0 != null) {
+                                                    retailSalePrice = p0;
+                                                  }
+                                                  return null;
+                                                },
                                               ),
                                               const SizedBox(height: 13),
                                               Row(
                                                 children: [
-                                                  index == 0
-                                                      ? MaterialButton(
-                                                          minWidth: 70,
-                                                          height: 50,
-                                                          elevation: 0,
-                                                          color: AppTheme.blue2,
-                                                          shape:
-                                                              const RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                          ),
-                                                          child: Text(
-                                                            '+',
-                                                            style: TextStyle(
-                                                              fontSize: 30.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color: AppTheme
-                                                                  .white1,
-                                                            ),
-                                                          ),
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              fiyatIndexLength++;
-                                                            });
-                                                          },
-                                                        )
-                                                      : const SizedBox(),
+                                                  MaterialButton(
+                                                    minWidth: 70,
+                                                    height: 50,
+                                                    elevation: 0,
+                                                    color: AppTheme.blue2,
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  5)),
+                                                    ),
+                                                    child: Text(
+                                                      '+',
+                                                      style: TextStyle(
+                                                        fontSize: 30.0,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        color: AppTheme.white1,
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      if (retailSaleCountry !=
+                                                              null &&
+                                                          retailSaleCurrency !=
+                                                              null &&
+                                                          retailSalePrice !=
+                                                              null) {
+                                                        Price newPrice = Price(
+                                                            country:
+                                                                retailSaleCountry,
+                                                            currency:
+                                                                retailSaleCurrency,
+                                                            price: int.parse(
+                                                                retailSalePrice!));
+                                                        menuPageProvider
+                                                            .updateRetailSaleList(
+                                                                newPrice);
+                                                        menuPageProvider
+                                                            .updateRetailSaleListLength();
+                                                        debugPrint(newPrice
+                                                            .country
+                                                            .toString());
+                                                      }
+                                                    },
+                                                  ),
                                                   const SizedBox(width: 8.0),
                                                   MaterialButton(
                                                     minWidth: 70,
@@ -819,19 +848,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       ),
                                                     ),
                                                     onPressed: () {
-                                                      selectedFiyatIndex =
-                                                          (index + 1);
-                                                      if (fiyatIndexLength >
-                                                          1) {
-                                                        setState(() {
-                                                          fiyatIndexLength--;
-                                                        });
-                                                      } else {
-                                                        setState(() {
-                                                          fiyatIndexLength--;
-                                                        });
-                                                        fiyatIndexLength++;
-                                                      }
+                                                      menuPageProvider
+                                                          .deleteRetailListLength();
                                                     },
                                                   ),
                                                 ],
@@ -850,7 +868,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       padding: EdgeInsets.zero,
-                                      itemCount: fiyatIndexLength,
+                                      itemCount:
+                                          menuPageProvider.wholeSaleListLength,
                                       itemBuilder: (context, index) {
                                         return Container(
                                           width: deviceWidth,
@@ -1013,8 +1032,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       scrollbarAlwaysShow: true,
                                                       // offset: const Offset(0, 180),
 
-                                                      searchController:
-                                                          countryController,
                                                       searchInnerWidget:
                                                           Padding(
                                                         padding:
@@ -1022,8 +1039,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                                 .fromLTRB(
                                                                 16, 16, 16, 4),
                                                         child: TextFormField(
-                                                          controller:
-                                                              countryController,
                                                           style: TextStyle(
                                                             fontSize: 14,
                                                             fontFamily: AppTheme
@@ -1123,10 +1138,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       //This to clear the search value when you close the menu
                                                       onMenuStateChange:
                                                           (isOpen) {
-                                                        if (!isOpen) {
-                                                          countryController
-                                                              .clear();
-                                                        }
+                                                        if (!isOpen) {}
                                                       },
                                                     ),
                                                   ),
@@ -1206,12 +1218,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                           .toList(),
                                                       value: menuPageProvider
                                                           .selectedCurrency,
-                                                      onChanged: (value) {
-                                                        menuPageProvider
-                                                            .updateSelectedCurrency(
-                                                                value
-                                                                    as String);
-                                                      },
+                                                      onChanged: (value) {},
                                                       icon: Center(
                                                         child: Image.asset(
                                                           'assets/icons/dropdown.png',
@@ -1298,6 +1305,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 titleText: 'Price'.tr,
                                                 keyboardType:
                                                     TextInputType.number,
+                                                onChanged: (p0) {
+                                                  return null;
+                                                },
                                               ),
                                               const SizedBox(height: 13),
                                               Row(
@@ -1328,9 +1338,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                             ),
                                                           ),
                                                           onPressed: () {
-                                                            setState(() {
-                                                              fiyatIndexLength++;
-                                                            });
+                                                            menuPageProvider
+                                                                .updateWholeSaleListLength();
                                                           },
                                                         )
                                                       : const SizedBox(),
@@ -1357,19 +1366,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       ),
                                                     ),
                                                     onPressed: () {
-                                                      selectedFiyatIndex =
-                                                          (index + 1);
-                                                      if (fiyatIndexLength >
-                                                          1) {
-                                                        setState(() {
-                                                          fiyatIndexLength--;
-                                                        });
-                                                      } else {
-                                                        setState(() {
-                                                          fiyatIndexLength--;
-                                                        });
-                                                        fiyatIndexLength++;
-                                                      }
+                                                      menuPageProvider
+                                                          .deleteWholeSaleListLength();
                                                     },
                                                   ),
                                                 ],
