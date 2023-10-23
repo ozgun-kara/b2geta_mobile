@@ -5,10 +5,10 @@ import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/city_model.dart';
 import 'package:b2geta_mobile/models/general/district_model.dart';
-import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
 
@@ -182,8 +182,8 @@ class MenuPageProvider with ChangeNotifier {
   int isSelectedProductSummaryIndex = 0;
   bool selectedRetailSale = false;
   bool selectedWholeSale = false;
-
   List<RetailSaleModel> retailSaleList = [];
+  List<WholeSaleModel> wholeSaleList = [];
 
   void updateSelectedProductName(int value) {
     isSelectedProductNameIndex = value;
@@ -222,6 +222,21 @@ class MenuPageProvider with ChangeNotifier {
 
   void deleteRetailSaleList(int index) {
     retailSaleList.removeAt(index);
+    notifyListeners();
+  }
+
+  void updateWholeSaleList(
+      {required WholeSaleModel wholeSaleModel, int? index}) {
+    if (index != null) {
+      wholeSaleList[index] = wholeSaleModel;
+    } else {
+      wholeSaleList.add(wholeSaleModel);
+    }
+    notifyListeners();
+  }
+
+  void deleteWholeSaleList(int index) {
+    wholeSaleList.removeAt(index);
     notifyListeners();
   }
 }

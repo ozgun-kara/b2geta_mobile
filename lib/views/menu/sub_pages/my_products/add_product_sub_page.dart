@@ -5,8 +5,10 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
@@ -46,7 +48,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final productDescriptionTRController = TextEditingController();
   final productDescriptionENController = TextEditingController();
   final productDescriptionGEController = TextEditingController();
-  final productPriceController = TextEditingController();
   final productSummaryTRController = TextEditingController();
   final productSummaryENController = TextEditingController();
   final productSummaryGEController = TextEditingController();
@@ -71,7 +72,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     final List<XFile> pickedFiles = await imagePicker.pickMultiImage();
 
     final List<File> selectedImages =
-        pickedFiles.map<File>((xfile) => File(xfile.path)).toList();
+        pickedFiles.map<File>((xFile) => File(xFile.path)).toList();
 
     if (selectedImages.isNotEmpty) {
       // ignore: use_build_context_synchronously
@@ -121,7 +122,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           widget.passedObject!.productName.toString();
       productDescriptionTRController.text =
           widget.passedObject!.productDescription.toString();
-      productPriceController.text = widget.passedObject!.price.toString();
+      TextEditingController().text = widget.passedObject!.price.toString();
       productSummaryTRController.text =
           widget.passedObject!.productSummary.toString();
 
@@ -330,6 +331,43 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                             menuPageProvider
                                                 .updateSelectedRetailSale(
                                                     false);
+
+                                            if (menuPageProvider
+                                                .wholeSaleList.isEmpty) {
+                                              var country =
+                                                  Constants.language == 'tr'
+                                                      ? 'Turkey'
+                                                      : null;
+                                              var currency =
+                                                  Constants.language == 'tr'
+                                                      ? 'TRY'
+                                                      : null;
+                                              var countryCode =
+                                                  Constants.language == 'tr'
+                                                      ? 'TR'
+                                                      : null;
+                                              TextEditingController
+                                                  priceController =
+                                                  TextEditingController();
+                                              TextEditingController
+                                                  quantityController =
+                                                  TextEditingController();
+
+                                              WholeSaleModel wholeSaleModel =
+                                                  WholeSaleModel(
+                                                      country: country,
+                                                      currency: currency,
+                                                      priceController:
+                                                          priceController,
+                                                      countryCode: countryCode,
+                                                      quantityController:
+                                                          quantityController);
+
+                                              menuPageProvider
+                                                  .updateWholeSaleList(
+                                                      wholeSaleModel:
+                                                          wholeSaleModel);
+                                            }
                                           },
                                           child: Row(
                                             children: [
@@ -370,534 +408,40 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                           menuPageProvider);
                                     },
                                   )),
-                              /*  Visibility(
+                              Visibility(
                                   visible: menuPageProvider.selectedWholeSale,
-                                  child: SizedBox(
-                                    width: deviceWidth,
-                                    height: 500,
-                                    child: ListView.builder(
+                                  child: ListView.builder(
                                       scrollDirection: Axis.vertical,
                                       padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
                                       itemCount:
-                                          menuPageProvider.wholeSaleListLength,
+                                          menuPageProvider.wholeSaleList.length,
                                       itemBuilder: (context, index) {
-                                        return Container(
-                                          width: deviceWidth,
-                                          margin: const EdgeInsets.only(
-                                              bottom: 16.0),
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                (index + 1).toString() +
-                                                    (".Fiyat").tr,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: themeMode
-                                                      ? AppTheme.blue3
-                                                      : AppTheme.white14,
-                                                ),
-                                              ),
-                                              Column(
-                                                children: [
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 8),
-                                                      child: Text(
-                                                        'Country'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: themeMode
-                                                              ? AppTheme.blue3
-                                                              : AppTheme
-                                                                  .white14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DropdownButtonHideUnderline(
-                                                    child: DropdownButton2(
-                                                      isExpanded: true,
-
-                                                      items: countryList
-                                                          .map((item) =>
-                                                              DropdownMenuItem<
-                                                                  String?>(
-                                                                value:
-                                                                    item.name,
-                                                                child: Text(
-                                                                  item.name ??
-                                                                      '',
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        AppTheme
-                                                                            .appFontFamily,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color: Provider.of<ThemeProvider>(context).themeMode ==
-                                                                            "light"
-                                                                        ? AppTheme
-                                                                            .blue3
-                                                                        : AppTheme
-                                                                            .white1,
-                                                                  ),
-                                                                ),
-                                                              ))
-                                                          .toList(),
-                                                      value: Provider.of<
-                                                                  MenuPageProvider>(
-                                                              context)
-                                                          .selectedCountry,
-
-                                                      onChanged: (value) {
-                                                        Provider.of<MenuPageProvider>(
-                                                                context,
-                                                                listen: false)
-                                                            .updateSelectedCountry(
-                                                                value
-                                                                    as String);
-                                                      },
-
-                                                      icon: Center(
-                                                        child: Image.asset(
-                                                          'assets/icons/dropdown.png',
-                                                          width: 10,
-                                                          height: 6,
-                                                          color: Provider.of<ThemeProvider>(
-                                                                          context)
-                                                                      .themeMode ==
-                                                                  "light"
-                                                              ? AppTheme.blue3
-                                                              : AppTheme
-                                                                  .white15,
-                                                        ),
-                                                      ),
-                                                      iconSize: 24,
-                                                      // iconEnabledColor: Colors.yellow,
-                                                      // iconDisabledColor: Colors.grey,
-                                                      // icon: Container(),
-                                                      buttonHeight: 57,
-                                                      buttonWidth: deviceWidth,
-                                                      buttonPadding:
-                                                          const EdgeInsets.only(
-                                                              left: 25,
-                                                              right: 17),
-                                                      buttonDecoration:
-                                                          BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        // border:
-                                                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                      ),
-                                                      // buttonElevation: 2,
-                                                      itemHeight: 40,
-                                                      itemPadding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal: 32),
-                                                      // dropdownMaxHeight: deviceHeight * 0.4,
-                                                      dropdownMaxHeight: 350,
-                                                      // dropdownWidth: deviceWidth,
-                                                      dropdownPadding: null,
-                                                      dropdownDecoration:
-                                                          BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(14),
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                      ),
-                                                      // dropdownElevation: 8,
-                                                      scrollbarRadius:
-                                                          const Radius.circular(
-                                                              40),
-                                                      scrollbarThickness: 4,
-                                                      scrollbarAlwaysShow: true,
-                                                      // offset: const Offset(0, 180),
-
-                                                      searchInnerWidget:
-                                                          Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .fromLTRB(
-                                                                16, 16, 16, 4),
-                                                        child: TextFormField(
-                                                          style: TextStyle(
-                                                            fontSize: 14,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            color: Provider.of<ThemeProvider>(
-                                                                            context)
-                                                                        .themeMode ==
-                                                                    "light"
-                                                                ? AppTheme.blue3
-                                                                : AppTheme
-                                                                    .white1,
-                                                          ), // WHILE WRITING
-                                                          decoration:
-                                                              InputDecoration(
-                                                            isDense: true,
-                                                            contentPadding:
-                                                                const EdgeInsets
-                                                                    .symmetric(
-                                                              horizontal: 16,
-                                                              vertical: 12,
-                                                            ),
-                                                            hintText:
-                                                                'Search...'.tr,
-                                                            hintStyle:
-                                                                TextStyle(
-                                                              fontSize: 14,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: Provider.of<ThemeProvider>(
-                                                                              context)
-                                                                          .themeMode ==
-                                                                      "light"
-                                                                  ? AppTheme
-                                                                      .blue3
-                                                                  : AppTheme
-                                                                      .white14,
-                                                            ),
-                                                            border:
-                                                                OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: AppTheme
-                                                                          .white15,
-                                                                      width: 1,
-                                                                    )),
-                                                            enabledBorder:
-                                                                OutlineInputBorder(
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            10),
-                                                                    borderSide:
-                                                                        BorderSide(
-                                                                      color: AppTheme
-                                                                          .white15,
-                                                                      width: 1,
-                                                                    )),
-                                                            focusedBorder:
-                                                                OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                              borderSide:
-                                                                  BorderSide(
-                                                                color: Provider.of<ThemeProvider>(
-                                                                                context)
-                                                                            .themeMode ==
-                                                                        "light"
-                                                                    ? AppTheme
-                                                                        .blue3
-                                                                    : AppTheme
-                                                                        .white1,
-                                                                width: 1,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      searchMatchFn:
-                                                          (item, searchValue) {
-                                                        debugPrint(
-                                                            "ITEM:${item.value}");
-
-                                                        return (item.value
-                                                            .toLowerCase()
-                                                            .contains(searchValue
-                                                                .toLowerCase()));
-                                                      },
-                                                      //This to clear the search value when you close the menu
-                                                      onMenuStateChange:
-                                                          (isOpen) {
-                                                        if (!isOpen) {}
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 13),
-                                              CustomTextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'Price Validate'.tr;
-                                                  }
-                                                  return null;
-                                                },
-                                                controller:
-                                                    TextEditingController(),
-                                                titleText: 'Quantity'.tr,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                              ),
-                                              const SizedBox(height: 13),
-                                              Column(
-                                                children: [
-                                                  Align(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                          horizontal: 8),
-                                                      child: Text(
-                                                        'Currency'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                          color: themeMode
-                                                              ? AppTheme.blue3
-                                                              : AppTheme
-                                                                  .white14,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  DropdownButtonHideUnderline(
-                                                    child: DropdownButton2(
-                                                      isExpanded: true,
-
-                                                      items: currencyList
-                                                          .map((item) =>
-                                                              DropdownMenuItem<
-                                                                  String>(
-                                                                value: item,
-                                                                child: Text(
-                                                                  item,
-                                                                  style:
-                                                                      TextStyle(
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        AppTheme
-                                                                            .appFontFamily,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w400,
-                                                                    color: Provider.of<ThemeProvider>(context).themeMode ==
-                                                                            "light"
-                                                                        ? AppTheme
-                                                                            .blue3
-                                                                        : AppTheme
-                                                                            .white1,
-                                                                  ),
-                                                                ),
-                                                              ))
-                                                          .toList(),
-                                                      value: menuPageProvider
-                                                          .selectedCurrency,
-                                                      onChanged: (value) {},
-                                                      icon: Center(
-                                                        child: Image.asset(
-                                                          'assets/icons/dropdown.png',
-                                                          width: 10,
-                                                          height: 6,
-                                                          color: Provider.of<ThemeProvider>(
-                                                                          context)
-                                                                      .themeMode ==
-                                                                  "light"
-                                                              ? AppTheme.blue3
-                                                              : AppTheme
-                                                                  .white15,
-                                                        ),
-                                                      ),
-                                                      iconSize: 24,
-                                                      // iconEnabledColor: Colors.yellow,
-                                                      // iconDisabledColor: Colors.grey,
-                                                      // icon: Container(),
-                                                      buttonHeight: 57,
-                                                      buttonWidth: deviceWidth,
-                                                      buttonPadding:
-                                                          const EdgeInsets.only(
-                                                              left: 25,
-                                                              right: 17),
-                                                      buttonDecoration:
-                                                          BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        // border:
-                                                        //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                      ),
-                                                      // buttonElevation: 2,
-                                                      itemHeight: 40,
-                                                      itemPadding:
-                                                          const EdgeInsets
-                                                              .symmetric(
-                                                              horizontal: 32),
-                                                      // dropdownMaxHeight: deviceHeight * 0.4,
-                                                      dropdownMaxHeight: 350,
-                                                      // dropdownWidth: deviceWidth,
-                                                      dropdownPadding: null,
-                                                      dropdownDecoration:
-                                                          BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(14),
-                                                        color: Provider.of<ThemeProvider>(
-                                                                        context)
-                                                                    .themeMode ==
-                                                                "light"
-                                                            ? AppTheme.white39
-                                                            : AppTheme.black18,
-                                                      ),
-                                                      // dropdownElevation: 8,
-                                                      scrollbarRadius:
-                                                          const Radius.circular(
-                                                              40),
-                                                      scrollbarThickness: 4,
-                                                      scrollbarAlwaysShow: true,
-                                                      // offset: const Offset(0, 180),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              const SizedBox(height: 13),
-                                              CustomTextFormField(
-                                                validator: (value) {
-                                                  if (value == null ||
-                                                      value.trim().isEmpty) {
-                                                    return 'Price Validate'.tr;
-                                                  }
-                                                  return null;
-                                                },
-                                                controller:
-                                                    productPriceController,
-                                                titleText: 'Price'.tr,
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                onChanged: (p0) {
-                                                  return null;
-                                                },
-                                              ),
-                                              const SizedBox(height: 13),
-                                              Row(
-                                                children: [
-                                                  index == 0
-                                                      ? MaterialButton(
-                                                          minWidth: 70,
-                                                          height: 50,
-                                                          elevation: 0,
-                                                          color: AppTheme.blue2,
-                                                          shape:
-                                                              const RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .all(Radius
-                                                                        .circular(
-                                                                            5)),
-                                                          ),
-                                                          child: Text(
-                                                            '+',
-                                                            style: TextStyle(
-                                                              fontSize: 30.0,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w700,
-                                                              color: AppTheme
-                                                                  .white1,
-                                                            ),
-                                                          ),
-                                                          onPressed: () {
-                                                            menuPageProvider
-                                                                .updateWholeSaleListLength();
-                                                          },
-                                                        )
-                                                      : const SizedBox(),
-                                                  const SizedBox(width: 8.0),
-                                                  MaterialButton(
-                                                    minWidth: 70,
-                                                    height: 50,
-                                                    elevation: 0,
-                                                    color: AppTheme.blue3,
-                                                    shape:
-                                                        const RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  5)),
-                                                    ),
-                                                    child: Text(
-                                                      '-',
-                                                      style: TextStyle(
-                                                        fontSize: 30.0,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        color: AppTheme.white1,
-                                                      ),
-                                                    ),
-                                                    onPressed: () {
-                                                      menuPageProvider
-                                                          .deleteWholeSaleListLength();
-                                                    },
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  )), */
+                                        return _getWholeSaleWidget(
+                                            menuPageProvider,
+                                            countryList,
+                                            currencyList,
+                                            index);
+                                      })),
                             ],
                           ),
                           const SizedBox(height: 13),
                           _productSummary(menuPageProvider),
                           const SizedBox(height: 13),
                           _status(statusList, context, menuPageProvider),
-                          const SizedBox(
-                            height: 13.0,
-                          ),
+                          const SizedBox(height: 13.0),
                           _addImages(menuPageProvider),
+                          const SizedBox(height: 13.0),
+                          CustomTextFormField(
+                            titleText: 'GTİP',
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r"[0-9.]")),
+                            ],
+                          ),
                           const SizedBox(height: 28),
                           MaterialButton(
                               minWidth: deviceWidth,
@@ -932,37 +476,34 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       Navigator.push(
                                           context,
                                           PageRouteBuilder(
-                                            pageBuilder: (_, __, ___) =>
-                                                AddProductImageSubPage(
-                                                    accountId: '',
-                                                    categoryId: categoryId,
-                                                    subCategoryId:
-                                                        subCategoryId,
-                                                    deepCategoryId:
-                                                        deepCategoryId,
-                                                    categoryFeatures: menuPageProvider
+                                            pageBuilder: (_, __, ___) => AddProductImageSubPage(
+                                                accountId: '',
+                                                categoryId: categoryId,
+                                                subCategoryId: subCategoryId,
+                                                deepCategoryId: deepCategoryId,
+                                                categoryFeatures:
+                                                    menuPageProvider
                                                         .selectedFetureasList,
-                                                    productName:
-                                                        productNameTRController
-                                                            .text,
-                                                    productDescription:
-                                                        productDescriptionTRController
-                                                            .text,
-                                                    productSummary:
-                                                        productSummaryTRController
-                                                            .text,
-                                                    brand: brandId,
-                                                    price:
-                                                        productPriceController
-                                                            .text,
-                                                    currency: menuPageProvider
-                                                        .selectedCurrency
-                                                        .toString(),
-                                                    status: menuPageProvider
-                                                                .selectedStatus ==
-                                                            'Active'.tr
-                                                        ? '1'
-                                                        : '0'),
+                                                productName:
+                                                    productNameTRController
+                                                        .text,
+                                                productDescription:
+                                                    productDescriptionTRController
+                                                        .text,
+                                                productSummary:
+                                                    productSummaryTRController
+                                                        .text,
+                                                brand: brandId,
+                                                price: TextEditingController()
+                                                    .text,
+                                                currency: menuPageProvider
+                                                    .selectedCurrency
+                                                    .toString(),
+                                                status: menuPageProvider
+                                                            .selectedStatus ==
+                                                        'Active'.tr
+                                                    ? '1'
+                                                    : '0'),
                                             transitionDuration:
                                                 const Duration(milliseconds: 0),
                                             reverseTransitionDuration:
@@ -987,7 +528,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       .text,
                                               brand: brandId,
                                               price:
-                                                  productPriceController.text,
+                                                  TextEditingController().text,
                                               currency: menuPageProvider
                                                   .selectedCurrency
                                                   .toString(),
@@ -1022,6 +563,371 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             ],
           ),
         ));
+  }
+
+  Widget _getWholeSaleWidget(MenuPageProvider menuPageProvider,
+      List<CountryModel> countryList, List<String> currencyList, int index) {
+    return Container(
+      width: deviceWidth,
+      margin: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text(
+            (index + 1).toString() + (".Fiyat").tr,
+            style: TextStyle(
+              fontSize: 14,
+              fontFamily: AppTheme.appFontFamily,
+              fontWeight: FontWeight.w400,
+              color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+            ),
+          ),
+          Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    'Country'.tr,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+                    ),
+                  ),
+                ),
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  isExpanded: true,
+
+                  items: countryList
+                      .map((item) => DropdownMenuItem<String?>(
+                            value: item.name,
+                            child: Text(
+                              item.name ?? '',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  value: menuPageProvider.wholeSaleList[index].country,
+
+                  onChanged: (value) {},
+
+                  icon: Center(
+                    child: Image.asset(
+                      'assets/icons/dropdown.png',
+                      width: 10,
+                      height: 6,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.blue3
+                          : AppTheme.white15,
+                    ),
+                  ),
+                  iconSize: 24,
+                  // iconEnabledColor: Colors.yellow,
+                  // iconDisabledColor: Colors.grey,
+                  // icon: Container(),
+                  buttonHeight: 57,
+                  buttonWidth: deviceWidth,
+                  buttonPadding: const EdgeInsets.only(left: 25, right: 17),
+                  buttonDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    // border:
+                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white39
+                            : AppTheme.black18,
+                  ),
+                  // buttonElevation: 2,
+                  itemHeight: 40,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                  // dropdownMaxHeight: deviceHeight * 0.4,
+                  dropdownMaxHeight: 350,
+                  // dropdownWidth: deviceWidth,
+                  dropdownPadding: null,
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white39
+                            : AppTheme.black18,
+                  ),
+                  // dropdownElevation: 8,
+                  scrollbarRadius: const Radius.circular(40),
+                  scrollbarThickness: 4,
+                  scrollbarAlwaysShow: true,
+                  // offset: const Offset(0, 180),
+
+                  searchInnerWidget: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
+                    child: TextFormField(
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: AppTheme.appFontFamily,
+                        fontWeight: FontWeight.w500,
+                        color: Provider.of<ThemeProvider>(context).themeMode ==
+                                "light"
+                            ? AppTheme.blue3
+                            : AppTheme.white1,
+                      ), // WHILE WRITING
+                      decoration: InputDecoration(
+                        isDense: true,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
+                        hintText: 'Search...'.tr,
+                        hintStyle: TextStyle(
+                          fontSize: 14,
+                          fontFamily: AppTheme.appFontFamily,
+                          fontWeight: FontWeight.w400,
+                          color:
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      "light"
+                                  ? AppTheme.blue3
+                                  : AppTheme.white14,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: AppTheme.white15,
+                              width: 1,
+                            )),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(
+                              color: AppTheme.white15,
+                              width: 1,
+                            )),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color:
+                                Provider.of<ThemeProvider>(context).themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1,
+                            width: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  searchMatchFn: (item, searchValue) {
+                    debugPrint("ITEM:${item.value}");
+
+                    return (item.value
+                        .toLowerCase()
+                        .contains(searchValue.toLowerCase()));
+                  },
+                  //This to clear the search value when you close the menu
+                  onMenuStateChange: (isOpen) {
+                    if (!isOpen) {}
+                  },
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          CustomTextFormField(
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Price Validate'.tr;
+              }
+              return null;
+            },
+            controller:
+                menuPageProvider.wholeSaleList[index].quantityController,
+            titleText: 'Quantity'.tr,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 13),
+          Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Text(
+                    'Currency'.tr,
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+                    ),
+                  ),
+                ),
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton2(
+                  isExpanded: true,
+
+                  items: currencyList
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontFamily: AppTheme.appFontFamily,
+                                fontWeight: FontWeight.w400,
+                                color: Provider.of<ThemeProvider>(context)
+                                            .themeMode ==
+                                        "light"
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  value: menuPageProvider.wholeSaleList[index].currency,
+                  onChanged: (value) {},
+                  icon: Center(
+                    child: Image.asset(
+                      'assets/icons/dropdown.png',
+                      width: 10,
+                      height: 6,
+                      color: Provider.of<ThemeProvider>(context).themeMode ==
+                              "light"
+                          ? AppTheme.blue3
+                          : AppTheme.white15,
+                    ),
+                  ),
+                  iconSize: 24,
+                  // iconEnabledColor: Colors.yellow,
+                  // iconDisabledColor: Colors.grey,
+                  // icon: Container(),
+                  buttonHeight: 57,
+                  buttonWidth: deviceWidth,
+                  buttonPadding: const EdgeInsets.only(left: 25, right: 17),
+                  buttonDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    // border:
+                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
+
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white39
+                            : AppTheme.black18,
+                  ),
+                  // buttonElevation: 2,
+                  itemHeight: 40,
+                  itemPadding: const EdgeInsets.symmetric(horizontal: 32),
+                  // dropdownMaxHeight: deviceHeight * 0.4,
+                  dropdownMaxHeight: 350,
+                  // dropdownWidth: deviceWidth,
+                  dropdownPadding: null,
+                  dropdownDecoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color:
+                        Provider.of<ThemeProvider>(context).themeMode == "light"
+                            ? AppTheme.white39
+                            : AppTheme.black18,
+                  ),
+                  // dropdownElevation: 8,
+                  scrollbarRadius: const Radius.circular(40),
+                  scrollbarThickness: 4,
+                  scrollbarAlwaysShow: true,
+                  // offset: const Offset(0, 180),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 13),
+          CustomTextFormField(
+            validator: (value) {
+              if (value == null || value.trim().isEmpty) {
+                return 'Price Validate'.tr;
+              }
+              return null;
+            },
+            controller: menuPageProvider.wholeSaleList[index].priceController,
+            titleText: 'Price'.tr,
+            keyboardType: TextInputType.number,
+          ),
+          const SizedBox(height: 13),
+          Row(
+            children: [
+              MaterialButton(
+                minWidth: 70,
+                height: 50,
+                elevation: 0,
+                color: AppTheme.blue2,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
+                ),
+                child: Text(
+                  '+',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.w700,
+                    color: AppTheme.white1,
+                  ),
+                ),
+                onPressed: () {
+                  var country = Constants.language == 'tr' ? 'Turkey' : null;
+                  var currency = Constants.language == 'tr' ? 'TRY' : null;
+                  var countryCode = Constants.language == 'tr' ? 'TR' : null;
+                  TextEditingController priceController =
+                      TextEditingController();
+                  TextEditingController quantityController =
+                      TextEditingController();
+
+                  WholeSaleModel wholeSaleModel = WholeSaleModel(
+                      country: country,
+                      currency: currency,
+                      priceController: priceController,
+                      countryCode: countryCode,
+                      quantityController: quantityController);
+
+                  menuPageProvider.updateWholeSaleList(
+                      wholeSaleModel: wholeSaleModel);
+                },
+              ),
+              const SizedBox(width: 8.0),
+              MaterialButton(
+                  minWidth: 70,
+                  height: 50,
+                  elevation: 0,
+                  color: AppTheme.blue3,
+                  disabledColor: AppTheme.blue3.withOpacity(.2),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                  ),
+                  onPressed: menuPageProvider.wholeSaleList.length > 1
+                      ? () {
+                          menuPageProvider.deleteWholeSaleList(index);
+                        }
+                      : null,
+                  child: Text(
+                    '-',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.white1,
+                    ),
+                  )),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   Container _getRetailSaleWidget(
@@ -1923,28 +1829,28 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     return Column(
       children: [
         CustomTextFormField(
-          controller: productPriceController,
+          controller: TextEditingController(),
           titleText: 'Width'.tr,
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           suffixText: 'sm',
         ),
         const SizedBox(
           height: 13,
         ),
         CustomTextFormField(
-          controller: productPriceController,
+          controller: TextEditingController(),
           titleText: 'Height'.tr,
           suffixText: 'cm',
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
         const SizedBox(
           height: 13,
         ),
         CustomTextFormField(
-          controller: productPriceController,
+          controller: TextEditingController(),
           titleText: 'Weight'.tr,
           suffixText: 'gr',
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
         const SizedBox(
           height: 13,
@@ -1956,10 +1862,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             }
             return null;
           },
-          controller: productPriceController,
+          controller: TextEditingController(),
           titleText: 'Length'.tr,
           suffixText: 'cm',
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
         ),
       ],
     );
