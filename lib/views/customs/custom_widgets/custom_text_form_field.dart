@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import 'package:b2geta_mobile/app_theme.dart';
@@ -20,6 +21,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.color,
     this.enabled,
+    this.inputFormatters,
   }) : super(key: key);
 
   final String? Function(String?)? validator;
@@ -34,6 +36,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final Color? color;
   final bool? enabled;
+  final List<TextInputFormatter>? inputFormatters;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -82,6 +85,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               widget.onChanged!(value);
             }
           },
+          inputFormatters: widget.inputFormatters,
           style: TextStyle(
               fontSize: 14,
               height: 1.5,
