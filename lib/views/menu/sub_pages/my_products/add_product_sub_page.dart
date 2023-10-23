@@ -1,25 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: iterable_contains_unrelated_type
-
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
-
+import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
-
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
-import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -27,34 +23,6 @@ import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
-
-class RetailSaleModel {
-  final String country;
-  final String currency;
-  final String quantity;
-  final TextEditingController priceController;
-
-  RetailSaleModel({
-    required this.country,
-    required this.currency,
-    required this.quantity,
-    required this.priceController,
-  });
-
-  RetailSaleModel copyWith({
-    String? country,
-    String? currency,
-    String? quantity,
-    TextEditingController? priceController,
-  }) {
-    return RetailSaleModel(
-      country: country ?? this.country,
-      currency: currency ?? this.currency,
-      quantity: quantity ?? this.quantity,
-      priceController: priceController ?? this.priceController,
-    );
-  }
-}
 
 class AddProductSubPage extends StatefulWidget {
   const AddProductSubPage(
@@ -96,12 +64,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-
-  String? retailSaleCountry;
-  String? retailSaleCurrency;
-  String? retailSalePrice;
-
-  List<RetailSaleModel> retailSaleList = [];
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -297,9 +259,20 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                             menuPageProvider
                                                 .updateSelectedWholeSale(false);
 
-                                            if (retailSaleList.isEmpty) {
-                                              var country = 'Turkey';
-                                              var currency = 'TRY';
+                                            if (menuPageProvider
+                                                .retailSaleList.isEmpty) {
+                                              var country =
+                                                  Constants.language == 'tr'
+                                                      ? 'Turkey'
+                                                      : null;
+                                              var currency =
+                                                  Constants.language == 'tr'
+                                                      ? 'TRY'
+                                                      : null;
+                                              var countryCode =
+                                                  Constants.language == 'tr'
+                                                      ? 'TR'
+                                                      : null;
                                               TextEditingController
                                                   priceController =
                                                   TextEditingController();
@@ -310,11 +283,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       currency: currency,
                                                       priceController:
                                                           priceController,
-                                                      quantity: '1');
-                                              setState(() {
-                                                retailSaleList
-                                                    .add(retailSaleModel);
-                                              });
+                                                      quantity: '1',
+                                                      countryCode: countryCode);
+
+                                              menuPageProvider
+                                                  .updateRetailSaleList(
+                                                      retailSaleModel:
+                                                          retailSaleModel);
                                             }
                                           },
                                           child: Row(
@@ -378,25 +353,24 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               const SizedBox(height: 13.0),
                               Visibility(
                                   visible: menuPageProvider.selectedRetailSale,
-                                  child: SizedBox(
-                                    width: deviceWidth,
-                                    height: 500,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      padding: EdgeInsets.zero,
-                                      itemCount: retailSaleList.length,
-                                      itemBuilder: (context, index) {
-                                        return _getRetailSaleWidget(
-                                            index,
-                                            retailSaleList,
-                                            countryList,
-                                            context,
-                                            currencyList,
-                                            menuPageProvider);
-                                      },
-                                    ),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding: EdgeInsets.zero,
+                                    itemCount:
+                                        menuPageProvider.retailSaleList.length,
+                                    itemBuilder: (context, index) {
+                                      return _getRetailSaleWidget(
+                                          index,
+                                          countryList,
+                                          context,
+                                          currencyList,
+                                          menuPageProvider);
+                                    },
                                   )),
-                              Visibility(
+                              /*  Visibility(
                                   visible: menuPageProvider.selectedWholeSale,
                                   child: SizedBox(
                                     width: deviceWidth,
@@ -913,7 +887,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         );
                                       },
                                     ),
-                                  )),
+                                  )), */
                             ],
                           ),
                           const SizedBox(height: 13),
@@ -1052,7 +1026,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
   Container _getRetailSaleWidget(
       int index,
-      List<RetailSaleModel> retailSaleList,
       List<CountryModel> countryList,
       BuildContext context,
       List<String> currencyList,
@@ -1110,18 +1083,18 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ))
                       .toList(),
-                  value: retailSaleList[index].country,
+                  value: menuPageProvider.retailSaleList[index].country,
 
                   onChanged: (value) {
                     var countryIndex = countryList
                         .indexWhere(((element) => element.name == value));
 
-                    retailSaleList[index] =
-                        retailSaleList[index].copyWith(country: value);
-                    setState(() {});
-                    if (countryIndex != -1) {
-                      retailSaleCountry = countryList[countryIndex].code;
-                    }
+                    menuPageProvider.updateRetailSaleList(
+                        retailSaleModel: menuPageProvider.retailSaleList[index]
+                            .copyWith(
+                                country: value,
+                                countryCode: countryList[countryIndex].code),
+                        index: index);
                   },
 
                   icon: Center(
@@ -1221,6 +1194,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       ),
                     ),
                   ),
+                  searchController: TextEditingController(),
                   searchMatchFn: (item, searchValue) {
                     debugPrint("ITEM:${item.value}");
 
@@ -1288,20 +1262,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             ),
                           ))
                       .toList(),
-                  value: retailSaleList[index].currency,
+                  value: menuPageProvider.retailSaleList[index].currency,
                   onChanged: (value) {
-                    Provider.of<MenuPageProvider>(context, listen: false)
-                        .updateSelectedCurrency(value as String);
-
-                    retailSaleList[index] =
-                        retailSaleList[index].copyWith(currency: value);
-                    setState(() {});
-
-                    var currencyIndex = currencyList
-                        .indexWhere(((element) => element == value));
-                    if (currencyIndex != -1) {
-                      retailSaleCurrency = currencyList[currencyIndex];
-                    }
+                    menuPageProvider.updateRetailSaleList(
+                        retailSaleModel:
+                            menuPageProvider.retailSaleList[index].copyWith(
+                          currency: value,
+                        ),
+                        index: index);
                   },
                   icon: Center(
                     child: Image.asset(
@@ -1357,14 +1325,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             },
             titleText: 'Price'.tr,
             keyboardType: TextInputType.number,
-            onChanged: (p0) {
-              setState(() {});
-              if (p0 != null) {
-                retailSalePrice = p0;
-              }
-              return null;
-            },
-            controller: retailSaleList[index].priceController,
+            controller: menuPageProvider.retailSaleList[index].priceController,
           ),
           const SizedBox(height: 13),
           Row(
@@ -1378,19 +1339,21 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                 ),
                 onPressed: () {
-                  var countryCode1 = 'Turkey';
-                  var currency1 = 'TRY';
+                  var country = Constants.language == 'tr' ? 'Turkey' : null;
+                  var currency = Constants.language == 'tr' ? 'TRY' : null;
+                  var countryCode = Constants.language == 'tr' ? 'TR' : null;
                   TextEditingController priceController =
                       TextEditingController();
 
                   RetailSaleModel retailSaleModel = RetailSaleModel(
-                      country: countryCode1,
-                      currency: currency1,
+                      country: country,
+                      currency: currency,
                       priceController: priceController,
-                      quantity: '1');
-                  setState(() {
-                    retailSaleList.add(retailSaleModel);
-                  });
+                      quantity: '1',
+                      countryCode: countryCode);
+
+                  menuPageProvider.updateRetailSaleList(
+                      retailSaleModel: retailSaleModel);
                 },
                 child: Text(
                   '+',
@@ -1412,14 +1375,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5)),
                 ),
-                onPressed: retailSaleList.length > 1
+                onPressed: menuPageProvider.retailSaleList.length > 1
                     ? () {
-                        menuPageProvider.deleteRetailListLength();
-                        if (retailSaleList.length > 1) {
-                          setState(() {
-                            retailSaleList.removeAt(index);
-                          });
-                        }
+                        menuPageProvider.deleteRetailSaleList(index);
                       }
                     : null,
                 child: Text(
@@ -2827,7 +2785,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       onSelected: (value) {
         Provider.of<MenuPageProvider>(context, listen: false)
             .updateSelectedProductName(index);
-        setState(() {});
       },
     );
   }

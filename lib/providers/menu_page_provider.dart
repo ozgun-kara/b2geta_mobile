@@ -8,6 +8,7 @@ import 'package:b2geta_mobile/models/general/district_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/services/categories/categories_services.dart';
 import 'package:b2geta_mobile/services/general_service.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:flutter/material.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
 
@@ -181,10 +182,8 @@ class MenuPageProvider with ChangeNotifier {
   int isSelectedProductSummaryIndex = 0;
   bool selectedRetailSale = false;
   bool selectedWholeSale = false;
-  List<Price> retailSaleList = [];
-  List<Price> wholeSaleList = [];
-  int retailSaleListLength = 1;
-  int wholeSaleListLength = 1;
+
+  List<RetailSaleModel> retailSaleList = [];
 
   void updateSelectedProductName(int value) {
     isSelectedProductNameIndex = value;
@@ -211,48 +210,18 @@ class MenuPageProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateRetailSaleList(Price price) {
-    retailSaleList.add(price);
-    notifyListeners();
-  }
-
-  void deleteRetailSaleList(Price price) {
-    retailSaleList.remove(price);
-    notifyListeners();
-  }
-
-  void updateWholeSaleList(Price price) {
-    wholeSaleList.add(price);
-    notifyListeners();
-  }
-
-  void deleteWholeSaleList(Price price) {
-    wholeSaleList.remove(price);
-    notifyListeners();
-  }
-
-  void updateRetailSaleListLength() {
-    retailSaleListLength++;
-    notifyListeners();
-  }
-
-  void deleteRetailListLength() {
-    if (retailSaleListLength > 1) {
-      retailSaleListLength--;
+  void updateRetailSaleList(
+      {required RetailSaleModel retailSaleModel, int? index}) {
+    if (index != null) {
+      retailSaleList[index] = retailSaleModel;
+    } else {
+      retailSaleList.add(retailSaleModel);
     }
     notifyListeners();
   }
 
-  void updateWholeSaleListLength() {
-    wholeSaleListLength++;
-    notifyListeners();
-  }
-
-  void deleteWholeSaleListLength() {
-    if (wholeSaleListLength > 1) {
-      wholeSaleListLength--;
-    }
-
+  void deleteRetailSaleList(int index) {
+    retailSaleList.removeAt(index);
     notifyListeners();
   }
 }
