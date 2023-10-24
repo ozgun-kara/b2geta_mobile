@@ -392,4 +392,8 @@ final Map<String, String> en = {
   'English': 'English',
   'German': 'German',
   'Quantity': 'Quantity',
+  'Pricing': 'Pricing',
+  'Retail Sale': 'Retail Sale',
+  'Whole Sale': 'Whole Sale',
+  '.Price':'.Price',
 };

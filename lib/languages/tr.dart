@@ -387,5 +387,9 @@ final Map<String, String> tr = {
   'Turkish': 'Türkçe',
   'English': 'İngilizce',
   'German': 'Almanca',
-  'Quantity':'Miktar',
+  'Quantity': 'Miktar',
+  'Pricing': 'Fiyatlandırma',
+  'Retail Sale': 'Perakende Satış',
+  'Whole Sale': 'Toptan Satış',
+  '.Price': '.Fiyat',
 };
