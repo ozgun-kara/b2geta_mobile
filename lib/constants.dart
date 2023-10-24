@@ -8,7 +8,6 @@ class Constants {
 
 // THIS VARIABLE (headers) WILL BE REMOVED FROM HERE IN THE FUTURE
   static final Map<String, String> headers = {
-    "Content-Type": "application/json; charset=utf-8",
     "Authorization": "Bearer ${Constants.userToken}",
     "Accept-Language": "${Constants.language}"
   };

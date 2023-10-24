@@ -4,6 +4,8 @@ import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -144,33 +146,75 @@ class ProductsServices {
       required String categoryId,
       required String subCategoryId,
       required String deepCategoryId,
-      required String productName,
-      required String productDescription,
-      required String productSummary,
+      required String productNameTR,
+      required String productNameEN,
+      required String productNameDE,
+      required String productDescriptionTR,
+      required String productDescriptionEN,
+      required String productDescriptionDE,
+      required String productSummaryTR,
+      required String productSummaryEN,
+      required String productSummaryDE,
+      required String width,
+      required String height,
+      required String weight,
+      required String saleRetail,
+      required String saleWhole,
+      required String length,
       required String brand,
-      required String price,
-      required String currency,
       required String status,
       required List<CategoryFeatureasModelFeatureValues> categoryFeatures,
+      required List<RetailSaleModel> retailSaleList,
+      required List<WholeSaleModel> wholeSaleList,
+      required String gtip,
       required List<File> images}) async {
     var request = http.MultipartRequest(
-        'POST', Uri.parse('${Constants.apiUrl}/products/create'));
+        'POST', Uri.parse('${Constants.apiUrl}/products/create2'));
     request.headers.addAll(Constants.headers);
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
     request.fields["category_id[]"] = categoryId;
     request.fields["category_id[]"] = subCategoryId;
     request.fields["category_id[]"] = deepCategoryId;
-    request.fields["product_name[${Constants.language}]"] = productName;
-    request.fields["product_description[${Constants.language}]"] =
-        productDescription;
-    request.fields["product_summary[${Constants.language}]"] = productSummary;
-    request.fields["brand"] = brand;
-    request.fields["price"] = price;
-    request.fields["currency"] = currency;
+    request.fields["product_name[tr]"] = productNameTR;
+    request.fields["product_name[en]"] = productNameEN;
+    request.fields["product_name[de]"] = productNameDE;
+    request.fields["product_description[tr]"] = productDescriptionTR;
+    request.fields["product_description[en]"] = productDescriptionEN;
+    request.fields["product_description[de]"] = productDescriptionDE;
+    request.fields["product_summary[tr]"] = productSummaryTR;
+    request.fields["product_summary[en]"] = productSummaryEN;
+    request.fields["product_summary[de]"] = productSummaryDE;
+    request.fields["width"] = width;
+    request.fields["height"] = height;
+    request.fields["weight"] = weight;
+    request.fields["length"] = weight;
+    request.fields["brand_name"] = brand;
+    request.fields["sale_retail"] = saleRetail;
+    request.fields["sale_whole"] = saleWhole;
     request.fields["status"] = status;
+    request.fields["gtip"] = gtip;
     for (var feature in categoryFeatures) {
       request.fields["feature[${feature.attributeId!}][]"] = feature.id!;
+    }
+    if (retailSaleList.isNotEmpty) {
+      for (var i = 0; i < retailSaleList.length; i++) {
+        request.fields["prices[$i][country]"] = retailSaleList[i].countryCode!;
+        request.fields["prices[$i][quantity]"] = retailSaleList[i].quantity;
+        request.fields["prices[$i][currency]"] = retailSaleList[i].currency!;
+        request.fields["prices[$i][price]"] =
+            retailSaleList[i].priceController.text;
+      }
+    }
+    if (wholeSaleList.isNotEmpty) {
+      for (var i = 0; i < wholeSaleList.length; i++) {
+        request.fields["prices[$i][country]"] = wholeSaleList[i].countryCode!;
+        request.fields["prices[$i][quantity]"] =
+            wholeSaleList[i].quantityController.text;
+        request.fields["prices[$i][currency]"] = wholeSaleList[i].currency!;
+        request.fields["prices[$i][price]"] =
+            wholeSaleList[i].priceController.text;
+      }
     }
 
     List<http.MultipartFile> files = [];
