@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
-import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -56,6 +55,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final brandController = TextEditingController();
   final countryController = TextEditingController();
   final statusController = TextEditingController();
+  final widthController = TextEditingController();
+  final heightController = TextEditingController();
+  final weightController = TextEditingController();
+  final lengthController = TextEditingController();
+  final gtipController = TextEditingController();
 
   var categoryId;
   var subCategoryId;
@@ -210,9 +214,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           _categories(categoryList, context, menuPageProvider),
                           _subCategories(menuPageProvider, context),
                           _deepCategories(menuPageProvider, context),
-                          const SizedBox(
-                            height: 13,
-                          ),
+                          const SizedBox(height: 13),
                           _categoryFeatures(menuPageProvider),
                           _productName(menuPageProvider),
                           const SizedBox(height: 13),
@@ -438,7 +440,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           _addImages(menuPageProvider),
                           const SizedBox(height: 13.0),
                           CustomTextFormField(
-                            titleText: 'GTİP',
+                            titleText: 'GTIP'.tr,
+                            controller: gtipController,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'GTIP Validate'.tr;
+                              }
+                              return null;
+                            },
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -603,9 +612,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 ),
               ),
               DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButtonFormField2(
                   isExpanded: true,
-
+                  decoration: const InputDecoration.collapsed(hintText: ''),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Country Validate'.tr;
+                    }
+                    return null;
+                  },
                   items: countryList
                       .map((item) => DropdownMenuItem<String?>(
                             value: item.name,
@@ -625,9 +640,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           ))
                       .toList(),
                   value: menuPageProvider.wholeSaleList[index].country,
-
                   onChanged: (value) {},
-
                   icon: Center(
                     child: Image.asset(
                       'assets/icons/dropdown.png',
@@ -640,17 +653,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                     ),
                   ),
                   iconSize: 24,
-                  // iconEnabledColor: Colors.yellow,
-                  // iconDisabledColor: Colors.grey,
-                  // icon: Container(),
                   buttonHeight: 57,
                   buttonWidth: deviceWidth,
                   buttonPadding: const EdgeInsets.only(left: 25, right: 17),
                   buttonDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    // border:
-                    //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
                     color:
                         Provider.of<ThemeProvider>(context).themeMode == "light"
                             ? AppTheme.white39
@@ -750,7 +757,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           CustomTextFormField(
             validator: (value) {
               if (value == null || value.trim().isEmpty) {
-                return 'Price Validate'.tr;
+                return 'Quantity Validate'.tr;
               }
               return null;
             },
@@ -778,9 +785,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 ),
               ),
               DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButtonFormField2(
                   isExpanded: true,
-
+                  decoration: const InputDecoration.collapsed(hintText: ''),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Currency Validate'.tr;
+                    }
+                    return null;
+                  },
                   items: currencyList
                       .map((item) => DropdownMenuItem<String>(
                             value: item,
@@ -972,8 +985,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 ),
               ),
               DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButtonFormField2(
                   isExpanded: true,
+                  decoration: const InputDecoration.collapsed(hintText: ''),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Country Validate'.tr;
+                    }
+                    return null;
+                  },
                   items: countryList
                       .map((item) => DropdownMenuItem<String?>(
                             value: item.name,
@@ -1145,7 +1165,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 ),
               ),
               DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButtonFormField2(
+                  decoration: const InputDecoration.collapsed(hintText: ''),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Currency Validate'.tr;
+                    }
+                    return null;
+                  },
                   isExpanded: true,
                   items: currencyList
                       .map((item) => DropdownMenuItem<String>(
@@ -1479,23 +1506,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
         ),
         DropdownButtonHideUnderline(
-          child: DropdownButton2(
-            // alignment: AlignmentDirectional.center,
+          child: DropdownButtonFormField2(
             isExpanded: true,
-            // hint: Text(
-            //   'Status'.tr,
-            //   style: TextStyle(
-            //     fontSize: 14,
-            //     fontFamily: AppTheme.appFontFamily,
-            //     fontWeight: FontWeight.w400,
-            //     color: Provider.of<ThemeProvider>(context)
-            //                 .themeMode ==
-            //             "light"
-            //         ? AppTheme.blue3
-            //         : AppTheme.white14,
-            //   ),
-            // ),
-
+            decoration: const InputDecoration.collapsed(hintText: ''),
+            validator: (value) {
+              if (value == null) {
+                return 'Status Validate'.tr;
+              }
+              return null;
+            },
             items: statusList
                 .map((item) => DropdownMenuItem<String>(
                       value: item,
@@ -1654,8 +1673,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
         ),
         DropdownButtonHideUnderline(
-          child: DropdownButton2(
+          child: DropdownButtonFormField2(
             isExpanded: true,
+            decoration: const InputDecoration.collapsed(hintText: ''),
+            validator: (value) {
+              if (value == null) {
+                return 'Brand Validate'.tr;
+              }
+              return null;
+            },
             items: brandList
                 .map((item) => DropdownMenuItem<String>(
                       value: item.name,
@@ -1807,7 +1833,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     return Column(
       children: [
         CustomTextFormField(
-          controller: TextEditingController(),
+          controller: widthController,
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Product Width Validate'.tr;
+            }
+            return null;
+          },
           titleText: 'Width'.tr,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           suffixText: 'sm',
@@ -1816,7 +1848,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           height: 13,
         ),
         CustomTextFormField(
-          controller: TextEditingController(),
+          controller: heightController,
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Product Height Validate'.tr;
+            }
+            return null;
+          },
           titleText: 'Height'.tr,
           suffixText: 'cm',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -1825,7 +1863,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           height: 13,
         ),
         CustomTextFormField(
-          controller: TextEditingController(),
+          controller: weightController,
+          validator: (value) {
+            if (value == null || value.trim().isEmpty) {
+              return 'Product Weight Validate'.tr;
+            }
+            return null;
+          },
           titleText: 'Weight'.tr,
           suffixText: 'gr',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -1834,13 +1878,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           height: 13,
         ),
         CustomTextFormField(
+          controller: lengthController,
           validator: (value) {
             if (value == null || value.trim().isEmpty) {
-              return 'Price Validate'.tr;
+              return 'Product Length Validate'.tr;
             }
             return null;
           },
-          controller: TextEditingController(),
           titleText: 'Length'.tr,
           suffixText: 'cm',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
@@ -1918,7 +1962,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         menuPageProvider.isSelectedProductNameIndex == 1
             ? CustomTextFormField(
                 validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
+                  if ((value == null || value.trim().isEmpty)) {
                     return 'Product Name Validate'.tr;
                   }
                   return null;
@@ -1929,7 +1973,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             : menuPageProvider.isSelectedProductNameIndex == 2
                 ? CustomTextFormField(
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                      if ((value == null || value.trim().isEmpty)) {
                         return 'Product Name Validate'.tr;
                       }
                       return null;
@@ -1939,7 +1983,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   )
                 : CustomTextFormField(
                     validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
+                      if ((value == null || value.trim().isEmpty)) {
                         return 'Product Name Validate'.tr;
                       }
                       return null;
@@ -2093,8 +2137,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             ),
           ),
           DropdownButtonHideUnderline(
-            child: DropdownButton2(
+            child: DropdownButtonFormField2(
               isExpanded: true,
+              decoration: const InputDecoration.collapsed(hintText: ''),
+              validator: (value) {
+                if (value == null) {
+                  return 'Deep Categories Validate'.tr;
+                }
+                return null;
+              },
               items: menuPageProvider.deepCategoryList
                   .map((item) => DropdownMenuItem<String>(
                         value: item.categoryName,
@@ -2271,9 +2322,16 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             ),
           ),
           DropdownButtonHideUnderline(
-            child: DropdownButton2(
+            child: DropdownButtonFormField2(
               // alignment: AlignmentDirectional.center,
               isExpanded: true,
+              decoration: const InputDecoration.collapsed(hintText: ''),
+              validator: (value) {
+                if (value == null) {
+                  return 'Sub Categories Validate'.tr;
+                }
+                return null;
+              },
               // hint: Text(
               //   'Categories'.tr,
               //   style: TextStyle(
@@ -2469,8 +2527,15 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
         ),
         DropdownButtonHideUnderline(
-          child: DropdownButton2(
+          child: DropdownButtonFormField2(
             // alignment: AlignmentDirectional.center,
+            decoration: const InputDecoration.collapsed(hintText: ''),
+            validator: (value) {
+              if (value == null) {
+                return 'Categories Validate'.tr;
+              }
+              return null;
+            },
             isExpanded: true,
             // hint: Text(
             //   'Categories'.tr,
