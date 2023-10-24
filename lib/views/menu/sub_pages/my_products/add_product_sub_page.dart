@@ -4,8 +4,10 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_products/product_added_sub_page.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,10 +49,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   final productNameDEController = TextEditingController();
   final productDescriptionTRController = TextEditingController();
   final productDescriptionENController = TextEditingController();
-  final productDescriptionGEController = TextEditingController();
+  final productDescriptionDEController = TextEditingController();
   final productSummaryTRController = TextEditingController();
   final productSummaryENController = TextEditingController();
-  final productSummaryGEController = TextEditingController();
+  final productSummaryDEController = TextEditingController();
   final categoriesController = TextEditingController();
   final brandController = TextEditingController();
   final countryController = TextEditingController();
@@ -70,8 +72,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
-
-  bool isAddButton = false;
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -223,215 +223,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           _sizes(),
                           const SizedBox(height: 13),
                           _brand(brandList, context, menuPageProvider),
-                          const SizedBox(
-                            height: 13,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Pricing'.tr,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: AppTheme.appFontFamily,
-                                  fontWeight: FontWeight.w400,
-                                  color: themeMode
-                                      ? AppTheme.blue3
-                                      : AppTheme.white14,
-                                ),
-                              ),
-                              const SizedBox(height: 13.0),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        8, 16, 16, 16),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: themeMode
-                                          ? AppTheme.white39
-                                          : AppTheme.black18,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            menuPageProvider
-                                                .updateSelectedRetailSale(
-                                                    !(menuPageProvider
-                                                        .selectedRetailSale));
-                                            menuPageProvider
-                                                .updateSelectedWholeSale(false);
-
-                                            if (menuPageProvider
-                                                .retailSaleList.isEmpty) {
-                                              var country =
-                                                  Constants.language == 'tr'
-                                                      ? 'Turkey'
-                                                      : null;
-                                              var currency =
-                                                  Constants.language == 'tr'
-                                                      ? 'TRY'
-                                                      : null;
-                                              var countryCode =
-                                                  Constants.language == 'tr'
-                                                      ? 'TR'
-                                                      : null;
-                                              TextEditingController
-                                                  priceController =
-                                                  TextEditingController();
-
-                                              RetailSaleModel retailSaleModel =
-                                                  RetailSaleModel(
-                                                      country: country,
-                                                      currency: currency,
-                                                      priceController:
-                                                          priceController,
-                                                      quantity: '1',
-                                                      countryCode: countryCode);
-
-                                              menuPageProvider
-                                                  .updateRetailSaleList(
-                                                      retailSaleModel:
-                                                          retailSaleModel);
-                                            }
-                                          },
-                                          child: Row(
-                                            children: [
-                                              if (menuPageProvider
-                                                  .selectedRetailSale)
-                                                const Icon(
-                                                    Icons.check_box_outlined)
-                                              else
-                                                const Icon(Icons
-                                                    .check_box_outline_blank),
-                                              const SizedBox(width: 16),
-                                            ],
-                                          ),
-                                        ),
-                                        Text('Retail Sale'.tr),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 10.0),
-                                  Container(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        8, 16, 16, 16),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: themeMode
-                                          ? AppTheme.white39
-                                          : AppTheme.black18,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            menuPageProvider
-                                                .updateSelectedWholeSale(
-                                                    !(menuPageProvider
-                                                        .selectedWholeSale));
-                                            menuPageProvider
-                                                .updateSelectedRetailSale(
-                                                    false);
-
-                                            if (menuPageProvider
-                                                .wholeSaleList.isEmpty) {
-                                              var country =
-                                                  Constants.language == 'tr'
-                                                      ? 'Turkey'
-                                                      : null;
-                                              var currency =
-                                                  Constants.language == 'tr'
-                                                      ? 'TRY'
-                                                      : null;
-                                              var countryCode =
-                                                  Constants.language == 'tr'
-                                                      ? 'TR'
-                                                      : null;
-                                              TextEditingController
-                                                  priceController =
-                                                  TextEditingController();
-                                              TextEditingController
-                                                  quantityController =
-                                                  TextEditingController();
-
-                                              WholeSaleModel wholeSaleModel =
-                                                  WholeSaleModel(
-                                                      country: country,
-                                                      currency: currency,
-                                                      priceController:
-                                                          priceController,
-                                                      countryCode: countryCode,
-                                                      quantityController:
-                                                          quantityController);
-
-                                              menuPageProvider
-                                                  .updateWholeSaleList(
-                                                      wholeSaleModel:
-                                                          wholeSaleModel);
-                                            }
-                                          },
-                                          child: Row(
-                                            children: [
-                                              if (menuPageProvider
-                                                  .selectedWholeSale)
-                                                const Icon(
-                                                    Icons.check_box_outlined)
-                                              else
-                                                const Icon(Icons
-                                                    .check_box_outline_blank),
-                                              const SizedBox(width: 16),
-                                            ],
-                                          ),
-                                        ),
-                                        Text('Whole Sale'.tr),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 13.0),
-                              Visibility(
-                                  visible: menuPageProvider.selectedRetailSale,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.vertical,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    padding: EdgeInsets.zero,
-                                    itemCount:
-                                        menuPageProvider.retailSaleList.length,
-                                    itemBuilder: (context, index) {
-                                      return _getRetailSaleWidget(
-                                          index,
-                                          countryList,
-                                          context,
-                                          currencyList,
-                                          menuPageProvider);
-                                    },
-                                  )),
-                              Visibility(
-                                  visible: menuPageProvider.selectedWholeSale,
-                                  child: ListView.builder(
-                                      scrollDirection: Axis.vertical,
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      itemCount:
-                                          menuPageProvider.wholeSaleList.length,
-                                      itemBuilder: (context, index) {
-                                        return _getWholeSaleWidget(
-                                            menuPageProvider,
-                                            countryList,
-                                            currencyList,
-                                            index);
-                                      })),
-                            ],
-                          ),
+                          const SizedBox(height: 13),
+                          _pricing(menuPageProvider, countryList, currencyList),
                           const SizedBox(height: 13),
                           _productSummary(menuPageProvider),
                           const SizedBox(height: 13),
@@ -439,21 +232,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           const SizedBox(height: 13.0),
                           _addImages(menuPageProvider),
                           const SizedBox(height: 13.0),
-                          CustomTextFormField(
-                            titleText: 'GTIP'.tr,
-                            controller: gtipController,
-                            validator: (value) {
-                              if (value == null || value.trim().isEmpty) {
-                                return 'GTIP Validate'.tr;
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r"[0-9.]")),
-                            ],
-                          ),
+                          _gtip(),
                           const SizedBox(height: 28),
                           MaterialButton(
                               minWidth: deviceWidth,
@@ -477,93 +256,137 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               onPressed: () {
                                 if (productGlobalKey.currentState!.validate()) {
                                   if (categoryId.toString() != 'null' &&
-                                      brandId.toString() != 'null' &&
-                                      menuPageProvider.selectedCurrency
-                                              .toString() !=
-                                          'null' &&
                                       menuPageProvider.selectedStatus
                                               .toString() !=
-                                          'null') {
+                                          'null' &&
+                                      menuPageProvider
+                                          .imageFilesList!.isNotEmpty) {
                                     if (widget.operation == 'Add') {
-                                      Navigator.push(
-                                          context,
-                                          PageRouteBuilder(
-                                            pageBuilder: (_, __, ___) => AddProductImageSubPage(
-                                                accountId: '',
-                                                categoryId: categoryId,
-                                                subCategoryId: subCategoryId,
-                                                deepCategoryId: deepCategoryId,
-                                                categoryFeatures:
-                                                    menuPageProvider
-                                                        .selectedFetureasList,
-                                                productName:
-                                                    productNameTRController
-                                                        .text,
-                                                productDescription:
-                                                    productDescriptionTRController
-                                                        .text,
-                                                productSummary:
-                                                    productSummaryTRController
-                                                        .text,
-                                                brand: brandId,
-                                                price: TextEditingController()
-                                                    .text,
-                                                currency: menuPageProvider
-                                                    .selectedCurrency
-                                                    .toString(),
-                                                status: menuPageProvider
-                                                            .selectedStatus ==
-                                                        'Active'.tr
-                                                    ? '1'
-                                                    : '0'),
-                                            transitionDuration:
-                                                const Duration(milliseconds: 0),
-                                            reverseTransitionDuration:
-                                                const Duration(milliseconds: 0),
-                                            transitionsBuilder: (_, a, __, c) =>
-                                                FadeTransition(
-                                                    opacity: a, child: c),
-                                          ));
-                                    } else {
                                       locator<ProductsServices>()
-                                          .updateProductCall(
-                                              productId:
-                                                  widget.passedObject!.id!,
+                                          .addProductCall(
+                                              accountId: Provider.of<UserProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .getUser
+                                                      .id ??
+                                                  '',
                                               categoryId: categoryId,
-                                              productName:
+                                              subCategoryId: subCategoryId,
+                                              deepCategoryId: deepCategoryId,
+                                              productNameTR:
                                                   productNameTRController.text,
-                                              productDescription:
+                                              productNameEN:
+                                                  productNameENController.text,
+                                              productNameDE:
+                                                  productNameDEController.text,
+                                              productDescriptionTR:
                                                   productDescriptionTRController
                                                       .text,
-                                              productSummary:
+                                              productDescriptionEN:
+                                                  productDescriptionENController
+                                                      .text,
+                                              productDescriptionDE:
+                                                  productDescriptionDEController
+                                                      .text,
+                                              productSummaryTR:
                                                   productSummaryTRController
                                                       .text,
-                                              brand: brandId,
-                                              price:
-                                                  TextEditingController().text,
-                                              currency: menuPageProvider
-                                                  .selectedCurrency
-                                                  .toString(),
-                                              status: menuPageProvider
-                                                          .selectedStatus ==
-                                                      'Active'.tr
+                                              productSummaryEN:
+                                                  productSummaryENController
+                                                      .text,
+                                              productSummaryDE:
+                                                  productSummaryDEController
+                                                      .text,
+                                              width: widthController.text,
+                                              height: heightController.text,
+                                              weight: weightController.text,
+                                              length: lengthController.text,
+                                              saleRetail:
+                                                  menuPageProvider.retailSaleList.length > 1
+                                                      ? '1'
+                                                      : '0',
+                                              saleWhole: menuPageProvider.wholeSaleList.length > 1
                                                   ? '1'
-                                                  : '0')
+                                                  : '0',
+                                              brand: 'My Brand',
+                                              status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
+                                              images: menuPageProvider.imageFilesList ?? [],
+                                              categoryFeatures: menuPageProvider.selectedFetureasList,
+                                              retailSaleList: menuPageProvider.retailSaleList,
+                                              wholeSaleList: menuPageProvider.wholeSaleList,
+                                              gtip: gtipController.text)
                                           .then((value) {
                                         if (value == true) {
                                           debugPrint(
-                                              "PRODUCT HAS SUCCESSFULLY UPDATED");
+                                              "PRODUCT HAS SUCCESSFULLY ADDED");
 
-                                          Navigator.pop(context);
+                                          menuPageProvider
+                                              .clearSelectedImageFilesList();
+
+                                          var count = 0;
+
+                                          Navigator.pushAndRemoveUntil(
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    const ProductAddedSubPage(),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                transitionsBuilder: (_, a, __,
+                                                        c) =>
+                                                    FadeTransition(
+                                                        opacity: a, child: c),
+                                              ), (route) {
+                                            return count++ == 2;
+                                          }).then((_) => setState(() {}));
                                         } else {
-                                          debugPrint("PRODUCT HAS NOT UPDATED");
+                                          debugPrint("PRODUCT HAS NOT ADDED");
                                           operationFailedDialog(context);
                                         }
                                       });
+                                    } else {
+                                      validationErrorDialog(context);
                                     }
                                   } else {
-                                    validationErrorDialog(context);
+                                    locator<ProductsServices>()
+                                        .updateProductCall(
+                                            productId: widget.passedObject!.id!,
+                                            categoryId: categoryId,
+                                            productName:
+                                                productNameTRController.text,
+                                            productDescription:
+                                                productDescriptionTRController
+                                                    .text,
+                                            productSummary:
+                                                productSummaryTRController.text,
+                                            brand: brandId,
+                                            price: TextEditingController().text,
+                                            currency: menuPageProvider
+                                                .selectedCurrency
+                                                .toString(),
+                                            status: menuPageProvider
+                                                        .selectedStatus ==
+                                                    'Active'.tr
+                                                ? '1'
+                                                : '0')
+                                        .then((value) {
+                                      if (value == true) {
+                                        debugPrint(
+                                            "PRODUCT HAS SUCCESSFULLY UPDATED");
+
+                                        Navigator.pop(context);
+                                      } else {
+                                        debugPrint("PRODUCT HAS NOT UPDATED");
+                                        operationFailedDialog(context);
+                                      }
+                                    });
                                   }
+                                } else {
+                                  validationErrorDialog(context);
                                 }
                               }),
                         ],
@@ -575,6 +398,174 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             ],
           ),
         ));
+  }
+
+  CustomTextFormField _gtip() {
+    return CustomTextFormField(
+      titleText: 'GTIP'.tr,
+      controller: gtipController,
+      validator: (value) {
+        if (value == null || value.trim().isEmpty) {
+          return 'GTIP Validate'.tr;
+        }
+        return null;
+      },
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+      ],
+    );
+  }
+
+  Column _pricing(MenuPageProvider menuPageProvider,
+      List<CountryModel> countryList, List<String> currencyList) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Pricing'.tr,
+          style: TextStyle(
+            fontSize: 14,
+            fontFamily: AppTheme.appFontFamily,
+            fontWeight: FontWeight.w400,
+            color: themeMode ? AppTheme.blue3 : AppTheme.white14,
+          ),
+        ),
+        const SizedBox(height: 13.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: themeMode ? AppTheme.white39 : AppTheme.black18,
+              ),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      menuPageProvider.updateSelectedRetailSale(
+                          !(menuPageProvider.selectedRetailSale));
+                      menuPageProvider.updateSelectedWholeSale(false);
+
+                      if (menuPageProvider.retailSaleList.isEmpty) {
+                        var country =
+                            Constants.language == 'tr' ? 'Turkey' : null;
+                        var currency =
+                            Constants.language == 'tr' ? 'TRY' : null;
+                        var countryCode =
+                            Constants.language == 'tr' ? 'TR' : null;
+                        TextEditingController priceController =
+                            TextEditingController();
+
+                        RetailSaleModel retailSaleModel = RetailSaleModel(
+                            country: country,
+                            currency: currency,
+                            priceController: priceController,
+                            quantity: '1',
+                            countryCode: countryCode);
+
+                        menuPageProvider.updateRetailSaleList(
+                            retailSaleModel: retailSaleModel);
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        if (menuPageProvider.selectedRetailSale)
+                          const Icon(Icons.check_box_outlined)
+                        else
+                          const Icon(Icons.check_box_outline_blank),
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  ),
+                  Text('Retail Sale'.tr),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10.0),
+            Container(
+              padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: themeMode ? AppTheme.white39 : AppTheme.black18,
+              ),
+              child: Row(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      menuPageProvider.updateSelectedWholeSale(
+                          !(menuPageProvider.selectedWholeSale));
+                      menuPageProvider.updateSelectedRetailSale(false);
+
+                      if (menuPageProvider.wholeSaleList.isEmpty) {
+                        var country =
+                            Constants.language == 'tr' ? 'Turkey' : null;
+                        var currency =
+                            Constants.language == 'tr' ? 'TRY' : null;
+                        var countryCode =
+                            Constants.language == 'tr' ? 'TR' : null;
+                        TextEditingController priceController =
+                            TextEditingController();
+                        TextEditingController quantityController =
+                            TextEditingController();
+
+                        WholeSaleModel wholeSaleModel = WholeSaleModel(
+                            country: country,
+                            currency: currency,
+                            priceController: priceController,
+                            countryCode: countryCode,
+                            quantityController: quantityController);
+
+                        menuPageProvider.updateWholeSaleList(
+                            wholeSaleModel: wholeSaleModel);
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        if (menuPageProvider.selectedWholeSale)
+                          const Icon(Icons.check_box_outlined)
+                        else
+                          const Icon(Icons.check_box_outline_blank),
+                        const SizedBox(width: 16),
+                      ],
+                    ),
+                  ),
+                  Text('Whole Sale'.tr),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 13.0),
+        Visibility(
+            visible: menuPageProvider.selectedRetailSale,
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: menuPageProvider.retailSaleList.length,
+              itemBuilder: (context, index) {
+                return _getRetailSaleWidget(index, countryList, context,
+                    currencyList, menuPageProvider);
+              },
+            )),
+        Visibility(
+            visible: menuPageProvider.selectedWholeSale,
+            child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: menuPageProvider.wholeSaleList.length,
+                itemBuilder: (context, index) {
+                  return _getWholeSaleWidget(
+                      menuPageProvider, countryList, currencyList, index);
+                })),
+      ],
+    );
   }
 
   Widget _getWholeSaleWidget(MenuPageProvider menuPageProvider,
@@ -1625,7 +1616,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       }
                       return null;
                     },
-                    controller: productSummaryGEController,
+                    controller: productSummaryDEController,
                     titleText: 'Product Summary'.tr,
                     keyboardType: TextInputType.text,
                     minLines: 2,
@@ -1929,7 +1920,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       }
                       return null;
                     },
-                    controller: productDescriptionGEController,
+                    controller: productDescriptionDEController,
                     titleText: 'Product Description'.tr,
                     minLines: 2,
                     maxLines: 5,

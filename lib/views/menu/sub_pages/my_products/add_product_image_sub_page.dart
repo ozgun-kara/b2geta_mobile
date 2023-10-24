@@ -293,7 +293,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
 
                               loadingScreen(context);
 
-                              locator<ProductsServices>()
+                     /*          locator<ProductsServices>()
                                   .addProductCall(
                                       accountId: widget.accountId,
                                       categoryId: widget.categoryId,
@@ -337,7 +337,7 @@ class _AddProductImageSubPageState extends State<AddProductImageSubPage> {
                                   debugPrint("PRODUCT HAS NOT ADDED");
                                   operationFailedDialog(context);
                                 }
-                              });
+                              }); */
                             } else {
                               validationErrorDialog(context);
                             }

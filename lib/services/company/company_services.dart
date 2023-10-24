@@ -152,7 +152,6 @@ class CompanyServices {
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
-      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
     }
   }
@@ -179,10 +178,7 @@ class CompanyServices {
   }) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/update/$id'),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
+      headers: Constants.headers,
       body: {
         "company_name": companyName,
         "tax_office": taxOffice,
@@ -215,13 +211,13 @@ class CompanyServices {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
             "responseCode: ${json.decode(response.body)["responseCode"]}");
-        debugPrint(
-            "responseText: ${json.decode(response.body)["responseText"]}");
+        debugPrint("responseText: ${json.decode(response.body)}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
         return false;
       }
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      debugPrint("responseText: ${json.decode(response.body)["responseText"]}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return false;
     }
