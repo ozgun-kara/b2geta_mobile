@@ -177,9 +177,9 @@ class MenuPageProvider with ChangeNotifier {
   }
 
   // ADD PRODUCT SUB PAGE
-  int isSelectedProductNameIndex = 0;
-  int isSelectedProductDescriptionIndex = 0;
-  int isSelectedProductSummaryIndex = 0;
+  int isSelectedProductNameIndex = 1;
+  int isSelectedProductDescriptionIndex = 1;
+  int isSelectedProductSummaryIndex = 1;
   bool selectedRetailSale = false;
   bool selectedWholeSale = false;
   List<RetailSaleModel> retailSaleList = [];
