@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -65,6 +66,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  bool isAddButton = false;
 
   final ImagePicker imagePicker = ImagePicker();
 
@@ -225,7 +228,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Fiyatlandırma'.tr,
+                                'Pricing'.tr,
                                 style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: AppTheme.appFontFamily,
@@ -306,7 +309,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                             ],
                                           ),
                                         ),
-                                        const Text('Perakende Satış'),
+                                        Text('Retail Sale'.tr),
                                       ],
                                     ),
                                   ),
@@ -382,7 +385,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                             ],
                                           ),
                                         ),
-                                        const Text('Toptan Satış'),
+                                        Text('Whole Sale'.tr),
                                       ],
                                     ),
                                   ),
@@ -943,7 +946,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       child: Column(
         children: [
           Text(
-            (index + 1).toString() + (".Fiyat").tr,
+            (index + 1).toString() + (".Price").tr,
             style: TextStyle(
               fontSize: 14,
               fontFamily: AppTheme.appFontFamily,
@@ -1118,12 +1121,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
           const SizedBox(height: 13),
           CustomTextFormField(
-            validator: (value) {
-              if (value == null || value.trim().isEmpty) {
-                return 'Price Validate'.tr;
-              }
-              return null;
-            },
             titleText: 'Quantity'.tr,
             keyboardType: TextInputType.number,
             initialValue: '1',
@@ -1658,21 +1655,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         ),
         DropdownButtonHideUnderline(
           child: DropdownButton2(
-            // alignment: AlignmentDirectional.center,
             isExpanded: true,
-            // hint: Text(
-            //   'Brand'.tr,
-            //   style: TextStyle(
-            //     fontSize: 14,
-            //     fontFamily: AppTheme.appFontFamily,
-            //     fontWeight: FontWeight.w400,
-            //     color: Provider.of<ThemeProvider>(context)
-            //                 .themeMode ==
-            //             "light"
-            //         ? AppTheme.blue3
-            //         : AppTheme.white14,
-            //   ),
-            // ),
             items: brandList
                 .map((item) => DropdownMenuItem<String>(
                       value: item.name,
@@ -1692,7 +1675,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                     ))
                 .toList(),
             value: menuPageProvider.selectedBrand,
-
             onChanged: (value) {
               menuPageProvider.updateSelectedBrand(value as String);
 
@@ -1705,7 +1687,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 brandId = brandList[brandIndex].id;
               }
             },
-
             icon: Center(
               child: Image.asset(
                 'assets/icons/dropdown.png',
@@ -1717,27 +1698,18 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               ),
             ),
             iconSize: 24,
-            // iconEnabledColor: Colors.yellow,
-            // iconDisabledColor: Colors.grey,
-            // icon: Container(),
             buttonHeight: 57,
             buttonWidth: deviceWidth,
             buttonPadding: const EdgeInsets.only(left: 25, right: 17),
             buttonDecoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              // border:
-              //     Border.all(color: Color.fromRGBO(110, 113, 145, 0.25)),
-
               color: Provider.of<ThemeProvider>(context).themeMode == "light"
                   ? AppTheme.white39
                   : AppTheme.black18,
             ),
-            // buttonElevation: 2,
             itemHeight: 40,
             itemPadding: const EdgeInsets.symmetric(horizontal: 32),
-            // dropdownMaxHeight: deviceHeight * 0.4,
             dropdownMaxHeight: 350,
-            // dropdownWidth: deviceWidth,
             dropdownPadding: null,
             dropdownDecoration: BoxDecoration(
               borderRadius: BorderRadius.circular(14),
@@ -1745,17 +1717,25 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   ? AppTheme.white39
                   : AppTheme.black18,
             ),
-            // dropdownElevation: 8,
             scrollbarRadius: const Radius.circular(40),
             scrollbarThickness: 4,
             scrollbarAlwaysShow: true,
-            // offset: const Offset(0, 180),
-
             searchController: brandController,
             searchInnerWidget: Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
               child: TextFormField(
                 controller: brandController,
+
+                onFieldSubmitted: (value) {
+                  for (var element in brandList) {
+                    if (element.name != value) {
+                      brandList.add(BrandModel(name: value));
+                      menuPageProvider.updateSelectedBrand(value);
+                      setState(() {});
+                    }
+                  }
+                },
+
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: AppTheme.appFontFamily,
@@ -1807,8 +1787,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               ),
             ),
             searchMatchFn: (item, searchValue) {
-              debugPrint("ITEM:${item.value}");
-
               return (item.value
                   .toLowerCase()
                   .contains(searchValue.toLowerCase()));
