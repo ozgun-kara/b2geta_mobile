@@ -239,4 +239,6 @@ class MenuPageProvider with ChangeNotifier {
     wholeSaleList.removeAt(index);
     notifyListeners();
   }
+
+
 }

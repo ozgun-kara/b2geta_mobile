@@ -157,11 +157,13 @@ class GeneralService {
       if (status == true) {
         var data = responseBody["data"]["data"];
         for (var element in data) {
-          if (BrandModel.fromJson(element).status == 'open') {
+          /*  if (BrandModel.fromJson(element).status == 'open') {
             brandList.add(BrandModel.fromJson(element));
-          }
+          } */
+
+          brandList.add(BrandModel.fromJson(element));
         }
-        return brandList;
+        return brandList.toSet().toList();
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint("responseCode: ${responseBody["responseCode"]}");

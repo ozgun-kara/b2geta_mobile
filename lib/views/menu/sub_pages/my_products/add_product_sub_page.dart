@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
@@ -20,20 +21,18 @@ import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/categories/category_model.dart';
 import 'package:b2geta_mobile/models/general/brand_model.dart';
 import 'package:b2geta_mobile/models/general/country_model.dart';
-import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
-import 'package:b2geta_mobile/views/menu/sub_pages/my_products/add_product_image_sub_page.dart';
 
 class AddProductSubPage extends StatefulWidget {
   const AddProductSubPage(
       {Key? key, this.passedObject, required this.operation})
       : super(key: key);
 
-  final ProductDetailModel? passedObject;
+  final ProductDetailEditModel? passedObject;
   final String operation;
 
   @override
@@ -44,24 +43,27 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   ScrollController scrollController = ScrollController();
   GlobalKey<FormState> productGlobalKey = GlobalKey<FormState>();
 
-  final productNameTRController = TextEditingController();
-  final productNameENController = TextEditingController();
-  final productNameDEController = TextEditingController();
-  final productDescriptionTRController = TextEditingController();
-  final productDescriptionENController = TextEditingController();
-  final productDescriptionDEController = TextEditingController();
-  final productSummaryTRController = TextEditingController();
-  final productSummaryENController = TextEditingController();
-  final productSummaryDEController = TextEditingController();
-  final categoriesController = TextEditingController();
-  final brandController = TextEditingController();
-  final countryController = TextEditingController();
-  final statusController = TextEditingController();
-  final widthController = TextEditingController();
-  final heightController = TextEditingController();
-  final weightController = TextEditingController();
-  final lengthController = TextEditingController();
-  final gtipController = TextEditingController();
+  TextEditingController productNameTRController = TextEditingController();
+  TextEditingController productNameENController = TextEditingController();
+  TextEditingController productNameDEController = TextEditingController();
+  TextEditingController productDescriptionTRController =
+      TextEditingController();
+  TextEditingController productDescriptionENController =
+      TextEditingController();
+  TextEditingController productDescriptionDEController =
+      TextEditingController();
+  TextEditingController productSummaryTRController = TextEditingController();
+  TextEditingController productSummaryENController = TextEditingController();
+  TextEditingController productSummaryDEController = TextEditingController();
+  TextEditingController categoriesController = TextEditingController();
+  TextEditingController brandController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController statusController = TextEditingController();
+  TextEditingController widthController = TextEditingController();
+  TextEditingController heightController = TextEditingController();
+  TextEditingController weightController = TextEditingController();
+  TextEditingController lengthController = TextEditingController();
+  TextEditingController gtipController = TextEditingController();
 
   var categoryId;
   var subCategoryId;
@@ -95,23 +97,58 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     return '${(bytes / pow(1024, i)).toStringAsFixed(decimals)} ${suffixes[i]}';
   }
 
-  @override
-  void initState() {
+  void clear() {
+    Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .subCategoryList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .deepCategoryList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .categoryFeatureasList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedSubCategory =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedDeepCategory =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .selectedFetureasList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .visibilitySubCategory = false;
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .visibilityDeepCategory = false;
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .visibilitycategoryFeatureasList = false;
+    Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).selectedBrand = null;
+    Provider.of<MenuPageProvider>(context, listen: false).statusList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).selectedStatus = null;
+    Provider.of<MenuPageProvider>(context, listen: false).currencyList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).selectedCurrency =
+        null;
+    Provider.of<MenuPageProvider>(context, listen: false).imageFilesList = [];
+
     Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
         null;
     Provider.of<MenuPageProvider>(context, listen: false).selectedBrand = null;
     Provider.of<MenuPageProvider>(context, listen: false).selectedCurrency =
         null;
     Provider.of<MenuPageProvider>(context, listen: false).selectedStatus = null;
-
     Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).countryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).currencyList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).statusList.clear();
+  }
 
+  @override
+  void initState() {
+    clear();
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
-
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
     Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
@@ -124,18 +161,70 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       'Passive'.tr
     ];
 
-    if (widget.operation == 'Edit') {
-      productNameTRController.text =
-          widget.passedObject!.productName.toString();
+    if (widget.operation == 'Edit' && widget.passedObject != null) {
+      productNameTRController.text = widget.passedObject!.productName!.tr ?? '';
+      productNameENController.text = widget.passedObject!.productName!.en ?? '';
+      productNameDEController.text = widget.passedObject!.productName!.de ?? '';
       productDescriptionTRController.text =
-          widget.passedObject!.productDescription.toString();
-      TextEditingController().text = widget.passedObject!.price.toString();
+          widget.passedObject!.productDescription!.tr ?? '';
+      productDescriptionENController.text =
+          widget.passedObject!.productDescription!.en ?? '';
+      productDescriptionDEController.text =
+          widget.passedObject!.productDescription!.de ?? '';
       productSummaryTRController.text =
-          widget.passedObject!.productSummary.toString();
+          widget.passedObject!.productSummary!.tr ?? '';
+      productSummaryENController.text =
+          widget.passedObject!.productSummary!.en ?? '';
+      productSummaryDEController.text =
+          widget.passedObject!.productSummary!.de ?? '';
+      widthController.text = widget.passedObject!.width != null
+          ? widget.passedObject!.width.toString()
+          : '';
+      heightController.text = widget.passedObject!.height != null
+          ? widget.passedObject!.height.toString()
+          : '';
+      weightController.text = widget.passedObject!.weight != null
+          ? widget.passedObject!.weight.toString()
+          : '';
+      lengthController.text = widget.passedObject!.length != null
+          ? widget.passedObject!.length.toString()
+          : '';
 
-      categoryId = widget.passedObject!.categories!.first!.categoryId;
+      TextEditingController().text = widget.passedObject!.price.toString();
+
+      categoryId = widget.passedObject!.categories![0].categoryId;
+      subCategoryId = widget.passedObject!.categories![1].categoryId;
+      deepCategoryId = widget.passedObject!.categories![2].categoryId;
+
+      Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchSubCategoryList(parentId: categoryId);
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchDeepCategoryList(parentId: subCategoryId);
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateVisibilitySubCategory(true);
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateVisibilityDeepCategory(true);
+
       Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
-          widget.passedObject!.categories!.first!.categoryName;
+          widget.passedObject!.categories![0].categoryName;
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+              .selectedSubCategory =
+          widget.passedObject!.categories![1].categoryName;
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+              .selectedDeepCategory =
+          widget.passedObject!.categories![2].categoryName;
+
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .fetchCategoryFeatureasList(categoryId: deepCategoryId);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateVisibilityCategoryFeatureas(true);
 
       brandId = widget.passedObject!.brand!.id;
       Provider.of<MenuPageProvider>(context, listen: false).selectedBrand =
@@ -153,15 +242,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
   @override
   void dispose() {
-    Provider.of<MenuPageProvider>(context, listen: false)
-        .subCategoryList
-        .clear();
-    Provider.of<MenuPageProvider>(context, listen: false)
-        .deepCategoryList
-        .clear();
-    Provider.of<MenuPageProvider>(context, listen: false)
-        .selectedFetureasList
-        .clear();
     super.dispose();
   }
 
@@ -255,12 +335,17 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               ),
                               onPressed: () {
                                 if (productGlobalKey.currentState!.validate()) {
-                                  if (categoryId.toString() != 'null' &&
-                                      menuPageProvider.selectedStatus
-                                              .toString() !=
-                                          'null' &&
+                                  if (categoryId != null &&
+                                      subCategoryId != null &&
+                                      deepCategoryId != null &&
+                                      menuPageProvider.selectedStatus != null &&
                                       menuPageProvider
                                           .imageFilesList!.isNotEmpty) {
+                                    List<String> categoriesList = [
+                                      categoryId,
+                                      subCategoryId,
+                                      deepCategoryId
+                                    ];
                                     if (widget.operation == 'Add') {
                                       locator<ProductsServices>()
                                           .addProductCall(
@@ -270,9 +355,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                       .getUser
                                                       .id ??
                                                   '',
-                                              categoryId: categoryId,
-                                              subCategoryId: subCategoryId,
-                                              deepCategoryId: deepCategoryId,
+                                              categoriesList: categoriesList,
                                               productNameTR:
                                                   productNameTRController.text,
                                               productNameEN:
