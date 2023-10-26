@@ -213,9 +213,11 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                         ),
                                         onPressed: () async {
                                           await locator<ProductsServices>()
-                                              .getProductCall(
+                                              .getProductEditCall(
                                                   productId: product.id!,
-                                                  queryParameters: {}).then((value) {
+                                                  queryParameters: {
+                                                'edit': '1'
+                                              }).then((value) {
                                             if (value != null) {
                                               Navigator.push(
                                                       context,
@@ -359,7 +361,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
           ],
         ),
       ),
-      bottomNavigationBar: SizedBox(
+      /*   bottomNavigationBar: SizedBox(
         height: 120,
         child: Column(
           children: [
@@ -422,7 +424,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
             ),
           ],
         ),
-      ),
+      ), */
     );
   }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
+import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_model.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
@@ -140,12 +141,48 @@ class ProductsServices {
     }
   }
 
+  // GET PRODUCT (PRODUCT DETAIL)
+  Future<ProductDetailEditModel?> getProductEditCall(
+      {required String productId,
+      required Map<String, String> queryParameters}) async {
+    final response = await http.get(
+        Uri.parse('${Constants.apiUrl}/products/$productId')
+            .replace(queryParameters: queryParameters),
+        headers: Constants.headers);
+
+    if (response.statusCode == 200) {
+      debugPrint("STATUS CODE: ${response.statusCode}");
+      debugPrint(
+          "RESPONSE DATA: ${jsonDecode(utf8.decode(response.bodyBytes))}");
+
+      var status = json.decode(response.body)["status"];
+      if (status == true) {
+        var data = json.decode(response.body)["data"];
+
+        ProductDetailEditModel productDetailsModel =
+            ProductDetailEditModel.fromJson(data);
+        return productDetailsModel;
+      } else {
+        debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
+        debugPrint(
+            "responseCode: ${json.decode(response.body)["responseCode"]}");
+        debugPrint(
+            "responseText: ${json.decode(response.body)["responseText"]}");
+        // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+        return null;
+      }
+    } else {
+      debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
+      // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
+      return null;
+    }
+   
+  }
+
   // ADD PRODUCT
   Future<bool> addProductCall(
       {required String accountId,
-      required String categoryId,
-      required String subCategoryId,
-      required String deepCategoryId,
+      required List<String> categoriesList,
       required String productNameTR,
       required String productNameEN,
       required String productNameDE,
@@ -173,9 +210,9 @@ class ProductsServices {
     request.headers.addAll(Constants.headers);
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
-    request.fields["category_id[]"] = categoryId;
-    request.fields["category_id[]"] = subCategoryId;
-    request.fields["category_id[]"] = deepCategoryId;
+    for (var i = 0; i < categoriesList.length; i++) {
+      request.fields["category_id[$i]"] = categoriesList[i];
+    }
     request.fields["product_name[tr]"] = productNameTR;
     request.fields["product_name[en]"] = productNameEN;
     request.fields["product_name[de]"] = productNameDE;
