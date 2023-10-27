@@ -123,12 +123,14 @@ class GeneralService {
         for (var element in data) {
           countryList.add(CountryModel.fromJson(element));
         }
+
         return countryList;
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint("responseCode: ${responseBody["responseCode"]}");
         debugPrint("responseText: ${responseBody["responseText"]}");
         // throw ("DATA ERROR\nSTATUS CODE:  ${response.statusCode}");
+
         return countryList;
       }
     } else {
