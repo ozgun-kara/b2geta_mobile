@@ -140,13 +140,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     Provider.of<MenuPageProvider>(context, listen: false).selectedStatus = null;
     Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
-    Provider.of<MenuPageProvider>(context, listen: false).countryList.clear();
-    Provider.of<MenuPageProvider>(context, listen: false).currencyList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).statusList.clear();
   }
 
   @override
   void initState() {
+    super.initState();
+
     clear();
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
@@ -189,8 +189,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       lengthController.text = widget.passedObject!.length != null
           ? widget.passedObject!.length.toString()
           : '';
-
-      TextEditingController().text = widget.passedObject!.price.toString();
 
       categoryId = widget.passedObject!.categories![0].categoryId;
       subCategoryId = widget.passedObject!.categories![1].categoryId;
@@ -235,9 +233,41 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
       Provider.of<MenuPageProvider>(context, listen: false).selectedStatus =
           widget.passedObject!.status == '1' ? 'Active'.tr : 'Passive'.tr;
-    }
 
-    super.initState();
+      for (var element in widget.passedObject!.prices!) {
+        if (element.type == 'retail') {
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateSelectedRetailSale((true));
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateSelectedWholeSale(false);
+
+          var countryCode = element.country;
+          var currency = element.currency;
+
+          String? country;
+
+          for (var element
+              in Provider.of<MenuPageProvider>(context, listen: false)
+                  .countryList) {
+            if (element.code == countryCode) {
+              country = element.name;
+            }
+          }
+
+          TextEditingController priceController = TextEditingController();
+          priceController.text = element.price.toString();
+          RetailSaleModel retailSaleModel = RetailSaleModel(
+              country: country,
+              currency: currency,
+              priceController: priceController,
+              quantity: '1',
+              countryCode: null);
+
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateRetailSaleList(retailSaleModel: retailSaleModel);
+        }
+      }
+    }
   }
 
   @override
