@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/products/product_model.dart';
+import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/products/products_services.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
@@ -23,6 +24,12 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
   late double deviceWidth;
   late double deviceHeight;
   late bool themeMode;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,7 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/product_added_sub_page.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,6 +70,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   var subCategoryId;
   var deepCategoryId;
   var brandId;
+  List<String>? editImageList;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -150,7 +152,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     clear();
     Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
     Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchCountryList();
+
     Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
       'EUR',
       'TRY',
@@ -234,6 +236,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       Provider.of<MenuPageProvider>(context, listen: false).selectedStatus =
           widget.passedObject!.status == '1' ? 'Active'.tr : 'Passive'.tr;
 
+      var countryList =
+          Provider.of<MenuPageProvider>(context, listen: false).countryList;
+
       for (var element in widget.passedObject!.prices!) {
         if (element.type == 'retail') {
           Provider.of<MenuPageProvider>(context, listen: false)
@@ -246,9 +251,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
           String? country;
 
-          for (var element
-              in Provider.of<MenuPageProvider>(context, listen: false)
-                  .countryList) {
+          for (var element in countryList) {
             if (element.code == countryCode) {
               country = element.name;
             }
@@ -265,8 +268,43 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateRetailSaleList(retailSaleModel: retailSaleModel);
+        } else if (element.type == 'whole') {
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateSelectedWholeSale(
+                  !(Provider.of<MenuPageProvider>(context, listen: false)
+                      .selectedWholeSale));
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateSelectedRetailSale(false);
+
+          var countryCode = element.country;
+          var currency = element.currency;
+
+          String? country;
+
+          for (var element in countryList) {
+            if (element.code == countryCode) {
+              country = element.name;
+            }
+          }
+
+          TextEditingController priceController = TextEditingController();
+          TextEditingController quantityController = TextEditingController();
+
+          WholeSaleModel wholeSaleModel = WholeSaleModel(
+              country: country,
+              currency: currency,
+              priceController: priceController,
+              countryCode: countryCode,
+              quantityController: quantityController);
+
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateWholeSaleList(wholeSaleModel: wholeSaleModel);
         }
       }
+
+      gtipController.text = widget.passedObject!.gtip ?? '';
+
+      editImageList = widget.passedObject!.images!;
     }
   }
 
@@ -376,6 +414,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                       subCategoryId,
                                       deepCategoryId
                                     ];
+
                                     if (widget.operation == 'Add') {
                                       locator<ProductsServices>()
                                           .addProductCall(
@@ -1503,7 +1542,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
                   String imageName = path.basename(image.path).substring(12);
 
-                  final file = File(image.path);
+                  var file = File(image.path);
                   String imageSize = formatBytes(file.lengthSync(), 2);
 
                   return Container(
@@ -1576,6 +1615,85 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                           ),
                           onPressed: () {
                             menuPageProvider.deleteSelectedImage(image);
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+            ),
+            const SizedBox(height: 11),
+            Visibility(
+              visible: editImageList != null,
+              child: ListView.separated(
+                controller: scrollController,
+                shrinkWrap: true,
+                padding: const EdgeInsets.all(0),
+                itemCount: editImageList!.length,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 11);
+                },
+                itemBuilder: ((context, index) {
+                  var image = editImageList![index];
+
+                  return Container(
+                    width: deviceWidth,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        width: 1,
+                        color: themeMode ? AppTheme.white10 : AppTheme.black28,
+                      ),
+                      color: themeMode ? AppTheme.white5 : Colors.transparent,
+                    ),
+                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          color: AppTheme.white10,
+                          child: Center(
+                            child: Image.network(
+                              image,
+                              width: 59,
+                              height: 59,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Center(
+                          child: SizedBox(
+                            width: deviceWidth * .5,
+                            child: Text(
+                              image,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontFamily: AppTheme.appFontFamily,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                                color: themeMode
+                                    ? AppTheme.blue3
+                                    : AppTheme.white1,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          splashRadius: 24,
+                          icon: Image.asset(
+                            'assets/icons/tabler_trash.png',
+                            width: 24,
+                            height: 24,
+                            color:
+                                themeMode ? AppTheme.blue2 : AppTheme.white15,
+                          ),
+                          onPressed: () {
+                            editImageList!.removeAt(index);
+                            setState(() {});
                           },
                         ),
                       ],
