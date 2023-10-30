@@ -1,9 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // To parse this JSON data, do
 //
 //     final productDetailEditModel = productDetailEditModelFromJson(jsonString);
 
 import 'dart:convert';
-
 
 ProductDetailEditModel productDetailEditModelFromJson(String str) =>
     ProductDetailEditModel.fromJson(json.decode(str));
@@ -270,7 +270,7 @@ class Price {
   String? type;
   String? quantity;
   String? currency;
-  int? price;
+  double? price;
 
   Price({
     this.id,
@@ -282,25 +282,29 @@ class Price {
     this.price,
   });
 
-  factory Price.fromJson(Map<String, dynamic> json) => Price(
-        id: json["id"],
-        productId: json["product_id"],
-        country: json["country"],
-        type: json["type"],
-        quantity: json["quantity"],
-        currency: json["currency"],
-        price: json["price"],
-      );
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'productId': productId,
+      'country': country,
+      'type': type,
+      'quantity': quantity,
+      'currency': currency,
+      'price': price,
+    };
+  }
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "product_id": productId,
-        "country": country,
-        "type": type,
-        "quantity": quantity,
-        "currency": currency,
-        "price": price,
-      };
+  factory Price.fromJson(Map<String, dynamic> map) {
+    return Price(
+      id: map['id'] != null ? map['id'] as String : null,
+      productId: map['productId'] != null ? map['productId'] as String : null,
+      country: map['country'] != null ? map['country'] as String : null,
+      type: map['type'] != null ? map['type'] as String : null,
+      quantity: map['quantity'] != null ? map['quantity'] as String : null,
+      currency: map['currency'] != null ? map['currency'] as String : null,
+      price: map['price'] != null ? map['price'].toDouble() as double : null,
+    );
+  }
 }
 
 class ProductName {
