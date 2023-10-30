@@ -336,7 +336,7 @@ class _MyProductsSubPageState extends State<MyProductsSubPage> {
                                             color: AppTheme.white15),
                                       ),
                                       Text(
-                                        'Rosebella',
+                                        product.brand!.name ?? '',
                                         style: TextStyle(
                                             fontFamily: AppTheme.appFontFamily,
                                             fontSize: 13,

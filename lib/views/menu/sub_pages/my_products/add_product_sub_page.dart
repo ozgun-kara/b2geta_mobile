@@ -9,7 +9,6 @@ import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/whole_sale_model.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/product_added_sub_page.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -143,6 +142,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     Provider.of<MenuPageProvider>(context, listen: false).categoryList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).brandList.clear();
     Provider.of<MenuPageProvider>(context, listen: false).statusList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .retailSaleList
+        .clear();
+    Provider.of<MenuPageProvider>(context, listen: false).wholeSaleList.clear();
+    Provider.of<MenuPageProvider>(context, listen: false).selectedRetailSale =
+        false;
+    Provider.of<MenuPageProvider>(context, listen: false).selectedWholeSale =
+        false;
   }
 
   @override
@@ -1624,84 +1631,86 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               ),
             ),
             const SizedBox(height: 11),
-            Visibility(
-              visible: editImageList != null,
-              child: ListView.separated(
-                controller: scrollController,
-                shrinkWrap: true,
-                padding: const EdgeInsets.all(0),
-                itemCount: editImageList!.length,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: 11);
-                },
-                itemBuilder: ((context, index) {
-                  var image = editImageList![index];
+            editImageList != null
+                ? ListView.separated(
+                    controller: scrollController,
+                    shrinkWrap: true,
+                    padding: const EdgeInsets.all(0),
+                    itemCount: editImageList!.length,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(height: 11);
+                    },
+                    itemBuilder: ((context, index) {
+                      var image = editImageList![index];
 
-                  return Container(
-                    width: deviceWidth,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      border: Border.all(
-                        width: 1,
-                        color: themeMode ? AppTheme.white10 : AppTheme.black28,
-                      ),
-                      color: themeMode ? AppTheme.white5 : Colors.transparent,
-                    ),
-                    padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
-                    child: Row(
-                      children: [
-                        Container(
-                          width: 60,
-                          height: 60,
-                          color: AppTheme.white10,
-                          child: Center(
-                            child: Image.network(
-                              image,
-                              width: 59,
-                              height: 59,
-                              fit: BoxFit.cover,
-                            ),
+                      return Container(
+                        width: deviceWidth,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          border: Border.all(
+                            width: 1,
+                            color:
+                                themeMode ? AppTheme.white10 : AppTheme.black28,
                           ),
+                          color:
+                              themeMode ? AppTheme.white5 : Colors.transparent,
                         ),
-                        const SizedBox(width: 10),
-                        Center(
-                          child: SizedBox(
-                            width: deviceWidth * .5,
-                            child: Text(
-                              image,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontFamily: AppTheme.appFontFamily,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
-                                color: themeMode
-                                    ? AppTheme.blue3
-                                    : AppTheme.white1,
+                        padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              color: AppTheme.white10,
+                              child: Center(
+                                child: Image.network(
+                                  image,
+                                  width: 59,
+                                  height: 59,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
-                          ),
+                            const SizedBox(width: 10),
+                            Center(
+                              child: SizedBox(
+                                width: deviceWidth * .5,
+                                child: Text(
+                                  image,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontSize: 11,
+                                    fontWeight: FontWeight.w600,
+                                    color: themeMode
+                                        ? AppTheme.blue3
+                                        : AppTheme.white1,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                              splashRadius: 24,
+                              icon: Image.asset(
+                                'assets/icons/tabler_trash.png',
+                                width: 24,
+                                height: 24,
+                                color: themeMode
+                                    ? AppTheme.blue2
+                                    : AppTheme.white15,
+                              ),
+                              onPressed: () {
+                                editImageList!.removeAt(index);
+                                setState(() {});
+                              },
+                            ),
+                          ],
                         ),
-                        const Spacer(),
-                        IconButton(
-                          splashRadius: 24,
-                          icon: Image.asset(
-                            'assets/icons/tabler_trash.png',
-                            width: 24,
-                            height: 24,
-                            color:
-                                themeMode ? AppTheme.blue2 : AppTheme.white15,
-                          ),
-                          onPressed: () {
-                            editImageList!.removeAt(index);
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    ),
-                  );
-                }),
-              ),
-            ),
+                      );
+                    }),
+                  )
+                : Container(),
           ],
         ),
       ],
