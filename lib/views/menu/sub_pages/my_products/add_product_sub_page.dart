@@ -1026,6 +1026,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             controller: menuPageProvider.wholeSaleList[index].priceController,
             titleText: 'Price'.tr,
             keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+            ],
           ),
           const SizedBox(height: 13),
           Row(
@@ -1406,6 +1409,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             titleText: 'Price'.tr,
             keyboardType: TextInputType.number,
             controller: menuPageProvider.retailSaleList[index].priceController,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+            ],
           ),
           const SizedBox(height: 13),
           Row(
@@ -2074,6 +2080,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           titleText: 'Width'.tr,
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           suffixText: 'sm',
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+          ],
         ),
         const SizedBox(
           height: 13,
@@ -2089,6 +2098,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           titleText: 'Height'.tr,
           suffixText: 'cm',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+          ],
         ),
         const SizedBox(
           height: 13,
@@ -2104,6 +2116,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           titleText: 'Weight'.tr,
           suffixText: 'gr',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+          ],
         ),
         const SizedBox(
           height: 13,
@@ -2119,6 +2134,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           titleText: 'Length'.tr,
           suffixText: 'cm',
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r"[0-9.]")),
+          ],
         ),
       ],
     );
