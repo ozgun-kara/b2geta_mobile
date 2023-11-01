@@ -305,6 +305,11 @@ class Price {
       price: map['price'] != null ? map['price'].toDouble() as double : null,
     );
   }
+
+  @override
+  String toString() {
+    return 'Price(id: $id, productId: $productId, country: $country, type: $type, quantity: $quantity, currency: $currency, price: $price)';
+  }
 }
 
 class ProductName {
