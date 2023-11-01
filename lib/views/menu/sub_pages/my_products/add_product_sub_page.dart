@@ -247,7 +247,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           Provider.of<MenuPageProvider>(context, listen: false).countryList;
 
       for (var element in widget.passedObject!.prices!) {
-        if (element.type == 'retail') {
+        debugPrint('${widget.passedObject!.prices.toString()}burda');
+        if (element.type == 'retailsale') {
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedRetailSale((true));
           Provider.of<MenuPageProvider>(context, listen: false)
@@ -275,11 +276,10 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateRetailSaleList(retailSaleModel: retailSaleModel);
-        } else if (element.type == 'whole') {
+        } else if (element.type == 'wholesale') {
+          debugPrint('${element.type == 'wholesale'}burda');
           Provider.of<MenuPageProvider>(context, listen: false)
-              .updateSelectedWholeSale(
-                  !(Provider.of<MenuPageProvider>(context, listen: false)
-                      .selectedWholeSale));
+              .updateSelectedWholeSale(true);
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedRetailSale(false);
 
@@ -296,6 +296,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
           TextEditingController priceController = TextEditingController();
           TextEditingController quantityController = TextEditingController();
+          quantityController.text = element.quantity.toString();
+          priceController.text = element.price.toString();
 
           WholeSaleModel wholeSaleModel = WholeSaleModel(
               country: country,
