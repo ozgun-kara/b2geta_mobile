@@ -22,10 +22,10 @@ class ProductDetailEditModel {
   String? price;
   String? currency;
   String? status;
-  int? width;
-  int? height;
-  int? length;
-  int? weight;
+  double? width;
+  double? height;
+  double? length;
+  double? weight;
   bool? saleRetail;
   bool? saleWhole;
   String? gtip;
@@ -78,10 +78,10 @@ class ProductDetailEditModel {
         price: json["price"],
         currency: json["currency"],
         status: json["status"],
-        width: json["width"],
-        height: json["height"],
-        length: json["length"],
-        weight: json["weight"],
+        width: json["width"].toDouble(),
+        height: json["height"].toDouble(),
+        length: json["length"].toDouble(),
+        weight: json["weight"].toDouble(),
         saleRetail: json["sale_retail"],
         saleWhole: json["sale_whole"],
         gtip: json["gtip"],
@@ -99,7 +99,7 @@ class ProductDetailEditModel {
         prices: json["prices"] == null
             ? []
             : List<Price>.from(json["prices"]!.map((x) => Price.fromJson(x))),
-        features: Map.from(json["features"]!)
+        features: Map.from(json["features"])
             .map((k, v) => MapEntry<String, Feature>(k, Feature.fromJson(v))),
       );
 
