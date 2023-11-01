@@ -247,8 +247,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           Provider.of<MenuPageProvider>(context, listen: false).countryList;
 
       for (var element in widget.passedObject!.prices!) {
-        debugPrint('${widget.passedObject!.prices.toString()}burda');
-        if (element.type == 'retailsale') {
+        if (element.type == 'retail') {
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedRetailSale((true));
           Provider.of<MenuPageProvider>(context, listen: false)
@@ -272,12 +271,12 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               currency: currency,
               priceController: priceController,
               quantity: '1',
-              countryCode: null);
+              countryCode: null,
+              type: 'retail');
 
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateRetailSaleList(retailSaleModel: retailSaleModel);
         } else if (element.type == 'wholesale') {
-          debugPrint('${element.type == 'wholesale'}burda');
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedWholeSale(true);
           Provider.of<MenuPageProvider>(context, listen: false)
@@ -304,7 +303,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               currency: currency,
               priceController: priceController,
               countryCode: countryCode,
-              quantityController: quantityController);
+              quantityController: quantityController,
+              type: 'wholesale');
 
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateWholeSaleList(wholeSaleModel: wholeSaleModel);
@@ -625,7 +625,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             currency: currency,
                             priceController: priceController,
                             quantity: '1',
-                            countryCode: countryCode);
+                            countryCode: countryCode,
+                            type: 'retail');
 
                         menuPageProvider.updateRetailSaleList(
                             retailSaleModel: retailSaleModel);
@@ -677,7 +678,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                             currency: currency,
                             priceController: priceController,
                             countryCode: countryCode,
-                            quantityController: quantityController);
+                            quantityController: quantityController, type: 'wholesale');
 
                         menuPageProvider.updateWholeSaleList(
                             wholeSaleModel: wholeSaleModel);
@@ -1065,7 +1066,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       currency: currency,
                       priceController: priceController,
                       countryCode: countryCode,
-                      quantityController: quantityController);
+                      quantityController: quantityController, type: 'wholesale');
 
                   menuPageProvider.updateWholeSaleList(
                       wholeSaleModel: wholeSaleModel);
@@ -1438,7 +1439,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       currency: currency,
                       priceController: priceController,
                       quantity: '1',
-                      countryCode: countryCode);
+                      countryCode: countryCode,
+                      type: 'retail');
 
                   menuPageProvider.updateRetailSaleList(
                       retailSaleModel: retailSaleModel);

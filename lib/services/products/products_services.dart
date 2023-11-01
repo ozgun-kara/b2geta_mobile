@@ -176,7 +176,6 @@ class ProductsServices {
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return null;
     }
-   
   }
 
   // ADD PRODUCT
@@ -234,6 +233,8 @@ class ProductsServices {
     for (var feature in categoryFeatures) {
       request.fields["feature[${feature.attributeId!}][]"] = feature.id!;
     }
+
+    int j = 0;
     if (retailSaleList.isNotEmpty) {
       for (var i = 0; i < retailSaleList.length; i++) {
         request.fields["prices[$i][country]"] = retailSaleList[i].countryCode!;
@@ -241,16 +242,19 @@ class ProductsServices {
         request.fields["prices[$i][currency]"] = retailSaleList[i].currency!;
         request.fields["prices[$i][price]"] =
             retailSaleList[i].priceController.text;
+        j++;
       }
     }
+
     if (wholeSaleList.isNotEmpty) {
       for (var i = 0; i < wholeSaleList.length; i++) {
-        request.fields["prices[$i][country]"] = wholeSaleList[i].countryCode!;
-        request.fields["prices[$i][quantity]"] =
+        request.fields["prices[$j][country]"] = wholeSaleList[i].countryCode!;
+        request.fields["prices[$j][quantity]"] =
             wholeSaleList[i].quantityController.text;
-        request.fields["prices[$i][currency]"] = wholeSaleList[i].currency!;
-        request.fields["prices[$i][price]"] =
+        request.fields["prices[$j][currency]"] = wholeSaleList[i].currency!;
+        request.fields["prices[$j][price]"] =
             wholeSaleList[i].priceController.text;
+        j++;
       }
     }
 

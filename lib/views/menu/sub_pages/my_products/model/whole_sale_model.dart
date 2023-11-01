@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class WholeSaleModel {
@@ -6,6 +7,7 @@ class WholeSaleModel {
   final String? currency;
   final TextEditingController priceController;
   final TextEditingController quantityController;
+  String type;
 
   WholeSaleModel({
     this.country,
@@ -13,6 +15,7 @@ class WholeSaleModel {
     this.currency,
     required this.priceController,
     required this.quantityController,
+    required this.type,
   });
 
   WholeSaleModel copyWith({
@@ -21,6 +24,7 @@ class WholeSaleModel {
     String? currency,
     TextEditingController? priceController,
     TextEditingController? quantityController,
+    String? type,
   }) {
     return WholeSaleModel(
       country: country ?? this.country,
@@ -28,6 +32,7 @@ class WholeSaleModel {
       currency: currency ?? this.currency,
       priceController: priceController ?? this.priceController,
       quantityController: quantityController ?? this.quantityController,
+      type: type ?? this.type,
     );
   }
 }

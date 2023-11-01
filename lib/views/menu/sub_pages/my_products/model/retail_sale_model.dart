@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class RetailSaleModel {
@@ -5,6 +6,7 @@ class RetailSaleModel {
   final String? countryCode;
   final String? currency;
   final String quantity;
+  final String type;
   final TextEditingController priceController;
 
   RetailSaleModel({
@@ -12,6 +14,7 @@ class RetailSaleModel {
     this.countryCode,
     this.currency,
     required this.quantity,
+    required this.type,
     required this.priceController,
   });
 
@@ -21,6 +24,7 @@ class RetailSaleModel {
     String? currency,
     String? quantity,
     TextEditingController? priceController,
+    String? type,
   }) {
     return RetailSaleModel(
       country: country ?? this.country,
@@ -28,6 +32,7 @@ class RetailSaleModel {
       currency: currency ?? this.currency,
       quantity: quantity ?? this.quantity,
       priceController: priceController ?? this.priceController,
+      type: type ?? this.type,
     );
   }
 }
