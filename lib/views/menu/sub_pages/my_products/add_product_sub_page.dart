@@ -250,8 +250,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         if (element.type == 'retail') {
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedRetailSale((true));
-          Provider.of<MenuPageProvider>(context, listen: false)
-              .updateSelectedWholeSale(false);
 
           var countryCode = element.country;
           var currency = element.currency;
@@ -279,8 +277,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         } else if (element.type == 'wholesale') {
           Provider.of<MenuPageProvider>(context, listen: false)
               .updateSelectedWholeSale(true);
-          Provider.of<MenuPageProvider>(context, listen: false)
-              .updateSelectedRetailSale(false);
 
           var countryCode = element.country;
           var currency = element.currency;
@@ -425,90 +421,103 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     ];
 
                                     if (widget.operation == 'Add') {
-                                      locator<ProductsServices>()
-                                          .addProductCall(
-                                              accountId: Provider.of<UserProvider>(
-                                                          context,
-                                                          listen: false)
-                                                      .getUser
-                                                      .id ??
-                                                  '',
-                                              categoriesList: categoriesList,
-                                              productNameTR:
-                                                  productNameTRController.text,
-                                              productNameEN:
-                                                  productNameENController.text,
-                                              productNameDE:
-                                                  productNameDEController.text,
-                                              productDescriptionTR:
-                                                  productDescriptionTRController
-                                                      .text,
-                                              productDescriptionEN:
-                                                  productDescriptionENController
-                                                      .text,
-                                              productDescriptionDE:
-                                                  productDescriptionDEController
-                                                      .text,
-                                              productSummaryTR:
-                                                  productSummaryTRController
-                                                      .text,
-                                              productSummaryEN:
-                                                  productSummaryENController
-                                                      .text,
-                                              productSummaryDE:
-                                                  productSummaryDEController
-                                                      .text,
-                                              width: widthController.text,
-                                              height: heightController.text,
-                                              weight: weightController.text,
-                                              length: lengthController.text,
-                                              saleRetail:
-                                                  menuPageProvider.retailSaleList.length > 1
-                                                      ? '1'
-                                                      : '0',
-                                              saleWhole: menuPageProvider.wholeSaleList.length > 1
-                                                  ? '1'
-                                                  : '0',
-                                              brand: 'My Brand',
-                                              status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
-                                              images: menuPageProvider.imageFilesList ?? [],
-                                              categoryFeatures: menuPageProvider.selectedFetureasList,
-                                              retailSaleList: menuPageProvider.retailSaleList,
-                                              wholeSaleList: menuPageProvider.wholeSaleList,
-                                              gtip: gtipController.text)
-                                          .then((value) {
-                                        if (value == true) {
-                                          debugPrint(
-                                              "PRODUCT HAS SUCCESSFULLY ADDED");
-
+                                      if (((menuPageProvider
+                                              .retailSaleList.isNotEmpty) |
                                           menuPageProvider
-                                              .clearSelectedImageFilesList();
+                                              .wholeSaleList.isNotEmpty)) {
+                                        locator<ProductsServices>()
+                                            .addProductCall(
+                                                accountId:
+                                                    Provider.of<UserProvider>(context, listen: false)
+                                                            .getUser
+                                                            .id ??
+                                                        '',
+                                                categoriesList: categoriesList,
+                                                productNameTR:
+                                                    productNameTRController
+                                                        .text,
+                                                productNameEN:
+                                                    productNameENController
+                                                        .text,
+                                                productNameDE:
+                                                    productNameDEController
+                                                        .text,
+                                                productDescriptionTR:
+                                                    productDescriptionTRController
+                                                        .text,
+                                                productDescriptionEN:
+                                                    productDescriptionENController
+                                                        .text,
+                                                productDescriptionDE:
+                                                    productDescriptionDEController
+                                                        .text,
+                                                productSummaryTR:
+                                                    productSummaryTRController
+                                                        .text,
+                                                productSummaryEN:
+                                                    productSummaryENController
+                                                        .text,
+                                                productSummaryDE:
+                                                    productSummaryDEController
+                                                        .text,
+                                                width: widthController.text,
+                                                height: heightController.text,
+                                                weight: weightController.text,
+                                                length: lengthController.text,
+                                                saleRetail:
+                                                    menuPageProvider.retailSaleList.length > 1
+                                                        ? '1'
+                                                        : '0',
+                                                saleWhole:
+                                                    menuPageProvider.wholeSaleList.length > 1
+                                                        ? '1'
+                                                        : '0',
+                                                brand: 'My Brand',
+                                                status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
+                                                images: menuPageProvider.imageFilesList ?? [],
+                                                categoryFeatures: menuPageProvider.selectedFetureasList,
+                                                retailSaleList: menuPageProvider.retailSaleList,
+                                                wholeSaleList: menuPageProvider.wholeSaleList,
+                                                gtip: gtipController.text)
+                                            .then((value) {
+                                          if (value == true) {
+                                            debugPrint(
+                                                "PRODUCT HAS SUCCESSFULLY ADDED");
 
-                                          var count = 0;
+                                            menuPageProvider
+                                                .clearSelectedImageFilesList();
 
-                                          Navigator.pushAndRemoveUntil(
-                                              context,
-                                              PageRouteBuilder(
-                                                pageBuilder: (_, __, ___) =>
-                                                    const ProductAddedSubPage(),
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                reverseTransitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                transitionsBuilder: (_, a, __,
-                                                        c) =>
-                                                    FadeTransition(
-                                                        opacity: a, child: c),
-                                              ), (route) {
-                                            return count++ == 2;
-                                          }).then((_) => setState(() {}));
-                                        } else {
-                                          debugPrint("PRODUCT HAS NOT ADDED");
-                                          operationFailedDialog(context);
-                                        }
-                                      });
+                                            var count = 0;
+
+                                            Navigator.pushAndRemoveUntil(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      const ProductAddedSubPage(),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
+                                                ), (route) {
+                                              return count++ == 2;
+                                            }).then((_) => setState(() {}));
+                                          } else {
+                                            debugPrint("PRODUCT HAS NOT ADDED");
+                                            operationFailedDialog(context);
+                                          }
+                                        });
+                                      } else {
+                                        validationErrorDialog(context,
+                                            message:
+                                                'En az bir tane fiyat girilmeli.');
+                                      }
                                     } else {
                                       validationErrorDialog(context);
                                     }
@@ -593,112 +602,51 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ),
         ),
         const SizedBox(height: 13.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: themeMode ? AppTheme.white39 : AppTheme.black18,
+        Container(
+          padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: themeMode ? AppTheme.white39 : AppTheme.black18,
+          ),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  menuPageProvider.updateSelectedRetailSale(
+                      !(menuPageProvider.selectedRetailSale));
+
+                  if (menuPageProvider.retailSaleList.isEmpty) {
+                    var country = Constants.language == 'tr' ? 'Turkey' : null;
+                    var currency = Constants.language == 'tr' ? 'TRY' : null;
+                    var countryCode = Constants.language == 'tr' ? 'TR' : null;
+                    TextEditingController priceController =
+                        TextEditingController();
+
+                    RetailSaleModel retailSaleModel = RetailSaleModel(
+                        country: country,
+                        currency: currency,
+                        priceController: priceController,
+                        quantity: '1',
+                        countryCode: countryCode,
+                        type: 'retail');
+
+                    menuPageProvider.updateRetailSaleList(
+                        retailSaleModel: retailSaleModel);
+                  }
+                },
+                child: Row(
+                  children: [
+                    if (menuPageProvider.selectedRetailSale)
+                      const Icon(Icons.check_box_outlined)
+                    else
+                      const Icon(Icons.check_box_outline_blank),
+                    const SizedBox(width: 16),
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      menuPageProvider.updateSelectedRetailSale(
-                          !(menuPageProvider.selectedRetailSale));
-                      menuPageProvider.updateSelectedWholeSale(false);
-
-                      if (menuPageProvider.retailSaleList.isEmpty) {
-                        var country =
-                            Constants.language == 'tr' ? 'Turkey' : null;
-                        var currency =
-                            Constants.language == 'tr' ? 'TRY' : null;
-                        var countryCode =
-                            Constants.language == 'tr' ? 'TR' : null;
-                        TextEditingController priceController =
-                            TextEditingController();
-
-                        RetailSaleModel retailSaleModel = RetailSaleModel(
-                            country: country,
-                            currency: currency,
-                            priceController: priceController,
-                            quantity: '1',
-                            countryCode: countryCode,
-                            type: 'retail');
-
-                        menuPageProvider.updateRetailSaleList(
-                            retailSaleModel: retailSaleModel);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        if (menuPageProvider.selectedRetailSale)
-                          const Icon(Icons.check_box_outlined)
-                        else
-                          const Icon(Icons.check_box_outline_blank),
-                        const SizedBox(width: 16),
-                      ],
-                    ),
-                  ),
-                  Text('Retail Sale'.tr),
-                ],
-              ),
-            ),
-            const SizedBox(width: 10.0),
-            Container(
-              padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: themeMode ? AppTheme.white39 : AppTheme.black18,
-              ),
-              child: Row(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      menuPageProvider.updateSelectedWholeSale(
-                          !(menuPageProvider.selectedWholeSale));
-                      menuPageProvider.updateSelectedRetailSale(false);
-
-                      if (menuPageProvider.wholeSaleList.isEmpty) {
-                        var country =
-                            Constants.language == 'tr' ? 'Turkey' : null;
-                        var currency =
-                            Constants.language == 'tr' ? 'TRY' : null;
-                        var countryCode =
-                            Constants.language == 'tr' ? 'TR' : null;
-                        TextEditingController priceController =
-                            TextEditingController();
-                        TextEditingController quantityController =
-                            TextEditingController();
-
-                        WholeSaleModel wholeSaleModel = WholeSaleModel(
-                            country: country,
-                            currency: currency,
-                            priceController: priceController,
-                            countryCode: countryCode,
-                            quantityController: quantityController, type: 'wholesale');
-
-                        menuPageProvider.updateWholeSaleList(
-                            wholeSaleModel: wholeSaleModel);
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        if (menuPageProvider.selectedWholeSale)
-                          const Icon(Icons.check_box_outlined)
-                        else
-                          const Icon(Icons.check_box_outline_blank),
-                        const SizedBox(width: 16),
-                      ],
-                    ),
-                  ),
-                  Text('Whole Sale'.tr),
-                ],
-              ),
-            ),
-          ],
+              Text('Retail Sale'.tr),
+            ],
+          ),
         ),
         const SizedBox(height: 13.0),
         Visibility(
@@ -714,6 +662,54 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                     currencyList, menuPageProvider);
               },
             )),
+        Container(
+          padding: const EdgeInsets.fromLTRB(8, 16, 16, 16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: themeMode ? AppTheme.white39 : AppTheme.black18,
+          ),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () {
+                  menuPageProvider.updateSelectedWholeSale(
+                      !(menuPageProvider.selectedWholeSale));
+
+                  if (menuPageProvider.wholeSaleList.isEmpty) {
+                    var country = Constants.language == 'tr' ? 'Turkey' : null;
+                    var currency = Constants.language == 'tr' ? 'TRY' : null;
+                    var countryCode = Constants.language == 'tr' ? 'TR' : null;
+                    TextEditingController priceController =
+                        TextEditingController();
+                    TextEditingController quantityController =
+                        TextEditingController();
+
+                    WholeSaleModel wholeSaleModel = WholeSaleModel(
+                        country: country,
+                        currency: currency,
+                        priceController: priceController,
+                        countryCode: countryCode,
+                        quantityController: quantityController,
+                        type: 'wholesale');
+
+                    menuPageProvider.updateWholeSaleList(
+                        wholeSaleModel: wholeSaleModel);
+                  }
+                },
+                child: Row(
+                  children: [
+                    if (menuPageProvider.selectedWholeSale)
+                      const Icon(Icons.check_box_outlined)
+                    else
+                      const Icon(Icons.check_box_outline_blank),
+                    const SizedBox(width: 16),
+                  ],
+                ),
+              ),
+              Text('Whole Sale'.tr),
+            ],
+          ),
+        ),
         Visibility(
             visible: menuPageProvider.selectedWholeSale,
             child: ListView.builder(
@@ -1066,7 +1062,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       currency: currency,
                       priceController: priceController,
                       countryCode: countryCode,
-                      quantityController: quantityController, type: 'wholesale');
+                      quantityController: quantityController,
+                      type: 'wholesale');
 
                   menuPageProvider.updateWholeSaleList(
                       wholeSaleModel: wholeSaleModel);
@@ -1086,7 +1083,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       ? () {
                           menuPageProvider.deleteWholeSaleList(index);
                         }
-                      : null,
+                      : () {
+                          menuPageProvider.deleteWholeSaleList(index);
+
+                          menuPageProvider.updateSelectedWholeSale(false);
+                        },
                   child: Text(
                     '-',
                     style: TextStyle(
@@ -1469,7 +1470,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                     ? () {
                         menuPageProvider.deleteRetailSaleList(index);
                       }
-                    : null,
+                    : () {
+                        menuPageProvider.deleteRetailSaleList(index);
+
+                        menuPageProvider.updateSelectedRetailSale(false);
+                      },
                 child: Text(
                   '-',
                   style: TextStyle(
@@ -3041,7 +3046,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     );
   }
 
-  void validationErrorDialog(BuildContext context) {
+  void validationErrorDialog(BuildContext context, {String? message}) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -3065,7 +3070,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                         const SizedBox(width: 40),
                         Expanded(
                           child: Text(
-                            'Validation Error Dialog'.tr,
+                            message != null
+                                ? message.tr
+                                : 'Validation Error Dialog'.tr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 15,
