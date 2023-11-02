@@ -197,7 +197,8 @@ class ProductsServices {
       required String saleRetail,
       required String saleWhole,
       required String length,
-      required String brand,
+      required String brandName,
+      String? brandId,
       required String status,
       required List<CategoryFeatureasModelFeatureValues> categoryFeatures,
       required List<RetailSaleModel> retailSaleList,
@@ -225,7 +226,11 @@ class ProductsServices {
     request.fields["height"] = height;
     request.fields["weight"] = weight;
     request.fields["length"] = weight;
-    request.fields["brand_name"] = brand;
+    if (brandId != null) {
+      request.fields["brand"] = brandId;
+    } else {
+      request.fields["brand_name"] = brandName;
+    }
     request.fields["sale_retail"] = saleRetail;
     request.fields["sale_whole"] = saleWhole;
     request.fields["status"] = status;
