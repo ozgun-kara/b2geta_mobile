@@ -235,8 +235,10 @@ class ProductsServices {
     request.fields["sale_whole"] = saleWhole;
     request.fields["status"] = status;
     request.fields["gtip"] = gtip;
-    for (var feature in categoryFeatures) {
-      request.fields["feature[${feature.attributeId!}][]"] = feature.id!;
+
+    for (var i = 0; i < categoryFeatures.length; i++) {
+      request.fields["feature[${categoryFeatures[i].attributeId!}][$i]"] =
+          categoryFeatures[i].id!;
     }
 
     int j = 0;

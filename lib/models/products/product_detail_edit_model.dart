@@ -99,8 +99,10 @@ class ProductDetailEditModel {
         prices: json["prices"] == null
             ? []
             : List<Price>.from(json["prices"]!.map((x) => Price.fromJson(x))),
-        features: Map.from(json["features"])
-            .map((k, v) => MapEntry<String, Feature>(k, Feature.fromJson(v))),
+        features: json["features"] is List<dynamic>
+            ? null
+            : Map.from(json["features"]).map(
+                (k, v) => MapEntry<String, Feature>(k, Feature.fromJson(v))),
       );
 
   Map<String, dynamic> toJson() => {

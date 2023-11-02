@@ -54,7 +54,9 @@ class CategoriesServices {
       {required String parentId}) async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/categories?parent_id=$parentId'),
-      headers: Constants.headers,
+      headers: {
+        "Accept-Language": Constants.language!,
+      },
     );
 
     List<CategoryModel> subCategoryList = [];
@@ -93,9 +95,11 @@ class CategoriesServices {
   Future<List<CategoryFeatureasModel>> categoryFeaturesCall(
       {required String categoryId}) async {
     final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/category_features?category_id[]=$categoryId')
-     ,
-      headers: Constants.headers,
+      Uri.parse(
+          '${Constants.apiUrl}/category_features?category_id[]=$categoryId'),
+      headers: {
+        "Accept-Language": Constants.language!,
+      },
     );
 
     List<CategoryFeatureasModel> categoryFeatureasList = [];
@@ -110,8 +114,9 @@ class CategoriesServices {
       var dataList = json.decode(response.body)["data"];
 
       if (status == true) {
-      for (var categoryFeatureas in dataList) {
-          categoryFeatureasList.add(CategoryFeatureasModel.fromJson(categoryFeatureas));
+        for (var categoryFeatureas in dataList) {
+          categoryFeatureasList
+              .add(CategoryFeatureasModel.fromJson(categoryFeatureas));
         }
         return categoryFeatureasList;
       } else {
