@@ -310,6 +310,8 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       gtipController.text = widget.passedObject!.gtip ?? '';
 
       editImageList = widget.passedObject!.images!;
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateSelectedBrand(widget.passedObject!.brand!.name!);
     }
   }
 
@@ -432,10 +434,13 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                             .getUser
                                                             .id ??
                                                         '',
+                                                brandId: brandId,
+                                                brandName:
+                                                    menuPageProvider.selectedBrand ??
+                                                        '',
                                                 categoriesList: categoriesList,
-                                                productNameTR:
-                                                    productNameTRController
-                                                        .text,
+                                                productNameTR: productNameTRController
+                                                    .text,
                                                 productNameEN:
                                                     productNameENController
                                                         .text,
@@ -468,11 +473,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                     menuPageProvider.retailSaleList.length > 1
                                                         ? '1'
                                                         : '0',
-                                                saleWhole:
-                                                    menuPageProvider.wholeSaleList.length > 1
-                                                        ? '1'
-                                                        : '0',
-                                                brand: 'My Brand',
+                                                saleWhole: menuPageProvider.wholeSaleList.length > 1 ? '1' : '0',
                                                 status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
                                                 images: menuPageProvider.imageFilesList ?? [],
                                                 categoryFeatures: menuPageProvider.selectedFetureasList,
@@ -612,26 +613,32 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             children: [
               InkWell(
                 onTap: () {
-                  menuPageProvider.updateSelectedRetailSale(
-                      !(menuPageProvider.selectedRetailSale));
+                  if (menuPageProvider.selectedRetailSale == true) {
+                    menuPageProvider.updateSelectedRetailSale(false);
+                    menuPageProvider.retailSaleList.clear();
+                  } else {
+                    menuPageProvider.updateSelectedRetailSale((true));
 
-                  if (menuPageProvider.retailSaleList.isEmpty) {
-                    var country = Constants.language == 'tr' ? 'Turkey' : null;
-                    var currency = Constants.language == 'tr' ? 'TRY' : null;
-                    var countryCode = Constants.language == 'tr' ? 'TR' : null;
-                    TextEditingController priceController =
-                        TextEditingController();
+                    if (menuPageProvider.retailSaleList.isEmpty) {
+                      var country =
+                          Constants.language == 'tr' ? 'Turkey' : null;
+                      var currency = Constants.language == 'tr' ? 'TRY' : null;
+                      var countryCode =
+                          Constants.language == 'tr' ? 'TR' : null;
+                      TextEditingController priceController =
+                          TextEditingController();
 
-                    RetailSaleModel retailSaleModel = RetailSaleModel(
-                        country: country,
-                        currency: currency,
-                        priceController: priceController,
-                        quantity: '1',
-                        countryCode: countryCode,
-                        type: 'retail');
+                      RetailSaleModel retailSaleModel = RetailSaleModel(
+                          country: country,
+                          currency: currency,
+                          priceController: priceController,
+                          quantity: '1',
+                          countryCode: countryCode,
+                          type: 'retail');
 
-                    menuPageProvider.updateRetailSaleList(
-                        retailSaleModel: retailSaleModel);
+                      menuPageProvider.updateRetailSaleList(
+                          retailSaleModel: retailSaleModel);
+                    }
                   }
                 },
                 child: Row(
@@ -672,28 +679,33 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
             children: [
               InkWell(
                 onTap: () {
-                  menuPageProvider.updateSelectedWholeSale(
-                      !(menuPageProvider.selectedWholeSale));
+                  if (menuPageProvider.selectedWholeSale == true) {
+                    menuPageProvider.updateSelectedWholeSale(false);
+                    menuPageProvider.wholeSaleList.clear();
+                  } else {
+                    menuPageProvider.updateSelectedWholeSale((true));
+                    if (menuPageProvider.wholeSaleList.isEmpty) {
+                      var country =
+                          Constants.language == 'tr' ? 'Turkey' : null;
+                      var currency = Constants.language == 'tr' ? 'TRY' : null;
+                      var countryCode =
+                          Constants.language == 'tr' ? 'TR' : null;
+                      TextEditingController priceController =
+                          TextEditingController();
+                      TextEditingController quantityController =
+                          TextEditingController();
 
-                  if (menuPageProvider.wholeSaleList.isEmpty) {
-                    var country = Constants.language == 'tr' ? 'Turkey' : null;
-                    var currency = Constants.language == 'tr' ? 'TRY' : null;
-                    var countryCode = Constants.language == 'tr' ? 'TR' : null;
-                    TextEditingController priceController =
-                        TextEditingController();
-                    TextEditingController quantityController =
-                        TextEditingController();
+                      WholeSaleModel wholeSaleModel = WholeSaleModel(
+                          country: country,
+                          currency: currency,
+                          priceController: priceController,
+                          countryCode: countryCode,
+                          quantityController: quantityController,
+                          type: 'wholesale');
 
-                    WholeSaleModel wholeSaleModel = WholeSaleModel(
-                        country: country,
-                        currency: currency,
-                        priceController: priceController,
-                        countryCode: countryCode,
-                        quantityController: quantityController,
-                        type: 'wholesale');
-
-                    menuPageProvider.updateWholeSaleList(
-                        wholeSaleModel: wholeSaleModel);
+                      menuPageProvider.updateWholeSaleList(
+                          wholeSaleModel: wholeSaleModel);
+                    }
                   }
                 },
                 child: Row(
@@ -914,6 +926,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                 menuPageProvider.wholeSaleList[index].quantityController,
             titleText: 'Quantity'.tr,
             keyboardType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.allow(RegExp(r"[0-9]")),
+            ],
           ),
           const SizedBox(height: 13),
           Column(
@@ -1457,33 +1472,32 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               ),
               const SizedBox(width: 8.0),
               MaterialButton(
-                minWidth: 70,
-                height: 50,
-                elevation: 0,
-                color: AppTheme.blue3,
-                enableFeedback: false,
-                disabledColor: AppTheme.blue3.withOpacity(.2),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(5)),
-                ),
-                onPressed: menuPageProvider.retailSaleList.length > 1
-                    ? () {
-                        menuPageProvider.deleteRetailSaleList(index);
-                      }
-                    : () {
-                        menuPageProvider.deleteRetailSaleList(index);
-
-                        menuPageProvider.updateSelectedRetailSale(false);
-                      },
-                child: Text(
-                  '-',
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.w700,
-                    color: AppTheme.white1,
+                  minWidth: 70,
+                  height: 50,
+                  elevation: 0,
+                  color: AppTheme.blue3,
+                  enableFeedback: false,
+                  disabledColor: AppTheme.blue3.withOpacity(.2),
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
                   ),
-                ),
-              ),
+                  onPressed: menuPageProvider.retailSaleList.length > 1
+                      ? () {
+                          menuPageProvider.deleteRetailSaleList(index);
+                        }
+                      : () {
+                          menuPageProvider.deleteRetailSaleList(index);
+
+                          menuPageProvider.updateSelectedRetailSale(false);
+                        },
+                  child: Text(
+                    '-',
+                    style: TextStyle(
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.w700,
+                      color: AppTheme.white1,
+                    ),
+                  )),
             ],
           ),
         ],
