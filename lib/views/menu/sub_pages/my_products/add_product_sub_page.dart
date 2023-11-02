@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:ui';
 import 'package:b2geta_mobile/constants.dart';
+import 'package:b2geta_mobile/models/categories/category_featureas_model.dart';
 import 'package:b2geta_mobile/models/products/product_detail_edit_model.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_products/model/retail_sale_model.dart';
@@ -170,6 +171,24 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       'Passive'.tr
     ];
 
+    var country = Constants.language == 'tr' ? 'Turkey' : null;
+    var currency = Constants.language == 'tr' ? 'TRY' : null;
+    var countryCode = Constants.language == 'tr' ? 'TR' : null;
+    TextEditingController priceController = TextEditingController();
+
+    RetailSaleModel retailSaleModel = RetailSaleModel(
+        country: country,
+        currency: currency,
+        priceController: priceController,
+        quantity: '1',
+        countryCode: countryCode,
+        type: 'retail');
+
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .updateRetailSaleList(retailSaleModel: retailSaleModel);
+    Provider.of<MenuPageProvider>(context, listen: false)
+        .updateSelectedRetailSale(true);
+
     if (widget.operation == 'Edit' && widget.passedObject != null) {
       productNameTRController.text = widget.passedObject!.productName!.tr ?? '';
       productNameENController.text = widget.passedObject!.productName!.en ?? '';
@@ -230,8 +249,23 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
       Provider.of<MenuPageProvider>(context, listen: false)
           .fetchCategoryFeatureasList(categoryId: deepCategoryId);
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .updateVisibilityCategoryFeatureas(true);
+
+      if (widget.passedObject!.features != null &&
+          widget.passedObject!.features!.isNotEmpty) {
+        for (var e in widget.passedObject!.features!.values) {
+          for (var element in e.values!.entries) {
+            Provider.of<MenuPageProvider>(context, listen: false)
+                .updateSelectedFetureas(
+                    selectedFetureasModel: CategoryFeatureasModelFeatureValues(
+                        attributeId: e.id,
+                        id: element.key,
+                        displayedValue: element.value),
+                    isSelected: true);
+          }
+        }
+        Provider.of<MenuPageProvider>(context, listen: false)
+            .updateVisibilityCategoryFeatureas(true);
+      }
 
       brandId = widget.passedObject!.brand!.id;
       Provider.of<MenuPageProvider>(context, listen: false).selectedBrand =
@@ -488,27 +522,24 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                             menuPageProvider
                                                 .clearSelectedImageFilesList();
 
-                                            var count = 0;
-
                                             Navigator.pushAndRemoveUntil(
-                                                context,
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      const ProductAddedSubPage(),
-                                                  transitionDuration:
-                                                      const Duration(
-                                                          milliseconds: 0),
-                                                  reverseTransitionDuration:
-                                                      const Duration(
-                                                          milliseconds: 0),
-                                                  transitionsBuilder:
-                                                      (_, a, __, c) =>
-                                                          FadeTransition(
-                                                              opacity: a,
-                                                              child: c),
-                                                ), (route) {
-                                              return count++ == 2;
-                                            }).then((_) => setState(() {}));
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    const ProductAddedSubPage(),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                transitionsBuilder: (_, a, __,
+                                                        c) =>
+                                                    FadeTransition(
+                                                        opacity: a, child: c),
+                                              ),
+                                              (route) => true,
+                                            );
                                           } else {
                                             debugPrint("PRODUCT HAS NOT ADDED");
                                             operationFailedDialog(context);
@@ -516,8 +547,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                         });
                                       } else {
                                         validationErrorDialog(context,
-                                            message:
-                                                'En az bir tane fiyat girilmeli.');
+                                            message: 'Price Error'.tr);
                                       }
                                     } else {
                                       validationErrorDialog(context);
@@ -2339,6 +2369,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   var isSelected = menuPageProvider
                                       .selectedFetureasList
                                       .contains(feature);
+
                                   return feature != null
                                       ? Container(
                                           padding: const EdgeInsets.symmetric(

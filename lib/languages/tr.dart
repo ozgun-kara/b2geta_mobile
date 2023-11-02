@@ -406,4 +406,5 @@ final Map<String, String> tr = {
   'Deep Categories Validate': 'Lütfen dip kategori seçiniz',
   'Sub Categories Validate': 'Lütfen alt kategori seçiniz',
   'Categories Validate': 'Lütfen kategori seçiniz',
+  'Price Error':'En az bir fiyat girilmelidir.',
 };
