@@ -582,11 +582,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                 menuPageProvider
                                                     .imageFilesList!);
                                           }
-                                          if (editImageList != null &&
+                                          /*   if (editImageList != null &&
                                               editImageList!.isNotEmpty) {
                                             resumeImageList
                                                 .addAll(editImageList!);
-                                          }
+                                          } */
 
                                           locator<ProductsServices>()
                                               .updateProductCall(

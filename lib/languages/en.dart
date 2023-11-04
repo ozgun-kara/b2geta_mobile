@@ -100,6 +100,8 @@ final Map<String, String> en = {
   'Write something': 'Write something',
 
   // MENU
+  'Switch To Personal Account': 'Switch To Personal Account',
+  'Switch to company': 'Switch to company',
   'My Companies': 'My Companies',
   'My Products': 'My Products',
   'My Orders': 'My Orders',
