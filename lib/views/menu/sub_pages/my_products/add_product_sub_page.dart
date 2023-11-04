@@ -70,7 +70,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   var subCategoryId;
   var deepCategoryId;
   var brandId;
-  List<String>? editImageList;
+  List<File>? editImageList;
 
   late double deviceTopPadding;
   late double deviceWidth;
@@ -158,8 +158,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
     super.initState();
 
     clear();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
-    Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
 
     Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
       'EUR',
@@ -171,23 +169,28 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       'Passive'.tr
     ];
 
-    var country = Constants.language == 'tr' ? 'Turkey' : null;
-    var currency = Constants.language == 'tr' ? 'TRY' : null;
-    var countryCode = Constants.language == 'tr' ? 'TR' : null;
-    TextEditingController priceController = TextEditingController();
+    if (widget.operation == 'Add') {
+      var country = Constants.language == 'tr' ? 'Turkey' : null;
+      var currency = Constants.language == 'tr' ? 'TRY' : null;
+      var countryCode = Constants.language == 'tr' ? 'TR' : null;
+      TextEditingController priceController = TextEditingController();
 
-    RetailSaleModel retailSaleModel = RetailSaleModel(
-        country: country,
-        currency: currency,
-        priceController: priceController,
-        quantity: '1',
-        countryCode: countryCode,
-        type: 'retail');
+      RetailSaleModel retailSaleModel = RetailSaleModel(
+          country: country,
+          currency: currency,
+          priceController: priceController,
+          quantity: '1',
+          countryCode: countryCode,
+          type: 'retail');
 
-    Provider.of<MenuPageProvider>(context, listen: false)
-        .updateRetailSaleList(retailSaleModel: retailSaleModel);
-    Provider.of<MenuPageProvider>(context, listen: false)
-        .updateSelectedRetailSale(true);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateRetailSaleList(retailSaleModel: retailSaleModel);
+      Provider.of<MenuPageProvider>(context, listen: false)
+          .updateSelectedRetailSale(true);
+    }
+
+    Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
+    Provider.of<MenuPageProvider>(context, listen: false).fetchBrandList();
 
     if (widget.operation == 'Edit' && widget.passedObject != null) {
       productNameTRController.text = widget.passedObject!.productName!.tr ?? '';
@@ -303,7 +306,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
               currency: currency,
               priceController: priceController,
               quantity: '1',
-              countryCode: null,
+              countryCode: countryCode,
               type: 'retail');
 
           Provider.of<MenuPageProvider>(context, listen: false)
@@ -343,7 +346,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
       gtipController.text = widget.passedObject!.gtip ?? '';
 
-      editImageList = widget.passedObject!.images!;
+      if (widget.passedObject!.images != null) {
+        editImageList =
+            widget.passedObject!.images!.map((e) => File(e)).toList();
+      }
+
       Provider.of<MenuPageProvider>(context, listen: false)
           .updateSelectedBrand(widget.passedObject!.brand!.name!);
     }
@@ -447,147 +454,225 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                   if (categoryId != null &&
                                       subCategoryId != null &&
                                       deepCategoryId != null &&
-                                      menuPageProvider.selectedStatus != null &&
-                                      menuPageProvider
-                                          .imageFilesList!.isNotEmpty) {
+                                      menuPageProvider.selectedStatus != null) {
                                     List<String> categoriesList = [
                                       categoryId,
                                       subCategoryId,
                                       deepCategoryId
                                     ];
-
-                                    if (widget.operation == 'Add') {
-                                      if (((menuPageProvider
-                                              .retailSaleList.isNotEmpty) |
-                                          menuPageProvider
-                                              .wholeSaleList.isNotEmpty)) {
-                                        locator<ProductsServices>()
-                                            .addProductCall(
-                                                accountId:
-                                                    Provider.of<UserProvider>(context, listen: false)
-                                                            .getUser
-                                                            .id ??
-                                                        '',
-                                                brandId: brandId,
-                                                brandName:
-                                                    menuPageProvider.selectedBrand ??
-                                                        '',
-                                                categoriesList: categoriesList,
-                                                productNameTR: productNameTRController
-                                                    .text,
-                                                productNameEN:
-                                                    productNameENController
-                                                        .text,
-                                                productNameDE:
-                                                    productNameDEController
-                                                        .text,
-                                                productDescriptionTR:
-                                                    productDescriptionTRController
-                                                        .text,
-                                                productDescriptionEN:
-                                                    productDescriptionENController
-                                                        .text,
-                                                productDescriptionDE:
-                                                    productDescriptionDEController
-                                                        .text,
-                                                productSummaryTR:
-                                                    productSummaryTRController
-                                                        .text,
-                                                productSummaryEN:
-                                                    productSummaryENController
-                                                        .text,
-                                                productSummaryDE:
-                                                    productSummaryDEController
-                                                        .text,
-                                                width: widthController.text,
-                                                height: heightController.text,
-                                                weight: weightController.text,
-                                                length: lengthController.text,
-                                                saleRetail:
-                                                    menuPageProvider.retailSaleList.length > 1
-                                                        ? '1'
-                                                        : '0',
-                                                saleWhole: menuPageProvider.wholeSaleList.length > 1 ? '1' : '0',
-                                                status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
-                                                images: menuPageProvider.imageFilesList ?? [],
-                                                categoryFeatures: menuPageProvider.selectedFetureasList,
-                                                retailSaleList: menuPageProvider.retailSaleList,
-                                                wholeSaleList: menuPageProvider.wholeSaleList,
-                                                gtip: gtipController.text)
-                                            .then((value) {
-                                          if (value == true) {
-                                            debugPrint(
-                                                "PRODUCT HAS SUCCESSFULLY ADDED");
-
+                                    if (((menuPageProvider
+                                            .retailSaleList.isNotEmpty) |
+                                        menuPageProvider
+                                            .wholeSaleList.isNotEmpty)) {
+                                      if (widget.operation == 'Add') {
+                                        if (menuPageProvider.imageFilesList !=
+                                                null &&
                                             menuPageProvider
-                                                .clearSelectedImageFilesList();
+                                                .imageFilesList!.isNotEmpty) {
+                                          locator<ProductsServices>()
+                                              .addProductCall(
+                                                  accountId: Provider.of<UserProvider>(context, listen: false).getUser.id ??
+                                                      '',
+                                                  brandId: brandId,
+                                                  brandName: menuPageProvider.selectedBrand ??
+                                                      '',
+                                                  categoriesList:
+                                                      categoriesList,
+                                                  productNameTR: productNameTRController
+                                                      .text,
+                                                  productNameEN: productNameENController
+                                                      .text,
+                                                  productNameDE:
+                                                      productNameDEController
+                                                          .text,
+                                                  productDescriptionTR:
+                                                      productDescriptionTRController
+                                                          .text,
+                                                  productDescriptionEN:
+                                                      productDescriptionENController
+                                                          .text,
+                                                  productDescriptionDE:
+                                                      productDescriptionDEController
+                                                          .text,
+                                                  productSummaryTR:
+                                                      productSummaryTRController
+                                                          .text,
+                                                  productSummaryEN:
+                                                      productSummaryENController
+                                                          .text,
+                                                  productSummaryDE:
+                                                      productSummaryDEController
+                                                          .text,
+                                                  width: widthController.text,
+                                                  height: heightController.text,
+                                                  weight: weightController.text,
+                                                  length: lengthController.text,
+                                                  saleRetail: menuPageProvider
+                                                          .retailSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  saleWhole: menuPageProvider
+                                                          .wholeSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
+                                                  images: menuPageProvider.imageFilesList ?? [],
+                                                  categoryFeatures: menuPageProvider.selectedFetureasList,
+                                                  retailSaleList: menuPageProvider.retailSaleList,
+                                                  wholeSaleList: menuPageProvider.wholeSaleList,
+                                                  gtip: gtipController.text)
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "PRODUCT HAS SUCCESSFULLY ADDED");
 
-                                            Navigator.pushAndRemoveUntil(
-                                              context,
-                                              PageRouteBuilder(
-                                                pageBuilder: (_, __, ___) =>
-                                                    const ProductAddedSubPage(),
-                                                transitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                reverseTransitionDuration:
-                                                    const Duration(
-                                                        milliseconds: 0),
-                                                transitionsBuilder: (_, a, __,
-                                                        c) =>
-                                                    FadeTransition(
-                                                        opacity: a, child: c),
-                                              ),
-                                              (route) => true,
-                                            );
-                                          } else {
-                                            debugPrint("PRODUCT HAS NOT ADDED");
-                                            operationFailedDialog(context);
+                                              menuPageProvider
+                                                  .clearSelectedImageFilesList();
+
+                                              Navigator.pushAndRemoveUntil(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      const ProductAddedSubPage(),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
+                                                ),
+                                                (route) => true,
+                                              );
+                                            } else {
+                                              debugPrint(
+                                                  "PRODUCT HAS NOT ADDED");
+                                              operationFailedDialog(context);
+                                            }
+                                          });
+                                        } else {
+                                          validationErrorDialog(
+                                            context,
+                                          );
+                                        }
+                                      } else if (widget.operation == 'Edit') {
+                                        if ((menuPageProvider.imageFilesList !=
+                                                    null &&
+                                                menuPageProvider.imageFilesList!
+                                                    .isNotEmpty) ||
+                                            (editImageList != null &&
+                                                editImageList!.isNotEmpty)) {
+                                          List<String> categoriesList = [
+                                            categoryId,
+                                            subCategoryId,
+                                            deepCategoryId
+                                          ];
+                                          List<File> resumeImageList = [];
+                                          if (menuPageProvider.imageFilesList !=
+                                                  null &&
+                                              menuPageProvider
+                                                  .imageFilesList!.isNotEmpty) {
+                                            resumeImageList.addAll(
+                                                menuPageProvider
+                                                    .imageFilesList!);
                                           }
-                                        });
-                                      } else {
-                                        validationErrorDialog(context,
-                                            message: 'Price Error'.tr);
+                                          if (editImageList != null &&
+                                              editImageList!.isNotEmpty) {
+                                            resumeImageList
+                                                .addAll(editImageList!);
+                                          }
+
+                                          locator<ProductsServices>()
+                                              .updateProductCall(
+                                                  productId: widget.passedObject!.id ??
+                                                      '',
+                                                  brandId: brandId,
+                                                  brandName: menuPageProvider.selectedBrand ??
+                                                      '',
+                                                  categoriesList:
+                                                      categoriesList,
+                                                  productNameTR: productNameTRController
+                                                      .text,
+                                                  productNameEN: productNameENController
+                                                      .text,
+                                                  productNameDE:
+                                                      productNameDEController
+                                                          .text,
+                                                  productDescriptionTR:
+                                                      productDescriptionTRController
+                                                          .text,
+                                                  productDescriptionEN:
+                                                      productDescriptionENController
+                                                          .text,
+                                                  productDescriptionDE:
+                                                      productDescriptionDEController
+                                                          .text,
+                                                  productSummaryTR:
+                                                      productSummaryTRController
+                                                          .text,
+                                                  productSummaryEN:
+                                                      productSummaryENController
+                                                          .text,
+                                                  productSummaryDE:
+                                                      productSummaryDEController
+                                                          .text,
+                                                  width: widthController.text,
+                                                  height: heightController.text,
+                                                  weight: weightController.text,
+                                                  length: lengthController.text,
+                                                  saleRetail: menuPageProvider
+                                                          .retailSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  saleWhole: menuPageProvider
+                                                          .wholeSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
+                                                  images: resumeImageList,
+                                                  categoryFeatures: menuPageProvider.selectedFetureasList,
+                                                  retailSaleList: menuPageProvider.retailSaleList,
+                                                  wholeSaleList: menuPageProvider.wholeSaleList,
+                                                  gtip: gtipController.text)
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "PRODUCT HAS SUCCESSFULLY UPDATED");
+
+                                              Navigator.pop(context);
+                                            } else {
+                                              debugPrint(
+                                                  "PRODUCT HAS NOT UPDATED");
+                                              operationFailedDialog(context);
+                                            }
+                                          });
+                                        } else {
+                                          validationErrorDialog(context);
+                                        }
                                       }
                                     } else {
-                                      validationErrorDialog(context);
+                                      validationErrorDialog(context,
+                                          message: 'Price Error'.tr);
                                     }
                                   } else {
-                                    locator<ProductsServices>()
-                                        .updateProductCall(
-                                            productId: widget.passedObject!.id!,
-                                            categoryId: categoryId,
-                                            productName:
-                                                productNameTRController.text,
-                                            productDescription:
-                                                productDescriptionTRController
-                                                    .text,
-                                            productSummary:
-                                                productSummaryTRController.text,
-                                            brand: brandId,
-                                            price: TextEditingController().text,
-                                            currency: menuPageProvider
-                                                .selectedCurrency
-                                                .toString(),
-                                            status: menuPageProvider
-                                                        .selectedStatus ==
-                                                    'Active'.tr
-                                                ? '1'
-                                                : '0')
-                                        .then((value) {
-                                      if (value == true) {
-                                        debugPrint(
-                                            "PRODUCT HAS SUCCESSFULLY UPDATED");
+                                    debugPrint('burda');
 
-                                        Navigator.pop(context);
-                                      } else {
-                                        debugPrint("PRODUCT HAS NOT UPDATED");
-                                        operationFailedDialog(context);
-                                      }
-                                    });
+                                    validationErrorDialog(
+                                      context,
+                                    );
                                   }
                                 } else {
-                                  validationErrorDialog(context);
+                                  validationErrorDialog(
+                                    context,
+                                  );
                                 }
                               }),
                         ],
@@ -1723,7 +1808,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               color: AppTheme.white10,
                               child: Center(
                                 child: Image.network(
-                                  image,
+                                  image.path,
                                   width: 59,
                                   height: 59,
                                   fit: BoxFit.cover,
@@ -1735,7 +1820,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                               child: SizedBox(
                                 width: deviceWidth * .5,
                                 child: Text(
-                                  image,
+                                  image.path,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontFamily: AppTheme.appFontFamily,
