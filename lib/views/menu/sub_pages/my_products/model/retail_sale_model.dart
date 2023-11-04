@@ -35,4 +35,9 @@ class RetailSaleModel {
       type: type ?? this.type,
     );
   }
+
+  @override
+  String toString() {
+    return 'RetailSaleModel(country: $country, countryCode: $countryCode, currency: $currency, quantity: $quantity, type: $type, priceController: ${priceController.text})';
+  }
 }
