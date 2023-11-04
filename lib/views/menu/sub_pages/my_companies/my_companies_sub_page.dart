@@ -478,7 +478,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                     Radius.circular(9)),
                                           ),
                                           child: Text(
-                                            'Choose'.tr,
+                                            'Switch to company'.tr,
                                             style: TextStyle(
                                                 fontSize: 14,
                                                 fontFamily:

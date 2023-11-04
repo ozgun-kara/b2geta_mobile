@@ -1,4 +1,5 @@
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
@@ -15,10 +16,12 @@ import 'package:b2geta_mobile/views/menu/sub_pages/my_products/my_products_sub_p
 import 'package:b2geta_mobile/views/menu/sub_pages/settings/settings_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_orders/profile_orders_sub_page.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
@@ -80,6 +83,56 @@ class _MenuPageState extends State<MenuPage> {
         child: Column(
           children: [
             const SizedBox(height: 48),
+            Visibility(
+              visible:
+                  Provider.of<UserProvider>(context).getUser.type != 'personal',
+              child: MaterialButton(
+                  minWidth: deviceWidth,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'Switch To Personal Account'.tr,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                    ),
+                  ),
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    var PID = prefs.getString('P-ID');
+                    var PTOKEN = prefs.getString('P-Token');
+
+                    prefs.setString("Token", PTOKEN ?? '');
+                    prefs.setString("UserId", PID ?? '');
+
+                    Constants.userToken = PTOKEN;
+                    Constants.userId = PID;
+
+                    await _memberServices.getProfileCall().then((value) {
+                      if (value != null) {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .updateUserModel(value);
+
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const NavigationPage(),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ),
+                            (route) => false);
+                      }
+                    });
+                  }),
+            ),
             Visibility(
               visible:
                   Provider.of<UserProvider>(context).getUser.type != 'company',
