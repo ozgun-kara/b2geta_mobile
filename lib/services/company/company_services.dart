@@ -158,6 +158,7 @@ class CompanyServices {
 
   // UPDATE COMPANY
   Future<bool> updateCompanyCall({
+    required String pToken,
     required String id,
     required String companyName,
     required String taxOffice,
@@ -178,7 +179,10 @@ class CompanyServices {
   }) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/update/$id'),
-      headers: Constants.headers,
+      headers: {
+        "Authorization": "Bearer $pToken",
+        "Accept-Language": "${Constants.language}"
+      },
       body: {
         "company_name": companyName,
         "tax_office": taxOffice,

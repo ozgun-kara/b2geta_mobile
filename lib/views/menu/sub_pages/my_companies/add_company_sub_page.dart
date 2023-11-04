@@ -10,6 +10,7 @@ import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
+import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,6 +20,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'dart:ui';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddCompanySubPage extends StatefulWidget {
   const AddCompanySubPage(
@@ -77,8 +80,6 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
 
   @override
   void initState() {
-
-
     Provider.of<MenuPageProvider>(context, listen: false).selectedCountry =
         null;
     Provider.of<MenuPageProvider>(context, listen: false).selectedCity = null;
@@ -1133,7 +1134,7 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                       fontWeight: FontWeight.w700,
                                       color: AppTheme.white1),
                                 ),
-                                onPressed: () {
+                                onPressed: () async {
                                   if (companyGlobalKey.currentState!
                                       .validate()) {
                                     if (countryCode.toString() != 'null' &&
@@ -1212,8 +1213,14 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                           }
                                         });
                                       } else {
+                                        SharedPreferences prefs =
+                                            await SharedPreferences
+                                                .getInstance();
+                                        var pToken = prefs.getString('P-Token');
+
                                         locator<CompanyServices>()
                                             .updateCompanyCall(
+                                                pToken: pToken ?? '',
                                                 id: widget.passedObject!.id
                                                     .toString(),
                                                 companyName:
@@ -1241,25 +1248,44 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                           if (value == true) {
                                             debugPrint(
                                                 "COMPANY HAS SUCCESSFULLY UPDATED");
-
-                                            Navigator.push(
-                                                context,
-                                                PageRouteBuilder(
-                                                  pageBuilder: (_, __, ___) =>
-                                                      const CompanyAddedSubPage(
-                                                          operation: 'Edit'),
-                                                  transitionDuration:
-                                                      const Duration(
-                                                          milliseconds: 0),
-                                                  reverseTransitionDuration:
-                                                      const Duration(
-                                                          milliseconds: 0),
-                                                  transitionsBuilder:
-                                                      (_, a, __, c) =>
-                                                          FadeTransition(
-                                                              opacity: a,
-                                                              child: c),
-                                                ));
+                                            if (widget.operation == 'Account') {
+                                              Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
+                                                        const MenuPage(),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
+                                                  ));
+                                            } else {
+                                              Navigator.push(
+                                                  context,
+                                                  PageRouteBuilder(
+                                                    pageBuilder: (_, __, ___) =>
+                                                        const CompanyAddedSubPage(
+                                                            operation: 'Edit'),
+                                                    transitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    reverseTransitionDuration:
+                                                        const Duration(
+                                                            milliseconds: 0),
+                                                    transitionsBuilder:
+                                                        (_, a, __, c) =>
+                                                            FadeTransition(
+                                                                opacity: a,
+                                                                child: c),
+                                                  ));
+                                            }
                                           } else {
                                             debugPrint(
                                                 "COMPANY HAS NOT UPDATED");

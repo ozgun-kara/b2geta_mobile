@@ -267,7 +267,6 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
             //     ),
             //   ],
             // ),
-
             Container(
               width: deviceWidth,
               height: 1,
@@ -275,7 +274,7 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
             ),
             SizedBox(
               width: deviceWidth,
-              height: deviceHeight - 215,
+              height: deviceHeight - 300,
               child: FutureBuilder<List<CompanyModel2>>(
                 future: locator<CompanyServices>().listMyCompaniesCall(),
                 builder: (context, data) {
