@@ -323,8 +323,7 @@ class ProductsServices {
       required List<CategoryFeatureasModelFeatureValues> categoryFeatures,
       required List<RetailSaleModel> retailSaleList,
       required List<WholeSaleModel> wholeSaleList,
-      required String gtip,
-      required List<File> images}) async {
+      required String gtip}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/update2/$productId'));
     request.headers.addAll(Constants.headers);
@@ -384,14 +383,6 @@ class ProductsServices {
         j++;
       }
     }
-
-    List<http.MultipartFile> files = [];
-    for (File file in images) {
-      var f = await http.MultipartFile.fromPath('images[]', file.path);
-      files.add(f);
-    }
-
-    request.files.addAll(files);
 
     var response = await request.send();
 
@@ -486,6 +477,35 @@ class ProductsServices {
     final response = await http.delete(
         Uri.parse('${Constants.apiUrl}/products/delete/$productId'),
         headers: Constants.headers);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // UPDATE PRODUCT IMAGE
+  Future<bool> updateProductImageCall(
+      {required String accountId,
+      required String productId,
+      required List<File> images}) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/products/upload_images'));
+    request.headers.addAll(Constants.headers);
+
+    request.fields["account_id"] = accountId;
+    request.fields["user_id"] = Constants.userId!;
+    request.fields["product_id"] = productId;
+
+    List<http.MultipartFile> files = [];
+    for (File file in images) {
+      var f = await http.MultipartFile.fromPath('images[]', file.path);
+      files.add(f);
+    }
+
+    request.files.addAll(files);
+    var response = await request.send();
 
     if (response.statusCode == 200) {
       return true;
