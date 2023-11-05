@@ -100,7 +100,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 0, 96),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(height: 1),
                     Container(
@@ -470,282 +470,159 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       ? AppTheme.white29
                                       : AppTheme.black21),
                               const SizedBox(height: 16),
-                              Wrap(
-                                spacing: 15,
-                                runSpacing: 13,
-                                children: [
-                                  SizedBox(
-                                    width: deviceWidth * 0.5 - 17.5,
-                                    height: 39,
-                                    child: MaterialButton(
-                                        minWidth: deviceWidth * 0.5 - 17.5,
-                                        height: 39,
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                        ),
-                                        color:
-                                            Provider.of<MarketPlacePageProvider>(
-                                                            context)
-                                                        .productCountIndex ==
-                                                    0
-                                                ? AppTheme.blue2
-                                                : themeMode
-                                                    ? AppTheme.white31
-                                                    : AppTheme.black18,
-                                        // padding: const EdgeInsets.all(7),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "50 - 199 ${'Piece-1'.tr}",
+                              product!.prices!.length > 1
+                                  ? Wrap(
+                                      spacing: 15,
+                                      runSpacing: 13,
+                                      children: [
+                                          for (var price in product!.prices!)
+                                            SizedBox(
+                                                width: deviceWidth * 0.5 - 17.5,
+                                                height: 39,
+                                                child: MaterialButton(
+                                                    minWidth:
+                                                        deviceWidth * 0.5 -
+                                                            17.5,
+                                                    height: 39,
+                                                    elevation: 0,
+                                                    shape:
+                                                        const RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  4)),
+                                                    ),
+                                                    color: Provider.of<MarketPlacePageProvider>(
+                                                                    context)
+                                                                .productCountIndex ==
+                                                            0
+                                                        ? AppTheme.blue2
+                                                        : themeMode
+                                                            ? AppTheme.white31
+                                                            : AppTheme.black18,
+                                                    // padding: const EdgeInsets.all(7),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            "${price.quantity} ${'Piece-1'.tr}",
+                                                            style: TextStyle(
+                                                              fontSize: 11,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              color: Provider.of<MarketPlacePageProvider>(
+                                                                              context)
+                                                                          .productCountIndex ==
+                                                                      0
+                                                                  ? AppTheme
+                                                                      .white30
+                                                                  : AppTheme
+                                                                      .white15,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Text(
+                                                          price.price
+                                                              .toString(),
+                                                          style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            color: Provider.of<MarketPlacePageProvider>(
+                                                                            context)
+                                                                        .productCountIndex ==
+                                                                    0
+                                                                ? AppTheme
+                                                                    .white1
+                                                                : themeMode
+                                                                    ? AppTheme
+                                                                        .blue2
+                                                                    : AppTheme
+                                                                        .white1,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    onPressed: () {
+                                                      Provider.of<MarketPlacePageProvider>(
+                                                              context,
+                                                              listen: false)
+                                                          .updateProductCountIndex(
+                                                              0);
+                                                    })),
+                                        ])
+                                  : SizedBox(
+                                      width: deviceWidth,
+                                      height: 39,
+                                      child: MaterialButton(
+                                          minWidth: deviceWidth,
+                                          height: 39,
+                                          elevation: 0,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(4)),
+                                          ),
+                                          color:
+                                              Provider.of<MarketPlacePageProvider>(
+                                                              context)
+                                                          .productCountIndex ==
+                                                      0
+                                                  ? AppTheme.blue2
+                                                  : themeMode
+                                                      ? AppTheme.white31
+                                                      : AppTheme.black18,
+                                          // padding: const EdgeInsets.all(7),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Expanded(
+                                                child: Text(
+                                                  "${product!.prices!.first.quantity} ${'Piece-1'.tr}",
+                                                  style: TextStyle(
+                                                    fontSize: 11,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w500,
+                                                    color: Provider.of<MarketPlacePageProvider>(
+                                                                    context)
+                                                                .productCountIndex ==
+                                                            0
+                                                        ? AppTheme.white30
+                                                        : AppTheme.white15,
+                                                  ),
+                                                ),
+                                              ),
+                                              Text(
+                                                product!.prices!.first.price!
+                                                    .toString(),
                                                 style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
+                                                  fontSize: 15,
                                                   fontWeight: FontWeight.w500,
                                                   color: Provider.of<MarketPlacePageProvider>(
                                                                   context)
                                                               .productCountIndex ==
                                                           0
-                                                      ? AppTheme.white30
-                                                      : AppTheme.white15,
+                                                      ? AppTheme.white1
+                                                      : themeMode
+                                                          ? AppTheme.blue2
+                                                          : AppTheme.white1,
                                                 ),
                                               ),
-                                            ),
-                                            Text(
-                                              product!.price ?? '0',
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productCountIndex ==
-                                                        0
-                                                    ? AppTheme.white1
-                                                    : themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onPressed: () {
-                                          Provider.of<MarketPlacePageProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .updateProductCountIndex(0);
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    width: deviceWidth * 0.5 - 17.5,
-                                    height: 39,
-                                    child: MaterialButton(
-                                        minWidth: deviceWidth * 0.5 - 17.5,
-                                        height: 39,
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                        ),
-                                        color:
+                                            ],
+                                          ),
+                                          onPressed: () {
                                             Provider.of<MarketPlacePageProvider>(
-                                                            context)
-                                                        .productCountIndex ==
-                                                    1
-                                                ? AppTheme.blue2
-                                                : themeMode
-                                                    ? AppTheme.white31
-                                                    : AppTheme.black18,
-                                        // padding: const EdgeInsets.all(7),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "200 - 499 ${'Piece-1'.tr}",
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Provider.of<MarketPlacePageProvider>(
-                                                                  context)
-                                                              .productCountIndex ==
-                                                          1
-                                                      ? AppTheme.white30
-                                                      : AppTheme.white15,
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              "89,05",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productCountIndex ==
-                                                        1
-                                                    ? AppTheme.white1
-                                                    : themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onPressed: () {
-                                          Provider.of<MarketPlacePageProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .updateProductCountIndex(1);
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    width: deviceWidth * 0.5 - 17.5,
-                                    height: 39,
-                                    child: MaterialButton(
-                                        minWidth: deviceWidth * 0.5 - 17.5,
-                                        height: 39,
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                        ),
-                                        color:
-                                            Provider.of<MarketPlacePageProvider>(
-                                                            context)
-                                                        .productCountIndex ==
-                                                    2
-                                                ? AppTheme.blue2
-                                                : themeMode
-                                                    ? AppTheme.white31
-                                                    : AppTheme.black18,
-                                        // padding: const EdgeInsets.all(7),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                "500 - 999 ${'Piece-1'.tr}",
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Provider.of<MarketPlacePageProvider>(
-                                                                  context)
-                                                              .productCountIndex ==
-                                                          2
-                                                      ? AppTheme.white30
-                                                      : AppTheme.white15,
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              "83,11",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productCountIndex ==
-                                                        2
-                                                    ? AppTheme.white1
-                                                    : themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onPressed: () {
-                                          Provider.of<MarketPlacePageProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .updateProductCountIndex(2);
-                                        }),
-                                  ),
-                                  SizedBox(
-                                    width: deviceWidth * 0.5 - 17.5,
-                                    height: 39,
-                                    child: MaterialButton(
-                                        minWidth: deviceWidth * 0.5 - 17.5,
-                                        height: 39,
-                                        elevation: 0,
-                                        shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(4)),
-                                        ),
-                                        color:
-                                            Provider.of<MarketPlacePageProvider>(
-                                                            context)
-                                                        .productCountIndex ==
-                                                    3
-                                                ? AppTheme.blue2
-                                                : themeMode
-                                                    ? AppTheme.white31
-                                                    : AppTheme.black18,
-                                        // padding: const EdgeInsets.all(7),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                ">= 1000 ${'Piece-1'.tr}",
-                                                style: TextStyle(
-                                                  fontSize: 11,
-                                                  fontFamily:
-                                                      AppTheme.appFontFamily,
-                                                  fontWeight: FontWeight.w500,
-                                                  color: Provider.of<MarketPlacePageProvider>(
-                                                                  context)
-                                                              .productCountIndex ==
-                                                          3
-                                                      ? AppTheme.white30
-                                                      : AppTheme.white15,
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              "79,15",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w500,
-                                                color: Provider.of<MarketPlacePageProvider>(
-                                                                context)
-                                                            .productCountIndex ==
-                                                        3
-                                                    ? AppTheme.white1
-                                                    : themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        onPressed: () {
-                                          Provider.of<MarketPlacePageProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .updateProductCountIndex(3);
-                                        }),
-                                  ),
-                                ],
-                              ), // PRODUCT COUNT
+                                                    context,
+                                                    listen: false)
+                                                .updateProductCountIndex(0);
+                                          })), // PRODUCT COUNT
                               const SizedBox(height: 17),
                               Container(
                                   height: 1,
@@ -2430,7 +2307,8 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         ),
                                                       ),
                                                       child: CachedNetworkImage(
-                                                        imageUrl:(product.images!
+                                                        imageUrl: (product
+                                                                    .images!
                                                                     .isNotEmpty &&
                                                                 product.images![
                                                                         0] !=
