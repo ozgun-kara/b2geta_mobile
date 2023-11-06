@@ -413,4 +413,5 @@ final Map<String, String> en = {
   'Sub Categories Validate': 'Please select the sub category',
   'Categories Validate': 'Please select the category',
   'Price Error': 'At least one price must be entered.',
+  'Image Error': 'At least one image must be added.',
 };

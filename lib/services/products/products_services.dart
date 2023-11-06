@@ -513,4 +513,22 @@ class ProductsServices {
       return false;
     }
   }
+
+
+ // DELETE PRODUCT IMAGE
+  Future<bool> deleteProductImageCall({
+    required String imageId,
+  }) async {
+    final response = await http.delete(
+        Uri.parse('${Constants.apiUrl}/products/delete_images/$imageId'),
+        headers: Constants.headers);
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+
 }
