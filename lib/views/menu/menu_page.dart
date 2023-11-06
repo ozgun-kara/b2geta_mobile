@@ -81,58 +81,10 @@ class _MenuPageState extends State<MenuPage> {
       appBar: const CustomInnerAppBar(),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 48),
-            Visibility(
-              visible:
-                  Provider.of<UserProvider>(context).getUser.type != 'personal',
-              child: MaterialButton(
-                  minWidth: deviceWidth,
-                  elevation: 0,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Text(
-                    'Switch To Personal Account'.tr,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontFamily: AppTheme.appFontFamily,
-                      fontWeight: FontWeight.w400,
-                      color: themeMode ? AppTheme.blue3 : AppTheme.white1,
-                    ),
-                  ),
-                  onPressed: () async {
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    var PID = prefs.getString('P-ID');
-                    var PTOKEN = prefs.getString('P-Token');
-
-                    prefs.setString("Token", PTOKEN ?? '');
-                    prefs.setString("UserId", PID ?? '');
-
-                    Constants.userToken = PTOKEN;
-                    Constants.userId = PID;
-
-                    await _memberServices.getProfileCall().then((value) {
-                      if (value != null) {
-                        Provider.of<UserProvider>(context, listen: false)
-                            .updateUserModel(value);
-
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (_, __, ___) =>
-                                  const NavigationPage(),
-                              transitionDuration:
-                                  const Duration(milliseconds: 0),
-                              reverseTransitionDuration:
-                                  const Duration(milliseconds: 0),
-                              transitionsBuilder: (_, a, __, c) =>
-                                  FadeTransition(opacity: a, child: c),
-                            ),
-                            (route) => false);
-                      }
-                    });
-                  }),
-            ),
             Visibility(
               visible:
                   Provider.of<UserProvider>(context).getUser.type != 'company',
@@ -182,6 +134,7 @@ class _MenuPageState extends State<MenuPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                       child: Text(
                         'My Products'.tr,
+                        textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: AppTheme.appFontFamily,
@@ -213,6 +166,7 @@ class _MenuPageState extends State<MenuPage> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: Text(
                   'My Orders'.tr,
+                  textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 16,
                     fontFamily: AppTheme.appFontFamily,
@@ -401,6 +355,56 @@ class _MenuPageState extends State<MenuPage> {
                             FadeTransition(opacity: a, child: c),
                       ));
                 }),
+            Visibility(
+              visible:
+                  Provider.of<UserProvider>(context).getUser.type != 'personal',
+              child: MaterialButton(
+                  minWidth: deviceWidth,
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Text(
+                    'Switch To Personal Account'.tr,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontFamily: AppTheme.appFontFamily,
+                      fontWeight: FontWeight.w400,
+                      color: themeMode ? AppTheme.blue3 : AppTheme.white1,
+                    ),
+                  ),
+                  onPressed: () async {
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    var PID = prefs.getString('P-ID');
+                    var PTOKEN = prefs.getString('P-Token');
+
+                    prefs.setString("Token", PTOKEN ?? '');
+                    prefs.setString("UserId", PID ?? '');
+
+                    Constants.userToken = PTOKEN;
+                    Constants.userId = PID;
+
+                    await _memberServices.getProfileCall().then((value) {
+                      if (value != null) {
+                        Provider.of<UserProvider>(context, listen: false)
+                            .updateUserModel(value);
+
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (_, __, ___) =>
+                                  const NavigationPage(),
+                              transitionDuration:
+                                  const Duration(milliseconds: 0),
+                              reverseTransitionDuration:
+                                  const Duration(milliseconds: 0),
+                              transitionsBuilder: (_, a, __, c) =>
+                                  FadeTransition(opacity: a, child: c),
+                            ),
+                            (route) => false);
+                      }
+                    });
+                  }),
+            ),
             const SizedBox(height: 8),
             MaterialButton(
                 minWidth: deviceWidth,
