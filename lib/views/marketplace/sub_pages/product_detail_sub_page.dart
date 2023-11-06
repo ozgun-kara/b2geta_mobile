@@ -525,8 +525,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                           ),
                                                         ),
                                                         Text(
-                                                          price.price
-                                                              .toString(),
+                                                          "${price.price} ${price.currency}",
                                                           style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
@@ -597,8 +596,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                 ),
                                               ),
                                               Text(
-                                                product!.prices!.first.price!
-                                                    .toString(),
+                                                "${product!.prices!.first.price!} ${product!.prices!.first.currency}",
                                                 style: TextStyle(
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w500,
@@ -2307,12 +2305,13 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                         imageUrl: (product
                                                                     .images!
                                                                     .isNotEmpty &&
-                                                                product.images![
-                                                                        0].url !=
+                                                                product
+                                                                        .images![
+                                                                            0]
+                                                                        .url !=
                                                                     null)
                                                             ? product
                                                                 .images![0].url!
-                                                          
                                                             : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                         fit: BoxFit.cover,
                                                         errorWidget: (context,

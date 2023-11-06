@@ -583,72 +583,81 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                                   images: menuPageProvider
                                                       .imageFilesList!);
                                         }
-                                        locator<ProductsServices>()
-                                            .updateProductCall(
-                                                productId: widget.passedObject!.id ??
-                                                    '',
-                                                brandId: brandId,
-                                                brandName: menuPageProvider.selectedBrand ??
-                                                    '',
-                                                categoriesList: categoriesList,
-                                                productNameTR: productNameTRController
-                                                    .text,
-                                                productNameEN: productNameENController
-                                                    .text,
-                                                productNameDE: productNameDEController
-                                                    .text,
-                                                productDescriptionTR:
-                                                    productDescriptionTRController
-                                                        .text,
-                                                productDescriptionEN:
-                                                    productDescriptionENController
-                                                        .text,
-                                                productDescriptionDE:
-                                                    productDescriptionDEController
-                                                        .text,
-                                                productSummaryTR:
-                                                    productSummaryTRController
-                                                        .text,
-                                                productSummaryEN:
-                                                    productSummaryENController
-                                                        .text,
-                                                productSummaryDE:
-                                                    productSummaryDEController
-                                                        .text,
-                                                width: widthController.text,
-                                                height: heightController.text,
-                                                weight: weightController.text,
-                                                length: lengthController.text,
-                                                saleRetail: menuPageProvider
-                                                        .retailSaleList
-                                                        .isNotEmpty
-                                                    ? '1'
-                                                    : '0',
-                                                saleWhole: menuPageProvider
-                                                        .wholeSaleList
-                                                        .isNotEmpty
-                                                    ? '1'
-                                                    : '0',
-                                                status: menuPageProvider.selectedStatus == 'Active'.tr
-                                                    ? '1'
-                                                    : '0',
-                                                categoryFeatures:
-                                                    menuPageProvider.selectedFetureasList,
-                                                retailSaleList: menuPageProvider.retailSaleList,
-                                                wholeSaleList: menuPageProvider.wholeSaleList,
-                                                gtip: gtipController.text)
-                                            .then((value) {
-                                          if (value == true) {
-                                            debugPrint(
-                                                "PRODUCT HAS SUCCESSFULLY UPDATED");
+                                        if ((editImageList != null &&
+                                                editImageList!.isNotEmpty) ||
+                                            (menuPageProvider.imageFilesList !=
+                                                    null &&
+                                                menuPageProvider.imageFilesList!
+                                                    .isNotEmpty)) {
+                                          locator<ProductsServices>()
+                                              .updateProductCall(
+                                                  productId: widget.passedObject!.id ??
+                                                      '',
+                                                  brandId: brandId,
+                                                  brandName: menuPageProvider.selectedBrand ??
+                                                      '',
+                                                  categoriesList:
+                                                      categoriesList,
+                                                  productNameTR: productNameTRController
+                                                      .text,
+                                                  productNameEN: productNameENController
+                                                      .text,
+                                                  productNameDE:
+                                                      productNameDEController
+                                                          .text,
+                                                  productDescriptionTR:
+                                                      productDescriptionTRController
+                                                          .text,
+                                                  productDescriptionEN:
+                                                      productDescriptionENController
+                                                          .text,
+                                                  productDescriptionDE:
+                                                      productDescriptionDEController
+                                                          .text,
+                                                  productSummaryTR:
+                                                      productSummaryTRController
+                                                          .text,
+                                                  productSummaryEN:
+                                                      productSummaryENController
+                                                          .text,
+                                                  productSummaryDE:
+                                                      productSummaryDEController
+                                                          .text,
+                                                  width: widthController.text,
+                                                  height: heightController.text,
+                                                  weight: weightController.text,
+                                                  length: lengthController.text,
+                                                  saleRetail: menuPageProvider
+                                                          .retailSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  saleWhole: menuPageProvider
+                                                          .wholeSaleList
+                                                          .isNotEmpty
+                                                      ? '1'
+                                                      : '0',
+                                                  status: menuPageProvider.selectedStatus == 'Active'.tr ? '1' : '0',
+                                                  categoryFeatures: menuPageProvider.selectedFetureasList,
+                                                  retailSaleList: menuPageProvider.retailSaleList,
+                                                  wholeSaleList: menuPageProvider.wholeSaleList,
+                                                  gtip: gtipController.text)
+                                              .then((value) {
+                                            if (value == true) {
+                                              debugPrint(
+                                                  "PRODUCT HAS SUCCESSFULLY UPDATED");
 
-                                            Navigator.pop(context);
-                                          } else {
-                                            debugPrint(
-                                                "PRODUCT HAS NOT UPDATED");
-                                            operationFailedDialog(context);
-                                          }
-                                        });
+                                              Navigator.pop(context);
+                                            } else {
+                                              debugPrint(
+                                                  "PRODUCT HAS NOT UPDATED");
+                                              operationFailedDialog(context);
+                                            }
+                                          });
+                                        } else {
+                                          validationErrorDialog(context,
+                                              message: 'Image Error'.tr);
+                                        }
                                       }
                                     } else {
                                       validationErrorDialog(context,
@@ -1837,8 +1846,16 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                                     : AppTheme.white15,
                               ),
                               onPressed: () {
-                                editImageList!.removeAt(index);
-                                setState(() {});
+                                locator<ProductsServices>()
+                                    .deleteProductImageCall(
+                                        imageId: widget
+                                            .passedObject!.images![index].id!)
+                                    .then((value) {
+                                  if (value) {
+                                    editImageList!.removeAt(index);
+                                    setState(() {});
+                                  }
+                                });
                               },
                             ),
                           ],
