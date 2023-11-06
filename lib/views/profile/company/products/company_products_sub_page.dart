@@ -273,7 +273,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                           ),
                                           child: CachedNetworkImage(
                                             imageUrl: product.images!.isNotEmpty
-                                                ? product.images![0] ??
+                                                ? product.images![0].url ??
                                                     'https://doraev.com/images/custom/product-images/nophoto.png'
                                                 : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                             fit: BoxFit.cover,
@@ -461,7 +461,7 @@ class _CompanyProductsSubPageState extends State<CompanyProductsSubPage> {
                                             child: CachedNetworkImage(
                                               imageUrl: product
                                                       .images!.isNotEmpty
-                                                  ? product.images![0] ??
+                                                  ? product.images![0].url ??
                                                       'https://doraev.com/images/custom/product-images/nophoto.png'
                                                   : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                               fit: BoxFit.cover,

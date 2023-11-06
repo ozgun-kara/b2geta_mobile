@@ -30,7 +30,7 @@ class ProductDetailEditModel {
   bool? saleWhole;
   String? gtip;
   List<Category>? categories;
-  List<String>? images;
+  List<Images>? images;
   List<ImagesMeta>? imagesMeta;
   List<Price>? prices;
   Map<String, Feature>? features;
@@ -91,8 +91,8 @@ class ProductDetailEditModel {
                 json["categories"]!.map((x) => Category.fromJson(x))),
         images: json["images"] == null
             ? []
-            : List<String>.from(json["images"]!.map((x) => x)),
-        imagesMeta: json["images_meta"] == null
+            : List<Images>.from(json["images"]!.map((x) => Images.fromJson(x))),
+        imagesMeta: json["images"] == null
             ? []
             : List<ImagesMeta>.from(
                 json["images_meta"]!.map((x) => ImagesMeta.fromJson(x))),
@@ -385,4 +385,41 @@ class ProductSummary {
         "en": en,
         "de": de,
       };
+}
+
+class Images {
+/*
+{
+  "id": "421",
+  "url": "https://api.businessucces.com/uploads/products/2023/11/04112023191741-1699114661.png",
+  "product_id": "474",
+  "file": "uploads/products/2023/11/04112023191741-1699114661.png"
+} 
+*/
+
+  String? id;
+  String? url;
+  String? productId;
+  String? file;
+
+  Images({
+    this.id,
+    this.url,
+    this.productId,
+    this.file,
+  });
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    url = json['url']?.toString();
+    productId = json['product_id']?.toString();
+    file = json['file']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
+    data['product_id'] = productId;
+    data['file'] = file;
+    return data;
+  }
 }

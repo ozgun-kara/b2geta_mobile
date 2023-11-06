@@ -131,7 +131,9 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                       CustomGalleryWidget(
                                     urlImages: (product!.images != null)
                                         ? product!.images!
-                                        : [],
+                                            .map((e) => e.url!)
+                                            .toList()
+                                        : const [],
                                   ),
                                   transitionDuration:
                                       const Duration(milliseconds: 0),
@@ -149,9 +151,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                 child: CachedNetworkImage(
                                   imageUrl: (product!.images != null &&
                                           product!.images!.isNotEmpty)
-                                      ? product!.images![0]
-                                          .replaceAll('////', '//')
-                                          .replaceAll('///', '//')
+                                      ? product!.images![0].url!
                                       : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                   fit: BoxFit.cover,
                                   errorWidget: (context, error, stackTrace) =>
@@ -225,10 +225,7 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                             null &&
                                                         product!
                                                             .images!.isNotEmpty)
-                                                    ? product!.images![0]
-                                                        .replaceAll(
-                                                            '////', '//')
-                                                        .replaceAll('///', '//')
+                                                    ? product!.images![0].url!
                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                 fit: BoxFit.cover,
                                                 errorWidget: (context, error,
@@ -2311,15 +2308,11 @@ class _ProductDetailSubPageState extends State<ProductDetailSubPage> {
                                                                     .images!
                                                                     .isNotEmpty &&
                                                                 product.images![
-                                                                        0] !=
+                                                                        0].url !=
                                                                     null)
                                                             ? product
-                                                                .images![0]!
-                                                                .replaceAll(
-                                                                    '////',
-                                                                    '//')
-                                                                .replaceAll(
-                                                                    '///', '//')
+                                                                .images![0].url!
+                                                          
                                                             : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                         fit: BoxFit.cover,
                                                         errorWidget: (context,

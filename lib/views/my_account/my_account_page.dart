@@ -485,7 +485,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                                         .images!
                                                                         .isNotEmpty
                                                                     ? product
-                                                                        .images![0]!
+                                                                        .images![0].url!
                                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                                 fit: BoxFit
                                                                     .cover,

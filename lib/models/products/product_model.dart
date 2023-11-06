@@ -221,7 +221,7 @@ class ProductModel {
   ProductModelBrand? brand;
   String? price;
   String? currency;
-  List<String?>? images;
+  List<Images>? images;
   ProductModelSeller? seller;
 
   ProductModel({
@@ -241,21 +241,25 @@ class ProductModel {
     id = json['id']?.toString();
     productType = json['product_type']?.toString();
     accountId = json['account_id']?.toString();
-    name = (json['name'] != null) ? ProductModelName.fromJson(json['name']) : null;
-    summary = (json['summary'] != null) ? ProductModelSummary.fromJson(json['summary']) : null;
-    description = (json['description'] != null) ? ProductModelDescription.fromJson(json['description']) : null;
-    brand = (json['brand'] != null) ? ProductModelBrand.fromJson(json['brand']) : null;
+    name =
+        (json['name'] != null) ? ProductModelName.fromJson(json['name']) : null;
+    summary = (json['summary'] != null)
+        ? ProductModelSummary.fromJson(json['summary'])
+        : null;
+    description = (json['description'] != null)
+        ? ProductModelDescription.fromJson(json['description'])
+        : null;
+    brand = (json['brand'] != null)
+        ? ProductModelBrand.fromJson(json['brand'])
+        : null;
     price = json['price']?.toString();
     currency = json['currency']?.toString();
-  if (json['images'] != null) {
-  final v = json['images'];
-  final arr0 = <String>[];
-  v.forEach((v) {
-  arr0.add(v.toString());
-  });
-    images = arr0;
-    }
-    seller = (json['seller'] != null) ? ProductModelSeller.fromJson(json['seller']) : null;
+    images = json["images"] == null
+        ? []
+        : List<Images>.from(json["images"]!.map((x) => Images.fromJson(x)));
+    seller = (json['seller'] != null)
+        ? ProductModelSeller.fromJson(json['seller'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -279,14 +283,51 @@ class ProductModel {
     if (images != null) {
       final v = images;
       final arr0 = [];
-  v!.forEach((v) {
-  arr0.add(v);
-  });
+      for (var v in v!) {
+        arr0.add(v);
+      }
       data['images'] = arr0;
     }
     if (seller != null) {
       data['seller'] = seller!.toJson();
     }
+    return data;
+  }
+}
+
+class Images {
+/*
+{
+  "id": "421",
+  "url": "https://api.businessucces.com/uploads/products/2023/11/04112023191741-1699114661.png",
+  "product_id": "474",
+  "file": "uploads/products/2023/11/04112023191741-1699114661.png"
+} 
+*/
+
+  String? id;
+  String? url;
+  String? productId;
+  String? file;
+
+  Images({
+    this.id,
+    this.url,
+    this.productId,
+    this.file,
+  });
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    url = json['url']?.toString();
+    productId = json['product_id']?.toString();
+    file = json['file']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
+    data['product_id'] = productId;
+    data['file'] = file;
     return data;
   }
 }
