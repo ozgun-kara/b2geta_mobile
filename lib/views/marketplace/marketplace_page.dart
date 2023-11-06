@@ -987,8 +987,8 @@ class _MarketplacePageState extends State<MarketplacePage> {
                                         productImageUrl: (product.images !=
                                                     null &&
                                                 product.images!.isNotEmpty &&
-                                                product.images![0] != null)
-                                            ? product.images![0] ??
+                                                product.images![0].url != null)
+                                            ? product.images![0].url ??
                                                 'https://doraev.com/images/custom/product-images/nophoto.png'
                                             : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                       ));

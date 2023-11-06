@@ -348,7 +348,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
 
       if (widget.passedObject!.images != null) {
         editImageList =
-            widget.passedObject!.images!.map((e) => File(e)).toList();
+            widget.passedObject!.images!.map((e) => File(e.url!)).toList();
       }
 
       Provider.of<MenuPageProvider>(context, listen: false)

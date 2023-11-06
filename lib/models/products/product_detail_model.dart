@@ -248,7 +248,7 @@ class ProductDetailModel {
   bool? saleRetail;
   bool? saleWhole;
   List<ProductDetailModelCategories?>? categories;
-  List<String>? images;
+  List<Images>? images;
   List<ImagesMeta>? imagesMeta;
   List<Price>? prices;
   Map<String, Feature>? features;
@@ -303,15 +303,10 @@ class ProductDetailModel {
       });
       categories = arr0;
     }
-    if (json['images'] != null) {
-      final v = json['images'];
-      final arr0 = <String>[];
-      v.forEach((v) {
-        arr0.add(v.toString());
-      });
-      images = arr0;
-    }
-    imagesMeta = json["images_meta"] == null
+    images = json["images"] == null
+        ? []
+        : List<Images>.from(json["images"]!.map((x) => Images.fromJson(x)));
+    imagesMeta = json["images"] == null
         ? []
         : List<ImagesMeta>.from(
             json["images_meta"]!.map((x) => ImagesMeta.fromJson(x)));
@@ -359,5 +354,42 @@ class ProductDetailModel {
   @override
   String toString() {
     return 'ProductDetailModel(id: $id, accountId: $accountId, userId: $userId, productName: $productName, productDescription: $productDescription, productSummary: $productSummary, price: $price, currency: $currency, status: $status, categories: $categories, images: $images)';
+  }
+}
+
+class Images {
+/*
+{
+  "id": "421",
+  "url": "https://api.businessucces.com/uploads/products/2023/11/04112023191741-1699114661.png",
+  "product_id": "474",
+  "file": "uploads/products/2023/11/04112023191741-1699114661.png"
+} 
+*/
+
+  String? id;
+  String? url;
+  String? productId;
+  String? file;
+
+  Images({
+    this.id,
+    this.url,
+    this.productId,
+    this.file,
+  });
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id']?.toString();
+    url = json['url']?.toString();
+    productId = json['product_id']?.toString();
+    file = json['file']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['id'] = id;
+    data['url'] = url;
+    data['product_id'] = productId;
+    data['file'] = file;
+    return data;
   }
 }
