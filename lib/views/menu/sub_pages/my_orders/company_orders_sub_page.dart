@@ -177,18 +177,6 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                   : (themeMode
                                       ? AppTheme.white43
                                       : AppTheme.black5),
-
-                              // themeMode ? AppTheme.white1 : AppTheme.black7,
-
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     blurStyle: BlurStyle.normal,
-                              //     offset: const Offset(0, -4),
-                              //     blurRadius: 26,
-                              //     spreadRadius: 0,
-                              //     color: const Color(0xFF2B3361).withOpacity(0.10),
-                              //   ),
-                              // ],
                             ),
                             child: Column(
                               children: [
@@ -431,7 +419,17 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            locator<OrderService>()
+                                                .updateOrderCall(
+                                                    orderId: items[index].id!,
+                                                    orderStatus: 'approved')
+                                                .then((value) {
+                                              if (value) {
+                                                setState(() {});
+                                              }
+                                            });
+                                          },
                                           elevation: 0,
                                           shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -465,7 +463,17 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            locator<OrderService>()
+                                                .updateOrderCall(
+                                                    orderId: items[index].id!,
+                                                    orderStatus: 'cancelled')
+                                                .then((value) {
+                                              if (value) {
+                                                setState(() {});
+                                              }
+                                            });
+                                          },
                                           elevation: 0,
                                           shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -499,7 +507,27 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      CompanyOrdersDetailSubPage(
+                                                    orderId: items[index].id!,
+                                                  ),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
+                                                ));
+                                          },
                                           elevation: 0,
                                           shape: const RoundedRectangleBorder(
                                             borderRadius: BorderRadius.all(
@@ -511,22 +539,22 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                 padding: const EdgeInsets.only(
                                                     bottom: 2),
                                                 child: Image.asset(
-                                                    'assets/icons/message.png',
-                                                    width: 12,
-                                                    height: 10,
+                                                    'assets/icons/arrow.png',
+                                                    width: 8,
+                                                    height: 8,
                                                     color: AppTheme.white15),
                                               ),
-                                              const SizedBox(width: 5),
+                                              const SizedBox(width: 6),
                                               Text(
-                                                'Send Message'.tr,
+                                                'Details'.tr,
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w700,
                                                     color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.blue13),
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.blue10),
                                               ),
                                             ],
                                           ),
@@ -606,18 +634,6 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                   : (themeMode
                                       ? AppTheme.white43
                                       : AppTheme.black5),
-
-                              // themeMode ? AppTheme.white1 : AppTheme.black7,
-
-                              // boxShadow: [
-                              //   BoxShadow(
-                              //     blurStyle: BlurStyle.normal,
-                              //     offset: const Offset(0, -4),
-                              //     blurRadius: 26,
-                              //     spreadRadius: 0,
-                              //     color: const Color(0xFF2B3361).withOpacity(0.10),
-                              //   ),
-                              // ],
                             ),
                             child: Column(
                               children: [
@@ -849,82 +865,15 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                     height: 1,
                                     color: themeMode
                                         ? AppTheme.white21
-                                        : AppTheme.black28),
+                                        : AppTheme.black18),
+                                const SizedBox(height: 2),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(4, 4, 4, 4),
+                                      const EdgeInsets.fromLTRB(4, 0, 4, 0),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {},
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/check-4.png',
-                                                    width: 12,
-                                                    height: 9,
-                                                    color: AppTheme.green3),
-                                              ),
-                                              const SizedBox(width: 3),
-                                              Text(
-                                                'Confirm'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppTheme.green3),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {},
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/cross-3.png',
-                                                    width: 9,
-                                                    height: 9,
-                                                    color: AppTheme.red6),
-                                              ),
-                                              const SizedBox(width: 4),
-                                              Text(
-                                                'Reject'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppTheme.red6),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
@@ -954,8 +903,65 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w700,
                                                     color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.blue13),
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.blue10),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(width: 20),
+                                      SizedBox(
+                                        height: 35,
+                                        child: MaterialButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (_, __, ___) =>
+                                                      CompanyOrdersDetailSubPage(
+                                                    orderId: items[index].id!,
+                                                  ),
+                                                  transitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  reverseTransitionDuration:
+                                                      const Duration(
+                                                          milliseconds: 0),
+                                                  transitionsBuilder:
+                                                      (_, a, __, c) =>
+                                                          FadeTransition(
+                                                              opacity: a,
+                                                              child: c),
+                                                ));
+                                          },
+                                          elevation: 0,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(16)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 2),
+                                                child: Image.asset(
+                                                    'assets/icons/arrow.png',
+                                                    width: 8,
+                                                    height: 8,
+                                                    color: AppTheme.white15),
+                                              ),
+                                              const SizedBox(width: 6),
+                                              Text(
+                                                'Details'.tr,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: themeMode
+                                                        ? AppTheme.blue2
+                                                        : AppTheme.blue10),
                                               ),
                                             ],
                                           ),

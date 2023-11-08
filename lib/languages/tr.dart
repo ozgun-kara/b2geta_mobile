@@ -101,7 +101,7 @@ final Map<String, String> tr = {
 
   // MENU
   'Switch To Personal Account': 'Kişisel Hesaba Geç',
-  'Switch to company':'Firmaya geç',
+  'Switch to company': 'Firmaya geç',
   'My Companies': 'Firmalarım',
   'My Products': 'Ürünlerim',
   'My Orders': 'Siparişlerim',
@@ -395,6 +395,11 @@ final Map<String, String> tr = {
   'Whole Sale': 'Toptan Satış',
   '.Price': '.Fiyat',
   'GTIP': 'GTIP',
+  'Invoice Transactions': 'Fatura işlemleri',
+  'Invoice Number': 'Fatura Numarası',
+  'Invoice Url': 'Fatura Url',
+  'Invoice Date': 'Fatura Tarihi',
+  'Create Invoice': 'Fatura Oluşturma',
   'Product Width Validate': 'Lütfen ürün genişliğini giriniz',
   'Product Height Validate': 'Lütfen ürün yüksekliğini giriniz',
   'Product Weight Validate': 'Lütfen ürün ağırlığını giriniz',
