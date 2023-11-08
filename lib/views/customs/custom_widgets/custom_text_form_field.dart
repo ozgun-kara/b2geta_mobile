@@ -21,6 +21,7 @@ class CustomTextFormField extends StatefulWidget {
     this.maxLines,
     this.color,
     this.enabled,
+    this.autofocus,
     this.inputFormatters,
   }) : super(key: key);
 
@@ -36,6 +37,7 @@ class CustomTextFormField extends StatefulWidget {
   final int? maxLines;
   final Color? color;
   final bool? enabled;
+  final bool? autofocus;
   final List<TextInputFormatter>? inputFormatters;
 
   @override
@@ -80,6 +82,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           keyboardType: widget.keyboardType ?? TextInputType.text,
           minLines: widget.minLines ?? 1,
           maxLines: widget.maxLines,
+          autofocus: widget.autofocus ?? false,
           onChanged: (value) {
             if (widget.onChanged != null) {
               widget.onChanged!(value);

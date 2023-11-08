@@ -165,4 +165,36 @@ class OrderService {
       return null;
     }
   }
+
+  Future<bool> updateOrderCall(
+      {required String orderId,
+      required String orderStatus,
+      String? invoiceNo,
+      String? invoiceUrl,
+      String? invoiceDate}) async {
+    var request = http.MultipartRequest(
+        'POST', Uri.parse('${Constants.apiUrl}/orders/update/$orderId'));
+    request.headers.addAll(Constants.headers);
+
+    request.fields["status"] = orderStatus;
+    if (invoiceNo != null && invoiceNo.isNotEmpty) {
+      request.fields["invoice_no"] = invoiceNo;
+    }
+
+    if (invoiceUrl != null && invoiceUrl.isNotEmpty) {
+      request.fields["invoice_url"] = invoiceUrl;
+    }
+
+    if (invoiceDate != null && invoiceDate.isNotEmpty) {
+      request.fields["invoice_date"] = invoiceDate;
+    }
+
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
