@@ -68,376 +68,365 @@ class _ProfileOrdersSubPageState extends State<ProfileOrdersSubPage> {
                     itemBuilder: ((context, index) {
                       var items = data.data;
 
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: themeMode ? AppTheme.white1 : AppTheme.black7,
-                          boxShadow: [
-                            BoxShadow(
-                              blurStyle: BlurStyle.normal,
-                              offset: const Offset(0, -4),
-                              blurRadius: 26,
-                              spreadRadius: 0,
-                              color: const Color(0xFF2B3361).withOpacity(0.10),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.fromLTRB(21, 21, 21, 23),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Date:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            Text(
-                                              items![index].orderDate ?? '',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Order Number:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            Text(
-                                              items[index].id ?? '',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Product Number:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            Text(
-                                              '210477',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 18),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Seller:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            Text(
-                                              items[index].seller!.name ?? '',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Quantity:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            Text(
-                                              '10.000',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w600,
-                                                color: themeMode
-                                                    ? AppTheme.blue3
-                                                    : AppTheme.white1,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      const Spacer(),
-                                      Expanded(
-                                        flex: 2,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Status:'.tr,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w400,
-                                                color: AppTheme.white15,
-                                              ),
-                                            ),
-                                            items[index].status == "approved"
-                                                ? Text(
-                                                    'Approved'.tr,
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontFamily: AppTheme
-                                                          .appFontFamily,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: themeMode
-                                                          ? AppTheme.green6
-                                                          : AppTheme.green7,
-                                                    ),
-                                                  )
-                                                : items[index].status == "new"
-                                                    ? Text(
-                                                        'Evaluating'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: themeMode
-                                                              ? AppTheme.blue3
-                                                              : AppTheme.white1,
-                                                        ),
-                                                      )
-                                                    : Text(
-                                                        'Denied'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: themeMode
-                                                              ? AppTheme.red2
-                                                              : AppTheme.red3,
-                                                        ),
-                                                      )
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                      return InkWell(
+                        onTap: (() {
+                          Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (_, __, ___) =>
+                                    ProfileOrdersDetailSubPage(
+                                  orderId: items[index].id!,
+                                ),
+                                transitionDuration:
+                                    const Duration(milliseconds: 0),
+                                reverseTransitionDuration:
+                                    const Duration(milliseconds: 0),
+                                transitionsBuilder: (_, a, __, c) =>
+                                    FadeTransition(opacity: a, child: c),
+                              ));
+                        }),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color:
+                                themeMode ? AppTheme.white1 : AppTheme.black7,
+                            boxShadow: [
+                              BoxShadow(
+                                blurStyle: BlurStyle.normal,
+                                offset: const Offset(0, -4),
+                                blurRadius: 26,
+                                spreadRadius: 0,
+                                color:
+                                    const Color(0xFF2B3361).withOpacity(0.10),
                               ),
-                            ),
-                            Container(
-                                width: deviceWidth,
-                                height: 1,
-                                color: themeMode
-                                    ? AppTheme.white21
-                                    : AppTheme.black18),
-                            const SizedBox(height: 2),
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(
-                                    height: 35,
-                                    child: MaterialButton(
-                                      onPressed: () {},
-                                      elevation: 0,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 2),
-                                            child: Image.asset(
-                                                'assets/icons/message.png',
-                                                width: 12,
-                                                height: 10,
-                                                color: AppTheme.white15),
+                            ],
+                          ),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(21, 21, 21, 23),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Date:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                items![index].orderDate ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(width: 5),
-                                          Text(
-                                            'Send Message'.tr,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.blue10),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Order Number:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                items[index].id ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                        ],
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Seller:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                items[index].seller!.name ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 18),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Total Price:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              Text(
+                                                items[index].totalPrice ?? '',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: themeMode
+                                                      ? AppTheme.blue3
+                                                      : AppTheme.white1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Expanded(
+                                          flex: 7,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Status:'.tr,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: AppTheme.white15,
+                                                ),
+                                              ),
+                                              items[index].status == "approved"
+                                                  ? Text(
+                                                      'Approved'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: themeMode
+                                                            ? AppTheme.green6
+                                                            : AppTheme.green7,
+                                                      ),
+                                                    )
+                                                  : items[index].status == "new"
+                                                      ? Text(
+                                                          'Evaluating'.tr,
+                                                          style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontFamily: AppTheme
+                                                                .appFontFamily,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: themeMode
+                                                                ? AppTheme.blue3
+                                                                : AppTheme
+                                                                    .white1,
+                                                          ),
+                                                        )
+                                                      : Text(
+                                                          'Denied'.tr,
+                                                          style: TextStyle(
+                                                            fontSize: 13,
+                                                            fontFamily: AppTheme
+                                                                .appFontFamily,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            color: themeMode
+                                                                ? AppTheme.red2
+                                                                : AppTheme.red3,
+                                                          ),
+                                                        )
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                  width: deviceWidth,
+                                  height: 1,
+                                  color: themeMode
+                                      ? AppTheme.white21
+                                      : AppTheme.black18),
+                              const SizedBox(height: 2),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(4, 0, 4, 0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      height: 35,
+                                      child: MaterialButton(
+                                        onPressed: () {},
+                                        elevation: 0,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 2),
+                                              child: Image.asset(
+                                                  'assets/icons/message.png',
+                                                  width: 12,
+                                                  height: 10,
+                                                  color: AppTheme.white15),
+                                            ),
+                                            const SizedBox(width: 5),
+                                            Text(
+                                              'Send Message'.tr,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: themeMode
+                                                      ? AppTheme.blue2
+                                                      : AppTheme.blue10),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(width: 20),
-                                  SizedBox(
-                                    height: 35,
-                                    child: MaterialButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (_, __, ___) =>
-                                                  ProfileOrdersDetailSubPage(
-                                                orderId: items[index].id!,
-                                              ),
-                                              transitionDuration:
-                                                  const Duration(
-                                                      milliseconds: 0),
-                                              reverseTransitionDuration:
-                                                  const Duration(
-                                                      milliseconds: 0),
-                                              transitionsBuilder:
-                                                  (_, a, __, c) =>
-                                                      FadeTransition(
-                                                          opacity: a, child: c),
-                                            ));
-                                      },
-                                      elevation: 0,
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(16)),
-                                      ),
-                                      child: Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 2),
-                                            child: Image.asset(
-                                                'assets/icons/arrow.png',
-                                                width: 8,
-                                                height: 8,
-                                                color: AppTheme.white15),
-                                          ),
-                                          const SizedBox(width: 6),
-                                          Text(
-                                            'Details'.tr,
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                fontFamily:
-                                                    AppTheme.appFontFamily,
-                                                fontWeight: FontWeight.w700,
-                                                color: themeMode
-                                                    ? AppTheme.blue2
-                                                    : AppTheme.blue10),
-                                          ),
-                                        ],
+                                    const SizedBox(width: 20),
+                                    SizedBox(
+                                      height: 35,
+                                      child: MaterialButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                pageBuilder: (_, __, ___) =>
+                                                    ProfileOrdersDetailSubPage(
+                                                  orderId: items[index].id!,
+                                                ),
+                                                transitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                reverseTransitionDuration:
+                                                    const Duration(
+                                                        milliseconds: 0),
+                                                transitionsBuilder: (_, a, __,
+                                                        c) =>
+                                                    FadeTransition(
+                                                        opacity: a, child: c),
+                                              ));
+                                        },
+                                        elevation: 0,
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(16)),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 2),
+                                              child: Image.asset(
+                                                  'assets/icons/arrow.png',
+                                                  width: 8,
+                                                  height: 8,
+                                                  color: AppTheme.white15),
+                                            ),
+                                            const SizedBox(width: 6),
+                                            Text(
+                                              'Details'.tr,
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontFamily:
+                                                      AppTheme.appFontFamily,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: themeMode
+                                                      ? AppTheme.blue2
+                                                      : AppTheme.blue10),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       );
                     }),
