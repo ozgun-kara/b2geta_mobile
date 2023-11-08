@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
@@ -37,6 +38,7 @@ class _CompanyOrdersDetailSubPageState
   late double deviceBottomPadding;
   late bool themeMode;
   ScrollController scrollController = ScrollController();
+  final GlobalKey<FormState> _invoiceGlobalKey = GlobalKey<FormState>();
 
   OrderDetailsModel? _orderDetailsModel;
 
@@ -52,7 +54,7 @@ class _CompanyOrdersDetailSubPageState
     super.initState();
     getOrderDetails();
     DateTime now = DateTime.now(); //current date
-    DateFormat formatter = DateFormat('dd/mm/yyyy'); // use any format
+    DateFormat formatter = DateFormat('dd-mm-yyyy'); // use any format
     String formatted = formatter.format(now);
     _invoiceDateController.text = formatted;
   }
@@ -584,7 +586,10 @@ class _CompanyOrdersDetailSubPageState
                                                     AppTheme.appFontFamily,
                                                 fontWeight: FontWeight.w600,
                                                 color: themeMode
-                                                    ? AppTheme.blue3
+                                                    ? _orderDetailsModel!
+                                                            .paymentStatus!
+                                                        ? AppTheme.blue3
+                                                        : AppTheme.red2
                                                     : AppTheme.white1,
                                               ),
                                             ),
@@ -705,6 +710,28 @@ class _CompanyOrdersDetailSubPageState
                       );
                     },
                   ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                    child: MaterialButton(
+                        minWidth: deviceWidth,
+                        height: 52,
+                        elevation: 0,
+                        color: AppTheme.blue2,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(16)),
+                        ),
+                        child: Text(
+                          'Sonraki Adım'.tr,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontFamily: AppTheme.appFontFamily,
+                              fontWeight: FontWeight.w700,
+                              color: AppTheme.white1),
+                        ),
+                        onPressed: () {
+                          createInvoiceDialog(context);
+                        }),
+                  ),
                   const SizedBox(height: 130),
                 ],
               ),
@@ -753,30 +780,61 @@ class _CompanyOrdersDetailSubPageState
                         color:
                             themeMode ? AppTheme.white32 : Colors.transparent),
                     const SizedBox(height: 32),
-                    CustomTextFormField(
-                      titleText: 'Invoice Number'.tr,
-                      controller: _invoiceNumberController,
-                      color: themeMode ? AppTheme.white6 : AppTheme.black11,
-                      autofocus: true,
-                    ),
-                    const SizedBox(height: 16),
-                    CustomTextFormField(
-                      titleText: 'Invoice Url'.tr,
-                      controller: _invoiceUrlController,
-                      color: themeMode ? AppTheme.white6 : AppTheme.black11,
-                    ),
-                    const SizedBox(height: 16),
-                    CustomTextFormField(
-                      titleText: 'Invoice Date'.tr,
-                      controller: _invoiceDateController,
-                      color: themeMode ? AppTheme.white6 : AppTheme.black11,
-                      inputFormatters: [
-                        DateTextFormatter(),
-                        FilteringTextInputFormatter.allow(RegExp('[0-9/]')),
-                        LengthLimitingTextInputFormatter(10)
-                      ],
-                    ),
-                    const SizedBox(height: 16),
+                    Form(
+                        key: _invoiceGlobalKey,
+                        child: Column(
+                          children: [
+                            CustomTextFormField(
+                              titleText: 'Invoice Number'.tr,
+                              controller: _invoiceNumberController,
+                              color: themeMode
+                                  ? AppTheme.white6
+                                  : AppTheme.black11,
+                              autofocus: true,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Invoice Number Validate'.tr;
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            CustomTextFormField(
+                              titleText: 'Invoice Url'.tr,
+                              controller: _invoiceUrlController,
+                              color: themeMode
+                                  ? AppTheme.white6
+                                  : AppTheme.black11,
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Invoice Url Validate'.tr;
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                            CustomTextFormField(
+                              titleText: 'Invoice Date'.tr,
+                              controller: _invoiceDateController,
+                              color: themeMode
+                                  ? AppTheme.white6
+                                  : AppTheme.black11,
+                              inputFormatters: [
+                                DateTextFormatter(),
+                                FilteringTextInputFormatter.allow(
+                                    RegExp('[0-9/]')),
+                                LengthLimitingTextInputFormatter(10)
+                              ],
+                              validator: (value) {
+                                if (value == null || value.trim().isEmpty) {
+                                  return 'Invoice Date Validate'.tr;
+                                }
+                                return null;
+                              },
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                        )),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32.0),
                       child: Row(
@@ -792,14 +850,33 @@ class _CompanyOrdersDetailSubPageState
                                       BorderRadius.all(Radius.circular(16)),
                                 ),
                                 child: Text(
-                                  'Save'.tr,
+                                  'Confirm'.tr,
                                   style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: AppTheme.appFontFamily,
                                       fontWeight: FontWeight.w700,
                                       color: AppTheme.white1),
                                 ),
-                                onPressed: () {}),
+                                onPressed: () {
+                                  if (_invoiceGlobalKey.currentState!
+                                      .validate()) {
+                                    locator<OrderService>()
+                                        .updateOrderCall(
+                                            orderId: widget.orderId,
+                                            orderStatus: 'shipped',
+                                            invoiceUrl:
+                                                _invoiceUrlController.text,
+                                            invoiceNo:
+                                                _invoiceNumberController.text,
+                                            invoiceDate:
+                                                _invoiceDateController.text)
+                                        .then((value) {
+                                      if (value) {
+                                        Navigator.pop(context);
+                                      }
+                                    });
+                                  }
+                                }),
                           ),
                           ButtonTheme(
                             height: 32,
@@ -844,7 +921,7 @@ class DateTextFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    var text = _format(newValue.text, '/');
+    var text = _format(newValue.text, '-');
     return newValue.copyWith(text: text, selection: updateCursorPosition(text));
   }
 
