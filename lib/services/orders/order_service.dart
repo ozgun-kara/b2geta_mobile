@@ -38,9 +38,7 @@ class OrderService {
   Future<List<OrderModel>> getMyOrdersCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/orders'),
-      headers: {
-        "Authorization": "Bearer ${Constants.userToken}",
-      },
+      headers: Constants.headers,
     );
 
     List<OrderModel> orderList = [];
@@ -111,14 +109,7 @@ class OrderService {
   Future<List<OrderModel>> getMyIncomingOrdersCall() async {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/orders/incoming'),
-      headers: {
-        // "Authorization": "Bearer ${Constants.userToken}",
-
-        "Content-Type": "application/json; charset=utf-8",
-        "Accept-Language": "${Constants.language}",
-        "Authorization":
-            "Bearer nzdngvtcmbmhtkjvlryauagpefmzybhtfjuqmpvgxmmbqvjopotusvglmgbyxdzc",
-      },
+      headers: Constants.headers,
     );
 
     List<OrderModel> orderList = [];

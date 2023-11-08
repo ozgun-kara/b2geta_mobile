@@ -276,46 +276,6 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Product Number:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '210477',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 18),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
                                                   'Seller:'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
@@ -341,15 +301,23 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                               ],
                                             ),
                                           ),
-                                          const Spacer(),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 18),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
                                           Expanded(
-                                            flex: 2,
+                                            flex: 3,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Quantity:'.tr,
+                                                  'Total Price:'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -359,7 +327,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  '10.000',
+                                                  items[index].totalPrice ?? '',
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily:
@@ -375,7 +343,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const Spacer(),
                                           Expanded(
-                                            flex: 2,
+                                            flex: 7,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -592,7 +560,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
             Visibility(
               visible: dropdownSelectedValue == 'Given Orders'.tr,
               child: FutureBuilder<List<OrderModel>>(
-                future: locator<OrderService>().getMyOrdersCallTest(),
+                future: locator<OrderService>().getMyOrdersCall(),
                 builder: (context, data) {
                   if (data.hasData) {
                     var orderList = data.data;
@@ -737,46 +705,6 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Product Number:'.tr,
-                                                  style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: AppTheme.white15,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  '210477',
-                                                  style: TextStyle(
-                                                    fontSize: 13,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: themeMode
-                                                        ? AppTheme.blue3
-                                                        : AppTheme.white1,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 18),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
                                                   'Seller:'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
@@ -802,15 +730,23 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                               ],
                                             ),
                                           ),
-                                          const Spacer(),
+                                        ],
+                                      ),
+                                      const SizedBox(height: 18),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
                                           Expanded(
-                                            flex: 2,
+                                            flex: 3,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
-                                                  'Quantity:'.tr,
+                                                  'Total Price:'.tr,
                                                   style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
@@ -820,7 +756,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   ),
                                                 ),
                                                 Text(
-                                                  '10.000',
+                                                  items[index].totalPrice ?? '',
                                                   style: TextStyle(
                                                     fontSize: 13,
                                                     fontFamily:
@@ -836,7 +772,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                           ),
                                           const Spacer(),
                                           Expanded(
-                                            flex: 2,
+                                            flex: 7,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -936,28 +872,59 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                 padding: const EdgeInsets.only(
                                                     bottom: 2),
                                                 child: Image.asset(
-                                                    'assets/icons/exclamation.png',
+                                                    'assets/icons/check-4.png',
                                                     width: 12,
-                                                    height: 12,
-                                                    color: AppTheme.white15),
+                                                    height: 9,
+                                                    color: AppTheme.green3),
                                               ),
-                                              const SizedBox(width: 5),
+                                              const SizedBox(width: 3),
                                               Text(
-                                                'Start Dispute'.tr,
+                                                'Confirm'.tr,
                                                 style: TextStyle(
                                                     fontSize: 12,
                                                     fontFamily:
                                                         AppTheme.appFontFamily,
                                                     fontWeight: FontWeight.w700,
-                                                    color: themeMode
-                                                        ? AppTheme.blue2
-                                                        : AppTheme.red6),
+                                                    color: AppTheme.green3),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(width: 16),
+                                      SizedBox(
+                                        height: 35,
+                                        child: MaterialButton(
+                                          onPressed: () {},
+                                          elevation: 0,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(16)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 2),
+                                                child: Image.asset(
+                                                    'assets/icons/cross-3.png',
+                                                    width: 9,
+                                                    height: 9,
+                                                    color: AppTheme.red6),
+                                              ),
+                                              const SizedBox(width: 4),
+                                              Text(
+                                                'Reject'.tr,
+                                                style: TextStyle(
+                                                    fontSize: 12,
+                                                    fontFamily:
+                                                        AppTheme.appFontFamily,
+                                                    fontWeight: FontWeight.w700,
+                                                    color: AppTheme.red6),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
