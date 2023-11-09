@@ -281,9 +281,10 @@ class _ProfileOrdersSubPageState extends State<ProfileOrdersSubPage> {
                                                             : AppTheme.green7,
                                                       ),
                                                     )
-                                                  : items[index].status == "new"
+                                                  : items[index].status ==
+                                                          "shipped"
                                                       ? Text(
-                                                          'Evaluating'.tr,
+                                                          'Shipped Out'.tr,
                                                           style: TextStyle(
                                                             fontSize: 13,
                                                             fontFamily: AppTheme
@@ -296,19 +297,47 @@ class _ProfileOrdersSubPageState extends State<ProfileOrdersSubPage> {
                                                                     .white1,
                                                           ),
                                                         )
-                                                      : Text(
-                                                          'Denied'.tr,
-                                                          style: TextStyle(
-                                                            fontSize: 13,
-                                                            fontFamily: AppTheme
-                                                                .appFontFamily,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            color: themeMode
-                                                                ? AppTheme.red2
-                                                                : AppTheme.red3,
-                                                          ),
-                                                        )
+                                                      : items[index].status ==
+                                                              "new"
+                                                          ? Text(
+                                                              'Evaluating'.tr,
+                                                              style: TextStyle(
+                                                                fontSize: 13,
+                                                                fontFamily: AppTheme
+                                                                    .appFontFamily,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                color: themeMode
+                                                                    ? AppTheme
+                                                                        .blue3
+                                                                    : AppTheme
+                                                                        .white1,
+                                                              ),
+                                                            )
+                                                          : items[index]
+                                                                      .status ==
+                                                                  "cancelled"
+                                                              ? Text(
+                                                                  'Denied'.tr,
+                                                                  style:
+                                                                      TextStyle(
+                                                                    fontSize:
+                                                                        13,
+                                                                    fontFamily:
+                                                                        AppTheme
+                                                                            .appFontFamily,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                    color: themeMode
+                                                                        ? AppTheme
+                                                                            .red2
+                                                                        : AppTheme
+                                                                            .red3,
+                                                                  ),
+                                                                )
+                                                              : const Text('')
                                             ],
                                           ),
                                         ),
