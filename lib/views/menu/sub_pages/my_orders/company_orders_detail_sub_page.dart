@@ -1,6 +1,4 @@
-import 'dart:math';
 import 'dart:ui';
-
 import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
@@ -54,7 +52,7 @@ class _CompanyOrdersDetailSubPageState
     super.initState();
     getOrderDetails();
     DateTime now = DateTime.now(); //current date
-    DateFormat formatter = DateFormat('yyyy-mm-dd'); // use any format
+    DateFormat formatter = DateFormat('yyyy-MM-dd'); // use any format
     String formatted = formatter.format(now);
     _invoiceDateController.text = formatted;
   }
@@ -543,19 +541,42 @@ class _CompanyOrdersDetailSubPageState
                                                               : AppTheme.white1,
                                                         ),
                                                       )
-                                                    : Text(
-                                                        'Denied'.tr,
-                                                        style: TextStyle(
-                                                          fontSize: 13,
-                                                          fontFamily: AppTheme
-                                                              .appFontFamily,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                          color: themeMode
-                                                              ? AppTheme.red2
-                                                              : AppTheme.red3,
-                                                        ),
-                                                      )
+                                                    : _orderDetailsModel!
+                                                                .status!
+                                                                .toLowerCase() ==
+                                                            "shipped"
+                                                        ? Text(
+                                                            'Shipped Out'.tr,
+                                                            style: TextStyle(
+                                                              fontSize: 13,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: themeMode
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .white1,
+                                                            ),
+                                                          )
+                                                        : Text(
+                                                            'Denied'.tr,
+                                                            style: TextStyle(
+                                                              fontSize: 13,
+                                                              fontFamily: AppTheme
+                                                                  .appFontFamily,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color: themeMode
+                                                                  ? AppTheme
+                                                                      .red2
+                                                                  : AppTheme
+                                                                      .red3,
+                                                            ),
+                                                          )
                                           ],
                                         ),
                                       ),
@@ -600,9 +621,105 @@ class _CompanyOrdersDetailSubPageState
                                     ],
                                   ),
                                   const SizedBox(height: 10),
-                                  const Row(
-                                    children: [],
-                                  ),
+                                  _orderDetailsModel!.status!.toLowerCase() ==
+                                          "shipped"
+                                      ? Column(
+                                          children: [
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Cargo Tracking Url:'
+                                                            .tr,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              AppTheme.white15,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        _orderDetailsModel!
+                                                                .cargoTrackingUrl ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: themeMode
+                                                              ? AppTheme.green6
+                                                              : AppTheme.green7,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                                const Spacer(),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Cargo Tracking No:'.tr,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              AppTheme.white15,
+                                                        ),
+                                                      ),
+                                                      Text(
+                                                        _orderDetailsModel!
+                                                                .cargoTrackingNo ??
+                                                            '',
+                                                        style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: themeMode
+                                                              ? _orderDetailsModel!
+                                                                      .paymentStatus!
+                                                                  ? AppTheme
+                                                                      .blue3
+                                                                  : AppTheme
+                                                                      .red2
+                                                              : AppTheme.white1,
+                                                        ),
+                                                      ),
+                                                      const SizedBox(
+                                                          height: 16),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )
+                                      : const SizedBox(),
                                 ],
                               ),
                             ),
@@ -857,12 +974,6 @@ class _CompanyOrdersDetailSubPageState
                                 onPressed: () {
                                   if (_invoiceGlobalKey.currentState!
                                       .validate()) {
-                                    var formatter = DateFormat('yyyy-mm-dd')
-                                        .parse(_invoiceDateController
-                                            .text); // use any format
-
-                                    debugPrint(
-                                        '${_invoiceDateController.text}-burda');
                                     locator<OrderService>()
                                         .updateOrderCall(
                                             orderId: widget.orderId,
