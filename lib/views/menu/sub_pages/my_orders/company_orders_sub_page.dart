@@ -159,6 +159,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                   pageBuilder: (_, __, ___) =>
                                       CompanyOrdersDetailSubPage(
                                     orderId: items[index].id!,
+                                    orderType: 'Received Orders',
                                   ),
                                   transitionDuration:
                                       const Duration(milliseconds: 0),
@@ -362,9 +363,9 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                         ),
                                                       )
                                                     : items[index].status ==
-                                                            "new"
+                                                            "shipped"
                                                         ? Text(
-                                                            'Evaluating'.tr,
+                                                            'Shipped Out'.tr,
                                                             style: TextStyle(
                                                               fontSize: 13,
                                                               fontFamily: AppTheme
@@ -379,22 +380,49 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                                       .white1,
                                                             ),
                                                           )
-                                                        : Text(
-                                                            'Denied'.tr,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .red2
-                                                                  : AppTheme
-                                                                      .red3,
-                                                            ),
-                                                          )
+                                                        : items[index].status ==
+                                                                "new"
+                                                            ? Text(
+                                                                'Evaluating'.tr,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontFamily:
+                                                                      AppTheme
+                                                                          .appFontFamily,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: themeMode
+                                                                      ? AppTheme
+                                                                          .blue3
+                                                                      : AppTheme
+                                                                          .white1,
+                                                                ),
+                                                              )
+                                                            : items[index]
+                                                                        .status ==
+                                                                    "cancelled"
+                                                                ? Text(
+                                                                    'Denied'.tr,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontFamily:
+                                                                          AppTheme
+                                                                              .appFontFamily,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: themeMode
+                                                                          ? AppTheme
+                                                                              .red2
+                                                                          : AppTheme
+                                                                              .red3,
+                                                                    ),
+                                                                  )
+                                                                : const Text('')
                                               ],
                                             ),
                                           ),
@@ -416,94 +444,112 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {
-                                            locator<OrderService>()
-                                                .updateOrderCall(
-                                                    orderId: items[index].id!,
-                                                    orderStatus: 'approved')
-                                                .then((value) {
-                                              if (value) {
-                                                setState(() {});
-                                              }
-                                            });
-                                          },
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/check-4.png',
-                                                    width: 12,
-                                                    height: 9,
-                                                    color: AppTheme.green3),
+                                      items[index].status == "new"
+                                          ? SizedBox(
+                                              height: 35,
+                                              child: MaterialButton(
+                                                onPressed: () {
+                                                  locator<OrderService>()
+                                                      .updateOrderCall(
+                                                          orderId:
+                                                              items[index].id!,
+                                                          orderStatus:
+                                                              'approved')
+                                                      .then((value) {
+                                                    if (value) {
+                                                      setState(() {});
+                                                    }
+                                                  });
+                                                },
+                                                elevation: 0,
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(16)),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 2),
+                                                      child: Image.asset(
+                                                          'assets/icons/check-4.png',
+                                                          width: 12,
+                                                          height: 9,
+                                                          color:
+                                                              AppTheme.green3),
+                                                    ),
+                                                    const SizedBox(width: 3),
+                                                    Text(
+                                                      'Confirm'.tr,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color:
+                                                              AppTheme.green3),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                              const SizedBox(width: 3),
-                                              Text(
-                                                'Confirm'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppTheme.green3),
+                                            )
+                                          : const SizedBox(),
+                                      items[index].status == "new"
+                                          ? SizedBox(
+                                              height: 35,
+                                              child: MaterialButton(
+                                                onPressed: () {
+                                                  locator<OrderService>()
+                                                      .updateOrderCall(
+                                                          orderId:
+                                                              items[index].id!,
+                                                          orderStatus:
+                                                              'cancelled')
+                                                      .then((value) {
+                                                    if (value) {
+                                                      setState(() {});
+                                                    }
+                                                  });
+                                                },
+                                                elevation: 0,
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(16)),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              bottom: 2),
+                                                      child: Image.asset(
+                                                          'assets/icons/cross-3.png',
+                                                          width: 9,
+                                                          height: 9,
+                                                          color: AppTheme.red6),
+                                                    ),
+                                                    const SizedBox(width: 4),
+                                                    Text(
+                                                      'Reject'.tr,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          color: AppTheme.red6),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 35,
-                                        child: MaterialButton(
-                                          onPressed: () {
-                                            locator<OrderService>()
-                                                .updateOrderCall(
-                                                    orderId: items[index].id!,
-                                                    orderStatus: 'cancelled')
-                                                .then((value) {
-                                              if (value) {
-                                                setState(() {});
-                                              }
-                                            });
-                                          },
-                                          elevation: 0,
-                                          shape: const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(16)),
-                                          ),
-                                          child: Row(
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 2),
-                                                child: Image.asset(
-                                                    'assets/icons/cross-3.png',
-                                                    width: 9,
-                                                    height: 9,
-                                                    color: AppTheme.red6),
-                                              ),
-                                              const SizedBox(width: 4),
-                                              Text(
-                                                'Reject'.tr,
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily:
-                                                        AppTheme.appFontFamily,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: AppTheme.red6),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
+                                            )
+                                          : const SizedBox(),
                                       SizedBox(
                                         height: 35,
                                         child: MaterialButton(
@@ -514,6 +560,8 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   pageBuilder: (_, __, ___) =>
                                                       CompanyOrdersDetailSubPage(
                                                     orderId: items[index].id!,
+                                                    orderType:
+                                                        'Received Orders',
                                                   ),
                                                   transitionDuration:
                                                       const Duration(
@@ -616,6 +664,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                   pageBuilder: (_, __, ___) =>
                                       CompanyOrdersDetailSubPage(
                                     orderId: items[index].id!,
+                                    orderType: 'Given Orders',
                                   ),
                                   transitionDuration:
                                       const Duration(milliseconds: 0),
@@ -819,9 +868,9 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                         ),
                                                       )
                                                     : items[index].status ==
-                                                            "new"
+                                                            "shipped"
                                                         ? Text(
-                                                            'Evaluating'.tr,
+                                                            'Shipped Out'.tr,
                                                             style: TextStyle(
                                                               fontSize: 13,
                                                               fontFamily: AppTheme
@@ -836,22 +885,49 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                                       .white1,
                                                             ),
                                                           )
-                                                        : Text(
-                                                            'Denied'.tr,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .red2
-                                                                  : AppTheme
-                                                                      .red3,
-                                                            ),
-                                                          )
+                                                        : items[index].status ==
+                                                                "new"
+                                                            ? Text(
+                                                                'Evaluating'.tr,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontFamily:
+                                                                      AppTheme
+                                                                          .appFontFamily,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: themeMode
+                                                                      ? AppTheme
+                                                                          .blue3
+                                                                      : AppTheme
+                                                                          .white1,
+                                                                ),
+                                                              )
+                                                            : items[index]
+                                                                        .status ==
+                                                                    "cancelled"
+                                                                ? Text(
+                                                                    'Denied'.tr,
+                                                                    style:
+                                                                        TextStyle(
+                                                                      fontSize:
+                                                                          13,
+                                                                      fontFamily:
+                                                                          AppTheme
+                                                                              .appFontFamily,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      color: themeMode
+                                                                          ? AppTheme
+                                                                              .red2
+                                                                          : AppTheme
+                                                                              .red3,
+                                                                    ),
+                                                                  )
+                                                                : const Text('')
                                               ],
                                             ),
                                           ),
@@ -921,6 +997,7 @@ class _CompanyOrdersSubPageState extends State<CompanyOrdersSubPage> {
                                                   pageBuilder: (_, __, ___) =>
                                                       CompanyOrdersDetailSubPage(
                                                     orderId: items[index].id!,
+                                                    orderType: 'Given Orders',
                                                   ),
                                                   transitionDuration:
                                                       const Duration(

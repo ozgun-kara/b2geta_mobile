@@ -1,9 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
-import 'package:b2geta_mobile/locator.dart';
-import 'package:b2geta_mobile/models/orders/order_details_model.dart';
-import 'package:b2geta_mobile/services/orders/order_service.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
-import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +9,24 @@ import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+
 import 'package:b2geta_mobile/app_theme.dart';
+import 'package:b2geta_mobile/locator.dart';
+import 'package:b2geta_mobile/models/orders/order_details_model.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
+import 'package:b2geta_mobile/services/orders/order_service.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
+import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 
 class CompanyOrdersDetailSubPage extends StatefulWidget {
   const CompanyOrdersDetailSubPage({
     Key? key,
     required this.orderId,
+    required this.orderType,
   }) : super(key: key);
 
   final String orderId;
+  final String orderType;
 
   @override
   State<CompanyOrdersDetailSubPage> createState() =>
@@ -561,22 +566,28 @@ class _CompanyOrdersDetailSubPageState
                                                                       .white1,
                                                             ),
                                                           )
-                                                        : Text(
-                                                            'Denied'.tr,
-                                                            style: TextStyle(
-                                                              fontSize: 13,
-                                                              fontFamily: AppTheme
-                                                                  .appFontFamily,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                              color: themeMode
-                                                                  ? AppTheme
-                                                                      .red2
-                                                                  : AppTheme
-                                                                      .red3,
-                                                            ),
-                                                          )
+                                                        : _orderDetailsModel!
+                                                                    .status ==
+                                                                "cancelled"
+                                                            ? Text(
+                                                                'Denied'.tr,
+                                                                style:
+                                                                    TextStyle(
+                                                                  fontSize: 13,
+                                                                  fontFamily:
+                                                                      AppTheme
+                                                                          .appFontFamily,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600,
+                                                                  color: themeMode
+                                                                      ? AppTheme
+                                                                          .red2
+                                                                      : AppTheme
+                                                                          .red3,
+                                                                ),
+                                                              )
+                                                            : const Text('')
                                           ],
                                         ),
                                       ),
@@ -621,8 +632,7 @@ class _CompanyOrdersDetailSubPageState
                                     ],
                                   ),
                                   const SizedBox(height: 10),
-                                  _orderDetailsModel!.status!.toLowerCase() ==
-                                          "shipped"
+                                  _orderDetailsModel!.status == "shipped"
                                       ? Column(
                                           children: [
                                             Row(
@@ -640,8 +650,7 @@ class _CompanyOrdersDetailSubPageState
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Cargo Tracking Url:'
-                                                            .tr,
+                                                        'Invoice Number:'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -654,8 +663,9 @@ class _CompanyOrdersDetailSubPageState
                                                       ),
                                                       Text(
                                                         _orderDetailsModel!
-                                                                .cargoTrackingUrl ??
-                                                            '',
+                                                                .invoice!
+                                                                .invoiceNo ??
+                                                            '-',
                                                         style: TextStyle(
                                                           fontSize: 13,
                                                           fontFamily: AppTheme
@@ -663,8 +673,8 @@ class _CompanyOrdersDetailSubPageState
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           color: themeMode
-                                                              ? AppTheme.green6
-                                                              : AppTheme.green7,
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
                                                         ),
                                                       )
                                                     ],
@@ -679,7 +689,7 @@ class _CompanyOrdersDetailSubPageState
                                                             .start,
                                                     children: [
                                                       Text(
-                                                        'Cargo Tracking No:'.tr,
+                                                        'Invoice Date:'.tr,
                                                         style: TextStyle(
                                                           fontSize: 12,
                                                           fontFamily: AppTheme
@@ -692,8 +702,9 @@ class _CompanyOrdersDetailSubPageState
                                                       ),
                                                       Text(
                                                         _orderDetailsModel!
-                                                                .cargoTrackingNo ??
-                                                            '',
+                                                                .invoice!
+                                                                .invoiceDate ??
+                                                            '-',
                                                         style: TextStyle(
                                                           fontSize: 13,
                                                           fontFamily: AppTheme
@@ -701,12 +712,7 @@ class _CompanyOrdersDetailSubPageState
                                                           fontWeight:
                                                               FontWeight.w600,
                                                           color: themeMode
-                                                              ? _orderDetailsModel!
-                                                                      .paymentStatus!
-                                                                  ? AppTheme
-                                                                      .blue3
-                                                                  : AppTheme
-                                                                      .red2
+                                                              ? AppTheme.blue3
                                                               : AppTheme.white1,
                                                         ),
                                                       ),
@@ -714,6 +720,133 @@ class _CompanyOrdersDetailSubPageState
                                                           height: 16),
                                                     ],
                                                   ),
+                                                ),
+                                              ],
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Invoice Url:'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppTheme.white15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      _orderDetailsModel!
+                                                              .invoice!
+                                                              .invoiceUrl ??
+                                                          '-',
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white1,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 16),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Cargo Tracking No:'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppTheme.white15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      _orderDetailsModel!
+                                                              .cargoTrackingNo ??
+                                                          '-',
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white1,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 16),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      'Cargo Tracking Url:'.tr,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        color: AppTheme.white15,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      _orderDetailsModel!
+                                                              .cargoTrackingUrl ??
+                                                          '-',
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        fontFamily: AppTheme
+                                                            .appFontFamily,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        color: themeMode
+                                                            ? AppTheme.blue3
+                                                            : AppTheme.white1,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(height: 16),
+                                                  ],
                                                 ),
                                               ],
                                             ),
@@ -827,28 +960,34 @@ class _CompanyOrdersDetailSubPageState
                       );
                     },
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
-                    child: MaterialButton(
-                        minWidth: deviceWidth,
-                        height: 52,
-                        elevation: 0,
-                        color: AppTheme.blue2,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(16)),
-                        ),
-                        child: Text(
-                          'Sonraki Adım'.tr,
-                          style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: AppTheme.appFontFamily,
-                              fontWeight: FontWeight.w700,
-                              color: AppTheme.white1),
-                        ),
-                        onPressed: () {
-                          createInvoiceDialog(context);
-                        }),
-                  ),
+                  (widget.orderType == 'Received Orders' &&
+                          (_orderDetailsModel!.paymentStatus != false &&
+                              (_orderDetailsModel!.status == "new" ||
+                                  _orderDetailsModel!.status == "approved")))
+                      ? Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                          child: MaterialButton(
+                              minWidth: deviceWidth,
+                              height: 52,
+                              elevation: 0,
+                              color: AppTheme.blue2,
+                              shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16)),
+                              ),
+                              child: Text(
+                                'Sonraki Adım'.tr,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontFamily: AppTheme.appFontFamily,
+                                    fontWeight: FontWeight.w700,
+                                    color: AppTheme.white1),
+                              ),
+                              onPressed: () {
+                                createInvoiceDialog(context);
+                              }),
+                        )
+                      : const SizedBox(),
                   const SizedBox(height: 130),
                 ],
               ),
