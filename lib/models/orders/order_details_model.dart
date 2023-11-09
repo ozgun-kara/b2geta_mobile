@@ -866,6 +866,9 @@ class OrderDetailsModel {
   String? tax;
   String? discount;
   String? shippingPrice;
+  Invoice? invoice;
+  String? cargoTrackingUrl;
+  String? cargoTrackingNo;
   OrderDetailsModelAddresses? addresses;
   OrderDetailsModelSeller? seller;
   OrderDetailsModelBuyer? buyer;
@@ -880,6 +883,9 @@ class OrderDetailsModel {
     this.tax,
     this.discount,
     this.shippingPrice,
+    this.invoice,
+    this.cargoTrackingUrl,
+    this.cargoTrackingNo,
     this.addresses,
     this.seller,
     this.buyer,
@@ -894,6 +900,11 @@ class OrderDetailsModel {
     tax = json['tax']?.toString();
     discount = json['discount']?.toString();
     shippingPrice = json['shipping_price']?.toString();
+    invoice =
+        (json['invoice'] != null) ? Invoice.fromJson(json['invoice']) : null;
+    cargoTrackingUrl = json['cargo_tracking_url']?.toString();
+    cargoTrackingNo = json['cargo_tracking_no']?.toString();
+
     addresses = (json['addresses'] != null)
         ? OrderDetailsModelAddresses.fromJson(json['addresses'])
         : null;
@@ -939,6 +950,38 @@ class OrderDetailsModel {
       }
       data['products'] = arr0;
     }
+    return data;
+  }
+}
+
+class Invoice {
+/*
+{
+  "invoice_no": "A1234",
+  "invoice_date": "2023-11-09",
+  "invoice_url": "https://www.google.com/dosya.pdf"
+} 
+*/
+
+  String? invoiceNo;
+  String? invoiceDate;
+  String? invoiceUrl;
+
+  Invoice({
+    this.invoiceNo,
+    this.invoiceDate,
+    this.invoiceUrl,
+  });
+  Invoice.fromJson(Map<String, dynamic> json) {
+    invoiceNo = json['invoice_no']?.toString();
+    invoiceDate = json['invoice_date']?.toString();
+    invoiceUrl = json['invoice_url']?.toString();
+  }
+  Map<String, dynamic> toJson() {
+    final data = <String, dynamic>{};
+    data['invoice_no'] = invoiceNo;
+    data['invoice_date'] = invoiceDate;
+    data['invoice_url'] = invoiceUrl;
     return data;
   }
 }
