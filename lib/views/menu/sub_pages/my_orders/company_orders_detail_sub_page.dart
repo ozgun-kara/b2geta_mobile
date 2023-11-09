@@ -54,7 +54,7 @@ class _CompanyOrdersDetailSubPageState
     super.initState();
     getOrderDetails();
     DateTime now = DateTime.now(); //current date
-    DateFormat formatter = DateFormat('dd-mm-yyyy'); // use any format
+    DateFormat formatter = DateFormat('yyyy-mm-dd'); // use any format
     String formatted = formatter.format(now);
     _invoiceDateController.text = formatted;
   }
@@ -821,9 +821,6 @@ class _CompanyOrdersDetailSubPageState
                                   : AppTheme.black11,
                               inputFormatters: [
                                 DateTextFormatter(),
-                                FilteringTextInputFormatter.allow(
-                                    RegExp('[0-9/]')),
-                                LengthLimitingTextInputFormatter(10)
                               ],
                               validator: (value) {
                                 if (value == null || value.trim().isEmpty) {
@@ -860,6 +857,12 @@ class _CompanyOrdersDetailSubPageState
                                 onPressed: () {
                                   if (_invoiceGlobalKey.currentState!
                                       .validate()) {
+                                    var formatter = DateFormat('yyyy-mm-dd')
+                                        .parse(_invoiceDateController
+                                            .text); // use any format
+
+                                    debugPrint(
+                                        '${_invoiceDateController.text}-burda');
                                     locator<OrderService>()
                                         .updateOrderCall(
                                             orderId: widget.orderId,
@@ -916,30 +919,43 @@ class _CompanyOrdersDetailSubPageState
 }
 
 class DateTextFormatter extends TextInputFormatter {
-  static const _maxChars = 8;
-
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    var text = _format(newValue.text, '-');
-    return newValue.copyWith(text: text, selection: updateCursorPosition(text));
-  }
-
-  String _format(String value, String seperator) {
-    value = value.replaceAll(seperator, '');
-    var newString = '';
-
-    for (int i = 0; i < min(value.length, _maxChars); i++) {
-      newString += value[i];
-      if ((i == 1 || i == 3) && i != value.length - 1) {
-        newString += seperator;
+    if (newValue.text.length > oldValue.text.length &&
+        newValue.text.isNotEmpty &&
+        oldValue.text.isNotEmpty) {
+      if (RegExp('[^0-9-]').hasMatch(newValue.text)) return oldValue;
+      if (newValue.text.length > 10) return oldValue;
+      if (newValue.text.length == 7) {
+        return TextEditingValue(
+          text: '${newValue.text}-',
+          selection: TextSelection.collapsed(
+            offset: newValue.selection.end + 1,
+          ),
+        );
+      } else if (newValue.text.length == 5 && newValue.text[4] != '-') {
+        return TextEditingValue(
+          text:
+              '${newValue.text.substring(0, 4)}-${newValue.text.substring(4)}',
+          selection: TextSelection.collapsed(
+            offset: newValue.selection.end + 1,
+          ),
+        );
+      } else if (newValue.text.length == 6 && newValue.text[7] != '-') {
+        return TextEditingValue(
+          text:
+              '${newValue.text.substring(0, 7)}-${newValue.text.substring(6)}',
+          selection: TextSelection.collapsed(
+            offset: newValue.selection.end + 1,
+          ),
+        );
       }
+    } else if (newValue.text.length == 1 &&
+        oldValue.text.isEmpty &&
+        RegExp('[^0-9]').hasMatch(newValue.text)) {
+      return oldValue;
     }
-
-    return newString;
-  }
-
-  TextSelection updateCursorPosition(String text) {
-    return TextSelection.fromPosition(TextPosition(offset: text.length));
+    return newValue;
   }
 }
