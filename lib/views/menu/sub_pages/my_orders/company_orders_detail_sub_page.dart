@@ -1,10 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ui';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +15,7 @@ import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/services/orders/order_service.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CompanyOrdersDetailSubPage extends StatefulWidget {
   const CompanyOrdersDetailSubPage({
@@ -69,6 +68,13 @@ class _CompanyOrdersDetailSubPageState
       _orderDetailsModel = orderDetailsModel;
       setState(() {});
     }
+  }
+
+  Future<void> launch(String url, {bool isNewTab = true}) async {
+    await launchUrl(
+      Uri.parse(url),
+      webOnlyWindowName: isNewTab ? '_blank' : '_self',
+    );
   }
 
   @override
@@ -730,38 +736,50 @@ class _CompanyOrdersDetailSubPageState
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Invoice Url:'.tr,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppTheme.white15,
+                                                InkWell(
+                                                  onTap: () {
+                                                    launch(
+                                                        _orderDetailsModel!
+                                                                .invoice!
+                                                                .invoiceUrl ??
+                                                            '',
+                                                        isNewTab: true);
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Invoice Url:'.tr,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              AppTheme.white15,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      _orderDetailsModel!
-                                                              .invoice!
-                                                              .invoiceUrl ??
-                                                          '-',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: themeMode
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1,
-                                                      ),
-                                                    )
-                                                  ],
+                                                      Text(
+                                                        _orderDetailsModel!
+                                                                .invoice!
+                                                                .invoiceUrl ??
+                                                            '-',
+                                                        style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
@@ -815,38 +833,51 @@ class _CompanyOrdersDetailSubPageState
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Cargo Tracking Url:'.tr,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppTheme.white15,
+                                                InkWell(
+                                                  onTap: () {
+                                                    launch(
+                                                        _orderDetailsModel!
+                                                                .cargoTrackingUrl ??
+                                                            '',
+                                                        isNewTab: true);
+                                                  },
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        'Cargo Tracking Url:'
+                                                            .tr,
+                                                        style: TextStyle(
+                                                          fontSize: 12,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color:
+                                                              AppTheme.white15,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    Text(
-                                                      _orderDetailsModel!
-                                                              .cargoTrackingUrl ??
-                                                          '-',
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        fontFamily: AppTheme
-                                                            .appFontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: themeMode
-                                                            ? AppTheme.blue3
-                                                            : AppTheme.white1,
+                                                      Text(
+                                                        _orderDetailsModel!
+                                                                .cargoTrackingUrl ??
+                                                            '-',
+                                                        style: TextStyle(
+                                                          fontSize: 13,
+                                                          fontFamily: AppTheme
+                                                              .appFontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          color: themeMode
+                                                              ? AppTheme.blue3
+                                                              : AppTheme.white1,
+                                                        ),
                                                       ),
-                                                    ),
-                                                    const SizedBox(height: 16),
-                                                  ],
+                                                      const SizedBox(
+                                                          height: 16),
+                                                    ],
+                                                  ),
                                                 ),
                                               ],
                                             ),
