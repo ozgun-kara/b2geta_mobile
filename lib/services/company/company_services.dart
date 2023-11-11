@@ -14,6 +14,7 @@ class CompanyServices {
       Uri.parse('${Constants.apiUrl}/company/list'),
       headers: {
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -55,6 +56,7 @@ class CompanyServices {
       Uri.parse('${Constants.apiUrl}/company/profile/$companyId'),
       headers: {
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -110,8 +112,8 @@ class CompanyServices {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/add'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: {
         "company_name": companyName,
@@ -233,7 +235,10 @@ class CompanyServices {
   }) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/company/photo'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     // IMAGE CONTROL PART
     if (image != null) {
@@ -267,7 +272,10 @@ class CompanyServices {
   Future<bool> deleteCompanyPhoto() async {
     final response = await http.delete(
       Uri.parse('${Constants.apiUrl}/member/photo'),
-      headers: Constants.headers,
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
 
     if (response.statusCode == 200) {
@@ -291,8 +299,8 @@ class CompanyServices {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/invite'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: {
         "company_id": companyId,
@@ -330,8 +338,8 @@ class CompanyServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/company/await_list'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -366,8 +374,8 @@ class CompanyServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/company/invites/$companyId'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -402,8 +410,8 @@ class CompanyServices {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/approve_invite'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: {
         "company_id": companyId,
@@ -441,8 +449,8 @@ class CompanyServices {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/reject_invite'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: {
         "company_id": companyId,
@@ -482,8 +490,8 @@ class CompanyServices {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/company/delete_invite'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: {
         "company_id": companyId,
@@ -523,8 +531,8 @@ class CompanyServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/member/change/$userId'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 

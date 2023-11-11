@@ -93,7 +93,7 @@ SPEC CHECKSUMS:
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   shared_preferences_ios: 548a61f8053b9b8a49ac19c1ffbc8b92c50d68ad
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
-  url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
+  url_launcher_ios: 68d46cc9766d0c41dbdc884310529557e3cd7a86
   video_player_avfoundation: e489aac24ef5cf7af82702979ed16f2a5ef84cff
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f

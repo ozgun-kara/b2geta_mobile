@@ -56,7 +56,10 @@ class ProductsServices {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/products')
             .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -111,7 +114,10 @@ class ProductsServices {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/products/$productId')
             .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
@@ -148,7 +154,10 @@ class ProductsServices {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/products/$productId')
             .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     if (response.statusCode == 200) {
       debugPrint("STATUS CODE: ${response.statusCode}");
@@ -207,7 +216,10 @@ class ProductsServices {
       required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/create2'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
     for (var i = 0; i < categoriesList.length; i++) {
@@ -326,7 +338,10 @@ class ProductsServices {
       required String gtip}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/update2/$productId'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     for (var i = 0; i < categoriesList.length; i++) {
       request.fields["category_id[$i]"] = categoriesList[i];
@@ -425,7 +440,10 @@ class ProductsServices {
       required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/update/$productId'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     request.fields["category_id[]"] = categoryId;
     request.fields["product_name[${Constants.language}]"] = productName;
@@ -476,7 +494,10 @@ class ProductsServices {
   }) async {
     final response = await http.delete(
         Uri.parse('${Constants.apiUrl}/products/delete/$productId'),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     if (response.statusCode == 200) {
       return true;
@@ -492,7 +513,10 @@ class ProductsServices {
       required List<File> images}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/products/upload_images'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     request.fields["account_id"] = accountId;
     request.fields["user_id"] = Constants.userId!;
@@ -514,14 +538,16 @@ class ProductsServices {
     }
   }
 
-
- // DELETE PRODUCT IMAGE
+  // DELETE PRODUCT IMAGE
   Future<bool> deleteProductImageCall({
     required String imageId,
   }) async {
     final response = await http.delete(
         Uri.parse('${Constants.apiUrl}/products/delete_images/$imageId'),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     if (response.statusCode == 200) {
       return true;
@@ -529,6 +555,4 @@ class ProductsServices {
       return false;
     }
   }
-
-
 }

@@ -14,6 +14,7 @@ class MemberAddressesServices {
             .replace(queryParameters: queryParameters),
         headers: {
           "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
         });
 
     if (response.statusCode == 200) {
@@ -43,6 +44,7 @@ class MemberAddressesServices {
     final response = await http
         .get(Uri.parse('${Constants.apiUrl}/member/addresses/$id'), headers: {
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     });
 
     if (response.statusCode == 200) {
@@ -84,8 +86,8 @@ class MemberAddressesServices {
   }) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/member/addresses/add'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "name": name,
       "country": country,
@@ -136,8 +138,8 @@ class MemberAddressesServices {
     final response = await http.post(
         Uri.parse('${Constants.apiUrl}/member/addresses/update/$id'),
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
           "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
         },
         body: {
           "name": name,
@@ -184,6 +186,7 @@ class MemberAddressesServices {
         Uri.parse('${Constants.apiUrl}/member/addresses/delete/$id'),
         headers: {
           "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
         });
 
     if (response.statusCode == 200) {

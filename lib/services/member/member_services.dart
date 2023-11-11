@@ -183,8 +183,8 @@ class MemberServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/member/get'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -212,8 +212,8 @@ class MemberServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/member/profile/$userId'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -241,8 +241,8 @@ class MemberServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/company/profile/$userId'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -332,8 +332,8 @@ class MemberServices {
   Future<bool> reSendCall({required String email, required rToken}) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/member/resend'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "Authorization": "Bearer $rToken",
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       'email': email,
     });
@@ -385,7 +385,10 @@ class MemberServices {
   Future<bool> deleteAccountCall() async {
     final response = await http.delete(
       Uri.parse('${Constants.apiUrl}/member/delete'),
-      headers: Constants.headers,
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
 
     if (response.statusCode == 200) {
@@ -408,7 +411,10 @@ class MemberServices {
   }) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/member/photo'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     // IMAGE CONTROL PART
     if (image != null) {
@@ -439,7 +445,10 @@ class MemberServices {
   Future<bool> deleteProfilePhoto() async {
     final response = await http.delete(
       Uri.parse('${Constants.apiUrl}/member/photo'),
-      headers: Constants.headers,
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
 
     if (response.statusCode == 200) {
@@ -471,9 +480,9 @@ class MemberServices {
     required String countryCode,
   }) async {
     final response = await http
-        .post(Uri.parse('${Constants.apiUrl}/member/update'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+        .post(Uri.parse('${Constants.apiUrl}/member/update'), headers:{
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       'first_name': firstname,
       'last_name': lastname,

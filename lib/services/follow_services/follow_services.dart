@@ -12,8 +12,8 @@ class FollowServices {
   }) async {
     final response =
         await http.post(Uri.parse('${Constants.apiUrl}/follow'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "user_id": userId
     });
@@ -52,8 +52,8 @@ class FollowServices {
   }) async {
     final response =
         await http.post(Uri.parse('${Constants.apiUrl}/unfollow'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "user_id": userId
     });
@@ -93,7 +93,10 @@ class FollowServices {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/followed/${Constants.userId}')
             .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     List<MyFollowingModel> myFollowingList = [];
 
@@ -132,7 +135,10 @@ class FollowServices {
     final response = await http.get(
         Uri.parse('${Constants.apiUrl}/my-followers/${Constants.userId}')
             .replace(queryParameters: queryParameters),
-        headers: Constants.headers);
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        });
 
     List<MyFollowerModel> myFollowersList = [];
 
