@@ -523,7 +523,7 @@ class _BasketPageState extends State<BasketPage> {
                                                                       child: c),
                                                             ))
                                                         .then((_) =>
-                                                            setState(() {}));
+                                                            getAllAddress());
                                                   }),
                                             ),
                                           ),
