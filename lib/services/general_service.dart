@@ -15,6 +15,7 @@ class GeneralService {
       Uri.parse('${Constants.apiUrl}/index'),
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
+        "Accept-Language": Constants.language!,
       },
     );
 
@@ -107,7 +108,8 @@ class GeneralService {
 
   // COUNTRIES
   Future<List<CountryModel>> countriesCall() async {
-    final response = await http.get(Uri.parse('${Constants.apiUrl}/countries'));
+    final response = await http.get(Uri.parse('${Constants.apiUrl}/countries'),
+        headers: {"Accept-Language": Constants.language!});
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
     List<CountryModel> countryList = [];
@@ -144,7 +146,7 @@ class GeneralService {
   // BRANDS
   Future<List<BrandModel>> brandsCall() async {
     final response = await http.get(Uri.parse('${Constants.apiUrl}/brands'),
-        headers: Constants.headers);
+        headers: {"Accept-Language": Constants.language!});
 
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -186,11 +188,14 @@ class GeneralService {
     required String country,
   }) async {
     final response = await http.get(
-        Uri.parse('${Constants.apiUrl}/cities').replace(queryParameters: {
-          'country': country,
-        }),
+        Uri.parse('${Constants.apiUrl}/cities').replace(
+          queryParameters: {
+            'country': country,
+          },
+        ),
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+          "Accept-Language": Constants.language!
         });
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -233,6 +238,7 @@ class GeneralService {
         }),
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
+          "Accept-Language": Constants.language!
         });
     final responseBody = jsonDecode(utf8.decode(response.bodyBytes));
 

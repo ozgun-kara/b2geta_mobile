@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: must_be_immutable
 
 import 'package:equatable/equatable.dart';
@@ -119,9 +120,9 @@ class CategoryFeatureasModelFeature {
     if (values != null) {
       final v = values;
       final arr0 = [];
-      v!.forEach((v) {
+      for (var v in v!) {
         arr0.add(v!.toJson());
-      });
+      }
       data['values'] = arr0;
     }
     data['required'] = required;
@@ -184,4 +185,14 @@ class CategoryFeatureasModel {
     }
     return data;
   }
+
+  @override
+  bool operator ==(covariant CategoryFeatureasModel other) {
+    if (identical(this, other)) return true;
+
+    return other.id == id && other.featureId == featureId;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ featureId.hashCode;
 }

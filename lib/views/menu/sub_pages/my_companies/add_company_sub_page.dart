@@ -147,7 +147,8 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
         appBar: const CustomInnerAppBar(),
-        body: widget.passedObject != null
+        body: ((widget.passedObject != null && widget.operation == 'Edit') ||
+                widget.operation == 'Add')
             ? SingleChildScrollView(
                 child: Column(
                   children: [
