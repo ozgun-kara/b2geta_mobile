@@ -15,7 +15,10 @@ class SocialServices {
       File? video}) async {
     var request =
         http.MultipartRequest('POST', Uri.parse('${Constants.apiUrl}/share'));
-    request.headers.addAll({"Authorization": "Bearer ${Constants.userToken}"});
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
     request.fields["type"] = type;
     request.fields["content"] = content ?? '';
 
@@ -72,7 +75,10 @@ class SocialServices {
       final response = await http.get(
         Uri.parse('${Constants.apiUrl}/feeds')
             .replace(queryParameters: queryParameters),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        },
       );
 
       if (response.statusCode == 200) {
@@ -113,7 +119,10 @@ class SocialServices {
       final response = await http.get(
         Uri.parse('${Constants.apiUrl}/feeds/$userId')
             .replace(queryParameters: queryParameters),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        },
       );
 
       if (response.statusCode == 200) {
@@ -153,7 +162,10 @@ class SocialServices {
       final response = await http.get(
         Uri.parse('${Constants.apiUrl}/feeds/')
             .replace(queryParameters: queryParameters),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        },
       );
 
       if (response.statusCode == 200) {
@@ -194,7 +206,10 @@ class SocialServices {
       final response = await http.get(
         Uri.parse('${Constants.apiUrl}/feeds/$userId')
             .replace(queryParameters: queryParameters),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        },
       );
 
       if (response.statusCode == 200) {
@@ -233,7 +248,10 @@ class SocialServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/feeds')
           .replace(queryParameters: queryParameters),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -268,7 +286,10 @@ class SocialServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/feeds/$userId')
           .replace(queryParameters: queryParameters),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -303,7 +324,10 @@ class SocialServices {
       final response = await http.get(
         Uri.parse('${Constants.apiUrl}/feeds')
             .replace(queryParameters: queryParameters),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"},
+        headers: {
+          "Authorization": "Bearer ${Constants.userToken}",
+          "Accept-Language": "${Constants.language}"
+        },
       );
 
       if (response.statusCode == 200) {
@@ -338,7 +362,10 @@ class SocialServices {
   Future<bool> feedLikeCall({required String feedId}) async {
     final response = await http.post(
       Uri.parse('${Constants.apiUrl}/like/$feedId'),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -360,7 +387,10 @@ class SocialServices {
   Future<bool> feedUnLikeCall({required String feedId}) async {
     final response = await http.delete(
       Uri.parse('${Constants.apiUrl}/unlike/$feedId'),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -385,7 +415,10 @@ class SocialServices {
 
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/comments/$feedId'),
-      headers: {"Authorization": "Bearer ${Constants.userToken}"},
+      headers: {
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
+      },
     );
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -415,7 +448,8 @@ class SocialServices {
   }) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/comment/$feedId'), headers: {
-      "Authorization": "Bearer ${Constants.userToken}"
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "type": "posts",
       "content": content,
@@ -442,9 +476,11 @@ class SocialServices {
   Future<bool> deleteCommentCall({
     required String commentId,
   }) async {
-    final response = await http.delete(
-        Uri.parse('${Constants.apiUrl}/comment/$commentId'),
-        headers: {"Authorization": "Bearer ${Constants.userToken}"});
+    final response = await http
+        .delete(Uri.parse('${Constants.apiUrl}/comment/$commentId'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];
@@ -474,7 +510,7 @@ class SocialServices {
             .replace(queryParameters: queryParameters),
         headers: {
           "Authorization": "Bearer ${Constants.userToken}",
-          "Accept-Language": "tr"
+          "Accept-Language": "${Constants.language}"
         });
     if (response.statusCode == 200) {
       var status = json.decode(response.body)["status"];

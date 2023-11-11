@@ -10,6 +10,7 @@ class BasketServices {
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     });
 
     debugPrint(Constants.userToken);
@@ -44,6 +45,7 @@ class BasketServices {
     final response =
         await http.get(Uri.parse('${Constants.apiUrl}/basket'), headers: {
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     });
 
     debugPrint(Constants.userToken);
@@ -74,8 +76,8 @@ class BasketServices {
   }) async {
     final response =
         await http.post(Uri.parse('${Constants.apiUrl}/basket/add'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "product_id": productId,
       "quantity": quantity
@@ -100,8 +102,8 @@ class BasketServices {
   }) async {
     final response = await http
         .post(Uri.parse('${Constants.apiUrl}/basket/update'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "product_id": productId,
       "quantity": quantity
@@ -140,8 +142,9 @@ class BasketServices {
     required String param1,
   }) async {
     final response = await http
-        .delete(Uri.parse('${Constants.apiUrl}/basket/$param1'), headers: {
+        .delete(Uri.parse('${Constants.apiUrl}/basket/$param1'), headers:{
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     });
 
     if (response.statusCode == 200) {
@@ -175,8 +178,9 @@ class BasketServices {
   // EMPTY BASKET
   Future<bool> emptyBasketCall() async {
     final response = await http
-        .delete(Uri.parse('${Constants.apiUrl}/basket/empty'), headers: {
+        .delete(Uri.parse('${Constants.apiUrl}/basket/empty'), headers:{
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     });
 
     if (response.statusCode == 200) {

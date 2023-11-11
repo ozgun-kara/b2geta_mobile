@@ -14,8 +14,8 @@ class MessagesServices {
       Uri.parse('${Constants.apiUrl}/messages')
           .replace(queryParameters: queryParameters),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -54,8 +54,8 @@ class MessagesServices {
   }) async {
     final response = await http
         .put(Uri.parse('${Constants.apiUrl}/messages/send'), headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
       "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
     }, body: {
       "to_id": toId,
       "message": message,
@@ -85,8 +85,8 @@ class MessagesServices {
       Uri.parse('${Constants.apiUrl}/messages/$messageId')
           .replace(queryParameters: queryParameters),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
     List<MessageDetailsModel> messageDetailList = [];
@@ -124,8 +124,8 @@ class MessagesServices {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/messages/$messageId'),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 

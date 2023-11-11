@@ -12,6 +12,7 @@ class OrderService {
       Uri.parse('${Constants.apiUrl}/orders/create'),
       headers: {
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
       body: requestBody,
     );
@@ -36,10 +37,11 @@ class OrderService {
   }
 
   Future<List<OrderModel>> getMyOrdersCall() async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/orders'),
-      headers: Constants.headers,
-    );
+    final response =
+        await http.get(Uri.parse('${Constants.apiUrl}/orders'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     List<OrderModel> orderList = [];
 
@@ -72,10 +74,8 @@ class OrderService {
     final response = await http.get(
       Uri.parse('${Constants.apiUrl}/orders'),
       headers: {
-        // "Authorization": "Bearer ${Constants.userToken}",
-
-        "Authorization":
-            "Bearer nzdngvtcmbmhtkjvlryauagpefmzybhtfjuqmpvgxmmbqvjopotusvglmgbyxdzc",
+        "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -107,10 +107,11 @@ class OrderService {
   }
 
   Future<List<OrderModel>> getMyIncomingOrdersCall() async {
-    final response = await http.get(
-      Uri.parse('${Constants.apiUrl}/orders/incoming'),
-      headers: Constants.headers,
-    );
+    final response = await http
+        .get(Uri.parse('${Constants.apiUrl}/orders/incoming'), headers: {
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     List<OrderModel> orderList = [];
 
@@ -145,6 +146,7 @@ class OrderService {
       Uri.parse('${Constants.apiUrl}/orders/$orderId'),
       headers: {
         "Authorization": "Bearer ${Constants.userToken}",
+        "Accept-Language": "${Constants.language}"
       },
     );
 
@@ -174,7 +176,10 @@ class OrderService {
       String? invoiceDate}) async {
     var request = http.MultipartRequest(
         'POST', Uri.parse('${Constants.apiUrl}/orders/update/$orderId'));
-    request.headers.addAll(Constants.headers);
+    request.headers.addAll({
+      "Authorization": "Bearer ${Constants.userToken}",
+      "Accept-Language": "${Constants.language}"
+    });
 
     request.fields["status"] = orderStatus;
     if (invoiceNo != null && invoiceNo.isNotEmpty) {
