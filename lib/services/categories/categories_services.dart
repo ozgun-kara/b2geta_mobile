@@ -33,7 +33,7 @@ class CategoriesServices {
           categoryList.add(CategoryModel.fromJson(address));
         }
 
-        return categoryList;
+        return categoryList.toSet().toList();
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint("responseCode: ${responseBody["responseCode"]}");
@@ -74,7 +74,7 @@ class CategoriesServices {
         for (var subCategory in dataList) {
           subCategoryList.add(CategoryModel.fromJson(subCategory));
         }
-        return subCategoryList;
+        return subCategoryList.toSet().toList();
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(
@@ -118,7 +118,7 @@ class CategoriesServices {
           categoryFeatureasList
               .add(CategoryFeatureasModel.fromJson(categoryFeatureas));
         }
-        return categoryFeatureasList;
+        return categoryFeatureasList.toSet().toList();
       } else {
         debugPrint("DATA ERROR\nSTATUS CODE: ${response.statusCode}");
         debugPrint(

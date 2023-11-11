@@ -298,13 +298,21 @@ class Price {
 
   factory Price.fromJson(Map<String, dynamic> map) {
     return Price(
-      id: map['id'] != null ? map['id'] as String : null,
-      productId: map['productId'] != null ? map['productId'] as String : null,
-      country: map['country'] != null ? map['country'] as String : null,
-      type: map['type'] != null ? map['type'] as String : null,
-      quantity: map['quantity'] != null ? map['quantity'] as String : null,
-      currency: map['currency'] != null ? map['currency'] as String : null,
-      price: map['price'] != null ? map['price'].toDouble() as double : null,
+      id: map['id'] != null ? map['id'].toString() : null,
+      productId: map['productId'] != null ? map['productId'].toString() : null,
+      country: map['country'] != null ? map['country'].toString() : null,
+      type: map['type'] != null ? map['type'].toString() : null,
+      quantity: map['quantity'] != null ? map['quantity'].toString() : null,
+      currency: map['currency'] != null ? map['currency'].toString() : null,
+      price: map['price'] != null
+          ? map['price'] is int
+              ? map['price'].toDouble()
+              : map['price'] is double
+                  ? map['price']
+                  : map['price'] is String
+                      ? double.parse(map['price'])
+                      : null
+          : null,
     );
   }
 

@@ -59,6 +59,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
   TextEditingController categoriesController = TextEditingController();
   TextEditingController brandController = TextEditingController();
   TextEditingController countryController = TextEditingController();
+  TextEditingController countryController2 = TextEditingController();
   TextEditingController statusController = TextEditingController();
   TextEditingController widthController = TextEditingController();
   TextEditingController heightController = TextEditingController();
@@ -153,10 +154,7 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
         false;
   }
 
-  @override
-  void initState() {
-    super.initState();
-
+  void init() async {
     clear();
 
     Provider.of<MenuPageProvider>(context, listen: false).currencyList = [
@@ -221,37 +219,45 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
           ? widget.passedObject!.length.toString()
           : '';
 
-      categoryId = widget.passedObject!.categories![0].categoryId;
-      subCategoryId = widget.passedObject!.categories![1].categoryId;
-      deepCategoryId = widget.passedObject!.categories![2].categoryId;
-
       Provider.of<MenuPageProvider>(context, listen: false).fetchCategoryList();
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .fetchSubCategoryList(parentId: categoryId);
+      if (widget.passedObject!.categories != null) {
+        if (widget.passedObject!.categories!.isNotEmpty) {
+          categoryId = widget.passedObject!.categories![0].categoryId;
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .fetchDeepCategoryList(parentId: subCategoryId);
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .fetchSubCategoryList(parentId: categoryId);
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .updateVisibilitySubCategory(true);
+          Provider.of<MenuPageProvider>(context, listen: false)
+                  .selectedCategory =
+              widget.passedObject!.categories![0].categoryName;
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateVisibilitySubCategory(true);
+        }
+        if (widget.passedObject!.categories!.length > 1) {
+          subCategoryId = widget.passedObject!.categories![1].categoryId;
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .fetchDeepCategoryList(parentId: subCategoryId);
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .updateVisibilityDeepCategory(true);
+          Provider.of<MenuPageProvider>(context, listen: false)
+                  .selectedSubCategory =
+              widget.passedObject!.categories![1].categoryName;
+        }
 
-      Provider.of<MenuPageProvider>(context, listen: false).selectedCategory =
-          widget.passedObject!.categories![0].categoryName;
+        if (widget.passedObject!.categories!.length >= 2) {
+          deepCategoryId = widget.passedObject!.categories![2].categoryId;
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-              .selectedSubCategory =
-          widget.passedObject!.categories![1].categoryName;
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .updateVisibilityDeepCategory(true);
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-              .selectedDeepCategory =
-          widget.passedObject!.categories![2].categoryName;
+          Provider.of<MenuPageProvider>(context, listen: false)
+                  .selectedDeepCategory =
+              widget.passedObject!.categories![2].categoryName;
 
-      Provider.of<MenuPageProvider>(context, listen: false)
-          .fetchCategoryFeatureasList(categoryId: deepCategoryId);
+          Provider.of<MenuPageProvider>(context, listen: false)
+              .fetchCategoryFeatureasList(categoryId: deepCategoryId);
+        }
+      }
 
       if (widget.passedObject!.features != null &&
           widget.passedObject!.features!.isNotEmpty) {
@@ -354,6 +360,14 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
       Provider.of<MenuPageProvider>(context, listen: false)
           .updateSelectedBrand(widget.passedObject!.brand!.name!);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      init();
+    });
   }
 
   @override
@@ -960,9 +974,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   scrollbarAlwaysShow: true,
                   // offset: const Offset(0, 180),
 
+                  searchController: countryController2,
                   searchInnerWidget: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                     child: TextFormField(
+                      controller: countryController2,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
@@ -1024,7 +1040,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   },
                   //This to clear the search value when you close the menu
                   onMenuStateChange: (isOpen) {
-                    if (!isOpen) {}
+                    if (!isOpen) {
+                      countryController.clear();
+                    }
                   },
                 ),
               ),
@@ -1356,9 +1374,11 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   scrollbarAlwaysShow: true,
                   // offset: const Offset(0, 180),
 
+                  searchController: countryController,
                   searchInnerWidget: Padding(
                     padding: const EdgeInsets.fromLTRB(16, 16, 16, 4),
                     child: TextFormField(
+                      controller: countryController,
                       style: TextStyle(
                         fontSize: 14,
                         fontFamily: AppTheme.appFontFamily,
@@ -1411,7 +1431,6 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                       ),
                     ),
                   ),
-                  searchController: TextEditingController(),
                   searchMatchFn: (item, searchValue) {
                     debugPrint("ITEM:${item.value}");
 
@@ -1421,7 +1440,9 @@ class _AddProductSubPageState extends State<AddProductSubPage> {
                   },
                   //This to clear the search value when you close the menu
                   onMenuStateChange: (isOpen) {
-                    if (!isOpen) {}
+                    if (!isOpen) {
+                      countryController.clear();
+                    }
                   },
                 ),
               ),
