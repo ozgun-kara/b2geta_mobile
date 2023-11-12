@@ -73,8 +73,19 @@ class _SplashPageState extends State<SplashPage> {
 
       await _memberServices.getProfileCall().then((value) {
         if (value != null) {
-          Provider.of<UserProvider>(context, listen: false)
-              .updateUserModel(value);
+          if (value.type == 'company') {
+            _memberServices
+                .getCompanyProfileCall(userId: value.id!)
+                .then((value2) {
+              if (value2 != null) {
+                Provider.of<UserProvider>(context, listen: false)
+                    .updateUserModel(value.copyWith(companyName: value2.name));
+              }
+            });
+          } else {
+            Provider.of<UserProvider>(context, listen: false)
+                .updateUserModel(value);
+          }
         }
       });
 

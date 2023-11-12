@@ -2,6 +2,7 @@
 
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
+import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/add_company_sub_page.dart';
@@ -309,7 +310,8 @@ class _NavigationPageState extends State<NavigationPage> {
                                             .avatar!
                                             .isNotEmpty)
                                     ? CachedNetworkImage(
-                                        imageUrl: '${context.watch<UserProvider>().getUser.avatar}',
+                                        imageUrl:
+                                            '${context.watch<UserProvider>().getUser.avatar}',
                                         width: 24,
                                         height: 24,
                                         fit: BoxFit.cover,
@@ -429,7 +431,6 @@ class _NavigationPageState extends State<NavigationPage> {
                                 personalProfileModel.companies![index];
                             return GestureDetector(
                               onTap: () async {
-                                debugPrint("basti");
                                 await CompanyServices()
                                     .changeProfileAnotherCompanyCall(
                                         userId: company.id.toString())
@@ -441,7 +442,8 @@ class _NavigationPageState extends State<NavigationPage> {
                                       if (value != null) {
                                         Provider.of<UserProvider>(context,
                                                 listen: false)
-                                            .updateUserModel(value);
+                                            .updateUserModel(value.copyWith(
+                                                companyName: company.name));
 
                                         Navigator.pushAndRemoveUntil(
                                             context,
@@ -476,7 +478,8 @@ class _NavigationPageState extends State<NavigationPage> {
                                               child: CachedNetworkImage(
                                                 width: 20,
                                                 height: 20,
-                                                imageUrl:company.logo.toString(),
+                                                imageUrl:
+                                                    company.logo.toString(),
                                                 errorWidget: (context, error,
                                                     stackTrace) {
                                                   return Image.asset(
@@ -598,7 +601,9 @@ class _NavigationPageState extends State<NavigationPage> {
                           if (value != null) {
                             Provider.of<UserProvider>(context, listen: false)
                                 .updateUserModel(value);
-
+                            Provider.of<MyAccountPageProvider>(context,
+                                    listen: false)
+                                .updateCurrentTabIndex(0);
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 PageRouteBuilder(
@@ -626,7 +631,7 @@ class _NavigationPageState extends State<NavigationPage> {
                                         child: CachedNetworkImage(
                                           width: 20,
                                           height: 20,
-                                          imageUrl:personalProfileModel.photo!,
+                                          imageUrl: personalProfileModel.photo!,
                                           errorWidget:
                                               (context, error, stackTrace) {
                                             return Image.asset(
