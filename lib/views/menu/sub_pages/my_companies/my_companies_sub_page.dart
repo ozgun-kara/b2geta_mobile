@@ -499,7 +499,11 @@ class _MyCompaniesSubPageState extends State<MyCompaniesSubPage> {
                                                     Provider.of<UserProvider>(
                                                             context,
                                                             listen: false)
-                                                        .updateUserModel(value);
+                                                        .updateUserModel(
+                                                            value.copyWith(
+                                                                companyName:
+                                                                    company
+                                                                        .name));
 
                                                     Navigator
                                                         .pushAndRemoveUntil(

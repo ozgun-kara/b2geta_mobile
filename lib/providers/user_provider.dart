@@ -11,7 +11,7 @@ class UserProvider with ChangeNotifier {
   UserModel _user = UserModel();
   UserModel get getUser => _user;
 
-  updateUserModel(UserModel user) {
+  Future<void> updateUserModel(UserModel user)async {
     _user = user;
     notifyListeners();
   }

@@ -60,7 +60,7 @@ class _MyAccountPageState extends State<MyAccountPage> {
           return CustomScrollView(slivers: [
             SliverAppBar(
               backgroundColor: themeMode ? AppTheme.white1 : AppTheme.black5,
-              expandedHeight: 255,
+              expandedHeight: 200,
               pinned: true,
               centerTitle: false,
               leading: const SizedBox(),
@@ -188,7 +188,12 @@ class _MyAccountPageState extends State<MyAccountPage> {
                             Column(
                               children: [
                                 Text(
-                                  '${user.firstname ?? ''} ${user.lastname ?? ''}',
+                                  Provider.of<UserProvider>(context)
+                                              .getUser
+                                              .type ==
+                                          'company'
+                                      ? user.companyName ?? ''
+                                      : '${user.firstname ?? ''} ${user.lastname ?? ''}',
                                   style: TextStyle(
                                     fontSize: 15,
                                     fontFamily: AppTheme.appFontFamily,
@@ -201,17 +206,8 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                Text(
-                                  "İstanbul, Türkiye",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: AppTheme.appFontFamily,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppTheme.white15),
-                                ),
                               ],
                             ),
-                            const SizedBox(height: 10),
                           ],
                         ),
                       ),
@@ -220,7 +216,6 @@ class _MyAccountPageState extends State<MyAccountPage> {
                           height: 1,
                           color:
                               themeMode ? AppTheme.white31 : AppTheme.black2),
-                      const SizedBox(height: 50),
                     ],
                   ),
                 ),
@@ -485,7 +480,9 @@ class _MyAccountPageState extends State<MyAccountPage> {
                                                                         .images!
                                                                         .isNotEmpty
                                                                     ? product
-                                                                        .images![0].url!
+                                                                        .images![
+                                                                            0]
+                                                                        .url!
                                                                     : 'https://doraev.com/images/custom/product-images/nophoto.png',
                                                                 fit: BoxFit
                                                                     .cover,

@@ -7,15 +7,19 @@ import 'package:b2geta_mobile/providers/menu_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/company/company_services.dart';
+import 'package:b2geta_mobile/services/member/member_services.dart';
 import 'package:b2geta_mobile/utils.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_inner_app_bar.dart';
 import 'package:b2geta_mobile/views/customs/custom_widgets/custom_text_form_field.dart';
 import 'package:b2geta_mobile/views/menu/menu_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_added_sub_page.dart';
 import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/company_delete_sub_page.dart';
+import 'package:b2geta_mobile/views/menu/sub_pages/my_companies/my_companies_sub_page.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
@@ -147,7 +151,8 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
     return Scaffold(
         backgroundColor: themeMode ? AppTheme.white2 : AppTheme.black24,
         appBar: const CustomInnerAppBar(),
-        body: ((widget.passedObject != null && widget.operation == 'Edit') ||
+        body: ((widget.passedObject != null && (widget.operation == 'Edit') ||
+                    widget.operation == 'Account') ||
                 widget.operation == 'Add')
             ? SingleChildScrollView(
                 child: Column(
@@ -253,21 +258,29 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                                                 .companyPhotoSet(
                                                               image: imageFile,
                                                             )
-                                                                .then((value) {
+                                                                .then(
+                                                                    (value) async {
                                                               if (value) {
-                                                                Provider.of<UserProvider>(
-                                                                        context,
-                                                                        listen:
-                                                                            false)
-                                                                    .getProfile()
+                                                                await locator<
+                                                                        MemberServices>()
+                                                                    .getProfileCall()
                                                                     .then(
                                                                         (value) {
-                                                                  showSnackbar(
-                                                                      context:
-                                                                          context,
-                                                                      message:
-                                                                          "Profile Photo Updated"
-                                                                              .tr);
+                                                                  if (value !=
+                                                                      null) {
+                                                                    showSnackbar(
+                                                                        context:
+                                                                            context,
+                                                                        message:
+                                                                            "Profile Photo Updated".tr);
+                                                                    Provider.of<UserProvider>(
+                                                                            context,
+                                                                            listen:
+                                                                                false)
+                                                                        .updateUserModel(value.copyWith(
+                                                                            companyName:
+                                                                                widget.passedObject!.name));
+                                                                  }
                                                                 });
                                                               }
                                                             });
@@ -1245,48 +1258,66 @@ class _AddCompanySubPageState extends State<AddCompanySubPage> {
                                                 languageCode: 'tr',
                                                 countryCode: countryCode,
                                                 timezone: '3')
-                                            .then((value) {
+                                            .then((value) async {
                                           if (value == true) {
                                             debugPrint(
                                                 "COMPANY HAS SUCCESSFULLY UPDATED");
-                                            if (widget.operation == 'Account') {
-                                              Navigator.push(
-                                                  context,
-                                                  PageRouteBuilder(
-                                                    pageBuilder: (_, __, ___) =>
-                                                        const MenuPage(),
-                                                    transitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    reverseTransitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    transitionsBuilder:
-                                                        (_, a, __, c) =>
-                                                            FadeTransition(
-                                                                opacity: a,
-                                                                child: c),
-                                                  ));
-                                            } else {
-                                              Navigator.push(
-                                                  context,
-                                                  PageRouteBuilder(
-                                                    pageBuilder: (_, __, ___) =>
-                                                        const CompanyAddedSubPage(
-                                                            operation: 'Edit'),
-                                                    transitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    reverseTransitionDuration:
-                                                        const Duration(
-                                                            milliseconds: 0),
-                                                    transitionsBuilder:
-                                                        (_, a, __, c) =>
-                                                            FadeTransition(
-                                                                opacity: a,
-                                                                child: c),
-                                                  ));
-                                            }
+                                            showSnackbar(
+                                                context: context,
+                                                message: "Profile Updated".tr);
+                                            await locator<MemberServices>()
+                                                .getProfileCall()
+                                                .then((value) {
+                                              if (value != null) {
+                                                Provider.of<UserProvider>(
+                                                        context,
+                                                        listen: false)
+                                                    .updateUserModel(value.copyWith(
+                                                        companyName:
+                                                            companyNameController
+                                                                .text));
+                                              }
+                                              if (widget.operation == 'Edit') {
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          const MyCompaniesSubPage(),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
+                                              } else if (widget.operation ==
+                                                  'Account') {
+                                                Navigator.push(
+                                                    context,
+                                                    PageRouteBuilder(
+                                                      pageBuilder: (_, __,
+                                                              ___) =>
+                                                          const NavigationPage(),
+                                                      transitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      reverseTransitionDuration:
+                                                          const Duration(
+                                                              milliseconds: 0),
+                                                      transitionsBuilder:
+                                                          (_, a, __, c) =>
+                                                              FadeTransition(
+                                                                  opacity: a,
+                                                                  child: c),
+                                                    ));
+                                              }
+                                            });
                                           } else {
                                             debugPrint(
                                                 "COMPANY HAS NOT UPDATED");

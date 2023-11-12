@@ -6,6 +6,7 @@ class UserModel {
   String? userConfirmed;
   String? firstname;
   String? lastname;
+  String? companyName;
   String? phone;
   String? email;
   String? avatar;
@@ -34,6 +35,7 @@ class UserModel {
     this.userConfirmed,
     this.firstname,
     this.lastname,
+    this.companyName,
     this.phone,
     this.email,
     this.avatar,
@@ -95,6 +97,7 @@ class UserModel {
     String? userConfirmed,
     String? firstname,
     String? lastname,
+    String? companyName,
     String? phone,
     String? email,
     String? avatar,
@@ -123,6 +126,7 @@ class UserModel {
       userConfirmed: userConfirmed ?? this.userConfirmed,
       firstname: firstname ?? this.firstname,
       lastname: lastname ?? this.lastname,
+      companyName: companyName ?? this.companyName,
       phone: phone ?? this.phone,
       email: email ?? this.email,
       avatar: avatar ?? this.avatar,

@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io';
 import 'dart:ui';
+import 'package:b2geta_mobile/locator.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/utils.dart';
+import 'package:b2geta_mobile/views/navigation_page.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
@@ -270,17 +272,20 @@ class _PersonalAccountSettingsSubPageState
                                     if (imageFile!.path.isNotEmpty) {
                                       await _memberServices
                                           .profilePhotoSet(image: imageFile)
-                                          .then((value) {
+                                          .then((value) async {
                                         if (value) {
-                                          Provider.of<UserProvider>(context,
-                                                  listen: false)
-                                              .getProfile()
+                                          showSnackbar(
+                                              context: context,
+                                              message:
+                                                  "Profile Photo Updated".tr);
+                                          await locator<MemberServices>()
+                                              .getProfileCall()
                                               .then((value) {
-                                            setState(() {});
-                                            showSnackbar(
-                                                context: context,
-                                                message:
-                                                    "Profile Photo Updated".tr);
+                                            if (value != null) {
+                                              Provider.of<UserProvider>(context,
+                                                      listen: false)
+                                                  .updateUserModel(value);
+                                            }
                                           });
                                         }
                                       });
@@ -991,14 +996,32 @@ class _PersonalAccountSettingsSubPageState
                                 postalCode: postalCodeController.text,
                                 about: _aboutController.text,
                                 country: countryCode)
-                            .then((value) {
+                            .then((value) async {
                           if (value) {
-                            Provider.of<UserProvider>(context, listen: false)
-                                .getProfile()
+                            showSnackbar(
+                                context: context,
+                                message: "Profile Updated".tr);
+
+                            await locator<MemberServices>()
+                                .getProfileCall()
                                 .then((value) {
-                              showSnackbar(
-                                  context: context,
-                                  message: "Profile Updated".tr);
+                              if (value != null) {
+                                Provider.of<UserProvider>(context,
+                                        listen: false)
+                                    .updateUserModel(value);
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          const NavigationPage(),
+                                      transitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      reverseTransitionDuration:
+                                          const Duration(milliseconds: 0),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ));
+                              }
                             });
                           }
                         });

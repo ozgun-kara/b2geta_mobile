@@ -2,6 +2,7 @@ import 'package:b2geta_mobile/app_theme.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/profile/company_profile_model.dart';
 import 'package:b2geta_mobile/models/profile/personal_profile_model.dart';
+import 'package:b2geta_mobile/providers/my_account_page_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
 import 'package:b2geta_mobile/services/member/member_services.dart';
@@ -387,7 +388,9 @@ class _MenuPageState extends State<MenuPage> {
                       if (value != null) {
                         Provider.of<UserProvider>(context, listen: false)
                             .updateUserModel(value);
-
+                        Provider.of<MyAccountPageProvider>(context,
+                                listen: false)
+                            .updateCurrentTabIndex(0);
                         Navigator.pushAndRemoveUntil(
                             context,
                             PageRouteBuilder(
