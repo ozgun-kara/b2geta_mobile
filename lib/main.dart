@@ -13,6 +13,7 @@ import 'package:b2geta_mobile/providers/navigation_page_provider.dart';
 import 'package:b2geta_mobile/providers/social_provider.dart';
 import 'package:b2geta_mobile/providers/theme_provider.dart';
 import 'package:b2geta_mobile/providers/user_provider.dart';
+import 'package:b2geta_mobile/services/general_service.dart';
 import 'package:b2geta_mobile/views/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -79,6 +80,7 @@ class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    GeneralService().getVersion();
     return GetMaterialApp(
       translations: AppLanguages(),
       locale: box.read("language") == null
