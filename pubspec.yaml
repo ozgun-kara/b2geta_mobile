@@ -74,7 +74,10 @@ dependencies:
   flutter_svg: ^2.0.7
   flutter_widget_from_html: ^0.10.3
   webview_flutter: ^4.2.2
-  url_launcher: ^6.2.1
+  url_launcher: ^6.1.12
+  version: ^3.0.2
+  package_info_plus: ^3.0.0
+  store_redirect: ^2.0.1
 
 flutter_icons:
   android: "launcher_icon"

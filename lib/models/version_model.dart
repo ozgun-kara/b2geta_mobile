@@ -93,7 +93,9 @@ class VersionModel {
     title = json['title']?.toString();
     endpoint = json['endpoint']?.toString();
     ios = (json['ios'] != null) ? VersionModelIos.fromJson(json['ios']) : null;
-    android = (json['android'] != null) ? VersionModelAndroid.fromJson(json['android']) : null;
+    android = (json['android'] != null)
+        ? VersionModelAndroid.fromJson(json['android'])
+        : null;
   }
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
@@ -109,5 +111,6 @@ class VersionModel {
   }
 
   @override
-  String toString() => 'VersionModel(title: $title, endpoint: $endpoint)';
+  String toString() =>
+      'VersionModel(title: $title, endpoint: $endpoint versionModelIos:$ios versionModelAndroid: $android)';
 }

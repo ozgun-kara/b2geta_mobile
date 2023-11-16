@@ -1,6 +1,12 @@
 // ignore_for_file: equal_keys_in_map
 
 final Map<String, String> tr = {
+  // SPLASH PAGE
+  'New version available': 'Yeni sürüm mevcut',
+  'There are new features available, please update your app':
+      'Yeni özellikler mevcut, lütfen uygulamanızı güncelleyin',
+  'Update': 'Güncelle',
+
   // LANGUAGE PAGE
   'Language Selection': 'Dil Seçimi',
   'Save': 'Kaydet',

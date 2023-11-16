@@ -1,6 +1,12 @@
 // ignore_for_file: equal_keys_in_map
 
 final Map<String, String> en = {
+  // SPLASH PAGE
+  'New version available': 'New version available',
+  'There are new features available, please update your app':
+      'There are new features available, please update your app',
+  'Update': 'Update',
+
   // LANGUAGE PAGE
   'Language Selection': 'Language Selection',
   'Save': 'Save',
@@ -409,7 +415,7 @@ final Map<String, String> en = {
   'Invoice Date:': 'Invoice Date',
   'Cargo Tracking Url:': 'Cargo Tracking Url',
   'Cargo Tracking No:': 'Cargo Tracking No',
-  'Shipped Out':  'Shipped Out',
+  'Shipped Out': 'Shipped Out',
   'Invoice Number Validate': 'Please enter the invoice number',
   'Invoice Url Validate': 'Please enter the invoice url',
   'Invoice Date Validate': 'Please enter the invoice date',
