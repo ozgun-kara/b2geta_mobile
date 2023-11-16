@@ -7,7 +7,6 @@ import 'package:b2geta_mobile/models/general/language_model.dart';
 import 'package:b2geta_mobile/constants.dart';
 import 'package:b2geta_mobile/models/version_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
 class GeneralService {
@@ -273,7 +272,7 @@ class GeneralService {
     }
   }
 
-  Future<String?> getVersion() async {
+  Future<VersionModel?> getVersion() async {
     final response = await http.get(
       Uri.parse('https://api.b2geta.com/b2geta.app.json'),
     );
@@ -285,13 +284,14 @@ class GeneralService {
           .replaceAll('",  }', '"  }')
           .trim();
 
-      debugPrint(jsonDecode(responseBody)["title"].toString());
-      return responseBody;
+      VersionModel versionModel =
+          VersionModel.fromJson(jsonDecode(responseBody));
+      debugPrint(versionModel.toString());
+      return versionModel;
     } else {
       debugPrint("API ERROR\nSTATUS CODE: ${response.statusCode}");
       // throw ("API ERROR\nSTATUS CODE:  ${response.statusCode}");
       return null;
     }
-    return null;
   }
 }
