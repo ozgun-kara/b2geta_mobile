@@ -18,7 +18,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -42,11 +41,8 @@ class _SplashPageState extends State<SplashPage> {
   init() async {
     await checkVersion();
     if (isUpdate == false) {
-      /*   Timer(const Duration(milliseconds: 1500), () {
-       
-      }); 
+      Timer(const Duration(milliseconds: 1500), () {});
       checkToken();
-      */
     }
   }
 
