@@ -125,12 +125,14 @@ class _SplashPageState extends State<SplashPage> {
       var packageInfo = await PackageInfo.fromPlatform();
 
       var appVersion = Version.parse(packageInfo.version);
+      var appBuildNumber = Version.parse(packageInfo.buildNumber);
       var latestAndroidVersion = Version.parse(versionModel.android!.version!);
       var latestIosVersion = Version.parse(versionModel.ios!.version!);
+      //  Constants.apiUrl =versionModel.endpoint ?? 'https://api.businessucces.com/api';
 
       if (Platform.isAndroid) {
         // Android-specific code
-        if (appVersion < latestAndroidVersion && mounted) {
+        if (appBuildNumber < latestAndroidVersion && mounted) {
           updateVersionAppDialog(context, versionModel.android!.url!);
           setState(() {
             isUpdate = true;
