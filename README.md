@@ -1,5 +1,4 @@
-# b2geta_mobile
-
+# b2geta_flutter
 A new Flutter project.
 
 ## Getting Started
