@@ -13,7 +13,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
+	<string>10</string>
 	<key>CFBundleName</key>
 	<string>b2geta_mobile</string>
 	<key>CFBundlePackageType</key>
@@ -27,9 +27,13 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Upload image from camera for screen background</string>
+	<string>This allows you to share photos and videos from your device. You can change this at any time in the device settings.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Upload images for screen background</string>
+	<string>This allows you to share photos and videos from your device. You can change this at any time in the device settings.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>This allows you to share photos and videos from your device. You can change this at any time in the device settings.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This allows you to share photos and videos from your device. You can change this at any time in the device settings.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
